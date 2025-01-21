@@ -13,6 +13,7 @@ dist
 dist-ssr
 coverage
 *.local
+tmp
 
 /cypress/videos/
 /cypress/screenshots/
@@ -27,4 +28,6 @@ coverage
 *.sln
 *.sw?
 
-*.tsbuildinfo
+storybook-static
+
+src/App.vue
