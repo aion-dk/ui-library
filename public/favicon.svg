@@ -1,0 +1,9 @@
+<svg version="1.1" width="800" height="800" viewBox="-29 -29 58 58"
+     xmlns="http://www.w3.org/2000/svg">
+  <mask id="logo_mask">
+    <rect fill="white" x="-29" y="-29" width="58" height="58"></rect>
+    <path fill="black" d="M -20 26 L 0 6 L 5 11 L 17 11 L 6 0 L 26 -20 L 20 -26 L 0 -6 L -5 -11 L -17 -11 L -6 0 L -26 20 Z"></path>
+  </mask>
+  <circle r="28" fill="#ffffff"></circle>
+  <circle r="28" stroke="#19132D" fill="#19132D" mask="url(#logo_mask)"></circle>
+</svg>

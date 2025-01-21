@@ -1,0 +1,108 @@
+import { Meta, Typeset } from "@storybook/blocks";
+
+<Meta title="Design System/Typography" />
+
+export const typography = {
+  type: {
+    primary: '"Open Sans", "sans-serif"',
+    monospace: '"PT Mono", "monospace"',
+  },
+  weight: {
+    light: "300",
+    regular: "400",
+    semibold: "600",
+    bold: "700",
+  },
+  size: {
+    s1: 12,
+    s2: 14,
+    s3: 16,
+    s4: 18,
+    m1: 20,
+    m2: 24,
+    m3: 30,
+    m4: 36,
+    l1: 48,
+    l2: 60,
+    l3: 72,
+    l4: 96,
+    xl: 128,
+    h1: 32,
+    h2: 26,
+    h3: 24,
+    h4: 22,
+  },
+};
+
+export const SampleText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
+
+# Typography
+
+<br />
+
+**Base Font:** Open Sans
+
+**Monospace Font:** PT Mono
+
+<br />
+
+---
+
+<br />
+
+## Headings
+
+<Typeset fontSizes={[Number(typography.size.h1)]} fontWeight={typography.weight.semibold} sampleText="Heading 1 <h1>" fontFamily={typography.type.primary} />
+
+<Typeset fontSizes={[Number(typography.size.h2)]} fontWeight={typography.weight.semibold} sampleText="Heading 2 <h2>" fontFamily={typography.type.primary} />
+
+<Typeset fontSizes={[Number(typography.size.h3)]} fontWeight={typography.weight.semibold} sampleText="Heading 3 <h3>" fontFamily={typography.type.primary} />
+
+<Typeset fontSizes={[Number(typography.size.h4)]} fontWeight={typography.weight.semibold} sampleText="Heading 4 <h4>" fontFamily={typography.type.primary} />
+
+<Typeset fontSizes={[Number(typography.size.s4)]} fontWeight={typography.weight.bold} sampleText="SUBTITLE <h5>" fontFamily={typography.type.primary} />
+
+---
+
+<br />
+
+## Body
+
+<Typeset
+  fontSizes={[Number(typography.size.s3)]}
+  fontWeight={typography.weight.regular}
+  sampleText="Lorem ipsum dolor sit amet, consectetur adipiscing elit. <p>"
+  fontFamily={typography.type.primary}
+/>
+
+**Other decorations:**
+
+<br />
+
+<strong>Strong text</strong> (strong)
+
+<br />
+
+<u>Underlined text</u> (u)
+
+<br />
+
+<em>Emphasized / Italic text</em> (em)
+
+<br />
+
+<del>Deleted text</del> (del)
+
+<br />
+
+<br />
+
+---
+
+<br />
+
+## Utilities
+
+<Typeset fontSizes={[Number(typography.size.s3)]} fontWeight={typography.weight.regular} sampleText="Code text <code>" fontFamily={typography.type.monospace} />
+
+Preview of a <code>codeblock</code> inside regular text (code)

@@ -1,0 +1,400 @@
+import { Meta, Source } from "@storybook/blocks";
+import Code from "../assets/code-brackets.svg";
+import Colors from "../assets/colors.svg";
+import Repo from "../assets/repo.svg";
+import StackAlt from "../assets/stackalt.svg";
+import Direction from "../assets/direction.svg";
+import CanvasSize from "../assets/CanvasSize.png";
+import CanvasSizeButton from "../assets/CanvasSizeButton.png";
+import FolderStructure from "../assets/FolderStructure.png";
+import ComponentStructure from "../assets/ComponentStructure.png";
+import AtomicDesign from "../assets/AtomicDesign.png";
+import Controls from "../assets/Controls.png";
+import dedent from "ts-dedent";
+
+<Meta title="Design System/Introduction" />
+
+<style>
+  {`
+      .subheading {
+        --mediumdark: '#999999';
+        font-weight: 900;
+        font-size: 13px;
+        color: #999;
+        letter-spacing: 6px;
+        line-height: 24px;
+        text-transform: uppercase;
+        margin-bottom: 12px;
+        margin-top: 40px;
+      }
+
+      .link-list {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr;
+        row-gap: 10px;
+      }
+
+      @media (min-width: 620px) {
+        .link-list {
+          row-gap: 20px;
+          column-gap: 20px;
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+
+      @media all and (-ms-high-contrast:none) {
+      .link-list {
+          display: -ms-grid;
+          -ms-grid-columns: 1fr 1fr;
+          -ms-grid-rows: 1fr 1fr;
+        }
+      }
+
+      .link-item {
+        display: block;
+        padding: 20px 30px 20px 15px;
+        border: 1px solid #00000010;
+        border-radius: 5px;
+        transition: background 150ms ease-out, border 150ms ease-out, transform 150ms ease-out;
+        color: #333333;
+        display: flex;
+        align-items: center;
+      }
+
+      .link-item:hover {
+        border-color: #1EA7FD50;
+        transform: translate3d(0, -3px, 0);
+        box-shadow: rgba(0, 0, 0, 0.08) 0 3px 10px 0;
+      }
+
+      .link-item:active {
+        border-color: #1EA7FD;
+        transform: translate3d(0, 0, 0);
+      }
+
+      .link-item strong {
+        font-weight: 700;
+        display: block;
+      }
+
+      .link-item img {
+        height: 40px;
+        width: 40px;
+        margin-right: 15px;
+        flex: none;
+      }
+
+      .link-item span {
+        font-size: 14px;
+        line-height: 20px;
+      }
+
+      .tip {
+        display: inline-block;
+        border-radius: 1em;
+        font-size: 11px;
+        line-height: 12px;
+        font-weight: 700;
+        background: #EAF7EE;
+        color: #3FC063;
+        padding: 4px 12px;
+        margin-right: 10px;
+        vertical-align: top;
+      }
+
+      .tip-wrapper {
+        font-size: 13px;
+        line-height: 20px;
+        margin-top: 40px;
+        margin-bottom: 10px;
+      }
+
+      .tip.important {
+        background: #FCEDE9;
+        color: #EA4E2C;
+      }
+
+      .tip-wrapper code {
+        font-size: 12px;
+        display: inline-block;
+      }
+    `}
+</style>
+
+# Welcome to the Assembly Voting UI Library
+
+This library based on our Design System is meant to help you build `Vue` applications faster.
+
+Here, you can search among our UI components, grab the ones you need, install them on your applications, customize them and you're ready to go. You can also go to the `templates` folder and copy a whole layout.
+
+<strong>Content</strong>
+
+- Getting started
+  - Install the library
+- Using Storybook
+  - Project structure
+  - Component structure
+  - Component controls (parameters and events)
+  - Viewport swap
+- Using the library
+  - Import Electa-UI as a plugin
+  - Import components individually
+- Creating new components
+- Useful links
+
+<div className="subheading">GETTING STARTED</div>
+
+### Install the library
+
+Install the dependency in your project by running:
+
+<Source
+  language="bash"
+  dark
+  format={false}
+  code={dedent`
+      npm i @assemblyvoting/electa-ui
+    `}
+/>
+
+or
+
+<Source
+  language="bash"
+  dark
+  format={false}
+  code={dedent`
+      yarn add @assemblyvoting/electa-ui
+    `}
+/>
+
+<div className="subheading">USING STORYBOOK</div>
+
+### Project structure
+
+The Design System and its components follow the principles of <strong>Atomic Design</strong>, where:
+
+- <strong>Atoms</strong> include basic HTML elements and UI components (buttons, inputs, etc.),
+- <strong>Molecules</strong> are small groups of atoms working together as a unit (election cards, radio groups, etc.),
+- <strong>Organisms</strong> are relatively complex UI components composed of groups of atoms and molecules (navbar, sidebar, modal, etc.),
+- <strong>Templates</strong> include <em>grab-and-go</em> pre-build pages to copy and paste them directly inside a project.
+
+<img src={AtomicDesign} />
+
+So the folder structure of the project follows these principles as well.
+
+<img src={FolderStructure} />
+
+### Component structure
+
+Every component has one or more representations of their variants/states/types that you can explore.
+
+<img src={ComponentStructure} />
+
+### Component controls (parameters and events)
+
+You can modify each of those previews by modifying the parameters on the bottom toolbar. There, you can see the arguments it accepts/requires and the events the component emits.
+
+<img src={Controls} />
+
+### Viewport swap
+
+You can change the viewport to see how the component behaves in different devices from the toolbar using the <strong>Change preview size</strong> button.
+
+<img src={CanvasSizeButton} />
+
+Example of a component view in Desktop, Tablet and Mobile.
+
+<img src={CanvasSize} />
+
+<div className="subheading">USING THE LIBRARY</div>
+
+<strong>Import the whole library as a plugin (recommended)</strong>
+
+<Source
+  language="typescript"
+  dark
+  format={false}
+  code={dedent` 
+      {/* main.ts | main.js */}\n
+      import * as UILibrary from "@assemblyvoting/electa-ui"; // Imports components
+      import "@assemblyvoting/electa-ui/styles"; // Imports styles\n
+      const app = createApp(App);\n
+      app.use(UILibrary.default); // Plugin-in the library\n
+      app.mount("#app");
+    `}
+/>
+
+<div className="tip-wrapper">
+  <span className="tip">Tip</span> You can optionally provide your instance of i18n to the UI library on initialization in the second param. In this case, the library will consume the translations
+  from the parent application's i18n and will ignore all the internal translations.
+</div>
+
+<div className="tip-wrapper">
+  <span className="tip">Tip</span> In case you don't pass a i18n instance, you can pass the locale as a param to any component that needs to be translated.
+</div>
+
+<div className="tip-wrapper">
+  <span className="tip important">Warning</span> If that's the case, it is important that you provide all translations needed for all of the components you will use.
+</div>
+
+<Source
+  language="typescript"
+  dark
+  format={false}
+  code={dedent` 
+      {/* main.ts | main.js */}\n
+      import * as UILibrary from "@assemblyvoting/electa-ui"; // Imports components
+      import "@assemblyvoting/electa-ui/styles"; // Imports styles\n
+      const app = createApp(App);\n
+      app.use(UILibrary.default, i18n); // Plugin-in the library\n
+      app.mount("#app");
+    `}
+/>
+
+The translations provided need to follow this structure:
+
+<Source
+  language="typescript"
+  dark
+  format={false}
+  code={dedent` 
+      {/* translationFile.es.yml */}\n
+
+        // ... translations
+        js:
+          components:
+            AVComponentName:
+              key_1: Translation1
+              key_2: Translation2
+              key_3: Translation3
+        // ... more translations
+    `}
+
+/>
+
+<strong>Importing components individually (if you only need a few components)</strong>
+
+<Source
+  language="typescript"
+  dark
+  format={false}
+  code={dedent` 
+      {/* myComponent.vue */}\n
+      <script>
+        import { AVButton } from "@assemblyvoting/electa-ui"
+      </script>\n
+      <template>
+        <AVButton />
+      </template>
+    `}
+/>
+
+<div id="newcomp" className="subheading">
+  CREATING NEW COMPONENTS
+</div>
+
+<div className="tip-wrapper">
+  <span className="tip important">Warning</span> This Library was initially built using Storybook 6 and the updated to Storybook 7, which includes a new ans easier way of writing stories. Please use
+  the new sintax when writing new Stories. See{" "}
+  <a href="https://storybook.js.org/docs/vue/writing-stories/introduction" target="_blank">
+    stories on SB7
+  </a>{" "}
+  for more information.
+</div>
+
+<div className="tip-wrapper">
+  <span className="tip">Tip</span> Use REMs as measure units. <code>1 REM = 16px</code>
+</div>
+
+<div className="tip-wrapper">
+  <span className="tip">Tip</span> Check the look and feel of the component in different browsers and viewport sizes.
+</div>
+
+<div className="tip-wrapper">
+  <span className="tip">Tip</span> Check the component both in the storybook view and in the development App.
+</div>
+
+<div className="tip-wrapper">
+  <span className="tip">Tip</span> Most of the UI components from our design system uses{" "}
+  <a href="https://tailwindcss.com/docs/preflight" target="_blank">
+    Tailwindcss utility classes
+  </a>
+  , you can implement them by using the <code>@apply</code> argument in your regular css file. Example:
+</div>
+
+<Source
+  language="css"
+  dark
+  format={false}
+  code={dedent`
+      .my-container {
+        @apply utility-class-1 utility-class-2 hover:utility-class-3;
+        normal-css-property: blue; 
+      }
+    `}
+/>
+
+<div className="tip-wrapper">
+  <span className="tip">Tip</span> The colors we use are named <strong>slate</strong> (avx/us), <strong>gray</strong> (electa), <strong>avblue</strong> and <strong>semantic</strong>. You can find the
+  swatches in the <code>Colors</code> page and use them inside the utility classes: <code>bg-avblue-600</code>, <code>text-slate-800</code>, <code>border-semantic-danger-1</code>.
+</div>
+
+<div className="tip-wrapper">
+  <span className="tip">Tip</span> Remember to use the AV prefix both for component and class names.
+</div>
+
+<div className="tip-wrapper">
+  <span className="tip">Tip</span> Once the component is ready, you need to include it on the component index at <code>@app/src/components.index.ts</code> and then in the Library (both as plugin
+  component and as regular export) at <code>@app/src/UILibrary.ts</code>.
+</div>
+
+<div className="subheading">USEFUL LINKS</div>
+
+<div className="link-list">
+  <a className="link-item" href="https://github.com/aion-dk/jambo-mambo" target="_blank">
+    <img src={Code} alt="code" />
+
+    <span>
+      <strong>GitHub repository</strong>
+    </span>
+
+  </a>
+
+  <a className="link-item" href="#" target="_blank">
+    <img src={Repo} alt="repo" />
+
+    <span>
+      <strong>Assembly Voting Design System</strong>
+    </span>
+
+  </a>
+
+  <a className="link-item" href="https://storybook.js.org/docs/vue" target="_blank">
+    <img src={StackAlt} alt="Build" />
+
+    <span>
+      <strong>Stoyrbook documentation</strong>
+    </span>
+
+  </a>
+
+  <a className="link-item" href="https://tailwindcss.com/docs" target="_blank">
+    <img src={Colors} alt="colors" />
+
+    <span>
+      <strong>Tailwind documentation</strong>
+    </span>
+
+  </a>
+
+  <a className="link-item" href="https://fontawesome.com/search?o=r&m=free" target="_blank">
+    <img src={Direction} alt="direction" />
+
+    <span>
+      <strong>FontAwesome 6.4.0 icon library</strong>
+    </span>
+
+  </a>
+</div>

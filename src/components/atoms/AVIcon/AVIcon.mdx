@@ -1,0 +1,20 @@
+import { Meta, Source } from "@storybook/blocks";
+import dedent from "ts-dedent";
+import { AVIcon } from "@/components";
+
+<Meta title="Design System/Icons" component={AVIcon} />
+
+# Icons
+
+This library uses the Font Awesome Icon Library v6.4.0, you can look for icons on the <a href="https://fontawesome.com/search?o=r&m=free" target="_blank">FontAwesome search engine</a> and pass the Icon Name as a param as in the following example.
+
+### Implementation example
+
+<Source
+  language="typescript"
+  dark
+  format={false}
+  code={dedent`
+    <AVIcon icon="user" />
+  `}
+/>
