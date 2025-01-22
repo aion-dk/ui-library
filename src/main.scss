@@ -1,1 +1,49 @@
 @import "bootstrap/scss/bootstrap";
+@import "./reset.scss";
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&family=PT+Mono&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lora:wght@600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@0,600&display=swap");
+
+// body {
+//   @apply flex items-center justify-center font-sans text-base text-slate-800 overflow-x-hidden;
+// }
+
+// h1,
+// .h1 {
+//   @apply font-semibold text-4xl text-slate-800;
+// }
+
+// h2,
+// .h2 {
+//   @apply font-semibold text-3xl text-slate-800;
+// }
+
+// h3,
+// .h3 {
+//   @apply font-semibold text-2xl text-slate-800;
+// }
+
+// h4,
+// .h4 {
+//   @apply font-semibold text-xl text-slate-800;
+// }
+
+// h5,
+// .h5 {
+//   @apply font-bold text-lg uppercase text-slate-700;
+// }
+
+// h6,
+// .h6 {
+//   @apply font-semibold text-base text-slate-800;
+// }
+
+// code,
+// .code {
+//   @apply font-mono font-normal text-base text-slate-800 bg-slate-200 rounded-md px-2;
+// }
+
+#app {
+  width: 100vw;
+  height: 100vh;
+}

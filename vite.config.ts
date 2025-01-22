@@ -49,4 +49,12 @@ export default defineConfig({
       bootstrap: resolve(__dirname, "node_modules/bootstrap"),
     },
   },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        api: "modern-compiler",
+        silenceDeprecations: ["mixed-decls", "color-functions", "global-builtin", "import", "abs-percent"],
+      },
+    },
+  },
 });
