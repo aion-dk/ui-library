@@ -1,6 +1,20 @@
 import type { LocalString } from "@/types";
 
-type ItemType = "video" | "check_box" | "date_time" | "date" | "divider" | "image" | "information" | "link_list" | "number" | "rich_text_area" | "text" | "image_link" | "jumbotron" | "select";
+type ItemType =
+  | "video"
+  | "check_box"
+  | "date_time"
+  | "date"
+  | "divider"
+  | "image"
+  | "information"
+  | "link_list"
+  | "number"
+  | "rich_text_area"
+  | "text"
+  | "image_link"
+  | "jumbotron"
+  | "select";
 
 type ItemPurpose = "generic" | "summary" | "title" | "subtitle" | "identifier";
 
@@ -45,4 +59,15 @@ interface Recommendation {
   label: string;
 }
 
-export type { ItemType, ItemPurpose, ResourceDataContent, Url, ResourceGroup, ResourceData, ResourceItem, Resource, Recommendation, RecommendationPublicType };
+export type {
+  ItemType,
+  ItemPurpose,
+  ResourceDataContent,
+  Url,
+  ResourceGroup,
+  ResourceData,
+  ResourceItem,
+  Resource,
+  Recommendation,
+  RecommendationPublicType,
+};

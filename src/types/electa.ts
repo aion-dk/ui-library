@@ -42,4 +42,13 @@ interface InstantRunoffRound {
 
 type Theme = "dark" | "light";
 
-export type { PartialResults, Party, Result, Round, InstantRunoffRound, NormalResult, RankedResult, Theme };
+export type {
+  PartialResults,
+  Party,
+  Result,
+  Round,
+  InstantRunoffRound,
+  NormalResult,
+  RankedResult,
+  Theme,
+};

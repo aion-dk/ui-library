@@ -2,9 +2,17 @@ import type { SelectionPile, SelectionPileArg } from "@/types";
 
 const getOptionSelections = (args: SelectionPileArg[]) => {
   if (args.includes("single")) return [{ reference: "exampleOption1" }];
-  if (args.includes("multi")) return [{ reference: "exampleOption1" }, { reference: "exampleOption2" }];
-  if (args.includes("multivote")) return [{ reference: "exampleOption1" }, { reference: "exampleOption1" }, { reference: "exampleOption1" }, { reference: "exampleOption1" }];
-  if (args.includes("children")) return [{ reference: "exampleOption2" }, { reference: "exampleChildren1-2" }];
+  if (args.includes("multi"))
+    return [{ reference: "exampleOption1" }, { reference: "exampleOption2" }];
+  if (args.includes("multivote"))
+    return [
+      { reference: "exampleOption1" },
+      { reference: "exampleOption1" },
+      { reference: "exampleOption1" },
+      { reference: "exampleOption1" },
+    ];
+  if (args.includes("children"))
+    return [{ reference: "exampleOption2" }, { reference: "exampleChildren1-2" }];
   if (args.includes("many"))
     return [
       { reference: "exampleOption1" },

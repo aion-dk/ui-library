@@ -17,6 +17,7 @@
   </main>
 
   <AVIcon icon="clock" />
+  <AVSpinner />
 </template>
 
 <style scoped>

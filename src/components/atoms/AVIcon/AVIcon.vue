@@ -1,7 +1,15 @@
 <script lang="ts">
 import * as SolidIcons from "@fortawesome/free-solid-svg-icons";
 import * as BrandIcons from "@fortawesome/free-brands-svg-icons";
-import type { PropType, IconName, AbstractElement, IconMixin, IconAttribute, VNode, IconPack } from "@/types";
+import type {
+  PropType,
+  IconName,
+  AbstractElement,
+  IconMixin,
+  IconAttribute,
+  VNode,
+  IconPack,
+} from "@/types";
 
 import { parse as faParse, icon as faIcon } from "@fortawesome/fontawesome-svg-core";
 import { computed, watch, h, defineComponent } from "vue";
@@ -28,8 +36,13 @@ export default defineComponent({
       ...BrandIcons,
     };
 
-    const convert = (abstractElement: AbstractElement, attrs: IconAttribute = {}): VNode | undefined => {
-      const children = (abstractElement.children || []).map((child: AbstractElement) => convert(child));
+    const convert = (
+      abstractElement: AbstractElement,
+      attrs: IconAttribute = {},
+    ): VNode | undefined => {
+      const children = (abstractElement.children || []).map((child: AbstractElement) =>
+        convert(child),
+      );
 
       if (abstractElement.prefix) return;
 
@@ -81,7 +94,9 @@ export default defineComponent({
       { immediate: true },
     );
 
-    const vnode = computed(() => (renderedIcon.value ? convert(renderedIcon.value.abstract[0]) : null));
+    const vnode = computed(() =>
+      renderedIcon.value ? convert(renderedIcon.value.abstract[0]) : null,
+    );
 
     return () => vnode.value;
   },

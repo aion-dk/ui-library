@@ -1,6 +1,15 @@
 import type { PartialResult } from "@/types";
 
-type OptionArg = "description" | "selectable" | "exclusive" | "children" | "color" | "url" | "randomizeChildren" | "image" | "candidacy";
+type OptionArg =
+  | "description"
+  | "selectable"
+  | "exclusive"
+  | "children"
+  | "color"
+  | "url"
+  | "randomizeChildren"
+  | "image"
+  | "candidacy";
 
 type ContestArg =
   | "description"
@@ -20,7 +29,14 @@ type ContestArg =
   | "complete_options"
   | "many_options";
 
-type SelectionPileArg = "single" | "multi" | "weighted" | "blank" | "many" | "children" | "multivote";
+type SelectionPileArg =
+  | "single"
+  | "multi"
+  | "weighted"
+  | "blank"
+  | "many"
+  | "children"
+  | "multivote";
 
 type ContestSelectionArg = "half" | "complete";
 
@@ -32,4 +48,11 @@ type ExampleColor = {
   [key: number]: string;
 };
 
-export type { ExampleColor, ContestArg, ContestSelectionArg, LiveResult, OptionArg, SelectionPileArg };
+export type {
+  ExampleColor,
+  ContestArg,
+  ContestSelectionArg,
+  LiveResult,
+  OptionArg,
+  SelectionPileArg,
+};

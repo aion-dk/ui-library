@@ -1,4 +1,5 @@
 /* ATOMS */
+import AVSpinner from "@/components/atoms/AVSpinner/AVSpinner.messages";
 // import AVFileInput from "@/components/atoms/AVFileInput/AVFileInput.messages";
 // import AVOptionCheckbox from "@/components/atoms/AVOptionCheckbox/AVOptionCheckbox.messages";
 // import AVOptionSelect from "@/components/atoms/AVOptionSelect/AVOptionSelect.messages";
@@ -23,10 +24,16 @@
 // import AVRankedSummary from "@/components/organisms/AVRankedSummary/AVRankedSummary.messages";
 // import AVInstantRunoffSummary from "@/components/organisms/AVInstantRunoffSummary/AVInstantRunoffSummary.messages";
 
-import type { LocalString, SupportedLocales, ComponentTranslation, ComponentTranslationList } from "@/types";
+import type {
+  LocalString,
+  SupportedLocales,
+  ComponentTranslationList,
+  DefineLocaleMessage,
+} from "@/types";
 
-const components: ComponentTranslation = {
+const components: DefineLocaleMessage = {
   /* ATOMS */
+  AVSpinner,
   // AVFileInput,
   // AVOptionCheckbox,
   // AVOptionSelect,

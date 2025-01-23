@@ -176,9 +176,12 @@ or
 The Design System and its components follow the principles of <strong>Atomic Design</strong>, where:
 
 - <strong>Atoms</strong> include basic HTML elements and UI components (buttons, inputs, etc.),
-- <strong>Molecules</strong> are small groups of atoms working together as a unit (election cards, radio groups, etc.),
-- <strong>Organisms</strong> are relatively complex UI components composed of groups of atoms and molecules (navbar, sidebar, modal, etc.),
-- <strong>Templates</strong> include <em>grab-and-go</em> pre-build pages to copy and paste them directly inside a project.
+- <strong>Molecules</strong> are small groups of atoms working together as a unit (election cards,
+  radio groups, etc.),
+- <strong>Organisms</strong> are relatively complex UI components composed of groups of atoms and
+  molecules (navbar, sidebar, modal, etc.),
+- <strong>Templates</strong> include <em>grab-and-go</em> pre-build pages to copy and paste them
+  directly inside a project.
 
 <img src={AtomicDesign} />
 
@@ -227,16 +230,19 @@ Example of a component view in Desktop, Tablet and Mobile.
 />
 
 <div className="tip-wrapper">
-  <span className="tip">Tip</span> You can optionally provide your instance of i18n to the UI library on initialization in the second param. In this case, the library will consume the translations
-  from the parent application's i18n and will ignore all the internal translations.
+  <span className="tip">Tip</span> You can optionally provide your instance of i18n to the UI
+  library on initialization in the second param. In this case, the library will consume the
+  translations from the parent application's i18n and will ignore all the internal translations.
 </div>
 
 <div className="tip-wrapper">
-  <span className="tip">Tip</span> In case you don't pass a i18n instance, you can pass the locale as a param to any component that needs to be translated.
+  <span className="tip">Tip</span> In case you don't pass a i18n instance, you can pass the locale
+  as a param to any component that needs to be translated.
 </div>
 
 <div className="tip-wrapper">
-  <span className="tip important">Warning</span> If that's the case, it is important that you provide all translations needed for all of the components you will use.
+  <span className="tip important">Warning</span> If that's the case, it is important that you
+  provide all translations needed for all of the components you will use.
 </div>
 
 <Source
@@ -296,7 +302,8 @@ The translations provided need to follow this structure:
 </div>
 
 <div className="tip-wrapper">
-  <span className="tip important">Warning</span> This Library was initially built using Storybook 6 and the updated to Storybook 7, which includes a new ans easier way of writing stories. Please use
+  <span className="tip important">Warning</span> This Library was initially built using Storybook 6
+  and the updated to Storybook 7, which includes a new ans easier way of writing stories. Please use
   the new sintax when writing new Stories. See{" "}
   <a href="https://storybook.js.org/docs/vue/writing-stories/introduction" target="_blank">
     stories on SB7
@@ -309,11 +316,13 @@ The translations provided need to follow this structure:
 </div>
 
 <div className="tip-wrapper">
-  <span className="tip">Tip</span> Check the look and feel of the component in different browsers and viewport sizes.
+  <span className="tip">Tip</span> Check the look and feel of the component in different browsers
+  and viewport sizes.
 </div>
 
 <div className="tip-wrapper">
-  <span className="tip">Tip</span> Check the component both in the storybook view and in the development App.
+  <span className="tip">Tip</span> Check the component both in the storybook view and in the
+  development App.
 </div>
 
 <div className="tip-wrapper">
@@ -321,7 +330,8 @@ The translations provided need to follow this structure:
   <a href="https://tailwindcss.com/docs/preflight" target="_blank">
     Tailwindcss utility classes
   </a>
-  , you can implement them by using the <code>@apply</code> argument in your regular css file. Example:
+  , you can implement them by using the <code>@apply</code> argument in your regular css file.
+  Example:
 </div>
 
 <Source
@@ -337,8 +347,10 @@ The translations provided need to follow this structure:
 />
 
 <div className="tip-wrapper">
-  <span className="tip">Tip</span> The colors we use are named <strong>slate</strong> (avx/us), <strong>gray</strong> (electa), <strong>avblue</strong> and <strong>semantic</strong>. You can find the
-  swatches in the <code>Colors</code> page and use them inside the utility classes: <code>bg-avblue-600</code>, <code>text-slate-800</code>, <code>border-semantic-danger-1</code>.
+  <span className="tip">Tip</span> The colors we use are named <strong>slate</strong> (avx/us),{" "}
+  <strong>gray</strong> (electa), <strong>avblue</strong> and <strong>semantic</strong>. You can
+  find the swatches in the <code>Colors</code> page and use them inside the utility classes:{" "}
+  <code>bg-avblue-600</code>, <code>text-slate-800</code>, <code>border-semantic-danger-1</code>.
 </div>
 
 <div className="tip-wrapper">
@@ -346,8 +358,9 @@ The translations provided need to follow this structure:
 </div>
 
 <div className="tip-wrapper">
-  <span className="tip">Tip</span> Once the component is ready, you need to include it on the component index at <code>@app/src/components.index.ts</code> and then in the Library (both as plugin
-  component and as regular export) at <code>@app/src/UILibrary.ts</code>.
+  <span className="tip">Tip</span> Once the component is ready, you need to include it on the
+  component index at <code>@app/src/components.index.ts</code> and then in the Library (both as
+  plugin component and as regular export) at <code>@app/src/UILibrary.ts</code>.
 </div>
 
 <div className="subheading">USEFUL LINKS</div>

@@ -5,4 +5,13 @@ import { getSelectionPile } from "@/examples/selectionPile";
 import { getLiveResult } from "@/examples/liveResult";
 import { getUrl, getCandidate } from "@/examples/candidacy";
 
-export { getContest, getOptions, getOption, getContestSelection, getSelectionPile, getLiveResult, getUrl, getCandidate };
+export {
+  getContest,
+  getOptions,
+  getOption,
+  getContestSelection,
+  getSelectionPile,
+  getLiveResult,
+  getUrl,
+  getCandidate,
+};

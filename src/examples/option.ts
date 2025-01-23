@@ -44,7 +44,12 @@ const colors: ExampleColor = {
   3: "#0000FF",
 };
 
-const getOption = (args: OptionArg[], index: number, children: boolean = false, parent: number | null = null): OptionContent => {
+const getOption = (
+  args: OptionArg[],
+  index: number,
+  children: boolean = false,
+  parent: number | null = null,
+): OptionContent => {
   const option: OptionContent = {
     reference: children ? `exampleChildren${parent}-${index}` : `exampleOption${index}`,
     code: index,
@@ -80,7 +85,12 @@ const getOption = (args: OptionArg[], index: number, children: boolean = false, 
   return option;
 };
 
-const getOptions = (args: OptionArg[], quantity: number, children: boolean = false, parent: number | null = null): OptionContent[] => {
+const getOptions = (
+  args: OptionArg[],
+  quantity: number,
+  children: boolean = false,
+  parent: number | null = null,
+): OptionContent[] => {
   const options: OptionContent[] = [];
 
   for (let index = 0; index < quantity; index++) {

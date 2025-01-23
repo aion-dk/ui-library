@@ -8,8 +8,9 @@ import { iconNames } from "@/helpers/iconHelper";
 import {
   // ATOMS
   AVIcon,
+  AVAnimatedTransition,
+  AVSpinner,
   //   AVButton,
-  //   AVSpinner,
   //   AVBullet,
   //   AVTextInput,
   //   AVNumberInput,
@@ -32,7 +33,6 @@ import {
   //   AVMenuDropdown,
   //   AVMenuDropdownItem,
   //   AVMenuDropdownContent,
-  //   AVAsyncButton,
   //   AVTabSwitcher,
   //   AVBallotSummary,
   //   AVTimedCard,
@@ -40,7 +40,6 @@ import {
   //   AVSteps,
   //   AVOptionSelect,
   //   AVOptionCheckbox,
-  //   AVAnimatedTransition,
   //   AVCollapser,
   //   AVLinkVisualizer,
   //   AVVerticalStep,
@@ -48,7 +47,8 @@ import {
   //   AVProgressBar,
   //   AVWaitingDots,
 
-  //   // MOLECULES
+  // MOLECULES
+  //   AVAsyncButton,
   //   AVRadioGroup,
   //   AVNavigationItemList,
   //   AVBreadcrumb,
@@ -66,7 +66,7 @@ import {
   //   AVResultOption,
   //   AVRecommendationList,
 
-  //   // ORGANISMS
+  // ORGANISMS
   //   AVFooter,
   //   AVSidebar,
   //   AVNavbar,
@@ -81,13 +81,13 @@ import {
   //   AVRankedSummary,
   //   AVInstantRunoffSummary,
 
-  //   // TEMPLATES
+  // TEMPLATES
   //   OneColumnLayout,
   //   TwoColumnsLayout,
   //   NoSidebarLayout,
   //   ElectionDashboardLayout,
 
-  //   // ...Components
+  // ...Components
 } from "@/components";
 
 export default {
@@ -96,8 +96,9 @@ export default {
 
     // ATOMS
     app.component("AVIcon", AVIcon);
+    app.component("AVAnimatedTransition", AVAnimatedTransition);
+    app.component("AVSpinner", AVSpinner);
     // app.component("AVButton", AVButton);
-    // app.component("AVSpinner", AVSpinner);
     // app.component("AVBullet", AVBullet);
     // app.component("AVTextInput", AVTextInput);
     // app.component("AVNumberInput", AVNumberInput);
@@ -120,7 +121,6 @@ export default {
     // app.component("AVMenuDropdown", AVMenuDropdown);
     // app.component("AVMenuDropdownContent", AVMenuDropdownContent);
     // app.component("AVMenuDropdownItem", AVMenuDropdownItem);
-    // app.component("AVAsyncButton", AVAsyncButton);
     // app.component("AVTabSwitcher", AVTabSwitcher);
     // app.component("AVBallotSummary", AVBallotSummary);
     // app.component("AVTimedCard", AVTimedCard);
@@ -128,7 +128,6 @@ export default {
     // app.component("AVSteps", AVSteps);
     // app.component("AVOptionSelect", AVOptionSelect);
     // app.component("AVOptionCheckbox", AVOptionCheckbox);
-    // app.component("AVAnimatedTransition", AVAnimatedTransition);
     // app.component("AVCollapser", AVCollapser);
     // app.component("AVLinkVisualizer", AVLinkVisualizer);
     // app.component("AVVerticalStep", AVVerticalStep);
@@ -137,6 +136,7 @@ export default {
     // app.component("AVWaitingDots", AVWaitingDots);
 
     // MOLECULES
+    // app.component("AVAsyncButton", AVAsyncButton);
     // app.component("AVRadioGroup", AVRadioGroup);
     // app.component("AVNavigationItemList", AVNavigationItemList);
     // app.component("AVBreadcrumb", AVBreadcrumb);
@@ -184,8 +184,9 @@ export default {
 export {
   // ATOMS
   AVIcon,
+  AVAnimatedTransition,
+  AVSpinner,
   //   AVButton,
-  //   AVSpinner,
   //   AVBullet,
   //   AVTextInput,
   //   AVNumberInput,
@@ -208,7 +209,6 @@ export {
   //   AVMenuDropdown,
   //   AVMenuDropdownItem,
   //   AVMenuDropdownContent,
-  //   AVAsyncButton,
   //   AVTabSwitcher,
   //   AVBallotSummary,
   //   AVTimedCard,
@@ -216,13 +216,13 @@ export {
   //   AVSteps,
   //   AVOptionSelect,
   //   AVOptionCheckbox,
-  //   AVAnimatedTransition,
   //   AVCollapser,
   //   AVLinkVisualizer,
   //   AVProgressBar,
   //   AVWaitingDots,
 
-  //   // MOLECULES
+  // MOLECULES
+  // AVAsyncButton,
   //   AVRadioGroup,
   //   AVNavigationItemList,
   //   AVBreadcrumb,

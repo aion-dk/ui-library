@@ -23,7 +23,8 @@ const Template = (args: Meta) => ({
   setup() {
     return { args };
   },
-  template: "<div style='width: 98vw; height: 96vh; display: flex; align-items: center; justify-content: center;'><AVIcon v-bind='args' /></div>",
+  template:
+    "<div style='width: 98vw; height: 96vh; display: flex; align-items: center; justify-content: center;'><AVIcon v-bind='args' /></div>",
 });
 
 export const Default = {

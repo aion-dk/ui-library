@@ -33,7 +33,9 @@
     "build-storybook": "NODE_OPTIONS=--max_old_space_size=8096 storybook build",
     "prepare": "husky",
     "precommit": "yarn lint",
-    "prepublishOnly": "yarn build"
+    "prepublishOnly": "yarn build",
+    "test-storybook": "test-storybook",
+    "test-storybook-coverage": "test-storybook --coverage"
   },
   "dependencies": {
     "@aion-dk/js-client": "^4.4.0",
@@ -51,6 +53,7 @@
     "@fortawesome/fontawesome-common-types": "^6.7.2",
     "@storybook/addon-a11y": "8.6.0-alpha.0",
     "@storybook/addon-actions": "8.6.0-alpha.0",
+    "@storybook/addon-coverage": "^1.0.5",
     "@storybook/addon-essentials": "8.6.0-alpha.0",
     "@storybook/addon-interactions": "8.6.0-alpha.0",
     "@storybook/addon-links": "8.6.0-alpha.0",
@@ -58,6 +61,7 @@
     "@storybook/manager-api": "8.6.0-alpha.0",
     "@storybook/preview-api": "8.6.0-alpha.0",
     "@storybook/test": "8.6.0-alpha.0",
+    "@storybook/test-runner": "^0.21.0",
     "@storybook/vue3": "8.6.0-alpha.0",
     "@storybook/vue3-vite": "8.6.0-alpha.0",
     "@tsconfig/node22": "^22.0.0",

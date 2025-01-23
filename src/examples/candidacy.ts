@@ -114,7 +114,14 @@ const getCandidate = (): Resource => {
         position: 7,
         purpose: "generic",
         item_type: "link_list",
-        form_content: [getUrl("instagram"), getUrl("twitter"), getUrl("facebook"), getUrl("github"), getUrl("website"), getUrl("tiktok")],
+        form_content: [
+          getUrl("instagram"),
+          getUrl("twitter"),
+          getUrl("facebook"),
+          getUrl("github"),
+          getUrl("website"),
+          getUrl("tiktok"),
+        ],
       },
       {
         id: 4,
