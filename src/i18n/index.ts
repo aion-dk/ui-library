@@ -8,6 +8,7 @@ const localI18n = createI18n({
   fallbackLocale: "en",
   warnHtmlInMessage: "off",
   messages: localMessages,
+  allowComposition: true,
 });
 
 const switchLocale = (locale: SupportedLocales) => (localI18n.global.locale = locale);

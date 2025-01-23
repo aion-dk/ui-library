@@ -1,6 +1,6 @@
 import type { App } from "vue";
-// import type { I18n } from "vue-i18n";
-// import localI18n from "@/i18n";
+import type { I18n } from "vue-i18n";
+import localI18n from "@/i18n";
 import { iconNames } from "@/helpers/iconHelper";
 // import FloatingVue from "floating-vue";
 // import "floating-vue/dist/style.css";
@@ -91,8 +91,7 @@ import {
 } from "@/components";
 
 export default {
-  // install: (app: App, i18n: I18n = null) => {
-  install: (app: App) => {
+  install: (app: App, i18n: I18n | null = null) => {
     // app.use(FloatingVue);
 
     // ATOMS
@@ -177,8 +176,8 @@ export default {
     // app.component("ElectionDashboardLayout", ElectionDashboardLayout);
 
     // COMPOSABLES
-    // app.provide("i18n", i18n ? i18n : localI18n);
-    // app.provide("iconNames", iconNames);
+    app.provide("i18n", i18n ? i18n : localI18n);
+    app.provide("iconNames", iconNames);
   },
 };
 
