@@ -1,24 +1,9 @@
+import { SUPPORTED_LOCALES } from "../src/constants/i18n";
 import localI18n from "../src/i18n";
 
 const parameters = {
   locale: localI18n.global.locale,
-  locales: [
-    "ar",
-    "ca",
-    "da",
-    "de",
-    "en",
-    "es",
-    "fi",
-    "fr",
-    "is",
-    "nl",
-    "pl",
-    "pt",
-    "ro",
-    "ru",
-    "sv",
-  ],
+  locales: SUPPORTED_LOCALES,
   actions: { argTypesRegex: "^on.*" },
   backgrounds: {
     default: "light",

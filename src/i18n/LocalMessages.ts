@@ -26,7 +26,7 @@ import AVSpinner from "@/components/atoms/AVSpinner/AVSpinner.messages";
 
 import type {
   LocalString,
-  SupportedLocales,
+  SupportedLocale,
   ComponentTranslationList,
   DefineLocaleMessage,
 } from "@/types";
@@ -57,7 +57,7 @@ const components: DefineLocaleMessage = {
   // AVInstantRunoffSummary,
 };
 
-const getTranslations = (locale: SupportedLocales) => {
+const getTranslations = (locale: SupportedLocale) => {
   const componentTranslation: ComponentTranslationList = {};
 
   Object.keys(components).forEach((componentKey: string) => {

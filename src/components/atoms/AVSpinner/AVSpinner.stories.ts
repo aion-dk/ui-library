@@ -1,6 +1,11 @@
 import type { Meta } from "@/types";
 import { AVSpinner } from "@/components";
-import { BOOTSTRAP_BASIC_SIZES, BOOTSTRAP_COLORS, SPINNER_VARIANTS } from "@/constants";
+import {
+  BOOTSTRAP_BASIC_SIZES,
+  BOOTSTRAP_COLORS,
+  SPINNER_VARIANTS,
+  SUPPORTED_LOCALES,
+} from "@/constants";
 
 const meta: Meta<typeof AVSpinner> = {
   title: "Design System/Atoms/AVSpinner",
@@ -21,23 +26,7 @@ const meta: Meta<typeof AVSpinner> = {
     },
     locale: {
       control: { type: "select" },
-      options: [
-        "ar",
-        "ca",
-        "da",
-        "de",
-        "en",
-        "es",
-        "fi",
-        "fr",
-        "is",
-        "nl",
-        "pl",
-        "pt",
-        "ro",
-        "ru",
-        "sv",
-      ],
+      options: SUPPORTED_LOCALES,
     },
   },
 };

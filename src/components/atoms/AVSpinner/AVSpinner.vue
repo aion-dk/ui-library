@@ -4,7 +4,7 @@ import type {
   BootstrapColor,
   BootstrapBasicSize,
   AVSpinnerVariant,
-  SupportedLocales,
+  SupportedLocale,
 } from "@/types";
 import { watch, inject, onMounted } from "vue";
 import { switchLocale } from "@/i18n";
@@ -23,7 +23,7 @@ const props = defineProps({
     default: "primary",
   },
   locale: {
-    type: String as PropType<SupportedLocales>,
+    type: String as PropType<SupportedLocale>,
     default: null,
   },
 });
