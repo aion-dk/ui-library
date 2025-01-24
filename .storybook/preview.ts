@@ -4,7 +4,7 @@ import localI18n from "../src/i18n";
 import decorators from "./decorators";
 import globals from "./globals";
 import parameters from "./parameters";
-import "@/main.scss"; // Bootstrap CSS
+import "@/bootstrap/bootstrap.customized.scss"; // Bootstrap CSS
 import "@/bootstrap"; // Bootstrap JS
 
 import {

@@ -1,0 +1,122 @@
+// Quickly modify global styling by enabling or disabling optional features.
+// @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&family=PT+Mono&display=swap");
+// @import url("https://fonts.googleapis.com/css2?family=Lora:wght@600&display=swap");
+
+$enable-caret:                true !default;
+$enable-rounded:              true !default;
+$enable-shadows:              false !default;
+$enable-gradients:            false !default;
+$enable-transitions:          true !default;
+$enable-reduced-motion:       true !default;
+$enable-smooth-scroll:        true !default;
+$enable-grid-classes:         true !default;
+$enable-container-classes:    true !default;
+$enable-cssgrid:              true;
+$enable-button-pointers:      true !default;
+$enable-rfs:                  true !default;
+$enable-validation-icons:     true !default;
+$enable-negative-margins:     true;
+$enable-deprecation-messages: true !default;
+$enable-important-utilities:  true !default;
+
+$enable-dark-mode:            true !default;
+$color-mode-type:             data !default; // `data` or `media-query`
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1900px,
+  qhd: 2559px, // 2K resolution
+  uhd: 3839px, // 4K resolution
+);
+
+@import "bootstrap/scss/functions";
+
+$primary: #1226AA;
+$secondary: #f8f8f8;
+$brand-dark: #1D1934;
+$accent: #E1251B;
+$danger: #D7282F;
+$success: #1D8649;
+$warning: #FFD040;
+$dark: #54565A;
+
+$custom-colors: (
+  "brand-dark": $brand-dark,
+  "accent": $accent,
+);
+
+@import "./font_mapping.scss";
+
+$font-family-base: "Open Sans", sans-serif;
+
+$custom-file-text: (
+  ar: "تصفح",
+  ca: "Navega",
+  da: "Gennemse",
+  de: "Durchsuche",
+  en: "Browse",
+  es: "Explorar",
+  fi: "Selaa",
+  fr: "Parcourir",
+  is: "Skoðaðu",
+  nl: "Bladeren",
+  pl: "Przeglądać",
+  pt: "Navegar",
+  ro: "Răsfoiește",
+  ru: "Просматривать",
+  sv: "Bläddra",
+);
+
+// Boostrap variable overrides
+$card-border-radius: 0;
+
+@import "bootstrap/scss/variables";
+
+// Include any default map overrides here
+$theme-colors: map-merge($theme-colors, $custom-colors);
+@import "bootstrap/scss/mixins/breakpoints";
+
+@each $breakpoint in map-keys($grid-breakpoints) {
+  @include media-breakpoint-up($breakpoint) {
+    $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+
+    @each $size, $length in $spacers {
+      .flex#{$infix}-gap-#{$size} {
+        gap: $length !important;
+      }
+    }
+  }
+}
+
+@each $color, $value in $theme-colors {
+  .pulse-shadow-#{$color} {
+    animation: pulse-shadow-#{$color}-animation 2s infinite;
+  }
+
+  @keyframes pulse-shadow-#{$color}-animation {
+    0% {
+      box-shadow: 0 0 0 0 rgba($value, 0.5);
+    }
+    50% {
+      box-shadow: 0 0 0 4px rgba($value, 0.3);
+    }
+    100% {
+      box-shadow: 0 0 0 7px #0000;
+    }
+  }
+
+  .bg-#{$color}-faded {
+    background-color: mix($value, white, 20%) !important;
+  }
+}
+
+@import "bootstrap/scss/bootstrap";
+
+#app {
+  width: 100vw;
+  height: 100vh;
+}
