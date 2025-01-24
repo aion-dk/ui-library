@@ -2,25 +2,25 @@
 // @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&family=PT+Mono&display=swap");
 // @import url("https://fonts.googleapis.com/css2?family=Lora:wght@600&display=swap");
 
-$enable-caret:                true !default;
-$enable-rounded:              true !default;
-$enable-shadows:              false !default;
-$enable-gradients:            false !default;
-$enable-transitions:          true !default;
-$enable-reduced-motion:       true !default;
-$enable-smooth-scroll:        true !default;
-$enable-grid-classes:         true !default;
-$enable-container-classes:    true !default;
-$enable-cssgrid:              true;
-$enable-button-pointers:      true !default;
-$enable-rfs:                  true !default;
-$enable-validation-icons:     true !default;
-$enable-negative-margins:     true;
+$enable-caret: true !default;
+$enable-rounded: true !default;
+$enable-shadows: false !default;
+$enable-gradients: false !default;
+$enable-transitions: true !default;
+$enable-reduced-motion: true !default;
+$enable-smooth-scroll: true !default;
+$enable-grid-classes: true !default;
+$enable-container-classes: true !default;
+$enable-cssgrid: true;
+$enable-button-pointers: true !default;
+$enable-rfs: true !default;
+$enable-validation-icons: true !default;
+$enable-negative-margins: true;
 $enable-deprecation-messages: true !default;
-$enable-important-utilities:  true !default;
+$enable-important-utilities: true !default;
 
-$enable-dark-mode:            true !default;
-$color-mode-type:             data !default; // `data` or `media-query`
+$enable-dark-mode: true !default;
+$color-mode-type: data !default; // `data` or `media-query`
 
 $grid-breakpoints: (
   xs: 0,
@@ -29,20 +29,21 @@ $grid-breakpoints: (
   lg: 992px,
   xl: 1200px,
   xxl: 1900px,
-  qhd: 2559px, // 2K resolution
+  qhd: 2559px,
+  // 2K resolution
   uhd: 3839px, // 4K resolution
 );
 
 @import "bootstrap/scss/functions";
 
-$primary: #1226AA;
+$primary: #1226aa;
 $secondary: #f8f8f8;
-$brand-dark: #1D1934;
-$accent: #E1251B;
-$danger: #D7282F;
-$success: #1D8649;
-$warning: #FFD040;
-$dark: #54565A;
+$brand-dark: #1d1934;
+$accent: #e1251b;
+$danger: #d7282f;
+$success: #1d8649;
+$warning: #ffd040;
+$dark: #54565a;
 
 $custom-colors: (
   "brand-dark": $brand-dark,
