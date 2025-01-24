@@ -11,10 +11,10 @@ import {
   AVAnimatedTransition,
   AVSpinner,
   AVCollapser,
+  AVLinkVisualizer,
   //   AVTooltip,
   //   AVOptionSelect,
   //   AVOptionCheckbox,
-  //   AVLinkVisualizer,
   //   AVVerticalStep,
   //   AVAnimatedMenuButton,
   //   AVProgressBar,
@@ -72,10 +72,10 @@ export default {
     app.component("AVAnimatedTransition", AVAnimatedTransition);
     app.component("AVSpinner", AVSpinner);
     app.component("AVCollapser", AVCollapser);
+    app.component("AVLinkVisualizer", AVLinkVisualizer);
     // app.component("AVTooltip", AVTooltip);
     // app.component("AVOptionSelect", AVOptionSelect);
     // app.component("AVOptionCheckbox", AVOptionCheckbox);
-    // app.component("AVLinkVisualizer", AVLinkVisualizer);
     // app.component("AVVerticalStep", AVVerticalStep);
     // app.component("AVAnimatedMenuButton", AVAnimatedMenuButton);
     // app.component("AVProgressBar", AVProgressBar);
@@ -133,10 +133,10 @@ export {
   AVAnimatedTransition,
   AVSpinner,
   AVCollapser,
+  AVLinkVisualizer,
   //   AVTooltip,
   //   AVOptionSelect,
   //   AVOptionCheckbox,
-  //   AVLinkVisualizer,
   //   AVProgressBar,
   //   AVWaitingDots,
 

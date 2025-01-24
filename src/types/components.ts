@@ -12,6 +12,9 @@ type BootstrapBasicSize = (typeof BOOTSTRAP_BASIC_SIZES)[number];
 type BootstrapExpandedSize = (typeof BOOTSTRAP_EXPANDED_SIZES)[number];
 
 export * from "@/components/atoms/AVSpinner/AVSpinner.types";
+export * from "@/components/atoms/AVLinkVisualizer/AVLinkVisualizer.types";
+
+// -------- Old stuff
 
 type AVSplitHelperState = "ballot" | "assign" | "overview";
 type AVPileSummaryState = AVSplitHelperState | "summary";
@@ -57,22 +60,6 @@ type AVCalculateResultContentStatus =
 
 type AVCalculateResultContentElapsed = `${string}:${string}:${string}`;
 
-const LINK_KEYS: string[] = [
-  "github",
-  "instagram",
-  "linkedin",
-  "twitter",
-  "envelope",
-  "facebook",
-  "vimeo",
-  "youtube",
-  "tiktok",
-] as const;
-
-type AVLinkVisualizerKey = (typeof LINK_KEYS)[number];
-
-type AVLinkVisualizerType = Record<AVLinkVisualizerKey, RegExp>;
-
 interface AVRankedSummaryResultOptionRow {
   reference: string;
   title: Record<string, string>;
@@ -84,8 +71,6 @@ interface AVRankedSummaryResultOptionRow {
   tied: boolean;
   elected: boolean;
 }
-
-export { LINK_KEYS };
 
 export type {
   BootstrapColor,
@@ -102,7 +87,5 @@ export type {
   AVCalculateResultContentElapsed,
   ImageOption,
   OptionSummary,
-  AVLinkVisualizerKey,
-  AVLinkVisualizerType,
   AVRankedSummaryResultOptionRow,
 };

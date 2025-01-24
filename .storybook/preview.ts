@@ -12,6 +12,7 @@ import {
   AVAnimatedTransition,
   AVSpinner,
   AVCollapser,
+  AVLinkVisualizer,
   //   AVTooltip,
   //   AVSplitWizardHeader,
   //   AVBallot,
@@ -25,7 +26,6 @@ import {
   //   AVSearchBallot,
   //   AVWriteInOption,
   //   AVSubmissionHelper,
-  //   AVLinkVisualizer,
   //   AVElectaContestCard,
   //   AVProgressBar,
   //   AVWaitingDots,
@@ -37,6 +37,7 @@ setup((app) => {
   app.component("AVAnimatedTransition", AVAnimatedTransition);
   app.component("AVSpinner", AVSpinner);
   app.component("AVCollapser", AVCollapser);
+  app.component("AVLinkVisualizer", AVLinkVisualizer);
   // app.component("AVTooltip", AVTooltip);
   // app.component("AVSplitWizardHeader", AVSplitWizardHeader);
   // app.component("AVBallot", AVBallot);
@@ -50,7 +51,6 @@ setup((app) => {
   // app.component("AVSearchBallot", AVSearchBallot);
   // app.component("AVWriteInOption", AVWriteInOption);
   // app.component("AVSubmissionHelper", AVSubmissionHelper);
-  // app.component("AVLinkVisualizer", AVLinkVisualizer);
   // app.component("AVElectaContestCard", AVElectaContestCard);
   // app.component("AVProgressBar", AVProgressBar);
   // app.component("AVWaitingDots", AVWaitingDots);
