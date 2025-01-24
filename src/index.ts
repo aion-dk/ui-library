@@ -12,8 +12,8 @@ import {
   AVSpinner,
   AVCollapser,
   AVLinkVisualizer,
+  AVOptionSelect,
   //   AVTooltip,
-  //   AVOptionSelect,
   //   AVOptionCheckbox,
   //   AVVerticalStep,
   //   AVAnimatedMenuButton,
@@ -73,8 +73,8 @@ export default {
     app.component("AVSpinner", AVSpinner);
     app.component("AVCollapser", AVCollapser);
     app.component("AVLinkVisualizer", AVLinkVisualizer);
+    app.component("AVOptionSelect", AVOptionSelect);
     // app.component("AVTooltip", AVTooltip);
-    // app.component("AVOptionSelect", AVOptionSelect);
     // app.component("AVOptionCheckbox", AVOptionCheckbox);
     // app.component("AVVerticalStep", AVVerticalStep);
     // app.component("AVAnimatedMenuButton", AVAnimatedMenuButton);
@@ -134,8 +134,8 @@ export {
   AVSpinner,
   AVCollapser,
   AVLinkVisualizer,
+  AVOptionSelect,
   //   AVTooltip,
-  //   AVOptionSelect,
   //   AVOptionCheckbox,
   //   AVProgressBar,
   //   AVWaitingDots,

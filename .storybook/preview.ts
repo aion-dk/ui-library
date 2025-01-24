@@ -13,6 +13,7 @@ import {
   AVSpinner,
   AVCollapser,
   AVLinkVisualizer,
+  AVOptionSelect,
   //   AVTooltip,
   //   AVSplitWizardHeader,
   //   AVBallot,
@@ -21,7 +22,6 @@ import {
   //   AVOption,
   //   AVBlankOption,
   //   AVOptionCheckbox,
-  //   AVOptionSelect,
   //   AVSummaryOption,
   //   AVSearchBallot,
   //   AVWriteInOption,
@@ -38,6 +38,7 @@ setup((app) => {
   app.component("AVSpinner", AVSpinner);
   app.component("AVCollapser", AVCollapser);
   app.component("AVLinkVisualizer", AVLinkVisualizer);
+  app.component("AVOptionSelect", AVOptionSelect);
   // app.component("AVTooltip", AVTooltip);
   // app.component("AVSplitWizardHeader", AVSplitWizardHeader);
   // app.component("AVBallot", AVBallot);
@@ -46,7 +47,6 @@ setup((app) => {
   // app.component("AVOption", AVOption);
   // app.component("AVBlankOption", AVBlankOption);
   // app.component("AVOptionCheckbox", AVOptionCheckbox);
-  // app.component("AVOptionSelect", AVOptionSelect);
   // app.component("AVSummaryOption", AVSummaryOption);
   // app.component("AVSearchBallot", AVSearchBallot);
   // app.component("AVWriteInOption", AVWriteInOption);
