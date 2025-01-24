@@ -21,5 +21,13 @@ export default [
     ...pluginVitest.configs.recommended,
     files: ["src/**/__tests__/*"],
   },
+
   skipFormatting,
+
+  {
+    files: ["**/*.{ts,mts,tsx,vue}"],
+    rules: {
+      "@typescript-eslint/no-unused-expressions": "off",
+    },
+  },
 ];

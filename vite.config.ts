@@ -41,7 +41,13 @@ export default defineConfig({
           vue: "Vue",
         },
       },
+      onwarn(warning, rollupWarn) {
+        if (warning.code && !["UNUSED_EXTERNAL_IMPORT"].includes(warning.code)) {
+          rollupWarn(warning);
+        }
+      },
     },
+    chunkSizeWarningLimit: 2000,
   },
   resolve: {
     alias: {
@@ -53,7 +59,13 @@ export default defineConfig({
     preprocessorOptions: {
       scss: {
         api: "modern-compiler",
-        silenceDeprecations: ["mixed-decls", "color-functions", "global-builtin", "import", "abs-percent"],
+        silenceDeprecations: [
+          "mixed-decls",
+          "color-functions",
+          "global-builtin",
+          "import",
+          "abs-percent",
+        ],
       },
     },
   },

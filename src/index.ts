@@ -10,37 +10,10 @@ import {
   AVIcon,
   AVAnimatedTransition,
   AVSpinner,
-  //   AVButton,
-  //   AVBullet,
-  //   AVTextInput,
-  //   AVNumberInput,
-  //   AVPasswordInput,
-  //   AVCard,
-  //   AVRoundButton,
-  //   AVLabel,
-  //   AVDatetimeInput,
-  //   AVTextArea,
-  //   AVDropdown,
-  //   AVDropdownContent,
-  //   AVDropdownItem,
-  //   AVAlert,
-  //   AVFileInput,
-  //   AVRadio,
-  //   AVLink,
-  //   AVNavbarItem,
-  //   AVSidebarItem,
+  AVCollapser,
   //   AVTooltip,
-  //   AVMenuDropdown,
-  //   AVMenuDropdownItem,
-  //   AVMenuDropdownContent,
-  //   AVTabSwitcher,
-  //   AVBallotSummary,
-  //   AVTimedCard,
-  //   AVBasicSteps,
-  //   AVSteps,
   //   AVOptionSelect,
   //   AVOptionCheckbox,
-  //   AVCollapser,
   //   AVLinkVisualizer,
   //   AVVerticalStep,
   //   AVAnimatedMenuButton,
@@ -98,37 +71,10 @@ export default {
     app.component("AVIcon", AVIcon);
     app.component("AVAnimatedTransition", AVAnimatedTransition);
     app.component("AVSpinner", AVSpinner);
-    // app.component("AVButton", AVButton);
-    // app.component("AVBullet", AVBullet);
-    // app.component("AVTextInput", AVTextInput);
-    // app.component("AVNumberInput", AVNumberInput);
-    // app.component("AVPasswordInput", AVPasswordInput);
-    // app.component("AVDatetimeInput", AVDatetimeInput);
-    // app.component("AVTextArea", AVTextArea);
-    // app.component("AVCard", AVCard);
-    // app.component("AVRoundButton", AVRoundButton);
-    // app.component("AVLabel", AVLabel);
-    // app.component("AVDropdown", AVDropdown);
-    // app.component("AVDropdownContent", AVDropdownContent);
-    // app.component("AVDropdownItem", AVDropdownItem);
-    // app.component("AVAlert", AVAlert);
-    // app.component("AVFileInput", AVFileInput);
-    // app.component("AVRadio", AVRadio);
-    // app.component("AVLink", AVLink);
-    // app.component("AVNavbarItem", AVNavbarItem);
-    // app.component("AVSidebarItem", AVSidebarItem);
+    app.component("AVCollapser", AVCollapser);
     // app.component("AVTooltip", AVTooltip);
-    // app.component("AVMenuDropdown", AVMenuDropdown);
-    // app.component("AVMenuDropdownContent", AVMenuDropdownContent);
-    // app.component("AVMenuDropdownItem", AVMenuDropdownItem);
-    // app.component("AVTabSwitcher", AVTabSwitcher);
-    // app.component("AVBallotSummary", AVBallotSummary);
-    // app.component("AVTimedCard", AVTimedCard);
-    // app.component("AVBasicSteps", AVBasicSteps);
-    // app.component("AVSteps", AVSteps);
     // app.component("AVOptionSelect", AVOptionSelect);
     // app.component("AVOptionCheckbox", AVOptionCheckbox);
-    // app.component("AVCollapser", AVCollapser);
     // app.component("AVLinkVisualizer", AVLinkVisualizer);
     // app.component("AVVerticalStep", AVVerticalStep);
     // app.component("AVAnimatedMenuButton", AVAnimatedMenuButton);
@@ -186,37 +132,10 @@ export {
   AVIcon,
   AVAnimatedTransition,
   AVSpinner,
-  //   AVButton,
-  //   AVBullet,
-  //   AVTextInput,
-  //   AVNumberInput,
-  //   AVPasswordInput,
-  //   AVCard,
-  //   AVRoundButton,
-  //   AVLabel,
-  //   AVDatetimeInput,
-  //   AVTextArea,
-  //   AVDropdown,
-  //   AVDropdownContent,
-  //   AVDropdownItem,
-  //   AVAlert,
-  //   AVFileInput,
-  //   AVRadio,
-  //   AVLink,
-  //   AVNavbarItem,
-  //   AVSidebarItem,
+  AVCollapser,
   //   AVTooltip,
-  //   AVMenuDropdown,
-  //   AVMenuDropdownItem,
-  //   AVMenuDropdownContent,
-  //   AVTabSwitcher,
-  //   AVBallotSummary,
-  //   AVTimedCard,
-  //   AVBasicSteps,
-  //   AVSteps,
   //   AVOptionSelect,
   //   AVOptionCheckbox,
-  //   AVCollapser,
   //   AVLinkVisualizer,
   //   AVProgressBar,
   //   AVWaitingDots,

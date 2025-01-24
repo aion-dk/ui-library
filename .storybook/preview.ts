@@ -11,25 +11,7 @@ import {
   AVIcon,
   AVAnimatedTransition,
   AVSpinner,
-  //   AVDropdownContent,
-  //   AVDropdownItem,
-  //   AVRadio,
-  //   AVNavbarItem,
-  //   AVMenuDropdownContent,
-  //   AVMenuDropdownItem,
-  //   AVSteps,
-  //   AVNavigationItemList,
-  //   AVMenuDropdown,
-  //   AVNavbar,
-  //   AVContent,
-  //   AVSidebar,
-  //   AVFooter,
-  //   AVLabel,
-  //   AVTabSwitcher,
-  //   AVSidebarItem,
-  //   AVButton,
-  //   AVCard,
-  //   AVElectionCard,
+  AVCollapser,
   //   AVTooltip,
   //   AVSplitWizardHeader,
   //   AVBallot,
@@ -38,7 +20,6 @@ import {
   //   AVOption,
   //   AVBlankOption,
   //   AVOptionCheckbox,
-  //   AVCollapser,
   //   AVOptionSelect,
   //   AVSummaryOption,
   //   AVSearchBallot,
@@ -55,25 +36,7 @@ setup((app) => {
   app.component("AVIcon", AVIcon);
   app.component("AVAnimatedTransition", AVAnimatedTransition);
   app.component("AVSpinner", AVSpinner);
-  // app.component("AVDropdownContent", AVDropdownContent);
-  // app.component("AVDropdownItem", AVDropdownItem);
-  // app.component("AVRadio", AVRadio);
-  // app.component("AVNavbarItem", AVNavbarItem);
-  // app.component("AVMenuDropdownContent", AVMenuDropdownContent);
-  // app.component("AVMenuDropdownItem", AVMenuDropdownItem);
-  // app.component("AVSteps", AVSteps);
-  // app.component("AVNavigationItemList", AVNavigationItemList);
-  // app.component("AVMenuDropdown", AVMenuDropdown);
-  // app.component("AVNavbar", AVNavbar);
-  // app.component("AVContent", AVContent);
-  // app.component("AVSidebar", AVSidebar);
-  // app.component("AVFooter", AVFooter);
-  // app.component("AVLabel", AVLabel);
-  // app.component("AVTabSwitcher", AVTabSwitcher);
-  // app.component("AVSidebarItem", AVSidebarItem);
-  // app.component("AVButton", AVButton);
-  // app.component("AVCard", AVCard);
-  // app.component("AVElectionCard", AVElectionCard);
+  app.component("AVCollapser", AVCollapser);
   // app.component("AVTooltip", AVTooltip);
   // app.component("AVSplitWizardHeader", AVSplitWizardHeader);
   // app.component("AVBallot", AVBallot);
@@ -82,7 +45,6 @@ setup((app) => {
   // app.component("AVOption", AVOption);
   // app.component("AVBlankOption", AVBlankOption);
   // app.component("AVOptionCheckbox", AVOptionCheckbox);
-  // app.component("AVCollapser", AVCollapser);
   // app.component("AVOptionSelect", AVOptionSelect);
   // app.component("AVSummaryOption", AVSummaryOption);
   // app.component("AVSearchBallot", AVSearchBallot);

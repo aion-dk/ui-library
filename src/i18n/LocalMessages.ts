@@ -1,6 +1,5 @@
 /* ATOMS */
 import AVSpinner from "@/components/atoms/AVSpinner/AVSpinner.messages";
-// import AVFileInput from "@/components/atoms/AVFileInput/AVFileInput.messages";
 // import AVOptionCheckbox from "@/components/atoms/AVOptionCheckbox/AVOptionCheckbox.messages";
 // import AVOptionSelect from "@/components/atoms/AVOptionSelect/AVOptionSelect.messages";
 
@@ -34,7 +33,6 @@ import type {
 const components: DefineLocaleMessage = {
   /* ATOMS */
   AVSpinner,
-  // AVFileInput,
   // AVOptionCheckbox,
   // AVOptionSelect,
   /* MOLECULES */
