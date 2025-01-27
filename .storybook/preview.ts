@@ -4,6 +4,8 @@ import localI18n from "../src/i18n";
 import decorators from "./decorators";
 import globals from "./globals";
 import parameters from "./parameters";
+import FloatingVue from "floating-vue";
+import "floating-vue/dist/style.css";
 import "@/bootstrap/bootstrap.customized.scss"; // Bootstrap CSS
 import "@/bootstrap"; // Bootstrap JS
 import "@/bootstrap/mock.scss"; // Mocked theme CSS
@@ -16,7 +18,7 @@ import {
   AVLinkVisualizer,
   AVOptionSelect,
   AVOptionCheckbox,
-  //   AVTooltip,
+  AVTooltip,
   //   AVSplitWizardHeader,
   //   AVBallot,
   //   AVPileSummary,
@@ -41,7 +43,7 @@ setup((app) => {
   app.component("AVLinkVisualizer", AVLinkVisualizer);
   app.component("AVOptionSelect", AVOptionSelect);
   app.component("AVOptionCheckbox", AVOptionCheckbox);
-  // app.component("AVTooltip", AVTooltip);
+  app.component("AVTooltip", AVTooltip);
   // app.component("AVSplitWizardHeader", AVSplitWizardHeader);
   // app.component("AVBallot", AVBallot);
   // app.component("AVPileSummary", AVPileSummary);
@@ -59,6 +61,7 @@ setup((app) => {
 
   app.provide("i18n", localI18n);
   app.use(localI18n);
+  app.use(FloatingVue);
 });
 
 const preview: Preview = {

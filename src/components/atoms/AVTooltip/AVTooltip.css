@@ -1,0 +1,8 @@
+.AVTooltip--wrapper {
+  cursor: help;
+  width: fit-content;
+}
+
+.AVTooltip--icon {
+  color: var(--gray-600) !important;
+}

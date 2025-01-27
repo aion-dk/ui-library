@@ -13,6 +13,7 @@ type BootstrapExpandedSize = (typeof BOOTSTRAP_EXPANDED_SIZES)[number];
 
 export * from "@/components/atoms/AVSpinner/AVSpinner.types";
 export * from "@/components/atoms/AVLinkVisualizer/AVLinkVisualizer.types";
+export * from "@/components/atoms/AVTooltip/AVTooltip.types";
 
 // -------- Old stuff
 

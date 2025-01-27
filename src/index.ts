@@ -2,8 +2,8 @@ import type { App } from "vue";
 import type { I18n } from "vue-i18n";
 import localI18n from "@/i18n";
 import { iconNames } from "@/helpers/iconHelper";
-// import FloatingVue from "floating-vue";
-// import "floating-vue/dist/style.css";
+import FloatingVue from "floating-vue";
+import "floating-vue/dist/style.css";
 
 import {
   // ATOMS
@@ -14,7 +14,7 @@ import {
   AVLinkVisualizer,
   AVOptionSelect,
   AVOptionCheckbox,
-  //   AVTooltip,
+  AVTooltip,
   //   AVVerticalStep,
   //   AVAnimatedMenuButton,
   //   AVProgressBar,
@@ -65,7 +65,7 @@ import {
 
 export default {
   install: (app: App, i18n: I18n | null = null) => {
-    // app.use(FloatingVue);
+    app.use(FloatingVue);
 
     // ATOMS
     app.component("AVIcon", AVIcon);
@@ -75,7 +75,7 @@ export default {
     app.component("AVLinkVisualizer", AVLinkVisualizer);
     app.component("AVOptionSelect", AVOptionSelect);
     app.component("AVOptionCheckbox", AVOptionCheckbox);
-    // app.component("AVTooltip", AVTooltip);
+    app.component("AVTooltip", AVTooltip);
     // app.component("AVVerticalStep", AVVerticalStep);
     // app.component("AVAnimatedMenuButton", AVAnimatedMenuButton);
     // app.component("AVProgressBar", AVProgressBar);
@@ -136,7 +136,7 @@ export {
   AVLinkVisualizer,
   AVOptionSelect,
   AVOptionCheckbox,
-  //   AVTooltip,
+  AVTooltip,
   //   AVProgressBar,
   //   AVWaitingDots,
 
