@@ -6,6 +6,7 @@ import globals from "./globals";
 import parameters from "./parameters";
 import "@/bootstrap/bootstrap.customized.scss"; // Bootstrap CSS
 import "@/bootstrap"; // Bootstrap JS
+import "@/bootstrap/mock.scss"; // Mocked theme CSS
 
 import {
   AVIcon,
@@ -14,6 +15,7 @@ import {
   AVCollapser,
   AVLinkVisualizer,
   AVOptionSelect,
+  AVOptionCheckbox,
   //   AVTooltip,
   //   AVSplitWizardHeader,
   //   AVBallot,
@@ -21,7 +23,6 @@ import {
   //   AVSplitWeightHelper,
   //   AVOption,
   //   AVBlankOption,
-  //   AVOptionCheckbox,
   //   AVSummaryOption,
   //   AVSearchBallot,
   //   AVWriteInOption,
@@ -39,6 +40,7 @@ setup((app) => {
   app.component("AVCollapser", AVCollapser);
   app.component("AVLinkVisualizer", AVLinkVisualizer);
   app.component("AVOptionSelect", AVOptionSelect);
+  app.component("AVOptionCheckbox", AVOptionCheckbox);
   // app.component("AVTooltip", AVTooltip);
   // app.component("AVSplitWizardHeader", AVSplitWizardHeader);
   // app.component("AVBallot", AVBallot);
@@ -46,7 +48,6 @@ setup((app) => {
   // app.component("AVSplitWeightHelper", AVSplitWeightHelper);
   // app.component("AVOption", AVOption);
   // app.component("AVBlankOption", AVBlankOption);
-  // app.component("AVOptionCheckbox", AVOptionCheckbox);
   // app.component("AVSummaryOption", AVSummaryOption);
   // app.component("AVSearchBallot", AVSearchBallot);
   // app.component("AVWriteInOption", AVWriteInOption);

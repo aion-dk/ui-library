@@ -1,7 +1,7 @@
 /* ATOMS */
 import AVSpinner from "@/components/atoms/AVSpinner/AVSpinner.messages";
 import AVOptionSelect from "@/components/atoms/AVOptionSelect/AVOptionSelect.messages";
-// import AVOptionCheckbox from "@/components/atoms/AVOptionCheckbox/AVOptionCheckbox.messages";
+import AVOptionCheckbox from "@/components/atoms/AVOptionCheckbox/AVOptionCheckbox.messages";
 
 /* MOLECULES */
 // import AVBlankOption from "@/components/molecules/AVBlankOption/AVBlankOption.messages";
@@ -34,7 +34,8 @@ const components: DefineLocaleMessage = {
   /* ATOMS */
   AVSpinner,
   AVOptionSelect,
-  // AVOptionCheckbox,
+  AVOptionCheckbox,
+
   /* MOLECULES */
   // AVBlankOption,
   // AVOption,
@@ -45,6 +46,7 @@ const components: DefineLocaleMessage = {
   // AVSummaryOption,
   // AVWriteInOption,
   // AVRecommendationList,
+
   /* ORGANISMS */
   // AVBallot,
   // AVPileSummary,
