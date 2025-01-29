@@ -140,7 +140,7 @@ watch(
         :alt="t('js.components.AVSummaryOption.aria_label.option_image')"
         data-test="summary-option-image"
       />
-      <div class="AVSummaryOption--body pb-0">
+      <div class="AVSummaryOption--body pb-0 d-flex align-items-center">
         <div class="AVSummaryOption--title m-0">
           {{ displayTitle }}
         </div>

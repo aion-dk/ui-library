@@ -10,26 +10,25 @@ type BootstrapBasicSize = (typeof BOOTSTRAP_BASIC_SIZES)[number];
 
 type BootstrapExpandedSize = (typeof BOOTSTRAP_EXPANDED_SIZES)[number];
 
+type ImageOption = "square" | "passport";
+
+// ATOMS
 export * from "@/components/atoms/AVSpinner/AVSpinner.types";
 export * from "@/components/atoms/AVLinkVisualizer/AVLinkVisualizer.types";
 export * from "@/components/atoms/AVTooltip/AVTooltip.types";
+
+// MOLECULES
 export * from "@/components/molecules/AVSummaryOption/AVSummaryOption.types";
 
-// -------- Old stuff
-import type { AVSummaryOptionObject } from "@/components/molecules/AVSummaryOption/AVSummaryOption.types";
+// ORGANISMS
+export * from "@/components/organisms/AVPileSummary/AVPileSummary.types";
 
+// -------- Old stuff
 type AVSplitHelperState = "ballot" | "assign" | "overview";
-type AVPileSummaryState = AVSplitHelperState | "summary";
-type ImageOption = "square" | "passport";
 
 interface AVDropdownOption {
   value: unknown;
   label: string;
-}
-
-interface OptionSummary {
-  options: AVSummaryOptionObject[];
-  writeIns: AVSummaryWriteInObject[];
 }
 
 interface AVSummaryWriteInObject {
@@ -66,13 +65,11 @@ export type {
   BootstrapBasicSize,
   BootstrapExpandedSize,
   AVSplitHelperState,
-  AVPileSummaryState,
   AVDropdownOption,
   AVSummaryWriteInObject,
   AVCalculateResultContentRole,
   AVCalculateResultContentStatus,
   AVCalculateResultContentElapsed,
   ImageOption,
-  OptionSummary,
   AVRankedSummaryResultOptionRow,
 };

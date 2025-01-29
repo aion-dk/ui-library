@@ -3,7 +3,7 @@
   --av-theme-secondary: #f7edcd;
   --av-theme-secondary-text: black;
   --av-theme-text: white;
-  --av-theme-danger-background: #ff0000;
+  --av-theme-danger-background: rgb(230, 0, 118);
   --av-theme-danger-text: white;
   --av-theme-rgb: rgb(116, 75, 163) %>;
   --av-theme-danger-rgb: rgb(220, 53, 69) %>;
@@ -29,18 +29,29 @@
 
 .bg-theme-danger {
   background-color: var(--av-theme-danger-background);
-  color: black;
+  color: white;
+}
+
+.btn-theme-danger {
+  color: white;
+  background-color: var(--av-theme-danger-background);
+  border-color: rgb(163, 0, 76);
+
+  &:hover {
+    background-color: rgb(163, 0, 76);
+    color: white;
+  }
 }
 
 .AVBallot--error .AVOptionCheckbox.AVOptionCheckbox--checked:focus,
 .AVBallot--error .option-number.AVOptionCheckbox--checked:focus {
-  box-shadow: 0 0 0 0.3rem #791e1e !important;
+  box-shadow: 0 0 0 0.3rem rgb(163, 0, 76) !important;
 }
 
 .AVBallot--error .AVOptionCheckbox.AVOptionCheckbox--checked {
   stroke: black !important;
-  background-color: #ff0000 !important;
-  border: 2px solid #791e1e !important;
+  background-color: var(--av-theme-danger-background) !important;
+  border: 2px solid rgb(163, 0, 76) !important;
 }
 
 .AVBallot--error .AVOptionCheckbox.AVOptionCheckbox--checked .AVOptionSelect {
@@ -52,6 +63,6 @@
 }
 
 .AVBallot--error .AVOptionCheckbox--exclusive {
-  background-color: #ff0000 !important;
+  background-color: var(--av-theme-danger-background) !important;
   color: black !important;
 }

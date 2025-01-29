@@ -1,0 +1,184 @@
+import type { Meta } from "@/types";
+import { AVPileSummary } from "@/components";
+import { SUPPORTED_LOCALES } from "@/constants";
+import { getContest, getSelectionPile } from "@/examples";
+
+const meta: Meta<typeof AVPileSummary> & {
+  argTypes: {
+    onEditCurrentSelection: { action: string };
+    onDeleteSelection: { action: string };
+  };
+} = {
+  title: "Design System/Organisms/AVPileSummary",
+  component: AVPileSummary,
+  tags: ["autodocs"],
+  argTypes: {
+    selectionPile: {
+      control: { type: "object" },
+    },
+    contest: {
+      control: { type: "object" },
+    },
+    maximumOptionsShown: {
+      control: { type: "number", min: 0, max: 100, step: 1 },
+    },
+    activeState: {
+      control: { type: "select" },
+      options: ["ballot", "assign", "overview", "summary"],
+    },
+    pileIndex: {
+      control: { type: "number", min: 0, max: 9, step: 1 },
+    },
+    isEditing: {
+      control: { type: "boolean" },
+    },
+    totalPiles: {
+      control: { type: "number", min: 0, max: 10, step: 1 },
+    },
+    locale: {
+      control: { type: "select" },
+      options: SUPPORTED_LOCALES,
+    },
+    onEditCurrentSelection: {
+      action: "editCurrentSelection: EDIT SELECTION",
+    },
+    onDeleteSelection: {
+      action: "deleteSelection: DELETE SELECTION",
+    },
+  },
+};
+
+export default meta;
+
+const Template = (args: Meta) => ({
+  components: { AVPileSummary },
+  setup() {
+    return { args };
+  },
+  template: '<AVPileSummary v-bind="args" />',
+});
+
+export const Ballot = {
+  render: Template,
+
+  args: {
+    contest: getContest([]),
+    activeState: "assign",
+    isEditing: false,
+    maximumOptionsShown: 3,
+    pileIndex: 0,
+    totalPiles: 0,
+    selectionPile: getSelectionPile(["single", "weighted"]),
+  },
+};
+
+export const MultiBallotWithChildren = {
+  render: Template,
+
+  args: {
+    contest: getContest(["children_options", "multi"]),
+    activeState: "assign",
+    isEditing: false,
+    maximumOptionsShown: 3,
+    pileIndex: 0,
+    totalPiles: 0,
+    selectionPile: getSelectionPile(["children", "weighted"]),
+  },
+};
+
+export const RankedBallotWithChildren = {
+  render: Template,
+
+  args: {
+    contest: getContest(["children_options", "ranked"]),
+    activeState: "assign",
+    isEditing: false,
+    maximumOptionsShown: 3,
+    pileIndex: 0,
+    totalPiles: 0,
+    selectionPile: getSelectionPile(["children", "weighted"]),
+  },
+};
+
+export const RankedBallot = {
+  render: Template,
+
+  args: {
+    contest: getContest(["ranked"]),
+    activeState: "assign",
+    isEditing: false,
+    maximumOptionsShown: 3,
+    pileIndex: 0,
+    totalPiles: 0,
+    selectionPile: getSelectionPile(["multi", "weighted"]),
+  },
+};
+
+export const ManyOptionsWithMaximum = {
+  render: Template,
+
+  args: {
+    contest: getContest(["many_options", "multi"]),
+    activeState: "assign",
+    isEditing: false,
+    maximumOptionsShown: 3,
+    pileIndex: 0,
+    totalPiles: 0,
+    selectionPile: getSelectionPile(["many", "weighted"]),
+  },
+};
+
+export const ManyOptionsWithoutMaximum = {
+  render: Template,
+
+  args: {
+    contest: getContest(["many_options", "multi"]),
+    activeState: "assign",
+    isEditing: false,
+    pileIndex: 0,
+    totalPiles: 0,
+    selectionPile: getSelectionPile(["many", "weighted"]),
+  },
+};
+
+export const Overview = {
+  render: Template,
+
+  args: {
+    contest: getContest([]),
+    activeState: "overview",
+    isEditing: false,
+    maximumOptionsShown: 3,
+    pileIndex: 0,
+    totalPiles: 0,
+    selectionPile: getSelectionPile(["single", "weighted"]),
+  },
+};
+
+export const Summary = {
+  render: Template,
+
+  args: {
+    contest: getContest([]),
+    activeState: "summary",
+    isEditing: false,
+    maximumOptionsShown: 3,
+    pileIndex: 0,
+    totalPiles: 3,
+    selectionPile: getSelectionPile(["single", "weighted"]),
+  },
+};
+
+export const SummaryRankedWithChildren = {
+  render: Template,
+
+  args: {
+    contest: getContest(["children_options", "ranked"]),
+    activeState: "summary",
+    isEditing: false,
+    maximumOptionsShown: 3,
+    pileIndex: 0,
+    totalPiles: 3,
+    selectionPile: getSelectionPile(["children", "weighted"]),
+  },
+};

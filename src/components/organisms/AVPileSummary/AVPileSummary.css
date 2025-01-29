@@ -1,0 +1,44 @@
+.AVPileSummary--summary {
+}
+
+.AVPileSummary--summary-header {
+  align-self: stretch;
+  background-color: var(--bs-border-color);
+}
+
+.AVPileSummary--summary-header-text {
+  font-weight: 500;
+}
+
+.AVPileSummary--summary-body {
+}
+
+.AVPileSummary--assign {
+}
+
+.AVPileSummary--assign:hover {
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+.AVPileSummary--assign-card {
+  width: 100%;
+  word-wrap: break-word;
+}
+
+.AVPileSummary--assign-header {
+}
+
+.AVPileSummary--edit {
+}
+
+.AVPileSummary--assign-body {
+}
+
+.AVPileSummary--assign-text {
+}
+
+.AVPileSummary--show-more-button {
+}
+
+.AVPileSummary--assign-delete-button {
+}
