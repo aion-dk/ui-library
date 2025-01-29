@@ -156,7 +156,7 @@ watch(
   <div v-if="activeState === 'summary'" class="d-grid flex-grow-1">
     <header
       v-if="contest.markingType.maxPiles !== 1"
-      class="AVPileSummary--summary-header hstack justify-content-between px-2 py-1"
+      class="AVPileSummary--summary-header hstack justify-content-between px-3 py-2"
       data-test="pile-summary-header"
     >
       <span
@@ -172,7 +172,7 @@ watch(
       <span>{{ t("js.components.AVPileSummary.selection") }}</span>
     </header>
 
-    <div class="AVPileSummary--summary-body vstack gap-2 p-4 border">
+    <div class="AVPileSummary--summary-body vstack gap-2 p-3 border">
       <AVSummaryOption
         v-for="(option, index) in optionSummaries.options"
         :key="index"

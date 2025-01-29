@@ -104,35 +104,28 @@ watch(
 
 <template>
   <div
-    class="AVSummaryOption card"
+    class="AVSummaryOption card rounded-0"
     :aria-label="t('js.components.AVSummaryOption.aria_label.option')"
     data-test="summary-option"
   >
-    <div
-      v-if="ancestryTitles"
-      aria-label="breadcrumb"
-      class="AVSummaryOption--ancestry bg-secondary border-0 border-bottom py-1 px-2 small"
-    >
-      <ol class="breadcrumb mb-0" data-test="summary-option-ancestry">
-        <li
-          v-for="(title, index) in ancestryTitles"
-          :key="title + index"
-          class="breadcrumb-item"
-          data-test="breadcrumb-item"
-        >
-          {{ title }}
-        </li>
-      </ol>
+    <!-- ANCESTRY -->
+    <div v-if="ancestryTitles" class="AVSummaryOption--ancestry card-header small">
+      <div aria-label="breadcrumb">
+        <ol class="breadcrumb mb-0" data-test="summary-option-ancestry">
+          <li
+            v-for="(title, index) in ancestryTitles"
+            :key="title + index"
+            class="breadcrumb-item"
+            data-test="breadcrumb-item"
+          >
+            {{ title }}
+          </li>
+        </ol>
+      </div>
     </div>
 
-    <div
-      :class="{
-        hstack: true,
-        'gap-2': true,
-        'p-3': true,
-        'p-4': useFooter,
-      }"
-    >
+    <!-- OPTION -->
+    <div class="card-body hstack gap-2" :class="{ 'p-4': useFooter }">
       <img
         v-if="option?.image"
         :src="imageUrl"
@@ -145,7 +138,6 @@ watch(
           {{ displayTitle }}
         </div>
       </div>
-
       <div v-if="!useFooter" class="AVSummaryOption--summary">
         <AVOptionCheckbox
           :checked="true"
@@ -156,7 +148,11 @@ watch(
       </div>
     </div>
 
-    <div v-if="useFooter" class="AVSummaryOption--footer d-flex border-0 border-top gap-2 p-3">
+    <!-- IF MULTIVOTE -->
+    <div
+      v-if="useFooter"
+      class="card-footer bg-white d-flex gap-2 justify-content-end py-3 flex-wrap"
+    >
       <div
         v-for="groupIndex in optionGroups"
         :key="groupIndex.toString()"

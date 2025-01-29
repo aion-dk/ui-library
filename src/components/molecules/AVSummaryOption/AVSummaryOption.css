@@ -28,8 +28,6 @@
 }
 
 .AVSummaryOption--footer {
-  flex-wrap: wrap;
-  justify-content: end;
 }
 
 .AVSummaryOption--group {
