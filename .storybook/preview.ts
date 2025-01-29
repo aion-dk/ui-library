@@ -19,13 +19,13 @@ import {
   AVOptionSelect,
   AVOptionCheckbox,
   AVTooltip,
+  AVSummaryOption,
   //   AVSplitWizardHeader,
   //   AVBallot,
   //   AVPileSummary,
   //   AVSplitWeightHelper,
   //   AVOption,
   //   AVBlankOption,
-  //   AVSummaryOption,
   //   AVSearchBallot,
   //   AVWriteInOption,
   //   AVSubmissionHelper,
@@ -44,13 +44,13 @@ setup((app) => {
   app.component("AVOptionSelect", AVOptionSelect);
   app.component("AVOptionCheckbox", AVOptionCheckbox);
   app.component("AVTooltip", AVTooltip);
+  app.component("AVSummaryOption", AVSummaryOption);
   // app.component("AVSplitWizardHeader", AVSplitWizardHeader);
   // app.component("AVBallot", AVBallot);
   // app.component("AVPileSummary", AVPileSummary);
   // app.component("AVSplitWeightHelper", AVSplitWeightHelper);
   // app.component("AVOption", AVOption);
   // app.component("AVBlankOption", AVBlankOption);
-  // app.component("AVSummaryOption", AVSummaryOption);
   // app.component("AVSearchBallot", AVSearchBallot);
   // app.component("AVWriteInOption", AVWriteInOption);
   // app.component("AVSubmissionHelper", AVSubmissionHelper);

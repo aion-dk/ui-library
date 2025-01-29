@@ -31,7 +31,7 @@ export default defineConfig({
       formats: ["es", "cjs"],
       name: "UILibrary",
       fileName: (format) => (format === "es" ? "index.js" : "index.cjs"),
-      cssFileName: "styles.css",
+      cssFileName: "styles",
     },
     rollupOptions: {
       external: ["vue"],

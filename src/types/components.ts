@@ -1,4 +1,3 @@
-import type { LocalString, OptionContent } from "@/types";
 import type {
   BOOTSTRAP_COLORS,
   BOOTSTRAP_BASIC_SIZES,
@@ -14,8 +13,10 @@ type BootstrapExpandedSize = (typeof BOOTSTRAP_EXPANDED_SIZES)[number];
 export * from "@/components/atoms/AVSpinner/AVSpinner.types";
 export * from "@/components/atoms/AVLinkVisualizer/AVLinkVisualizer.types";
 export * from "@/components/atoms/AVTooltip/AVTooltip.types";
+export * from "@/components/molecules/AVSummaryOption/AVSummaryOption.types";
 
 // -------- Old stuff
+import type { AVSummaryOptionObject } from "@/components/molecules/AVSummaryOption/AVSummaryOption.types";
 
 type AVSplitHelperState = "ballot" | "assign" | "overview";
 type AVPileSummaryState = AVSplitHelperState | "summary";
@@ -24,19 +25,6 @@ type ImageOption = "square" | "passport";
 interface AVDropdownOption {
   value: unknown;
   label: string;
-}
-
-interface AVSummaryOptionObject {
-  title: LocalString;
-  handle: string;
-  image?: string;
-  crosses: number;
-  rank?: number;
-  parent?: OptionContent;
-}
-
-interface AVSummaryOptionParent {
-  title: LocalString;
 }
 
 interface OptionSummary {
@@ -80,8 +68,6 @@ export type {
   AVSplitHelperState,
   AVPileSummaryState,
   AVDropdownOption,
-  AVSummaryOptionObject,
-  AVSummaryOptionParent,
   AVSummaryWriteInObject,
   AVCalculateResultContentRole,
   AVCalculateResultContentStatus,

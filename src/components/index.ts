@@ -14,13 +14,13 @@ export { default as AVTooltip } from "@/components/atoms/AVTooltip";
 // export { default as AVWaitingDots } from "@/components/atoms/AVWaitingDots";
 
 // MOLECULES
+export { default as AVSummaryOption } from "@/components/molecules/AVSummaryOption";
 // export { default as AVAsyncButton } from "@/components/molecules/AVAsyncButton";
 // export { default as AVRadioGroup } from "@/components/molecules/AVRadioGroup";
 // export { default as AVNavigationItemList } from "@/components/molecules/AVNavigationItemList";
 // export { default as AVBreadcrumb } from "@/components/molecules/AVBreadcrumb";
 // export { default as AVElectionCard } from "@/components/molecules/AVElectionCard";
 // export { default as AVBallotStyleCard } from "@/components/molecules/AVBallotStyleCard";
-// export { default as AVSummaryOption } from "@/components/molecules/AVSummaryOption";
 // export { default as AVOption } from "@/components/molecules/AVOption";
 // export { default as AVBlankOption } from "@/components/molecules/AVBlankOption";
 // export { default as AVWriteInOption } from "@/components/molecules/AVWriteInOption";

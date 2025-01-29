@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, inject, onMounted, watch } from "vue";
 import { switchLocale } from "@/i18n";
-import type { PropType, SupportedLocales } from "@/types";
+import type { PropType, SupportedLocale } from "@/types";
 
 const props = defineProps({
   checked: {
@@ -33,7 +33,7 @@ const props = defineProps({
     default: false,
   },
   locale: {
-    type: String as PropType<SupportedLocales>,
+    type: String as PropType<SupportedLocale>,
     default: null,
   },
 });
@@ -104,8 +104,8 @@ watch(
       "
       role="checkbox"
       :aria-checked="checked ? true : false"
-      :tabindex="disabled ? null : 0"
-      :aria-disabled="disabled || null"
+      :tabindex="disabled ? undefined : 0"
+      :aria-disabled="disabled || undefined"
       :disabled="disabled"
       v-bind="accessibilityAttributes"
       @click.stop="onToggled"
