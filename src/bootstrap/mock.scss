@@ -43,6 +43,24 @@
   }
 }
 
+.border-theme {
+  border-color: var(--av-theme-background) !important;
+}
+
+.border-start-theme {
+  [dir="ltr"] & {
+    border-left-color: var(--av-theme-background) !important;
+  }
+
+  [dir="rtl"] & {
+    border-right-color: var(--av-theme-background) !important;
+  }
+}
+
+html[dir="ltr"] .border-start-theme {
+  border-left-color: var(--av-theme-background) !important;
+}
+
 .AVBallot--error .AVOptionCheckbox.AVOptionCheckbox--checked:focus,
 .AVBallot--error .option-number.AVOptionCheckbox--checked:focus {
   box-shadow: 0 0 0 0.3rem rgb(163, 0, 76) !important;

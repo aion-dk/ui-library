@@ -4,6 +4,7 @@ import localI18n from "@/i18n";
 import { iconNames } from "@/helpers/iconHelper";
 import FloatingVue from "floating-vue";
 import "floating-vue/dist/style.css";
+import "@/bootstrap/bootstrap.customized.scss";
 
 import {
   // ATOMS
@@ -22,6 +23,7 @@ import {
 
   // MOLECULES
   AVSummaryOption,
+  AVBlankOption,
   //   AVAsyncButton,
   //   AVRadioGroup,
   //   AVNavigationItemList,
@@ -29,7 +31,6 @@ import {
   //   AVElectionCard,
   //   AVBallotStyleCard,
   //   AVOption,
-  //   AVBlankOption,
   //   AVWriteInOption,
   //   AVSubmissionHelper,
   //   AVSearchBallot,
@@ -83,6 +84,7 @@ export default {
 
     // MOLECULES
     app.component("AVSummaryOption", AVSummaryOption);
+    app.component("AVBlankOption", AVBlankOption);
     // app.component("AVAsyncButton", AVAsyncButton);
     // app.component("AVRadioGroup", AVRadioGroup);
     // app.component("AVNavigationItemList", AVNavigationItemList);
@@ -90,7 +92,6 @@ export default {
     // app.component("AVElectionCard", AVElectionCard);
     // app.component("AVBallotStyleCard", AVBallotStyleCard);
     // app.component("AVOption", AVOption);
-    // app.component("AVBlankOption", AVBlankOption);
     // app.component("AVWriteInOption", AVWriteInOption);
     // app.component("AVSubmissionHelper", AVSubmissionHelper);
     // app.component("AVSearchBallot", AVSearchBallot);
@@ -142,6 +143,7 @@ export {
 
   // MOLECULES
   AVSummaryOption,
+  AVBlankOption,
   //   AVAsyncButton,
   //   AVRadioGroup,
   //   AVNavigationItemList,
@@ -149,7 +151,6 @@ export {
   //   AVElectionCard,
   //   AVBallotStyleCard,
   //   AVOption,
-  //   AVBlankOption,
   //   AVWriteInOption,
   //   AVSubmissionHelper,
   //   AVSearchBallot,

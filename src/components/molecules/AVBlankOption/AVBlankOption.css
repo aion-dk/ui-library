@@ -1,0 +1,35 @@
+.AVBlankOption {
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  min-height: 4rem;
+}
+
+.AVBlankOption--disabled {
+  opacity: 0.8;
+}
+
+.AVBlankOption--accent {
+  [dir="ltr"] & {
+    border-left-width: 8px;
+  }
+
+  [dir="rtl"] & {
+    border-right-width: 8px;
+  }
+}
+
+.AVBlankOption--header {
+}
+
+.AVBlankOption--title {
+  font-size: 20px;
+  line-height: 20px;
+  text-transform: none;
+  font-weight: 500;
+}
+
+.AVBlankOption--checkbox {
+}
+
+.AVBlankOption--realtime-results {
+  color: var(--gray-700);
+}

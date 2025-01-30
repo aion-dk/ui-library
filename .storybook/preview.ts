@@ -21,11 +21,11 @@ import {
   AVTooltip,
   AVSummaryOption,
   AVPileSummary,
+  AVBlankOption,
   //   AVSplitWizardHeader,
   //   AVBallot,
   //   AVSplitWeightHelper,
   //   AVOption,
-  //   AVBlankOption,
   //   AVSearchBallot,
   //   AVWriteInOption,
   //   AVSubmissionHelper,
@@ -46,11 +46,11 @@ setup((app) => {
   app.component("AVTooltip", AVTooltip);
   app.component("AVSummaryOption", AVSummaryOption);
   app.component("AVPileSummary", AVPileSummary);
+  app.component("AVBlankOption", AVBlankOption);
   // app.component("AVSplitWizardHeader", AVSplitWizardHeader);
   // app.component("AVBallot", AVBallot);
   // app.component("AVSplitWeightHelper", AVSplitWeightHelper);
   // app.component("AVOption", AVOption);
-  // app.component("AVBlankOption", AVBlankOption);
   // app.component("AVSearchBallot", AVSearchBallot);
   // app.component("AVWriteInOption", AVWriteInOption);
   // app.component("AVSubmissionHelper", AVSubmissionHelper);

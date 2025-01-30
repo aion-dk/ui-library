@@ -47,10 +47,9 @@ const accessibilityAttributes = computed(() => {
 
   return {
     id: `option_${props.optionReference}_checkbox_${props.checkBoxIndex}`,
-    role: "checkbox",
     "aria-labelledby": `option_${props.optionReference}_title option_${props.optionReference}_tick option_${props.optionReference}_subtitle`,
     "aria-describedby": `option_${props.optionReference}_description option_${props.optionReference}_handle`,
-    tabindex: 0,
+    tabindex: props.disabled ? undefined : 0,
   };
 });
 
@@ -81,7 +80,7 @@ watch(
   <div class="AVOptionCheckbox--container">
     <div
       v-if="exclusiveError && checked"
-      class="AVOptionCheckbox--exclusive-container mb-2 me-n3 mt-n3"
+      class="AVOptionCheckbox--exclusive-container mb-2"
       data-test="exclusive-error"
     >
       <div class="AVOptionCheckbox--exclusive text-white px-2 d-block bg-theme-danger">
@@ -89,12 +88,14 @@ watch(
       </div>
     </div>
     <button
+      role="checkbox"
       class="AVOptionCheckbox float-end p-0 m-0"
       :class="{
         'AVOptionCheckbox--checked': checked,
         'AVOptionCheckbox--disabled': disabled,
         'AVOptionCheckbox--error': (exclusiveError || invalid) && checked,
       }"
+      :aria-checked="props.checked"
       :aria-label="
         checked
           ? rank
@@ -102,10 +103,7 @@ watch(
             : t('js.components.AVOptionCheckbox.aria_label.checked_normal')
           : t('js.components.AVOptionCheckbox.aria_label.unchecked')
       "
-      role="checkbox"
-      :aria-checked="checked ? true : false"
-      :tabindex="disabled ? undefined : 0"
-      :aria-disabled="disabled || undefined"
+      :aria-disabled="props.disabled || undefined"
       :disabled="disabled"
       v-bind="accessibilityAttributes"
       @click.stop="onToggled"
