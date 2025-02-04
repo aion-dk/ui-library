@@ -6,7 +6,7 @@ import AVOptionCheckbox from "@/components/atoms/AVOptionCheckbox/AVOptionCheckb
 /* MOLECULES */
 import AVSummaryOption from "@/components/molecules/AVSummaryOption/AVSummaryOption.messages";
 import AVBlankOption from "@/components/molecules/AVBlankOption/AVBlankOption.messages";
-// import AVOption from "@/components/molecules/AVOption/AVOption.messages";
+import AVOption from "@/components/molecules/AVOption/AVOption.messages";
 // import AVSearchBallot from "@/components/molecules/AVSearchBallot/AVSearchBallot.messages";
 // import AVSplitWeightHelper from "@/components/molecules/AVSplitWeightHelper/AVSplitWeightHelper.messages";
 // import AVSplitWizardHeader from "@/components/molecules/AVSplitWizardHeader/AVSplitWizardHeader.messages";
@@ -39,7 +39,7 @@ const components: DefineLocaleMessage = {
   /* MOLECULES */
   AVSummaryOption,
   AVBlankOption,
-  // AVOption,
+  AVOption,
   // AVSearchBallot,
   // AVSplitWeightHelper,
   // AVSplitWizardHeader,

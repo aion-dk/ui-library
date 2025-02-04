@@ -22,10 +22,10 @@ import {
   AVSummaryOption,
   AVPileSummary,
   AVBlankOption,
+  AVOption,
   //   AVSplitWizardHeader,
   //   AVBallot,
   //   AVSplitWeightHelper,
-  //   AVOption,
   //   AVSearchBallot,
   //   AVWriteInOption,
   //   AVSubmissionHelper,
@@ -47,10 +47,10 @@ setup((app) => {
   app.component("AVSummaryOption", AVSummaryOption);
   app.component("AVPileSummary", AVPileSummary);
   app.component("AVBlankOption", AVBlankOption);
+  app.component("AVOption", AVOption);
   // app.component("AVSplitWizardHeader", AVSplitWizardHeader);
   // app.component("AVBallot", AVBallot);
   // app.component("AVSplitWeightHelper", AVSplitWeightHelper);
-  // app.component("AVOption", AVOption);
   // app.component("AVSearchBallot", AVSearchBallot);
   // app.component("AVWriteInOption", AVWriteInOption);
   // app.component("AVSubmissionHelper", AVSubmissionHelper);

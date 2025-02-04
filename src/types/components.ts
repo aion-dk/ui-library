@@ -2,6 +2,7 @@ import type {
   BOOTSTRAP_COLORS,
   BOOTSTRAP_BASIC_SIZES,
   BOOTSTRAP_EXPANDED_SIZES,
+  IMAGE_OPTIONS,
 } from "@/constants";
 
 type BootstrapColor = (typeof BOOTSTRAP_COLORS)[number];
@@ -10,7 +11,7 @@ type BootstrapBasicSize = (typeof BOOTSTRAP_BASIC_SIZES)[number];
 
 type BootstrapExpandedSize = (typeof BOOTSTRAP_EXPANDED_SIZES)[number];
 
-type ImageOption = "square" | "passport";
+type ImageOption = (typeof IMAGE_OPTIONS)[number];
 
 // ATOMS
 export * from "@/components/atoms/AVSpinner/AVSpinner.types";

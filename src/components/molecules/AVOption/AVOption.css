@@ -1,0 +1,166 @@
+.AVOption--background {
+}
+
+.AVOption--scroll-anchor {
+  margin-top: -1.5rem;
+}
+
+.AVOption {
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  min-height: 4rem;
+}
+
+.AVOption--disabled {
+  opacity: 0.8;
+}
+
+.AVOption--highlight {
+  animation: grow-in-highlight 1s;
+  animation-iteration-count: 3;
+}
+
+.AVOption--accent {
+  [dir="ltr"] & {
+    border-left-width: 8px;
+  }
+
+  [dir="rtl"] & {
+    border-right-width: 8px;
+  }
+}
+
+.AVOption--container {
+}
+
+.AVOption--container-column {
+  flex-direction: column;
+}
+
+.AVOption--header-container {
+}
+
+.AVOption--header {
+}
+
+.AVOption-image {
+  object-fit: cover;
+  max-height: 90px;
+  max-width: 70px;
+}
+
+.AVOption--title {
+  font-size: 20px;
+  line-height: 20px;
+  text-transform: none;
+  font-weight: 500;
+}
+
+.AVOption--body {
+}
+
+.AVOption--description {
+  font-weight: 300;
+}
+
+.AVOption--description > * {
+  margin: 0;
+}
+
+.AVOption--links-container {
+  flex-wrap: wrap;
+}
+
+.AVOption--children-container {
+}
+
+.AVOption--expander-container {
+}
+
+.AVOption--expander-icon {
+  transform: rotate(0deg);
+  transition: all 500ms ease-in-out;
+}
+
+.AVOption--expander-icon-opened {
+  [dir="ltr"] & {
+    transform: rotate(-90deg);
+  }
+
+  [dir="rtl"] & {
+    transform: rotate(90deg);
+  }
+}
+
+.AVOption--multivote-aside {
+  border-top: 1px solid var(--bs-border-color);
+  padding: 1.25rem;
+}
+
+.AVOption--multivote-footer {
+  padding: 1.25rem;
+}
+
+.AVOption--singlevote {
+  align-items: flex-start;
+  padding: 1.25rem;
+}
+
+.AVOption--group {
+}
+
+.AVOption--realtime-results {
+  color: var(--gray-700);
+}
+
+.AVOption--children {
+  box-shadow: unset;
+
+  [dir="ltr"] & {
+    padding-left: 2.5rem;
+  }
+
+  [dir="rtl"] & {
+    padding-right: 2.5rem;
+  }
+}
+
+.AVOption--children .AVOption {
+  box-shadow: unset;
+}
+
+@media screen and (min-width: 768px) {
+  .AVOption--container-row {
+    flex-direction: row;
+  }
+
+  .AVOption--multivote-aside {
+    border-top: none;
+
+    [dir="ltr"] & {
+      border-left: 1px solid var(--bs-border-color);
+    }
+
+    [dir="rtl"] & {
+      border-right: 1px solid var(--bs-border-color);
+    }
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .AVOption--header {
+    flex-direction: column;
+  }
+
+  .AVOption-image {
+    align-self: self-start;
+  }
+}
+
+@keyframes grow-in-highlight {
+  from {
+    outline: var(--gray-600) solid 0;
+  }
+  to {
+    outline: transparent solid 1rem;
+  }
+}

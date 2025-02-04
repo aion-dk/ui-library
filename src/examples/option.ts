@@ -36,7 +36,8 @@ const url: LocalString = {
   sv: "https://www.google.sv",
 };
 
-const image: string = "https://placehold.co/40";
+const image: string =
+  "https://electa.staging-1.assemblyvoting.net/uploads_proxy/option/image/657750";
 
 const colors: ExampleColor = {
   1: "#FF0000",

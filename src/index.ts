@@ -24,13 +24,13 @@ import {
   // MOLECULES
   AVSummaryOption,
   AVBlankOption,
+  AVOption,
   //   AVAsyncButton,
   //   AVRadioGroup,
   //   AVNavigationItemList,
   //   AVBreadcrumb,
   //   AVElectionCard,
   //   AVBallotStyleCard,
-  //   AVOption,
   //   AVWriteInOption,
   //   AVSubmissionHelper,
   //   AVSearchBallot,
@@ -85,13 +85,13 @@ export default {
     // MOLECULES
     app.component("AVSummaryOption", AVSummaryOption);
     app.component("AVBlankOption", AVBlankOption);
+    app.component("AVOption", AVOption);
     // app.component("AVAsyncButton", AVAsyncButton);
     // app.component("AVRadioGroup", AVRadioGroup);
     // app.component("AVNavigationItemList", AVNavigationItemList);
     // app.component("AVBreadcrumb", AVBreadcrumb);
     // app.component("AVElectionCard", AVElectionCard);
     // app.component("AVBallotStyleCard", AVBallotStyleCard);
-    // app.component("AVOption", AVOption);
     // app.component("AVWriteInOption", AVWriteInOption);
     // app.component("AVSubmissionHelper", AVSubmissionHelper);
     // app.component("AVSearchBallot", AVSearchBallot);
@@ -144,13 +144,13 @@ export {
   // MOLECULES
   AVSummaryOption,
   AVBlankOption,
+  AVOption,
   //   AVAsyncButton,
   //   AVRadioGroup,
   //   AVNavigationItemList,
   //   AVBreadcrumb,
   //   AVElectionCard,
   //   AVBallotStyleCard,
-  //   AVOption,
   //   AVWriteInOption,
   //   AVSubmissionHelper,
   //   AVSearchBallot,

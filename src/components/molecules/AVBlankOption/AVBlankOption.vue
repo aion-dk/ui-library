@@ -88,9 +88,7 @@ watch(
         <h5 id="option_blank_title" class="AVBlankOption--title m-0">
           {{ t("js.components.AVBlankOption.title") }}
         </h5>
-        <span id="option_blank_handle" class="visually-hidden">{{
-          t("js.components.AVBlankOption.title")
-        }}</span>
+        <span id="option_blank_handle" class="visually-hidden">blank</span>
         <div class="AVBlankOption--checkbox p-1">
           <AVOptionCheckbox
             option-reference="blank"
@@ -105,6 +103,7 @@ watch(
         </div>
         <div
           v-if="partialResults && (observerMode || disabled)"
+          id="option_blank_partial_results"
           class="AVBlankOption--realtime-results hstack gap-2"
           data-test="partial-results"
         >

@@ -80,10 +80,10 @@ describe("AVBlankOption", () => {
   });
 
   it("can display accent color", async () => {
-    expect(wrapper.find("[data-test=option-container]").attributes().class).to.not.include(
+    expect(wrapper.find("[data-test=option-container]").classes()).to.not.include(
       "AVBlankOption--accent",
     );
-    expect(wrapper.find("[data-test=option-container]").attributes().class).to.not.include(
+    expect(wrapper.find("[data-test=option-container]").classes()).to.not.include(
       "border-start-theme",
     );
 
@@ -91,12 +91,10 @@ describe("AVBlankOption", () => {
       accentColor: "#FF0000",
     });
 
-    expect(wrapper.find("[data-test=option-container]").attributes().class).to.include(
+    expect(wrapper.find("[data-test=option-container]").classes()).to.include(
       "AVBlankOption--accent",
     );
-    expect(wrapper.find("[data-test=option-container]").attributes().class).to.include(
-      "border-start-theme",
-    );
+    expect(wrapper.find("[data-test=option-container]").classes()).to.include("border-start-theme");
   });
 
   it("can display partial results", async () => {
