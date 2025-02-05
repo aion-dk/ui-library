@@ -1,0 +1,34 @@
+.AVSubmissionHelper {
+  bottom: 0px;
+  position: sticky;
+  position: -webkit-sticky; /* Safari */
+}
+
+.AVSubmissionHelper--weight {
+  float: none;
+  display: flex;
+  width: 100%;
+  justify-content: start;
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+@media only screen and (min-width: 1024px) {
+  .AVSubmissionHelper--weight {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    width: fit-content;
+
+    [dir="ltr"] & {
+      float: right;
+    }
+
+    [dir="rtl"] & {
+      float: left;
+    }
+  }
+}
+
+.AVSubmissionHelper--help {
+}

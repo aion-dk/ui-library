@@ -25,11 +25,11 @@ import {
   AVBlankOption,
   AVOption,
   AVSearchBallot,
+  AVSubmissionHelper,
   //   AVSplitWizardHeader,
   //   AVBallot,
   //   AVSplitWeightHelper,
   //   AVWriteInOption,
-  //   AVSubmissionHelper,
   //   AVElectaContestCard,
   //   AVProgressBar,
   //   AVWaitingDots,
@@ -51,11 +51,11 @@ setup((app) => {
   app.component("AVBlankOption", AVBlankOption);
   app.component("AVOption", AVOption);
   app.component("AVSearchBallot", AVSearchBallot);
+  app.component("AVSubmissionHelper", AVSubmissionHelper);
   // app.component("AVSplitWizardHeader", AVSplitWizardHeader);
   // app.component("AVBallot", AVBallot);
   // app.component("AVSplitWeightHelper", AVSplitWeightHelper);
   // app.component("AVWriteInOption", AVWriteInOption);
-  // app.component("AVSubmissionHelper", AVSubmissionHelper);
   // app.component("AVElectaContestCard", AVElectaContestCard);
   // app.component("AVProgressBar", AVProgressBar);
   // app.component("AVWaitingDots", AVWaitingDots);
