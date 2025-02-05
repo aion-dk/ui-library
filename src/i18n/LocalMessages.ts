@@ -10,9 +10,9 @@ import AVBlankOption from "@/components/molecules/AVBlankOption/AVBlankOption.me
 import AVOption from "@/components/molecules/AVOption/AVOption.messages";
 import AVSearchBallot from "@/components/molecules/AVSearchBallot/AVSearchBallot.messages";
 import AVSubmissionHelper from "@/components/molecules/AVSubmissionHelper/AVSubmissionHelper.messages";
+import AVWriteInOption from "@/components/molecules/AVWriteInOption/AVWriteInOption.messages";
 // import AVSplitWeightHelper from "@/components/molecules/AVSplitWeightHelper/AVSplitWeightHelper.messages";
 // import AVSplitWizardHeader from "@/components/molecules/AVSplitWizardHeader/AVSplitWizardHeader.messages";
-// import AVWriteInOption from "@/components/molecules/AVWriteInOption/AVWriteInOption.messages";
 // import AVRecommendationList from "@/components/molecules/AVRecommendationList/AVRecommendationList.messages";
 
 /* ORGANISMS */
@@ -44,9 +44,9 @@ const components: DefineLocaleMessage = {
   AVOption,
   AVSearchBallot,
   AVSubmissionHelper,
+  AVWriteInOption,
   // AVSplitWeightHelper,
   // AVSplitWizardHeader,
-  // AVWriteInOption,
   // AVRecommendationList,
 
   /* ORGANISMS */

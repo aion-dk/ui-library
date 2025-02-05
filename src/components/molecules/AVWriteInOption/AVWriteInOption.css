@@ -1,0 +1,18 @@
+.AVWriteInOption {
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  min-height: 4rem;
+}
+
+.AVWriteInOption--header {
+}
+
+.AVWriteInOption--container {
+}
+
+.AVWriteInOption--title {
+  font-weight: 500;
+}
+
+.AVWriteInOption--checkbox {
+  align-self: flex-start;
+}

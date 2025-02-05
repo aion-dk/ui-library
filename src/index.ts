@@ -28,13 +28,13 @@ import {
   AVOption,
   AVSearchBallot,
   AVSubmissionHelper,
+  AVWriteInOption,
   //   AVAsyncButton,
   //   AVRadioGroup,
   //   AVNavigationItemList,
   //   AVBreadcrumb,
   //   AVElectionCard,
   //   AVBallotStyleCard,
-  //   AVWriteInOption,
   //   AVSplitWeightHelper,
   //   AVSplitWizardHeader,
   //   AVElectaContestCard,
@@ -90,13 +90,13 @@ export default {
     app.component("AVOption", AVOption);
     app.component("AVSearchBallot", AVSearchBallot);
     app.component("AVSubmissionHelper", AVSubmissionHelper);
+    app.component("AVWriteInOption", AVWriteInOption);
     // app.component("AVAsyncButton", AVAsyncButton);
     // app.component("AVRadioGroup", AVRadioGroup);
     // app.component("AVNavigationItemList", AVNavigationItemList);
     // app.component("AVBreadcrumb", AVBreadcrumb);
     // app.component("AVElectionCard", AVElectionCard);
     // app.component("AVBallotStyleCard", AVBallotStyleCard);
-    // app.component("AVWriteInOption", AVWriteInOption);
     // app.component("AVSplitWeightHelper", AVSplitWeightHelper);
     // app.component("AVSplitWizardHeader", AVSplitWizardHeader);
     // app.component("AVElectaContestCard", AVElectaContestCard);
@@ -150,13 +150,13 @@ export {
   AVOption,
   AVSearchBallot,
   AVSubmissionHelper,
+  AVWriteInOption,
   //   AVAsyncButton,
   //   AVRadioGroup,
   //   AVNavigationItemList,
   //   AVBreadcrumb,
   //   AVElectionCard,
   //   AVBallotStyleCard,
-  //   AVWriteInOption,
   //   AVSplitWeightHelper,
   //   AVSplitWizardHeader,
   //   AVElectaContestCard,
