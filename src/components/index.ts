@@ -7,6 +7,7 @@ export { default as AVLinkVisualizer } from "@/components/atoms/AVLinkVisualizer
 export { default as AVOptionSelect } from "@/components/atoms/AVOptionSelect";
 export { default as AVOptionCheckbox } from "@/components/atoms/AVOptionCheckbox";
 export { default as AVTooltip } from "@/components/atoms/AVTooltip";
+export { default as AVOptionLiveResults } from "@/components/atoms/AVOptionLiveResults";
 // export { default as AVBallotSummary } from "@/components/atoms/AVBallotSummary";
 // export { default as AVVerticalStep } from "@/components/atoms/AVVerticalStep";
 // export { default as AVAnimatedMenuButton } from "@/components/atoms/AVAnimatedMenuButton";

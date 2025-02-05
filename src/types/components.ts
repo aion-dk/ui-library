@@ -17,6 +17,7 @@ type ImageOption = (typeof IMAGE_OPTIONS)[number];
 export * from "@/components/atoms/AVSpinner/AVSpinner.types";
 export * from "@/components/atoms/AVLinkVisualizer/AVLinkVisualizer.types";
 export * from "@/components/atoms/AVTooltip/AVTooltip.types";
+export * from "@/components/atoms/AVOptionLiveResults/AVOptionLiveResults.types";
 
 // MOLECULES
 export * from "@/components/molecules/AVSummaryOption/AVSummaryOption.types";

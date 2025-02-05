@@ -1,7 +1,7 @@
 import type { Resource, Url, LocalString, AVLinkVisualizerKey } from "@/types";
 import image from "@/assets/silhouette.jpg";
 
-const getUrl = (web: AVLinkVisualizerKey): Url => {
+const getUrl = (web: AVLinkVisualizerKey | "website"): Url => {
   return {
     attributes: {
       name: `My ${web}`,

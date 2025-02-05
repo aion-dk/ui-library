@@ -19,6 +19,7 @@ import {
   AVOptionSelect,
   AVOptionCheckbox,
   AVTooltip,
+  AVOptionLiveResults,
   AVSummaryOption,
   AVPileSummary,
   AVBlankOption,
@@ -44,6 +45,7 @@ setup((app) => {
   app.component("AVOptionSelect", AVOptionSelect);
   app.component("AVOptionCheckbox", AVOptionCheckbox);
   app.component("AVTooltip", AVTooltip);
+  app.component("AVOptionLiveResults", AVOptionLiveResults);
   app.component("AVSummaryOption", AVSummaryOption);
   app.component("AVPileSummary", AVPileSummary);
   app.component("AVBlankOption", AVBlankOption);

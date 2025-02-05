@@ -27,8 +27,8 @@ const regexps: AVLinkVisualizerType = {
 
 const icon = computed(() => {
   let icon = "link";
-  Object.keys(regexps).map((key: AVLinkVisualizerKey) => {
-    if (regexps[key].test(props.link.attributes.url)) icon = key;
+  Object.keys(regexps).map((key) => {
+    if (regexps[key as AVLinkVisualizerKey].test(props.link.attributes.url)) icon = key;
   });
   return icon;
 });

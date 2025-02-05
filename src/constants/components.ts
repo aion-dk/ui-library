@@ -4,7 +4,7 @@ const IMAGE_OPTIONS = ["square", "passport"] as const;
 const SPINNER_VARIANTS = ["spinner-border", "spinner-grow"] as const;
 
 // AVLinkVisualizer
-const LINK_VISUALIZER_KEYS: string[] = [
+const LINK_VISUALIZER_KEYS = [
   "github",
   "instagram",
   "linkedin",
@@ -16,4 +16,7 @@ const LINK_VISUALIZER_KEYS: string[] = [
   "tiktok",
 ] as const;
 
-export { IMAGE_OPTIONS, SPINNER_VARIANTS, LINK_VISUALIZER_KEYS };
+// AVOptionLiveResults
+const LIVE_RESULT_MODES = ["internal", "external"] as const;
+
+export { IMAGE_OPTIONS, SPINNER_VARIANTS, LINK_VISUALIZER_KEYS, LIVE_RESULT_MODES };

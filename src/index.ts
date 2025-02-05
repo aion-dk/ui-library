@@ -16,6 +16,7 @@ import {
   AVOptionSelect,
   AVOptionCheckbox,
   AVTooltip,
+  AVOptionLiveResults,
   //   AVVerticalStep,
   //   AVAnimatedMenuButton,
   //   AVProgressBar,
@@ -77,6 +78,7 @@ export default {
     app.component("AVOptionSelect", AVOptionSelect);
     app.component("AVOptionCheckbox", AVOptionCheckbox);
     app.component("AVTooltip", AVTooltip);
+    app.component("AVOptionLiveResults", AVOptionLiveResults);
     // app.component("AVVerticalStep", AVVerticalStep);
     // app.component("AVAnimatedMenuButton", AVAnimatedMenuButton);
     // app.component("AVProgressBar", AVProgressBar);
@@ -138,6 +140,7 @@ export {
   AVOptionSelect,
   AVOptionCheckbox,
   AVTooltip,
+  AVOptionLiveResults,
   //   AVProgressBar,
   //   AVWaitingDots,
 
