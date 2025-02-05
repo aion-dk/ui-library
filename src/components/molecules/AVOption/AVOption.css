@@ -108,10 +108,6 @@
 .AVOption--group {
 }
 
-.AVOption--realtime-results {
-  color: var(--gray-700);
-}
-
 .AVOption--children {
   box-shadow: unset;
 

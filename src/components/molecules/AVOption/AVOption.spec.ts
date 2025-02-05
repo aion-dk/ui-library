@@ -9,6 +9,7 @@ import AVCollapser from "@/components/atoms/AVCollapser";
 import AVOptionSelect from "@/components/atoms/AVOptionSelect";
 import AVOptionCheckbox from "@/components/atoms/AVOptionCheckbox";
 import AVAnimatedTransition from "@/components/atoms/AVAnimatedTransition";
+import AVOptionLiveResults from "@/components/atoms/AVOptionLiveResults";
 
 describe("AVOption", () => {
   const wrapper = mount(AVOption, {
@@ -27,6 +28,7 @@ describe("AVOption", () => {
         AVAnimatedTransition,
         AVOptionCheckbox,
         AVOptionSelect,
+        AVOptionLiveResults,
       },
       stubs: {
         AVIcon: {
@@ -130,40 +132,40 @@ describe("AVOption", () => {
   });
 
   it("can display partial results", async () => {
-    expect(wrapper.findAll("[data-test=option-partialresults]").length).to.eq(0);
-    expect(wrapper.findAll("[data-test=option-realtimeresults]").length).to.eq(0);
+    expect(wrapper.findAll("[data-test=partial-results-internal]").length).to.eq(0);
+    expect(wrapper.findAll("[data-test=partial-results-external]").length).to.eq(0);
 
     await wrapper.setProps({
       partialResults: getLiveResult(["exampleOption1"]),
     });
 
-    expect(wrapper.findAll("[data-test=option-partialresults]").length).to.eq(0);
-    expect(wrapper.findAll("[data-test=option-realtimeresults]").length).to.eq(1);
-    expect(wrapper.find("[data-test=option-realtimeresults]").text()).to.contain("5 votes");
+    expect(wrapper.findAll("[data-test=partial-results-internal]").length).to.eq(0);
+    expect(wrapper.findAll("[data-test=partial-results-external]").length).to.eq(1);
+    expect(wrapper.find("[data-test=partial-results-external]").text()).to.contain("5 votes");
 
     await wrapper.setProps({
       observerMode: true,
     });
 
-    expect(wrapper.findAll("[data-test=option-realtimeresults]").length).to.eq(0);
-    expect(wrapper.findAll("[data-test=option-partialresults]").length).to.eq(1);
-    expect(wrapper.find("[data-test=option-partialresults]").text()).to.contain("5 votes");
+    expect(wrapper.findAll("[data-test=partial-results-external]").length).to.eq(0);
+    expect(wrapper.findAll("[data-test=partial-results-internal]").length).to.eq(1);
+    expect(wrapper.find("[data-test=partial-results-internal]").text()).to.contain("5 votes");
   });
 
   it("can show percentages", async () => {
-    expect(wrapper.find("[data-test=option-partialresults]").text()).to.not.contain("25.2%");
+    expect(wrapper.find("[data-test=partial-results-internal]").text()).to.not.contain("25.2%");
 
     await wrapper.setProps({
       partialResults: getLiveResult(["exampleOption1"], true),
     });
 
-    expect(wrapper.find("[data-test=option-partialresults]").text()).to.contain("25.2%");
+    expect(wrapper.find("[data-test=partial-results-internal]").text()).to.contain("25.2%");
 
     await wrapper.setProps({
       observerMode: false,
     });
 
-    expect(wrapper.find("[data-test=option-realtimeresults]").text()).to.contain("25.2%");
+    expect(wrapper.find("[data-test=partial-results-external]").text()).to.contain("25.2%");
   });
 
   it("can display image", async () => {

@@ -62,8 +62,6 @@ const props = defineProps({
 
 const emits = defineEmits(["accordion-open", "checked", "view-candidate"]);
 
-const isRtl = computed(() => document.getElementsByTagName("html")[0].dir === "rtl");
-
 const ranked = computed(() => props.contest.markingType.voteVariation === "ranked");
 
 const checkedCount = computed(
@@ -333,11 +331,7 @@ watch(
                     }"
                     data-test="option-child-selected"
                   >
-                    {{
-                      isRtl
-                        ? `${t("js.components.AVOption.sub_options_select")} ${subOptionSelected}`
-                        : `${subOptionSelected} ${t("js.components.AVOption.sub_options_select")}`
-                    }}
+                    {{ t("js.components.AVOption.sub_options_select", { n: subOptionSelected }) }}
                   </span>
                 </div>
               </div>
@@ -375,71 +369,23 @@ watch(
                 />
               </div>
             </div>
-
-            <div
+            <AVOptionLiveResults
               v-if="optionPartialResults && (observerMode || disabled)"
-              :id="`option_${option.reference}_partial_results`"
-              class="AVOption--realtime-results hstack gap-2 px-3"
-              data-test="option-partialresults"
-            >
-              <AVIcon icon="user" />
-              <span>
-                {{
-                  isRtl
-                    ? `${
-                        optionPartialResults.results.count === 1
-                          ? t("js.components.AVOption.vote_count_singular")
-                          : t("js.components.AVOption.vote_count_plural")
-                      } ${optionPartialResults.results.count}`
-                    : `${optionPartialResults.results.count} ${
-                        optionPartialResults.results.count === 1
-                          ? t("js.components.AVOption.vote_count_singular")
-                          : t("js.components.AVOption.vote_count_plural")
-                      }`
-                }}
-              </span>
-
-              <template v-if="optionPartialResults.showPercentage">
-                <span>-</span>
-                <span>
-                  {{ `${optionPartialResults.results.percentage}%` }}
-                </span>
-              </template>
-            </div>
+              :partial-results="optionPartialResults"
+              mode="internal"
+              :show-percentage="optionPartialResults.showPercentage"
+              class="px-3"
+            />
           </div>
         </section>
       </template>
 
       <template #results v-if="!disabled && optionPartialResults && !observerMode">
-        <div
-          class="AVOption--realtime-results hstack gap-2 mt-1 mx-1"
-          :id="`option_${option.reference}_partial_results`"
-          data-test="option-realtimeresults"
-        >
-          <AVIcon icon="user" />
-          <span>
-            {{
-              isRtl
-                ? `${
-                    optionPartialResults.results.count === 1
-                      ? t("js.components.AVOption.vote_count_singular")
-                      : t("js.components.AVOption.vote_count_plural")
-                  } ${optionPartialResults.results.count}`
-                : `${optionPartialResults.results.count} ${
-                    optionPartialResults.results.count === 1
-                      ? t("js.components.AVOption.vote_count_singular")
-                      : t("js.components.AVOption.vote_count_plural")
-                  }`
-            }}
-          </span>
-
-          <template v-if="optionPartialResults.showPercentage">
-            <span>-</span>
-            <span>
-              {{ `${optionPartialResults.results.percentage}%` }}
-            </span>
-          </template>
-        </div>
+        <AVOptionLiveResults
+          :partial-results="optionPartialResults"
+          mode="external"
+          :show-percentage="optionPartialResults.showPercentage"
+        />
       </template>
 
       <template #pane="{ isOpen, toggleCollapse }">

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, inject, onMounted, watch } from "vue";
+import { inject, onMounted, watch } from "vue";
 import type { PropType, SupportedLocale, PartialResult } from "@/types";
 import { switchLocale } from "@/i18n";
 
@@ -39,8 +39,6 @@ const props = defineProps({
 });
 
 defineEmits(["toggleBlank"]);
-
-const isRtl = computed(() => document.getElementsByTagName("html")[0].dir === "rtl");
 
 /**
  * This is necesary in order to support both provided i18n and local i18n.
@@ -101,68 +99,21 @@ watch(
             data-test="blank-checkbox"
           />
         </div>
-        <div
+        <AVOptionLiveResults
           v-if="partialResults && (observerMode || disabled)"
-          id="option_blank_partial_results"
-          class="AVBlankOption--realtime-results hstack gap-2"
-          data-test="partial-results"
-        >
-          <AVIcon icon="user" />
-          <span>
-            {{
-              isRtl
-                ? `${
-                    partialResults.results.count === 1
-                      ? t("js.components.AVBlankOption.vote_count_singular")
-                      : t("js.components.AVBlankOption.vote_count_plural")
-                  } ${partialResults.results.count}`
-                : `${partialResults.results.count} ${
-                    partialResults.results.count === 1
-                      ? t("js.components.AVBlankOption.vote_count_singular")
-                      : t("js.components.AVBlankOption.vote_count_plural")
-                  }`
-            }}
-          </span>
-
-          <template v-if="partialResults.showPercentage">
-            <span>-</span>
-            <span>
-              {{ `${partialResults.results.percentage}%` }}
-            </span>
-          </template>
-        </div>
+          :partial-results="partialResults"
+          mode="internal"
+          :show-percentage="partialResults.showPercentage"
+        />
       </div>
     </div>
 
-    <div
+    <AVOptionLiveResults
       v-if="!disabled && partialResults && !observerMode"
-      class="AVBlankOption--realtime-results hstack gap-2 mt-1 ms-1"
-      data-test="realtime-results"
-    >
-      <AVIcon icon="user" />
-      <span>
-        {{
-          isRtl
-            ? `${
-                partialResults.results.count === 1
-                  ? t("js.components.AVBlankOption.vote_count_singular")
-                  : t("js.components.AVBlankOption.vote_count_plural")
-              } ${partialResults.results.count}`
-            : `${partialResults.results.count} ${
-                partialResults.results.count === 1
-                  ? t("js.components.AVBlankOption.vote_count_singular")
-                  : t("js.components.AVBlankOption.vote_count_plural")
-              }`
-        }}
-      </span>
-
-      <template v-if="partialResults.showPercentage">
-        <span>-</span>
-        <span>
-          {{ `${partialResults.results.percentage}%` }}
-        </span>
-      </template>
-    </div>
+      :partial-results="partialResults"
+      mode="external"
+      :show-percentage="partialResults.showPercentage"
+    />
   </div>
 </template>
 

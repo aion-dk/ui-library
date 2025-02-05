@@ -4,6 +4,7 @@ import localI18n from "@/i18n";
 import { getLiveResult } from "@/examples";
 
 import AVBlankOption from "./AVBlankOption.vue";
+import AVOptionLiveResults from "@/components/atoms/AVOptionLiveResults";
 
 describe("AVBlankOption", () => {
   const wrapper = mount(AVBlankOption, {
@@ -14,6 +15,9 @@ describe("AVBlankOption", () => {
     global: {
       provide: {
         i18n: localI18n,
+      },
+      components: {
+        AVOptionLiveResults,
       },
       stubs: {
         AVIcon: {
@@ -98,40 +102,42 @@ describe("AVBlankOption", () => {
   });
 
   it("can display partial results", async () => {
-    expect(wrapper.findAll("[data-test=partial-results]").length).to.eq(0);
-    expect(wrapper.findAll("[data-test=realtime-results]").length).to.eq(0);
+    expect(wrapper.findAll("[data-test=partial-results-internal]").length).to.eq(0);
+    expect(wrapper.findAll("[data-test=partial-results-external]").length).to.eq(0);
 
     await wrapper.setProps({
       partialResults: getLiveResult(["blank"]).blank,
     });
 
-    expect(wrapper.findAll("[data-test=partial-results]").length).to.eq(0);
-    expect(wrapper.findAll("[data-test=realtime-results]").length).to.eq(1);
-    expect(wrapper.find("[data-test=realtime-results]").text()).to.contain("5 votes");
+    console.log(wrapper.html());
+
+    expect(wrapper.findAll("[data-test=partial-results-internal]").length).to.eq(0);
+    expect(wrapper.findAll("[data-test=partial-results-external]").length).to.eq(1);
+    expect(wrapper.find("[data-test=partial-results-external]").text()).to.contain("5 votes");
 
     await wrapper.setProps({
       observerMode: true,
     });
 
-    expect(wrapper.findAll("[data-test=partial-results]").length).to.eq(1);
-    expect(wrapper.findAll("[data-test=realtime-results]").length).to.eq(0);
-    expect(wrapper.find("[data-test=partial-results]").text()).to.contain("5 votes");
+    expect(wrapper.findAll("[data-test=partial-results-internal]").length).to.eq(1);
+    expect(wrapper.findAll("[data-test=partial-results-external]").length).to.eq(0);
+    expect(wrapper.find("[data-test=partial-results-internal]").text()).to.contain("5 votes");
   });
 
   it("can show percentages", async () => {
-    expect(wrapper.find("[data-test=partial-results]").text()).to.not.contain("25.2%");
+    expect(wrapper.find("[data-test=partial-results-internal]").text()).to.not.contain("25.2%");
 
     await wrapper.setProps({
       partialResults: getLiveResult(["blank"], true).blank,
     });
 
-    expect(wrapper.find("[data-test=partial-results]").text()).to.contain("25.2%");
+    expect(wrapper.find("[data-test=partial-results-internal]").text()).to.contain("25.2%");
 
     await wrapper.setProps({
       observerMode: false,
     });
 
-    expect(wrapper.find("[data-test=realtime-results]").text()).to.contain("25.2%");
+    expect(wrapper.find("[data-test=partial-results-external]").text()).to.contain("25.2%");
   });
 
   it("can switch language", async () => {
@@ -140,6 +146,6 @@ describe("AVBlankOption", () => {
     });
 
     expect(wrapper.find("[data-test=option-content]").text()).to.contain("Vot en blanc");
-    expect(wrapper.find("[data-test=realtime-results]").text()).to.contain("5 vots");
+    expect(wrapper.find("[data-test=partial-results-external]").text()).to.contain("5 vots");
   });
 });
