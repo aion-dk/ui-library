@@ -8,6 +8,9 @@ const meta: Meta<typeof AVOptionLiveResults> = {
   component: AVOptionLiveResults,
   tags: ["autodocs"],
   argTypes: {
+    optionReference: {
+      control: { type: "text" },
+    },
     partialResults: {
       control: { type: "object" },
     },
@@ -39,6 +42,7 @@ export const InternalWithoutPercentage = {
   render: Template,
 
   args: {
+    optionReference: "test",
     partialResults: getLiveResult(["blank"]).blank,
   },
 };
@@ -47,6 +51,7 @@ export const InternalWithPercentage = {
   render: Template,
 
   args: {
+    optionReference: "test",
     partialResults: getLiveResult(["blank"], true).blank,
     showPercentage: true,
   },
@@ -56,6 +61,7 @@ export const ExternalWithoutPercentage = {
   render: Template,
 
   args: {
+    optionReference: "test",
     mode: "external",
     partialResults: getLiveResult(["blank"]).blank,
   },
@@ -65,6 +71,7 @@ export const ExternalWithPercentage = {
   render: Template,
 
   args: {
+    optionReference: "test",
     mode: "external",
     partialResults: getLiveResult(["blank"], true).blank,
     showPercentage: true,

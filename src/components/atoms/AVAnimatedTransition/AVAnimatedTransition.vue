@@ -1,4 +1,3 @@
-<!-- eslint-disable @typescript-eslint/no-unused-expressions -->
 <script setup lang="ts">
 const props = defineProps({
   skipTransition: {

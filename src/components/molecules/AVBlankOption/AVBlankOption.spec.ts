@@ -109,8 +109,6 @@ describe("AVBlankOption", () => {
       partialResults: getLiveResult(["blank"]).blank,
     });
 
-    console.log(wrapper.html());
-
     expect(wrapper.findAll("[data-test=partial-results-internal]").length).to.eq(0);
     expect(wrapper.findAll("[data-test=partial-results-external]").length).to.eq(1);
     expect(wrapper.find("[data-test=partial-results-external]").text()).to.contain("5 votes");

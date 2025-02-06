@@ -209,6 +209,7 @@ watch(
       :aria-labelledby="`option_${option.reference}_title`"
     />
     <AVCollapser
+      :pane-id="`pane_for_option_${option.reference}`"
       :collapsable="contest.collapsable && hasChildren"
       :start-collapsed="contest.collapseDefault && !observerMode"
       @accordion-open="emits('accordion-open')"
@@ -216,7 +217,7 @@ watch(
       <template #toggle="{ isOpen, collapsable }">
         <section
           ref="el"
-          class="AVOption card m-0 p-0 position-relative vstack justify-content-center"
+          class="AVOption card"
           :class="{
             'AVOption--highlight': highlighted,
             'AVOption--accent': option.accentColor,
@@ -371,6 +372,7 @@ watch(
             </div>
             <AVOptionLiveResults
               v-if="optionPartialResults && (observerMode || disabled)"
+              :option-reference="option.reference"
               :partial-results="optionPartialResults"
               mode="internal"
               :show-percentage="optionPartialResults.showPercentage"
@@ -382,17 +384,17 @@ watch(
 
       <template #results v-if="!disabled && optionPartialResults && !observerMode">
         <AVOptionLiveResults
+          :option-reference="option.reference"
           :partial-results="optionPartialResults"
           mode="external"
           :show-percentage="optionPartialResults.showPercentage"
         />
       </template>
 
-      <template #pane="{ isOpen, toggleCollapse }">
+      <template #pane="{ toggleCollapse }">
         <div
           v-if="hasChildren"
           class="AVOption--children vstack gap-2 py-2"
-          :class="{ 'visually-hidden-focusable': !isOpen }"
           data-test="option-children"
         >
           <AVOption

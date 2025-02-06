@@ -88,7 +88,7 @@ watch(
           {{ t("js.components.AVWriteInOption.title") }}
         </div>
 
-        <div class="col-5">
+        <div class="col-12 col-md-5">
           <label for="party_selector" class="visually-hidden">{{
             t("js.components.AVWriteInOption.aria_labels.party")
           }}</label>
@@ -114,7 +114,7 @@ watch(
           </select>
         </div>
 
-        <div class="col-5">
+        <div class="col-12 col-md-5">
           <label for="candidate_name" class="visually-hidden">{{
             t("js.components.AVWriteInOption.aria_labels.candidate")
           }}</label>

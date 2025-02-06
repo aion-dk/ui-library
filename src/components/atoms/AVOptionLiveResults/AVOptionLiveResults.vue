@@ -4,6 +4,10 @@ import type { PropType, SupportedLocale, PartialResult, AVOptionLiveResultsMode 
 import { switchLocale } from "@/i18n";
 
 const props = defineProps({
+  optionReference: {
+    type: String,
+    required: true,
+  },
   partialResults: {
     type: Object as PropType<PartialResult>,
     default: null,
@@ -47,7 +51,7 @@ watch(
 
 <template>
   <div
-    id="option_blank_partial_results"
+    :id="`option_${optionReference}_partial_results`"
     class="AVOptionLiveResults hstack gap-2"
     :class="{
       'mt-1 ms-1': mode === 'external',

@@ -101,6 +101,7 @@ watch(
         </div>
         <AVOptionLiveResults
           v-if="partialResults && (observerMode || disabled)"
+          option-reference="blank"
           :partial-results="partialResults"
           mode="internal"
           :show-percentage="partialResults.showPercentage"
@@ -110,6 +111,7 @@ watch(
 
     <AVOptionLiveResults
       v-if="!disabled && partialResults && !observerMode"
+      option-reference="blank"
       :partial-results="partialResults"
       mode="external"
       :show-percentage="partialResults.showPercentage"

@@ -12,7 +12,7 @@ const props = defineProps({
   },
   paneId: {
     type: String,
-    default: "option_reference_children",
+    required: true,
   },
 });
 

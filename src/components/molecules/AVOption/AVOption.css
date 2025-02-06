@@ -109,8 +109,6 @@
 }
 
 .AVOption--children {
-  box-shadow: unset;
-
   [dir="ltr"] & {
     padding-left: 2.5rem;
   }

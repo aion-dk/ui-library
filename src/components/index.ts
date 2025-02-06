@@ -35,12 +35,12 @@ export { default as AVWriteInOption } from "@/components/molecules/AVWriteInOpti
 
 // // ORGANISMS
 export { default as AVPileSummary } from "@/components/organisms/AVPileSummary";
+export { default as AVBallot } from "@/components/organisms/AVBallot";
 // export { default as AVFooter } from "@/components/organisms/AVFooter";
 // export { default as AVSidebar } from "@/components/organisms/AVSidebar";
 // export { default as AVNavbar } from "@/components/organisms/AVNavbar";
 // export { default as AVContent } from "@/components/organisms/AVContent";
 // export { default as AVModal } from "@/components/organisms/AVModal";
-// export { default as AVBallot } from "@/components/organisms/AVBallot";
 // export { default as AVSplitHelper } from "@/components/organisms/AVSplitHelper";
 // export { default as AVResourceSection } from "@/components/organisms/AVResourceSection";
 // export { default as AVCalculateResultContent } from "@/components/organisms/AVCalculateResultContent";

@@ -8,6 +8,7 @@ import AVOptionLiveResults from "./AVOptionLiveResults.vue";
 describe("AVOptionLiveResults", () => {
   const wrapper = mount(AVOptionLiveResults, {
     props: {
+      optionReference: "test",
       partialResults: getLiveResult(["blank"]).blank,
     },
     global: {
