@@ -21,12 +21,12 @@ export * from "@/components/atoms/AVOptionLiveResults/AVOptionLiveResults.types"
 
 // MOLECULES
 export * from "@/components/molecules/AVSummaryOption/AVSummaryOption.types";
+export * from "@/components/molecules/AVSplitWizardHeader/AVSplitWizardHeader.types";
 
 // ORGANISMS
 export * from "@/components/organisms/AVPileSummary/AVPileSummary.types";
 
 // -------- Old stuff
-type AVSplitHelperState = "ballot" | "assign" | "overview";
 
 interface AVDropdownOption {
   value: unknown;
@@ -66,7 +66,6 @@ export type {
   BootstrapColor,
   BootstrapBasicSize,
   BootstrapExpandedSize,
-  AVSplitHelperState,
   AVDropdownOption,
   AVSummaryWriteInObject,
   AVCalculateResultContentRole,

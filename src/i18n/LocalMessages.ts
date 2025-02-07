@@ -12,7 +12,7 @@ import AVSearchBallot from "@/components/molecules/AVSearchBallot/AVSearchBallot
 import AVSubmissionHelper from "@/components/molecules/AVSubmissionHelper/AVSubmissionHelper.messages";
 import AVWriteInOption from "@/components/molecules/AVWriteInOption/AVWriteInOption.messages";
 import AVSplitWeightHelper from "@/components/molecules/AVSplitWeightHelper/AVSplitWeightHelper.messages";
-// import AVSplitWizardHeader from "@/components/molecules/AVSplitWizardHeader/AVSplitWizardHeader.messages";
+import AVSplitWizardHeader from "@/components/molecules/AVSplitWizardHeader/AVSplitWizardHeader.messages";
 // import AVRecommendationList from "@/components/molecules/AVRecommendationList/AVRecommendationList.messages";
 
 /* ORGANISMS */
@@ -46,7 +46,7 @@ const components: DefineLocaleMessage = {
   AVSubmissionHelper,
   AVWriteInOption,
   AVSplitWeightHelper,
-  // AVSplitWizardHeader,
+  AVSplitWizardHeader,
   // AVRecommendationList,
 
   /* ORGANISMS */

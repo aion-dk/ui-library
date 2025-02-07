@@ -29,7 +29,7 @@ import {
   AVWriteInOption,
   AVBallot,
   AVSplitWeightHelper,
-  //   AVSplitWizardHeader,
+  AVSplitWizardHeader,
   //   AVElectaContestCard,
   //   AVProgressBar,
   //   AVWaitingDots,
@@ -55,7 +55,7 @@ setup((app) => {
   app.component("AVWriteInOption", AVWriteInOption);
   app.component("AVBallot", AVBallot);
   app.component("AVSplitWeightHelper", AVSplitWeightHelper);
-  // app.component("AVSplitWizardHeader", AVSplitWizardHeader);
+  app.component("AVSplitWizardHeader", AVSplitWizardHeader);
   // app.component("AVElectaContestCard", AVElectaContestCard);
   // app.component("AVProgressBar", AVProgressBar);
   // app.component("AVWaitingDots", AVWaitingDots);

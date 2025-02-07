@@ -22,13 +22,13 @@ export { default as AVSearchBallot } from "@/components/molecules/AVSearchBallot
 export { default as AVSubmissionHelper } from "@/components/molecules/AVSubmissionHelper";
 export { default as AVWriteInOption } from "@/components/molecules/AVWriteInOption";
 export { default as AVSplitWeightHelper } from "@/components/molecules/AVSplitWeightHelper";
+export { default as AVSplitWizardHeader } from "@/components/molecules/AVSplitWizardHeader";
 // export { default as AVAsyncButton } from "@/components/molecules/AVAsyncButton";
 // export { default as AVRadioGroup } from "@/components/molecules/AVRadioGroup";
 // export { default as AVNavigationItemList } from "@/components/molecules/AVNavigationItemList";
 // export { default as AVBreadcrumb } from "@/components/molecules/AVBreadcrumb";
 // export { default as AVElectionCard } from "@/components/molecules/AVElectionCard";
 // export { default as AVBallotStyleCard } from "@/components/molecules/AVBallotStyleCard";
-// export { default as AVSplitWizardHeader } from "@/components/molecules/AVSplitWizardHeader";
 // export { default as AVElectaContestCard } from "@/components/molecules/AVElectaContestCard";
 // export { default as AVResultOption } from "@/components/molecules/AVResultOption";
 // export { default as AVRecommendationList } from "@/components/molecules/AVRecommendationList";
