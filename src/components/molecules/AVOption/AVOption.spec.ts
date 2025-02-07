@@ -1,8 +1,8 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { describe, it, expect } from "vitest";
 import { mount } from "@vue/test-utils";
 import localI18n from "@/i18n";
 import { getOption, getContest, getLiveResult } from "@/examples";
+import type { VitestEmitted } from "@/types";
 
 import AVOption from "./AVOption.vue";
 import AVCollapser from "@/components/atoms/AVCollapser";
@@ -62,8 +62,8 @@ describe("AVOption", () => {
     expect(wrapper.emitted().checked).to.not.exist;
     await wrapper.find("[data-test=option-checkbox]").trigger("click");
     expect(wrapper.emitted().checked).to.exist;
-    expect((wrapper.emitted().checked as any)[0][0].reference).to.eq("exampleOption1");
-    expect((wrapper.emitted().checked as any)[0][0].amount).to.eq(1);
+    expect((wrapper.emitted().checked as VitestEmitted)[0][0].reference).to.eq("exampleOption1");
+    expect((wrapper.emitted().checked as VitestEmitted)[0][0].amount).to.eq(1);
   });
 
   it("can be disabled", async () => {
@@ -273,8 +273,8 @@ describe("AVOption", () => {
     expect(wrapper.emitted().checked.length).to.eq(1);
     await wrapper.findAll("[data-test=option-checkbox]")[6].trigger("click");
     expect(wrapper.emitted().checked.length).to.eq(2);
-    expect((wrapper.emitted().checked as any)[1][0].reference).to.eq("exampleOption1");
-    expect((wrapper.emitted().checked as any)[1][0].amount).to.eq(7);
+    expect((wrapper.emitted().checked as VitestEmitted)[1][0].reference).to.eq("exampleOption1");
+    expect((wrapper.emitted().checked as VitestEmitted)[1][0].amount).to.eq(7);
   });
 
   it("can have a candidacy attached", async () => {
@@ -290,7 +290,7 @@ describe("AVOption", () => {
 
     expect(wrapper.emitted()["view-candidate"]).to.not.exist;
     await wrapper.find("[data-test=option-candidacy]").trigger("click");
-    expect((wrapper.emitted()["view-candidate"] as any)[0][0]).to.eq(1); // candidate ID
+    expect((wrapper.emitted()["view-candidate"] as VitestEmitted)[0][0]).to.eq(1); // candidate ID
   });
 
   it("can display links", async () => {

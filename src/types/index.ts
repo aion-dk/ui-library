@@ -3,6 +3,9 @@ export type { PropType, VNode } from "vue";
 export type { Locale, DefineLocaleMessage } from "vue-i18n";
 export type { Meta, Decorator } from "@storybook/vue3";
 
+/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+export type VitestEmitted = Array<Array<{ [key: string]: any }>>;
+
 export * from "@/types/electa";
 export * from "@/types/candidacy";
 export * from "@/types/examples";
