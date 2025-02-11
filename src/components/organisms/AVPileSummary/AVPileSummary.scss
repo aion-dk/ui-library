@@ -1,0 +1,19 @@
+.AVPileSummary--summary-header {
+  align-self: stretch;
+  background-color: var(--bs-border-color);
+}
+
+.AVPileSummary--summary-header-text {
+  font-weight: 500;
+}
+
+.AVPileSummary--assign {
+  &:hover {
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.075);
+  }
+}
+
+.AVPileSummary--assign-card {
+  width: 100%;
+  word-wrap: break-word;
+}

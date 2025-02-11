@@ -74,4 +74,4 @@ watch(
   </div>
 </template>
 
-<style scoped src="./AVOptionSelect.css" />
+<style scoped lang="scss" src="./AVOptionSelect.scss" />

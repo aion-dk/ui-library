@@ -227,18 +227,20 @@ watch(
           data-test="option-section"
         >
           <div
-            class="AVOption--container hstack justify-content-between"
+            class="d-flex justify-content-between"
             :class="{
-              'AVOption--container-column': votesAllowedPerOption > 1,
-              'AVOption--container-row': votesAllowedPerOption <= 5,
+              'flex-column': votesAllowedPerOption > 1,
+              'flex-sm-row': votesAllowedPerOption <= 5,
             }"
             data-test="option-container"
           >
             <div
-              class="AVOption--header-container vstack gap-2 p-3 align-items-start justify-content-center"
+              class="vstack gap-2 p-3 align-items-start justify-content-center"
               data-test="option-content"
             >
-              <header class="AVOption--header d-flex align-items-center gap-3">
+              <header
+                class="AVOption--header d-flex flex-column flex-sm-row align-items-sm-center gap-3"
+              >
                 <img
                   v-if="option.image"
                   :src="imageUrl"
@@ -262,7 +264,7 @@ watch(
                   (hasChildren && collapsable) ||
                   !!option.candidateId
                 "
-                class="AVOption--body vstack gap-2"
+                class="vstack gap-2"
                 data-test="option-summary"
               >
                 <div
@@ -298,12 +300,12 @@ watch(
                 </div>
                 <div
                   v-if="collapsable && hasChildren"
-                  class="AVOption--children-container hstack gap-2 mt-2"
+                  class="hstack gap-2 mt-2"
                   data-test="option-children"
                 >
                   <div
                     :id="`option_${option.reference}_dropdown`"
-                    class="AVOption--expander-container hstack gap-1 text-dark"
+                    class="hstack gap-1 text-dark"
                     aria-hidden="true"
                     data-test="option-expander"
                   >
@@ -352,7 +354,7 @@ watch(
               <div
                 v-for="groupIndex in optionGroups"
                 :key="groupIndex.toString()"
-                class="AVOption--group hstack gap-2 flex-nowrap"
+                class="hstack gap-2 flex-nowrap"
               >
                 <AVOptionCheckbox
                   v-for="optionIndex in groupIndex"
@@ -418,4 +420,4 @@ watch(
   </div>
 </template>
 
-<style scoped src="./AVOption.css" />
+<style scoped lang="scss" src="./AVOption.scss" />

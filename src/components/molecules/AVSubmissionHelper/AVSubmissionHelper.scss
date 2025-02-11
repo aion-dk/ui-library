@@ -1,8 +1,4 @@
-.AVSubmissionHelper {
-  bottom: 0px;
-  position: sticky;
-  position: -webkit-sticky; /* Safari */
-}
+@import "bootstrap/scss/bootstrap-utilities";
 
 .AVSubmissionHelper--weight {
   float: none;
@@ -12,13 +8,8 @@
   margin-bottom: 0.5rem;
   font-size: 0.875rem;
   line-height: 1.25rem;
-}
 
-.AVSubmissionHelper--help {
-}
-
-@media only screen and (min-width: 1024px) {
-  .AVSubmissionHelper--weight {
+  @include media-breakpoint-up(lg) {
     font-size: 1rem;
     line-height: 1.5rem;
     width: fit-content;

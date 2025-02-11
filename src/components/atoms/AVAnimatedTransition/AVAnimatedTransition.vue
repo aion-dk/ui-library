@@ -49,4 +49,4 @@ const leave = (element: Element) => {
   </transition>
 </template>
 
-<style scoped src="./AVAnimatedTransition.css" />
+<style scoped lang="scss" src="./AVAnimatedTransition.scss" />

@@ -79,7 +79,7 @@ watch(
 <template>
   <form
     role="search"
-    class="AVSearchBallot card rounded vstack"
+    class="card rounded vstack"
     :aria-label="t('js.components.AVSearchBallot.aria_labels.ballot_options')"
     data-test="search-ballot"
     @submit.prevent
@@ -145,4 +145,4 @@ watch(
   </form>
 </template>
 
-<style scoped src="./AVSearchBallot.css" />
+<style scoped lang="scss" src="./AVSearchBallot.scss" />

@@ -275,4 +275,4 @@ watch(
   </div>
 </template>
 
-<style scoped src="./AVBallot.css" />
+<style scoped lang="scss" src="./AVBallot.scss" />

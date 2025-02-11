@@ -45,4 +45,4 @@ defineProps({
   </span>
 </template>
 
-<style scoped src="./AVTooltip.css" />
+<style scoped lang="scss" src="./AVTooltip.scss" />

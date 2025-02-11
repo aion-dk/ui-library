@@ -57,4 +57,4 @@ watch(
   </div>
 </template>
 
-<style scoped src="./AVSpinner.css" />
+<style scoped lang="scss" src="./AVSpinner.scss" />

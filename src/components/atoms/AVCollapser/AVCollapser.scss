@@ -2,8 +2,8 @@
   cursor: pointer;
   transition: all 300ms ease-in-out;
   box-shadow: 0 0 0 0.125rem rgb(82 88 93 / 0%);
-}
 
-.AVCollapser:hover {
-  box-shadow: 0 0 0 0.125rem rgb(82 88 93 / 50%);
+  &:hover {
+    box-shadow: 0 0 0 0.125rem rgb(82 88 93 / 50%);
+  }
 }

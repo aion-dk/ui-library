@@ -46,7 +46,7 @@ watch(
 </script>
 
 <template>
-  <div class="AVSplitWeightHelper d-flex flex-column flex-sm-row gap-2 mb-3">
+  <div class="d-flex flex-column flex-sm-row gap-2 mb-3">
     <div class="card p-3 bg-dark-faded w-100" data-test="weight-helper-total">
       <span
         >{{ t("js.components.AVSplitWeightHelper.total") }}
@@ -70,4 +70,4 @@ watch(
   </div>
 </template>
 
-<style scoped src="./AVSplitWeightHelper.css" />
+<style scoped lang="scss" src="./AVSplitWeightHelper.scss" />

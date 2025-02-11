@@ -80,4 +80,4 @@ watch(
   </div>
 </template>
 
-<style scoped src="./AVOptionLiveResults.css" />
+<style scoped lang="scss" src="./AVOptionLiveResults.scss" />

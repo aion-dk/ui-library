@@ -72,4 +72,4 @@ const toggleAccordion = (force: boolean | null = null, animate = true) => {
   </template>
 </template>
 
-<style scoped src="./AVCollapser.css" />
+<style scoped lang="scss" src="./AVCollapser.scss" />

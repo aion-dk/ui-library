@@ -83,7 +83,7 @@ watch(
 </script>
 
 <template>
-  <div class="AVSubmissionHelper">
+  <div class="sticky-bottom">
     <div
       class="p-3"
       :class="{
@@ -120,7 +120,7 @@ watch(
       </div>
 
       <div v-if="maxMarks > 1">
-        <div class="AVSubmissionHelper--help d-block justify-content-between align-items-center">
+        <div class="d-block justify-content-between align-items-center">
           <div v-if="minMarks === maxMarks">
             {{
               `${t("js.components.AVSubmissionHelper.select_exactly", {
@@ -163,4 +163,4 @@ watch(
   </div>
 </template>
 
-<style scoped src="./AVSubmissionHelper.css" />
+<style scoped lang="scss" src="./AVSubmissionHelper.scss" />

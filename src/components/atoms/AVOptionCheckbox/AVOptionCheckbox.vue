@@ -121,4 +121,4 @@ watch(
   </div>
 </template>
 
-<style scoped src="./AVOptionCheckbox.css" />
+<style scoped lang="scss" src="./AVOptionCheckbox.scss" />

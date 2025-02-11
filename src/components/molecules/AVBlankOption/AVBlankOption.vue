@@ -79,15 +79,12 @@ watch(
       :aria-label="t('js.components.AVBlankOption.aria_labels.option')"
       data-test="option-container"
     >
-      <div
-        class="AVBlankOption--header hstack justify-content-between p-3"
-        data-test="option-content"
-      >
+      <div class="hstack justify-content-between p-3" data-test="option-content">
         <h5 id="option_blank_title" class="AVBlankOption--title m-0">
           {{ t("js.components.AVBlankOption.title") }}
         </h5>
         <span id="option_blank_handle" class="visually-hidden">blank</span>
-        <div class="AVBlankOption--checkbox p-1">
+        <div class="p-1">
           <AVOptionCheckbox
             option-reference="blank"
             :rank="null"
@@ -119,4 +116,4 @@ watch(
   </div>
 </template>
 
-<style scoped src="./AVBlankOption.css" />
+<style scoped lang="scss" src="./AVBlankOption.scss" />

@@ -104,7 +104,7 @@ watch(
 
 <template>
   <div
-    class="AVSummaryOption card rounded-0"
+    class="AVSummaryOption card rounded-0 position-relative"
     :aria-label="t('js.components.AVSummaryOption.aria_label.option')"
     data-test="summary-option"
   >
@@ -129,7 +129,7 @@ watch(
       <img
         v-if="option?.image"
         :src="imageUrl"
-        class="AVSummaryOption--img me-sm-3"
+        class="AVSummaryOption--img me-2 me-sm-3"
         :alt="t('js.components.AVSummaryOption.aria_label.option_image')"
         data-test="summary-option-image"
       />
@@ -156,7 +156,7 @@ watch(
       <div
         v-for="groupIndex in optionGroups"
         :key="groupIndex.toString()"
-        class="AVSummaryOption--group hstack gap-2"
+        class="hstack gap-2 flex-nowrap"
       >
         <AVOptionCheckbox
           v-for="optionIndex in groupIndex"
@@ -171,4 +171,4 @@ watch(
   </div>
 </template>
 
-<style lang="scss" src="./AVSummaryOption.css" />
+<style scoped lang="scss" src="./AVSummaryOption.scss" />

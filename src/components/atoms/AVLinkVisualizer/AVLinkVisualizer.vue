@@ -48,4 +48,4 @@ const openLink = (url: string) => window.open(url, "_blank")?.focus();
   </button>
 </template>
 
-<style scoped src="./AVLinkVisualizer.css" />
+<style scoped lang="scss" src="./AVLinkVisualizer.scss" />

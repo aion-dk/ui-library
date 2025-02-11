@@ -96,4 +96,4 @@ watch(
   </header>
 </template>
 
-<style scoped src="./AVSplitWizardHeader.css" />
+<style scoped lang="scss" src="./AVSplitWizardHeader.scss" />

@@ -1,6 +1,5 @@
 .AVBlankOption {
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
-  min-height: 4rem;
 }
 
 .AVBlankOption--disabled {
@@ -17,15 +16,9 @@
   }
 }
 
-.AVBlankOption--header {
-}
-
 .AVBlankOption--title {
   font-size: 20px;
   line-height: 20px;
   text-transform: none;
   font-weight: 500;
-}
-
-.AVBlankOption--checkbox {
 }

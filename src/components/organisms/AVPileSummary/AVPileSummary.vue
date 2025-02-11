@@ -172,7 +172,7 @@ watch(
       <span>{{ t("js.components.AVPileSummary.selection") }}</span>
     </header>
 
-    <div class="AVPileSummary--summary-body vstack gap-2 p-3 border">
+    <div class="vstack gap-2 p-3 border">
       <AVSummaryOption
         v-for="(option, index) in optionSummaries.options"
         :key="index"
@@ -197,13 +197,13 @@ watch(
       }"
     >
       <div
-        class="AVPileSummary--assign-header hstack justify-content-between gap-2 py-2 px-3 mb-0 rounded-0 btn btn-secondary border-0 border-bottom"
+        class="hstack justify-content-between gap-2 py-2 px-3 mb-0 rounded-0 btn btn-secondary border-0 border-bottom"
         :aria-label="t('js.components.AVPileSummary.aria_labels.edit_selection')"
         role="button"
         data-test="pile-summary-edit"
         @click="emits('editCurrentSelection')"
       >
-        <div class="AVPileSummary--edit hstack gap-2 text-dark">
+        <div class="hstack gap-2 text-dark">
           <AVIcon icon="pen-to-square" />
           <span>{{ t("js.components.AVPileSummary.ballot_selection") }} {{ pileIndex + 1 }}</span>
         </div>
@@ -213,30 +213,22 @@ watch(
         </span>
       </div>
 
-      <div class="AVPileSummary--assign-body bg-white p-3" data-test="pile-summary-body">
-        <p v-if="blankSelected" class="AVPileSummary--assign-text mb-0">
+      <div class="bg-white p-3" data-test="pile-summary-body">
+        <p v-if="blankSelected" class="mb-0">
           {{ t("js.components.AVPileSummary.blank") }}
         </p>
-        <p
-          v-for="(option, index) in shownOptions"
-          :key="index"
-          class="AVPileSummary--assign-text mb-0"
-        >
+        <p v-for="(option, index) in shownOptions" :key="index" class="mb-0">
           {{ option.rank ? `${option.rank}: ` : "" }}
           {{ option.title[i18nLocale] }}
         </p>
-        <p
-          v-for="(option, index) in optionSummaries.writeIns"
-          :key="index"
-          class="AVPileSummary--assign-text mb-0"
-        >
+        <p v-for="(option, index) in optionSummaries.writeIns" :key="index" class="mb-0">
           <b>{{ option.partyLetter }} - {{ option.partyName }}</b>
           <br /><span>{{ option.candidateName }}</span>
         </p>
         <p
           v-if="remainingOptions > 0"
           role="button"
-          class="AVPileSummary--show-more-button mb-0 text-dark"
+          class="mb-0 text-dark"
           data-test="pile-summary-more"
           @click.stop.prevent="showAllOptions = true"
         >
@@ -253,7 +245,7 @@ watch(
         <p
           v-if="showAllOptions"
           role="button"
-          class="AVPileSummary--show-more-button mb-0 text-dark"
+          class="mb-0 text-dark"
           data-test="pile-summary-more"
           @click.stop.prevent="showAllOptions = false"
         >
@@ -266,7 +258,7 @@ watch(
 
     <div
       v-if="activeState === 'overview'"
-      class="AVPileSummary--assign-delete-button hstack btn btn-theme-danger-outline rounded-0"
+      class="hstack btn btn-theme-danger-outline rounded-0"
       role="button"
       :aria-label="t('js.components.AVPileSummary.aria_labels.delete_selection')"
       data-test="pile-summary-delete"
@@ -277,4 +269,4 @@ watch(
   </div>
 </template>
 
-<style scoped src="./AVPileSummary.css" />
+<style scoped lang="scss" src="./AVPileSummary.scss" />

@@ -52,6 +52,22 @@ export const Default = {
   },
 };
 
+export const WithImage = {
+  render: Template,
+
+  args: {
+    option: {
+      title: getOption([], 1).title,
+      handle: getOption([], 1).reference,
+      image: getOption(["image"], 1).image,
+      crosses: 1,
+      rank: null,
+    },
+    blank: false,
+    multipleVotesAllowed: false,
+  },
+};
+
 export const Ranked = {
   render: Template,
 

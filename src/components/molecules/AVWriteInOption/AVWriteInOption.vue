@@ -82,7 +82,7 @@ watch(
     }"
     :aria-label="t('js.components.AVWriteInOption.aria_labels.option')"
   >
-    <div class="AVWriteInOption--header hstack">
+    <div class="hstack">
       <form class="row g-1 p-3 flex-grow-1">
         <div id="option_writeIn" class="AVWriteInOption--title col-12">
           {{ t("js.components.AVWriteInOption.title") }}
@@ -141,4 +141,4 @@ watch(
   </div>
 </template>
 
-<style scoped src="./AVWriteInOption.css" />
+<style scoped lang="scss" src="./AVWriteInOption.scss" />

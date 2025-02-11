@@ -1,5 +1,4 @@
 .AVSummaryOption {
-  position: relative;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
   min-height: 4rem;
 }
@@ -20,20 +19,6 @@
   font-weight: 500;
 }
 
-.AVSummaryOption--footer {
-}
-
-.AVSummaryOption--group {
-  flex-wrap: nowrap;
-}
-
 .AVSummaryOption--ancestry {
   color: var(--gray-700);
-}
-
-@media (min-width: 576px) {
-  .AVSummaryOption--img {
-    max-width: 70px;
-    max-height: 90px;
-  }
 }

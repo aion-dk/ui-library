@@ -7,17 +7,14 @@ html {
   -webkit-appearance: none;
 }
 
-.AVSearchBallot {
-}
-
 .AVSearchBallot--results {
   gap: 0.75rem;
   padding: 1rem;
   max-height: 15vh;
-}
 
-.AVSearchBallot--results:empty {
-  padding: 0.5rem;
+  &:empty {
+    padding: 0.5rem;
+  }
 }
 
 .AVSeachOptionBallot--ancestry {
@@ -28,8 +25,8 @@ html {
 .AVSearchBallot--option {
   padding: 0.5rem 1rem;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
-}
 
-.AVSearchBallot--option:hover {
-  background-color: var(--bs-light);
+  &:hover {
+    background-color: var(--bs-light);
+  }
 }
