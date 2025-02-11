@@ -47,21 +47,21 @@ watch(
 
 <template>
   <div class="AVSplitWeightHelper d-flex flex-column flex-sm-row gap-2 mb-3">
-    <div class="card p-3 bg-secondary w-100" data-test="weight-helper-total">
+    <div class="card p-3 bg-dark-faded w-100" data-test="weight-helper-total">
       <span
         >{{ t("js.components.AVSplitWeightHelper.total") }}
         <strong>{{ assignedWeight + unusedWeight }}</strong></span
       >
     </div>
 
-    <div class="card p-3 bg-secondary w-100" data-test="weight-helper-assigned">
+    <div class="card p-3 bg-dark-faded w-100" data-test="weight-helper-assigned">
       <span
         >{{ t("js.components.AVSplitWeightHelper.assigned") }}
         <strong>{{ assignedWeight }}</strong></span
       >
     </div>
 
-    <div class="card p-3 bg-secondary w-100" data-test="weight-helper-unused">
+    <div class="card p-3 bg-dark-faded w-100" data-test="weight-helper-unused">
       <span
         >{{ t("js.components.AVSplitWeightHelper.unused") }}
         <strong>{{ unusedWeight }}</strong></span

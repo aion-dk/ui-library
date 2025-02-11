@@ -49,7 +49,6 @@ import {
   //   AVNavbar,
   //   AVContent,
   //   AVModal,
-  //   AVSplitHelper,
   //   AVResourceSection,
   //   AVCalculateResultContent,
   //   AVNormalSummary,
@@ -57,10 +56,7 @@ import {
   //   AVInstantRunoffSummary,
 
   // TEMPLATES
-  //   OneColumnLayout,
-  //   TwoColumnsLayout,
-  //   NoSidebarLayout,
-  //   ElectionDashboardLayout,
+  AVSplitHelper,
 
   // ...Components
 } from "@/components";
@@ -111,7 +107,6 @@ export default {
     // app.component("AVNavbar", AVNavbar);
     // app.component("AVContent", AVContent);
     // app.component("AVModal", AVModal);
-    // app.component("AVSplitHelper", AVSplitHelper);
     // app.component("AVResourceSection", AVResourceSection);
     // app.component("AVCalculateResultContent", AVCalculateResultContent);
     // app.component("AVNormalSummary", AVNormalSummary);
@@ -119,10 +114,7 @@ export default {
     // app.component("AVInstantRunoffSummary", AVInstantRunoffSummary);
 
     // TEMPLATES
-    // app.component("OneColumnLayout", OneColumnLayout);
-    // app.component("TwoColumnsLayout", TwoColumnsLayout);
-    // app.component("NoSidebarLayout", NoSidebarLayout);
-    // app.component("ElectionDashboardLayout", ElectionDashboardLayout);
+    app.component("AVSplitHelper", AVSplitHelper);
 
     // COMPOSABLES
     app.provide("i18n", i18n ? i18n : localI18n);
@@ -171,18 +163,14 @@ export {
   //   AVNavbar,
   //   AVContent,
   //   AVModal,
-  //   AVSplitHelper,
   //   AVResourceSection,
   //   AVCalculateResultContent,
   //   AVNormalSummary,
   //   AVRankedSummary,
   //   AVInstantRunoffSummary,
 
-  //   // TEMPLATES
-  //   OneColumnLayout,
-  //   TwoColumnsLayout,
-  //   NoSidebarLayout,
-  //   ElectionDashboardLayout,
+  // TEMPLATES
+  AVSplitHelper,
 
   // ...Components
 

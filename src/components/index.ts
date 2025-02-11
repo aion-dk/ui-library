@@ -41,7 +41,6 @@ export { default as AVBallot } from "@/components/organisms/AVBallot";
 // export { default as AVNavbar } from "@/components/organisms/AVNavbar";
 // export { default as AVContent } from "@/components/organisms/AVContent";
 // export { default as AVModal } from "@/components/organisms/AVModal";
-// export { default as AVSplitHelper } from "@/components/organisms/AVSplitHelper";
 // export { default as AVResourceSection } from "@/components/organisms/AVResourceSection";
 // export { default as AVCalculateResultContent } from "@/components/organisms/AVCalculateResultContent";
 // export { default as AVNormalSummary } from "@/components/organisms/AVNormalSummary";
@@ -49,9 +48,6 @@ export { default as AVBallot } from "@/components/organisms/AVBallot";
 // export { default as AVInstantRunoffSummary } from "@/components/organisms/AVInstantRunoffSummary";
 
 // // TEMPLATES
-// export { default as OneColumnLayout } from "@/components/templates/OneColumnLayout";
-// export { default as TwoColumnsLayout } from "@/components/templates/TwoColumnsLayout";
-// export { default as NoSidebarLayout } from "@/components/templates/NoSidebarLayout";
-// export { default as ElectionDashboardLayout } from "@/components/templates/ElectionDashboardLayout";
+export { default as AVSplitHelper } from "@/components/templates/AVSplitHelper";
 
 // ...Components

@@ -18,11 +18,13 @@ import AVSplitWizardHeader from "@/components/molecules/AVSplitWizardHeader/AVSp
 /* ORGANISMS */
 import AVPileSummary from "@/components/organisms/AVPileSummary/AVPileSummary.messages";
 import AVBallot from "@/components/organisms/AVBallot/AVBallot.messages";
-// import AVSplitHelper from "@/components/organisms/AVSplitHelper/AVSplitHelper.messages";
 // import AVResourceSection from "@/components/organisms/AVResourceSection/AVResourceSection.messages";
 // import AVCalculateResultContent from "@/components/organisms/AVCalculateResultContent/AVCalculateResultContent.messages";
 // import AVRankedSummary from "@/components/organisms/AVRankedSummary/AVRankedSummary.messages";
 // import AVInstantRunoffSummary from "@/components/organisms/AVInstantRunoffSummary/AVInstantRunoffSummary.messages";
+
+/* TEMPLATES */
+import AVSplitHelper from "@/components/templates/AVSplitHelper/AVSplitHelper.messages";
 
 import type {
   LocalString,
@@ -52,11 +54,13 @@ const components: DefineLocaleMessage = {
   /* ORGANISMS */
   AVPileSummary,
   AVBallot,
-  // AVSplitHelper,
   // AVResourceSection,
   // AVCalculateResultContent,
   // AVRankedSummary,
   // AVInstantRunoffSummary,
+
+  /* TEMPLATES */
+  AVSplitHelper,
 };
 
 const getTranslations = (locale: SupportedLocale) => {

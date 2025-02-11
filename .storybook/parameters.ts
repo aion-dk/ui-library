@@ -23,9 +23,14 @@ const parameters = {
     config: {
       rules: [
         {
-          // Don't show accesibility warnings regarding VUE devtools
+          // Don't show accesibility warnings regarding VUE devtools.
           id: "aria-prohibited-attr",
           selector: ".panel-entry-btn",
+          enabled: false,
+        },
+        {
+          // Don't look at heading order because we are analyzing isolated components, so sometimes this won't make sense as it will be missing context.
+          id: "heading-order",
           enabled: false,
         },
       ],

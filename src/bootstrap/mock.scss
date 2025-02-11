@@ -43,6 +43,17 @@
   }
 }
 
+.btn-theme-danger-outline {
+  color: var(--av-theme-danger-background);
+  background-color: white;
+  border-color: var(--bs-border-color);
+
+  &:hover {
+    background-color: var(--av-theme-danger-background);
+    color: white;
+  }
+}
+
 .border-theme {
   border-color: var(--av-theme-background) !important;
 }

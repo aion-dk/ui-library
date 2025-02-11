@@ -1,0 +1,41 @@
+@import "bootstrap/scss/bootstrap-utilities";
+
+.AVSplitHelper--full-width-mobile {
+  width: 100%;
+
+  @include media-breakpoint-up(sm) {
+    width: fit-content;
+  }
+}
+
+.AVSplitHelper--assign-input {
+  font-size: 1.25rem;
+  appearance: none;
+  transition:
+    border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out;
+}
+
+.AVSplitHelper--overview-new-ballot-btn {
+  text-decoration: none;
+  transition:
+    color 0.15s ease-in-out,
+    background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out;
+
+  &:hover {
+    background-color: var(--gray-200) !important;
+    box-shadow: 0rem 0rem 1rem 1px rgba(0, 0, 0, 0.05);
+  }
+}
+
+.transition-fade-enter-active,
+.transition-fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.transition-fade-enter,
+.transition-fade-leave-to {
+  opacity: 0;
+}

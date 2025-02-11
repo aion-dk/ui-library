@@ -213,7 +213,7 @@ watch(
         </span>
       </div>
 
-      <div class="AVPileSummary--assign-body p-3" data-test="pile-summary-body">
+      <div class="AVPileSummary--assign-body bg-white p-3" data-test="pile-summary-body">
         <p v-if="blankSelected" class="AVPileSummary--assign-text mb-0">
           {{ t("js.components.AVPileSummary.blank") }}
         </p>
@@ -266,7 +266,7 @@ watch(
 
     <div
       v-if="activeState === 'overview'"
-      class="AVPileSummary--assign-delete-button hstack btn btn-theme-danger rounded-0"
+      class="AVPileSummary--assign-delete-button hstack btn btn-theme-danger-outline rounded-0"
       role="button"
       :aria-label="t('js.components.AVPileSummary.aria_labels.delete_selection')"
       data-test="pile-summary-delete"
