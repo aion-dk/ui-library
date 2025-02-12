@@ -76,7 +76,7 @@ export const Disabled = {
   },
 };
 
-export const WithColor = {
+export const WithAccentColor = {
   render: Template,
 
   args: {

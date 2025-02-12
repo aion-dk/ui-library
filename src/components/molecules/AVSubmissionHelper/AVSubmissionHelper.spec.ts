@@ -64,7 +64,6 @@ describe("AVSubmissionHelper", () => {
       "Exclusive options cannot be combined with other options",
     );
     expect(wrapper.find("[data-test=submission-helper]").classes()).to.contain("bg-theme-danger");
-    expect(wrapper.find("[data-test=submission-helper]").classes()).to.contain("text-theme-danger");
   });
 
   it("can display an error", async () => {

@@ -90,7 +90,6 @@ watch(
         'bg-dark': !errors.length,
         'text-white': !errors.length,
         'bg-theme-danger': errors.length > 0,
-        'text-theme-danger': errors.length > 0,
       }"
       data-test="submission-helper"
     >
@@ -100,7 +99,6 @@ watch(
         class="AVSubmissionHelper--weight"
         :class="{
           'text-white': !errors.length,
-          'text-theme-danger': errors.length > 0,
         }"
         data-test="submission-helper-weight"
       >

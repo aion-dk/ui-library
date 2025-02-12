@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import useEventsBus from "@/helpers/eventBus";
-import { watch, ref, nextTick, computed, inject, onMounted } from "vue";
+import { watch, ref, nextTick, computed, inject, onMounted, onUnmounted } from "vue";
 import type {
   PropType,
   SupportedLocale,
@@ -162,6 +162,12 @@ const handleHighlightOptionChange = (reference: string) => {
   }
 };
 
+const isRtl = ref<boolean>(false);
+
+const mutationObserver = ref<MutationObserver | null>(null);
+
+const mutationObserverTarget = document.getElementsByTagName("html")[0];
+
 watch(
   () => eventBus.value.get("highlight-option"),
   (val) => {
@@ -169,6 +175,18 @@ watch(
     handleHighlightOptionChange(optionId);
   },
 );
+
+onMounted(() => {
+  if (props.locale) switchLocale(props.locale); // DO NOT REMOVE (If in doubt, read the next block comment)
+
+  mutationObserver.value = new MutationObserver(() => {
+    const dirAttr = mutationObserverTarget.attributes.getNamedItem("dir")?.value;
+    isRtl.value = !!dirAttr && dirAttr === "rtl";
+  });
+  mutationObserver.value.observe(mutationObserverTarget, { attributes: true });
+});
+
+onUnmounted(() => mutationObserver.value && mutationObserver.value.disconnect());
 
 /**
  * This is necesary in order to support both provided i18n and local i18n.
@@ -181,9 +199,6 @@ watch(
 const i18n: any = inject("i18n");
 const { t } = i18n.global;
 const i18nLocale = computed(() => i18n.global.locale.value || i18n.global.locale);
-onMounted(() => {
-  if (props.locale) switchLocale(props.locale);
-});
 watch(
   () => props.locale,
   () => {
@@ -221,8 +236,12 @@ watch(
           :class="{
             'AVOption--highlight': highlighted,
             'AVOption--accent': option.accentColor,
-            'border-start-theme': option.accentColor,
           }"
+          :style="
+            props.option.accentColor
+              ? `border-${isRtl ? 'right' : 'left'}-color: ${props.option.accentColor};`
+              : ''
+          "
           :aria-label="`${t('js.components.AVOption.aria_labels.option')} ${option.title[i18nLocale]}`"
           data-test="option-section"
         >

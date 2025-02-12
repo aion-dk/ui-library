@@ -118,8 +118,8 @@ describe("AVOption", () => {
 
   it("can display accent color", async () => {
     expect(wrapper.find("[data-test=option-section]").classes()).to.not.include("AVOption--accent");
-    expect(wrapper.find("[data-test=option-section]").classes()).to.not.include(
-      "border-start-theme",
+    expect(wrapper.find("[data-test=option-section]").attributes().style).to.not.include(
+      "border-left-color: #FF0000;",
     );
 
     await wrapper.setProps({
@@ -128,7 +128,9 @@ describe("AVOption", () => {
     });
 
     expect(wrapper.find("[data-test=option-section]").classes()).to.include("AVOption--accent");
-    expect(wrapper.find("[data-test=option-section]").classes()).to.include("border-start-theme");
+    expect(wrapper.find("[data-test=option-section]").attributes().style).to.include(
+      "border-left-color: #FF0000;",
+    );
   });
 
   it("can display partial results", async () => {

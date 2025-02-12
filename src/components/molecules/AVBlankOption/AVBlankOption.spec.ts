@@ -87,8 +87,8 @@ describe("AVBlankOption", () => {
     expect(wrapper.find("[data-test=option-container]").classes()).to.not.include(
       "AVBlankOption--accent",
     );
-    expect(wrapper.find("[data-test=option-container]").classes()).to.not.include(
-      "border-start-theme",
+    expect(wrapper.find("[data-test=option-container]").attributes().style).to.not.include(
+      "border-left-color: #FF0000;",
     );
 
     await wrapper.setProps({
@@ -98,7 +98,9 @@ describe("AVBlankOption", () => {
     expect(wrapper.find("[data-test=option-container]").classes()).to.include(
       "AVBlankOption--accent",
     );
-    expect(wrapper.find("[data-test=option-container]").classes()).to.include("border-start-theme");
+    expect(wrapper.find("[data-test=option-container]").attributes().style).to.include(
+      "border-left-color: #FF0000;",
+    );
   });
 
   it("can display partial results", async () => {

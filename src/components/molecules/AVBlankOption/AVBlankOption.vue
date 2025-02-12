@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { inject, onMounted, watch } from "vue";
+import { inject, onMounted, watch, ref, onUnmounted } from "vue";
 import type { PropType, SupportedLocale, PartialResult } from "@/types";
 import { switchLocale } from "@/i18n";
 
@@ -40,6 +40,24 @@ const props = defineProps({
 
 defineEmits(["toggleBlank"]);
 
+const isRtl = ref<boolean>(false);
+
+const mutationObserver = ref<MutationObserver | null>(null);
+
+const mutationObserverTarget = document.getElementsByTagName("html")[0];
+
+onMounted(() => {
+  if (props.locale) switchLocale(props.locale); // DO NOT REMOVE (If in doubt, read the next block comment)
+
+  mutationObserver.value = new MutationObserver(() => {
+    const dirAttr = mutationObserverTarget.attributes.getNamedItem("dir")?.value;
+    isRtl.value = !!dirAttr && dirAttr === "rtl";
+  });
+  mutationObserver.value.observe(mutationObserverTarget, { attributes: true });
+});
+
+onUnmounted(() => mutationObserver.value && mutationObserver.value.disconnect());
+
 /**
  * This is necesary in order to support both provided i18n and local i18n.
  * The used locale will be taken from the provided i18n as long as there is one
@@ -50,9 +68,6 @@ defineEmits(["toggleBlank"]);
 /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
 const i18n: any = inject("i18n");
 const { t } = i18n.global;
-onMounted(() => {
-  if (props.locale) switchLocale(props.locale);
-});
 watch(
   () => props.locale,
   () => {
@@ -74,8 +89,8 @@ watch(
       class="AVBlankOption card position-relative"
       :class="{
         'AVBlankOption--accent': accentColor,
-        'border-start-theme': accentColor,
       }"
+      :style="accentColor ? `border-${isRtl ? 'right' : 'left'}-color: ${accentColor};` : ''"
       :aria-label="t('js.components.AVBlankOption.aria_labels.option')"
       data-test="option-container"
     >
