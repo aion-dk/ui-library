@@ -32,6 +32,7 @@ import {
   AVSplitWeightHelper,
   AVSplitWizardHeader,
   AVRecommendationList,
+  AVResultOption,
   //   AVAsyncButton,
   //   AVRadioGroup,
   //   AVNavigationItemList,
@@ -39,7 +40,6 @@ import {
   //   AVElectionCard,
   //   AVBallotStyleCard,
   //   AVElectaContestCard,
-  //   AVResultOption,
 
   // ORGANISMS
   AVPileSummary,
@@ -90,6 +90,7 @@ export default {
     app.component("AVSplitWeightHelper", AVSplitWeightHelper);
     app.component("AVSplitWizardHeader", AVSplitWizardHeader);
     app.component("AVRecommendationList", AVRecommendationList);
+    app.component("AVResultOption", AVResultOption);
     // app.component("AVAsyncButton", AVAsyncButton);
     // app.component("AVRadioGroup", AVRadioGroup);
     // app.component("AVNavigationItemList", AVNavigationItemList);
@@ -97,7 +98,6 @@ export default {
     // app.component("AVElectionCard", AVElectionCard);
     // app.component("AVBallotStyleCard", AVBallotStyleCard);
     // app.component("AVElectaContestCard", AVElectaContestCard);
-    // app.component("AVResultOption", AVResultOption);
 
     // ORGANISMS
     app.component("AVPileSummary", AVPileSummary);
@@ -146,6 +146,7 @@ export {
   AVSplitWeightHelper,
   AVSplitWizardHeader,
   AVRecommendationList,
+  AVResultOption,
   //   AVAsyncButton,
   //   AVRadioGroup,
   //   AVNavigationItemList,
@@ -153,7 +154,6 @@ export {
   //   AVElectionCard,
   //   AVBallotStyleCard,
   //   AVElectaContestCard,
-  //   AVResultOption,
 
   // ORGANISMS
   AVPileSummary,

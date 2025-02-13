@@ -30,10 +30,10 @@ import {
   AVBallot,
   AVSplitWeightHelper,
   AVSplitWizardHeader,
+  AVResultOption,
   //   AVElectaContestCard,
   //   AVProgressBar,
   //   AVWaitingDots,
-  //   AVResultOption,
 } from "../src";
 
 setup((app) => {
@@ -56,10 +56,10 @@ setup((app) => {
   app.component("AVBallot", AVBallot);
   app.component("AVSplitWeightHelper", AVSplitWeightHelper);
   app.component("AVSplitWizardHeader", AVSplitWizardHeader);
+  app.component("AVResultOption", AVResultOption);
   // app.component("AVElectaContestCard", AVElectaContestCard);
   // app.component("AVProgressBar", AVProgressBar);
   // app.component("AVWaitingDots", AVWaitingDots);
-  // app.component("AVResultOption", AVResultOption);
 
   app.provide("i18n", localI18n);
   app.use(localI18n);
