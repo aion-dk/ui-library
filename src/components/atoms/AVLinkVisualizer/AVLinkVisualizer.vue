@@ -39,7 +39,10 @@ const openLink = (url: string) => window.open(url, "_blank")?.focus();
 <template>
   <button
     class="btn btn-theme d-flex gap-2 align-items-center"
-    :class="{ 'btn-lg': large }"
+    :class="{
+      'btn-lg': large,
+      'btn-sm': !large,
+    }"
     data-test="button"
     @click="openLink(link.attributes.url)"
   >

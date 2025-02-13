@@ -135,3 +135,8 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
   --gray-800: #343a40;
   --gray-900: #212529;
 }
+
+.text-lora {
+  font-family: "Lora", "Open Sans", sans-serif;
+  font-weight: 600;
+}

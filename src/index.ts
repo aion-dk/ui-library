@@ -44,12 +44,12 @@ import {
   // ORGANISMS
   AVPileSummary,
   AVBallot,
+  AVResourceSection,
   //   AVFooter,
   //   AVSidebar,
   //   AVNavbar,
   //   AVContent,
   //   AVModal,
-  //   AVResourceSection,
   //   AVCalculateResultContent,
   //   AVNormalSummary,
   //   AVRankedSummary,
@@ -102,12 +102,12 @@ export default {
     // ORGANISMS
     app.component("AVPileSummary", AVPileSummary);
     app.component("AVBallot", AVBallot);
+    app.component("AVResourceSection", AVResourceSection);
     // app.component("AVFooter", AVFooter);
     // app.component("AVSidebar", AVSidebar);
     // app.component("AVNavbar", AVNavbar);
     // app.component("AVContent", AVContent);
     // app.component("AVModal", AVModal);
-    // app.component("AVResourceSection", AVResourceSection);
     // app.component("AVCalculateResultContent", AVCalculateResultContent);
     // app.component("AVNormalSummary", AVNormalSummary);
     // app.component("AVRankedSummary", AVRankedSummary);
@@ -158,12 +158,12 @@ export {
   // ORGANISMS
   AVPileSummary,
   AVBallot,
+  AVResourceSection,
   //   AVFooter,
   //   AVSidebar,
   //   AVNavbar,
   //   AVContent,
   //   AVModal,
-  //   AVResourceSection,
   //   AVCalculateResultContent,
   //   AVNormalSummary,
   //   AVRankedSummary,

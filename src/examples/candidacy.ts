@@ -164,7 +164,7 @@ const getCandidate = (): Resource => {
         position: 5,
         purpose: "subtitle",
         item_type: "text",
-        form_content: { en: "Delevoper" },
+        form_content: { en: "Developer" },
       },
     ],
     summary: [
@@ -184,7 +184,7 @@ const getCandidate = (): Resource => {
         label: fieldLabel,
         localised: false,
         position: 15,
-        purpose: "generic",
+        purpose: "summary",
         item_type: "text",
         form_content: "Some text",
       },
