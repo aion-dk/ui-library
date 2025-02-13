@@ -25,6 +25,7 @@ export * from "@/components/molecules/AVRecommendationList/AVRecommendationList.
 
 // ORGANISMS
 export * from "@/components/organisms/AVPileSummary/AVPileSummary.types";
+export * from "@/components/organisms/AVRankedSummary/AVRankedSummary.types";
 
 // TEMPLATES
 export * from "@/components/templates/AVSplitHelper/AVSplitHelper.types";
@@ -34,12 +35,6 @@ export * from "@/components/templates/AVSplitHelper/AVSplitHelper.types";
 interface AVDropdownOption {
   value: unknown;
   label: string;
-}
-
-interface AVSummaryWriteInObject {
-  partyLetter: string;
-  partyName: string;
-  candidateName: string;
 }
 
 type AVCalculateResultContentRole = "mixer" | "decrypter" | "all" | "observer";
@@ -53,27 +48,13 @@ type AVCalculateResultContentStatus =
 
 type AVCalculateResultContentElapsed = `${string}:${string}:${string}`;
 
-interface AVRankedSummaryResultOptionRow {
-  reference: string;
-  title: Record<string, string>;
-  rounds: {
-    count: number;
-    tied: boolean;
-    elected: boolean;
-  }[];
-  tied: boolean;
-  elected: boolean;
-}
-
 export type {
   BootstrapColor,
   BootstrapBasicSize,
   BootstrapExpandedSize,
   AVDropdownOption,
-  AVSummaryWriteInObject,
   AVCalculateResultContentRole,
   AVCalculateResultContentStatus,
   AVCalculateResultContentElapsed,
   ImageOption,
-  AVRankedSummaryResultOptionRow,
 };

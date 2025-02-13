@@ -1,6 +1,12 @@
-import type { AVSplitHelperState, AVSummaryOptionObject, AVSummaryWriteInObject } from "@/types";
+import type { AVSplitHelperState, AVSummaryOptionObject } from "@/types";
 
 type AVPileSummaryState = AVSplitHelperState | "summary";
+
+interface AVSummaryWriteInObject {
+  partyLetter: string;
+  partyName: string;
+  candidateName: string;
+}
 
 interface AVPileSummaryOptionSummary {
   options: AVSummaryOptionObject[];

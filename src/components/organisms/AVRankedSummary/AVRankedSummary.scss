@@ -1,0 +1,25 @@
+.AVRankedSummary--heading > tr {
+  background-color: var(--bs-light);
+  border-bottom-color: var(--bs-border-color);
+}
+
+tr.bg-warning-faded,
+tr.bg-success-faded {
+  border-bottom-color: var(--bs-border-color);
+}
+
+.AVRankedSummary--text-bold {
+  font-weight: 700;
+}
+
+.AVRankedSummary--text-semibold {
+  font-weight: 600;
+}
+
+.AVRankedSummary--text-dark {
+  color: var(--gray-200);
+}
+
+.AVRankedSummary--text-light {
+  color: var(--gray-800);
+}

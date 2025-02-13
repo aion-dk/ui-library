@@ -46,13 +46,13 @@ import {
   AVBallot,
   AVResourceSection,
   AVNormalSummary,
+  AVRankedSummary,
   //   AVFooter,
   //   AVSidebar,
   //   AVNavbar,
   //   AVContent,
   //   AVModal,
   //   AVCalculateResultContent,
-  //   AVRankedSummary,
   //   AVInstantRunoffSummary,
 
   // TEMPLATES
@@ -104,13 +104,13 @@ export default {
     app.component("AVBallot", AVBallot);
     app.component("AVResourceSection", AVResourceSection);
     app.component("AVNormalSummary", AVNormalSummary);
+    app.component("AVRankedSummary", AVRankedSummary);
     // app.component("AVFooter", AVFooter);
     // app.component("AVSidebar", AVSidebar);
     // app.component("AVNavbar", AVNavbar);
     // app.component("AVContent", AVContent);
     // app.component("AVModal", AVModal);
     // app.component("AVCalculateResultContent", AVCalculateResultContent);
-    // app.component("AVRankedSummary", AVRankedSummary);
     // app.component("AVInstantRunoffSummary", AVInstantRunoffSummary);
 
     // TEMPLATES
@@ -160,13 +160,13 @@ export {
   AVBallot,
   AVResourceSection,
   AVNormalSummary,
+  AVRankedSummary,
   //   AVFooter,
   //   AVSidebar,
   //   AVNavbar,
   //   AVContent,
   //   AVModal,
   //   AVCalculateResultContent,
-  //   AVRankedSummary,
   //   AVInstantRunoffSummary,
 
   // TEMPLATES
