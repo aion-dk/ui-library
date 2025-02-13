@@ -138,7 +138,7 @@ watch(
           {{ displayTitle }}
         </div>
       </div>
-      <div v-if="!useFooter" class="AVSummaryOption--summary">
+      <div v-if="!useFooter" class="align-self-start">
         <AVOptionCheckbox
           :checked="true"
           :rank="option?.rank"
@@ -151,7 +151,7 @@ watch(
     <!-- IF MULTIVOTE -->
     <div
       v-if="useFooter"
-      class="card-footer bg-white d-flex gap-2 justify-content-end py-3 flex-wrap"
+      class="card-footer bg-secondary d-flex gap-2 justify-content-end py-3 flex-wrap"
     >
       <div
         v-for="groupIndex in optionGroups"
