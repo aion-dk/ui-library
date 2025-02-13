@@ -1,0 +1,50 @@
+.AVRecommendationList--header {
+  padding: 0.75rem 0.5rem;
+  gap: 0.75rem;
+}
+
+.AVRecommendationList--intive-btn {
+  &:hover {
+    background-color: var(--bs-dark);
+    color: white;
+  }
+}
+
+.AVRecommendationList--icon-container {
+  width: 1.25rem;
+  height: 1.25rem;
+  padding: 0.75rem 0rem;
+}
+
+.AVRecommendationList--cursor-help {
+  cursor: help;
+}
+
+.AVRecommendationList--collapser-icon {
+  transform: rotate(0deg);
+  transition: all 500ms ease-in-out;
+}
+
+.AVRecommendationList--collapser-icon-opened {
+  [dir="ltr"] & {
+    transform: rotate(-180deg);
+  }
+
+  [dir="rtl"] & {
+    transform: rotate(180deg);
+  }
+}
+
+.AVRecommendationList--content {
+  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+}
+
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+}

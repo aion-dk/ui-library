@@ -21,6 +21,7 @@ export * from "@/components/atoms/AVOptionLiveResults/AVOptionLiveResults.types"
 
 // MOLECULES
 export * from "@/components/molecules/AVSummaryOption/AVSummaryOption.types";
+export * from "@/components/molecules/AVRecommendationList/AVRecommendationList.types";
 
 // ORGANISMS
 export * from "@/components/organisms/AVPileSummary/AVPileSummary.types";

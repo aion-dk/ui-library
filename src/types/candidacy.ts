@@ -20,8 +20,6 @@ type ItemPurpose = "generic" | "summary" | "title" | "subtitle" | "identifier";
 
 type ResourceDataContent = string | number | boolean | Url[] | LocalString;
 
-type RecommendationPublicType = "public" | "private" | "public_count";
-
 interface Url {
   attributes: {
     url: string;
@@ -69,5 +67,4 @@ export type {
   ResourceItem,
   Resource,
   Recommendation,
-  RecommendationPublicType,
 };
