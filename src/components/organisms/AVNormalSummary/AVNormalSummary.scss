@@ -1,0 +1,26 @@
+.AVNormalSummary--container {
+  container-type: inline-size;
+}
+
+.AVNormalSummary {
+  grid-template-columns: 1fr;
+  grid-auto-rows: auto;
+}
+
+@container (min-width: 20rem) {
+  .AVNormalSummary {
+    grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+  }
+}
+
+@container (min-width: 40rem) {
+  .AVNormalSummary {
+    grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+  }
+}
+
+@container (min-width: 60rem) {
+  .AVNormalSummary {
+    grid-template-columns: repeat(auto-fill, minmax(30rem, 1fr));
+  }
+}
