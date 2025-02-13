@@ -33,9 +33,9 @@ interface Round {
 
 interface InstantRunoffRound {
   counts: Record<string, number>;
-  eliminated: string;
+  eliminated: string | null;
   exhausted: number;
-  elected: string;
+  elected: string | null;
   transferred: number;
   event: string;
 }

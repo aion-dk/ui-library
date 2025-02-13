@@ -20,8 +20,8 @@ import AVPileSummary from "@/components/organisms/AVPileSummary/AVPileSummary.me
 import AVBallot from "@/components/organisms/AVBallot/AVBallot.messages";
 import AVResourceSection from "@/components/organisms/AVResourceSection/AVResourceSection.messages";
 import AVRankedSummary from "@/components/organisms/AVRankedSummary/AVRankedSummary.messages";
+import AVInstantRunoffSummary from "@/components/organisms/AVInstantRunoffSummary/AVInstantRunoffSummary.messages";
 // import AVCalculateResultContent from "@/components/organisms/AVCalculateResultContent/AVCalculateResultContent.messages";
-// import AVInstantRunoffSummary from "@/components/organisms/AVInstantRunoffSummary/AVInstantRunoffSummary.messages";
 
 /* TEMPLATES */
 import AVSplitHelper from "@/components/templates/AVSplitHelper/AVSplitHelper.messages";
@@ -56,8 +56,8 @@ const components: DefineLocaleMessage = {
   AVBallot,
   AVResourceSection,
   AVRankedSummary,
+  AVInstantRunoffSummary,
   // AVCalculateResultContent,
-  // AVInstantRunoffSummary,
 
   /* TEMPLATES */
   AVSplitHelper,

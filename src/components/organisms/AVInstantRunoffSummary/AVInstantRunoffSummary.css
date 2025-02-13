@@ -1,0 +1,11 @@
+.AVInstantRunoffSummary--text-bold {
+  font-weight: 700;
+}
+
+.AVInstantRunoffSummary--text-dark {
+  color: var(--gray-200);
+}
+
+.AVInstantRunoffSummary--text-light {
+  color: var(--gray-800);
+}

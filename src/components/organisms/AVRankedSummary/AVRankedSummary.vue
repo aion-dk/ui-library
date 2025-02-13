@@ -80,14 +80,14 @@ watch(
       id="ranked_summary_table"
       data-test="table"
     >
-      <thead class="AVRankedSummary--heading">
+      <thead class="bg-secondary border-bottom">
         <tr>
           <th>{{ t("js.components.AVRankedSummary.header.position") }}</th>
           <th>{{ t("js.components.AVRankedSummary.header.candidate") }}</th>
           <th
             v-for="roundNumber in roundCount"
             :key="`header_for_round_${roundNumber}`"
-            class="text-center"
+            class="text-center text-nowrap"
           >
             {{
               t("js.components.AVRankedSummary.header.round_n", {
@@ -122,7 +122,7 @@ watch(
           <td
             v-for="(round, index) in option.rounds"
             :key="`round_nr_${index}`"
-            class="text-center"
+            class="text-center text-nowrap"
             :class="{
               'AVRankedSummary--text-bold': index + 1 === roundCount,
               [`AVRankedSummary--text-${theme}`]: !option.elected && !option.tied,
