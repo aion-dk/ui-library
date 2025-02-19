@@ -3,7 +3,7 @@ orbs:
   node: circleci/node@7.0.0
   docker: assemblyvoting/docker@1.6.2
 executors:
-  node18:
+  node22:
     docker:
       - image: cimg/node:22.13
   ruby-node:
@@ -18,7 +18,7 @@ filters:
 jobs:
   lint_test_build:
     executor:
-      name: node18
+      name: node22
     steps:
       - checkout
       - restore_cache:
@@ -41,7 +41,7 @@ jobs:
             - ./assemblyvoting-electa-ui-*.tgz
   publish:
     executor:
-      name: node18
+      name: node22
     steps:
       - attach_workspace:
           at: /tmp/workspace
