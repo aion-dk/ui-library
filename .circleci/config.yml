@@ -1,0 +1,93 @@
+version: 2.1
+orbs:
+  node: circleci/node@7.0.0
+  docker: assemblyvoting/docker@1.6.2
+executors:
+  node22:
+    docker:
+      - image: cimg/node:22.13
+  ruby-node:
+    docker:
+      - image: cimg/ruby:3.2-node
+
+filters:
+  - &always
+    tags:
+      only: /.*/
+  
+jobs:
+  lint_test_build:
+    executor:
+      name: node22
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "yarn.lock" }}
+            - v1-dependencies-
+      - node/install-yarn
+      - run: yarn install --frozen-lockfile
+      - save_cache:
+          paths:
+            - ./node_modules
+          key: v1-dependencies-{{ checksum "yarn.lock" }}
+      - run: yarn run lint
+      - run: yarn run test
+      - run: yarn run build
+      - run: yarn pack
+      - persist_to_workspace:
+          root: /home/circleci/project
+          paths:
+            - ./assemblyvoting-electa-ui-*.tgz
+  publish:
+    executor:
+      name: node22
+    steps:
+      - attach_workspace:
+          at: /tmp/workspace
+      - run:
+          name: Move files
+          command: |
+            mv /tmp/workspace/assemblyvoting-electa-ui-*.tgz ./
+      - run:
+          name: Set npm access token
+          command: |
+            npm set //registry.npmjs.org/:_authToken=$NPM_TOKEN
+      - run:
+          name: Publish to NPM
+          command: |
+            package_file=$(ls assemblyvoting-electa-ui-*.tgz)
+            if echo "${package_file}" | grep -E "alpha|beta" > /dev/null; then
+              prerelease=$(echo "${package_file}" | grep -E -o "alpha|beta")
+              echo "Publishing prerelease with tag ${prerelease} to NPM"
+              npm publish ${package_file} --tag ${prerelease}
+            else
+              echo "Publishing release with to NPM"
+              npm publish ${package_file}
+            fi
+workflows:
+  build_and_deploy:
+    jobs:
+      - lint_test_build:
+          filters:
+            branches:
+              only: /.*/
+            tags:
+              only: /^v.*/
+      - publish:
+          requires:
+            - lint_test_build
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^v.*/
+  license-checker:
+    jobs:
+      - docker/license-checker:
+          context:
+            - "GIT"
+          filters: *always
+          prep-yarn: true
+          prep-bundle: false
+          executor: ruby-node
