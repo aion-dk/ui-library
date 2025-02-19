@@ -1,0 +1,51 @@
+---
+- - :name_project
+  - ui-library
+  - &1
+    :who: tech@assemblyvoting.com
+    :why:
+    :versions: []
+    :when: 2025-01-31 09:39:02.344871000 Z
+- - :permit
+  - MIT
+  - *1
+- - :permit
+  - ruby
+  - *1
+- - :permit
+  - Simplified BSD
+  - *1
+- - :permit
+  - Apache 2.0
+  - *1
+- - :permit
+  - New BSD
+  - *1
+- - :permit
+  - ISC
+  - *1
+- - :permit
+  - BlueOak-1.0.0
+  - *1
+- - :permit
+  - CC-BY-3.0
+  - *1
+- - :permit
+  - CC0 1.0 Universal
+  - *1
+- - :permit
+  - CC-BY-4.0
+  - &3
+    :who: tech@assemblyvoting.com
+    :why: Fontawesome. Licensing attribution comments embedded on corresponding files. 
+    :versions: []
+    :when: 2025-02-18 12:55:01.344871000 Z
+- - :permit
+  - MIT-0
+  - *1
+- - :permit
+  - Python-2.0
+  - *1
+- - :permit
+  - BSD Zero Clause License
+  - *1
