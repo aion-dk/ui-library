@@ -38,7 +38,7 @@ jobs:
       - persist_to_workspace:
           root: /home/circleci/project
           paths:
-            - ./assemblyvoting/electa-ui*.tgz
+            - ./assemblyvoting-electa-ui-*.tgz
   publish:
     executor:
       name: node18
@@ -48,7 +48,7 @@ jobs:
       - run:
           name: Move files
           command: |
-            mv /tmp/workspace/assemblyvoting/electa-ui*.tgz ./
+            mv /tmp/workspace/assemblyvoting-electa-ui-*.tgz ./
       - run:
           name: Set npm access token
           command: |
@@ -56,7 +56,7 @@ jobs:
       - run:
           name: Publish to NPM
           command: |
-            package_file=$(ls assemblyvoting/electa-ui*.tgz)
+            package_file=$(ls assemblyvoting-electa-ui-*.tgz)
             if echo "${package_file}" | grep -E "alpha|beta" > /dev/null; then
               prerelease=$(echo "${package_file}" | grep -E -o "alpha|beta")
               echo "Publishing prerelease with tag ${prerelease} to NPM"
