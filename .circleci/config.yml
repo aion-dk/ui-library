@@ -34,6 +34,9 @@ jobs:
       - run: yarn run lint
       - run: yarn run test
       - run: yarn run build
+      - run: yarn run build-storybook
+      - run: yarn run storybook
+      - run: yarn run storybook-test
       - run: yarn pack
       - persist_to_workspace:
           root: /home/circleci/project
