@@ -6,6 +6,21 @@ import FloatingVue from "floating-vue";
 import "floating-vue/dist/style.css";
 import "@/bootstrap/bootstrap.customized.scss";
 
+export {
+  Alert,
+  Button,
+  Carousel,
+  Collapse,
+  Dropdown,
+  Modal,
+  Offcanvas,
+  Popover,
+  ScrollSpy,
+  Tab,
+  Toast,
+  Tooltip,
+} from "bootstrap";
+
 import {
   // ATOMS
   AVIcon,
@@ -21,6 +36,7 @@ import {
   //   AVAnimatedMenuButton,
   //   AVProgressBar,
   //   AVWaitingDots,
+  //   AVFileInput,
 
   // MOLECULES
   AVSummaryOption,
@@ -79,6 +95,7 @@ export default {
     // app.component("AVAnimatedMenuButton", AVAnimatedMenuButton);
     // app.component("AVProgressBar", AVProgressBar);
     // app.component("AVWaitingDots", AVWaitingDots);
+    // app.component("AVFileInput", AVFileInput);
 
     // MOLECULES
     app.component("AVSummaryOption", AVSummaryOption);
@@ -133,8 +150,11 @@ export {
   AVOptionCheckbox,
   AVTooltip,
   AVOptionLiveResults,
+  //   AVVerticalStep,
+  //   AVAnimatedMenuButton,
   //   AVProgressBar,
   //   AVWaitingDots,
+  //   AVFileInput,
 
   // MOLECULES
   AVSummaryOption,

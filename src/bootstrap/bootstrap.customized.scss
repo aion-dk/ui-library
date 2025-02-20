@@ -1,6 +1,5 @@
-// Quickly modify global styling by enabling or disabling optional features.
-// @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&family=PT+Mono&display=swap");
-// @import url("https://fonts.googleapis.com/css2?family=Lora:wght@600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&family=PT+Mono&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lora:wght@600&display=swap");
 
 $enable-caret: true !default;
 $enable-rounded: true !default;
@@ -49,8 +48,6 @@ $custom-colors: (
   "brand-dark": $brand-dark,
   "accent": $accent,
 );
-
-@import "./font_mapping.scss";
 
 $font-family-base: "Open Sans", sans-serif;
 

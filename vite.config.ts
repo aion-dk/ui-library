@@ -4,6 +4,7 @@ import typescript2 from "rollup-plugin-typescript2";
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import vueDevTools from "vite-plugin-vue-devtools";
+import { viteStaticCopy } from "vite-plugin-static-copy";
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -22,6 +23,14 @@ export default defineConfig({
         },
       },
       exclude: ["vite.config.ts"],
+    }),
+    viteStaticCopy({
+      targets: [
+        {
+          src: resolve(__dirname, "node_modules/bootstrap"),
+          dest: ".",
+        },
+      ],
     }),
   ],
   build: {
@@ -48,6 +57,8 @@ export default defineConfig({
       },
     },
     chunkSizeWarningLimit: 2000,
+    minify: true,
+    cssMinify: true,
   },
   resolve: {
     alias: {

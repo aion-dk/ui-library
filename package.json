@@ -1,6 +1,6 @@
 {
   "name": "@assemblyvoting/electa-ui",
-  "version": "0.0.0-alpha.2",
+  "version": "0.0.0-alpha.5",
   "license": "MIT",
   "private": false,
   "publishConfig": {
@@ -89,6 +89,7 @@
     "storybook-addon-rtl": "^1.0.1",
     "typescript": "^5.7.3",
     "vite": "^6.0.7",
+    "vite-plugin-static-copy": "^2.2.0",
     "vite-plugin-vue-devtools": "^7.6.8",
     "vitest": "^3.0.5",
     "vue-tsc": "^2.2.0"
