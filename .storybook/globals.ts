@@ -12,6 +12,7 @@ const globals = {
       items: [
         { value: "ar", left: "🇸🇦", title: "Arabic", right: "AR - RTL" },
         { value: "ca", left: "🇪🇸", title: "Catalan", right: "CA - LTR" },
+        { value: "cy", left: "🏴󠁧󠁢󠁷󠁬󠁳󠁿", title: "Welsh", right: "CY - LTR" },
         { value: "da", left: "🇩🇰", title: "Danish", right: "DA - LTR" },
         { value: "de", left: "🇩🇪", title: "German", right: "DE - LTR" },
         { value: "en", left: "🇬🇧", title: "English", right: "EN - LTR" },
@@ -19,6 +20,7 @@ const globals = {
         { value: "fi", left: "🇫🇮", title: "Finnish", right: "FI - LTR" },
         { value: "fr", left: "🇫🇷", title: "French", right: "FR - LTR" },
         { value: "is", left: "🇮🇸", title: "Icelandic", right: "IS - LTR" },
+        { value: "it", left: "🇮🇹", title: "Italian", right: "IT - LTR" },
         { value: "nl", left: "🇳🇱", title: "Dutch", right: "NL - LTR" },
         { value: "pl", left: "🇵🇱", title: "Polish", right: "PL - LTR" },
         { value: "pt", left: "🇵🇹", title: "Portuguese", right: "PT - LTR" },

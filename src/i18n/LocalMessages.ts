@@ -84,6 +84,11 @@ const messages = {
       components: getTranslations("ca"),
     },
   },
+  cy: {
+    js: {
+      components: getTranslations("cy"),
+    },
+  },
   da: {
     js: {
       components: getTranslations("da"),
@@ -117,6 +122,11 @@ const messages = {
   is: {
     js: {
       components: getTranslations("is"),
+    },
+  },
+  it: {
+    js: {
+      components: getTranslations("it"),
     },
   },
   nl: {

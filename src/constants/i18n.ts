@@ -1,6 +1,7 @@
 const SUPPORTED_LOCALES = [
   "ar",
   "ca",
+  "cy",
   "da",
   "de",
   "en",
@@ -8,6 +9,7 @@ const SUPPORTED_LOCALES = [
   "fi",
   "fr",
   "is",
+  "it",
   "nl",
   "pl",
   "pt",
