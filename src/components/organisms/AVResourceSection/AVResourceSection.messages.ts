@@ -30,6 +30,7 @@ const translations: DefineLocaleMessage = {
     and_more: "& {amount} more",
     true: "Checked",
     false: "Not checked",
+    video: "Video player from external source",
   },
   es: {
     alt_candidate: "Retrato del candidato",
