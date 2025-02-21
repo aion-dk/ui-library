@@ -32,9 +32,9 @@ import {
   AVOptionCheckbox,
   AVTooltip,
   AVOptionLiveResults,
+  AVProgressBar,
   //   AVVerticalStep,
   //   AVAnimatedMenuButton,
-  //   AVProgressBar,
   //   AVWaitingDots,
   //   AVFileInput,
 
@@ -91,9 +91,9 @@ export default {
     app.component("AVOptionCheckbox", AVOptionCheckbox);
     app.component("AVTooltip", AVTooltip);
     app.component("AVOptionLiveResults", AVOptionLiveResults);
+    app.component("AVProgressBar", AVProgressBar);
     // app.component("AVVerticalStep", AVVerticalStep);
     // app.component("AVAnimatedMenuButton", AVAnimatedMenuButton);
-    // app.component("AVProgressBar", AVProgressBar);
     // app.component("AVWaitingDots", AVWaitingDots);
     // app.component("AVFileInput", AVFileInput);
 
@@ -150,9 +150,9 @@ export {
   AVOptionCheckbox,
   AVTooltip,
   AVOptionLiveResults,
+  AVProgressBar,
   //   AVVerticalStep,
   //   AVAnimatedMenuButton,
-  //   AVProgressBar,
   //   AVWaitingDots,
   //   AVFileInput,
 
