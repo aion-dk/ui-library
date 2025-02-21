@@ -13,6 +13,12 @@ const translations: DefineLocaleMessage = {
       option: "Opció",
     },
   },
+  cy: {
+    title: "Gwag",
+    aria_labels: {
+      option: "Opsiwn",
+    },
+  },
   da: {
     title: "Blank",
     aria_labels: {
@@ -53,6 +59,12 @@ const translations: DefineLocaleMessage = {
     title: "Autt",
     aria_labels: {
       option: "Valkostur",
+    },
+  },
+  it: {
+    title: "Titolo",
+    aria_labels: {
+      option: "Opzione",
     },
   },
   nl: {

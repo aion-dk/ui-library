@@ -32,6 +32,22 @@ const translations: DefineLocaleMessage = {
       quota: "Mínim requerit per ser electe:",
     },
   },
+  cy: {
+    seat_n: "Sedd {n}",
+    header: {
+      candidate: "Ymgeisydd",
+      round_n: "Rownd {n}",
+    },
+    summary: {
+      transfered_votes: "Pleidleisiau a drosglwyddwyd oddi wrth ymgeiswyr a ddilëwyd",
+      exhausted: "Cardiau blinedig",
+      not_included_count:
+        "Pleidleisiau ar gyfer ymgeiswyr etholedig nad ydynt wedi'u cynnwys yn y cyfrif ar gyfer y sedd hon",
+      abstain: "Atal:",
+      total_votes: "Cyfanswm Pleidleisiau:",
+      quota: "Mae angen cworwm ar gyfer etholiad:",
+    },
+  },
   da: {
     seat_n: "Sæde {n}",
     header: {
@@ -139,6 +155,22 @@ const translations: DefineLocaleMessage = {
       abstain: "Forðastu:",
       total_votes: "Samtals atkvæði:",
       quota: "Kvóti sem þarf til kosninga:",
+    },
+  },
+  it: {
+    seat_n: "Seggio {n}",
+    header: {
+      candidate: "Candidato",
+      round_n: "Round {n}",
+    },
+    summary: {
+      transfered_votes: "Voti trasferiti dai candidati eliminati",
+      exhausted: "Schede esaurite",
+      not_included_count:
+        "Voti per i candidati eletti non inclusi nel conteggio per questo seggio:",
+      abstain: "Astenuti:",
+      total_votes: "Voti totali:",
+      quota: "Quorum necessario per l'elezione:",
     },
   },
   nl: {

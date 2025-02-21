@@ -13,6 +13,12 @@ const translations: DefineLocaleMessage = {
     false: "No seleccionat",
     alt_candidate: "Imatge del candidat/a",
   },
+  cy: {
+    and_more: "a {amount} mwy",
+    true: "Wedi'i ddewis",
+    false: "Heb ei ddewis",
+    alt_candidate: "Delwedd yr ymgeisydd",
+  },
   da: {
     alt_candidate: "Portræt af kandidaten",
     and_more: "& {amount} mere",
@@ -55,6 +61,12 @@ const translations: DefineLocaleMessage = {
     and_more: "& {amount} í viðbót",
     true: "Merkt",
     false: "Ekki athugað",
+  },
+  it: {
+    alt_candidate: "Ritratto del candidato",
+    and_more: "& %{amount} in più",
+    true: "Selezionato",
+    false: "Non selezionato",
   },
   nl: {
     alt_candidate: "Portret van de kandidaat",

@@ -9,6 +9,10 @@ const translations: DefineLocaleMessage = {
     vote_count_singular: "{n} vot",
     vote_count_plural: "{n} vots",
   },
+  cy: {
+    vote_count_singular: "{n} bleidlais",
+    vote_count_plural: "{n} bleidlais",
+  },
   da: {
     vote_count_singular: "{n} stemme",
     vote_count_plural: "{n} stemmer",
@@ -36,6 +40,10 @@ const translations: DefineLocaleMessage = {
   is: {
     vote_count_singular: "{n} atkvæði",
     vote_count_plural: "{n} atkvæði",
+  },
+  it: {
+    vote_count_singular: "{n} voto",
+    vote_count_plural: "{n} voti",
   },
   nl: {
     vote_count_singular: "{n} stem",

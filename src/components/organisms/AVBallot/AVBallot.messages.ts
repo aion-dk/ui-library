@@ -13,6 +13,12 @@ const translations: DefineLocaleMessage = {
       ballot: "Papereta",
     },
   },
+  cy: {
+    aria_labels: {
+      ballot_options: "Opsiynau pleidleisio",
+      ballot: "Pleidlais",
+    },
+  },
   da: {
     aria_labels: {
       ballot_options: "Stemmesedlens valgmuligheder",
@@ -53,6 +59,12 @@ const translations: DefineLocaleMessage = {
     aria_labels: {
       ballot_options: "Valmöguleikar atkvæða",
       ballot: "Atkvæðaseðill",
+    },
+  },
+  it: {
+    aria_labels: {
+      ballot_options: "Opzioni della scheda elettorale",
+      ballot: "Scheda elettorale",
     },
   },
   nl: {

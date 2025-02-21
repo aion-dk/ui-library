@@ -7,6 +7,9 @@ const translations: DefineLocaleMessage = {
   ca: {
     loading: "Carregant...",
   },
+  cy: {
+    loading: "Wrthi'n llwytho...",
+  },
   da: {
     loading: "Indlæser...",
   },
@@ -27,6 +30,9 @@ const translations: DefineLocaleMessage = {
   },
   is: {
     loading: "Hleður...",
+  },
+  it: {
+    loading: "Caricamento in corso...",
   },
   nl: {
     loading: "Bezig met laden...",

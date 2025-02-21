@@ -42,6 +42,28 @@ const translations: DefineLocaleMessage = {
         "La teva selecció ha superat la quantitat màxima d'opcions que es poden triar a la lllista {list_name}. Selecciona un màxim de ({max_list_marks}) opcions d'aquaquesta lllista.",
     },
   },
+  cy: {
+    select_exactly: "Dewiswch {min_marks} opsiynau.",
+    select_multiple: "Dewiswch rhwng {min_marks} a {max_marks} o opsiynau.",
+    select_multiple_with_exclusives:
+      "Dewiswch rhwng {min_marks} a {max_marks}. Neu dewiswch un (1) opsiwn unigol.",
+    select_single: "Dewiswch un (1) opsiwn.",
+    selected: "Dewiswyd: <b>{selected}</b>",
+    your_vote_weight: "Mae gan eich pleidlais bwysoliad o {weight}",
+    errors: {
+      too_many: "Gormod o opsiynau wedi'u dewis.",
+      blank: "Mae gwag yn ddewis unigol ac ni ellir ei gyfuno ag opsiynau eraill.",
+      write_in_required: "Mae'n ofynnol i chi nodi plaid o leiaf wrth ddewis 'Ysgrifennu'.",
+      write_in_too_long: "Mae'r hyn a ysgrifennwyd yn rhy hir. Ceisiwch ei wneud yn fyrrach.",
+      exclusive: "Ni ellir cyfuno opsiynau unigol ag opsiynau eraill.",
+      cross_party_voting:
+        "Roedd eich dewis yn cynnwys mwy nag un rhestr. Dewiswch o fewn un rhestr yn unig.",
+      below_list_limit:
+        "Mae eich dewisiad yn is na'r lleiafswm o opsiynau y gellir eu dewis yn y rhestr \"{list_name}\". Dewiswch leiafswm o ({ min_list_marks}) opsiynau o'r rhestr hon.",
+      exceeded_list_limit:
+        "Mae eich dewis yn fwy na’r uchafswm o opsiynau a all fod ar y rhestr {list_name}. Dewiswch uchafswm o ({max_list_marks}) o opsiynau o'r rhestr hon.",
+    },
+  },
   da: {
     select_exactly: "Sæt {min_marks} kryds(er).",
     select_multiple: "Sæt kryds ved {min_marks} til {max_marks} valgmuligheder",
@@ -186,6 +208,28 @@ const translations: DefineLocaleMessage = {
       exclusive: "Ekki er hægt að sameina einkavalkosti við aðra valkosti.",
       cross_party_voting:
         "Val þitt innihélt fleiri en einn lista. Vinsamlegast veldu aðeins innan eins lista.",
+    },
+  },
+  it: {
+    select_exactly: "Seleziona {min_marks} opzioni.",
+    select_multiple: "Seleziona tra {min_marks} e {max_marks} opzioni.",
+    select_multiple_with_exclusives:
+      "Seleziona tra {min_marks} e {max_marks}. Oppure seleziona una (1) opzione esclusiva.",
+    select_single: "Seleziona una (1) opzione.",
+    selected: "Selezionato: <b>{selected}</b>",
+    your_vote_weight: "Il tuo voto ha un peso di {weight}",
+    errors: {
+      too_many: "Troppe opzioni selezionate.",
+      blank: "Il voto vuoto è esclusivo e non è cumulabile con altre opzioni.",
+      write_in_required: 'È necessario specificare almeno un partito quando si seleziona "Scrivi".',
+      write_in_too_long: "Il valore scritto è troppo lungo. Cerca di ridurne la lunghezza.",
+      cross_party_voting:
+        "La tua selezione include più di una lista. Si prega di selezionare solo all'interno di una singola lista.",
+      exceeded_list_limit:
+        'La tua selezione ha superato il numero massimo di opzioni che possono essere effettuate per la lista "{list_name}". Si prega di selezionare un massimo di ({max_list_marks}) opzioni da questa lista.',
+      exclusive: "Le opzioni esclusive non possono essere combinate con altre opzioni.",
+      below_list_limit:
+        'La tua selezione è inferiore al numero minimo di opzioni che devono essere effettuate per la lista "{list_name}". Si prega di selezionare un minimo di ({min_list_marks}) opzioni da questa lista.',
     },
   },
   nl: {

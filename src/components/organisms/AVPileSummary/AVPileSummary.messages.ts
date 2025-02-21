@@ -29,6 +29,20 @@ const translations: DefineLocaleMessage = {
       edit_selection: "Modificar aquesta selecció",
     },
   },
+  cy: {
+    selection: "Dewis",
+    assigned: "Dyrannwyd:",
+    ballots: "o bleidleisiau",
+    ballot_selection: "Dewis pleidlais",
+    blank: "Gwag",
+    and_n_more_pre: "a",
+    and_n_more_pos: "mwy...",
+    show_less: "Dangos llai o opsiynau",
+    aria_labels: {
+      delete_selection: "Dileu'r dewis hwn",
+      edit_selection: "Golygu’r dewis hwn",
+    },
+  },
   da: {
     selection: "Valgkombination",
     assigned: "Tildelt:",
@@ -125,6 +139,20 @@ const translations: DefineLocaleMessage = {
     aria_labels: {
       delete_selection: "Eyða þessu vali",
       edit_selection: "Breyttu þessu vali",
+    },
+  },
+  it: {
+    selection: "Selezione",
+    assigned: "Assegnato:",
+    ballots: "schede elettorali",
+    ballot_selection: "Selezione scheda elettorale",
+    blank: "Vuoto",
+    and_n_more_pre: "E",
+    and_n_more_pos: "altri...",
+    show_less: "Mostra meno opzioni",
+    aria_labels: {
+      delete_selection: "Elimina questa selezione",
+      edit_selection: "Modifica questa selezione",
     },
   },
   nl: {

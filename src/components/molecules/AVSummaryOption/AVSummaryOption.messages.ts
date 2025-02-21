@@ -15,6 +15,13 @@ const translations: DefineLocaleMessage = {
     },
     blank: "Vot en blanc",
   },
+  cy: {
+    aria_label: {
+      option: "Opsiwn",
+      option_image: "Delwedd opsiwn",
+    },
+    blank: "Gwag",
+  },
   da: {
     aria_label: {
       option: "Valgmulighed",
@@ -63,6 +70,13 @@ const translations: DefineLocaleMessage = {
       option_image: "Valmöguleikamynd",
     },
     blank: "Autt",
+  },
+  it: {
+    aria_label: {
+      option: "Opzione",
+      option_image: "Immagine dell'opzione",
+    },
+    blank: "Vuoto",
   },
   nl: {
     aria_label: {
