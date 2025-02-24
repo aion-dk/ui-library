@@ -137,3 +137,24 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
   font-family: "Lora", "Open Sans", sans-serif;
   font-weight: 600;
 }
+
+// Override floating labels to be a bit lighter
+.form-floating > .form-label {
+  color: $dark;
+}
+
+.position-relative-table-fix {
+  position: relative;
+  transform: translate(0); // Fix for safari not supporting position relative on table rows
+  td {
+    background-clip: padding-box;
+  }
+}
+
+.text-decoration-hover {
+  text-decoration: none !important;
+}
+
+.text-decoration-hover:hover {
+  text-decoration: underline !important;
+}

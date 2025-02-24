@@ -30,6 +30,10 @@ export default defineConfig({
           src: resolve(__dirname, "node_modules/bootstrap"),
           dest: ".",
         },
+        {
+          src: resolve(__dirname, "src/bootstrap/bootstrap.customized.scss"),
+          dest: "bootstrap/scss",
+        },
       ],
     }),
   ],
