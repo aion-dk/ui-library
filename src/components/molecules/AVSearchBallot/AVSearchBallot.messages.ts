@@ -19,6 +19,15 @@ const translations: DefineLocaleMessage = {
       go_to_option: "Anar a l'opció",
     },
   },
+  cy: {
+    search_the_ballot: "Chwilio’r bleidlais",
+    no_results: "Dim canlyniadau",
+    enter_option_name: "Enw'r ymgeisydd",
+    aria_labels: {
+      ballot_options: "Opsiynau pleidleisio",
+      go_to_option: "Mynd i opsiwn",
+    },
+  },
   da: {
     search_the_ballot: "Søg på stemmesedlen",
     no_results: "Ingen resultater",
@@ -80,6 +89,15 @@ const translations: DefineLocaleMessage = {
     aria_labels: {
       ballot_options: "Valmöguleikar atkvæða",
       go_to_option: "Farðu í valmöguleika",
+    },
+  },
+  it: {
+    search_the_ballot: "Cerca la scheda elettorale",
+    no_results: "Nessun risultato",
+    enter_option_name: "Nome del candidato",
+    aria_labels: {
+      ballot_options: "Opzioni della scheda elettorale",
+      go_to_option: "Vai all'opzione",
     },
   },
   nl: {

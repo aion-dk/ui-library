@@ -27,6 +27,14 @@
   --bs-btn-disabled-border-color: var(--av-theme-background);
 }
 
+.text-theme {
+  color: var(--av-theme-background) !important;
+}
+
+.text-theme-danger {
+  color: var(--av-theme-danger-background) !important;
+}
+
 .bg-theme-danger {
   background-color: var(--av-theme-danger-background);
   color: black;

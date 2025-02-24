@@ -34,6 +34,22 @@ const translations: DefineLocaleMessage = {
       header: "Paso 3: Revisa les teves seleccions",
     },
   },
+  cy: {
+    ballot: {
+      adding: "Cam 1: Gwneud eich dewis ar gyfer y bleidlais {n}",
+      editing: "Cam 1: Golygu eich dewis y bleidlais {n}",
+      can_assign_ballots: "Gallwch ddyrannu eich dewisiadau hyd at {n} o bleidleisiau.",
+      can_assign_description:
+        "Gallwch ddewis cyflwyno’r holl {n} bleidleisiau gyda’r un dewisiadau neu gallwch benderfynu eu dosbarthu. Cam 1: Dewis yr opsiynau a ddymunwch. Cam 2: Penderfynu faint o bleidleisiau pe bai’r opsiwn hwn yn cael ei gofnodi ac ailadroddwch hyd nes y byddwch wedi defnyddio pob pleidlais. Cam 3: Gwirio eich dewisiadau a bwrw’r bleidlais.",
+    },
+    assign: {
+      header: "Cam 2: Dyrannu nifer y pleidleisiau i’r bleidlais {n}",
+      header_edit_mode: "Cam 2: Golygu nifer y pleidleisiau a ddyrannwyd i’r bleidlais {n}",
+    },
+    overview: {
+      header: "Cam 3: Trosolwg o''r dewis o bleidleisiau",
+    },
+  },
   da: {
     ballot: {
       adding: "Trin 1: Angiv dit valg for valgkombination {n}",
@@ -148,6 +164,23 @@ const translations: DefineLocaleMessage = {
     },
     overview: {
       header: "Skref 3: Yfirlit yfir val á kjörseðlum",
+    },
+  },
+  it: {
+    ballot: {
+      adding: "Passaggio 1: Effettua la tua scelta per la selezione della scheda elettorale {n}",
+      editing: "Passaggio 1: Modifica la tua scelta per la selezione della scheda elettorale {n}",
+      can_assign_ballots: "Puoi assegnare le tue scelte fino a {n} schede elettorali.",
+      can_assign_description:
+        "Puoi scegliere di inviare tutte le {n} schede elettorali con le stesse scelte oppure puoi decidere di distribuirle. Passaggio 1: Scegli le opzioni che desideri. Passaggio 2: Decidi quante schede elettorali devono essere registrate con questa opzione e ripeti finché non avrai utilizzato tutte le schede elettorali. Passaggio 3: Controlla le tue scelte e invia il voto.",
+    },
+    assign: {
+      header: "Passaggio 2: Assegna il numero di schede alla selezione della scheda {n}",
+      header_edit_mode:
+        "Passaggio 2: Modifica il numero di schede assegnate alla selezione della scheda {n}",
+    },
+    overview: {
+      header: "Passaggio 3: Panoramica delle selezioni della scheda",
     },
   },
   nl: {

@@ -17,6 +17,14 @@ const translations: DefineLocaleMessage = {
     public_count_text: "Aquest candidat té {n} avals",
     invite_recommenders_button_label: "Convida avals",
   },
+  cy: {
+    header_title: "Argymhellwr ({n})",
+    collapse: "Cwymp y rhestr",
+    uncollapse: "Ehangu rhestr",
+    and_more: "ac eraill {n}...",
+    public_count_text: "Mae gan yr ymgeisydd hwn {n} argymhelliad.",
+    invite_recommenders_button_label: "Gwahodd Atgyfeirwyr",
+  },
   da: {
     header_title: "Anbefalinger ({n})",
     collapse: "Skjul liste",
@@ -72,6 +80,14 @@ const translations: DefineLocaleMessage = {
     and_more: "og {n} í viðbót...",
     public_count_text: "Þessi frambjóðandi hefur {n} meðmæli",
     invite_recommenders_button_label: "Bjóddu meðmælendum",
+  },
+  it: {
+    header_title: "Raccomandatori ({n})",
+    collapse: "Comprimi elenco",
+    uncollapse: "Espandi elenco",
+    and_more: "e altri {n}...",
+    public_count_text: "Questo candidato ha {n} raccomandazioni.",
+    invite_recommenders_button_label: "Invita i referenti",
   },
   nl: {
     header_title: "Aanbevelers ({n})",

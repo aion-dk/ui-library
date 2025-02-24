@@ -1,0 +1,13 @@
+.AVProgressBar {
+  height: 1.35rem !important;
+}
+
+.AVProgressBar--percentage {
+  width: 3rem;
+  transition: all 1000ms ease-in-out;
+  font-weight: 600;
+}
+
+.AVProgressBar--filling {
+  transition: all 1000ms ease-in-out;
+}

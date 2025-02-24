@@ -29,6 +29,20 @@ const translations: DefineLocaleMessage = {
       option_image: "Imatge de l'opció",
     },
   },
+  cy: {
+    info_link_text_html: "Gwybodaeth",
+    video_link_text_html: "Fideo",
+    collapse_text: "Cau",
+    expand_text: "CCliciwch i ehangu",
+    sub_options_select: "{n} dewiswyd",
+    vote_count_singular: "vot",
+    vote_count_plural: "vots",
+    view_candidate: "Veure candidat/a",
+    aria_labels: {
+      option: "Opsiwn",
+      option_image: "Delwedd opsiwn",
+    },
+  },
   da: {
     info_link_text_html: "Info",
     video_link_text_html: "Video",
@@ -111,6 +125,18 @@ const translations: DefineLocaleMessage = {
     aria_labels: {
       option: "Valkostur",
       option_image: "Valmöguleikamynd",
+    },
+  },
+  it: {
+    info_link_text_html: "Informazioni",
+    video_link_text_html: "Video",
+    collapse_text: "Clicca per comprimere",
+    expand_text: "Clicca per espandere",
+    sub_options_select: "{n} selezionato",
+    view_candidate: "Visualizza candidato",
+    aria_labels: {
+      option: "Opzione",
+      option_image: "Immagine dell'opzione",
     },
   },
   nl: {

@@ -9,6 +9,8 @@ const BOOTSTRAP_COLORS = [
   "dark",
   "accent",
   "brand-dark",
+  "theme",
+  "theme-danger",
 ] as const;
 
 const BOOTSTRAP_BASIC_SIZES = ["sm", "md", "lg"] as const;

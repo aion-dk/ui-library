@@ -3,6 +3,7 @@ import type { DefineLocaleMessage } from "@/types";
 const translations: DefineLocaleMessage = {
   ar: { aria_label: "مرتبة" },
   ca: { aria_label: "Classificació" },
+  cy: { aria_label: "Mewn trefn" },
   da: { aria_label: "Rangeret" },
   de: { aria_label: "Rang" },
   en: { aria_label: "Ranked" },
@@ -10,6 +11,7 @@ const translations: DefineLocaleMessage = {
   fi: { aria_label: "Sijoitus" },
   fr: { aria_label: "Classé" },
   is: { aria_label: "Raðað" },
+  it: { aria_label: "Classificato" },
   nl: { aria_label: "Gerangschikt" },
   pl: { aria_label: "Ocenione" },
   pt: { aria_label: "Classificado" },
