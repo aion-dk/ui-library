@@ -125,7 +125,7 @@ watch(
 <template>
   <section class="vstack">
     <div class="row" data-test="resource-section">
-      <div class="col-12 col-md-6 p-0">
+      <div class="col-12" :class="!card ? 'col-md-6' : ''">
         <img
           v-if="summary && image"
           :src="image"
@@ -135,7 +135,13 @@ watch(
         />
       </div>
 
-      <div :class="summary ? 'vstack justify-content-center col-12 col-md-6 p-4 pb-0 p-md-3' : ''">
+      <div
+        :class="
+          summary
+            ? `vstack justify-content-center col-12 ${!card ? 'col-md-6 p-4 pb-0 p-md-3' : 'p-3'} `
+            : ''
+        "
+      >
         <!-- Title (only summary) -->
         <h4
           v-if="summary && !!title"
@@ -158,6 +164,7 @@ watch(
             h4: !card,
             h5: card,
             'px-3': card,
+            'mb-0': card,
           }"
           data-test="heading-subtitle"
         >
