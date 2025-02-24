@@ -33,7 +33,7 @@ $grid-breakpoints: (
   uhd: 3839px, // 4K resolution
 );
 
-@import "bootstrap/scss/functions";
+@import "../../node_modules/bootstrap/scss/functions";
 
 $primary: #1226aa;
 $secondary: #f8f8f8;
@@ -72,11 +72,12 @@ $custom-file-text: (
 // Boostrap variable overrides
 $card-border-radius: 0;
 
-@import "bootstrap/scss/variables";
+@import "../../node_modules/bootstrap/scss/variables";
 
 // Include any default map overrides here
 $theme-colors: map-merge($theme-colors, $custom-colors);
-@import "bootstrap/scss/mixins/breakpoints";
+
+@import "../../node_modules/bootstrap/scss/mixins/breakpoints";
 
 @each $breakpoint in map-keys($grid-breakpoints) {
   @include media-breakpoint-up($breakpoint) {
@@ -112,7 +113,7 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
   }
 }
 
-@import "bootstrap/scss/bootstrap";
+@import "../../node_modules/bootstrap/scss/bootstrap";
 
 #app {
   width: 100vw;

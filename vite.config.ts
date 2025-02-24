@@ -28,11 +28,11 @@ export default defineConfig({
       targets: [
         {
           src: resolve(__dirname, "node_modules/bootstrap"),
-          dest: ".",
+          dest: "node_modules",
         },
         {
           src: resolve(__dirname, "src/bootstrap/bootstrap.customized.scss"),
-          dest: "bootstrap/scss",
+          dest: "src/bootstrap",
         },
       ],
     }),
@@ -67,7 +67,7 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": fileURLToPath(new URL("./src", import.meta.url)),
-      bootstrap: resolve(__dirname, "node_modules/bootstrap"),
+      // bootstrap: DON'T USE ALIAS FOR IT. Path should be written complete on scss files in order to work when imported in different projects.
     },
   },
   css: {
