@@ -74,19 +74,19 @@ $card-border-radius: 0;
 
 @import "../../node_modules/bootstrap/scss/variables";
 
-$utilities: () !default; 
+$utilities: () !default;
 $utilities: map-merge(
   (
     "grays": (
       property: background-color,
       class: bg-gray,
-      values: $grays
+      values: $grays,
     ),
     "text-grays": (
       property: color,
       class: text-gray,
-      values: $grays
-    )
+      values: $grays,
+    ),
   ),
   $utilities
 );
