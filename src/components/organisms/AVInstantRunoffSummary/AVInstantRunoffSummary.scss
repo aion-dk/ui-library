@@ -1,11 +1,15 @@
+td {
+  background-color: transparent;
+}
+
 .AVInstantRunoffSummary--text-bold {
   font-weight: 700;
 }
 
 .AVInstantRunoffSummary--text-dark {
-  color: var(--gray-200);
+  color: var(--bs-gray-200);
 }
 
 .AVInstantRunoffSummary--text-light {
-  color: var(--gray-800);
+  color: var(--bs-gray-800);
 }

@@ -49,6 +49,14 @@ export const Primary = {
   },
 };
 
+export const Theme = {
+  render: Template,
+
+  args: {
+    color: "theme",
+  },
+};
+
 export const Light = {
   render: Template,
 
@@ -67,6 +75,15 @@ export const Small = {
   args: {
     color: "danger",
     size: "sm",
+  },
+};
+
+export const Large = {
+  render: Template,
+
+  args: {
+    color: "info",
+    size: "lg",
   },
 };
 

@@ -282,7 +282,7 @@ watch(
       </div>
 
       <div v-else-if="activeState === 'assign'">
-        <div class="card bg-dark-faded p-3 mb-2 text-break">
+        <div class="card bg-gray-300 p-3 mb-2 text-break">
           <h4 class="h5 mb-3 mt-1" data-test="split-helper-contest-question">
             {{ t("js.components.AVSplitHelper.assign.split_question") }}
           </h4>

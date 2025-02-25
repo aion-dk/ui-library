@@ -29,7 +29,9 @@ const Template = (args: Meta) => ({
 export const NotCollapsible = {
   render: Template,
 
-  args: {},
+  args: {
+    paneId: "test-collapse1",
+  },
 };
 
 export const Collapsible = {
@@ -37,6 +39,7 @@ export const Collapsible = {
 
   args: {
     collapsable: true,
+    paneId: "test-collapse2",
   },
 };
 
@@ -46,5 +49,6 @@ export const StartCollapsed = {
   args: {
     collapsable: true,
     startCollapsed: true,
+    paneId: "test-collapse3",
   },
 };
