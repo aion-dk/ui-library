@@ -132,7 +132,11 @@ watch(
         v-if="summary && image"
         :src="image"
         :alt="t('js.components.AVResourceSection.alt_candidate')"
-        class="AVResourceSection--image img-fluid ratio ratio-1x1 shadow-lg"
+        class="AVResourceSection--image img-fluid ratio ratio-1x1"
+        :class="{
+          'shadow-lg': !card,
+          'border-bottom': card,
+        }"
         data-test="resource-image"
       />
 
@@ -165,6 +169,7 @@ watch(
           :class="{
             h4: !card,
             h6: card,
+            'mb-0': card,
           }"
           data-test="heading-subtitle"
         >

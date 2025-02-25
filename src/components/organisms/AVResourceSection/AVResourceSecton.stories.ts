@@ -48,7 +48,7 @@ const CardTemplate = (args: Meta) => ({
     return { args };
   },
   template:
-    '<div class="card p-3 rounded" style="width: 15rem;"><AVResourceSection v-bind="args" /></div>',
+    '<div class="card p-0 pb-3 overflow-hidden rounded" style="width: 12rem;"><AVResourceSection v-bind="args" /></div>',
 });
 
 export const Default = {
