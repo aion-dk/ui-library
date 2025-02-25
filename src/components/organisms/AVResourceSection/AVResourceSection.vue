@@ -124,32 +124,34 @@ watch(
 
 <template>
   <section class="vstack">
-    <div class="row" data-test="resource-section">
-      <div class="col-12" :class="!card ? 'col-md-6' : ''">
-        <img
-          v-if="summary && image"
-          :src="image"
-          :alt="t('js.components.AVResourceSection.alt_candidate')"
-          class="AVResourceSection--image img-fluid ratio ratio-1x1 shadow-lg"
-          data-test="resource-image"
-        />
-      </div>
+    <div
+      :class="`d-flex gap-3 ${card ? 'flex-column' : 'flex-column flex-sm-row gap-sm-4 gap-md-5'}`"
+      data-test="resource-section"
+    >
+      <img
+        v-if="summary && image"
+        :src="image"
+        :alt="t('js.components.AVResourceSection.alt_candidate')"
+        class="AVResourceSection--image img-fluid ratio ratio-1x1 shadow-lg"
+        data-test="resource-image"
+      />
 
       <div
-        :class="
-          summary
-            ? `vstack justify-content-center col-12 ${!card ? 'col-md-6 p-4 pb-0 p-md-3' : 'p-3'} `
-            : ''
-        "
+        :class="{
+          vstack: summary,
+          'justify-content-center': summary,
+          'px-3': summary,
+          'px-sm-0': summary && !card,
+        }"
       >
         <!-- Title (only summary) -->
         <h4
           v-if="summary && !!title"
-          class="text-lora"
+          class="text-lora AVResourceSection--header-text"
           :class="{
             h3: !card,
-            h4: card,
-            'px-3': card,
+            h5: card,
+            'mb-0': card && !subtitle,
           }"
           data-test="heading-title"
         >
@@ -159,12 +161,10 @@ watch(
         <!-- Subtitle (only summary) -->
         <h5
           v-if="summary && !!subtitle"
-          class="text-lora"
+          class="text-lora AVResourceSection--header-text"
           :class="{
             h4: !card,
-            h5: card,
-            'px-3': card,
-            'mb-0': card,
+            h6: card,
           }"
           data-test="heading-subtitle"
         >
@@ -174,7 +174,7 @@ watch(
         <!-- Group (only when enabled) -->
         <h6
           v-if="summary && candidate.groups && !card"
-          class="text-lora h5"
+          class="text-lora h5 AVResourceSection--header-text"
           data-test="heading-group"
         >
           <span class="align-middle me-2">
@@ -185,6 +185,7 @@ watch(
             v-if="!!groups?.surplus"
             v-tooltip:top="groups.remaining"
             class="cursor-help badge rounded-pill text-bg-secondary"
+            style="color: black !important"
           >
             {{
               t("js.components.AVResourceSection.and_more", {
@@ -201,8 +202,8 @@ watch(
               v-if="hasContent && itemHasContent(item)"
               :class="
                 summary
-                  ? 'AVResourceFields--container-summary'
-                  : 'AVResourceFields--container-generic'
+                  ? 'AVResourceSection--container-summary'
+                  : 'AVResourceSection--container-generic'
               "
               data-test="resource-content"
             >
@@ -279,7 +280,7 @@ watch(
 
               <div
                 v-else-if="item.item_type === 'rich_text_area' && !summary && itemHasContent(item)"
-                class="AVResourceFields--rich-text"
+                class="AVResourceSection--rich-text"
                 v-html="
                   item.localised
                     ? (item.form_content as LocalString)[i18nLocale]
@@ -291,7 +292,7 @@ watch(
               <template
                 v-else-if="item.item_type !== 'rich_text_area' && item.item_type !== 'check_box'"
               >
-                <p class="AVResourceFields--regular-content" data-test="resource-regular-content">
+                <p class="AVResourceSection--regular-content" data-test="resource-regular-content">
                   <span v-if="summary">{{ `${item.label[i18nLocale]}: ` }}</span>
                   <template v-if="item.item_type === 'date' || item.item_type === 'date_time'">{{
                     d(item.form_content, item.item_type === "date" ? null : "long")

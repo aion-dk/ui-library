@@ -92,3 +92,8 @@
 .cursor-help {
   cursor: help !important;
 }
+
+.bg-theme-secondary {
+  color: var(--av-theme-secondary-text) !important;
+  background-color: var(--av-theme-secondary) !important;
+}

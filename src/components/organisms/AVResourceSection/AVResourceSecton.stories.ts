@@ -34,6 +34,23 @@ const Template = (args: Meta) => ({
   template: '<AVResourceSection v-bind="args" />',
 });
 
+const SummaryTemplate = (args: Meta) => ({
+  components: { AVResourceSection },
+  setup() {
+    return { args };
+  },
+  template: '<div class="bg-theme-secondary p-5"><AVResourceSection v-bind="args" /></div>',
+});
+
+const CardTemplate = (args: Meta) => ({
+  components: { AVResourceSection },
+  setup() {
+    return { args };
+  },
+  template:
+    '<div class="card p-3 rounded" style="width: 15rem;"><AVResourceSection v-bind="args" /></div>',
+});
+
 export const Default = {
   render: Template,
 
@@ -43,7 +60,7 @@ export const Default = {
 };
 
 export const Summary = {
-  render: Template,
+  render: SummaryTemplate,
 
   args: {
     candidate: getCandidate(),
@@ -52,7 +69,7 @@ export const Summary = {
 };
 
 export const WithCustomGroup = {
-  render: Template,
+  render: SummaryTemplate,
 
   args: {
     candidate: getCandidate(),
@@ -62,7 +79,7 @@ export const WithCustomGroup = {
 };
 
 export const Card = {
-  render: Template,
+  render: CardTemplate,
 
   args: {
     candidate: getCandidate(),
