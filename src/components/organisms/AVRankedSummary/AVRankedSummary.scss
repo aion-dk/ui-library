@@ -3,8 +3,9 @@ tr.bg-success-faded {
   border-bottom-color: var(--bs-border-color);
 }
 
-td {
-  background-color: transparent;
+td,
+th {
+  background-color: transparent !important;
 }
 
 .AVRankedSummary--text-bold {

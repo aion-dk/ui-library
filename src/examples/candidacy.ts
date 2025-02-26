@@ -1,5 +1,4 @@
 import type { Resource, Url, LocalString, AVLinkVisualizerKey } from "@/types";
-import image from "@/assets/silhouette.jpg";
 
 const getUrl = (web: AVLinkVisualizerKey | "website"): Url => {
   return {
@@ -94,7 +93,8 @@ const getCandidate = (): Resource => {
         position: 3,
         purpose: "generic",
         item_type: "image",
-        form_content: image,
+        form_content:
+          "https://electa.staging-1.assemblyvoting.net/uploads_proxy/option/image/657750",
       },
       {
         id: 2,
