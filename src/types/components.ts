@@ -18,6 +18,7 @@ export * from "@/components/atoms/AVSpinner/AVSpinner.types";
 export * from "@/components/atoms/AVLinkVisualizer/AVLinkVisualizer.types";
 export * from "@/components/atoms/AVTooltip/AVTooltip.types";
 export * from "@/components/atoms/AVOptionLiveResults/AVOptionLiveResults.types";
+export * from "@/components/atoms/AVAnimatedMenuButton/AVAnimatedMenuButton.types";
 
 // MOLECULES
 export * from "@/components/molecules/AVSummaryOption/AVSummaryOption.types";

@@ -32,8 +32,8 @@ import {
   AVTooltip,
   AVOptionLiveResults,
   AVProgressBar,
+  AVAnimatedMenuButton,
   //   AVVerticalStep,
-  //   AVAnimatedMenuButton,
   //   AVWaitingDots,
   //   AVFileInput,
 
@@ -91,8 +91,8 @@ export default {
     app.component("AVTooltip", AVTooltip);
     app.component("AVOptionLiveResults", AVOptionLiveResults);
     app.component("AVProgressBar", AVProgressBar);
+    app.component("AVAnimatedMenuButton", AVAnimatedMenuButton);
     // app.component("AVVerticalStep", AVVerticalStep);
-    // app.component("AVAnimatedMenuButton", AVAnimatedMenuButton);
     // app.component("AVWaitingDots", AVWaitingDots);
     // app.component("AVFileInput", AVFileInput);
 
@@ -150,8 +150,8 @@ export {
   AVTooltip,
   AVOptionLiveResults,
   AVProgressBar,
+  AVAnimatedMenuButton,
   //   AVVerticalStep,
-  //   AVAnimatedMenuButton,
   //   AVWaitingDots,
   //   AVFileInput,
 
