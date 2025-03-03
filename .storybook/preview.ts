@@ -32,6 +32,7 @@ import {
   AVSplitWizardHeader,
   AVResultOption,
   AVProgressBar,
+  AVTweenedCount,
   //   AVElectaContestCard,
   //   AVWaitingDots,
 } from "../src";
@@ -58,6 +59,7 @@ setup((app) => {
   app.component("AVSplitWizardHeader", AVSplitWizardHeader);
   app.component("AVResultOption", AVResultOption);
   app.component("AVProgressBar", AVProgressBar);
+  app.component("AVTweenedCount", AVTweenedCount);
   // app.component("AVElectaContestCard", AVElectaContestCard);
   // app.component("AVWaitingDots", AVWaitingDots);
 

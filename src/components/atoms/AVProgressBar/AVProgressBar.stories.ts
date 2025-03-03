@@ -29,6 +29,7 @@ export const Default = {
   render: Template,
 
   args: {
+    id: "storybook_1",
     value: 34,
   },
 };
@@ -37,6 +38,7 @@ export const Finished = {
   render: Template,
 
   args: {
+    id: "storybook_2",
     value: 100,
   },
 };
@@ -45,6 +47,7 @@ export const HidePercentage = {
   render: Template,
 
   args: {
+    id: "storybook_3",
     value: 34,
     hidePercentage: true,
   },

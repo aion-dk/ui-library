@@ -1,5 +1,9 @@
 <script setup lang="ts">
 defineProps({
+  id: {
+    type: String,
+    required: true,
+  },
   value: {
     type: Number,
     required: true,
@@ -22,7 +26,7 @@ defineProps({
         'bg-brand-dark': value !== 100,
       }"
     >
-      {{ `${Math.round(value)}%` }}
+      <AVTweenedCount :id="`progress_for_${id}`" :count="Math.round(value)" />%
     </div>
 
     <div class="AVProgressBar progress w-100 rounded-1">
