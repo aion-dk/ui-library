@@ -70,6 +70,9 @@ export default defineConfig({
       // bootstrap: DON'T USE ALIAS FOR IT. Path should be written complete on scss files in order to work when imported in different projects.
     },
   },
+  optimizeDeps: {
+    include: ["motion", "bootstrap"],
+  },
   css: {
     preprocessorOptions: {
       scss: {

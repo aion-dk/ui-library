@@ -10,6 +10,7 @@ export { default as AVTooltip } from "@/components/atoms/AVTooltip";
 export { default as AVOptionLiveResults } from "@/components/atoms/AVOptionLiveResults";
 export { default as AVProgressBar } from "@/components/atoms/AVProgressBar";
 export { default as AVAnimatedMenuButton } from "@/components/atoms/AVAnimatedMenuButton";
+export { default as AVTweenedCount } from "@/components/atoms/AVTweenedCount";
 // export { default as AVBallotSummary } from "@/components/atoms/AVBallotSummary";
 // export { default as AVVerticalStep } from "@/components/atoms/AVVerticalStep";
 // export { default as AVWaitingDots } from "@/components/atoms/AVWaitingDots";

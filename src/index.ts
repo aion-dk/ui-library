@@ -20,6 +20,8 @@ export {
   Tooltip,
 } from "bootstrap";
 
+export { animate } from "motion";
+
 import {
   // ATOMS
   AVIcon,
@@ -33,6 +35,7 @@ import {
   AVOptionLiveResults,
   AVProgressBar,
   AVAnimatedMenuButton,
+  AVTweenedCount,
   //   AVVerticalStep,
   //   AVWaitingDots,
   //   AVFileInput,
@@ -92,6 +95,7 @@ export default {
     app.component("AVOptionLiveResults", AVOptionLiveResults);
     app.component("AVProgressBar", AVProgressBar);
     app.component("AVAnimatedMenuButton", AVAnimatedMenuButton);
+    app.component("AVTweenedCount", AVTweenedCount);
     // app.component("AVVerticalStep", AVVerticalStep);
     // app.component("AVWaitingDots", AVWaitingDots);
     // app.component("AVFileInput", AVFileInput);
@@ -151,6 +155,7 @@ export {
   AVOptionLiveResults,
   AVProgressBar,
   AVAnimatedMenuButton,
+  AVTweenedCount,
   //   AVVerticalStep,
   //   AVWaitingDots,
   //   AVFileInput,

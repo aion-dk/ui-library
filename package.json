@@ -1,6 +1,6 @@
 {
   "name": "@assemblyvoting/electa-ui",
-  "version": "4.0.5",
+  "version": "4.0.6",
   "license": "MIT",
   "private": false,
   "publishConfig": {
@@ -44,6 +44,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
     "@popperjs/core": "^2.11.8",
     "floating-vue": "^5.2.2",
+    "motion": "^12.4.7",
     "vue": "^3.5.13",
     "vue-i18n": "^11.0.1"
   },
