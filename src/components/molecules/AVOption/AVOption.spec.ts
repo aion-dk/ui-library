@@ -1,4 +1,4 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi } from "vitest";
 import { mount } from "@vue/test-utils";
 import localI18n from "@/i18n";
 import { getOption, getContest, getLiveResult } from "@/examples";
@@ -10,6 +10,7 @@ import AVOptionSelect from "@/components/atoms/AVOptionSelect";
 import AVOptionCheckbox from "@/components/atoms/AVOptionCheckbox";
 import AVAnimatedTransition from "@/components/atoms/AVAnimatedTransition";
 import AVOptionLiveResults from "@/components/atoms/AVOptionLiveResults";
+import AVTweenedCount from "@/components/atoms/AVTweenedCount";
 
 describe("AVOption", () => {
   const wrapper = mount(AVOption, {
@@ -29,6 +30,7 @@ describe("AVOption", () => {
         AVOptionCheckbox,
         AVOptionSelect,
         AVOptionLiveResults,
+        AVTweenedCount,
       },
       stubs: {
         AVIcon: {
@@ -143,7 +145,21 @@ describe("AVOption", () => {
 
     expect(wrapper.findAll("[data-test=partial-results-internal]").length).to.eq(0);
     expect(wrapper.findAll("[data-test=partial-results-external]").length).to.eq(1);
-    expect(wrapper.find("[data-test=partial-results-external]").text()).to.contain("5 votes");
+    expect(wrapper.find("[data-test=partial-results-external]").text()).to.contain("0  votes");
+
+    let isReady = false;
+    setTimeout(() => (isReady = true), 1100);
+    await vi.waitFor(
+      () => {
+        if (!isReady) throw new Error("Animation failed");
+        expect(wrapper.find("[data-test=partial-results-external]").text()).to.contain("5  votes");
+        isReady = false;
+      },
+      {
+        timeout: 2000,
+        interval: 500,
+      },
+    );
 
     await wrapper.setProps({
       observerMode: true,
@@ -151,23 +167,61 @@ describe("AVOption", () => {
 
     expect(wrapper.findAll("[data-test=partial-results-external]").length).to.eq(0);
     expect(wrapper.findAll("[data-test=partial-results-internal]").length).to.eq(1);
-    expect(wrapper.find("[data-test=partial-results-internal]").text()).to.contain("5 votes");
+    expect(wrapper.find("[data-test=partial-results-internal]").text()).to.contain("0  votes");
+
+    setTimeout(() => (isReady = true), 1100);
+    await vi.waitFor(
+      () => {
+        if (!isReady) throw new Error("Animation failed");
+        expect(wrapper.find("[data-test=partial-results-internal]").text()).to.contain("5  votes");
+      },
+      {
+        timeout: 2000,
+        interval: 500,
+      },
+    );
   });
 
   it("can show percentages", async () => {
-    expect(wrapper.find("[data-test=partial-results-internal]").text()).to.not.contain("25.2%");
+    expect(wrapper.find("[data-test=partial-results-internal]").text()).to.not.contain("0.0%");
 
     await wrapper.setProps({
       partialResults: getLiveResult(["exampleOption1"], true),
     });
 
-    expect(wrapper.find("[data-test=partial-results-internal]").text()).to.contain("25.2%");
+    expect(wrapper.find("[data-test=partial-results-internal]").text()).to.contain("0.0%");
+
+    let isReady = false;
+    setTimeout(() => (isReady = true), 1100);
+    await vi.waitFor(
+      () => {
+        if (!isReady) throw new Error("Animation failed");
+        expect(wrapper.find("[data-test=partial-results-internal]").text()).to.contain("25.2%");
+        isReady = false;
+      },
+      {
+        timeout: 2000,
+        interval: 500,
+      },
+    );
 
     await wrapper.setProps({
       observerMode: false,
     });
 
-    expect(wrapper.find("[data-test=partial-results-external]").text()).to.contain("25.2%");
+    expect(wrapper.find("[data-test=partial-results-external]").text()).to.contain("0.0%");
+
+    setTimeout(() => (isReady = true), 1100);
+    await vi.waitFor(
+      () => {
+        if (!isReady) throw new Error("Animation failed");
+        expect(wrapper.find("[data-test=partial-results-external]").text()).to.contain("25.2%");
+      },
+      {
+        timeout: 2000,
+        interval: 500,
+      },
+    );
   });
 
   it("can display image", async () => {

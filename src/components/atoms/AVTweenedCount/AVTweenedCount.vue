@@ -1,5 +1,5 @@
 <template>
-  <span :id="countId" v-text="tweenedCount.toFixed(0)" />
+  <span :id="countId" v-text="tweenedCount.toFixed(decimals)" />
 </template>
 
 <script setup lang="ts">
@@ -18,6 +18,10 @@ const props = defineProps({
   duration: {
     type: Number,
     default: 1,
+  },
+  decimals: {
+    type: Number,
+    default: 0,
   },
 });
 
