@@ -20,6 +20,14 @@ const props = defineProps({
     type: String as PropType<SupportedLocale>,
     default: "en",
   },
+  hideElected: {
+    type: Boolean,
+    default: false,
+  },
+  hideTied: {
+    type: Boolean,
+    default: false,
+  },
   theme: {
     type: String as PropType<Theme>,
     default: "light",
@@ -103,8 +111,8 @@ watch(
           v-for="(option, index) in result"
           :key="`option_${option.reference}`"
           :class="{
-            'bg-success-faded': option.elected,
-            'bg-warning-faded': option.tied,
+            'bg-success-faded': !hideElected && option.elected,
+            'bg-warning-faded': !hideTied && option.tied,
           }"
           data-test="candidate-ranked-result"
         >

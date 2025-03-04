@@ -13,6 +13,12 @@ const meta: Meta<typeof AVNormalSummary> = {
     hidePercentage: {
       control: { type: "boolean" },
     },
+    hideElected: {
+      control: { type: "boolean" },
+    },
+    hideTied: {
+      control: { type: "boolean" },
+    },
     disregardBlank: {
       control: { type: "boolean" },
     },

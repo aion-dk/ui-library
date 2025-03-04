@@ -165,4 +165,75 @@ describe("AVNormalSummary", () => {
       else expect(e.attributes()["hide-percentage"]).to.eq("false");
     });
   });
+
+  it("hides elected color", async () => {
+    const electedBefore: Array<string> = [];
+    wrapper
+      .findAll("[data-test=result-option]")
+      .forEach((e) => electedBefore.push(e.attributes()["elected"]));
+    expect(electedBefore.some((e) => e === "true")).to.be.true;
+
+    await wrapper.setProps({
+      hidePercentage: true,
+      hideElected: true,
+    });
+
+    const electedAfter: Array<string> = [];
+    wrapper
+      .findAll("[data-test=result-option]")
+      .forEach((e) => electedAfter.push(e.attributes()["elected"]));
+    expect(electedAfter.every((e) => e === "false")).to.be.true;
+  });
+
+  it("hides tied color", async () => {
+    await wrapper.setProps({
+      sortedResult: [
+        {
+          reference: getOption(["selectable"], 3).reference,
+          title: getOption(["selectable"], 3).title,
+          count: 20,
+          elected: false,
+          tied: true,
+        },
+        {
+          reference: getOption(["selectable"], 2).reference,
+          title: getOption(["selectable"], 2).title,
+          count: 20,
+          elected: false,
+          tied: true,
+        },
+        {
+          reference: getOption(["selectable"], 1).reference,
+          title: getOption(["selectable"], 1).title,
+          count: 10,
+          elected: true,
+          tied: false,
+        },
+        {
+          reference: "blank",
+          title: { en: "Blank" },
+          count: 5,
+          elected: false,
+          tied: false,
+        },
+      ],
+    });
+
+    const tiedBefore: Array<string> = [];
+    wrapper
+      .findAll("[data-test=result-option]")
+      .forEach((e) => tiedBefore.push(e.attributes()["tied"]));
+    expect(tiedBefore.some((e) => e === "true")).to.be.true;
+
+    await wrapper.setProps({
+      hideElected: false,
+      hideTied: true,
+    });
+
+    const tiedAfter: Array<string> = [];
+    wrapper
+      .findAll("[data-test=result-option]")
+      .forEach((e) => tiedAfter.push(e.attributes()["tied"]));
+    expect(tiedAfter.every((e) => e === "false")).to.be.true;
+  });
 });
