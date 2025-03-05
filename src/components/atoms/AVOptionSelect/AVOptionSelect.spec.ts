@@ -6,7 +6,9 @@ import AVOptionSelect from "./AVOptionSelect.vue";
 
 describe("AVOptionSelect", () => {
   const wrapper = mount(AVOptionSelect, {
-    props: {},
+    props: {
+      locale: "en",
+    },
     global: {
       provide: {
         i18n: localI18n,

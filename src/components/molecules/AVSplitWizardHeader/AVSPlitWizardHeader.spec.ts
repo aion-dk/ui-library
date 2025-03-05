@@ -14,6 +14,7 @@ describe("AVSplitWizardHeader", () => {
       activeSelectionPileIndex: 2,
       totalWeight: 10,
       isEditing: false,
+      locale: "en",
     },
     global: {
       provide: {

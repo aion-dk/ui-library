@@ -12,6 +12,7 @@ describe("AVResourceSection", () => {
       candidate: getCandidate(),
       summary: true,
       card: true,
+      locale: "en",
     },
     global: {
       components: { AVTooltip },

@@ -104,6 +104,7 @@ describe("AVRankedSummary", () => {
           tied: false,
         },
       ],
+      locale: "en",
     },
     global: {
       provide: {

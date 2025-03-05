@@ -19,6 +19,7 @@ describe("AVOption", () => {
       selections: [],
       contest: getContest([]),
       invalid: false,
+      locale: "en",
     },
     global: {
       provide: {
@@ -360,6 +361,25 @@ describe("AVOption", () => {
     expect(wrapper.find("[data-test=option-link]").text()).to.contain("Info");
     expect(wrapper.find("[data-test=option-link]").attributes().href).to.eq(
       "https://www.google.com/",
+    );
+    expect(wrapper.find("[data-test=option-link]").attributes().target).to.eq("_blank");
+
+    await wrapper.setProps({
+      option: getOption(["selectable"], 1),
+    });
+  });
+
+  it("can display videos", async () => {
+    expect(wrapper.findAll("[data-test=option-link]").length).to.eq(0);
+
+    await wrapper.setProps({
+      option: getOption(["selectable", "video"], 1),
+    });
+
+    expect(wrapper.findAll("[data-test=option-link]").length).to.eq(1);
+    expect(wrapper.find("[data-test=option-link]").text()).to.contain("Video");
+    expect(wrapper.find("[data-test=option-link]").attributes().href).to.eq(
+      "https://www.youtube.com/watch?v=Lzmt-g4Xf6k",
     );
     expect(wrapper.find("[data-test=option-link]").attributes().target).to.eq("_blank");
   });

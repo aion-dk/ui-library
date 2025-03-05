@@ -11,6 +11,7 @@ describe("AVOptionLiveResults", () => {
     props: {
       optionReference: "test",
       partialResults: getLiveResult(["blank"]).blank,
+      locale: "en",
     },
     global: {
       provide: {

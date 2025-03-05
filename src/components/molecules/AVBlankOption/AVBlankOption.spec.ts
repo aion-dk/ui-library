@@ -12,6 +12,7 @@ describe("AVBlankOption", () => {
     props: {
       checked: false,
       error: false,
+      locale: "en",
     },
     global: {
       provide: {
