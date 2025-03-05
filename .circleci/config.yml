@@ -5,7 +5,7 @@ orbs:
 executors:
   node22:
     docker:
-      - image: cimg/node:22.13
+      - image: mcr.microsoft.com/playwright:v1.50.0-noble
   ruby-node:
     docker:
       - image: cimg/ruby:3.2-node
@@ -14,7 +14,7 @@ filters:
   - &always
     tags:
       only: /.*/
-  
+
 jobs:
   lint_test_build:
     executor:
