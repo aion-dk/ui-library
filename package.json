@@ -35,7 +35,7 @@
     "prepare": "husky",
     "precommit": "yarn lint",
     "prepublishOnly": "yarn build",
-    "test-storybook": "test-storybook",
+    "test-storybook": "test-storybook --maxWorkers 1",
     "test-storybook-coverage": "test-storybook --coverage"
   },
   "dependencies": {
