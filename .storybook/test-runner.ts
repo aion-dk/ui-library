@@ -7,9 +7,16 @@ import { injectAxe, checkA11y, configureAxe } from "axe-playwright";
  * See https://storybook.js.org/docs/writing-tests/test-runner#test-hook-api
  * to learn more about the test-runner hooks API.
  */
+const mutex = new Set();
+
 const config: TestRunnerConfig = {
   async preVisit(page) {
+    while (mutex.size > 0) {
+      await new Promise((resolve) => setTimeout(resolve, 100));
+    }
+    mutex.add(page);
     await injectAxe(page);
+    mutex.delete(page);
   },
 
   async postVisit(page, context) {
