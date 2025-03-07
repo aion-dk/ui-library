@@ -1,5 +1,6 @@
 import type { Meta } from "@/types";
 import { AVAnimatedMenuButton } from "@/components";
+import { SUPPORTED_LOCALES, ANIMATED_MENU_BUTTON_VARIANTS } from "@/constants";
 
 const meta: Meta<typeof AVAnimatedMenuButton> = {
   title: "Design System/Atoms/AVAnimatedMenuButton",
@@ -8,6 +9,18 @@ const meta: Meta<typeof AVAnimatedMenuButton> = {
   argTypes: {
     isOpened: {
       control: { type: "boolean" },
+    },
+    variant: {
+      control: { type: "select" },
+      options: ANIMATED_MENU_BUTTON_VARIANTS,
+    },
+    theme: {
+      control: { type: "select" },
+      options: ["light", "dark"],
+    },
+    locale: {
+      control: { type: "select" },
+      options: SUPPORTED_LOCALES,
     },
     "onUpdate:isOpened": { action: "v-model: VALUE CHANGED" },
   },

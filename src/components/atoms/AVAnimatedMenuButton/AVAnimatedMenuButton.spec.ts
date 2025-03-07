@@ -1,5 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { mount } from "@vue/test-utils";
+import localI18n from "@/i18n";
 
 import AVAnimatedMenuButton from "./AVAnimatedMenuButton.vue";
 import type { VitestEmitted } from "@/types";
@@ -10,6 +11,12 @@ describe("AVAnimatedMenuButton", () => {
       isOpened: false,
       variant: "cross",
       theme: "dark",
+      locale: "en",
+    },
+    global: {
+      provide: {
+        i18n: localI18n,
+      },
     },
   });
 
@@ -104,5 +111,15 @@ describe("AVAnimatedMenuButton", () => {
     expect(wrapper.find("span.AVAnimatedMenuButton--icon").classes()).to.not.contain(
       "AVAnimatedMenuButton--arrow-down-opened",
     );
+  });
+
+  it("can switch locale", async () => {
+    expect(wrapper.find("button").attributes()["aria-label"]).to.eq("Expand");
+
+    await wrapper.setProps({
+      locale: "cy",
+    });
+
+    expect(wrapper.find("button").attributes()["aria-label"]).to.eq("Ehangu");
   });
 });
