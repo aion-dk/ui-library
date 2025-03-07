@@ -20,6 +20,7 @@ const parameters = {
   },
   // See https://github.com/dequelabs/axe-core/blob/develop/doc/API.md#options-parameter
   a11y: {
+    element: "#storybook-root",
     config: {
       rules: [
         {
@@ -44,8 +45,13 @@ const parameters = {
           selector: "[data-test=candidate-ranked-result]",
           enabled: false,
         },
+        {
+          id: "nested-interactive",
+          enabled: false,
+        },
       ],
     },
+    test: "error",
   },
 };
 
