@@ -15,6 +15,7 @@ describe("AVPileSummary", () => {
       maximumOptionsShown: 3,
       pileIndex: 0,
       totalPiles: 0,
+      locale: "en",
     },
     global: {
       components: {

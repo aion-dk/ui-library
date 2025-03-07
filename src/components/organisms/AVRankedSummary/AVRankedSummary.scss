@@ -3,6 +3,11 @@ tr.bg-success-faded {
   border-bottom-color: var(--bs-border-color);
 }
 
+td,
+th {
+  background-color: transparent !important;
+}
+
 .AVRankedSummary--text-bold {
   font-weight: 700;
 }
@@ -12,9 +17,9 @@ tr.bg-success-faded {
 }
 
 .AVRankedSummary--text-dark {
-  color: var(--gray-200);
+  color: var(--bs-gray-200);
 }
 
 .AVRankedSummary--text-light {
-  color: var(--gray-800);
+  color: var(--bs-gray-800);
 }

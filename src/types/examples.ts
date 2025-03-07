@@ -7,6 +7,7 @@ type OptionArg =
   | "children"
   | "color"
   | "url"
+  | "video"
   | "randomizeChildren"
   | "image"
   | "candidacy";

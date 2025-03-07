@@ -30,7 +30,7 @@
   border-width: 0.125rem;
   cursor: pointer;
   display: grid;
-  border-color: var(--gray-600);
+  border-color: var(--bs-gray-600);
   border-style: solid;
   border-width: 0.125rem;
   place-content: center;
@@ -49,8 +49,8 @@
   }
 
   &.AVOptionCheckbox--checked {
-    background-color: var(--gray-600);
-    border-color: var(--gray-700);
+    background-color: var(--bs-gray-600);
+    border-color: var(--bs-gray-700);
 
     &.AVOptionCheckbox--error {
       background-color: var(--av-theme-danger-background);
@@ -69,8 +69,8 @@
 
   &:disabled,
   &.AVOptionCheckbox--checked[disabled] {
-    background-color: var(--gray-500);
-    border-color: var(--gray-600);
+    background-color: var(--bs-gray-500);
+    border-color: var(--bs-gray-600);
     pointer-events: none;
     cursor: default;
   }

@@ -1,37 +1,34 @@
-@import "bootstrap/scss/bootstrap-utilities";
+@import "../../../../node_modules/bootstrap/scss/bootstrap-utilities";
 
-.AVResourceSection--container {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  gap: 2rem;
-
-  @include media-breakpoint-up(sm) {
-    flex-direction: row;
-  }
-
-  @include media-breakpoint-up(md) {
-    gap: 3rem;
-  }
-}
-
-.AVResourceFields--container-summary {
+.AVResourceSection--container-summary {
   margin-bottom: 0.5rem;
 }
 
-.AVResourceFields--container-generic {
+.AVResourceSection--container-generic {
   margin-bottom: 2rem;
 }
 
-.AVResourceFields--rich-text > * {
+.AVResourceSection--rich-text > * {
   margin-bottom: 0;
 }
 
-.AVResourceFields--regular-content {
+.AVResourceSection--regular-content {
   max-width: 100%;
   margin-bottom: 0;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   text-wrap: nowrap;
+}
+
+.AVResourceSection--image {
+  width: 100%;
+
+  @include media-breakpoint-up(sm) {
+    width: 350px;
+  }
+}
+
+.AVResourceSection--header-text {
+  color: var(--av-theme-secondary-text);
 }

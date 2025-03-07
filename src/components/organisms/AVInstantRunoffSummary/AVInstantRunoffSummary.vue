@@ -202,4 +202,4 @@ watch(
   </div>
 </template>
 
-<style scoped src="./AVInstantRunoffSummary.css" />
+<style scoped lang="scss" src="./AVInstantRunoffSummary.scss" />

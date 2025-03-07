@@ -31,8 +31,9 @@ import {
   AVSplitWeightHelper,
   AVSplitWizardHeader,
   AVResultOption,
+  AVProgressBar,
+  AVTweenedCount,
   //   AVElectaContestCard,
-  //   AVProgressBar,
   //   AVWaitingDots,
 } from "../src";
 
@@ -57,8 +58,9 @@ setup((app) => {
   app.component("AVSplitWeightHelper", AVSplitWeightHelper);
   app.component("AVSplitWizardHeader", AVSplitWizardHeader);
   app.component("AVResultOption", AVResultOption);
+  app.component("AVProgressBar", AVProgressBar);
+  app.component("AVTweenedCount", AVTweenedCount);
   // app.component("AVElectaContestCard", AVElectaContestCard);
-  // app.component("AVProgressBar", AVProgressBar);
   // app.component("AVWaitingDots", AVWaitingDots);
 
   app.provide("i18n", localI18n);

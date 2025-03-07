@@ -17,6 +17,14 @@ const translations: DefineLocaleMessage = {
       unchecked: "No comprovat",
     },
   },
+  cy: {
+    exclusive_option: "Unigol",
+    aria_label: {
+      checked_normal: "Gwiriwyd",
+      checked_ranked: "Wedi'i wirio gyda safle {rank}",
+      unchecked: "Heb ei wirio",
+    },
+  },
   da: {
     exclusive_option: "Eksklusiv",
     aria_label: {
@@ -71,6 +79,14 @@ const translations: DefineLocaleMessage = {
       checked_normal: "Merkt",
       checked_ranked: "Skoðaður með {rank}. sæti",
       unchecked: "Ekki athugað",
+    },
+  },
+  it: {
+    exclusive_option: "Esclusivo",
+    aria_label: {
+      checked_normal: "Controllato",
+      checked_ranked: "Controllato con rango {rank}",
+      unchecked: "Non controllato",
     },
   },
   nl: {

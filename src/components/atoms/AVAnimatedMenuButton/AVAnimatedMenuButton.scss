@@ -1,0 +1,102 @@
+.AVAnimatedMenuButton {
+  // @apply relative bg-gray-100 border-0 w-10 h-10 grid place-items-center p-0 rounded-lg overflow-hidden;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  scale: 0.7;
+  transition: 175ms;
+}
+
+.AVAnimatedMenuButton--light {
+  background-color: var(--bs-gray-100);
+
+  &:hover {
+    background-color: white;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.AVAnimatedMenuButton--dark {
+  background-color: transparent;
+
+  &:hover .AVAnimatedMenuButton--icon-dark > * {
+    background-color: var(--bs-gray-500);
+  }
+}
+
+.AVAnimatedMenuButton--icon {
+  cursor: pointer;
+  margin-top: -2px;
+  scale: 0.6;
+}
+
+.AVAnimatedMenuButton--icon .AVAnimatedMenuButton--line {
+  display: block;
+  cursor: pointer;
+  width: 2rem;
+  height: 0.25rem;
+  border-radius: 0.5rem;
+  margin: 0.5rem auto;
+  -webkit-transition: all 300ms ease-in-out;
+  -o-transition: all 300ms ease-in-out;
+  transition: all 300ms ease-in-out;
+}
+
+.AVAnimatedMenuButton--icon-light > * {
+  background-color: var(--bs-primary);
+}
+
+.AVAnimatedMenuButton--icon-dark > * {
+  background-color: var(--bs-white);
+}
+
+.AVAnimatedMenuButton--icon:hover {
+  cursor: pointer;
+}
+
+// CROSS
+.AVAnimatedMenuButton--icon.AVAnimatedMenuButton--cross-opened
+  .AVAnimatedMenuButton--line:nth-child(1) {
+  -webkit-transform: translateY(0.75rem) rotate(45deg);
+  -ms-transform: translateY(0.75rem) rotate(45deg);
+  -o-transform: translateY(0.75rem) rotate(45deg);
+  transform: translateY(0.75rem) rotate(45deg);
+}
+
+.AVAnimatedMenuButton--icon.AVAnimatedMenuButton--cross-opened
+  .AVAnimatedMenuButton--line:nth-child(2) {
+  opacity: 0;
+}
+
+.AVAnimatedMenuButton--icon.AVAnimatedMenuButton--cross-opened
+  .AVAnimatedMenuButton--line:nth-child(3) {
+  -webkit-transform: translateY(-0.75rem) rotate(-45deg);
+  -ms-transform: translateY(-0.75rem) rotate(-45deg);
+  -o-transform: translateY(-0.75rem) rotate(-45deg);
+  transform: translateY(-0.75rem) rotate(-45deg);
+}
+
+// ARROW DOWN
+.AVAnimatedMenuButton--icon.AVAnimatedMenuButton--arrow-down-opened
+  .AVAnimatedMenuButton--line:nth-child(1) {
+  -webkit-transform: translateY(1.25rem) translateX(-0.5rem) rotate(45deg) scaleX(70%);
+  -ms-transform: translateY(1.25rem) translateX(-0.5rem) rotate(45deg) scaleX(70%);
+  -o-transform: translateY(1.25rem) translateX(-0.5rem) rotate(45deg) scaleX(70%);
+  transform: translateY(1.25rem) translateX(-0.5rem) rotate(45deg) scaleX(70%);
+}
+
+.AVAnimatedMenuButton--icon.AVAnimatedMenuButton--arrow-down-opened
+  .AVAnimatedMenuButton--line:nth-child(2) {
+  -webkit-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  -o-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+
+.AVAnimatedMenuButton--icon.AVAnimatedMenuButton--arrow-down-opened
+  .AVAnimatedMenuButton--line:nth-child(3) {
+  -webkit-transform: translateY(-0.25rem) translateX(0.5rem) rotate(-45deg) scaleX(70%);
+  -ms-transform: translateY(-0.25rem) translateX(0.5rem) rotate(-45deg) scaleX(70%);
+  -o-transform: translateY(-0.25rem) translateX(0.5rem) rotate(-45deg) scaleX(70%);
+  transform: translateY(-0.25rem) translateX(0.5rem) rotate(-45deg) scaleX(70%);
+}

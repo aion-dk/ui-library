@@ -27,6 +27,7 @@ describe("AVSplitHelper", () => {
       contest: getContest([]),
       contestSelection: getContestSelection([]),
       weight: 1,
+      locale: "en",
     },
     global: {
       components: {

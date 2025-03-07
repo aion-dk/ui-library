@@ -17,6 +17,7 @@ describe("AVBallot", () => {
       contest: getContest([]),
       selectionPile: getSelectionPile([]),
       showSubmissionHelper: false,
+      locale: "en",
     },
     global: {
       components: {

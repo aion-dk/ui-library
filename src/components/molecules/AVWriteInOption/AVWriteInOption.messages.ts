@@ -21,6 +21,16 @@ const translations: DefineLocaleMessage = {
       candidate: "Nom del candidat/a",
     },
   },
+  cy: {
+    title: "Ysgrifennu",
+    choose_party: "Dewiswch blaid...",
+    placeholder: "Enw'r ymgeisydd...",
+    aria_labels: {
+      option: "Opsiwn",
+      party: "Plaid",
+      candidate: "Enw'r ymgeisydd",
+    },
+  },
   da: {
     title: "Skrivestemme",
     choose_party: "Vælg en liste...",
@@ -89,6 +99,16 @@ const translations: DefineLocaleMessage = {
       option: "Valkostur",
       party: "Stjórnmálaflokkur",
       candidate: "Nafn frambjóðanda",
+    },
+  },
+  it: {
+    title: "Scrivi",
+    choose_party: "Scegli un partito...",
+    placeholder: "Nome del candidato...",
+    aria_labels: {
+      option: "Opzione",
+      party: "Partito",
+      candidate: "Nome del candidato",
     },
   },
   nl: {

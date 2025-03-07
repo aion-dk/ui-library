@@ -17,6 +17,12 @@ const meta: Meta<typeof AVRankedSummary> = {
     seats: {
       control: { type: "number", min: 0, max: 9999, step: 1 },
     },
+    hideElected: {
+      control: { type: "boolean" },
+    },
+    hideTied: {
+      control: { type: "boolean" },
+    },
     theme: {
       control: { type: "select" },
       options: ["light", "dark"],

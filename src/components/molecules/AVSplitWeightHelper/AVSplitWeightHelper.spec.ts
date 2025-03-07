@@ -10,6 +10,7 @@ describe("AVSplitWeightHelper", () => {
       assignedWeight: 4,
       unusedWeight: 6,
       activeAssigned: 4,
+      locale: "en",
     },
     global: {
       provide: {

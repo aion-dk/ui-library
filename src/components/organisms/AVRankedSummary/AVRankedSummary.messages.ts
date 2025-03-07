@@ -27,6 +27,19 @@ const translations: DefineLocaleMessage = {
       tied: "Empatat",
     },
   },
+  cy: {
+    header: {
+      position: "Swydd",
+      candidate: "Ymgeisydd",
+      round_n: "Rownd {n}",
+    },
+    summary: {
+      seats: "Seddi",
+      distribution: "Rhif dosbarthu",
+      elected: "Etholedig",
+      tied: "Tynnu llun",
+    },
+  },
   da: {
     header: {
       position: "Position",
@@ -116,6 +129,19 @@ const translations: DefineLocaleMessage = {
       distribution: "Dreifingartala",
       elected: "Kjörin(n)",
       tied: "Jafntefli",
+    },
+  },
+  it: {
+    header: {
+      position: "Posizione",
+      candidate: "Candidato",
+      round_n: "Round {n}",
+    },
+    summary: {
+      seats: "Seggi",
+      distribution: "Numero di distribuzione",
+      elected: "Eletti",
+      tied: "Parità",
     },
   },
   nl: {

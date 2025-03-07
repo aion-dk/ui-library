@@ -11,6 +11,7 @@ describe("AVSubmissionHelper", () => {
       maxMarks: 1,
       chosenCount: 1,
       errors: [],
+      locale: "en",
     },
     global: {
       provide: {

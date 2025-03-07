@@ -69,6 +69,7 @@ describe("AVInstantRunoffSummary", () => {
       quota: 5,
       totalVotes: 10,
       blankVotes: 1,
+      locale: "en",
     },
     global: {
       provide: {

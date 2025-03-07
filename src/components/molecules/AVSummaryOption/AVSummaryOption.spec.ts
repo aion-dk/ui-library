@@ -13,6 +13,7 @@ describe("AVSummaryOption", () => {
         handle: getOption([], 1).reference,
         crosses: 1,
         rank: undefined,
+        locale: "en",
       },
     },
     global: {

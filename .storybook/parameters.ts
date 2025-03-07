@@ -20,6 +20,7 @@ const parameters = {
   },
   // See https://github.com/dequelabs/axe-core/blob/develop/doc/API.md#options-parameter
   a11y: {
+    element: "#storybook-root",
     config: {
       rules: [
         {
@@ -33,8 +34,24 @@ const parameters = {
           id: "heading-order",
           enabled: false,
         },
+        {
+          // These will always be Youtube/Vimeo embedded videos that we cannot change/fix, so we also don't care about accessibility inside them.
+          id: "frame-tested",
+          enabled: false,
+        },
+        {
+          // Storybook doesn't know the actual background color when "dark mode" is enabled, as the table has a transparent background. This is why it incorrectly tags the contrast ratio as low.
+          id: "color-contrast",
+          selector: "[data-test=candidate-ranked-result]",
+          enabled: false,
+        },
+        {
+          id: "nested-interactive",
+          enabled: false,
+        },
       ],
     },
+    test: "error",
   },
 };
 

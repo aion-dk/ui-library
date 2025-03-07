@@ -10,6 +10,7 @@ describe("AVResultOption", () => {
       optionTitle: { en: "I'm the option title" },
       votes: 1,
       total: 2,
+      locale: "en",
     },
     global: {
       provide: {

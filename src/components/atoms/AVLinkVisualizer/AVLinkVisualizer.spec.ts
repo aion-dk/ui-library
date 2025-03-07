@@ -1,8 +1,10 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi } from "vitest";
 import { mount } from "@vue/test-utils";
 import { getUrl } from "@/examples";
 
 import AVLinkVisualizer from "./AVLinkVisualizer.vue";
+
+window.open = vi.fn();
 
 describe("AVLinkVisualizer", () => {
   const wrapper = mount(AVLinkVisualizer, {
@@ -55,5 +57,11 @@ describe("AVLinkVisualizer", () => {
 
     expect(wrapper.find("[data-test=name]").text()).to.contain("My twitter");
     expect(wrapper.find("[data-test=icon]").attributes().icon).to.eq("twitter");
+  });
+
+  it("opens external link", async () => {
+    expect(window.open).not.toBeCalled();
+    await wrapper.trigger("click");
+    expect(window.open).toBeCalled();
   });
 });
