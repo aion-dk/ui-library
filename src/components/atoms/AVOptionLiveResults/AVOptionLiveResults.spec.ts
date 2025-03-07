@@ -87,8 +87,19 @@ describe("AVOptionLiveResults", () => {
       locale: "ru",
     });
 
-    expect(wrapper.find("[data-test=partial-results-external]").text()).to.contain(
-      "5  голосов-25.2%",
+    let isReady = false;
+    setTimeout(() => (isReady = true), 1100);
+    await vi.waitFor(
+      () => {
+        if (!isReady) throw new Error("Animation failed");
+        expect(wrapper.find("[data-test=partial-results-external]").text()).to.contain(
+          "5  голосов-25.2%",
+        );
+      },
+      {
+        timeout: 2000,
+        interval: 500,
+      },
     );
   });
 });
