@@ -104,6 +104,7 @@ describe("AVRankedSummary", () => {
           tied: false,
         },
       ],
+      locale: "en",
     },
     global: {
       provide: {
@@ -401,6 +402,140 @@ describe("AVRankedSummary", () => {
     });
   });
 
+  it("can hide elected", async () => {
+    wrapper.findAll("[data-test=candidate-ranked-result]").forEach((el, i) => {
+      if (i === 0) {
+        expect(el.classes()).to.contain("bg-success-faded");
+      }
+    });
+
+    await wrapper.setProps({
+      hideElected: true,
+    });
+
+    wrapper.findAll("[data-test=candidate-ranked-result]").forEach((el, i) => {
+      if (i === 0) {
+        expect(el.classes()).to.not.contain("bg-success-faded");
+      }
+    });
+  });
+
+  it("can hide tied", async () => {
+    await wrapper.setProps({
+      result: [
+        {
+          reference: getOption(["selectable"], 2).reference,
+          title: getOption(["selectable"], 2).title,
+          rounds: [
+            {
+              count: 2,
+              elected: false,
+              tied: false,
+            },
+            {
+              count: 3,
+              elected: false,
+              tied: false,
+            },
+            {
+              count: 5,
+              elected: true,
+              tied: false,
+            },
+          ],
+          elected: false,
+          tied: true,
+        },
+        {
+          reference: getOption(["selectable"], 3).reference,
+          title: getOption(["selectable"], 3).title,
+          rounds: [
+            {
+              count: 1,
+              elected: false,
+              tied: false,
+            },
+            {
+              count: 1,
+              elected: false,
+              tied: false,
+            },
+            {
+              count: 3,
+              elected: false,
+              tied: false,
+            },
+          ],
+          elected: false,
+          tied: true,
+        },
+        {
+          reference: getOption(["selectable"], 1).reference,
+          title: getOption(["selectable"], 1).title,
+          rounds: [
+            {
+              count: 0,
+              elected: false,
+              tied: false,
+            },
+            {
+              count: 1,
+              elected: false,
+              tied: false,
+            },
+            {
+              count: 1,
+              elected: false,
+              tied: false,
+            },
+          ],
+          elected: false,
+          tied: false,
+        },
+        {
+          reference: getOption(["selectable"], 4).reference,
+          title: getOption(["selectable"], 4).title,
+          rounds: [
+            {
+              count: 0,
+              elected: false,
+              tied: false,
+            },
+            {
+              count: 0,
+              elected: false,
+              tied: false,
+            },
+            {
+              count: 1,
+              elected: false,
+              tied: false,
+            },
+          ],
+          elected: false,
+          tied: false,
+        },
+      ],
+    });
+
+    wrapper.findAll("[data-test=candidate-ranked-result]").forEach((el, i) => {
+      if (i === 0) {
+        expect(el.classes()).to.contain("bg-warning-faded");
+      }
+    });
+
+    await wrapper.setProps({
+      hideElected: false,
+      hideTied: true,
+    });
+
+    wrapper.findAll("[data-test=candidate-ranked-result]").forEach((el, i) => {
+      if (i === 0) {
+        expect(el.classes()).to.not.contain("bg-warning-faded");
+      }
+    });
+  });
+
   it("can switch language", async () => {
     await wrapper.setProps({
       locale: "es",
@@ -416,6 +551,8 @@ describe("AVRankedSummary", () => {
 
     expect(wrapper.find("[data-test=summary]").text()).to.contain("Escaños: 1");
     expect(wrapper.find("[data-test=summary]").text()).to.contain("Número de distribución: 5");
-    expect(wrapper.find("[data-test=summary]").text()).to.contain("Electo: Opción de ejemplo 4");
+    expect(wrapper.find("[data-test=summary]").text()).to.contain(
+      "Empatado: Opción de ejemplo 2, Opción de ejemplo 3",
+    );
   });
 });

@@ -7,8 +7,7 @@ const translations: DefineLocaleMessage = {
     ballots: "الاقتراع",
     ballot_selection: "اختيار ورقة الاقتراع",
     blank: "فارغ",
-    and_n_more_pre: "...أخرى",
-    and_n_more_pos: "و",
+    and_n_more: "...أخرى {n} و",
     show_less: "عرض خيارات أقل",
     aria_labels: {
       delete_selection: "حذف هذا التحديد",
@@ -21,12 +20,24 @@ const translations: DefineLocaleMessage = {
     ballots: "paperetes",
     ballot_selection: "Selecció de papereta",
     blank: "blanc",
-    and_n_more_pre: "i",
-    and_n_more_pos: "més...",
+    and_n_more: "i {n} més...",
     show_less: "Mostrar menys opcions",
     aria_labels: {
       delete_selection: "Borrar aquesta selecció",
       edit_selection: "Modificar aquesta selecció",
+    },
+  },
+  cy: {
+    selection: "Dewis",
+    assigned: "Dyrannwyd:",
+    ballots: "o bleidleisiau",
+    ballot_selection: "Dewis pleidlais",
+    blank: "Gwag",
+    and_n_more: "a {n} mwy...",
+    show_less: "Dangos llai o opsiynau",
+    aria_labels: {
+      delete_selection: "Dileu'r dewis hwn",
+      edit_selection: "Golygu’r dewis hwn",
     },
   },
   da: {
@@ -35,8 +46,7 @@ const translations: DefineLocaleMessage = {
     ballots: "stemmesedler",
     ballot_selection: "Valgkombination",
     blank: "Blank",
-    and_n_more_pre: "Og",
-    and_n_more_pos: "flere...",
+    and_n_more: "Og {n} flere...",
     show_less: "Vis færre valgte",
     aria_labels: {
       delete_selection: "Slet dette valg",
@@ -49,8 +59,7 @@ const translations: DefineLocaleMessage = {
     ballots: "Stimmzettel",
     ballot_selection: "Auswahl der Stimmzettel",
     blank: "Leere",
-    and_n_more_pre: "Und",
-    and_n_more_pos: "mehr...",
+    and_n_more: "Und {n} mehr...",
     show_less: "Weniger Optionen anzeigen",
     aria_labels: {
       delete_selection: "Diese Auswahl löschen",
@@ -63,8 +72,7 @@ const translations: DefineLocaleMessage = {
     ballots: "ballots",
     ballot_selection: "Ballot selection",
     blank: "Blank",
-    and_n_more_pre: "And",
-    and_n_more_pos: "more...",
+    and_n_more: "And {n} more...",
     show_less: "Show less options",
     aria_labels: {
       delete_selection: "Delete this selection",
@@ -77,8 +85,7 @@ const translations: DefineLocaleMessage = {
     ballots: "boletas",
     ballot_selection: "Selección de boleta Nº",
     blank: "Blanco",
-    and_n_more_pre: "Y",
-    and_n_more_pos: "más...",
+    and_n_more: "Y {n} más...",
     show_less: "Mostrar menos opciones",
     aria_labels: {
       delete_selection: "Borrar esta selección",
@@ -91,8 +98,7 @@ const translations: DefineLocaleMessage = {
     ballots: "äänestysliput",
     ballot_selection: "Äänestyslippujen valinta",
     blank: "Tyhjä",
-    and_n_more_pre: "Ja",
-    and_n_more_pos: "lisää...",
+    and_n_more: "Ja {n} lisää...",
     show_less: "Näytä vähemmän vaihtoehtoja",
     aria_labels: {
       delete_selection: "Poista tämä valinta",
@@ -105,8 +111,7 @@ const translations: DefineLocaleMessage = {
     ballots: "bulletins de vote",
     ballot_selection: "Sélection des bulletins de vote",
     blank: "Blanc",
-    and_n_more_pre: "Et",
-    and_n_more_pos: "autres...",
+    and_n_more: "Et {n} autres...",
     show_less: "Afficher moins d'options",
     aria_labels: {
       delete_selection: "Supprimer cette sélection",
@@ -119,12 +124,24 @@ const translations: DefineLocaleMessage = {
     ballots: "atkvæðaseðla",
     ballot_selection: "Val á kjörseðlum",
     blank: "Autt",
-    and_n_more_pre: "Og",
-    and_n_more_pos: "í viðbót...",
+    and_n_more: "Og {n} í viðbót...",
     show_less: "Sýna færri valkosti",
     aria_labels: {
       delete_selection: "Eyða þessu vali",
       edit_selection: "Breyttu þessu vali",
+    },
+  },
+  it: {
+    selection: "Selezione",
+    assigned: "Assegnato:",
+    ballots: "schede elettorali",
+    ballot_selection: "Selezione scheda elettorale",
+    blank: "Vuoto",
+    and_n_more: "E {n} altri...",
+    show_less: "Mostra meno opzioni",
+    aria_labels: {
+      delete_selection: "Elimina questa selezione",
+      edit_selection: "Modifica questa selezione",
     },
   },
   nl: {
@@ -133,8 +150,7 @@ const translations: DefineLocaleMessage = {
     ballots: "stembiljetten",
     ballot_selection: "Stembiljet selectie",
     blank: "Blanco",
-    and_n_more_pre: "En",
-    and_n_more_pos: "meer...",
+    and_n_more: "En {n} meer...",
     show_less: "Toon minder opties",
     aria_labels: {
       delete_selection: "Verwijder deze selectie",
@@ -147,8 +163,7 @@ const translations: DefineLocaleMessage = {
     ballots: "karty do głosowania",
     ballot_selection: "Wybór karty do głosowania",
     blank: "Puste",
-    and_n_more_pre: "I",
-    and_n_more_pos: "więcej...",
+    and_n_more: "I {n} więcej...",
     show_less: "Pokaż mniej opcji",
     aria_labels: {
       delete_selection: "Usuń ten wybór",
@@ -161,8 +176,7 @@ const translations: DefineLocaleMessage = {
     ballots: "boletins",
     ballot_selection: "Seleção de boletim de voto",
     blank: "Em branco",
-    and_n_more_pre: "E",
-    and_n_more_pos: "mais...",
+    and_n_more: "E {n} mais...",
     show_less: "Mostrar menos opções",
     aria_labels: {
       delete_selection: "Eliminar esta seleção",
@@ -175,8 +189,7 @@ const translations: DefineLocaleMessage = {
     ballots: "buletine",
     ballot_selection: "Selecție buletin",
     blank: "Gol",
-    and_n_more_pre: "Și",
-    and_n_more_pos: "altele...",
+    and_n_more: "Și {n} altele...",
     show_less: "Arată mai puține opțiuni",
     aria_labels: {
       delete_selection: "Ștergeți această selecție",
@@ -189,8 +202,7 @@ const translations: DefineLocaleMessage = {
     ballots: "бюллетени",
     ballot_selection: "Выбор бюллетеня",
     blank: "Пустой",
-    and_n_more_pre: "И",
-    and_n_more_pos: "больше...",
+    and_n_more: "И {n} больше...",
     show_less: "Показать меньше вариантов",
     aria_label: {
       delete_selection: "Удалить этот выбор",
@@ -203,8 +215,7 @@ const translations: DefineLocaleMessage = {
     ballots: "röstsedlar",
     ballot_selection: "Val av röstsedel",
     blank: "Blank",
-    and_n_more_pre: "Och",
-    and_n_more_pos: "fler...",
+    and_n_more: "Och {n} fler...",
     show_less: "Visa färre alternativ",
     aria_label: {
       delete_selection: "Ta bort detta val",

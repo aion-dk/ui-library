@@ -1,4 +1,4 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi } from "vitest";
 import { mount } from "@vue/test-utils";
 import localI18n from "@/i18n";
 import AVCollapser from "@/components/atoms/AVCollapser";
@@ -6,10 +6,14 @@ import AVAnimatedTransition from "@/components/atoms/AVAnimatedTransition";
 
 import AVRecommendationList from "./AVRecommendationList.vue";
 
+const hash = "www.initial.com";
+vi.stubGlobal("location", { href: hash });
+
 describe("AVRecommendationList", () => {
   const wrapper = mount(AVRecommendationList, {
     props: {
       recommendations: [],
+      locale: "en",
     },
     global: {
       provide: {
@@ -149,6 +153,23 @@ describe("AVRecommendationList", () => {
     expect(wrapper.find("[data-test=recommendation-summary]").text()).to.eq("R4, R2, R1, R3");
   });
 
+  it("can display invite recommenders button", async () => {
+    expect(wrapper.findAll(".AVRecommendationList--intive-btn").length).to.eq(0);
+
+    await wrapper.setProps({
+      inviteRecommendersPath: "www.some-url.com",
+    });
+
+    expect(wrapper.find(".AVRecommendationList--intive-btn").text()).to.contain(
+      "Invite recommenders",
+    );
+
+    expect(window.location.href).to.eq("www.initial.com");
+    expect(window.location.href).not.to.eq("www.some-url.com");
+    await wrapper.find(".AVRecommendationList--intive-btn").trigger("click");
+    expect(window.location.href).to.eq("www.some-url.com");
+  });
+
   it("can switch language", async () => {
     await wrapper.setProps({
       locale: "fi",
@@ -164,5 +185,8 @@ describe("AVRecommendationList", () => {
     await wrapper.find("[data-test=collapser-button]").trigger("click");
 
     expect(wrapper.find("[data-test=list-collapse]").text()).to.contain("Tiivistä luettelo");
+    expect(wrapper.find(".AVRecommendationList--intive-btn").text()).to.contain(
+      "Kutsu suosittelijoita",
+    );
   });
 });

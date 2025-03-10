@@ -10,6 +10,14 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  hideElected: {
+    type: Boolean,
+    default: false,
+  },
+  hideTied: {
+    type: Boolean,
+    default: false,
+  },
   disregardBlank: {
     type: Boolean,
     default: false,
@@ -34,8 +42,8 @@ const isPercentageHidden = (reference: string): boolean =>
         :optionImage="result.image"
         :votes="result.count"
         :total="totalCount"
-        :elected="result.elected"
-        :tied="result.tied"
+        :elected="!hideElected && result.elected"
+        :tied="!hideTied && result.tied"
         :hide-percentage="isPercentageHidden(result.reference)"
         data-test="result-option"
       />

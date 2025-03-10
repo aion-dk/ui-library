@@ -37,6 +37,24 @@ const translations: DefineLocaleMessage = {
       new_ballot_selection: "Afegir nova selecció de papereta",
     },
   },
+  cy: {
+    ballot: {
+      back_button: "Yn ôl",
+      confirm_button: "Cadarnhau Dewis",
+    },
+    assign: {
+      split_question: "Sawl pleidlais ddylai gael y cyfuniad hwn o ddewisiadau?",
+      ballots_to_assign: "Nifer y pleidleisiau i''w dyrannu:",
+      ballots_to_assign_edit_mode: "Golygu nifer y pleidleisiau a ddyrannwyd:",
+      back_button: "Yn ôl i'r dewis",
+      confirm_button: "Cadarnhau a dyrannu",
+    },
+    overview: {
+      all_ballots_assigned: "Rydych wedi dyrannu eich holl bleidleisiau a gallwch barhau",
+      ballots_left: " o bleidleisiau ar ôl i'w dyrannu",
+      new_ballot_selection: "Ychwanegu dewis pleidlais newydd",
+    },
+  },
   da: {
     ballot: {
       back_button: "Tilbage",
@@ -164,6 +182,24 @@ const translations: DefineLocaleMessage = {
       all_ballots_assigned: "Þú hefur úthlutað öllum atkvæðum þínum og getur haldið áfram",
       ballots_left: " kjörseðlar eftir til að úthluta",
       new_ballot_selection: "Bæta við nýju kjörseðlavali",
+    },
+  },
+  it: {
+    ballot: {
+      back_button: "Indietro",
+      confirm_button: "Conferma Selezione",
+    },
+    assign: {
+      split_question: "Quante schede elettorali dovrebbero avere questa combinazione di scelte?",
+      ballots_to_assign: "Numero di schede elettorali da assegnare:",
+      ballots_to_assign_edit_mode: "Modifica il numero di schede elettorali assegnate:",
+      back_button: "Torna alla selezione",
+      confirm_button: "Conferma e assegna",
+    },
+    overview: {
+      all_ballots_assigned: "Hai assegnato tutte le tue schede elettorali e puoi continuare",
+      ballots_left: " schede elettorali rimanenti da assegnare",
+      new_ballot_selection: "Aggiungi una nuova selezione elettorale",
     },
   },
   nl: {

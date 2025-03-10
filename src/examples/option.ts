@@ -36,6 +36,24 @@ const url: LocalString = {
   sv: "https://www.google.sv",
 };
 
+const video: LocalString = {
+  ar: "https://www.youtube.com/watch?v=Lzmt-g4Xf6k",
+  ca: "https://www.youtube.com/watch?v=Lzmt-g4Xf6k",
+  da: "https://www.youtube.com/watch?v=Lzmt-g4Xf6k",
+  de: "https://www.youtube.com/watch?v=Lzmt-g4Xf6k",
+  en: "https://www.youtube.com/watch?v=Lzmt-g4Xf6k",
+  es: "https://www.youtube.com/watch?v=Lzmt-g4Xf6k",
+  fi: "https://www.youtube.com/watch?v=Lzmt-g4Xf6k",
+  fr: "https://www.youtube.com/watch?v=Lzmt-g4Xf6k",
+  is: "https://www.youtube.com/watch?v=Lzmt-g4Xf6k",
+  nl: "https://www.youtube.com/watch?v=Lzmt-g4Xf6k",
+  pl: "https://www.youtube.com/watch?v=Lzmt-g4Xf6k",
+  pt: "https://www.youtube.com/watch?v=Lzmt-g4Xf6k",
+  ro: "https://www.youtube.com/watch?v=Lzmt-g4Xf6k",
+  ru: "https://www.youtube.com/watch?v=Lzmt-g4Xf6k",
+  sv: "https://www.youtube.com/watch?v=Lzmt-g4Xf6k",
+};
+
 const image: string =
   "https://electa.staging-1.assemblyvoting.net/uploads_proxy/option/image/657750";
 
@@ -80,6 +98,7 @@ const getOption = (
     randomizeChildren: args.includes("randomizeChildren"),
     accentColor: args.includes("color") ? colors[index] : "",
     url: args.includes("url") ? url : {},
+    videoUrl: args.includes("video") ? video : {},
     candidateId: args.includes("candidacy") ? index : undefined,
   };
 

@@ -2,6 +2,7 @@
 import { inject, onMounted, watch } from "vue";
 import type { PropType, SupportedLocale, PartialResult, AVOptionLiveResultsMode } from "@/types";
 import { switchLocale } from "@/i18n";
+import type AVTweenedCount from "../AVTweenedCount/AVTweenedCount.vue";
 
 const props = defineProps({
   optionReference: {
@@ -60,21 +61,27 @@ watch(
   >
     <AVIcon icon="user" />
     <span>
+      <AVTweenedCount
+        :id="`count_for_option_${optionReference}`"
+        :count="partialResults.results.count"
+        :duration="0.5"
+      />
       {{
         partialResults.results.count === 1
-          ? t("js.components.AVOptionLiveResults.vote_count_singular", {
-              n: partialResults.results.count,
-            })
-          : t("js.components.AVOptionLiveResults.vote_count_plural", {
-              n: partialResults.results.count,
-            })
+          ? t("js.components.AVOptionLiveResults.vote_count_singular")
+          : t("js.components.AVOptionLiveResults.vote_count_plural")
       }}
     </span>
 
     <template v-if="showPercentage">
       <span>-</span>
       <span>
-        {{ `${partialResults.results.percentage}%` }}
+        <AVTweenedCount
+          :id="`percentage_for_option_${optionReference}`"
+          :count="partialResults.results.percentage"
+          :duration="0.5"
+          :decimals="1"
+        />%
       </span>
     </template>
   </div>

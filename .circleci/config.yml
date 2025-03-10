@@ -5,7 +5,7 @@ orbs:
 executors:
   node22:
     docker:
-      - image: cimg/node:22.13
+      - image: mcr.microsoft.com/playwright:v1.49.1-noble
   ruby-node:
     docker:
       - image: cimg/ruby:3.2-node
@@ -14,7 +14,7 @@ filters:
   - &always
     tags:
       only: /.*/
-  
+
 jobs:
   lint_test_build:
     executor:
@@ -33,10 +33,16 @@ jobs:
           key: v1-dependencies-{{ checksum "yarn.lock" }}
       - run: yarn run lint
       - run: yarn run test
+      - run: yarn run test-coverage
       - run: yarn run build
+      - run: yarn run build-storybook
+      - run: |
+          npx concurrently -k -s first -n "SB,TEST" -c "magenta,blue" \
+              "npx http-server storybook-static --port 6006 --silent" \
+              "npx wait-on tcp:127.0.0.1:6006 && yarn test-storybook"
       - run: yarn pack
       - persist_to_workspace:
-          root: /home/circleci/project
+          root: /root/project
           paths:
             - ./assemblyvoting-electa-ui-*.tgz
   publish:

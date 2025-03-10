@@ -4,7 +4,23 @@ import localI18n from "@/i18n";
 import { iconNames } from "@/helpers/iconHelper";
 import FloatingVue from "floating-vue";
 import "floating-vue/dist/style.css";
-import "@/bootstrap/bootstrap.customized.scss";
+
+export {
+  Alert,
+  Button,
+  Carousel,
+  Collapse,
+  Dropdown,
+  Modal,
+  Offcanvas,
+  Popover,
+  ScrollSpy,
+  Tab,
+  Toast,
+  Tooltip,
+} from "bootstrap";
+
+export { animate } from "motion";
 
 import {
   // ATOMS
@@ -17,10 +33,12 @@ import {
   AVOptionCheckbox,
   AVTooltip,
   AVOptionLiveResults,
+  AVProgressBar,
+  AVAnimatedMenuButton,
+  AVTweenedCount,
   //   AVVerticalStep,
-  //   AVAnimatedMenuButton,
-  //   AVProgressBar,
   //   AVWaitingDots,
+  //   AVFileInput,
 
   // MOLECULES
   AVSummaryOption,
@@ -75,10 +93,12 @@ export default {
     app.component("AVOptionCheckbox", AVOptionCheckbox);
     app.component("AVTooltip", AVTooltip);
     app.component("AVOptionLiveResults", AVOptionLiveResults);
+    app.component("AVProgressBar", AVProgressBar);
+    app.component("AVAnimatedMenuButton", AVAnimatedMenuButton);
+    app.component("AVTweenedCount", AVTweenedCount);
     // app.component("AVVerticalStep", AVVerticalStep);
-    // app.component("AVAnimatedMenuButton", AVAnimatedMenuButton);
-    // app.component("AVProgressBar", AVProgressBar);
     // app.component("AVWaitingDots", AVWaitingDots);
+    // app.component("AVFileInput", AVFileInput);
 
     // MOLECULES
     app.component("AVSummaryOption", AVSummaryOption);
@@ -133,8 +153,12 @@ export {
   AVOptionCheckbox,
   AVTooltip,
   AVOptionLiveResults,
-  //   AVProgressBar,
+  AVProgressBar,
+  AVAnimatedMenuButton,
+  AVTweenedCount,
+  //   AVVerticalStep,
   //   AVWaitingDots,
+  //   AVFileInput,
 
   // MOLECULES
   AVSummaryOption,

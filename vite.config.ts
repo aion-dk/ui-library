@@ -4,6 +4,7 @@ import typescript2 from "rollup-plugin-typescript2";
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import vueDevTools from "vite-plugin-vue-devtools";
+import { viteStaticCopy } from "vite-plugin-static-copy";
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -22,6 +23,18 @@ export default defineConfig({
         },
       },
       exclude: ["vite.config.ts"],
+    }),
+    viteStaticCopy({
+      targets: [
+        {
+          src: resolve(__dirname, "node_modules/bootstrap"),
+          dest: "node_modules",
+        },
+        {
+          src: resolve(__dirname, "src/bootstrap/bootstrap.customized.scss"),
+          dest: "src/bootstrap",
+        },
+      ],
     }),
   ],
   build: {
@@ -48,12 +61,17 @@ export default defineConfig({
       },
     },
     chunkSizeWarningLimit: 2000,
+    minify: true,
+    cssMinify: true,
   },
   resolve: {
     alias: {
       "@": fileURLToPath(new URL("./src", import.meta.url)),
-      bootstrap: resolve(__dirname, "node_modules/bootstrap"),
+      // bootstrap: DON'T USE ALIAS FOR IT. Path should be written complete on scss files in order to work when imported in different projects.
     },
+  },
+  optimizeDeps: {
+    include: ["motion", "bootstrap"],
   },
   css: {
     preprocessorOptions: {

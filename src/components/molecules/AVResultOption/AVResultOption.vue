@@ -83,11 +83,12 @@ watch(
           v-if="optionImage"
           :src="optionImage"
           class="AVResultOption--image ratio ratio-1x1"
+          aria-hidden="true"
           data-test="result-image"
         />
-        <header class="text-truncate" data-test="result-title">
+        <span class="text-truncate" data-test="result-title">
           {{ optionTitle[i18nLocale] }}
-        </header>
+        </span>
       </div>
       <div class="vstack align-items-end gap-1" data-test="result-results">
         <p class="mb-0">{{ truncatedVotes }}</p>

@@ -232,15 +232,11 @@ watch(
           data-test="pile-summary-more"
           @click.stop.prevent="showAllOptions = true"
         >
-          <u
-            ><em>
-              {{
-                `${t("js.components.AVPileSummary.and_n_more_pre")} ${remainingOptions} ${t(
-                  "js.components.AVPileSummary.and_n_more_pos",
-                )}`
-              }}</em
-            ></u
-          >
+          <u>
+            <em>
+              {{ t("js.components.AVPileSummary.and_n_more", { n: remainingOptions }) }}
+            </em>
+          </u>
         </p>
         <p
           v-if="showAllOptions"

@@ -11,6 +11,11 @@ const translations: DefineLocaleMessage = {
     assigned: "Ja assignades:",
     unused: "Per assignar:",
   },
+  cy: {
+    total: "Cyfanswm nifer y pleidleisiau:",
+    assigned: "Eisoes wedi''i dyrannu:",
+    unused: "Yn weddill i’w dyrannu:",
+  },
   da: {
     total: "Dit samlede antal stemmesedler:",
     assigned: "Allerede tildelt:",
@@ -45,6 +50,11 @@ const translations: DefineLocaleMessage = {
     total: "Heildarþyngd þín:",
     assigned: "Þegar úthlutað:",
     unused: "Eftir að úthluta:",
+  },
+  it: {
+    total: "Numero totale di schede elettorali:",
+    assigned: "Già assegnato:",
+    unused: "Ancora da assegnare:",
   },
   nl: {
     total: "Uw totale gewicht:",

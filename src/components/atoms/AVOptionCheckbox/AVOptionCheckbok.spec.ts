@@ -8,6 +8,7 @@ describe("AVOptionCheckbox", () => {
   const wrapper = mount(AVOptionCheckbox, {
     props: {
       checked: false,
+      locale: "en",
     },
     global: {
       provide: {

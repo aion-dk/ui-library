@@ -34,6 +34,32 @@ const Template = (args: Meta) => ({
   template: '<AVResourceSection v-bind="args" />',
 });
 
+const SummaryTemplate = (args: Meta) => ({
+  components: { AVResourceSection },
+  setup() {
+    return { args };
+  },
+  template: '<div class="bg-theme-secondary p-5"><AVResourceSection v-bind="args" /></div>',
+});
+
+const SmallCardTemplate = (args: Meta) => ({
+  components: { AVResourceSection },
+  setup() {
+    return { args };
+  },
+  template:
+    '<div class="card p-0 pb-3 overflow-hidden rounded" style="width: 12rem;"><AVResourceSection v-bind="args" /></div>',
+});
+
+const LargeCardTemplate = (args: Meta) => ({
+  components: { AVResourceSection },
+  setup() {
+    return { args };
+  },
+  template:
+    '<div class="card p-0 pb-3 overflow-hidden rounded" style="width: 15rem;"><AVResourceSection v-bind="args" /></div>',
+});
+
 export const Default = {
   render: Template,
 
@@ -43,7 +69,7 @@ export const Default = {
 };
 
 export const Summary = {
-  render: Template,
+  render: SummaryTemplate,
 
   args: {
     candidate: getCandidate(),
@@ -52,7 +78,7 @@ export const Summary = {
 };
 
 export const WithCustomGroup = {
-  render: Template,
+  render: SummaryTemplate,
 
   args: {
     candidate: getCandidate(),
@@ -61,8 +87,19 @@ export const WithCustomGroup = {
   },
 };
 
-export const Card = {
-  render: Template,
+export const SmallCard = {
+  render: SmallCardTemplate,
+
+  args: {
+    candidate: getCandidate(),
+    currentCandidateGroup: 2,
+    summary: true,
+    card: true,
+  },
+};
+
+export const LargeCard = {
+  render: LargeCardTemplate,
 
   args: {
     candidate: getCandidate(),

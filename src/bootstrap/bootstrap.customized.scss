@@ -1,6 +1,5 @@
-// Quickly modify global styling by enabling or disabling optional features.
-// @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&family=PT+Mono&display=swap");
-// @import url("https://fonts.googleapis.com/css2?family=Lora:wght@600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&family=PT+Mono&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lora:wght@600&display=swap");
 
 $enable-caret: true !default;
 $enable-rounded: true !default;
@@ -34,7 +33,7 @@ $grid-breakpoints: (
   uhd: 3839px, // 4K resolution
 );
 
-@import "bootstrap/scss/functions";
+@import "../../node_modules/bootstrap/scss/functions";
 
 $primary: #1226aa;
 $secondary: #f8f8f8;
@@ -49,8 +48,6 @@ $custom-colors: (
   "brand-dark": $brand-dark,
   "accent": $accent,
 );
-
-@import "./font_mapping.scss";
 
 $font-family-base: "Open Sans", sans-serif;
 
@@ -75,11 +72,29 @@ $custom-file-text: (
 // Boostrap variable overrides
 $card-border-radius: 0;
 
-@import "bootstrap/scss/variables";
+@import "../../node_modules/bootstrap/scss/variables";
+
+$utilities: () !default;
+$utilities: map-merge(
+  (
+    "grays": (
+      property: background-color,
+      class: bg-gray,
+      values: $grays,
+    ),
+    "text-grays": (
+      property: color,
+      class: text-gray,
+      values: $grays,
+    ),
+  ),
+  $utilities
+);
 
 // Include any default map overrides here
 $theme-colors: map-merge($theme-colors, $custom-colors);
-@import "bootstrap/scss/mixins/breakpoints";
+
+@import "../../node_modules/bootstrap/scss/mixins/breakpoints";
 
 @each $breakpoint in map-keys($grid-breakpoints) {
   @include media-breakpoint-up($breakpoint) {
@@ -115,28 +130,35 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
   }
 }
 
-@import "bootstrap/scss/bootstrap";
+@import "../../node_modules/bootstrap/scss/bootstrap";
 
 #app {
   width: 100vw;
   height: 100vh;
 }
 
-// Neutrals
-:root {
-  --gray-50: #f8fafc;
-  --gray-100: #f7f7f7;
-  --gray-200: #e9ecef;
-  --gray-300: #dee2e6;
-  --gray-400: #ced4da;
-  --gray-500: #adb5bd;
-  --gray-600: #6c757d;
-  --gray-700: #495057;
-  --gray-800: #343a40;
-  --gray-900: #212529;
-}
-
 .text-lora {
   font-family: "Lora", "Open Sans", sans-serif;
   font-weight: 600;
+}
+
+// Override floating labels to be a bit lighter
+.form-floating > .form-label {
+  color: $dark;
+}
+
+.position-relative-table-fix {
+  position: relative;
+  transform: translate(0); // Fix for safari not supporting position relative on table rows
+  td {
+    background-clip: padding-box;
+  }
+}
+
+.text-decoration-hover {
+  text-decoration: none !important;
+}
+
+.text-decoration-hover:hover {
+  text-decoration: underline !important;
 }

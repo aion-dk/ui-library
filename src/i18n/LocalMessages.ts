@@ -3,6 +3,7 @@ import AVSpinner from "@/components/atoms/AVSpinner/AVSpinner.messages";
 import AVOptionSelect from "@/components/atoms/AVOptionSelect/AVOptionSelect.messages";
 import AVOptionCheckbox from "@/components/atoms/AVOptionCheckbox/AVOptionCheckbox.messages";
 import AVOptionLiveResults from "@/components/atoms/AVOptionLiveResults/AVOptionLiveResults.messages";
+import AVAnimatedMenuButton from "@/components/atoms/AVAnimatedMenuButton/AVAnimatedMenuButton.messages";
 
 /* MOLECULES */
 import AVSummaryOption from "@/components/molecules/AVSummaryOption/AVSummaryOption.messages";
@@ -39,6 +40,7 @@ const components: DefineLocaleMessage = {
   AVOptionSelect,
   AVOptionCheckbox,
   AVOptionLiveResults,
+  AVAnimatedMenuButton,
 
   /* MOLECULES */
   AVSummaryOption,
@@ -84,6 +86,11 @@ const messages = {
       components: getTranslations("ca"),
     },
   },
+  cy: {
+    js: {
+      components: getTranslations("cy"),
+    },
+  },
   da: {
     js: {
       components: getTranslations("da"),
@@ -117,6 +124,11 @@ const messages = {
   is: {
     js: {
       components: getTranslations("is"),
+    },
+  },
+  it: {
+    js: {
+      components: getTranslations("it"),
     },
   },
   nl: {

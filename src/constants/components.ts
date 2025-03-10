@@ -23,6 +23,9 @@ const SPLIT_HELPER_STATE = ["ballot", "assign", "overview"] as const;
 
 const RECOMMENDATION_PUBLIC_TYPES = ["public", "private", "public_count"] as const;
 
+// AVAnimatedMenuButton
+const ANIMATED_MENU_BUTTON_VARIANTS = ["cross", "arrow-down"] as const;
+
 export {
   IMAGE_OPTIONS,
   SPINNER_VARIANTS,
@@ -30,4 +33,5 @@ export {
   LIVE_RESULT_MODES,
   SPLIT_HELPER_STATE,
   RECOMMENDATION_PUBLIC_TYPES,
+  ANIMATED_MENU_BUTTON_VARIANTS,
 };

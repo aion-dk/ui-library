@@ -12,6 +12,7 @@ describe("AVResourceSection", () => {
       candidate: getCandidate(),
       summary: true,
       card: true,
+      locale: "en",
     },
     global: {
       components: { AVTooltip },
@@ -34,7 +35,7 @@ describe("AVResourceSection", () => {
 
   it("renders properly as card", async () => {
     expect(wrapper.find("[data-test=resource-image]").attributes().src).to.contain(
-      "/assets/silhouette.jpg",
+      "https://electa.staging-1.assemblyvoting.net/uploads_proxy/option/image/657750",
     );
     expect(wrapper.find("[data-test=resource-image]").attributes().alt).to.contain(
       "Portrait of the candidate",
@@ -51,7 +52,7 @@ describe("AVResourceSection", () => {
     });
 
     expect(wrapper.find("[data-test=resource-image]").attributes().src).to.contain(
-      "/assets/silhouette.jpg",
+      "https://electa.staging-1.assemblyvoting.net/uploads_proxy/option/image/657750",
     );
     expect(wrapper.find("[data-test=resource-image]").attributes().alt).to.contain(
       "Portrait of the candidate",

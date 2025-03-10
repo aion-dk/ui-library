@@ -60,11 +60,9 @@ const props = defineProps({
 
 const emits = defineEmits(["update:selectionPile", "update:errors", "view-candidate"]);
 
-const writeInChecked = ref<boolean>(false);
-
-const writeInParty = ref<string>("");
-
-const writeInCandidate = ref<string>("");
+// const writeInChecked = ref<boolean>(false);
+// const writeInParty = ref<string>("");
+// const writeInCandidate = ref<string>("");
 
 const search = ref<HTMLInputElement | null>(null);
 
@@ -220,17 +218,8 @@ watch(
       :aria-label="t('js.components.AVBallot.aria_labels.ballot_options')"
     >
       <template v-for="option in contest.options" :key="option.reference">
-        <AVWriteInOption
-          v-if="option.writeIn"
-          v-model:candidate-value="writeInCandidate"
-          v-model:party-value="writeInParty"
-          v-model:checked-value="writeInChecked"
-          :parties="[] /* contest.parties // TODO: we need to figure out how this should work */"
-          :disabled="disabled"
-          :observerMode="observerMode"
-        />
         <AVOption
-          v-else
+          v-if="!option.writeIn"
           :selections="selections"
           :option="option"
           :invalid="!isValid"
@@ -247,6 +236,15 @@ watch(
           @checked="toggleOption"
           @view-candidate="viewCandidate"
         />
+        <!-- <AVWriteInOption
+          v-else
+          v-model:candidate-value="writeInCandidate"
+          v-model:party-value="writeInParty"
+          v-model:checked-value="writeInChecked"
+          :parties="[] /* contest.parties // TODO: we need to figure out how this should work */"
+          :disabled="disabled"
+          :observerMode="observerMode"
+        /> -->
       </template>
       <AVBlankOption
         v-if="contest.markingType.blankSubmission === 'active_choice'"
