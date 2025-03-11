@@ -39,6 +39,7 @@ type ResourceData = {
 interface ResourceItem {
   id: number;
   attribute_name: string;
+  internal_name?: string;
   label: LocalString;
   purpose: ItemPurpose;
   position: number;
