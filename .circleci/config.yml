@@ -1,7 +1,7 @@
 version: 2.1
 orbs:
-  node: circleci/node@7.0.0
-  docker: assemblyvoting/docker@1.6.2
+  node: circleci/node@7.1.0
+  docker: assemblyvoting/docker@1.6.3
 executors:
   node22:
     docker:
@@ -26,7 +26,7 @@ jobs:
             - v1-dependencies-{{ checksum "yarn.lock" }}
             - v1-dependencies-
       - node/install-yarn
-      - run: yarn install --frozen-lockfile
+      - run: yarn install --immutable
       - save_cache:
           paths:
             - ./node_modules

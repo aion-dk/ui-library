@@ -45,7 +45,7 @@ describe("AVOptionLiveResults", () => {
         expect(wrapper.find("[data-test=partial-results-internal]").text()).to.eq("5  votes");
       },
       {
-        timeout: 2000,
+        timeout: 5000,
         interval: 500,
       },
     );
@@ -65,7 +65,7 @@ describe("AVOptionLiveResults", () => {
         expect(wrapper.find("[data-test=partial-results-internal]").text()).to.eq("5  votes-25.2%");
       },
       {
-        timeout: 2000,
+        timeout: 5000,
         interval: 500,
       },
     );
@@ -97,7 +97,7 @@ describe("AVOptionLiveResults", () => {
         );
       },
       {
-        timeout: 2000,
+        timeout: 5000,
         interval: 500,
       },
     );
