@@ -44,7 +44,7 @@ jobs:
       - persist_to_workspace:
           root: /root/project
           paths:
-            - ./assemblyvoting-electa-ui-*.tgz
+            - ./package.tgz
   publish:
     executor:
       name: node22
