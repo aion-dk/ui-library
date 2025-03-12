@@ -8,6 +8,7 @@ import type {
   AVSummaryOptionParent,
   ImageOption,
 } from "@/types";
+import { getMeaningfulLabel } from "@/helpers/meaningfulLabel";
 
 const props = defineProps({
   option: {
@@ -58,7 +59,7 @@ const displayTitle = computed(() => {
   if (props.blank) {
     return t("js.components.AVSummaryOption.blank");
   } else {
-    return props.option?.title[i18nLocale.value];
+    return getMeaningfulLabel("option", props.option, i18nLocale.value, t);
   }
 });
 
