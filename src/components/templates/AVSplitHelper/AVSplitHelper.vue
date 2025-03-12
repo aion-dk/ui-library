@@ -13,6 +13,7 @@ import type {
 } from "@/types";
 import SelectionPileValidator from "@aion-dk/js-client/dist/lib/validators/selectionPileValidator";
 import ContestSelectionValidator from "@aion-dk/js-client/dist/lib/validators/contestSelectionValidator";
+import { getMeaningfulLabel } from "@/helpers/meaningfulLabel";
 
 const props = defineProps({
   contest: {
@@ -78,7 +79,10 @@ const contestErrors = ref<string[]>([]);
 const selectionPiles = computed(() => props.contestSelection.piles);
 
 const unusedWeight = computed(() =>
-  selectionPiles.value?.reduce((sum, bs) => sum - bs.multiplier, props.weight),
+  selectionPiles.value?.reduce(
+    (sum: number, bs: SelectionPile) => sum - bs.multiplier,
+    props.weight,
+  ),
 );
 
 const selectionPileValidator = computed(() => new SelectionPileValidator(props.contest));
@@ -95,20 +99,22 @@ const readyForSubmission = computed(() => {
   return (
     unusedWeight.value === 0 &&
     contestErrors.value.length == 0 &&
-    selectionPiles.value.every((pile) => selectionPileValidator.value.isComplete(pile))
+    selectionPiles.value.every((pile: SelectionPile) =>
+      selectionPileValidator.value.isComplete(pile),
+    )
   );
 });
 
 const assignedWeight = computed(() =>
-  selectionPiles.value?.reduce((sum: number, pile) => sum + pile.multiplier, 0),
+  selectionPiles.value?.reduce((sum: number, pile: SelectionPile) => sum + pile.multiplier, 0),
 );
 
 const activeWeight = computed(() => activePile.value?.multiplier);
 
 const maxAssignable = computed(() =>
   selectionPiles.value
-    .filter((_, index) => index !== activeSelectionPileIndex.value)
-    .reduce((sum, bs) => sum - bs.multiplier, props.weight),
+    .filter((_: SelectionPile, index: number) => index !== activeSelectionPileIndex.value)
+    .reduce((sum: number, bs: SelectionPile) => sum - bs.multiplier, props.weight),
 );
 
 const userCanSplit = computed(() => props.contest.markingType.maxPiles !== 1 && props.weight > 1);
@@ -225,7 +231,7 @@ watch(
 
 <template>
   <h3 class="h4 mt-0 mb-2" aria-live="polite" data-test="split-helper-contest-title">
-    {{ contest.title[i18nLocale] }}
+    {{ getMeaningfulLabel("contest", contest, i18nLocale, t) }}
   </h3>
   <div data-test="split-helper-contest-description" v-html="contest.description?.[i18nLocale]" />
   <template v-if="userCanSplit">
