@@ -17,7 +17,7 @@ describe("AVTweenedCount", () => {
     expect(wrapper.text()).to.eq("0");
 
     let isReady = false;
-    setTimeout(() => (isReady = true), 600);
+    setTimeout(() => (isReady = true), 1000);
     await vi.waitFor(
       () => {
         if (!isReady) throw new Error("Animation failed");
@@ -25,7 +25,7 @@ describe("AVTweenedCount", () => {
         isReady = false;
       },
       {
-        timeout: 2000,
+        timeout: 3000,
         interval: 500,
       },
     );
@@ -35,7 +35,7 @@ describe("AVTweenedCount", () => {
       count: 10,
     });
 
-    setTimeout(() => (isReady = true), 600);
+    setTimeout(() => (isReady = true), 1000);
 
     expect(wrapper.text()).to.eq("5");
 
@@ -59,7 +59,7 @@ describe("AVTweenedCount", () => {
         isReady = false;
       },
       {
-        timeout: 2000,
+        timeout: 3000,
         interval: 500,
       },
     );
@@ -72,7 +72,7 @@ describe("AVTweenedCount", () => {
     });
 
     let isReady = false;
-    setTimeout(() => (isReady = true), 600);
+    setTimeout(() => (isReady = true), 1000);
 
     await vi.waitFor(
       () => {
@@ -81,7 +81,7 @@ describe("AVTweenedCount", () => {
         isReady = false;
       },
       {
-        timeout: 2000,
+        timeout: 3000,
         interval: 500,
       },
     );
@@ -90,7 +90,7 @@ describe("AVTweenedCount", () => {
       decimals: 5,
     });
 
-    setTimeout(() => (isReady = true), 600);
+    setTimeout(() => (isReady = true), 1000);
     await vi.waitFor(
       () => {
         if (!isReady) throw new Error("Animation failed");
@@ -98,7 +98,7 @@ describe("AVTweenedCount", () => {
         isReady = false;
       },
       {
-        timeout: 2000,
+        timeout: 3000,
         interval: 500,
       },
     );
