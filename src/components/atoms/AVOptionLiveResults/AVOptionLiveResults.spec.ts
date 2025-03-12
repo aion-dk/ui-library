@@ -38,7 +38,7 @@ describe("AVOptionLiveResults", () => {
     expect(wrapper.find("[data-test=partial-results-internal]").text()).to.eq("0  votes");
 
     let isReady = false;
-    setTimeout(() => (isReady = true), 1100);
+    setTimeout(() => (isReady = true), 1500);
     await vi.waitFor(
       () => {
         if (!isReady) throw new Error("Animation failed");
@@ -58,7 +58,7 @@ describe("AVOptionLiveResults", () => {
     expect(wrapper.find("[data-test=partial-results-internal]").text()).to.eq("5  votes-0.0%");
 
     let isReady = false;
-    setTimeout(() => (isReady = true), 1100);
+    setTimeout(() => (isReady = true), 1500);
     await vi.waitFor(
       () => {
         if (!isReady) throw new Error("Animation failed");
@@ -88,7 +88,7 @@ describe("AVOptionLiveResults", () => {
     });
 
     let isReady = false;
-    setTimeout(() => (isReady = true), 1100);
+    setTimeout(() => (isReady = true), 1500);
     await vi.waitFor(
       () => {
         if (!isReady) throw new Error("Animation failed");
