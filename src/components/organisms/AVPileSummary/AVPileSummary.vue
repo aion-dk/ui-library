@@ -11,7 +11,9 @@ import type {
   ImageOption,
   AVPileSummaryOptionSummary,
   AVPileSummaryState,
+  OptionSelection,
 } from "@/types";
+import { getMeaningfulLabel } from "@/helpers/meaningfulLabel";
 
 const emits = defineEmits(["editCurrentSelection", "deleteSelection"]);
 
@@ -91,7 +93,7 @@ const optionSummaries = computed(() => {
     writeIns: [],
   };
 
-  props.selectionPile.optionSelections.forEach((selection) => {
+  props.selectionPile.optionSelections.forEach((selection: OptionSelection) => {
     if (selection.text) {
       optionSummary.writeIns.push({
         partyLetter: "?", // TODO: Figure out how this party stuff is supposed to work
@@ -219,7 +221,7 @@ watch(
         </p>
         <p v-for="(option, index) in shownOptions" :key="index" class="mb-0">
           {{ option.rank ? `${option.rank}: ` : "" }}
-          {{ option.title[i18nLocale] }}
+          {{ getMeaningfulLabel("option", option, i18nLocale, t) }}
         </p>
         <p v-for="(option, index) in optionSummaries.writeIns" :key="index" class="mb-0">
           <b>{{ option.partyLetter }} - {{ option.partyName }}</b>
