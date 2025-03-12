@@ -8,19 +8,19 @@
 }
 
 @container (min-width: 20rem) {
-  .AVNormalSummary {
+  .AVNormalSummary .dynamic-columns {
     grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
   }
 }
 
 @container (min-width: 40rem) {
-  .AVNormalSummary {
+  .AVNormalSummary .dynamic-columns {
     grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
   }
 }
 
 @container (min-width: 60rem) {
-  .AVNormalSummary {
+  .AVNormalSummary .dynamic-columns {
     grid-template-columns: repeat(auto-fill, minmax(30rem, 1fr));
   }
 }
