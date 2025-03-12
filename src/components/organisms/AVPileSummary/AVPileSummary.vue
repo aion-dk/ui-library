@@ -221,7 +221,7 @@ watch(
         </p>
         <p v-for="(option, index) in shownOptions" :key="index" class="mb-0">
           {{ option.rank ? `${option.rank}: ` : "" }}
-          {{ getMeaningfulLabel("option", option, i18nLocale, t) }}
+          {{ getMeaningfulLabel("option", option as unknown as OptionContent, i18nLocale, t) }}
         </p>
         <p v-for="(option, index) in optionSummaries.writeIns" :key="index" class="mb-0">
           <b>{{ option.partyLetter }} - {{ option.partyName }}</b>

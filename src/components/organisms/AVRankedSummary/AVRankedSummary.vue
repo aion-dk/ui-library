@@ -145,7 +145,7 @@ watch(
               [`AVRankedSummary--text-${theme}`]: !option.elected && !option.tied,
             }"
           >
-            {{ getMeaningfulLabel("option", option, i18nLocale, t) }}
+            {{ getMeaningfulLabel("option", option as unknown as OptionContent, i18nLocale, t) }}
           </td>
 
           <td

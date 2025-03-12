@@ -7,6 +7,7 @@ import type {
   AVSummaryOptionObject,
   AVSummaryOptionParent,
   ImageOption,
+  OptionContent,
 } from "@/types";
 import { getMeaningfulLabel } from "@/helpers/meaningfulLabel";
 
@@ -59,7 +60,12 @@ const displayTitle = computed(() => {
   if (props.blank) {
     return t("js.components.AVSummaryOption.blank");
   } else {
-    return getMeaningfulLabel("option", props.option, i18nLocale.value, t);
+    return getMeaningfulLabel(
+      "option",
+      props.option as unknown as OptionContent,
+      i18nLocale.value,
+      t,
+    );
   }
 });
 
