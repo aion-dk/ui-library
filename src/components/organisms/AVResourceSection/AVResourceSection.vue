@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { watch, onMounted, computed, inject } from "vue";
 import { switchLocale } from "@/i18n";
+import { getMeaningfulLabel } from "@/helpers/meaningfulLabel";
 import type {
   ResourceItem,
   PropType,
@@ -95,7 +96,9 @@ const itemHasContent = (item: ResourceItem) => {
 };
 
 const image = computed(
-  () => props.candidate.generic.find((item) => item.item_type === "image")?.form_content as string,
+  () =>
+    props.candidate.generic.find((item: ResourceItem) => item.item_type === "image")
+      ?.form_content as string,
 );
 
 /**
@@ -228,7 +231,7 @@ watch(
                 }"
                 data-test="resource-title"
               >
-                {{ item.label[i18nLocale] }}
+                {{ getMeaningfulLabel("resourceLabel", item, i18nLocale, t) }}
                 <AVIcon
                   v-if="item.item_type === 'check_box'"
                   :icon="item.form_content ? 'square-check' : 'square-xmark'"
@@ -246,7 +249,9 @@ watch(
 
               <template v-if="item.item_type === 'link_list' && itemHasContent(item)">
                 <div class="hstack gap-1 flex-wrap" data-test="resource-link-list">
-                  <span v-if="summary">{{ `${item.label[i18nLocale]}:` }}</span>
+                  <span v-if="summary">{{
+                    `${getMeaningfulLabel("resourceLabel", item, i18nLocale, t)}:`
+                  }}</span>
                   <AVLinkVisualizer
                     v-for="link in item.form_content"
                     :key="(link as Url).attributes.name"
@@ -260,7 +265,7 @@ watch(
                 v-else-if="item.item_type === 'check_box' && summary"
                 data-test="resource-checkbox-summary"
               >
-                <span>{{ `${item.label[i18nLocale]}` }}</span>
+                <span>{{ getMeaningfulLabel("resourceLabel", item, i18nLocale, t) }}</span>
                 <AVIcon
                   :icon="item.form_content ? 'square-check' : 'square-xmark'"
                   :class="item.form_content ? 'text-success ms-1' : 'text-danger ms-1'"
@@ -276,7 +281,9 @@ watch(
                 v-else-if="item.item_type === 'select' && itemHasContent(item)"
                 data-test="resource-selection"
               >
-                <span v-if="summary">{{ `${item.label[i18nLocale]}:` }}</span>
+                <span v-if="summary">{{
+                  `${getMeaningfulLabel("resourceLabel", item, i18nLocale, t)}:`
+                }}</span>
                 {{ (item.form_content as LocalString)[i18nLocale] }}
               </div>
 
@@ -306,7 +313,9 @@ watch(
                 v-else-if="item.item_type !== 'rich_text_area' && item.item_type !== 'check_box'"
               >
                 <p class="AVResourceSection--regular-content" data-test="resource-regular-content">
-                  <span v-if="summary">{{ `${item.label[i18nLocale]}: ` }}</span>
+                  <span v-if="summary">{{
+                    `${getMeaningfulLabel("resourceLabel", item, i18nLocale, t)}: `
+                  }}</span>
                   <template v-if="item.item_type === 'date' || item.item_type === 'date_time'">{{
                     d(item.form_content, item.item_type === "date" ? null : "long")
                   }}</template>
