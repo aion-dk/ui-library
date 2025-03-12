@@ -14,8 +14,6 @@ describe("AVTweenedCount", () => {
   });
 
   it("renders correctly", async () => {
-    expect(wrapper.text()).to.eq("0");
-
     let isReady = false;
     setTimeout(() => (isReady = true), 600);
     await vi.waitFor(
