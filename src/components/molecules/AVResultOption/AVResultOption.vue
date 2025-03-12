@@ -1,16 +1,13 @@
 <script setup lang="ts">
 import { computed, inject, onMounted, watch } from "vue";
-import type { PropType, LocalString, SupportedLocale } from "@/types";
+import type { PropType, SupportedLocale, OptionContent } from "@/types";
+import { getMeaningfulLabel } from "@/helpers/meaningfulLabel";
 import { switchLocale } from "@/i18n";
 
 const props = defineProps({
-  optionTitle: {
-    type: Object as PropType<LocalString>,
+  option: {
+    type: Object as PropType<OptionContent>,
     required: true,
-  },
-  optionImage: {
-    type: String,
-    default: null,
   },
   votes: {
     type: Number,
@@ -53,6 +50,7 @@ const truncatedVotes = computed(() => Math.round(props.votes * 100) / 100);
  */
 /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
 const i18n: any = inject("i18n");
+const { t } = i18n.global;
 const i18nLocale = computed(() => i18n.global.locale.value || i18n.global.locale);
 onMounted(() => {
   if (props.locale) switchLocale(props.locale);
@@ -77,17 +75,20 @@ watch(
     }"
     data-test="result-option"
   >
-    <div class="hstack justify-content-between w-100" v-tooltip="optionTitle[i18nLocale]">
+    <div
+      class="hstack justify-content-between w-100"
+      v-tooltip="getMeaningfulLabel('option', option, i18nLocale, t)"
+    >
       <div class="hstack gap-3 overflow-hidden text-nowrap">
         <img
-          v-if="optionImage"
-          :src="optionImage"
+          v-if="option.image"
+          :src="option.image"
           class="AVResultOption--image ratio ratio-1x1"
           aria-hidden="true"
           data-test="result-image"
         />
         <span class="text-truncate" data-test="result-title">
-          {{ optionTitle[i18nLocale] }}
+          {{ getMeaningfulLabel("option", option, i18nLocale, t) }}
         </span>
       </div>
       <div class="vstack align-items-end gap-1" data-test="result-results">
