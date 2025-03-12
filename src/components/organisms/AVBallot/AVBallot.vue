@@ -70,10 +70,6 @@ const selections = computed(() => props.selectionPile.optionSelections);
 
 const validator = computed(() => new SelectionPileValidator(props.contest));
 
-const haveChildren = computed(() =>
-  props.contest.options.some((option) => !!option.children?.length),
-);
-
 const displayedWeight = computed(() => (props.contest.disregardVoterWeight ? null : props.weight));
 
 const customValidators = computed(() => {
@@ -210,11 +206,7 @@ watch(
 
     <div
       id="ballot_options"
-      class="vstack"
-      :class="{
-        'gap-2': !haveChildren,
-        'gap-4': haveChildren,
-      }"
+      class="vstack gap-2"
       :aria-label="t('js.components.AVBallot.aria_labels.ballot_options')"
     >
       <template v-for="option in contest.options" :key="option.reference">
