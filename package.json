@@ -109,6 +109,5 @@
   "lint-staged": {
     "*.{vue,js,jsx,cjs,mjs,ts,tsx,cts,mts}": "eslint --cache --fix",
     "*.{js,css,md}": "prettier --write"
-  },
-  "packageManager": "yarn@4.7.0"
+  }
 }
