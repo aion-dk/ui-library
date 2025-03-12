@@ -5,7 +5,7 @@ orbs:
 executors:
   node22:
     docker:
-      - image: mcr.microsoft.com/playwright:v1.49.1-noble
+      - image: mcr.microsoft.com/playwright:v1.51.0-noble
   ruby-node:
     docker:
       - image: cimg/ruby:3.2-node
