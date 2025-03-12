@@ -4,6 +4,7 @@ import useEventsBus from "@/helpers/eventBus";
 import type { PropType, SupportedLocale, OptionContent } from "@/types";
 import { ref, computed, inject, onMounted, watch } from "vue";
 import { switchLocale } from "@/i18n";
+import { getMeaningfulLabel } from "@/helpers/meaningfulLabel";
 
 const { eventBusEmit } = useEventsBus();
 
@@ -23,10 +24,8 @@ const searchTerm = ref<string>("");
 const searchedOptions = computed(() => {
   if (searchTerm.value.trim() === "") return [];
 
-  return search(
-    props.options,
-    searchTerm.value,
-    (option: OptionContent) => option.title[i18nLocale.value],
+  return search(props.options, searchTerm.value, (option: OptionContent) =>
+    getMeaningfulLabel("option", option, i18nLocale.value, t),
   );
 });
 
@@ -111,7 +110,7 @@ watch(
         v-for="option in searchedOptions"
         :key="option.reference"
         class="card"
-        :aria-label="option.title[i18nLocale]"
+        :aria-label="getMeaningfulLabel('option', option, i18nLocale, t)"
       >
         <div
           v-if="optionParents(option).length > 0"
@@ -119,7 +118,7 @@ watch(
         >
           <ul class="breadcrumb m-0">
             <li v-for="opt in optionParents(option)" :key="opt.reference" class="breadcrumb-item">
-              {{ opt.title[i18nLocale] }}
+              {{ getMeaningfulLabel("option", option, i18nLocale, t) }}
             </li>
           </ul>
         </div>
@@ -132,7 +131,10 @@ watch(
           data-test="search-result"
           @click.prevent="highlightOption(option)"
         >
-          <span class="text-decoration-underline" v-text="option.title[i18nLocale]" />
+          <span
+            class="text-decoration-underline"
+            v-text="getMeaningfulLabel('option', option, i18nLocale, t)"
+          />
         </div>
       </div>
 
