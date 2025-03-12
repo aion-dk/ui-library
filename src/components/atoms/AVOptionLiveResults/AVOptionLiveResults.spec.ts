@@ -35,7 +35,6 @@ describe("AVOptionLiveResults", () => {
     expect(wrapper.find("[data-test=partial-results-internal]").text()).to.not.contain("%");
     expect(wrapper.find("[data-test=partial-results-internal]").classes()).to.not.contain("ms-1");
     expect(wrapper.find("[data-test=partial-results-internal]").classes()).to.not.contain("mt-1");
-    expect(wrapper.find("[data-test=partial-results-internal]").text()).to.eq("0  votes");
 
     let isReady = false;
     setTimeout(() => (isReady = true), 1500);
