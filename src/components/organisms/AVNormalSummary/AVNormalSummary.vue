@@ -41,8 +41,7 @@ const isPercentageHidden = (reference: string): boolean =>
       <AVResultOption
         v-for="result in sortedResult"
         :key="`result_for_${result.reference}`"
-        :optionTitle="result.title"
-        :optionImage="result.image"
+        :option="{ title: result.title, reference: result.reference, image: result.image }"
         :votes="result.count"
         :total="totalCount"
         :elected="!hideElected && result.elected"

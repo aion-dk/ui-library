@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import useEventsBus from "@/helpers/eventBus";
+import { getMeaningfulLabel } from "@/helpers/meaningfulLabel";
 import { watch, ref, nextTick, computed, inject, onMounted, onUnmounted } from "vue";
 import type {
   PropType,
@@ -10,6 +11,7 @@ import type {
   CheckedEventArgs,
   PartialResults,
   ImageOption,
+  IterableObject,
 } from "@/types";
 import { switchLocale } from "@/i18n";
 
@@ -66,10 +68,19 @@ const ranked = computed(() => props.contest.markingType.voteVariation === "ranke
 
 const checkedCount = computed(
   () =>
-    props.selections.filter((selection) => selection.reference === props.option.reference).length,
+    props.selections.filter(
+      (selection: OptionSelection) => selection.reference === props.option.reference,
+    ).length,
 );
 
-const title = computed(() => props.option.title[i18nLocale.value] ?? "");
+const title = computed(
+  () =>
+    getMeaningfulLabel(
+      props.option as unknown as IterableObject,
+      i18nLocale.value,
+      t("js.components.AVOption.aria_labels.option"),
+    ) ?? "",
+);
 
 const description = computed(() => props.option.description?.[i18nLocale.value] ?? "");
 
@@ -141,7 +152,7 @@ const checkSubOptionSelected = (options: OptionContent[] | undefined): number =>
   if (!options) return 0;
 
   const count = options.filter((option) =>
-    props.selections.map((s) => s.reference).includes(option.reference),
+    props.selections.map((s: OptionSelection) => s.reference).includes(option.reference),
   ).length;
   return options.reduce((sum, subOption) => {
     return sum + checkSubOptionSelected(subOption.children);
@@ -242,7 +253,7 @@ watch(
               ? `border-${isRtl ? 'right' : 'left'}-color: ${props.option.accentColor};`
               : ''
           "
-          :aria-label="`${t('js.components.AVOption.aria_labels.option')} ${option.title[i18nLocale]}`"
+          :aria-label="`${t('js.components.AVOption.aria_labels.option')} ${getMeaningfulLabel(option as unknown as IterableObject, i18nLocale, t('js.components.AVOption.aria_labels.option'))}`"
           data-test="option-section"
         >
           <div
@@ -380,7 +391,11 @@ watch(
                   :key="optionIndex"
                   :checked="checkedCount >= optionIndex"
                   :rank="
-                    ranked ? selections.map((s) => s.reference).indexOf(option.reference) + 1 : null
+                    ranked
+                      ? selections
+                          .map((s: OptionSelection) => s.reference)
+                          .indexOf(option.reference) + 1
+                      : null
                   "
                   :exclusive-error="exclusiveError"
                   :invalid="invalid"

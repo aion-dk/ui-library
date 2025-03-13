@@ -1,9 +1,8 @@
 import { createApp } from "vue";
 import App from "@/App.vue";
 import * as UILibrary from "@/index";
-import "@/bootstrap/bootstrap.customized.scss"; // Bootstrap CSS
 import "bootstrap"; // Bootstrap JS
-import "@/bootstrap/mock.scss"; // Mocked theme CSS
+import "@/bootstrap/local-style-entrypoint.scss"; // Bootstrap CSS + Mocked theme CSS
 
 const app = createApp(App);
 

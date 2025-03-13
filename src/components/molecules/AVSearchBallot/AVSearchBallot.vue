@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { search } from "@/helpers/ballotSearcher";
 import useEventsBus from "@/helpers/eventBus";
-import type { PropType, SupportedLocale, OptionContent } from "@/types";
+import type { PropType, SupportedLocale, OptionContent, IterableObject } from "@/types";
 import { ref, computed, inject, onMounted, watch } from "vue";
 import { switchLocale } from "@/i18n";
+import { getMeaningfulLabel } from "@/helpers/meaningfulLabel";
 
 const { eventBusEmit } = useEventsBus();
 
@@ -23,10 +24,12 @@ const searchTerm = ref<string>("");
 const searchedOptions = computed(() => {
   if (searchTerm.value.trim() === "") return [];
 
-  return search(
-    props.options,
-    searchTerm.value,
-    (option: OptionContent) => option.title[i18nLocale.value],
+  return search(props.options, searchTerm.value, (option: OptionContent) =>
+    getMeaningfulLabel(
+      option as unknown as IterableObject,
+      i18nLocale.value,
+      t("js.components.AVOption.aria_labels.option"),
+    ),
   );
 });
 
@@ -111,7 +114,13 @@ watch(
         v-for="option in searchedOptions"
         :key="option.reference"
         class="card"
-        :aria-label="option.title[i18nLocale]"
+        :aria-label="
+          getMeaningfulLabel(
+            option as unknown as IterableObject,
+            i18nLocale,
+            t('js.components.AVOption.aria_labels.option'),
+          )
+        "
       >
         <div
           v-if="optionParents(option).length > 0"
@@ -119,7 +128,13 @@ watch(
         >
           <ul class="breadcrumb m-0">
             <li v-for="opt in optionParents(option)" :key="opt.reference" class="breadcrumb-item">
-              {{ opt.title[i18nLocale] }}
+              {{
+                getMeaningfulLabel(
+                  option as unknown as IterableObject,
+                  i18nLocale,
+                  t("js.components.AVOption.aria_labels.option"),
+                )
+              }}
             </li>
           </ul>
         </div>
@@ -132,7 +147,16 @@ watch(
           data-test="search-result"
           @click.prevent="highlightOption(option)"
         >
-          <span class="text-decoration-underline" v-text="option.title[i18nLocale]" />
+          <span
+            class="text-decoration-underline"
+            v-text="
+              getMeaningfulLabel(
+                option as unknown as IterableObject,
+                i18nLocale,
+                t('js.components.AVOption.aria_labels.option'),
+              )
+            "
+          />
         </div>
       </div>
 

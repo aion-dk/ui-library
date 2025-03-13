@@ -1,7 +1,14 @@
 <script setup lang="ts">
 import { inject, onMounted, watch, computed } from "vue";
 import { switchLocale } from "@/i18n";
-import type { AVRankedSummaryResultOptionRow, SupportedLocale, Theme, PropType } from "@/types";
+import type {
+  AVRankedSummaryResultOptionRow,
+  SupportedLocale,
+  Theme,
+  PropType,
+  IterableObject,
+} from "@/types";
+import { getMeaningfulLabel } from "@/helpers/meaningfulLabel";
 
 const props = defineProps({
   result: {
@@ -40,17 +47,29 @@ const roundCount = computed(() => {
 
 const elected = computed(() => {
   return props.result
-    .filter((row) => row.elected)
-    .map((row) => {
-      return row.title[i18nLocale.value] ?? Object.values(row.title)[0];
+    .filter((row: AVRankedSummaryResultOptionRow) => row.elected)
+    .map((row: AVRankedSummaryResultOptionRow) => {
+      return (
+        getMeaningfulLabel(
+          { reference: row.reference, title: row.title },
+          i18nLocale.value,
+          t("js.components.AVOption.aria_labels.option"),
+        ) ?? Object.values(row.title)[0]
+      );
     });
 });
 
 const tied = computed(() => {
   return props.result
-    .filter((row) => row.tied)
-    .map((row) => {
-      return row.title[i18nLocale.value] ?? Object.values(row.title)[0];
+    .filter((row: AVRankedSummaryResultOptionRow) => row.tied)
+    .map((row: AVRankedSummaryResultOptionRow) => {
+      return (
+        getMeaningfulLabel(
+          { reference: row.reference, title: row.title },
+          i18nLocale.value,
+          t("js.components.AVOption.aria_labels.option"),
+        ) ?? Object.values(row.title)[0]
+      );
     });
 });
 
@@ -124,7 +143,13 @@ watch(
               [`AVRankedSummary--text-${theme}`]: !option.elected && !option.tied,
             }"
           >
-            {{ option.title[i18nLocale] }}
+            {{
+              getMeaningfulLabel(
+                option as unknown as IterableObject,
+                i18nLocale,
+                t("js.components.AVOption.aria_labels.option"),
+              )
+            }}
           </td>
 
           <td

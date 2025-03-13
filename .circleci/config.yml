@@ -1,11 +1,11 @@
 version: 2.1
 orbs:
-  node: circleci/node@7.0.0
-  docker: assemblyvoting/docker@1.6.2
+  node: circleci/node@7.1.0
+  docker: assemblyvoting/docker@1.6.3
 executors:
   node22:
     docker:
-      - image: mcr.microsoft.com/playwright:v1.49.1-noble
+      - image: mcr.microsoft.com/playwright:v1.51.0-noble
   ruby-node:
     docker:
       - image: cimg/ruby:3.2-node
@@ -26,13 +26,12 @@ jobs:
             - v1-dependencies-{{ checksum "yarn.lock" }}
             - v1-dependencies-
       - node/install-yarn
-      - run: yarn install --frozen-lockfile
+      - run: yarn install --immutable
       - save_cache:
           paths:
             - ./node_modules
           key: v1-dependencies-{{ checksum "yarn.lock" }}
       - run: yarn run lint
-      - run: yarn run test
       - run: yarn run test-coverage
       - run: yarn run build
       - run: yarn run build-storybook

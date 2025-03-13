@@ -1,5 +1,15 @@
 const IMAGE_OPTIONS = ["square", "passport"] as const;
 
+const LOOKUP_DEFAULT_FALLBACKS: Array<string> = [
+  "title",
+  "label",
+  "first_available_locale",
+  "reference",
+  "internal_name",
+  "attribute_name",
+  "id",
+] as const;
+
 // AVSpinner
 const SPINNER_VARIANTS = ["spinner-border", "spinner-grow"] as const;
 
@@ -28,6 +38,7 @@ const ANIMATED_MENU_BUTTON_VARIANTS = ["cross", "arrow-down"] as const;
 
 export {
   IMAGE_OPTIONS,
+  LOOKUP_DEFAULT_FALLBACKS,
   SPINNER_VARIANTS,
   LINK_VISUALIZER_KEYS,
   LIVE_RESULT_MODES,

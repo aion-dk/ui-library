@@ -6,9 +6,8 @@ import globals from "./globals";
 import parameters from "./parameters";
 import FloatingVue from "floating-vue";
 import "floating-vue/dist/style.css";
-import "@/bootstrap/bootstrap.customized.scss"; // Bootstrap CSS
 import "@/bootstrap"; // Bootstrap JS
-import "@/bootstrap/mock.scss"; // Mocked theme CSS
+import "@/bootstrap/local-style-entrypoint.scss"; // Bootstrap CSS + Mocked theme CSS
 
 import {
   AVIcon,

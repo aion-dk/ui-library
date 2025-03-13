@@ -7,6 +7,7 @@ const translations: DefineLocaleMessage = {
     true: "التحقق",
     false: "غير مدقق",
     video: "مشغل الفيديو من مصدر خارجي",
+    human: "عنصر النموذج",
   },
   ca: {
     and_more: "i {amount} més",
@@ -14,6 +15,7 @@ const translations: DefineLocaleMessage = {
     false: "No seleccionat",
     alt_candidate: "Imatge del candidat/a",
     video: "Reproductor de vídeo d'una font externa",
+    human: "Element de formulari",
   },
   cy: {
     and_more: "a {amount} mwy",
@@ -21,6 +23,7 @@ const translations: DefineLocaleMessage = {
     false: "Heb ei ddewis",
     alt_candidate: "Delwedd yr ymgeisydd",
     video: "Chwaraewr fideo o ffynhonnell allanol",
+    human: "Ffurflen eitem",
   },
   da: {
     alt_candidate: "Portræt af kandidaten",
@@ -28,6 +31,7 @@ const translations: DefineLocaleMessage = {
     true: "Slået til",
     false: "Slået fra",
     video: "Videoafspiller fra ekstern kilde",
+    human: "Formularelement",
   },
   de: {
     alt_candidate: "Porträt des Kandidaten",
@@ -35,6 +39,7 @@ const translations: DefineLocaleMessage = {
     true: "Geprüft",
     false: "Nicht geprüft",
     video: "Videoplayer von externer Quelle",
+    human: "Formularelement",
   },
   en: {
     alt_candidate: "Portrait of the candidate",
@@ -42,6 +47,7 @@ const translations: DefineLocaleMessage = {
     true: "Checked",
     false: "Not checked",
     video: "Video player from external source",
+    human: "Form item",
   },
   es: {
     alt_candidate: "Retrato del candidato",
@@ -49,6 +55,7 @@ const translations: DefineLocaleMessage = {
     true: "Marcado",
     false: "No marcado",
     video: "Reproductor de vídeo de fuente externa",
+    human: "Item del formulario",
   },
   fi: {
     alt_candidate: "Ehdokkaan muotokuva",
@@ -56,6 +63,7 @@ const translations: DefineLocaleMessage = {
     true: "Tarkistettu",
     false: "Ei tarkistettu",
     video: "Videosoitin ulkoisesta lähteestä",
+    human: "Lomakekohde",
   },
   fr: {
     alt_candidate: "Portrait du candidat",
@@ -63,6 +71,7 @@ const translations: DefineLocaleMessage = {
     true: "Vérifié",
     false: "Non vérifié",
     video: "Lecteur vidéo à partir d'une source externe",
+    human: "Élément de formulaire",
   },
   is: {
     alt_candidate: "Andlitsmynd af frambjóðandanum",
@@ -70,6 +79,7 @@ const translations: DefineLocaleMessage = {
     true: "Merkt",
     false: "Ekki athugað",
     video: "Myndbandsspilari frá ytri uppruna",
+    human: "Form atriði",
   },
   it: {
     alt_candidate: "Ritratto del candidato",
@@ -77,6 +87,7 @@ const translations: DefineLocaleMessage = {
     true: "Selezionato",
     false: "Non selezionato",
     video: "Lettore video da fonte esterna",
+    human: "Elemento del modulo",
   },
   nl: {
     alt_candidate: "Portret van de kandidaat",
@@ -84,6 +95,7 @@ const translations: DefineLocaleMessage = {
     true: "Gecontroleerd",
     false: "Niet gecontroleerd",
     video: "Videospeler van externe bron",
+    human: "Formulier item",
   },
   pl: {
     alt_candidate: "Portret kandydata",
@@ -91,6 +103,7 @@ const translations: DefineLocaleMessage = {
     true: "Sprawdzony",
     false: "Niesprawdzone",
     video: "Odtwarzacz wideo ze źródła zewnętrznego",
+    human: "Element formularza",
   },
   pt: {
     alt_candidate: "Retrato do candidato",
@@ -98,6 +111,7 @@ const translations: DefineLocaleMessage = {
     true: "Marcado",
     false: "Não marcado",
     video: "Reprodutor de vídeo de fonte externa",
+    human: "Item de formulário",
   },
   ro: {
     alt_candidate: "Portretul candidatului",
@@ -105,6 +119,7 @@ const translations: DefineLocaleMessage = {
     true: "Verificat",
     false: "Nu a verificat",
     video: "Player video din sursă externă",
+    human: "Element de formular",
   },
   ru: {
     alt_candidate: "Портрет кандидата",
@@ -112,6 +127,7 @@ const translations: DefineLocaleMessage = {
     true: "Проверено",
     false: "Не проверено",
     video: "Видеоплеер из внешнего источника",
+    human: "Элемент формы",
   },
   sv: {
     alt_candidate: "Porträtt av kandidaten",
@@ -119,6 +135,7 @@ const translations: DefineLocaleMessage = {
     true: "Kontrollerade",
     false: "Inte kontrollerad",
     video: "Videospelare från extern källa",
+    human: "Formulärobjekt",
   },
 };
 

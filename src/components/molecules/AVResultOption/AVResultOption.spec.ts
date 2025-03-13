@@ -1,13 +1,16 @@
 import { describe, it, expect } from "vitest";
 import { mount } from "@vue/test-utils";
 import localI18n from "@/i18n";
+import { getOption } from "@/examples";
 
 import AVResultOption from "./AVResultOption.vue";
+
+const INITIAL_OPTION = getOption(["selectable"], 1);
 
 describe("AVResultOption", () => {
   const wrapper = mount(AVResultOption, {
     props: {
-      optionTitle: { en: "I'm the option title" },
+      option: INITIAL_OPTION,
       votes: 1,
       total: 2,
       locale: "en",
@@ -29,14 +32,16 @@ describe("AVResultOption", () => {
     expect(wrapper.find("[data-test=result-option]").classes()).to.not.contain("bg-success-faded");
     expect(wrapper.find("[data-test=result-option]").classes()).to.not.contain("bg-warning-faded");
 
-    expect(wrapper.find("[data-test=result-title]").text()).to.contain("I'm the option title");
+    expect(wrapper.find("[data-test=result-title]").text()).to.contain("Example option 1");
     expect(wrapper.find("[data-test=result-results]").text()).to.contain("1");
     expect(wrapper.find("[data-test=result-results]").text()).to.contain("50%");
   });
 
   it("can update values", async () => {
+    INITIAL_OPTION.title.en = "I've changed";
+
     await wrapper.setProps({
-      optionTitle: { en: "I've changed" },
+      option: INITIAL_OPTION,
       votes: 2,
       total: 10,
       elected: true,
@@ -80,19 +85,20 @@ describe("AVResultOption", () => {
 
   it("can display image", async () => {
     await wrapper.setProps({
-      optionImage: "http://image.com",
+      option: getOption(["selectable", "image"], 1),
     });
 
     expect(wrapper.findAll("[data-test=result-image]").length).to.eq(1);
-    expect(wrapper.find("[data-test=result-image]").attributes().src).to.eq("http://image.com");
+    expect(wrapper.find("[data-test=result-image]").attributes().src).to.eq(
+      "https://electa.staging-1.assemblyvoting.net/uploads_proxy/option/image/657750",
+    );
   });
 
   it("can switch language", async () => {
     await wrapper.setProps({
       locale: "is",
-      optionTitle: { is: "Title in Icelandic" },
     });
 
-    expect(wrapper.find("[data-test=result-title]").text()).to.contain("Title in Icelandic");
+    expect(wrapper.find("[data-test=result-title]").text()).to.contain("Dæmi um valmöguleika 1");
   });
 });

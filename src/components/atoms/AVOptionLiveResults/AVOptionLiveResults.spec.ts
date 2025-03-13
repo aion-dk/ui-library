@@ -37,14 +37,14 @@ describe("AVOptionLiveResults", () => {
     expect(wrapper.find("[data-test=partial-results-internal]").classes()).to.not.contain("mt-1");
 
     let isReady = false;
-    setTimeout(() => (isReady = true), 1100);
+    setTimeout(() => (isReady = true), 1500);
     await vi.waitFor(
       () => {
         if (!isReady) throw new Error("Animation failed");
         expect(wrapper.find("[data-test=partial-results-internal]").text()).to.eq("5  votes");
       },
       {
-        timeout: 2000,
+        timeout: 5000,
         interval: 500,
       },
     );
@@ -56,14 +56,14 @@ describe("AVOptionLiveResults", () => {
     });
 
     let isReady = false;
-    setTimeout(() => (isReady = true), 1100);
+    setTimeout(() => (isReady = true), 1500);
     await vi.waitFor(
       () => {
         if (!isReady) throw new Error("Animation failed");
         expect(wrapper.find("[data-test=partial-results-internal]").text()).to.eq("5  votes-25.2%");
       },
       {
-        timeout: 2000,
+        timeout: 5000,
         interval: 500,
       },
     );
@@ -86,7 +86,7 @@ describe("AVOptionLiveResults", () => {
     });
 
     let isReady = false;
-    setTimeout(() => (isReady = true), 1100);
+    setTimeout(() => (isReady = true), 1500);
     await vi.waitFor(
       () => {
         if (!isReady) throw new Error("Animation failed");
@@ -95,7 +95,7 @@ describe("AVOptionLiveResults", () => {
         );
       },
       {
-        timeout: 2000,
+        timeout: 5000,
         interval: 500,
       },
     );

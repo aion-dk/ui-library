@@ -1,7 +1,15 @@
 <script setup lang="ts">
-import type { PropType, InstantRunoffRound, SupportedLocale, Result, Theme } from "@/types";
+import type {
+  PropType,
+  InstantRunoffRound,
+  SupportedLocale,
+  Result,
+  Theme,
+  IterableObject,
+} from "@/types";
 import { inject, onMounted, watch, computed } from "vue";
 import { switchLocale } from "@/i18n";
+import { getMeaningfulLabel } from "@/helpers/meaningfulLabel";
 
 const props = defineProps({
   rounds: {
@@ -119,7 +127,13 @@ watch(
             <tr v-for="(option, optionIndex) in sortedResult" :key="optionIndex">
               <template v-if="option.title">
                 <td :class="`AVInstantRunoffSummary--text-${theme}`">
-                  {{ option.title[i18nLocale] }}
+                  {{
+                    getMeaningfulLabel(
+                      option as IterableObject,
+                      i18nLocale,
+                      t("js.components.AVOption.aria_labels.option"),
+                    )
+                  }}
                 </td>
                 <td
                   v-for="number in rounds.length"
