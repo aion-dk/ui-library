@@ -9,6 +9,30 @@ const INITIAL_CONTEST = { ...getContest([]), id: 7 };
 const INITIAL_RESOURCE = { ...getCandidate().generic[1], internal_name: "Some internal name" };
 localI18n.global.locale = "es";
 
+describe("Respects fallback order", () => {
+  it("Gets Item ID", async () => {
+    expect(
+      getMeaningfulLabel(INITIAL_OPTION, "da", "Item", ["id", "first_available_locale", "title"]),
+    ).to.eq("Item #5");
+  });
+
+  it("Gets first available locale", async () => {
+    expect(
+      getMeaningfulLabel(INITIAL_OPTION, "da", "Item", ["first_available_locale", "title"]),
+    ).to.eq("خيار المثال 1");
+  });
+
+  it("Gets title", async () => {
+    expect(getMeaningfulLabel(INITIAL_OPTION, "da", "Item", ["title"])).to.eq(
+      "Eksempel mulighed 1",
+    );
+  });
+
+  it("Gets title", async () => {
+    expect(getMeaningfulLabel({}, "da", "Item", ["title"])).to.eq("Unknown resource");
+  });
+});
+
 describe("Option labels", () => {
   it("Gets localised label", async () => {
     expect(getMeaningfulLabel(INITIAL_OPTION, "es")).to.eq("Opción de ejemplo 1");
