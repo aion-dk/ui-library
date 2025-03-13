@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, inject, onMounted, watch } from "vue";
-import type { PropType, SupportedLocale, OptionContent } from "@/types";
+import type { PropType, SupportedLocale, OptionContent, IterableObject } from "@/types";
 import { getMeaningfulLabel } from "@/helpers/meaningfulLabel";
 import { switchLocale } from "@/i18n";
 
@@ -77,7 +77,13 @@ watch(
   >
     <div
       class="hstack justify-content-between w-100"
-      v-tooltip="getMeaningfulLabel('option', option, i18nLocale, t)"
+      v-tooltip="
+        getMeaningfulLabel(
+          option as unknown as IterableObject,
+          i18nLocale,
+          t('js.components.AVOption.aria_labels.option'),
+        )
+      "
     >
       <div class="hstack gap-3 overflow-hidden text-nowrap">
         <img
@@ -88,7 +94,13 @@ watch(
           data-test="result-image"
         />
         <span class="text-truncate" data-test="result-title">
-          {{ getMeaningfulLabel("option", option, i18nLocale, t) }}
+          {{
+            getMeaningfulLabel(
+              option as unknown as IterableObject,
+              i18nLocale,
+              t("js.components.AVOption.aria_labels.option"),
+            )
+          }}
         </span>
       </div>
       <div class="vstack align-items-end gap-1" data-test="result-results">

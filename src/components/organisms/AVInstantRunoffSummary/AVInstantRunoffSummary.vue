@@ -5,7 +5,7 @@ import type {
   SupportedLocale,
   Result,
   Theme,
-  OptionContent,
+  IterableObject,
 } from "@/types";
 import { inject, onMounted, watch, computed } from "vue";
 import { switchLocale } from "@/i18n";
@@ -127,7 +127,13 @@ watch(
             <tr v-for="(option, optionIndex) in sortedResult" :key="optionIndex">
               <template v-if="option.title">
                 <td :class="`AVInstantRunoffSummary--text-${theme}`">
-                  {{ getMeaningfulLabel("option", option as OptionContent, i18nLocale, t) }}
+                  {{
+                    getMeaningfulLabel(
+                      option as IterableObject,
+                      i18nLocale,
+                      t("js.components.AVOption.aria_labels.option"),
+                    )
+                  }}
                 </td>
                 <td
                   v-for="number in rounds.length"

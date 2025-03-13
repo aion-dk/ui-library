@@ -10,6 +10,7 @@ import type {
   AVSplitHelperState,
   PartialResults,
   ImageOption,
+  IterableObject,
 } from "@/types";
 import SelectionPileValidator from "@aion-dk/js-client/dist/lib/validators/selectionPileValidator";
 import ContestSelectionValidator from "@aion-dk/js-client/dist/lib/validators/contestSelectionValidator";
@@ -231,7 +232,13 @@ watch(
 
 <template>
   <h3 class="h4 mt-0 mb-2" aria-live="polite" data-test="split-helper-contest-title">
-    {{ getMeaningfulLabel("contest", contest, i18nLocale, t) }}
+    {{
+      getMeaningfulLabel(
+        contest as unknown as IterableObject,
+        i18nLocale,
+        t("js.components.AVBallot.aria_labels.ballot"),
+      )
+    }}
   </h3>
   <div data-test="split-helper-contest-description" v-html="contest.description?.[i18nLocale]" />
   <template v-if="userCanSplit">

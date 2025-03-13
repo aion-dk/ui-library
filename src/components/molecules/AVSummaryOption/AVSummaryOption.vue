@@ -7,7 +7,7 @@ import type {
   AVSummaryOptionObject,
   AVSummaryOptionParent,
   ImageOption,
-  OptionContent,
+  IterableObject,
 } from "@/types";
 import { getMeaningfulLabel } from "@/helpers/meaningfulLabel";
 
@@ -61,10 +61,9 @@ const displayTitle = computed(() => {
     return t("js.components.AVSummaryOption.blank");
   } else {
     return getMeaningfulLabel(
-      "option",
-      props.option as unknown as OptionContent,
+      props.option as unknown as IterableObject,
       i18nLocale.value,
-      t,
+      t("js.components.AVOption.aria_labels.option"),
     );
   }
 });

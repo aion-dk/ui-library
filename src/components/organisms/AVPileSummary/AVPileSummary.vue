@@ -12,6 +12,7 @@ import type {
   AVPileSummaryOptionSummary,
   AVPileSummaryState,
   OptionSelection,
+  IterableObject,
 } from "@/types";
 import { getMeaningfulLabel } from "@/helpers/meaningfulLabel";
 
@@ -221,7 +222,13 @@ watch(
         </p>
         <p v-for="(option, index) in shownOptions" :key="index" class="mb-0">
           {{ option.rank ? `${option.rank}: ` : "" }}
-          {{ getMeaningfulLabel("option", option as unknown as OptionContent, i18nLocale, t) }}
+          {{
+            getMeaningfulLabel(
+              option as unknown as IterableObject,
+              i18nLocale,
+              t("js.components.AVOption.aria_labels.option"),
+            )
+          }}
         </p>
         <p v-for="(option, index) in optionSummaries.writeIns" :key="index" class="mb-0">
           <b>{{ option.partyLetter }} - {{ option.partyName }}</b>

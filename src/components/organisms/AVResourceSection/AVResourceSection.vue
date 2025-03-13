@@ -10,6 +10,7 @@ import type {
   Url,
   ResourceGroup,
   LocalString,
+  IterableObject,
 } from "@/types";
 
 const props = defineProps({
@@ -231,7 +232,13 @@ watch(
                 }"
                 data-test="resource-title"
               >
-                {{ getMeaningfulLabel("resourceLabel", item, i18nLocale, t) }}
+                {{
+                  getMeaningfulLabel(
+                    item as unknown as IterableObject,
+                    i18nLocale,
+                    `${`${t("js.components.AVResourceSection.human")} ${item.item_type}`} ${item.item_type}`,
+                  )
+                }}
                 <AVIcon
                   v-if="item.item_type === 'check_box'"
                   :icon="item.form_content ? 'square-check' : 'square-xmark'"
@@ -250,7 +257,7 @@ watch(
               <template v-if="item.item_type === 'link_list' && itemHasContent(item)">
                 <div class="hstack gap-1 flex-wrap" data-test="resource-link-list">
                   <span v-if="summary">{{
-                    `${getMeaningfulLabel("resourceLabel", item, i18nLocale, t)}:`
+                    `${getMeaningfulLabel(item as unknown as IterableObject, i18nLocale, `${t("js.components.AVResourceSection.human")} ${item.item_type}`)}:`
                   }}</span>
                   <AVLinkVisualizer
                     v-for="link in item.form_content"
@@ -265,7 +272,13 @@ watch(
                 v-else-if="item.item_type === 'check_box' && summary"
                 data-test="resource-checkbox-summary"
               >
-                <span>{{ getMeaningfulLabel("resourceLabel", item, i18nLocale, t) }}</span>
+                <span>{{
+                  getMeaningfulLabel(
+                    item as unknown as IterableObject,
+                    i18nLocale,
+                    `${t("js.components.AVResourceSection.human")} ${item.item_type}`,
+                  )
+                }}</span>
                 <AVIcon
                   :icon="item.form_content ? 'square-check' : 'square-xmark'"
                   :class="item.form_content ? 'text-success ms-1' : 'text-danger ms-1'"
@@ -282,7 +295,7 @@ watch(
                 data-test="resource-selection"
               >
                 <span v-if="summary">{{
-                  `${getMeaningfulLabel("resourceLabel", item, i18nLocale, t)}:`
+                  `${getMeaningfulLabel(item as unknown as IterableObject, i18nLocale, `${t("js.components.AVResourceSection.human")} ${item.item_type}`)}:`
                 }}</span>
                 {{ (item.form_content as LocalString)[i18nLocale] }}
               </div>
@@ -314,7 +327,7 @@ watch(
               >
                 <p class="AVResourceSection--regular-content" data-test="resource-regular-content">
                   <span v-if="summary">{{
-                    `${getMeaningfulLabel("resourceLabel", item, i18nLocale, t)}: `
+                    `${getMeaningfulLabel(item as unknown as IterableObject, i18nLocale, `${t("js.components.AVResourceSection.human")} ${item.item_type}`)}: `
                   }}</span>
                   <template v-if="item.item_type === 'date' || item.item_type === 'date_time'">{{
                     d(item.form_content, item.item_type === "date" ? null : "long")

@@ -11,6 +11,7 @@ import type {
   CheckedEventArgs,
   PartialResults,
   ImageOption,
+  IterableObject,
 } from "@/types";
 import { switchLocale } from "@/i18n";
 
@@ -72,7 +73,14 @@ const checkedCount = computed(
     ).length,
 );
 
-const title = computed(() => getMeaningfulLabel("option", props.option, i18nLocale.value, t) ?? "");
+const title = computed(
+  () =>
+    getMeaningfulLabel(
+      props.option as unknown as IterableObject,
+      i18nLocale.value,
+      t("js.components.AVOption.aria_labels.option"),
+    ) ?? "",
+);
 
 const description = computed(() => props.option.description?.[i18nLocale.value] ?? "");
 
@@ -245,7 +253,7 @@ watch(
               ? `border-${isRtl ? 'right' : 'left'}-color: ${props.option.accentColor};`
               : ''
           "
-          :aria-label="`${t('js.components.AVOption.aria_labels.option')} ${getMeaningfulLabel('option', option, i18nLocale, t)}`"
+          :aria-label="`${t('js.components.AVOption.aria_labels.option')} ${getMeaningfulLabel(option as unknown as IterableObject, i18nLocale, t('js.components.AVOption.aria_labels.option'))}`"
           data-test="option-section"
         >
           <div

@@ -6,7 +6,7 @@ import type {
   SupportedLocale,
   Theme,
   PropType,
-  OptionContent,
+  IterableObject,
 } from "@/types";
 import { getMeaningfulLabel } from "@/helpers/meaningfulLabel";
 
@@ -51,10 +51,9 @@ const elected = computed(() => {
     .map((row: AVRankedSummaryResultOptionRow) => {
       return (
         getMeaningfulLabel(
-          "option",
-          { reference: row.reference, title: row.title } as OptionContent,
+          { reference: row.reference, title: row.title },
           i18nLocale.value,
-          t,
+          t("js.components.AVOption.aria_labels.option"),
         ) ?? Object.values(row.title)[0]
       );
     });
@@ -66,10 +65,9 @@ const tied = computed(() => {
     .map((row: AVRankedSummaryResultOptionRow) => {
       return (
         getMeaningfulLabel(
-          "option",
-          { reference: row.reference, title: row.title } as OptionContent,
+          { reference: row.reference, title: row.title },
           i18nLocale.value,
-          t,
+          t("js.components.AVOption.aria_labels.option"),
         ) ?? Object.values(row.title)[0]
       );
     });
@@ -145,7 +143,13 @@ watch(
               [`AVRankedSummary--text-${theme}`]: !option.elected && !option.tied,
             }"
           >
-            {{ getMeaningfulLabel("option", option as unknown as OptionContent, i18nLocale, t) }}
+            {{
+              getMeaningfulLabel(
+                option as unknown as IterableObject,
+                i18nLocale,
+                t("js.components.AVOption.aria_labels.option"),
+              )
+            }}
           </td>
 
           <td
