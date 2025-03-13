@@ -39,7 +39,7 @@ const getMeaningfulLabel: LookUpMethod = (
     }
   });
 
-  if (result === null) result = "Unknown resource";
+  if (result === null) result = "";
 
   return result;
 };

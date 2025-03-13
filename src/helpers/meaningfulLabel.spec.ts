@@ -29,7 +29,7 @@ describe("Respects fallback order", () => {
   });
 
   it("Gets title", async () => {
-    expect(getMeaningfulLabel({}, "da", "Item", ["title"])).to.eq("Unknown resource");
+    expect(getMeaningfulLabel({}, "da", "Item", ["title"])).to.eq("");
   });
 });
 
@@ -60,7 +60,7 @@ describe("Option labels", () => {
   it("Gets 'unknown' when everything is missing", async () => {
     // @ts-expect-error it will usually have one. This it just for testing purposes.
     delete INITIAL_OPTION.id;
-    expect(getMeaningfulLabel(INITIAL_OPTION, "es")).to.eq("Unknown resource");
+    expect(getMeaningfulLabel(INITIAL_OPTION, "es")).to.eq("");
   });
 });
 
@@ -90,7 +90,7 @@ describe("Contest labels", () => {
   it("Gets 'unknown' when everything is missing", async () => {
     // @ts-expect-error it will usually have one. This it just for testing purposes.
     delete INITIAL_CONTEST.id;
-    expect(getMeaningfulLabel(INITIAL_CONTEST, "es")).to.eq("Unknown resource");
+    expect(getMeaningfulLabel(INITIAL_CONTEST, "es")).to.eq("");
   });
 });
 
@@ -132,6 +132,6 @@ describe("Resource labels", () => {
   it("Gets 'unknown' when everything is missing", async () => {
     // @ts-expect-error it will usually have one. This it just for testing purposes.
     delete INITIAL_RESOURCE.id;
-    expect(getMeaningfulLabel(INITIAL_RESOURCE, "es")).to.eq("Unknown resource");
+    expect(getMeaningfulLabel(INITIAL_RESOURCE, "es")).to.eq("");
   });
 });
