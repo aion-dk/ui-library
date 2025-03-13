@@ -34,7 +34,10 @@ const isPercentageHidden = (reference: string): boolean =>
 
 <template>
   <div class="AVNormalSummary--container d-flex w-100">
-    <div class="AVNormalSummary d-grid gap-2 w-100">
+    <div
+      class="AVNormalSummary d-grid gap-2 w-100"
+      :class="{ 'dynamic-columns': sortedResult.length > 8 }"
+    >
       <AVResultOption
         v-for="result in sortedResult"
         :key="`result_for_${result.reference}`"

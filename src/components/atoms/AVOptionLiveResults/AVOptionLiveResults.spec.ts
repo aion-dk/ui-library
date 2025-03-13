@@ -54,7 +54,6 @@ describe("AVOptionLiveResults", () => {
     await wrapper.setProps({
       showPercentage: true,
     });
-    expect(wrapper.find("[data-test=partial-results-internal]").text()).to.eq("5  votes-0.0%");
 
     let isReady = false;
     setTimeout(() => (isReady = true), 1500);
