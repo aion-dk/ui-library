@@ -1,6 +1,8 @@
+import type { LocalString } from "@/types";
+
 interface AVRankedSummaryResultOptionRow {
   reference: string;
-  title: Record<string, string>;
+  title: LocalString;
   rounds: {
     count: number;
     tied: boolean;
