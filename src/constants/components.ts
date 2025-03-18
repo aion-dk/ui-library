@@ -3,6 +3,7 @@ const IMAGE_OPTIONS = ["square", "passport"] as const;
 const LOOKUP_DEFAULT_FALLBACKS: Array<string> = [
   "title",
   "label",
+  "group",
   "first_available_locale",
   "reference",
   "internal_name",

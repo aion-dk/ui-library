@@ -17,10 +17,14 @@ const getMeaningfulLabel: LookUpMethod = (
         case fallback === "label":
           result = object.label?.[locale] ?? null;
           break;
+        case fallback === "group":
+          result = object.group?.[locale] ?? null;
+          break;
         case fallback === "first_available_locale":
           result =
             object.title?.[Object.keys(object.title)[0]] ??
             object.label?.[Object.keys(object.label)[0]] ??
+            object.group?.[Object.keys(object.group)[0]] ??
             null;
           break;
         case fallback === "reference":

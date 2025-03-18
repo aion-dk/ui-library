@@ -6,6 +6,7 @@ type LookUpFallback = (typeof LOOKUP_DEFAULT_FALLBACKS)[number];
 interface IterableObject {
   title?: LocalString;
   label?: LocalString;
+  group?: LocalString;
   reference?: string;
   internal_name?: string;
   attribute_name?: string;

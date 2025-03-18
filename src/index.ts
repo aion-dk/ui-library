@@ -66,6 +66,7 @@ import {
   AVNormalSummary,
   AVRankedSummary,
   AVInstantRunoffSummary,
+  AVDhondtSummary,
   //   AVFooter,
   //   AVSidebar,
   //   AVNavbar,
@@ -126,6 +127,7 @@ export default {
     app.component("AVNormalSummary", AVNormalSummary);
     app.component("AVRankedSummary", AVRankedSummary);
     app.component("AVInstantRunoffSummary", AVInstantRunoffSummary);
+    app.component("AVDhondtSummary", AVDhondtSummary);
     // app.component("AVFooter", AVFooter);
     // app.component("AVSidebar", AVSidebar);
     // app.component("AVNavbar", AVNavbar);
@@ -186,6 +188,7 @@ export {
   AVNormalSummary,
   AVRankedSummary,
   AVInstantRunoffSummary,
+  AVDhondtSummary,
   //   AVFooter,
   //   AVSidebar,
   //   AVNavbar,
