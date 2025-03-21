@@ -107,21 +107,9 @@ watch(
       id="ballot_searcher_results"
       class="AVSearchBallot--results vstack overflow-auto"
       aria-live="polite"
-      aria-label="search-results"
       data-test="search-results"
     >
-      <div
-        v-for="option in searchedOptions"
-        :key="option.reference"
-        class="card"
-        :aria-label="
-          getMeaningfulLabel(
-            option as unknown as IterableObject,
-            i18nLocale,
-            t('js.components.AVOption.aria_labels.option'),
-          )
-        "
-      >
+      <div v-for="option in searchedOptions" :key="option.reference" class="card">
         <div
           v-if="optionParents(option).length > 0"
           class="AVSeachOptionBallot--ancestry card-header small"
@@ -143,7 +131,11 @@ watch(
           :id="`search_result_${option.reference}`"
           class="AVSearchBallot--option card-body"
           role="button"
-          :aria-label="t('js.components.AVSearchBallot.aria_labels.go_to_option')"
+          :aria-label="`${t('js.components.AVSearchBallot.aria_labels.go_to_option')} ${getMeaningfulLabel(
+            option as unknown as IterableObject,
+            i18nLocale,
+            t('js.components.AVOption.aria_labels.option'),
+          )}`"
           data-test="search-result"
           @click.prevent="highlightOption(option)"
         >

@@ -131,7 +131,7 @@ watch(
           :key="`option_${option.reference}`"
           :class="{
             'bg-success-faded': !hideElected && option.elected,
-            'bg-warning-faded': !hideTied && option.tied,
+            'bg-warning-faded': !hideTied && option.tied && !option.elected,
           }"
           data-test="candidate-ranked-result"
         >
