@@ -130,7 +130,7 @@ watch(
           :key="`option_${option.reference}`"
           :class="{
             'bg-success-faded': !hideElected && option.elected,
-            'bg-warning-faded': !hideTied && option.tied,
+            'bg-warning-faded': !hideTied && option.tied && !option.elected,
           }"
           data-test="candidate-dhondt-result"
         >
@@ -161,7 +161,7 @@ watch(
                     option as unknown as IterableObject,
                     i18nLocale,
                     t("js.components.AVOption.aria_labels.option"),
-                    ["group", "first_available_locale"],
+                    ["group"],
                   )
                 : getMeaningfulLabel(
                     option as unknown as IterableObject,
