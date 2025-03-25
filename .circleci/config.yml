@@ -5,7 +5,7 @@ orbs:
 executors:
   node22:
     docker:
-      - image: mcr.microsoft.com/playwright:v1.51.1-noble
+      - image: mcr.microsoft.com/playwright:v1.51.0-noble
   ruby-node:
     docker:
       - image: cimg/ruby:3.2-node
@@ -39,10 +39,11 @@ jobs:
           npx concurrently -k -s first -n "SB,TEST" -c "magenta,blue" \
               "npx http-server storybook-static --port 6006 --silent" \
               "npx wait-on tcp:127.0.0.1:6006 && yarn test-storybook"
+      - run: yarn pack
       - persist_to_workspace:
           root: /root/project
           paths:
-            - ./dist
+            - ./assemblyvoting-electa-ui-*.tgz
   publish:
     executor:
       name: node22
@@ -52,7 +53,7 @@ jobs:
       - run:
           name: Move files
           command: |
-            mv /tmp/workspace/dist ./
+            mv /tmp/workspace/assemblyvoting-electa-ui-*.tgz ./
       - run:
           name: Set npm access token
           command: |
@@ -60,13 +61,14 @@ jobs:
       - run:
           name: Publish to NPM
           command: |
+            package_file=$(ls assemblyvoting-electa-ui-*.tgz)
             if echo "${package_file}" | grep -E "alpha|beta" > /dev/null; then
               prerelease=$(echo "${package_file}" | grep -E -o "alpha|beta")
               echo "Publishing prerelease with tag ${prerelease} to NPM"
-              # npm publish --tag ${prerelease}
+              npm publish ${package_file} --tag ${prerelease}
             else
               echo "Publishing release with to NPM"
-              # npm publish
+              npm publish ${package_file}
             fi
 workflows:
   build_and_deploy:
