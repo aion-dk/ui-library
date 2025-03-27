@@ -57,6 +57,11 @@ jobs:
       - run: yarn run lint
       - run: yarn run test-coverage
       - run: yarn run build
+      - run:
+          name: Copy extra files to ./dist
+          command: |
+            cp /home/circleci/project/README.md ./dist/README.md
+            cp /home/circleci/project/package.json ./dist/package.json
       - persist_to_workspace:
           root: /home/circleci/project
           paths:
