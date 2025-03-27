@@ -13,11 +13,6 @@ executors:
     docker:
       - image: cimg/ruby:3.2-node
 
-filters:
-  - &always
-    tags:
-      only: /.*/
-
 jobs:
   playwright:
     executor:
@@ -92,10 +87,10 @@ jobs:
             if echo "${package_version}" | grep -E "alpha|beta" > /dev/null; then
               prerelease=$(echo "${package_version}" | grep -E -o "alpha|beta")
               echo "Publishing prerelease with tag ${prerelease} to NPM"
-                npm publish --tag ${prerelease}
+                # npm publish --tag ${prerelease}
             else
               echo "Publishing release with to NPM"
-                npm publish
+                # npm publish
             fi
 workflows:
   build_and_deploy:
@@ -129,7 +124,5 @@ workflows:
             - docker/license-checker
             - playwright
           filters:
-            branches:
-              ignore: /.*/
             tags:
               only: /^v.*/
