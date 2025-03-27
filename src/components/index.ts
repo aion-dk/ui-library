@@ -11,6 +11,7 @@ export { default as AVOptionLiveResults } from "@/components/atoms/AVOptionLiveR
 export { default as AVProgressBar } from "@/components/atoms/AVProgressBar";
 export { default as AVAnimatedMenuButton } from "@/components/atoms/AVAnimatedMenuButton";
 export { default as AVTweenedCount } from "@/components/atoms/AVTweenedCount";
+export { default as AVFileInput } from "@/components/atoms/AVFileInput";
 // export { default as AVBallotSummary } from "@/components/atoms/AVBallotSummary";
 // export { default as AVVerticalStep } from "@/components/atoms/AVVerticalStep";
 // export { default as AVWaitingDots } from "@/components/atoms/AVWaitingDots";
