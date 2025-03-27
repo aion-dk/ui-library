@@ -115,6 +115,10 @@ workflows:
             - playwright
           filters:
             branches:
-              ignore: /.*/
+              only: /.*/
             tags:
               only: /^v.*/
+            # branches:
+            #   ignore: /.*/
+            # tags:
+            #   only: /^v.*/
