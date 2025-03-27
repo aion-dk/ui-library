@@ -51,10 +51,21 @@
   }
 }
 
+.btn-theme-outline {
+  color: var(--av-theme-background);
+  background-color: transparent;
+  border-color: var(--av-theme-background);
+
+  &:hover {
+    background-color: var(--av-theme-background);
+    color: var(--av-theme-text);
+  }
+}
+
 .btn-theme-danger-outline {
   color: var(--av-theme-danger-background);
-  background-color: white;
-  border-color: var(--bs-border-color);
+  background-color: transparent;
+  border-color: rgb(163, 0, 76);
 
   &:hover {
     background-color: var(--av-theme-danger-background);

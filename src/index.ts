@@ -36,9 +36,9 @@ import {
   AVProgressBar,
   AVAnimatedMenuButton,
   AVTweenedCount,
+  AVFileInput,
   //   AVVerticalStep,
   //   AVWaitingDots,
-  //   AVFileInput,
 
   // MOLECULES
   AVSummaryOption,
@@ -97,9 +97,9 @@ export default {
     app.component("AVProgressBar", AVProgressBar);
     app.component("AVAnimatedMenuButton", AVAnimatedMenuButton);
     app.component("AVTweenedCount", AVTweenedCount);
+    app.component("AVFileInput", AVFileInput);
     // app.component("AVVerticalStep", AVVerticalStep);
     // app.component("AVWaitingDots", AVWaitingDots);
-    // app.component("AVFileInput", AVFileInput);
 
     // MOLECULES
     app.component("AVSummaryOption", AVSummaryOption);
@@ -158,9 +158,9 @@ export {
   AVProgressBar,
   AVAnimatedMenuButton,
   AVTweenedCount,
+  AVFileInput,
   //   AVVerticalStep,
   //   AVWaitingDots,
-  //   AVFileInput,
 
   // MOLECULES
   AVSummaryOption,
