@@ -74,10 +74,10 @@ jobs:
             if echo "${package_version}" | grep -E "alpha|beta" > /dev/null; then
               prerelease=$(echo "${package_version}" | grep -E -o "alpha|beta")
               echo "Publishing prerelease with tag ${prerelease} to NPM"
-                npm publish --tag ${prerelease}
+              npm publish --tag ${prerelease}
             else
               echo "Publishing release with to NPM"
-                npm publish
+              npm publish
             fi
 workflows:
   build_and_deploy:
