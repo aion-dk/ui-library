@@ -82,7 +82,7 @@ jobs:
       - run:
           name: Publish to NPM
           command: |
-            cd ./dist
+            cd dist
             package_version=$(jq -r '.version' package.json)
             if echo "${package_version}" | grep -E "alpha|beta" > /dev/null; then
               prerelease=$(echo "${package_version}" | grep -E -o "alpha|beta")
