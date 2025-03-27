@@ -65,6 +65,11 @@ jobs:
     executor:
       name: node22
     steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "yarn.lock" }}
+            - v1-dependencies-
       - attach_workspace:
           at: /tmp/workspace
       - run:
@@ -82,7 +87,6 @@ jobs:
       - run:
           name: Publish to NPM
           command: |
-            cd dist
             package_version=$(jq -r '.version' package.json)
             if echo "${package_version}" | grep -E "alpha|beta" > /dev/null; then
               prerelease=$(echo "${package_version}" | grep -E -o "alpha|beta")
