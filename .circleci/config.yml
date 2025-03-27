@@ -58,7 +58,7 @@ jobs:
       - run: yarn run test-coverage
       - run: yarn run build
       - persist_to_workspace:
-          root: /root/project
+          root: /home/circleci/project
           paths:
             - dist
   publish:
