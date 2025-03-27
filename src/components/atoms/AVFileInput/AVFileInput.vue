@@ -224,7 +224,7 @@ watch(
         <AVIcon icon="cloud-arrow-up" class="text-gray-500 fs-1" data-test="input-icon" />
       </div>
 
-      <p class="AVFileInput--dragdroptext text-gray-700 text-center m-0">
+      <p class="AVFileInput--dragdroptext text-gray-700 text-center m-0" data-test="draggable-text">
         <span v-if="isDragging">
           {{ t("js.components.AVFileInput.release") }}
         </span>
@@ -244,7 +244,7 @@ watch(
       </p>
     </label>
 
-    <p v-if="!disableAcceptedFormats" class="my-2 small text-gray-600">
+    <p v-if="!disableAcceptedFormats" class="my-2 small text-gray-600" data-test="accepted-formats">
       <strong>
         {{ t("js.components.AVFileInput.acceptedFormats") }}
       </strong>
@@ -291,7 +291,7 @@ watch(
         {{ t("js.components.AVFileInput.current") }}
       </p>
 
-      <div v-for="file in currentValue" :key="`image-${file}`">
+      <div v-for="file in currentValue" :key="`image-${file}`" data-test="external-values">
         <img
           v-if="showPreview"
           class="AVFileInput--current-img img-thumbnail"
