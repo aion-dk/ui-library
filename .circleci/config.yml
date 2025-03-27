@@ -109,12 +109,20 @@ workflows:
       - docker/license-checker:
           context:
             - "GIT"
-          filters: *always
+          filters:
+            branches:
+              only: /.*/
+            tags:
+              only: /^v.*/
           prep-yarn: true
           prep-bundle: false
           executor: ruby-node
       - playwright:
-          filters: *always
+          filters:
+            branches:
+              only: /.*/
+            tags:
+              only: /^v.*/
       - publish:
           requires:
             - lint_test_build
