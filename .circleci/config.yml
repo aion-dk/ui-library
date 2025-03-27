@@ -79,6 +79,7 @@ jobs:
           name: Set npm access token
           command: |
             npm set //registry.npmjs.org/:_authToken=$NPM_TOKEN
+      - node/install-yarn
       - run:
           name: Publish to NPM
           command: |
