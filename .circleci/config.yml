@@ -72,6 +72,10 @@ jobs:
           command: |
             mv /tmp/workspace/dist ./
       - run:
+          name: List files recursive
+          command: |
+            ls -R ./
+      - run:
           name: Set npm access token
           command: |
             npm set //registry.npmjs.org/:_authToken=$NPM_TOKEN
