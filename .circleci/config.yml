@@ -124,5 +124,7 @@ workflows:
             - docker/license-checker
             - playwright
           filters:
+            branches:
+              ignore: /.*/
             tags:
               only: /^v.*/
