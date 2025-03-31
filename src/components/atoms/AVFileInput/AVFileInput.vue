@@ -54,19 +54,6 @@ const isDragging = ref<boolean>(false);
 const fileInput = ref<HTMLInputElement | null>(null);
 const files = ref<File[]>([]);
 
-onMounted(() => {
-  if (props.locale) switchLocale(props.locale);
-  if (props.value) files.value = props.value;
-});
-
-watch(
-  () => props.locale,
-  () => {
-    if (props.locale) switchLocale(props.locale);
-  },
-  { deep: true },
-);
-
 const emit = defineEmits(["update", "fileFormatNotAccepted", "download"]);
 
 const onChange = () => {
@@ -145,7 +132,7 @@ const drop = (e: DragEvent) => {
   if (fileInput.value && e.dataTransfer)
     fileInput.value.files = verifyFileType(Array.from(e.dataTransfer.files));
 
-  if (!fileInput.value?.files) {
+  if (!fileInput.value || !fileInput.value.files || !fileInput.value.files.length) {
     isDragging.value = false;
     return;
   }
@@ -172,6 +159,11 @@ const downloadFile = (file: string) => {
   emit("download", file);
 };
 
+onMounted(() => {
+  if (props.locale) switchLocale(props.locale); // Do not remove, read next comment.
+  if (props.value) files.value = props.value;
+});
+
 /**
  * This is necesary in order to support both provided i18n and local i18n.
  * The used locale will be taken from the provided i18n as long as there is one
@@ -182,9 +174,6 @@ const downloadFile = (file: string) => {
 /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
 const i18n: any = inject("i18n");
 const { t } = i18n.global;
-onMounted(() => {
-  if (props.locale) switchLocale(props.locale);
-});
 watch(
   () => props.locale,
   () => {
@@ -207,6 +196,7 @@ watch(
       @dragover="dragOver"
       @dragleave="dragLeave"
       @drop="drop"
+      data-test="dropzone"
     >
       <input
         type="file"
@@ -279,9 +269,10 @@ watch(
           class="btn btn-theme-danger-outline border-theme-danger"
           type="button"
           @click="remove(files.indexOf(file))"
-          title="Remove file"
+          :aria-label="t('js.components.AVFileInput.remove_file')"
+          data-test="delete-file-button"
         >
-          <AVIcon icon="trash" data-test="file-preview-icon" />
+          <AVIcon icon="trash" data-test="file-delete-icon" />
         </button>
       </div>
     </div>
@@ -312,7 +303,7 @@ watch(
           <button
             class="btn btn-theme-outline"
             type="button"
-            title="Download file"
+            :aria-label="t('js.components.AVFileInput.download_file')"
             @click="downloadFile(file)"
           >
             <AVIcon icon="download" data-test="file-download-icon" />

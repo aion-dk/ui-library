@@ -13,6 +13,8 @@ const translations: DefineLocaleMessage = {
     current: "النسخة الحالية:",
     uploading: "التحميل:",
     alt_preview: "معاينة الصورة الحالية",
+    remove_file: "إزالة",
+    download_file: "تنزيل",
   },
   ca: {
     acceptedFormats: "Formats acceptats:",
@@ -26,6 +28,8 @@ const translations: DefineLocaleMessage = {
     current: "Versió actual:",
     uploading: "Carregant:",
     alt_preview: "Vista prèvia de la imatge actual",
+    remove_file: "Eliminar",
+    download_file: "Descarregar",
   },
   da: {
     acceptedFormats: "Tilladte filtyper:",
@@ -39,6 +43,8 @@ const translations: DefineLocaleMessage = {
     current: "Nuværende version:",
     uploading: "Uploader:",
     alt_preview: "Aktuel billedforhåndsvisning",
+    remove_file: "Fjern",
+    download_file: "Download",
   },
   de: {
     acceptedFormats: "Akzeptierte Dateitypen:",
@@ -52,6 +58,8 @@ const translations: DefineLocaleMessage = {
     current: "Aktuelle Version:",
     uploading: "Hochladen:",
     alt_preview: "Aktuelle Bildvorschau",
+    remove_file: "Entfernen",
+    download_file: "Herunterladen",
   },
   en: {
     acceptedFormats: "Accepted File Types:",
@@ -65,6 +73,8 @@ const translations: DefineLocaleMessage = {
     current: "Current version:",
     uploading: "Uploading:",
     alt_preview: "Current image preview",
+    remove_file: "Remove",
+    download_file: "Download",
   },
   es: {
     acceptedFormats: "Formatos aceptados:",
@@ -78,6 +88,8 @@ const translations: DefineLocaleMessage = {
     current: "Versión actual:",
     uploading: "Cargando:",
     alt_preview: "Vista previa de la imagen actual",
+    remove_file: "Eliminar",
+    download_file: "Descargar",
   },
   fi: {
     acceptedFormats: "Hyväksytyt tiedostotyypit:",
@@ -91,6 +103,8 @@ const translations: DefineLocaleMessage = {
     current: "Nykyinen versio:",
     uploading: "Ladataan:",
     alt_preview: "Nykyisen kuvan esikatselu",
+    remove_file: "Poistaa",
+    download_file: "Lataa",
   },
   fr: {
     acceptedFormats: "Types de fichiers acceptés:",
@@ -104,6 +118,8 @@ const translations: DefineLocaleMessage = {
     current: "Version actuelle:",
     uploading: "Téléchargement:",
     alt_preview: "Aperçu de l'image actuelle",
+    remove_file: "Supprimer",
+    download_file: "Télécharger",
   },
   is: {
     acceptedFormats: "Samþykktar skráargerðir:",
@@ -117,6 +133,8 @@ const translations: DefineLocaleMessage = {
     current: "Núverandi útgáfa:",
     uploading: "Hleður upp:",
     alt_preview: "Núverandi forskoðun mynd",
+    remove_file: "Fjarlægja",
+    download_file: "Sækja",
   },
   nl: {
     acceptedFormats: "Geaccepteerde bestandstypen:",
@@ -130,6 +148,8 @@ const translations: DefineLocaleMessage = {
     current: "Huidige versie:",
     uploading: "Uploaden:",
     alt_preview: "Huidig beeldvoorbeeld",
+    remove_file: "Verwijderen",
+    download_file: "Downloaden",
   },
   pl: {
     acceptedFormats: "Akceptowane typy plików:",
@@ -143,6 +163,8 @@ const translations: DefineLocaleMessage = {
     current: "Obecna wersja:",
     uploading: "Przesyłanie:",
     alt_preview: "Aktualny podgląd obrazu",
+    remove_file: "Usuń",
+    download_file: "Pobierz",
   },
   pt: {
     acceptedFormats: "Tipos de ficheiro aceites:",
@@ -156,6 +178,8 @@ const translations: DefineLocaleMessage = {
     current: "Versão atual:",
     uploading: "A enviar:",
     alt_preview: "Visualização da imagem atual",
+    remove_file: "Remover",
+    download_file: "Transferir",
   },
   ro: {
     acceptedFormats: "Tipuri de fișiere acceptate:",
@@ -169,6 +193,8 @@ const translations: DefineLocaleMessage = {
     current: "Versiune curentă:",
     uploading: "Încărcare:",
     alt_preview: "Previzualizarea imaginii curente",
+    remove_file: "Elimina",
+    download_file: "Descărcați",
   },
   ru: {
     acceptedFormats: "Принимаемые типы файлов:",
@@ -182,6 +208,8 @@ const translations: DefineLocaleMessage = {
     current: "Текущая версия:",
     uploading: "Загрузка:",
     alt_preview: "Предварительный просмотр текущего изображения",
+    remove_file: "Удалить",
+    download_file: "Скачать",
   },
   sv: {
     acceptedFormats: "Godkända filtyper:",
@@ -195,6 +223,8 @@ const translations: DefineLocaleMessage = {
     current: "Aktuell version:",
     uploading: "Laddar upp:",
     alt_preview: "Aktuell förhandsvisning av bilden",
+    remove_file: "Ta bort",
+    download_file: "Ladda ner",
   },
 };
 
