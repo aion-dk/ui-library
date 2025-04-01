@@ -250,6 +250,109 @@ export const Tied = {
   },
 };
 
+export const TiedAndElected = {
+  render: Template,
+
+  args: {
+    distributionNumber: 5,
+    seats: 1,
+    result: [
+      {
+        reference: getOption(["selectable"], 2).reference,
+        title: getOption(["selectable"], 2).title,
+        rounds: [
+          {
+            count: 2,
+            elected: false,
+            tied: false,
+          },
+          {
+            count: 3,
+            elected: false,
+            tied: false,
+          },
+          {
+            count: 4,
+            elected: true,
+            tied: true,
+          },
+        ],
+        elected: true,
+        tied: true,
+      },
+      {
+        reference: getOption(["selectable"], 3).reference,
+        title: getOption(["selectable"], 3).title,
+        rounds: [
+          {
+            count: 1,
+            elected: false,
+            tied: false,
+          },
+          {
+            count: 1,
+            elected: false,
+            tied: false,
+          },
+          {
+            count: 4,
+            elected: false,
+            tied: true,
+          },
+        ],
+        elected: false,
+        tied: true,
+      },
+      {
+        reference: getOption(["selectable"], 1).reference,
+        title: getOption(["selectable"], 1).title,
+        rounds: [
+          {
+            count: 0,
+            elected: false,
+            tied: false,
+          },
+          {
+            count: 1,
+            elected: false,
+            tied: false,
+          },
+          {
+            count: 1,
+            elected: false,
+            tied: false,
+          },
+        ],
+        elected: false,
+        tied: false,
+      },
+      {
+        reference: getOption(["selectable"], 4).reference,
+        title: getOption(["selectable"], 4).title,
+        rounds: [
+          {
+            count: 0,
+            elected: false,
+            tied: false,
+          },
+          {
+            count: 0,
+            elected: false,
+            tied: false,
+          },
+          {
+            count: 0,
+            elected: false,
+            tied: false,
+          },
+        ],
+        elected: false,
+        tied: false,
+      },
+    ],
+  },
+};
+
 export const ElectedDark = {
   render: Template,
 
