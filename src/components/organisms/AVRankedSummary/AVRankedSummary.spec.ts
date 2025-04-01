@@ -348,76 +348,87 @@ describe("AVRankedSummary", () => {
   });
 
   it("can switch theme", async () => {
-    wrapper.findAll("[data-test=candidate-ranked-result]").forEach((el, i) => {
-      if (i === 0) {
-        // elected, theme rules do not apply
-        expect(el.html()).to.not.contain("AVRankedSummary--text-dark");
-        expect(el.html()).to.not.contain("AVRankedSummary--text-light");
-      } else {
-        el.findAll("td").forEach((child, i) => {
-          if (i !== 0) {
-            expect(child.classes()).to.contain("AVRankedSummary--text-light");
-            expect(child.classes()).to.not.contain("AVRankedSummary--text-dark");
-          }
-        });
-      }
-    });
+    expect(wrapper.find("[data-test=exampleOption4_round_0]").classes()).to.not.contain(
+      "AVRankedSummary--text-dark",
+    );
+    expect(wrapper.find("[data-test=exampleOption4_round_0]").classes()).to.contain(
+      "AVRankedSummary--text-light",
+    );
+    expect(wrapper.find("[data-test=exampleOption4_round_1]").classes()).to.not.contain(
+      "AVRankedSummary--text-dark",
+    );
+    expect(wrapper.find("[data-test=exampleOption4_round_1]").classes()).to.contain(
+      "AVRankedSummary--text-light",
+    );
+    // elected in round 2, theme rules do not apply
+    expect(wrapper.find("[data-test=exampleOption4_round_2]").classes()).to.not.contain(
+      "AVRankedSummary--text-dark",
+    );
+    expect(wrapper.find("[data-test=exampleOption4_round_2]").classes()).to.not.contain(
+      "AVRankedSummary--text-light",
+    );
 
     await wrapper.setProps({
       theme: "dark",
     });
 
-    wrapper.findAll("[data-test=candidate-ranked-result]").forEach((el, i) => {
-      if (i === 0) {
-        // elected, theme rules do not apply
-        expect(el.html()).to.not.contain("AVRankedSummary--text-dark");
-        expect(el.html()).to.not.contain("AVRankedSummary--text-light");
-      } else {
-        el.findAll("td").forEach((child, i) => {
-          if (i !== 0) {
-            expect(child.classes()).to.not.contain("AVRankedSummary--text-light");
-            expect(child.classes()).to.contain("AVRankedSummary--text-dark");
-          }
-        });
-      }
-    });
+    expect(wrapper.find("[data-test=exampleOption4_round_0]").classes()).to.contain(
+      "AVRankedSummary--text-dark",
+    );
+    expect(wrapper.find("[data-test=exampleOption4_round_0]").classes()).to.not.contain(
+      "AVRankedSummary--text-light",
+    );
+    expect(wrapper.find("[data-test=exampleOption4_round_1]").classes()).to.contain(
+      "AVRankedSummary--text-dark",
+    );
+    expect(wrapper.find("[data-test=exampleOption4_round_1]").classes()).to.not.contain(
+      "AVRankedSummary--text-light",
+    );
+    // elected in round 2, theme rules do not apply
+    expect(wrapper.find("[data-test=exampleOption4_round_2]").classes()).to.not.contain(
+      "AVRankedSummary--text-dark",
+    );
+    expect(wrapper.find("[data-test=exampleOption4_round_2]").classes()).to.not.contain(
+      "AVRankedSummary--text-light",
+    );
 
     await wrapper.setProps({
       theme: "light",
     });
 
-    wrapper.findAll("[data-test=candidate-ranked-result]").forEach((el, i) => {
-      if (i === 0) {
-        // elected, theme rules do not apply
-        expect(el.html()).to.not.contain("AVRankedSummary--text-dark");
-        expect(el.html()).to.not.contain("AVRankedSummary--text-light");
-      } else {
-        el.findAll("td").forEach((child, i) => {
-          if (i !== 0) {
-            expect(child.classes()).to.contain("AVRankedSummary--text-light");
-            expect(child.classes()).to.not.contain("AVRankedSummary--text-dark");
-          }
-        });
-      }
-    });
+    expect(wrapper.find("[data-test=exampleOption4_round_0]").classes()).to.not.contain(
+      "AVRankedSummary--text-dark",
+    );
+    expect(wrapper.find("[data-test=exampleOption4_round_0]").classes()).to.contain(
+      "AVRankedSummary--text-light",
+    );
+    expect(wrapper.find("[data-test=exampleOption4_round_1]").classes()).to.not.contain(
+      "AVRankedSummary--text-dark",
+    );
+    expect(wrapper.find("[data-test=exampleOption4_round_1]").classes()).to.contain(
+      "AVRankedSummary--text-light",
+    );
+    // elected in round 2, theme rules do not apply
+    expect(wrapper.find("[data-test=exampleOption4_round_2]").classes()).to.not.contain(
+      "AVRankedSummary--text-dark",
+    );
+    expect(wrapper.find("[data-test=exampleOption4_round_2]").classes()).to.not.contain(
+      "AVRankedSummary--text-light",
+    );
   });
 
   it("can hide elected", async () => {
-    wrapper.findAll("[data-test=candidate-ranked-result]").forEach((el, i) => {
-      if (i === 0) {
-        expect(el.classes()).to.contain("bg-success-faded");
-      }
-    });
+    expect(wrapper.find("[data-test=exampleOption4_round_2]").classes()).to.contain(
+      "bg-success-faded",
+    );
 
     await wrapper.setProps({
       hideElected: true,
     });
 
-    wrapper.findAll("[data-test=candidate-ranked-result]").forEach((el, i) => {
-      if (i === 0) {
-        expect(el.classes()).to.not.contain("bg-success-faded");
-      }
-    });
+    expect(wrapper.find("[data-test=exampleOption4_round_2]").classes()).to.not.contain(
+      "bg-success-faded",
+    );
   });
 
   it("can hide tied", async () => {
@@ -440,7 +451,7 @@ describe("AVRankedSummary", () => {
             {
               count: 5,
               elected: true,
-              tied: false,
+              tied: true,
             },
           ],
           elected: false,
@@ -463,7 +474,7 @@ describe("AVRankedSummary", () => {
             {
               count: 3,
               elected: false,
-              tied: false,
+              tied: true,
             },
           ],
           elected: false,
@@ -518,22 +529,24 @@ describe("AVRankedSummary", () => {
       ],
     });
 
-    wrapper.findAll("[data-test=candidate-ranked-result]").forEach((el, i) => {
-      if (i === 0) {
-        expect(el.classes()).to.contain("bg-warning-faded");
-      }
-    });
+    expect(wrapper.find("[data-test=exampleOption2_round_2]").classes()).to.contain(
+      "bg-warning-faded",
+    );
+    expect(wrapper.find("[data-test=exampleOption3_round_2]").classes()).to.contain(
+      "bg-warning-faded",
+    );
 
     await wrapper.setProps({
       hideElected: false,
       hideTied: true,
     });
 
-    wrapper.findAll("[data-test=candidate-ranked-result]").forEach((el, i) => {
-      if (i === 0) {
-        expect(el.classes()).to.not.contain("bg-warning-faded");
-      }
-    });
+    expect(wrapper.find("[data-test=exampleOption2_round_2]").classes()).to.not.contain(
+      "bg-warning-faded",
+    );
+    expect(wrapper.find("[data-test=exampleOption3_round_2]").classes()).to.not.contain(
+      "bg-warning-faded",
+    );
   });
 
   it("can switch language", async () => {

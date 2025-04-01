@@ -135,11 +135,7 @@ watch(
           <td>
             {{ (option.elected && index + 1) || "" }}
           </td>
-          <td
-            :class="{
-              [`AVRankedSummary--text-${theme}`]: !option.elected && !option.tied,
-            }"
-          >
+          <td :class="`AVRankedSummary--text-${theme}`">
             {{
               getMeaningfulLabel(
                 option as unknown as IterableObject,
@@ -153,11 +149,12 @@ watch(
             v-for="(round, index) in option.rounds"
             :key="`round_nr_${index}`"
             class="text-center text-nowrap"
+            :data-test="`${option.reference}_round_${index}`"
             :class="{
               'bg-warning-faded': !hideTied && round.tied,
               'bg-success-faded': !hideElected && round.elected,
               'AVRankedSummary--text-bold': round.elected,
-              [`AVRankedSummary--text-${theme}`]: !round.elected && !option.tied,
+              [`AVRankedSummary--text-${theme}`]: !round.elected && !round.tied,
             }"
           >
             {{ round.count }}
