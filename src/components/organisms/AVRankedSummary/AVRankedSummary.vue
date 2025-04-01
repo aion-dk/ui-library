@@ -151,7 +151,7 @@ watch(
             class="text-center text-nowrap"
             :data-test="`${option.reference}_round_${index}`"
             :class="{
-              'bg-warning-faded': !hideTied && round.tied,
+              'bg-warning-faded': !hideTied && round.tied && !round.elected,
               'bg-success-faded': !hideElected && round.elected,
               'AVRankedSummary--text-bold': round.elected,
               [`AVRankedSummary--text-${theme}`]: !round.elected && !round.tied,
