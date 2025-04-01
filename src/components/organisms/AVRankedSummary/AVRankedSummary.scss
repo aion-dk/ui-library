@@ -3,6 +3,11 @@ tr.bg-success-faded {
   border-bottom-color: var(--bs-border-color);
 }
 
+td,
+th {
+  background-color: transparent;
+}
+
 .AVRankedSummary--text-bold {
   font-weight: 700;
 }

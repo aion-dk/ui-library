@@ -132,7 +132,7 @@ watch(
           data-test="candidate-ranked-result"
           :class="{ 'border-0 border-bottom border-3': index + 1 === elected.length }"
         >
-          <td>
+          <td :class="`AVRankedSummary--text-${theme}`">
             {{ (option.elected && index + 1) || "" }}
           </td>
           <td :class="`AVRankedSummary--text-${theme}`">
