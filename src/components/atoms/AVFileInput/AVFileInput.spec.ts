@@ -172,7 +172,7 @@ describe("AVFileInput", () => {
     expect(wrapper.findAll("[data-test=file-preview-icon]").length).to.eq(0);
     expect(wrapper.findAll("[data-test=file-delete-icon]").length).to.eq(0);
     expect(wrapper.text()).to.not.contain("testfile.txt");
-    expect(wrapper.text()).to.not.contain("(17b)");
+    expect(wrapper.text()).to.not.contain("(17B)");
 
     const mockFile = new File(["File text content"], "testfile.txt", {
       type: "text/plain",
@@ -192,7 +192,7 @@ describe("AVFileInput", () => {
     expect(wrapper.findAll("[data-test=file-preview-icon]").length).to.eq(1);
     expect(wrapper.findAll("[data-test=file-delete-icon]").length).to.eq(1);
     expect(wrapper.text()).to.contain("testfile.txt");
-    expect(wrapper.text()).to.contain("(17b)");
+    expect(wrapper.text()).to.contain("(17B)");
   });
 
   it("can remove a loaded file", async () => {
@@ -202,7 +202,7 @@ describe("AVFileInput", () => {
     expect(wrapper.findAll("[data-test=file-preview-icon]").length).to.eq(0);
     expect(wrapper.findAll("[data-test=file-delete-icon]").length).to.eq(0);
     expect(wrapper.text()).to.not.contain("testfile.txt");
-    expect(wrapper.text()).to.not.contain("(17b)");
+    expect(wrapper.text()).to.not.contain("(17B)");
   });
 
   it("cannot drag a incorrect file", async () => {
@@ -214,7 +214,7 @@ describe("AVFileInput", () => {
     expect(wrapper2.findAll("[data-test=file-preview-icon]").length).to.eq(0);
     expect(wrapper2.findAll("[data-test=file-delete-icon]").length).to.eq(0);
     expect(wrapper2.text()).to.not.contain("testfile.txt");
-    expect(wrapper2.text()).to.not.contain("(17b)");
+    expect(wrapper2.text()).to.not.contain("(17B)");
 
     await dropzone.trigger("drop", { files: [imageFile] });
 
@@ -223,7 +223,7 @@ describe("AVFileInput", () => {
     expect(wrapper2.findAll("[data-test=file-preview-icon]").length).to.eq(0);
     expect(wrapper2.findAll("[data-test=file-delete-icon]").length).to.eq(0);
     expect(wrapper2.text()).to.not.contain("testfile.txt");
-    expect(wrapper2.text()).to.not.contain("(17b)");
+    expect(wrapper2.text()).to.not.contain("(17B)");
   });
 
   it("can drag a file", async () => {
@@ -237,7 +237,7 @@ describe("AVFileInput", () => {
     expect(wrapper.findAll("[data-test=file-preview-icon]").length).to.eq(0);
     expect(wrapper.findAll("[data-test=file-delete-icon]").length).to.eq(0);
     expect(wrapper.text()).to.not.contain("testfile.txt");
-    expect(wrapper.text()).to.not.contain("(17b)");
+    expect(wrapper.text()).to.not.contain("(17B)");
 
     await dropzone.trigger("drop", { files: [textFile] });
 
@@ -246,7 +246,7 @@ describe("AVFileInput", () => {
     expect(wrapper.findAll("[data-test=file-preview-icon]").length).to.eq(1);
     expect(wrapper.findAll("[data-test=file-delete-icon]").length).to.eq(1);
     expect(wrapper.text()).to.contain("testfile.txt");
-    expect(wrapper.text()).to.contain("(17b)");
+    expect(wrapper.text()).to.contain("(17B)");
   });
 
   it("can switch locale", async () => {
@@ -261,7 +261,6 @@ describe("AVFileInput", () => {
       locale: "da",
     });
 
-    console.log(wrapper.text());
     expect(wrapper.text()).to.contain("Træk og slip en fil hereller gennemse enhed efter fil");
     expect(wrapper.text()).to.contain("Tilladte filtyper:");
     expect(wrapper.text()).to.contain("Uploader:");
