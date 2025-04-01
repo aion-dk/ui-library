@@ -646,8 +646,6 @@ describe("AVRankedSummary", () => {
       ],
     });
 
-    console.log(wrapper.find("[data-test=exampleOption1_round_2]").classes());
-
     expect(wrapper.find("[data-test=exampleOption1_round_2]").classes()).to.contain(
       "bg-success-faded",
     );
