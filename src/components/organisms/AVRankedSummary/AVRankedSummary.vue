@@ -129,11 +129,8 @@ watch(
         <tr
           v-for="(option, index) in result"
           :key="`option_${option.reference}`"
-          :class="{
-            'bg-success-faded': !hideElected && option.elected,
-            'bg-warning-faded': !hideTied && option.tied && !option.elected,
-          }"
           data-test="candidate-ranked-result"
+          :class="{ 'border-0 border-bottom border-3': index + 1 === elected.length }"
         >
           <td>
             {{ (option.elected && index + 1) || "" }}
@@ -157,8 +154,10 @@ watch(
             :key="`round_nr_${index}`"
             class="text-center text-nowrap"
             :class="{
-              'AVRankedSummary--text-bold': index + 1 === roundCount,
-              [`AVRankedSummary--text-${theme}`]: !option.elected && !option.tied,
+              'bg-warning-faded': !hideTied && round.tied,
+              'bg-success-faded': !hideElected && round.elected,
+              'AVRankedSummary--text-bold': round.elected,
+              [`AVRankedSummary--text-${theme}`]: !round.elected && !option.tied,
             }"
           >
             {{ round.count }}
