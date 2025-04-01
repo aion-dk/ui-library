@@ -105,20 +105,12 @@ const lowerCasedFormats = computed(() =>
 );
 
 const getFileSize = (fileSize: number): string => {
-  const kb = Math.round(fileSize / 1024);
-  const mb = Math.round(kb / 1024);
-  const gb = Math.round(mb / 1024);
-
-  switch (true) {
-    case Boolean(gb):
-      return `${gb}Gb`;
-    case Boolean(mb):
-      return `${mb}Mb`;
-    case Boolean(kb):
-      return `${kb}Kb`;
-    default:
-      return `${fileSize}b`;
-  }
+  return new Intl.NumberFormat(i18nLocale.value, {
+    notation: "compact",
+    style: "unit",
+    unit: "byte",
+    unitDisplay: "narrow",
+  }).format(fileSize);
 };
 
 const currentValueFileName = (filePath: string) => {
@@ -174,6 +166,7 @@ onMounted(() => {
 /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
 const i18n: any = inject("i18n");
 const { t } = i18n.global;
+const i18nLocale = computed(() => i18n.global.locale.value || i18n.global.locale);
 watch(
   () => props.locale,
   () => {
