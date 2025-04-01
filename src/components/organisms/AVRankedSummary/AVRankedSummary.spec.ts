@@ -568,4 +568,94 @@ describe("AVRankedSummary", () => {
       "Empatado: Opción de ejemplo 2, Opción de ejemplo 3",
     );
   });
+
+  it("prioritizes elected color", async () => {
+    await wrapper.setProps({
+      hideElected: false,
+      hideTied: false,
+      result: [
+        {
+          reference: getOption(["selectable"], 1).reference,
+          title: getOption(["selectable"], 1).title,
+          rounds: [
+            {
+              count: 10,
+              elected: false,
+              tied: false,
+            },
+            {
+              count: 11,
+              elected: false,
+              tied: false,
+            },
+            {
+              count: 12,
+              elected: true,
+              tied: true,
+            },
+          ],
+          elected: true,
+          tied: true,
+        },
+        {
+          reference: getOption(["selectable"], 2).reference,
+          title: getOption(["selectable"], 2).title,
+          rounds: [
+            {
+              count: 10,
+              elected: false,
+              tied: false,
+            },
+            {
+              count: 11,
+              elected: false,
+              tied: false,
+            },
+            {
+              count: 12,
+              elected: false,
+              tied: true,
+            },
+          ],
+          elected: false,
+          tied: true,
+        },
+        {
+          reference: getOption(["selectable"], 2).reference,
+          title: getOption(["selectable"], 2).title,
+          rounds: [
+            {
+              count: 1,
+              elected: false,
+              tied: false,
+            },
+            {
+              count: 2,
+              elected: false,
+              tied: false,
+            },
+            {
+              count: 3,
+              elected: false,
+              tied: false,
+            },
+          ],
+          elected: false,
+          tied: false,
+        },
+      ],
+    });
+
+    console.log(wrapper.find("[data-test=exampleOption1_round_2]").classes());
+
+    expect(wrapper.find("[data-test=exampleOption1_round_2]").classes()).to.contain(
+      "bg-success-faded",
+    );
+    expect(wrapper.find("[data-test=exampleOption1_round_2]").classes()).to.not.contain(
+      "bg-warning-faded",
+    );
+    expect(wrapper.find("[data-test=exampleOption2_round_2]").classes()).to.contain(
+      "bg-warning-faded",
+    );
+  });
 });
