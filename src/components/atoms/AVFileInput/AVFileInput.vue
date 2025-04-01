@@ -32,9 +32,9 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-  locale: {
-    type: String as PropType<SupportedLocale>,
-    default: null,
+  multiple: {
+    type: Boolean,
+    default: false,
   },
   disableAcceptedFormats: {
     type: Boolean,
@@ -44,9 +44,9 @@ const props = defineProps({
     type: Array as PropType<string[]>,
     default: () => [],
   },
-  multiple: {
-    type: Boolean,
-    default: false,
+  locale: {
+    type: String as PropType<SupportedLocale>,
+    default: null,
   },
 });
 
@@ -249,7 +249,7 @@ watch(
       <div
         v-for="file in files"
         :key="file.name"
-        class="AVFileInput--preview-card rounded border hstack justify-content-between align-content-center p-2 pe-1"
+        class="AVFileInput--preview-card rounded border hstack justify-content-between align-content-center py-2 ps-3 pe-1"
         :class="{ error: error }"
       >
         <div class="AVFileInput--header hstack align-items-center gap-2">

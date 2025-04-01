@@ -31,6 +31,9 @@ const meta: Meta<typeof AVFileInput> = {
     multiple: {
       control: { type: "boolean" },
     },
+    disableAcceptedFormats: {
+      control: { type: "boolean" },
+    },
     currentValue: {
       control: { type: "object" },
     },
