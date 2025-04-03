@@ -1,11 +1,11 @@
 import type { Meta, LocalString } from "@/types";
-import { AVDhondtSummary } from "@/components";
+import { AVDhondtAPSummary } from "@/components";
 import { SUPPORTED_LOCALES } from "@/constants";
 import { getOption } from "@/examples";
 
-const meta: Meta<typeof AVDhondtSummary> = {
-  title: "Design System/Organisms/AVDhondtSummary",
-  component: AVDhondtSummary,
+const meta: Meta<typeof AVDhondtAPSummary> = {
+  title: "Design System/Organisms/AVDhondtAPSummary",
+  component: AVDhondtAPSummary,
   tags: ["autodocs"],
   argTypes: {
     result: {
@@ -40,11 +40,11 @@ const meta: Meta<typeof AVDhondtSummary> = {
 export default meta;
 
 const Template = (args: Meta) => ({
-  components: { AVDhondtSummary },
+  components: { AVDhondtAPSummary },
   setup() {
     return { args };
   },
-  template: '<AVDhondtSummary v-bind="args" />',
+  template: '<AVDhondtAPSummary v-bind="args" />',
 });
 
 export const Elected = {

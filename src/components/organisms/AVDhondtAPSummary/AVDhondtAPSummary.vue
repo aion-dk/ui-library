@@ -110,16 +110,16 @@ watch(
       <thead class="bg-secondary border-bottom">
         <tr>
           <th>
-            {{ t("js.components.AVDhondtSummary.header.title") }}
+            {{ t("js.components.AVDhondtAPSummary.header.title") }}
           </th>
           <th>
-            {{ t("js.components.AVDhondtSummary.header.group") }}
+            {{ t("js.components.AVDhondtAPSummary.header.group") }}
           </th>
           <th>
-            {{ t("js.components.AVDhondtSummary.header.count") }}
+            {{ t("js.components.AVDhondtAPSummary.header.count") }}
           </th>
           <th>
-            {{ t("js.components.AVDhondtSummary.header.comparative_figure") }}
+            {{ t("js.components.AVDhondtAPSummary.header.comparative_figure") }}
           </th>
         </tr>
       </thead>
@@ -136,7 +136,7 @@ watch(
         >
           <td
             :class="{
-              [`AVDhondtSummary--text-${theme}`]: !option.elected && !option.tied,
+              [`AVDhondtAPSummary--text-${theme}`]: !option.elected && !option.tied,
             }"
           >
             <template v-if="option.group">
@@ -152,7 +152,7 @@ watch(
           </td>
           <td
             :class="{
-              [`AVDhondtSummary--text-${theme}`]: !option.elected && !option.tied,
+              [`AVDhondtAPSummary--text-${theme}`]: !option.elected && !option.tied,
             }"
           >
             {{
@@ -173,14 +173,14 @@ watch(
           </td>
           <td
             :class="{
-              [`AVDhondtSummary--text-${theme}`]: !option.elected && !option.tied,
+              [`AVDhondtAPSummary--text-${theme}`]: !option.elected && !option.tied,
             }"
           >
             {{ option.count }}
           </td>
           <td
             :class="{
-              [`AVDhondtSummary--text-${theme}`]: !option.elected && !option.tied,
+              [`AVDhondtAPSummary--text-${theme}`]: !option.elected && !option.tied,
             }"
           >
             {{ option.comparativeFigure ? Number(option.comparativeFigure).toFixed(3) : "" }}
@@ -190,15 +190,15 @@ watch(
         <tr>
           <td
             :class="{
-              [`AVDhondtSummary--text-${theme}`]: true,
+              [`AVDhondtAPSummary--text-${theme}`]: true,
             }"
           >
-            <strong>{{ t("js.components.AVDhondtSummary.total_count") }}</strong>
+            <strong>{{ t("js.components.AVDhondtAPSummary.total_count") }}</strong>
           </td>
           <td></td>
           <td
             :class="{
-              [`AVDhondtSummary--text-${theme}`]: true,
+              [`AVDhondtAPSummary--text-${theme}`]: true,
             }"
           >
             <strong>{{ totalCount }}</strong>
@@ -210,22 +210,22 @@ watch(
   </div>
 
   <div
-    :class="`AVDhondtSummary--summary vstack gap-1 AVDhondtSummary--text-semibold AVDhondtSummary--text-${theme}`"
+    :class="`AVDhondtAPSummary--summary vstack gap-1 AVDhondtAPSummary--text-semibold AVDhondtAPSummary--text-${theme}`"
     data-test="summary"
   >
-    <p class="mb-0">{{ t("js.components.AVDhondtSummary.summary.seats") }}: {{ seats }}</p>
+    <p class="mb-0">{{ t("js.components.AVDhondtAPSummary.summary.seats") }}: {{ seats }}</p>
     <p v-if="distributionNumber > 0" class="mb-0">
-      {{ t("js.components.AVDhondtSummary.summary.distribution") }}:
+      {{ t("js.components.AVDhondtAPSummary.summary.distribution") }}:
       {{ distributionNumber }}
     </p>
     <p v-if="elected.length > 0" class="mb-0">
-      {{ t("js.components.AVDhondtSummary.summary.elected") }}:
+      {{ t("js.components.AVDhondtAPSummary.summary.elected") }}:
       <span>
         {{ elected.join(", ") }}
       </span>
     </p>
     <p v-if="tied.length > 0" class="mb-0">
-      {{ t("js.components.AVDhondtSummary.summary.tied") }}:
+      {{ t("js.components.AVDhondtAPSummary.summary.tied") }}:
       <span>
         {{ tied.join(", ") }}
       </span>
@@ -233,4 +233,4 @@ watch(
   </div>
 </template>
 
-<style scoped lang="scss" src="./AVDhondtSummary.scss" />
+<style scoped lang="scss" src="./AVDhondtAPSummary.scss" />

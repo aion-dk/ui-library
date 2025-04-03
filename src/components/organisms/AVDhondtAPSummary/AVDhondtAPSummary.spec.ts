@@ -4,10 +4,10 @@ import { getOption } from "@/examples";
 import type { LocalString } from "@/types";
 import localI18n from "@/i18n";
 
-import AVDhondtSummary from "./AVDhondtSummary.vue";
+import AVDhondtAPSummary from "./AVDhondtAPSummary.vue";
 
-describe("AVDhondtSummary", () => {
-  const wrapper = mount(AVDhondtSummary, {
+describe("AVDhondtAPSummary", () => {
+  const wrapper = mount(AVDhondtAPSummary, {
     props: {
       distributionNumber: 5,
       totalCount: 10,
@@ -294,13 +294,13 @@ describe("AVDhondtSummary", () => {
     wrapper.findAll("[data-test=candidate-dhondt-result]").forEach((el, i) => {
       if (i === 0) {
         // elected, theme rules do not apply
-        expect(el.html()).to.not.contain("AVDhondtSummary--text-dark");
-        expect(el.html()).to.not.contain("AVDhondtSummary--text-light");
+        expect(el.html()).to.not.contain("AVDhondtAPSummary--text-dark");
+        expect(el.html()).to.not.contain("AVDhondtAPSummary--text-light");
       } else {
         el.findAll("td").forEach((child, i) => {
           if (i !== 0) {
-            expect(child.classes()).to.contain("AVDhondtSummary--text-light");
-            expect(child.classes()).to.not.contain("AVDhondtSummary--text-dark");
+            expect(child.classes()).to.contain("AVDhondtAPSummary--text-light");
+            expect(child.classes()).to.not.contain("AVDhondAPSummary--text-dark");
           }
         });
       }
@@ -313,13 +313,13 @@ describe("AVDhondtSummary", () => {
     wrapper.findAll("[data-test=candidate-dhondt-result]").forEach((el, i) => {
       if (i === 0) {
         // elected, theme rules do not apply
-        expect(el.html()).to.not.contain("AVDhondtSummary--text-dark");
-        expect(el.html()).to.not.contain("AVDhondtSummary--text-light");
+        expect(el.html()).to.not.contain("AVDhondtAPSummary--text-dark");
+        expect(el.html()).to.not.contain("AVDhondtAPSummary--text-light");
       } else {
         el.findAll("td").forEach((child, i) => {
           if (i !== 0) {
-            expect(child.classes()).to.not.contain("AVDhondtSummary--text-light");
-            expect(child.classes()).to.contain("AVDhondtSummary--text-dark");
+            expect(child.classes()).to.not.contain("AVDhondtAPSummary--text-light");
+            expect(child.classes()).to.contain("AVDhondtAPSummary--text-dark");
           }
         });
       }
@@ -332,13 +332,13 @@ describe("AVDhondtSummary", () => {
     wrapper.findAll("[data-test=candidate-dhondt-result]").forEach((el, i) => {
       if (i === 0) {
         // elected, theme rules do not apply
-        expect(el.html()).to.not.contain("AVDhondtSummary--text-dark");
-        expect(el.html()).to.not.contain("AVDhondtSummary--text-light");
+        expect(el.html()).to.not.contain("AVDhondtAPSummary--text-dark");
+        expect(el.html()).to.not.contain("AVDhondtAPSummary--text-light");
       } else {
         el.findAll("td").forEach((child, i) => {
           if (i !== 0) {
-            expect(child.classes()).to.contain("AVDhondtSummary--text-light");
-            expect(child.classes()).to.not.contain("AVDhondtSummary--text-dark");
+            expect(child.classes()).to.contain("AVDhondtAPSummary--text-light");
+            expect(child.classes()).to.not.contain("AVDhondtAPSummary--text-dark");
           }
         });
       }

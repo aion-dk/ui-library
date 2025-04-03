@@ -42,7 +42,7 @@ export { default as AVResourceSection } from "@/components/organisms/AVResourceS
 export { default as AVNormalSummary } from "@/components/organisms/AVNormalSummary";
 export { default as AVRankedSummary } from "@/components/organisms/AVRankedSummary";
 export { default as AVInstantRunoffSummary } from "@/components/organisms/AVInstantRunoffSummary";
-export { default as AVDhondtSummary } from "@/components/organisms/AVDhondtSummary";
+export { default as AVDhondtAPSummary } from "@/components/organisms/AVDhondtAPSummary";
 // export { default as AVFooter } from "@/components/organisms/AVFooter";
 // export { default as AVSidebar } from "@/components/organisms/AVSidebar";
 // export { default as AVNavbar } from "@/components/organisms/AVNavbar";
