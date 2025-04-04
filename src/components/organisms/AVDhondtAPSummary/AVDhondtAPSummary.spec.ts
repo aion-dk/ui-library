@@ -4,10 +4,10 @@ import { getOption } from "@/examples";
 import type { LocalString } from "@/types";
 import localI18n from "@/i18n";
 
-import AVDhondtSummary from "./AVDhondtSummary.vue";
+import AVDhondtAPSummary from "./AVDhondtAPSummary.vue";
 
-describe("AVDhondtSummary", () => {
-  const wrapper = mount(AVDhondtSummary, {
+describe("AVDhondtAPSummary", () => {
+  const wrapper = mount(AVDhondtAPSummary, {
     props: {
       distributionNumber: 5,
       totalCount: 10,
@@ -94,16 +94,16 @@ describe("AVDhondtSummary", () => {
       "OptionListVotes countComparative figure",
     );
     expect(wrapper.find("[data-test=table]").text()).to.contain(
-      "Child option 2.2Example option 246.000",
+      "Child option 2.2Example option 246.00",
     );
     expect(wrapper.find("[data-test=table]").text()).to.contain(
-      "Child option 1.1Example option 134.000",
+      "Child option 1.1Example option 134.00",
     );
     expect(wrapper.find("[data-test=table]").text()).to.contain(
-      "Child option 1.2Example option 123.000",
+      "Child option 1.2Example option 123.00",
     );
     expect(wrapper.find("[data-test=table]").text()).to.contain(
-      "Child option 2.1Example option 222.000",
+      "Child option 2.1Example option 222.00",
     );
     expect(wrapper.find("[data-test=table]").text()).to.contain("Example option 26");
     expect(wrapper.find("[data-test=table]").text()).to.contain("Example option 14");
@@ -119,7 +119,7 @@ describe("AVDhondtSummary", () => {
 
   it("renders in correct order", async () => {
     expect(wrapper.find("[data-test=table]").text()).to.contain(
-      "Child option 2.2Example option 246.000Child option 1.1Example option 134.000Child option 1.2Example option 123.000Child option 2.1Example option 222.000Example option 26Example option 14Blank vote0Total count10",
+      "Child option 2.2Example option 246.00Child option 1.1Example option 134.00Child option 1.2Example option 123.00Child option 2.1Example option 222.00Example option 26Example option 14Blank vote0Total count10",
     );
 
     await wrapper.setProps({
@@ -194,10 +194,10 @@ describe("AVDhondtSummary", () => {
     });
 
     expect(wrapper.find("[data-test=table]").text()).to.contain(
-      "Child option 2.1Example option 246.000Child option 1.2Example option 134.000Child option 1.1Example option 123.000Child option 2.2Example option 222.000Example option 26Example option 14Blank vote0Total count10",
+      "Child option 2.1Example option 246.00Child option 1.2Example option 134.00Child option 1.1Example option 123.00Child option 2.2Example option 222.00Example option 26Example option 14Blank vote0Total count10",
     );
     expect(wrapper.find("[data-test=table]").text()).to.not.contain(
-      "Child option 2.2Example option 246.000Child option 1.1Example option 134.000Child option 1.2Example option 123.000Child option 2.1Example option 222.000Example option 26Example option 14Blank vote0Total count10",
+      "Child option 2.2Example option 246.00Child option 1.1Example option 134.00Child option 1.2Example option 123.00Child option 2.1Example option 222.00Example option 26Example option 14Blank vote0Total count10",
     );
   });
 
@@ -277,10 +277,10 @@ describe("AVDhondtSummary", () => {
     });
 
     expect(wrapper.find("[data-test=table]").text()).to.contain(
-      "OptionListVotes countComparative figureChild option 2.1Example option 2106.235Child option 1.2Example option 185.453Child option 1.1Example option 153.432Child option 2.2Example option 272.435Example option 255Example option 144Blank vote15Total count999",
+      "OptionListVotes countComparative figureChild option 2.1Example option 2106.24Child option 1.2Example option 185.45Child option 1.1Example option 153.43Child option 2.2Example option 272.44Example option 255Example option 144Blank vote15Total count999",
     );
     expect(wrapper.find("[data-test=table]").text()).to.not.contain(
-      "Child option 2.1Example option 246.000Child option 1.2Example option 134.000Child option 1.1Example option 123.000Child option 2.2Example option 222.000Example option 26Example option 14Blank vote0Total count10",
+      "Child option 2.1Example option 246.00Child option 1.2Example option 134.00Child option 1.1Example option 123.00Child option 2.2Example option 222.00Example option 26Example option 14Blank vote0Total count10",
     );
     expect(wrapper.find("[data-test=summary]").text()).to.contain(
       "Seats: 1Distribution number: 4Elected: Child option 2.1",
@@ -294,13 +294,13 @@ describe("AVDhondtSummary", () => {
     wrapper.findAll("[data-test=candidate-dhondt-result]").forEach((el, i) => {
       if (i === 0) {
         // elected, theme rules do not apply
-        expect(el.html()).to.not.contain("AVDhondtSummary--text-dark");
-        expect(el.html()).to.not.contain("AVDhondtSummary--text-light");
+        expect(el.html()).to.not.contain("AVDhondtAPSummary--text-dark");
+        expect(el.html()).to.not.contain("AVDhondtAPSummary--text-light");
       } else {
         el.findAll("td").forEach((child, i) => {
           if (i !== 0) {
-            expect(child.classes()).to.contain("AVDhondtSummary--text-light");
-            expect(child.classes()).to.not.contain("AVDhondtSummary--text-dark");
+            expect(child.classes()).to.contain("AVDhondtAPSummary--text-light");
+            expect(child.classes()).to.not.contain("AVDhondAPSummary--text-dark");
           }
         });
       }
@@ -313,13 +313,13 @@ describe("AVDhondtSummary", () => {
     wrapper.findAll("[data-test=candidate-dhondt-result]").forEach((el, i) => {
       if (i === 0) {
         // elected, theme rules do not apply
-        expect(el.html()).to.not.contain("AVDhondtSummary--text-dark");
-        expect(el.html()).to.not.contain("AVDhondtSummary--text-light");
+        expect(el.html()).to.not.contain("AVDhondtAPSummary--text-dark");
+        expect(el.html()).to.not.contain("AVDhondtAPSummary--text-light");
       } else {
         el.findAll("td").forEach((child, i) => {
           if (i !== 0) {
-            expect(child.classes()).to.not.contain("AVDhondtSummary--text-light");
-            expect(child.classes()).to.contain("AVDhondtSummary--text-dark");
+            expect(child.classes()).to.not.contain("AVDhondtAPSummary--text-light");
+            expect(child.classes()).to.contain("AVDhondtAPSummary--text-dark");
           }
         });
       }
@@ -332,13 +332,13 @@ describe("AVDhondtSummary", () => {
     wrapper.findAll("[data-test=candidate-dhondt-result]").forEach((el, i) => {
       if (i === 0) {
         // elected, theme rules do not apply
-        expect(el.html()).to.not.contain("AVDhondtSummary--text-dark");
-        expect(el.html()).to.not.contain("AVDhondtSummary--text-light");
+        expect(el.html()).to.not.contain("AVDhondtAPSummary--text-dark");
+        expect(el.html()).to.not.contain("AVDhondtAPSummary--text-light");
       } else {
         el.findAll("td").forEach((child, i) => {
           if (i !== 0) {
-            expect(child.classes()).to.contain("AVDhondtSummary--text-light");
-            expect(child.classes()).to.not.contain("AVDhondtSummary--text-dark");
+            expect(child.classes()).to.contain("AVDhondtAPSummary--text-light");
+            expect(child.classes()).to.not.contain("AVDhondtAPSummary--text-dark");
           }
         });
       }
@@ -462,7 +462,7 @@ describe("AVDhondtSummary", () => {
       "ValkosturListiAtkvæði teljaSamanburðarmynd",
     );
     expect(wrapper.find("[data-test=table]").text()).to.contain(
-      "Barnakostur 2.2Dæmi um valmöguleika 245.000Barnakostur 1.1Dæmi um valmöguleika 145.000Barnakostur 1.2Dæmi um valmöguleika 123.000Barnakostur 2.1Dæmi um valmöguleika 222.000Dæmi um valmöguleika 26Dæmi um valmöguleika 15Blank vote0Heildarfjöldi999",
+      "Barnakostur 2.2Dæmi um valmöguleika 245.00Barnakostur 1.1Dæmi um valmöguleika 145.00Barnakostur 1.2Dæmi um valmöguleika 123.00Barnakostur 2.1Dæmi um valmöguleika 222.00Dæmi um valmöguleika 26Dæmi um valmöguleika 15Blank vote0Heildarfjöldi999",
     );
     expect(wrapper.find("[data-test=summary]").text()).to.contain("Sæti: 1");
     expect(wrapper.find("[data-test=summary]").text()).to.contain("Dreifingarnúmer: 4");

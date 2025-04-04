@@ -1,13 +1,43 @@
 import type { LocalString } from "@/types";
 
-interface AVDhondtResultOptionRow {
+interface AVDhondtSummaryBlankOption {
   reference: string;
   title: LocalString;
-  count: number;
   tied: boolean;
   elected: boolean;
-  group?: LocalString | null | undefined;
-  comparativeFigure?: number | null | undefined;
+  count?: number;
 }
 
-export type { AVDhondtResultOptionRow };
+interface AVDhondtSummaryOption extends AVDhondtSummaryBlankOption {
+  raffled: boolean;
+  comparativeFigure: number;
+}
+
+type AVDhondtSummarySeat = Array<AVDhondtSummaryOption>;
+
+type AVDhondtSummaryResult = Array<AVDhondtSummarySeat | AVDhondtSummaryBlankOption>;
+
+interface AVDhondtSummarySortedResult {
+  seats: Array<AVDhondtSummarySeat>;
+  blank: AVDhondtSummaryBlankOption | null;
+}
+
+interface AVDhondtSummaryOptionData {
+  title: string;
+  tied: number;
+  elected: number;
+}
+
+type AVDhondtSummaryAdditionalData = {
+  [reference: string]: AVDhondtSummaryOptionData;
+};
+
+export type {
+  AVDhondtSummaryBlankOption,
+  AVDhondtSummaryOption,
+  AVDhondtSummarySeat,
+  AVDhondtSummaryResult,
+  AVDhondtSummarySortedResult,
+  AVDhondtSummaryOptionData,
+  AVDhondtSummaryAdditionalData,
+};

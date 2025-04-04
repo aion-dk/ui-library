@@ -1,11 +1,15 @@
-tr.bg-warning-faded,
-tr.bg-success-faded {
-  border-bottom-color: var(--bs-gray-400);
+td.bg-warning-faded,
+td.bg-success-faded {
+  border-bottom-color: var(--bs-border-color);
 }
 
 td,
 th {
-  background-color: transparent !important;
+  background-color: transparent;
+}
+
+.AVDhondtSummary--text-bold {
+  font-weight: 700;
 }
 
 .AVDhondtSummary--text-semibold {
