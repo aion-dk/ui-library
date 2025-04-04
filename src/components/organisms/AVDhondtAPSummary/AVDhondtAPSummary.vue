@@ -183,7 +183,7 @@ watch(
               [`AVDhondtAPSummary--text-${theme}`]: !option.elected && !option.tied,
             }"
           >
-            {{ option.comparativeFigure ? Number(option.comparativeFigure).toFixed(3) : "" }}
+            {{ option.comparativeFigure ? Number(option.comparativeFigure).toFixed(2) : "" }}
           </td>
         </tr>
 

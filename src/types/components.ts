@@ -28,6 +28,7 @@ export * from "@/components/molecules/AVRecommendationList/AVRecommendationList.
 export * from "@/components/organisms/AVPileSummary/AVPileSummary.types";
 export * from "@/components/organisms/AVRankedSummary/AVRankedSummary.types";
 export * from "@/components/organisms/AVDhondtAPSummary/AVDhondtAPSummary.types";
+export * from "@/components/organisms/AVDhondtSummary/AVDhondtSummary.types";
 
 // TEMPLATES
 export * from "@/components/templates/AVSplitHelper/AVSplitHelper.types";

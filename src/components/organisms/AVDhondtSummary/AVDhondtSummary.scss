@@ -1,0 +1,25 @@
+td.bg-warning-faded,
+td.bg-success-faded {
+  border-bottom-color: var(--bs-border-color);
+}
+
+td,
+th {
+  background-color: transparent;
+}
+
+.AVDhondtSummary--text-bold {
+  font-weight: 700;
+}
+
+.AVDhondtSummary--text-semibold {
+  font-weight: 600;
+}
+
+.AVDhondtSummary--text-dark {
+  color: var(--bs-gray-200);
+}
+
+.AVDhondtSummary--text-light {
+  color: var(--bs-gray-800);
+}
