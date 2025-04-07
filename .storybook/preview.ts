@@ -71,6 +71,7 @@ const preview: Preview = {
   parameters: parameters,
   globalTypes: globals,
   decorators: decorators,
+  tags: ["autodocs"],
 };
 
 export default preview;

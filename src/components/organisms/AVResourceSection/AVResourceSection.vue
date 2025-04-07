@@ -163,11 +163,13 @@ watch(
         <!-- Title (only summary) -->
         <h4
           v-if="summary && !!title"
-          class="text-lora AVResourceSection--header-text"
+          class="text-lora"
           :class="{
             h3: !card,
             h5: card,
             'mb-0': card && !subtitle,
+            'AVResourceSection--header-text': !card,
+            'text-gray-800': card,
           }"
           data-test="heading-title"
         >
@@ -177,11 +179,13 @@ watch(
         <!-- Subtitle (only summary) -->
         <h5
           v-if="summary && !!subtitle"
-          class="text-lora AVResourceSection--header-text"
+          class="text-lora"
           :class="{
             h4: !card,
             h6: card,
             'mb-0': card,
+            'AVResourceSection--header-text': !card,
+            'text-gray-800': card,
           }"
           data-test="heading-subtitle"
         >
@@ -191,7 +195,11 @@ watch(
         <!-- Group (only when enabled) -->
         <h6
           v-if="summary && candidate.groups && !card"
-          class="text-lora h5 AVResourceSection--header-text"
+          class="text-lora h5"
+          :class="{
+            'AVResourceSection--header-text': !card,
+            'text-gray-800': card,
+          }"
           data-test="heading-group"
         >
           <span class="align-middle me-2">

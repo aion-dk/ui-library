@@ -2,7 +2,10 @@
 import { inject, onMounted, watch, computed } from "vue";
 import { switchLocale } from "@/i18n";
 import type {
-  AVDhondtResultOptionRow,
+  AVDhondtSummaryOption,
+  AVDhondtSummaryResult,
+  AVDhondtSummarySortedResult,
+  AVDhondtSummaryAdditionalData,
   SupportedLocale,
   Theme,
   PropType,
@@ -12,11 +15,7 @@ import { getMeaningfulLabel } from "@/helpers/meaningfulLabel";
 
 const props = defineProps({
   result: {
-    type: Array as PropType<Array<AVDhondtResultOptionRow>>,
-    required: true,
-  },
-  totalCount: {
-    type: Number,
+    type: Array as PropType<AVDhondtSummaryResult>,
     required: true,
   },
   distributionNumber: {
@@ -27,6 +26,10 @@ const props = defineProps({
     typ: Number,
     required: true,
   },
+  locale: {
+    type: String as PropType<SupportedLocale>,
+    default: "en",
+  },
   hideElected: {
     type: Boolean,
     default: false,
@@ -35,42 +38,65 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-  locale: {
-    type: String as PropType<SupportedLocale>,
-    default: "en",
-  },
   theme: {
     type: String as PropType<Theme>,
     default: "light",
   },
 });
 
-const elected = computed(() => {
-  return props.result
-    .filter((row: AVDhondtResultOptionRow) => row.elected)
-    .map((row: AVDhondtResultOptionRow) => {
-      return (
-        getMeaningfulLabel(
-          { reference: row.reference, title: row.title },
-          i18nLocale.value,
-          t("js.components.AVOption.aria_labels.option"),
-        ) ?? Object.values(row.title)[0]
-      );
-    });
+const sortedData = computed(() => {
+  const sorted: AVDhondtSummarySortedResult = {
+    seats: [],
+    blank: null,
+  };
+
+  props.result.filter((seat) => {
+    if (Array.isArray(seat)) sorted.seats.push(seat);
+    else sorted.blank = seat;
+  });
+
+  return sorted;
 });
 
-const tied = computed(() => {
-  return props.result
-    .filter((row: AVDhondtResultOptionRow) => row.tied)
-    .map((row: AVDhondtResultOptionRow) => {
-      return (
-        getMeaningfulLabel(
-          { reference: row.reference, title: row.title },
-          i18nLocale.value,
-          t("js.components.AVOption.aria_labels.option"),
-        ) ?? Object.values(row.title)[0]
-      );
-    });
+const optionReferences = computed(() =>
+  sortedData.value.seats[0].map((option) => option.reference),
+);
+
+const additionalData = computed(() => {
+  const data: AVDhondtSummaryAdditionalData = {};
+
+  optionReferences.value.forEach((reference) => {
+    data[reference] = {
+      title: getMeaningfulLabel(
+        sortedData.value.seats[0].find(
+          (option) => option.reference === reference,
+        ) as unknown as IterableObject,
+        i18nLocale.value,
+        t("js.components.AVOption.aria_labels.option"),
+      ),
+      elected: sortedData.value.seats.reduce((accumulator, currentValue) => {
+        if (currentValue.find((option) => option.reference === reference)?.elected) accumulator++;
+        return accumulator;
+      }, 0),
+      tied: sortedData.value.seats.reduce((accumulator, currentValue) => {
+        if (currentValue.find((option) => option.reference === reference)?.tied) accumulator++;
+        return accumulator;
+      }, 0),
+    };
+  });
+
+  return data;
+});
+
+const getOptionForSeat = (seat: number, optionReference: string): AVDhondtSummaryOption =>
+  sortedData.value.seats[seat].find(
+    (option) => option.reference === optionReference,
+  ) as AVDhondtSummaryOption;
+
+onMounted(() => {
+  if (props.locale) switchLocale(props.locale); // Do not delete, read next comment.
+  if (props.seats !== sortedData.value.seats.length)
+    throw new Error("Amount of seats doesn't match with amount of rounds on the result");
 });
 
 /**
@@ -84,9 +110,6 @@ const tied = computed(() => {
 const i18n: any = inject("i18n");
 const { t } = i18n.global;
 const i18nLocale = computed(() => i18n.global.locale.value || i18n.global.locale);
-onMounted(() => {
-  if (props.locale) switchLocale(props.locale);
-});
 watch(
   () => props.locale,
   () => {
@@ -109,126 +132,97 @@ watch(
     >
       <thead class="bg-secondary border-bottom">
         <tr>
-          <th>
-            {{ t("js.components.AVDhondtSummary.header.title") }}
-          </th>
-          <th>
-            {{ t("js.components.AVDhondtSummary.header.group") }}
-          </th>
-          <th>
-            {{ t("js.components.AVDhondtSummary.header.count") }}
-          </th>
-          <th>
-            {{ t("js.components.AVDhondtSummary.header.comparative_figure") }}
+          <th>{{ t("js.components.AVDhondtSummary.header.party") }}</th>
+
+          <th
+            v-for="seatNumber in seats"
+            :key="`header_for_round_${seatNumber}`"
+            class="text-center text-nowrap"
+          >
+            {{
+              t("js.components.AVDhondtSummary.header.seat_n", {
+                n: seatNumber,
+              })
+            }}
           </th>
         </tr>
       </thead>
 
       <tbody>
         <tr
-          v-for="option in result"
-          :key="`option_${option.reference}`"
-          :class="{
-            'bg-success-faded': !hideElected && option.elected,
-            'bg-warning-faded': !hideTied && option.tied && !option.elected,
-          }"
-          data-test="candidate-dhondt-result"
+          v-for="(optionReference, index) in Object.keys(additionalData)"
+          :key="`list_${optionReference}`"
+          :data-test="`party-list-${index}`"
         >
-          <td
-            :class="{
-              [`AVDhondtSummary--text-${theme}`]: !option.elected && !option.tied,
-            }"
-          >
-            <template v-if="option.group">
-              {{
-                getMeaningfulLabel(
-                  option as unknown as IterableObject,
-                  i18nLocale,
-                  t("js.components.AVOption.aria_labels.option"),
-                  ["title", "first_available_locale", "reference", "id"],
-                )
-              }}
-            </template>
+          <td :class="`AVDhondtSummary--text-${theme}`">
+            {{ additionalData[optionReference].title }}
           </td>
           <td
+            v-for="(_seat, seatNumber) in sortedData.seats"
+            :key="`seat_${seatNumber}`"
+            class="text-center"
             :class="{
-              [`AVDhondtSummary--text-${theme}`]: !option.elected && !option.tied,
+              [`AVDhondtSummary--text-${theme}`]:
+                !getOptionForSeat(seatNumber, optionReference).elected &&
+                !getOptionForSeat(seatNumber, optionReference).tied,
+              'text-gray-800':
+                getOptionForSeat(seatNumber, optionReference).elected ||
+                getOptionForSeat(seatNumber, optionReference).tied,
+              'bg-success-faded':
+                getOptionForSeat(seatNumber, optionReference).elected && !hideElected,
+              'AVDhondtSummary--text-semibold':
+                (getOptionForSeat(seatNumber, optionReference).elected && !hideElected) ||
+                (getOptionForSeat(seatNumber, optionReference).tied && !hideTied),
+              'bg-warning-faded':
+                getOptionForSeat(seatNumber, optionReference).tied &&
+                !getOptionForSeat(seatNumber, optionReference).elected &&
+                !hideTied,
             }"
           >
-            {{
-              option.group !== null && option.reference !== "blank"
-                ? getMeaningfulLabel(
-                    option as unknown as IterableObject,
-                    i18nLocale,
-                    t("js.components.AVOption.aria_labels.option"),
-                    ["group"],
-                  )
-                : getMeaningfulLabel(
-                    option as unknown as IterableObject,
-                    i18nLocale,
-                    t("js.components.AVOption.aria_labels.option"),
-                    ["title", "first_available_locale", "reference", "id"],
-                  )
-            }}
+            {{ Number(getOptionForSeat(seatNumber, optionReference).comparativeFigure).toFixed(2) }}
           </td>
-          <td
-            :class="{
-              [`AVDhondtSummary--text-${theme}`]: !option.elected && !option.tied,
-            }"
-          >
-            {{ option.count }}
-          </td>
-          <td
-            :class="{
-              [`AVDhondtSummary--text-${theme}`]: !option.elected && !option.tied,
-            }"
-          >
-            {{ option.comparativeFigure ? Number(option.comparativeFigure).toFixed(3) : "" }}
-          </td>
-        </tr>
-
-        <tr>
-          <td
-            :class="{
-              [`AVDhondtSummary--text-${theme}`]: true,
-            }"
-          >
-            <strong>{{ t("js.components.AVDhondtSummary.total_count") }}</strong>
-          </td>
-          <td></td>
-          <td
-            :class="{
-              [`AVDhondtSummary--text-${theme}`]: true,
-            }"
-          >
-            <strong>{{ totalCount }}</strong>
-          </td>
-          <td></td>
         </tr>
       </tbody>
     </table>
   </div>
-
   <div
     :class="`AVDhondtSummary--summary vstack gap-1 AVDhondtSummary--text-semibold AVDhondtSummary--text-${theme}`"
     data-test="summary"
   >
     <p class="mb-0">{{ t("js.components.AVDhondtSummary.summary.seats") }}: {{ seats }}</p>
+
+    <template v-if="!hideElected">
+      <p
+        v-for="partyReference in optionReferences"
+        :key="`written_results_for_${partyReference}`"
+        class="mb-0"
+      >
+        {{ additionalData[partyReference].title }}:
+        <template v-if="additionalData[partyReference].elected > 1">
+          {{
+            t("js.components.AVDhondtSummary.summary.seat_count.n_seats", {
+              n: additionalData[partyReference].elected,
+            })
+          }}
+        </template>
+        <template v-else-if="additionalData[partyReference].elected === 1">
+          {{ t("js.components.AVDhondtSummary.summary.seat_count.one_seat") }}
+        </template>
+        <template v-else>
+          {{ t("js.components.AVDhondtSummary.summary.seat_count.no_seats") }}
+        </template>
+      </p>
+    </template>
+
+    <template v-if="sortedData.blank">
+      <p class="mb-0">
+        {{ t("js.components.AVDhondtSummary.summary.blank") }}: {{ sortedData.blank.count }}
+      </p>
+    </template>
+
     <p v-if="distributionNumber > 0" class="mb-0">
       {{ t("js.components.AVDhondtSummary.summary.distribution") }}:
       {{ distributionNumber }}
-    </p>
-    <p v-if="elected.length > 0" class="mb-0">
-      {{ t("js.components.AVDhondtSummary.summary.elected") }}:
-      <span>
-        {{ elected.join(", ") }}
-      </span>
-    </p>
-    <p v-if="tied.length > 0" class="mb-0">
-      {{ t("js.components.AVDhondtSummary.summary.tied") }}:
-      <span>
-        {{ tied.join(", ") }}
-      </span>
     </p>
   </div>
 </template>
