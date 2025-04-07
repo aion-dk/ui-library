@@ -163,7 +163,7 @@ watch(
             class="text-center"
             :class="{
               [`AVDhondtSummary--text-${theme}`]:
-                !getOptionForSeat(seatNumber, optionReference).elected ||
+                !getOptionForSeat(seatNumber, optionReference).elected &&
                 !getOptionForSeat(seatNumber, optionReference).tied,
               'text-gray-800':
                 getOptionForSeat(seatNumber, optionReference).elected ||

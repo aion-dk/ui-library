@@ -4,7 +4,7 @@ const translations: DefineLocaleMessage = {
   ar: {
     header: {
       party: "الحفلة",
-      seat_n: "المقعد %{n}",
+      seat_n: "المقعد {n}",
     },
     summary: {
       distribution: "رقم التوزيع",
@@ -20,7 +20,7 @@ const translations: DefineLocaleMessage = {
   ca: {
     header: {
       party: "Partit",
-      seat_n: "Seient %{n}",
+      seat_n: "Seient {n}",
     },
     summary: {
       distribution: "Número de distribució",
@@ -36,7 +36,7 @@ const translations: DefineLocaleMessage = {
   cy: {
     header: {
       party: "Parti",
-      seat_n: "Sedd %{n}",
+      seat_n: "Sedd {n}",
     },
     summary: {
       distribution: "Rhif dosbarthu",
@@ -68,7 +68,7 @@ const translations: DefineLocaleMessage = {
   de: {
     header: {
       party: "Party",
-      seat_n: "Sitz %{n}",
+      seat_n: "Sitz {n}",
     },
     summary: {
       distribution: "Verteilungsnummer",
@@ -100,7 +100,7 @@ const translations: DefineLocaleMessage = {
   es: {
     header: {
       party: "Partido",
-      seat_n: "Escaño %{n}",
+      seat_n: "Escaño {n}",
     },
     summary: {
       distribution: "Número de distribución",
@@ -116,7 +116,7 @@ const translations: DefineLocaleMessage = {
   fi: {
     header: {
       party: "Puolue",
-      seat_n: "Istuin %{n}",
+      seat_n: "Istuin {n}",
     },
     summary: {
       distribution: "Jakelunumero",
@@ -132,7 +132,7 @@ const translations: DefineLocaleMessage = {
   fr: {
     header: {
       party: "Parti",
-      seat_n: "Siège %{n}",
+      seat_n: "Siège {n}",
     },
     summary: {
       distribution: "Numéro de distribution",
@@ -148,7 +148,7 @@ const translations: DefineLocaleMessage = {
   is: {
     header: {
       party: "Veisla",
-      seat_n: "Sæti %{n}",
+      seat_n: "Sæti {n}",
     },
     summary: {
       distribution: "Dreifingarnúmer",
@@ -164,7 +164,7 @@ const translations: DefineLocaleMessage = {
   it: {
     header: {
       party: "Partito",
-      seat_n: "Sedile %{n}",
+      seat_n: "Sedile {n}",
     },
     summary: {
       distribution: "Numero di distribuzione",
@@ -180,7 +180,7 @@ const translations: DefineLocaleMessage = {
   nl: {
     header: {
       party: "Feest",
-      seat_n: "Stoel %{n}",
+      seat_n: "Stoel {n}",
     },
     summary: {
       distribution: "Distributienummer",
@@ -196,7 +196,7 @@ const translations: DefineLocaleMessage = {
   pl: {
     header: {
       party: "Impreza",
-      seat_n: "Siedzenie %{n}",
+      seat_n: "Siedzenie {n}",
     },
     summary: {
       distribution: "Numer dystrybucyjny",
@@ -212,7 +212,7 @@ const translations: DefineLocaleMessage = {
   pt: {
     header: {
       party: "Festa",
-      seat_n: "Assento %{n}",
+      seat_n: "Assento {n}",
     },
     summary: {
       distribution: "Número de distribuição",
@@ -228,7 +228,7 @@ const translations: DefineLocaleMessage = {
   ro: {
     header: {
       party: "Partidul",
-      seat_n: "Scaun %{n}",
+      seat_n: "Scaun {n}",
     },
     summary: {
       distribution: "Numărul de distribuție",
@@ -244,7 +244,7 @@ const translations: DefineLocaleMessage = {
   ru: {
     header: {
       party: "Вечеринка",
-      seat_n: "Место %{n}",
+      seat_n: "Место {n}",
     },
     summary: {
       distribution: "Номер распределения",
@@ -260,7 +260,7 @@ const translations: DefineLocaleMessage = {
   sv: {
     header: {
       party: "Partiet",
-      seat_n: "Sittplats %{n}",
+      seat_n: "Sittplats {n}",
     },
     summary: {
       distribution: "Distributionsnummer",
