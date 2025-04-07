@@ -621,8 +621,8 @@ describe("AVRankedSummary", () => {
           tied: true,
         },
         {
-          reference: getOption(["selectable"], 2).reference,
-          title: getOption(["selectable"], 2).title,
+          reference: getOption(["selectable"], 3).reference,
+          title: getOption(["selectable"], 3).title,
           rounds: [
             {
               count: 1,
