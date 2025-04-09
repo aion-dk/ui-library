@@ -118,7 +118,7 @@ watch(
             <li v-for="opt in optionParents(option)" :key="opt.reference" class="breadcrumb-item">
               {{
                 getMeaningfulLabel(
-                  option as unknown as IterableObject,
+                  opt as unknown as IterableObject,
                   i18nLocale,
                   t("js.components.AVOption.aria_labels.option"),
                 )
