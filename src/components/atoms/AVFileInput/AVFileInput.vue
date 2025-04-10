@@ -253,7 +253,7 @@ watch(
           />
           <AVIcon v-else icon="file" data-test="file-preview-icon" />
           <p class="text-gray-800 m-0">
-            {{ file.name }}&nbsp;<em class="text-gray-600">({{ getFileSize(file.size) }})</em>
+            {{ file.name }}&nbsp;<em class="text-gray-700">({{ getFileSize(file.size) }})</em>
           </p>
         </div>
 
