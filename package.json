@@ -1,6 +1,6 @@
 {
   "name": "@assemblyvoting/electa-ui",
-  "version": "4.1.9-beta.0",
+  "version": "4.1.9",
   "license": "MIT",
   "publishConfig": {
     "access": "public"
