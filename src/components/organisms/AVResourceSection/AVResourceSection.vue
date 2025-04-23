@@ -133,13 +133,13 @@ watch(
       data-test="resource-section"
     >
       <div
+        v-if="summary && image"
         :class="{
           'px-3': card,
           'pt-3': card,
         }"
       >
         <img
-          v-if="summary && image"
           :src="image"
           :alt="t('js.components.AVResourceSection.alt_candidate')"
           class="AVResourceSection--image img-fluid ratio ratio-1x1"
