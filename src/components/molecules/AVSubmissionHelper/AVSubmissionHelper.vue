@@ -20,6 +20,10 @@ const props = defineProps({
     type: Number,
     required: true,
   },
+  showScrollToBottom: {
+    type: Boolean,
+    default: false,
+  },
   hasExclusiveOptions: {
     type: Boolean,
     default: false,
@@ -33,6 +37,8 @@ const props = defineProps({
     default: null,
   },
 });
+
+const emits = defineEmits(["scrollToBottom"]);
 
 const errorMessages = computed(() => {
   // Hint to i18n-tasks that these translations should be present:
@@ -84,6 +90,15 @@ watch(
 
 <template>
   <div class="sticky-bottom">
+    <button
+      v-if="showScrollToBottom"
+      class="btn btn-light rounded-0 w-100 border AVSubmissionHelper--btn-override"
+      @click="emits('scrollToBottom')"
+    >
+      <AVIcon icon="chevron-down" />
+      Go to bottom
+      <!-- {{ t("js.components.AVSubmissionHelper.go_to_bottom") }} -->
+    </button>
     <div
       class="p-3"
       :class="{
@@ -113,7 +128,7 @@ watch(
           role="alert"
           v-text="errorMessage"
           data-test="submission-helper-error"
-        />
+        ></div>
         <hr class="my-3" />
       </div>
 
@@ -150,7 +165,7 @@ watch(
             "
             class="mt-2 mt-sm-0"
             data-test="submission-helper-count"
-          />
+          ></div>
         </div>
       </div>
 

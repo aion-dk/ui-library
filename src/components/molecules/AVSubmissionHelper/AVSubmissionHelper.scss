@@ -23,3 +23,11 @@
     }
   }
 }
+
+.AVSubmissionHelper--btn-override {
+  background-color: var(--bs-gray-300);
+
+  &:hover {
+    background-color: var(--bs-gray-500);
+  }
+}
