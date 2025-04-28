@@ -264,7 +264,7 @@ watch(
       :min-marks="contest.markingType.minMarks"
       :max-marks="contest.markingType.maxMarks"
       :has-exclusive-options="contestHasExclusiveOptions"
-      :show-scroll-to-bottom="contest.displayScrollToBottomBtn"
+      :display-scroll-to-bottom="contest.displayScrollToBottomBtn"
       @scroll-to-bottom="scrollToBottom"
       class="mt-3"
       data-test="ballot-submission-helper"

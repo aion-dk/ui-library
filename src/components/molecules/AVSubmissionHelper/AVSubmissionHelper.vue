@@ -20,7 +20,7 @@ const props = defineProps({
     type: Number,
     required: true,
   },
-  showScrollToBottom: {
+  displayScrollToBottom: {
     type: Boolean,
     default: false,
   },
@@ -91,7 +91,7 @@ watch(
 <template>
   <div class="sticky-bottom">
     <button
-      v-if="showScrollToBottom"
+      v-if="displayScrollToBottom"
       class="btn btn-light rounded-0 w-100 border AVSubmissionHelper--btn-override"
       @click="emits('scrollToBottom')"
     >
