@@ -96,8 +96,7 @@ watch(
       @click="emits('scrollToBottom')"
     >
       <AVIcon icon="chevron-down" />
-      Go to bottom
-      <!-- {{ t("js.components.AVSubmissionHelper.go_to_bottom") }} -->
+      {{ t("js.components.AVSubmissionHelper.go_to_bottom") }}
     </button>
     <div
       class="p-3"
