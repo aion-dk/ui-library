@@ -64,6 +64,8 @@ const emits = defineEmits(["update:selectionPile", "update:errors", "view-candid
 // const writeInParty = ref<string>("");
 // const writeInCandidate = ref<string>("");
 
+const endOfBallot = ref<HTMLDivElement | null>(null);
+
 const search = ref<HTMLInputElement | null>(null);
 
 const selections = computed(() => props.selectionPile.optionSelections);
@@ -152,6 +154,9 @@ const toggleOption = ({ reference, amount }: CheckedEventArgs) => {
 };
 
 const viewCandidate = (reference: string) => emits("view-candidate", reference);
+
+const scrollToBottom = () =>
+  endOfBallot.value?.scrollIntoView({ behavior: "smooth", block: "end" });
 
 /**
  * This is necesary in order to support both provided i18n and local i18n.
@@ -259,10 +264,13 @@ watch(
       :min-marks="contest.markingType.minMarks"
       :max-marks="contest.markingType.maxMarks"
       :has-exclusive-options="contestHasExclusiveOptions"
+      :show-scroll-to-bottom="contest.displayScrollToBottomBtn"
+      @scroll-to-bottom="scrollToBottom"
       class="mt-3"
       data-test="ballot-submission-helper"
     />
   </div>
+  <div ref="endOfBallot" class="visually-hidden"></div>
 </template>
 
 <style scoped lang="scss" src="./AVBallot.scss" />

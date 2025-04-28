@@ -172,3 +172,12 @@ export const Disabled = {
     selectionPile: getSelectionPile([]),
   },
 };
+
+export const HugeContest = {
+  render: Template,
+
+  args: {
+    contest: getContest(["huge"]),
+    selectionPile: getSelectionPile([]),
+  },
+};
