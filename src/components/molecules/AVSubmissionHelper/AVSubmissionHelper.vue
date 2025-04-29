@@ -38,8 +38,6 @@ const props = defineProps({
   },
 });
 
-const emits = defineEmits(["scrollToBottom"]);
-
 const errorMessages = computed(() => {
   // Hint to i18n-tasks that these translations should be present:
   // t("submission_helper.errors.too_many")
@@ -63,6 +61,11 @@ const errorMessages = computed(() => {
     }
   });
 });
+
+const scrollToBottom = () =>
+  document
+    .querySelector("#ballot-action-buttons")
+    ?.scrollIntoView({ behavior: "smooth", block: "start" });
 
 /**
  * This is necesary in order to support both provided i18n and local i18n.
@@ -93,7 +96,7 @@ watch(
     <button
       v-if="displayScrollToBottom"
       class="btn btn-light rounded-0 border-0 w-100 AVSubmissionHelper--btn-override"
-      @click="emits('scrollToBottom')"
+      @click="scrollToBottom"
     >
       <AVIcon icon="chevron-down" />
       {{ t("js.components.AVSubmissionHelper.go_to_bottom") }}

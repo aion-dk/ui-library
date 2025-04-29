@@ -153,11 +153,6 @@ const toggleOption = ({ reference, amount }: CheckedEventArgs) => {
 
 const viewCandidate = (reference: string) => emits("view-candidate", reference);
 
-const scrollToBottom = () =>
-  document
-    .querySelector("#ballot-action-buttons")
-    ?.scrollIntoView({ behavior: "smooth", block: "start" });
-
 /**
  * This is necesary in order to support both provided i18n and local i18n.
  * The used locale will be taken from the provided i18n as long as there is one
@@ -265,7 +260,6 @@ watch(
       :max-marks="contest.markingType.maxMarks"
       :has-exclusive-options="contestHasExclusiveOptions"
       :display-scroll-to-bottom="contest.displayScrollToBottomBtn"
-      @scroll-to-bottom="scrollToBottom"
       class="mt-3"
       data-test="ballot-submission-helper"
     />
