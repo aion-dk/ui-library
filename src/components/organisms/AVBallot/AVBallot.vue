@@ -270,7 +270,6 @@ watch(
       data-test="ballot-submission-helper"
     />
   </div>
-  <div ref="endOfBallot" class="visually-hidden"></div>
 </template>
 
 <style scoped lang="scss" src="./AVBallot.scss" />
