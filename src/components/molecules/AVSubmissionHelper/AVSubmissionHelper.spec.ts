@@ -20,6 +20,11 @@ describe("AVSubmissionHelper", () => {
       directives: {
         tooltip: () => {},
       },
+      stubs: {
+        AVIcon: {
+          template: "<span />",
+        },
+      },
     },
   });
 
@@ -121,11 +126,23 @@ describe("AVSubmissionHelper", () => {
     );
   });
 
+  it("can display scroll to bottom", async () => {
+    expect(wrapper.findAll("[data-test=scroll-bottom]").length).to.eq(0);
+
+    await wrapper.setProps({
+      displayScrollToBottom: true,
+    });
+
+    expect(wrapper.findAll("[data-test=scroll-bottom]").length).to.eq(1);
+    expect(wrapper.find("[data-test=scroll-bottom]").text()).to.contain("Go to the bottom");
+    // Can't actually test the scrolling as it is pointing to an external HTML element.
+  });
+
   it("can switch language", async () => {
     await wrapper.setProps({
       locale: "ro",
     });
-
+    expect(wrapper.find("[data-test=scroll-bottom]").text()).to.contain("Mergeți la partea de jos");
     expect(wrapper.find("[data-test=submission-helper]").text()).to.contain(
       "Selectați între 1 și 5 opțiuni",
     );
