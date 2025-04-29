@@ -64,8 +64,6 @@ const emits = defineEmits(["update:selectionPile", "update:errors", "view-candid
 // const writeInParty = ref<string>("");
 // const writeInCandidate = ref<string>("");
 
-const endOfBallot = ref<HTMLDivElement | null>(null);
-
 const search = ref<HTMLInputElement | null>(null);
 
 const selections = computed(() => props.selectionPile.optionSelections);
@@ -156,7 +154,9 @@ const toggleOption = ({ reference, amount }: CheckedEventArgs) => {
 const viewCandidate = (reference: string) => emits("view-candidate", reference);
 
 const scrollToBottom = () =>
-  endOfBallot.value?.scrollIntoView({ behavior: "smooth", block: "end" });
+  document
+    .querySelector("#ballot-action-buttons")
+    ?.scrollIntoView({ behavior: "smooth", block: "start" });
 
 /**
  * This is necesary in order to support both provided i18n and local i18n.
