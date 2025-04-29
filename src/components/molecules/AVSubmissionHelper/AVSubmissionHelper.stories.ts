@@ -25,6 +25,9 @@ const meta: Meta<typeof AVSubmissionHelper> = {
     weight: {
       control: { type: "number", min: 0, max: 999, step: 1 },
     },
+    displayScrollToBottom: {
+      control: { type: "boolean" },
+    },
     locale: {
       control: { type: "select" },
       options: SUPPORTED_LOCALES,

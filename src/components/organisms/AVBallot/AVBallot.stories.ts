@@ -45,7 +45,8 @@ const Template = (args: Meta) => ({
   setup() {
     return { args };
   },
-  template: '<AVBallot v-bind="args" />',
+  template:
+    '<div><AVBallot v-bind="args" /><div id="ballot-action-buttons" class="mt-4 bg-danger-subtle border border-danger p-3 hstack justify-content-center">External #ballot-action-buttons section</div></div>',
 });
 
 export const Default = {
@@ -169,6 +170,15 @@ export const Disabled = {
   args: {
     contest: getContest([]),
     disabled: true,
+    selectionPile: getSelectionPile([]),
+  },
+};
+
+export const HugeContest = {
+  render: Template,
+
+  args: {
+    contest: getContest(["huge"]),
     selectionPile: getSelectionPile([]),
   },
 };
