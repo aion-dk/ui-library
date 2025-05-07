@@ -316,7 +316,7 @@ watch(
                   <button
                     v-if="!!option.candidateId"
                     class="btn btn-sm btn-outline-dark"
-                    @click="emits('view-candidate', option.candidateId)"
+                    @click.stop="emits('view-candidate', option.candidateId)"
                     data-test="option-candidacy"
                   >
                     {{ t("js.components.AVOption.view_candidate") }}
@@ -328,6 +328,7 @@ watch(
                     :href="link.url"
                     class="btn btn-sm btn-outline-dark"
                     target="_blank"
+                    @click.stop
                     data-test="option-link"
                   >
                     {{ link.text }}
