@@ -447,6 +447,7 @@ watch(
             :image-option="imageOption"
             @checked="(args: boolean) => emits('checked', args)"
             @accordion-open="() => toggleCollapse(true, false)"
+            @view-candidate="emits('view-candidate', option.candidateId)"
           />
         </div>
       </template>
