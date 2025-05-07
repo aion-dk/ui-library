@@ -154,6 +154,7 @@ watch(
       <div
         :class="{
           vstack: summary,
+          'w-100': !summary && !card,
           'justify-content-center': summary,
           'px-3': summary,
           'px-4': summary && card,

@@ -266,6 +266,7 @@ watch(
           :image-option="imageOption"
           @update:selection-pile="updateActivePile"
           @update:errors="(errors: string[]) => updateErrors(errors)"
+          @view-candidate="viewCandidate"
         />
 
         <div id="ballot-action-buttons" class="mt-3 row">

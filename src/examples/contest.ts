@@ -43,7 +43,7 @@ const getContestOptions = (args: ContestArg[]): OptionContent[] => {
   else if (args.includes("complete_options"))
     return getOptions(["selectable", "description", "image"], 3);
   else if (args.includes("many_options")) return getOptions(["selectable"], 8);
-  else if (args.includes("huge")) return getOptions(["selectable"], 1000);
+  else if (args.includes("huge")) return getOptions(["selectable"], 20);
   else return getOptions(["selectable"], 3);
 };
 
