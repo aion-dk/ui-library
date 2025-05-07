@@ -179,6 +179,11 @@ const mutationObserver = ref<MutationObserver | null>(null);
 
 const mutationObserverTarget = document.getElementsByTagName("html")[0];
 
+const openChildrenCandidate = (reference: string) => {
+  console.log("TRIGGERED", reference);
+  emits("view-candidate", reference);
+};
+
 watch(
   () => eventBus.value.get("highlight-option"),
   (val) => {
@@ -447,7 +452,7 @@ watch(
             :image-option="imageOption"
             @checked="(args: boolean) => emits('checked', args)"
             @accordion-open="() => toggleCollapse(true, false)"
-            @view-candidate="emits('view-candidate', option.candidateId)"
+            @view-candidate="openChildrenCandidate"
           />
         </div>
       </template>
