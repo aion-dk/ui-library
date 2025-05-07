@@ -31,6 +31,9 @@ const meta: Meta<typeof AVSplitHelper> & {
     partialResults: {
       control: { type: "object" },
     },
+    showSubmissionHelper: {
+      control: { type: "boolean" },
+    },
     "onUpdate:activePile": {
       action: "onUpdate:activePile: UPDATED",
     },

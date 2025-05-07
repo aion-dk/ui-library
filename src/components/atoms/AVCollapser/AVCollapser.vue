@@ -47,10 +47,8 @@ const toggleAccordion = (force: boolean | null = null, animate = true) => {
 <template>
   <template v-if="collapsable">
     <div
-      role="button"
       :aria-controls="paneId"
       tabindex="0"
-      :aria-expanded="isOpen"
       class="AVCollapser"
       @click="toggleAccordion()"
       @keypress.space.enter.prevent="toggleAccordion()"
