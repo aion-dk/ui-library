@@ -180,7 +180,6 @@ const mutationObserver = ref<MutationObserver | null>(null);
 const mutationObserverTarget = document.getElementsByTagName("html")[0];
 
 const openChildrenCandidate = (reference: string) => {
-  console.log("TRIGGERED", reference);
   emits("view-candidate", reference);
 };
 
