@@ -11,6 +11,7 @@ const translations: DefineLocaleMessage = {
     your_vote_weight: "قدره ترجيح صوتك {weight}",
     exceeded_list_limit:
       "لقد تجاوز اختيارك الحد الأقصى لعدد الخيارات التي يمكن أن تكون في قائمة {list_name}. يرجى تحديد الحد الأقصى لعدد {max_list_marks} من الخيارات في هذه القائمة",
+    go_to_bottom: "انتقل إلى الأسفل",
     errors: {
       too_many: "تم تحديد عدد كبير جدًا من الخيارات",
       blank: "فارغ حصري ولا يمكن دمجه مع خيارات أخرى.",
@@ -28,6 +29,7 @@ const translations: DefineLocaleMessage = {
     select_single: "Selecciona 1 (una) opció.",
     selected: "Seleccionades: <b>{selected}</b>",
     your_vote_weight: "El seu vot té un pes de {weight}",
+    go_to_bottom: "Anar al fons",
     errors: {
       too_many: "S'han seleccionat massa opcions.",
       blank: "El vot en blanc és exclusiu i no es pot combinar amb altres opcions.",
@@ -50,6 +52,7 @@ const translations: DefineLocaleMessage = {
     select_single: "Dewiswch un (1) opsiwn.",
     selected: "Dewiswyd: <b>{selected}</b>",
     your_vote_weight: "Mae gan eich pleidlais bwysoliad o {weight}",
+    go_to_bottom: "Ewch i'r gwaelod",
     errors: {
       too_many: "Gormod o opsiynau wedi'u dewis.",
       blank: "Mae gwag yn ddewis unigol ac ni ellir ei gyfuno ag opsiynau eraill.",
@@ -72,6 +75,7 @@ const translations: DefineLocaleMessage = {
     select_single: "Sæt ét (1) kryds.",
     selected: "Krydser: <b>{selected}</b>",
     your_vote_weight: "Du har en stemmevægt på {weight}",
+    go_to_bottom: "Gå til bunden",
     errors: {
       too_many: "Du har sat for mange krydser.",
       blank: "Blank stemme kan ikke kombineres med andre valgmuligheder.",
@@ -92,6 +96,7 @@ const translations: DefineLocaleMessage = {
     select_single: "Vergeben Sie eine Stimme.",
     selected: "Gewählt: <b>{selected}</b>",
     your_vote_weight: "Ihre Stimme hat ein Gewicht von {weight}",
+    go_to_bottom: "Nach unten gehen",
     errors: {
       too_many: "Zu viele Optionen gewählt.",
       blank: "Blank ist exklusiv und kann nicht mit anderen Optionen kombiniert werden.",
@@ -114,6 +119,7 @@ const translations: DefineLocaleMessage = {
     select_single: "Select one (1) option.",
     selected: "Selected: <b>{selected}</b>",
     your_vote_weight: "Your vote has a weight of {weight}",
+    go_to_bottom: "Go to the bottom",
     errors: {
       too_many: "Too many options selected.",
       blank: "Blank is exclusive and cannot be combined with other options.",
@@ -135,6 +141,7 @@ const translations: DefineLocaleMessage = {
     select_single: "Seleccione 1 (una) opción.",
     selected: "Seleccionadas: <b>{selected}</b>",
     your_vote_weight: "Su voto tiene un peso de {weight}",
+    go_to_bottom: "Ir al final de la boleta",
     errors: {
       too_many: "Demasiadas opciones seleccionadas.",
       exceeded_list_limit:
@@ -156,6 +163,7 @@ const translations: DefineLocaleMessage = {
     select_single: "Valitse yksi (1) vaihtoehto.",
     selected: "Valittu: <b>{selected}</b>",
     your_vote_weight: "Äänesi painoarvo on {weight}",
+    go_to_bottom: "Siirry pohjaan",
     errors: {
       exceeded_list_limit:
         "Valintasi ylitti luettelossa {list_name} olevien vaihtoehtojen enimmäismäärän. Valitse enintään {max_list_marks} vaihtoehtoa tälle luettelolle",
@@ -176,6 +184,7 @@ const translations: DefineLocaleMessage = {
     select_single: "Sélectionnez une (1) option.",
     selected: "Sélection: <b>{selected}</b>",
     your_vote_weight: "Votre vote a un poids de {weight}",
+    go_to_bottom: "Aller au bas de la page",
     errors: {
       exceeded_list_limit:
         "Votre sélection a dépassé le nombre maximum d'options pouvant figurer sur la liste {list_name}. Veuillez sélectionner un maximum de {max_list_marks} options dans cette liste.",
@@ -197,6 +206,7 @@ const translations: DefineLocaleMessage = {
     select_single: "Veldu einn (1) valmöguleika.",
     selected: "Valið: <b>{selected}</b>",
     your_vote_weight: "Vægi atkvæðis þíns er {weight}",
+    go_to_bottom: "Fara til botns",
     errors: {
       exceeded_list_limit:
         "Val þitt fór yfir hámarksfjölda valkosta sem geta verið á listanum {list_name}. Vinsamlegast veldu hámark {max_list_marks} valkosti á þessum lista",
@@ -218,6 +228,7 @@ const translations: DefineLocaleMessage = {
     select_single: "Seleziona una (1) opzione.",
     selected: "Selezionato: <b>{selected}</b>",
     your_vote_weight: "Il tuo voto ha un peso di {weight}",
+    go_to_bottom: "Vai in fondo",
     errors: {
       too_many: "Troppe opzioni selezionate.",
       blank: "Il voto vuoto è esclusivo e non è cumulabile con altre opzioni.",
@@ -240,6 +251,7 @@ const translations: DefineLocaleMessage = {
     select_single: "Selecteer één (1) optie.",
     selected: "Geselecteerd: <b>{selected}</b>",
     your_vote_weight: "Uw stem heeft een gewicht van {weight}",
+    go_to_bottom: "Naar beneden",
     errors: {
       exceeded_list_limit:
         "Je selectie heeft het maximale aantal opties overschreden dat op de lijst {list_name} kan staan. Selecteer maximaal {max_list_marks} opties per deze lijst",
@@ -260,6 +272,7 @@ const translations: DefineLocaleMessage = {
     select_single: "Wybierz jedną (1) opcję.",
     selected: "Wybrane: <b>{selected}</b>",
     your_vote_weight: "Twój głos ma wagę {weight}",
+    go_to_bottom: "Przejdź na dół",
     errors: {
       exceeded_list_limit:
         "Twój wybór przekroczył maksymalną liczbę opcji, które mogą znajdować się na liście {list_name}. Wybierz maksymalnie {max_list_marks} opcji z tej listy",
@@ -281,6 +294,7 @@ const translations: DefineLocaleMessage = {
     select_single: "Seleccione uma (1) opção.",
     selected: "Selecionada: <b>{selected}</b>",
     your_vote_weight: "O seu voto tem um peso de {weight}",
+    go_to_bottom: "Ir para o fundo",
     errors: {
       too_many: "Demasiadas opções seleccionadas.",
       blank: "O voto em branco é exclusivo e não pode ser combinado com outras opções.",
@@ -302,6 +316,7 @@ const translations: DefineLocaleMessage = {
     select_single: "Selectați una (1) opțiune.",
     selected: "Selectat: <b>{selected}</b>",
     your_vote_weight: "Votul dvs. are o greutate de {weight}",
+    go_to_bottom: "Mergeți la partea de jos",
     errors: {
       exceeded_list_limit:
         "Selecția dvs. a depășit numărul maxim de opțiuni care pot fi în lista {list_name}. Selectați maximum {max_list_marks} opțiuni din această listă",
@@ -324,6 +339,7 @@ const translations: DefineLocaleMessage = {
     select_single: "Выберите один (1) вариант.",
     selected: "Выбрано: <b>{selected}</b>",
     your_vote_weight: "Ваш голос имеет вес {weight}",
+    go_to_bottom: "Перейдите в нижнюю часть",
     errors: {
       exceeded_list_limit:
         "Ваш выбор превысил максимальное количество вариантов, которые могут быть в списке {list_name}. Выберите максимальное количество параметров: {max_list_marks} в этом списке.",
@@ -345,6 +361,7 @@ const translations: DefineLocaleMessage = {
     select_single: "Välj ett (1) alternativ.",
     selected: "Valda: <b>{selected}</b>",
     your_vote_weight: "Din röst har en vikt på {weight}",
+    go_to_bottom: "Gå till botten",
     errors: {
       exceeded_list_limit:
         "Ditt val överskred det maximala antalet alternativ som kan finnas på listan {list_name}. Välj max {max_list_marks} alternativ per den här listan",

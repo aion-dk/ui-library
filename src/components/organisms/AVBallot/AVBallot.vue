@@ -259,6 +259,7 @@ watch(
       :min-marks="contest.markingType.minMarks"
       :max-marks="contest.markingType.maxMarks"
       :has-exclusive-options="contestHasExclusiveOptions"
+      :display-scroll-to-bottom="contest.displayScrollToBottomBtn"
       class="mt-3"
       data-test="ballot-submission-helper"
     />

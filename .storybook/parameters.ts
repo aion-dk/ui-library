@@ -45,10 +45,6 @@ const parameters = {
           selector: "[data-test=candidate-ranked-result]",
           enabled: false,
         },
-        {
-          id: "nested-interactive",
-          enabled: false,
-        },
       ],
     },
     test: "error",

@@ -266,9 +266,10 @@ watch(
           :image-option="imageOption"
           @update:selection-pile="updateActivePile"
           @update:errors="(errors: string[]) => updateErrors(errors)"
+          @view-candidate="viewCandidate"
         />
 
-        <div class="mt-3 row">
+        <div id="ballot-action-buttons" class="mt-3 row">
           <div class="col-12 col-sm-6 order-2 order-sm-1 d-flex justify-content-sm-start">
             <button
               v-if="selectionPiles.length > 0"

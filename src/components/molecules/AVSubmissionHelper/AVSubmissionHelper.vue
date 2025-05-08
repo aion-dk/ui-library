@@ -20,6 +20,10 @@ const props = defineProps({
     type: Number,
     required: true,
   },
+  displayScrollToBottom: {
+    type: Boolean,
+    default: false,
+  },
   hasExclusiveOptions: {
     type: Boolean,
     default: false,
@@ -58,6 +62,11 @@ const errorMessages = computed(() => {
   });
 });
 
+const scrollToBottom = () =>
+  document
+    .querySelector("#ballot-action-buttons")
+    ?.scrollIntoView({ behavior: "smooth", block: "start" });
+
 /**
  * This is necesary in order to support both provided i18n and local i18n.
  * The used locale will be taken from the provided i18n as long as there is one
@@ -84,6 +93,15 @@ watch(
 
 <template>
   <div class="sticky-bottom">
+    <button
+      v-if="displayScrollToBottom"
+      class="btn btn-light rounded-0 border-0 w-100 AVSubmissionHelper--btn-override"
+      data-test="scroll-bottom"
+      @click="scrollToBottom"
+    >
+      <AVIcon icon="chevron-down" />
+      {{ t("js.components.AVSubmissionHelper.go_to_bottom") }}
+    </button>
     <div
       class="p-3"
       :class="{
@@ -113,7 +131,7 @@ watch(
           role="alert"
           v-text="errorMessage"
           data-test="submission-helper-error"
-        />
+        ></div>
         <hr class="my-3" />
       </div>
 
@@ -150,7 +168,7 @@ watch(
             "
             class="mt-2 mt-sm-0"
             data-test="submission-helper-count"
-          />
+          ></div>
         </div>
       </div>
 
