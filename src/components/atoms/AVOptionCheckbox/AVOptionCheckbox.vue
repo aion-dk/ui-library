@@ -10,7 +10,7 @@ const props = defineProps({
   },
   excluded: {
     type: Boolean,
-    required: false,
+    default: false,
   },
   optionReference: {
     type: String,
@@ -117,7 +117,7 @@ watch(
       <AVOptionSelect
         v-if="checked"
         :id="`option_${optionReference}_tick`"
-        :rank="rank"
+        :rank="excluded ? null : rank"
         :checked="checked"
         data-test="select"
       />
