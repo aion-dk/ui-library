@@ -8,6 +8,10 @@ const props = defineProps({
     type: Boolean,
     required: true,
   },
+  excluded: {
+    type: Boolean,
+    default: false,
+  },
   optionReference: {
     type: String,
     default: "",
@@ -98,7 +102,7 @@ watch(
       :aria-checked="props.checked"
       :aria-label="
         checked
-          ? rank
+          ? rank && !excluded
             ? t('js.components.AVOptionCheckbox.aria_label.checked_ranked', { rank: rank })
             : t('js.components.AVOptionCheckbox.aria_label.checked_normal')
           : t('js.components.AVOptionCheckbox.aria_label.unchecked')
@@ -113,7 +117,7 @@ watch(
       <AVOptionSelect
         v-if="checked"
         :id="`option_${optionReference}_tick`"
-        :rank="rank"
+        :rank="excluded ? null : rank"
         :checked="checked"
         data-test="select"
       />
