@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import type { PropType, NormalResult } from "@/types";
-
+import type { PropType, NormalResult, VoteCounts } from "@/types";
+import { inject } from "vue";
 const props = defineProps({
   sortedResult: {
     type: Array as PropType<NormalResult[]>,
@@ -26,8 +26,15 @@ const props = defineProps({
     type: Number,
     required: true,
   },
+  voteCounts: {
+    type: Object as PropType<VoteCounts>,
+    required: false,
+  },
 });
 
+/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+const i18n: any = inject("i18n");
+const { t } = i18n.global;
 const isPercentageHidden = (reference: string): boolean =>
   reference === "blank" && props.disregardBlank ? true : props.hidePercentage;
 </script>
@@ -49,6 +56,11 @@ const isPercentageHidden = (reference: string): boolean =>
         :hide-percentage="isPercentageHidden(result.reference)"
         data-test="result-option"
       />
+    </div>
+    <div v-if="voteCounts">
+      <p class="mb-0">
+        {{ t("js.components.AVDhondtSummary.summary.null_votes") }}: {{ voteCounts.excludedCount }}
+      </p>
     </div>
   </div>
 </template>

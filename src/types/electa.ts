@@ -16,6 +16,21 @@ interface Result {
   tied?: boolean;
 }
 
+interface VoteCounts {
+  voted: number;
+  disabledCount: number;
+  disabledWeight: number;
+  votedWeight: number;
+  present: number;
+  presentWeight: number;
+  eligible: number;
+  eligibleWeight: number;
+  invalidVotes: number;
+  votedMultipleChannels: number;
+  excludedCount: number;
+  blankCount: number;
+}
+
 interface NormalResult extends Result {
   image?: string;
   count: number;
@@ -51,4 +66,5 @@ export type {
   NormalResult,
   RankedResult,
   Theme,
+  VoteCounts,
 };
