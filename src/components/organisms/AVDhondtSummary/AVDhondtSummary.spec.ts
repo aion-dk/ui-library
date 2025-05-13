@@ -1,13 +1,15 @@
 import { describe, it, expect } from "vitest";
 import { mount } from "@vue/test-utils";
-import { getOption } from "@/examples";
+import { getOption, getVoteCounts } from "@/examples";
 import localI18n from "@/i18n";
+import AVResultSummaryItem from "@/components/atoms/AVResultSummaryItem";
 
 import AVDhondtSummary from "./AVDhondtSummary.vue";
 
 describe("AVDhondtSummary", () => {
   const wrapper = mount(AVDhondtSummary, {
     props: {
+      voteCounts: getVoteCounts(),
       distributionNumber: 5,
       seats: 4,
       result: [
@@ -97,6 +99,9 @@ describe("AVDhondtSummary", () => {
       provide: {
         i18n: localI18n,
       },
+      components: {
+        AVResultSummaryItem,
+      },
     },
   });
 
@@ -138,11 +143,16 @@ describe("AVDhondtSummary", () => {
       "bg-success-faded",
     );
 
-    expect(wrapper.find("[data-test=summary]").text()).to.contain("Total seats: 4");
-    expect(wrapper.find("[data-test=summary]").text()).to.contain("Example option 1: 3 seats");
-    expect(wrapper.find("[data-test=summary]").text()).to.contain("Example option 2: 1 seat");
-    expect(wrapper.find("[data-test=summary]").text()).to.contain("Blank votes: 1");
-    expect(wrapper.find("[data-test=summary]").text()).to.contain("Distribution number: 5");
+    expect(wrapper.find("[data-test=seats]").text()).to.contain("Total seats:  4");
+    expect(wrapper.find("[data-test=exampleOption1]").text()).to.contain(
+      "Example option 1:  3 seats",
+    );
+    expect(wrapper.find("[data-test=exampleOption2]").text()).to.contain(
+      "Example option 2:  1 seat",
+    );
+    expect(wrapper.find("[data-test=blank_votes]").text()).to.contain("Blank votes:  1");
+    expect(wrapper.find("[data-test=null_votes]").text()).to.contain("Null votes:  8");
+    expect(wrapper.find("[data-test=distribution_n]").text()).to.contain("Distribution number:  5");
   });
 
   it("hides elected", async () => {
@@ -176,11 +186,8 @@ describe("AVDhondtSummary", () => {
       "bg-success-faded",
     );
 
-    expect(wrapper.find("[data-test=summary]").text()).to.contain("Total seats: 4");
-    expect(wrapper.find("[data-test=summary]").text()).to.not.contain("Example option 1: 3 seats");
-    expect(wrapper.find("[data-test=summary]").text()).to.not.contain("Example option 2: 1 seat");
-    expect(wrapper.find("[data-test=summary]").text()).to.contain("Blank votes: 1");
-    expect(wrapper.find("[data-test=summary]").text()).to.contain("Distribution number: 5");
+    expect(wrapper.find("[data-test=summary]").text()).to.not.contain("Example option 1:  3 seats");
+    expect(wrapper.find("[data-test=summary]").text()).to.not.contain("Example option 2:  1 seat");
   });
 
   it("update values", async () => {
@@ -305,11 +312,16 @@ describe("AVDhondtSummary", () => {
       "bg-success-faded",
     );
 
-    expect(wrapper.find("[data-test=summary]").text()).to.contain("Total seats: 4");
-    expect(wrapper.find("[data-test=summary]").text()).to.contain("Example option 1: 2 seats");
-    expect(wrapper.find("[data-test=summary]").text()).to.contain("Example option 2: 1 seat");
-    expect(wrapper.find("[data-test=summary]").text()).to.contain("Blank votes: 1");
-    expect(wrapper.find("[data-test=summary]").text()).to.contain("Distribution number: 5");
+    expect(wrapper.find("[data-test=seats]").text()).to.contain("Total seats:  4");
+    expect(wrapper.find("[data-test=exampleOption1]").text()).to.contain(
+      "Example option 1:  2 seats",
+    );
+    expect(wrapper.find("[data-test=exampleOption2]").text()).to.contain(
+      "Example option 2:  1 seat",
+    );
+    expect(wrapper.find("[data-test=blank_votes]").text()).to.contain("Blank votes:  1");
+    expect(wrapper.find("[data-test=null_votes]").text()).to.contain("Null votes:  8");
+    expect(wrapper.find("[data-test=distribution_n]").text()).to.contain("Distribution number:  5");
   });
 
   it("handle ties", async () => {
@@ -433,14 +445,19 @@ describe("AVDhondtSummary", () => {
       "bg-success-faded",
     );
 
-    expect(wrapper.find("[data-test=summary]").text()).to.contain("Total seats: 4");
-    expect(wrapper.find("[data-test=summary]").text()).to.contain("Example option 1: 2 seats");
-    expect(wrapper.find("[data-test=summary]").text()).to.contain("Example option 2: 2 seats");
-    expect(wrapper.find("[data-test=summary]").text()).to.contain("Blank votes: 1");
-    expect(wrapper.find("[data-test=summary]").text()).to.contain("Distribution number: 5");
+    expect(wrapper.find("[data-test=seats]").text()).to.contain("Total seats:  4");
+    expect(wrapper.find("[data-test=exampleOption1]").text()).to.contain(
+      "Example option 1:  2 seats",
+    );
+    expect(wrapper.find("[data-test=exampleOption2]").text()).to.contain(
+      "Example option 2:  2 seats",
+    );
+    expect(wrapper.find("[data-test=blank_votes]").text()).to.contain("Blank votes:  1");
+    expect(wrapper.find("[data-test=null_votes]").text()).to.contain("Null votes:  8");
+    expect(wrapper.find("[data-test=distribution_n]").text()).to.contain("Distribution number:  5");
   });
 
-  it("hides elected", async () => {
+  it("hides tied", async () => {
     await wrapper.setProps({
       hideTied: true,
     });
@@ -594,10 +611,17 @@ describe("AVDhondtSummary", () => {
     expect(wrapper.find("[data-test=party-list-1]").text()).to.contain(
       "Exemplu de opțiune 23.002.001.000.75",
     );
-    expect(wrapper.find("[data-test=summary]").text()).to.contain("Total locuri: 4");
-    expect(wrapper.find("[data-test=summary]").text()).to.contain("Exemplu de opțiune 1: 2 locuri");
-    expect(wrapper.find("[data-test=summary]").text()).to.contain("Exemplu de opțiune 2: 2 locuri");
-    expect(wrapper.find("[data-test=summary]").text()).to.contain("Voturi în alb: 1");
-    expect(wrapper.find("[data-test=summary]").text()).to.contain("Numărul de distribuție: 5");
+    expect(wrapper.find("[data-test=seats]").text()).to.contain("Total locuri:  4");
+    expect(wrapper.find("[data-test=exampleOption1]").text()).to.contain(
+      "Exemplu de opțiune 1:  2 locuri",
+    );
+    expect(wrapper.find("[data-test=exampleOption2]").text()).to.contain(
+      "Exemplu de opțiune 2:  2 locuri",
+    );
+    expect(wrapper.find("[data-test=blank_votes]").text()).to.contain("Voturi în alb:  1");
+    expect(wrapper.find("[data-test=null_votes]").text()).to.contain("Voturi nule:  8");
+    expect(wrapper.find("[data-test=distribution_n]").text()).to.contain(
+      "Numărul de distribuție:  5",
+    );
   });
 });

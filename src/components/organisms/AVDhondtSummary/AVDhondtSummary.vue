@@ -10,6 +10,7 @@ import type {
   Theme,
   PropType,
   IterableObject,
+  VoteCounts,
 } from "@/types";
 import { getMeaningfulLabel } from "@/helpers/meaningfulLabel";
 
@@ -38,6 +39,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  voteCounts: {
+    type: Object as PropType<VoteCounts>,
+    required: true,
+  },
   theme: {
     type: String as PropType<Theme>,
     default: "light",
@@ -61,6 +66,13 @@ const sortedData = computed(() => {
 const optionReferences = computed(() =>
   sortedData.value.seats[0].map((option) => option.reference),
 );
+
+const getElectedSeats = (amount: number) => {
+  if (amount > 1)
+    return t("js.components.AVDhondtSummary.summary.seat_count.n_seats", { n: amount });
+  else if (amount === 1) return t("js.components.AVDhondtSummary.summary.seat_count.one_seat");
+  else return t("js.components.AVDhondtSummary.summary.seat_count.no_seats");
+};
 
 const additionalData = computed(() => {
   const data: AVDhondtSummaryAdditionalData = {};
@@ -185,45 +197,48 @@ watch(
       </tbody>
     </table>
   </div>
-  <div
-    :class="`AVDhondtSummary--summary vstack gap-1 AVDhondtSummary--text-semibold AVDhondtSummary--text-${theme}`"
-    data-test="summary"
-  >
-    <p class="mb-0">{{ t("js.components.AVDhondtSummary.summary.seats") }}: {{ seats }}</p>
+
+  <div class="vstack gap-1" data-test="summary">
+    <AVResultSummaryItem
+      :title="t('js.components.AVDhondtSummary.summary.seats')"
+      :value="seats"
+      reference="seats"
+      :theme="theme"
+    />
 
     <template v-if="!hideElected">
-      <p
+      <AVResultSummaryItem
         v-for="partyReference in optionReferences"
         :key="`written_results_for_${partyReference}`"
-        class="mb-0"
-      >
-        {{ additionalData[partyReference].title }}:
-        <template v-if="additionalData[partyReference].elected > 1">
-          {{
-            t("js.components.AVDhondtSummary.summary.seat_count.n_seats", {
-              n: additionalData[partyReference].elected,
-            })
-          }}
-        </template>
-        <template v-else-if="additionalData[partyReference].elected === 1">
-          {{ t("js.components.AVDhondtSummary.summary.seat_count.one_seat") }}
-        </template>
-        <template v-else>
-          {{ t("js.components.AVDhondtSummary.summary.seat_count.no_seats") }}
-        </template>
-      </p>
+        :title="additionalData[partyReference].title"
+        :value="getElectedSeats(additionalData[partyReference].elected)"
+        :reference="partyReference"
+        :theme="theme"
+      />
     </template>
 
-    <template v-if="sortedData.blank">
-      <p class="mb-0">
-        {{ t("js.components.AVDhondtSummary.summary.blank") }}: {{ sortedData.blank.count }}
-      </p>
-    </template>
+    <AVResultSummaryItem
+      v-if="sortedData.blank"
+      :title="t('js.components.AVDhondtSummary.summary.blank')"
+      :value="sortedData.blank.count"
+      reference="blank_votes"
+      :theme="theme"
+    />
 
-    <p v-if="distributionNumber > 0" class="mb-0">
-      {{ t("js.components.AVDhondtSummary.summary.distribution") }}:
-      {{ distributionNumber }}
-    </p>
+    <AVResultSummaryItem
+      :title="t('js.components.AVDhondtSummary.summary.null_votes')"
+      :value="voteCounts.excludedCount"
+      reference="null_votes"
+      :theme="theme"
+    />
+
+    <AVResultSummaryItem
+      v-if="distributionNumber > 0"
+      :title="t('js.components.AVDhondtSummary.summary.distribution')"
+      :value="distributionNumber"
+      reference="distribution_n"
+      :theme="theme"
+    />
   </div>
 </template>
 

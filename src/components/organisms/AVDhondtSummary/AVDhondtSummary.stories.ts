@@ -1,7 +1,7 @@
 import type { Meta } from "@/types";
 import { AVDhondtSummary } from "@/components";
 import { SUPPORTED_LOCALES } from "@/constants";
-import { getOption } from "@/examples";
+import { getOption, getVoteCounts } from "@/examples";
 
 const meta: Meta<typeof AVDhondtSummary> = {
   title: "Design System/Organisms/AVDhondtSummary",
@@ -22,6 +22,9 @@ const meta: Meta<typeof AVDhondtSummary> = {
     },
     hideTied: {
       control: { type: "boolean" },
+    },
+    voteCounts: {
+      control: { type: "object" },
     },
     theme: {
       control: { type: "select" },
@@ -131,6 +134,7 @@ export const Elected = {
         tied: false,
       },
     ],
+    voteCounts: getVoteCounts(),
   },
 };
 
@@ -221,6 +225,7 @@ export const Tied = {
         tied: false,
       },
     ],
+    voteCounts: getVoteCounts(),
   },
 };
 
@@ -311,6 +316,7 @@ export const TiedAndElected = {
         tied: false,
       },
     ],
+    voteCounts: getVoteCounts(),
   },
 };
 
@@ -405,6 +411,7 @@ export const ElectedDark = {
         tied: false,
       },
     ],
+    voteCounts: getVoteCounts(),
   },
 };
 
@@ -499,6 +506,7 @@ export const TiedDark = {
         tied: false,
       },
     ],
+    voteCounts: getVoteCounts(),
   },
 };
 
@@ -593,6 +601,7 @@ export const TiedAndElectedDark = {
         tied: false,
       },
     ],
+    voteCounts: getVoteCounts(),
   },
 };
 
@@ -684,6 +693,7 @@ export const ElectedAndHideElected = {
         tied: false,
       },
     ],
+    voteCounts: getVoteCounts(),
   },
 };
 
@@ -775,5 +785,6 @@ export const TiedAndHideTied = {
         tied: false,
       },
     ],
+    voteCounts: getVoteCounts(),
   },
 };

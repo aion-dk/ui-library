@@ -10,6 +10,7 @@ const translations: DefineLocaleMessage = {
       distribution: "رقم التوزيع",
       seats: "إجمالي المقاعد",
       blank: "أصوات فارغة",
+      null_votes: "الأصوات الفارغة",
       seat_count: {
         no_seats: "لا توجد مقاعد",
         one_seat: "1 مقعد",
@@ -26,6 +27,7 @@ const translations: DefineLocaleMessage = {
       distribution: "Número de distribució",
       seats: "Total de seients",
       blank: "Vots en blanc",
+      null_votes: "Vots nuls",
       seat_count: {
         no_seats: "Sense seients",
         one_seat: "1 seient",
@@ -42,6 +44,7 @@ const translations: DefineLocaleMessage = {
       distribution: "Rhif dosbarthu",
       seats: "Cyfanswm y seddi",
       blank: "Pleidleisiau gwag",
+      null_votes: "Pleidleisiau gwag",
       seat_count: {
         no_seats: "Dim seddi",
         one_seat: "1 sedd",
@@ -58,6 +61,7 @@ const translations: DefineLocaleMessage = {
       distribution: "Distributionsnummer",
       seats: "Samlet antal pladser",
       blank: "Blanke stemmer",
+      null_votes: "Nul stemmer",
       seat_count: {
         no_seats: "Ingen sæder",
         one_seat: "Ingen sæder",
@@ -74,6 +78,7 @@ const translations: DefineLocaleMessage = {
       distribution: "Verteilungsnummer",
       seats: "Sitze insgesamt",
       blank: "Leere Stimmen",
+      null_votes: "Nullstimmen",
       seat_count: {
         no_seats: "Keine Sitze",
         one_seat: "1 Sitz",
@@ -90,6 +95,7 @@ const translations: DefineLocaleMessage = {
       distribution: "Distribution number",
       seats: "Total seats",
       blank: "Blank votes",
+      null_votes: "Null votes",
       seat_count: {
         no_seats: "No seats",
         one_seat: "1 seat",
@@ -106,6 +112,7 @@ const translations: DefineLocaleMessage = {
       distribution: "Número de distribución",
       seats: "Total escaños",
       blank: "Votos en blanco",
+      null_votes: "Votos nulos",
       seat_count: {
         no_seats: "Sin escaños",
         one_seat: "1 escaño",
@@ -122,6 +129,7 @@ const translations: DefineLocaleMessage = {
       distribution: "Jakelunumero",
       seats: "Paikkoja yhteensä",
       blank: "Tyhjät äänet",
+      null_votes: "Nollaäänet",
       seat_count: {
         no_seats: "Ei paikkoja",
         one_seat: "1 paikka",
@@ -138,6 +146,7 @@ const translations: DefineLocaleMessage = {
       distribution: "Numéro de distribution",
       seats: "Nombre total de sièges",
       blank: "Votes blancs",
+      null_votes: "Votes nuls",
       seat_count: {
         no_seats: "Pas de sièges",
         one_seat: "1 siège",
@@ -154,6 +163,7 @@ const translations: DefineLocaleMessage = {
       distribution: "Dreifingarnúmer",
       seats: "Samtals sæti",
       blank: "Auð atkvæði",
+      null_votes: "Núll atkvæði",
       seat_count: {
         no_seats: "Engin sæti",
         one_seat: "1 sæti",
@@ -170,6 +180,7 @@ const translations: DefineLocaleMessage = {
       distribution: "Numero di distribuzione",
       seats: "Totale posti a sedere",
       blank: "Voti in bianco",
+      null_votes: "Voti nulli",
       seat_count: {
         no_seats: "Nessun posto a sedere",
         one_seat: "1 posto",
@@ -186,6 +197,7 @@ const translations: DefineLocaleMessage = {
       distribution: "Distributienummer",
       seats: "Totaal aantal zetels",
       blank: "Blanco stemmen",
+      null_votes: "Nul stemmen",
       seat_count: {
         no_seats: "Geen zitplaatsen",
         one_seat: "1 stoel",
@@ -202,6 +214,7 @@ const translations: DefineLocaleMessage = {
       distribution: "Numer dystrybucyjny",
       seats: "Łączna liczba miejsc",
       blank: "Puste głosy",
+      null_votes: "Głosy zerowe",
       seat_count: {
         no_seats: "Brak miejsc",
         one_seat: "1 miejsce",
@@ -218,6 +231,7 @@ const translations: DefineLocaleMessage = {
       distribution: "Número de distribuição",
       seats: "Total de lugares",
       blank: "Votos em branco",
+      null_votes: "Votos nulos",
       seat_count: {
         no_seats: "Sem lugares",
         one_seat: "1 lugar",
@@ -234,6 +248,7 @@ const translations: DefineLocaleMessage = {
       distribution: "Numărul de distribuție",
       seats: "Total locuri",
       blank: "Voturi în alb",
+      null_votes: "Voturi nule",
       seat_count: {
         no_seats: "Fără locuri",
         one_seat: "1 scaun",
@@ -250,6 +265,7 @@ const translations: DefineLocaleMessage = {
       distribution: "Номер распределения",
       seats: "Всего мест",
       blank: "Пустые голоса",
+      null_votes: "Нулевые голоса",
       seat_count: {
         no_seats: "Нет мест",
         one_seat: "1 место",
@@ -266,6 +282,7 @@ const translations: DefineLocaleMessage = {
       distribution: "Distributionsnummer",
       seats: "Totalt antal platser",
       blank: "Blanka röster",
+      null_votes: "Nollröster",
       seat_count: {
         no_seats: "Inga platser",
         one_seat: "1 säte",
