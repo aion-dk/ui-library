@@ -12,6 +12,8 @@ const translations: DefineLocaleMessage = {
       distribution: "رقم التوزيع",
       elected: "مُنتَخب",
       tied: "تعادُل",
+      blank_votes: "الأصوات الفارغة",
+      null_votes: "الأصوات الفارغة",
     },
   },
   ca: {
@@ -25,6 +27,8 @@ const translations: DefineLocaleMessage = {
       distribution: "Número de distribució",
       elected: "Electe",
       tied: "Empatat",
+      blank_votes: "Vots en blanc",
+      null_votes: "Vots nuls",
     },
   },
   cy: {
@@ -38,6 +42,8 @@ const translations: DefineLocaleMessage = {
       distribution: "Rhif dosbarthu",
       elected: "Etholedig",
       tied: "Tynnu llun",
+      blank_votes: "Pleidleisiau gwag",
+      null_votes: "Pleidleisiau gwag",
     },
   },
   da: {
@@ -51,6 +57,8 @@ const translations: DefineLocaleMessage = {
       distribution: "Fordelingstal",
       elected: "Valgt ind",
       tied: "Uafgjort",
+      blank_votes: "Blanke stemmer",
+      null_votes: "Nul stemmer",
     },
   },
   de: {
@@ -64,6 +72,8 @@ const translations: DefineLocaleMessage = {
       distribution: "Nummer",
       elected: "Gewählt",
       tied: "Unentschieden",
+      blank_votes: "Leere Stimmen",
+      null_votes: "Nullstimmen",
     },
   },
   en: {
@@ -77,6 +87,8 @@ const translations: DefineLocaleMessage = {
       distribution: "Distribution number",
       elected: "Elected",
       tied: "Tied",
+      blank_votes: "Blank votes",
+      null_votes: "Null votes",
     },
   },
   es: {
@@ -90,6 +102,8 @@ const translations: DefineLocaleMessage = {
       distribution: "Número de distribución",
       elected: "Electo",
       tied: "Empatado",
+      blank_votes: "Votos en blanco",
+      null_votes: "Votos nulos",
     },
   },
   fi: {
@@ -103,6 +117,8 @@ const translations: DefineLocaleMessage = {
       distribution: "Jakelunumero",
       elected: "Valittu",
       tied: "Tasapeli",
+      blank_votes: "Tyhjät äänet",
+      null_votes: "Nollaäänet",
     },
   },
   fr: {
@@ -116,6 +132,8 @@ const translations: DefineLocaleMessage = {
       distribution: "Numéro de distribution",
       elected: "Élu",
       tied: "À égalité",
+      blank_votes: "Votes blancs",
+      null_votes: "Votes nuls",
     },
   },
   is: {
@@ -129,6 +147,8 @@ const translations: DefineLocaleMessage = {
       distribution: "Dreifingartala",
       elected: "Kjörin(n)",
       tied: "Jafntefli",
+      blank_votes: "Auð atkvæði",
+      null_votes: "Núll atkvæði",
     },
   },
   it: {
@@ -142,6 +162,8 @@ const translations: DefineLocaleMessage = {
       distribution: "Numero di distribuzione",
       elected: "Eletti",
       tied: "Parità",
+      blank_votes: "Voti in bianco",
+      null_votes: "Voti nulli",
     },
   },
   nl: {
@@ -155,6 +177,8 @@ const translations: DefineLocaleMessage = {
       distribution: "Distributienummer",
       elected: "Verkozen",
       tied: "Gelijk",
+      blank_votes: "Blanco stemmen",
+      null_votes: "Nul stemmen",
     },
   },
   pl: {
@@ -168,6 +192,8 @@ const translations: DefineLocaleMessage = {
       distribution: "Numer dystrybucji",
       elected: "Wybrany",
       tied: "Remis",
+      blank_votes: "Puste głosy",
+      null_votes: "Głosy zerowe",
     },
   },
   pt: {
@@ -181,6 +207,8 @@ const translations: DefineLocaleMessage = {
       distribution: "Número de distribuição",
       elected: "Eleito",
       tied: "Empatados",
+      blank_votes: "Votos em branco",
+      null_votes: "Votos nulos",
     },
   },
   ro: {
@@ -194,6 +222,8 @@ const translations: DefineLocaleMessage = {
       distribution: "Numărul de distribuție",
       elected: "Ales",
       tied: "Egal",
+      blank_votes: "Voturi în alb",
+      null_votes: "Voturi nule",
     },
   },
   ru: {
@@ -207,6 +237,8 @@ const translations: DefineLocaleMessage = {
       distribution: "Номер распределения",
       elected: "Выбран",
       tied: "Рисовать",
+      blank_votes: "Пустые голоса",
+      null_votes: "Нулевые голоса",
     },
   },
   sv: {
@@ -220,6 +252,8 @@ const translations: DefineLocaleMessage = {
       distribution: "Distributionnummer",
       elected: "Vald",
       tied: "Oavgjort",
+      blank_votes: "Blanka röster",
+      null_votes: "Nollröster",
     },
   },
 };
