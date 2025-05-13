@@ -7,6 +7,7 @@ import type {
   Theme,
   PropType,
   IterableObject,
+  VoteCounts,
 } from "@/types";
 import { getMeaningfulLabel } from "@/helpers/meaningfulLabel";
 
@@ -34,6 +35,10 @@ const props = defineProps({
   hideTied: {
     type: Boolean,
     default: false,
+  },
+  voteCounts: {
+    type: Object as PropType<VoteCounts>,
+    required: true,
   },
   locale: {
     type: String as PropType<SupportedLocale>,
@@ -209,27 +214,44 @@ watch(
     </table>
   </div>
 
-  <div
-    :class="`AVDhondtAPSummary--summary vstack gap-1 AVDhondtAPSummary--text-semibold AVDhondtAPSummary--text-${theme}`"
-    data-test="summary"
-  >
-    <p class="mb-0">{{ t("js.components.AVDhondtAPSummary.summary.seats") }}: {{ seats }}</p>
-    <p v-if="distributionNumber > 0" class="mb-0">
-      {{ t("js.components.AVDhondtAPSummary.summary.distribution") }}:
-      {{ distributionNumber }}
-    </p>
-    <p v-if="elected.length > 0" class="mb-0">
-      {{ t("js.components.AVDhondtAPSummary.summary.elected") }}:
-      <span>
-        {{ elected.join(", ") }}
-      </span>
-    </p>
-    <p v-if="tied.length > 0" class="mb-0">
-      {{ t("js.components.AVDhondtAPSummary.summary.tied") }}:
-      <span>
-        {{ tied.join(", ") }}
-      </span>
-    </p>
+  <div class="vstack gap-1" data-test="summary">
+    <AVResultSummaryItem
+      :title="t('js.components.AVDhondtAPSummary.summary.seats')"
+      :value="seats"
+      reference="seats"
+      :theme="theme"
+    />
+
+    <AVResultSummaryItem
+      v-if="distributionNumber > 0"
+      :title="t('js.components.AVDhondtAPSummary.summary.distribution')"
+      :value="distributionNumber"
+      reference="distribution_n"
+      :theme="theme"
+    />
+
+    <AVResultSummaryItem
+      v-if="elected.length > 0 && !hideElected"
+      :title="t('js.components.AVDhondtAPSummary.summary.elected')"
+      :value="elected.join(', ')"
+      reference="elected"
+      :theme="theme"
+    />
+
+    <AVResultSummaryItem
+      v-if="tied.length > 0 && !hideTied"
+      :title="t('js.components.AVDhondtAPSummary.summary.tied')"
+      :value="tied.join(', ')"
+      reference="tied"
+      :theme="theme"
+    />
+
+    <AVResultSummaryItem
+      :title="t('js.components.AVDhondtAPSummary.summary.null_votes')"
+      :value="voteCounts.excludedCount"
+      reference="null_votes"
+      :theme="theme"
+    />
   </div>
 </template>
 
