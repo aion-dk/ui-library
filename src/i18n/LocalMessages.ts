@@ -21,6 +21,7 @@ import AVRecommendationList from "@/components/molecules/AVRecommendationList/AV
 import AVPileSummary from "@/components/organisms/AVPileSummary/AVPileSummary.messages";
 import AVBallot from "@/components/organisms/AVBallot/AVBallot.messages";
 import AVResourceSection from "@/components/organisms/AVResourceSection/AVResourceSection.messages";
+import AVNormalSummary from "@/components/organisms/AVNormalSummary/AVNormalSummary.messages";
 import AVRankedSummary from "@/components/organisms/AVRankedSummary/AVRankedSummary.messages";
 import AVInstantRunoffSummary from "@/components/organisms/AVInstantRunoffSummary/AVInstantRunoffSummary.messages";
 import AVDhondtAPSummary from "@/components/organisms/AVDhondtAPSummary/AVDhondtAPSummary.messages";
@@ -61,6 +62,7 @@ const components: DefineLocaleMessage = {
   AVPileSummary,
   AVBallot,
   AVResourceSection,
+  AVNormalSummary,
   AVRankedSummary,
   AVInstantRunoffSummary,
   AVDhondtAPSummary,

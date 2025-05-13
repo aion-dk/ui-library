@@ -1,6 +1,6 @@
 import type { Meta } from "@/types";
 import { AVNormalSummary } from "@/components";
-import { getOption } from "@/examples";
+import { getOption, getVoteCounts } from "@/examples";
 
 const meta: Meta<typeof AVNormalSummary> = {
   title: "Design System/Organisms/AVNormalSummary",
@@ -21,6 +21,9 @@ const meta: Meta<typeof AVNormalSummary> = {
     },
     disregardBlank: {
       control: { type: "boolean" },
+    },
+    voteCounts: {
+      control: { type: "object" },
     },
     totalCount: {
       control: { type: "number", min: 0, max: 9999, step: 1 },
@@ -94,6 +97,7 @@ export const Elected = {
       },
     ],
     totalCount: 100,
+    voteCounts: getVoteCounts(),
   },
 };
 
@@ -139,6 +143,7 @@ export const Tied = {
       },
     ],
     totalCount: 100,
+    voteCounts: getVoteCounts(),
   },
 };
 
@@ -184,6 +189,7 @@ export const HandledTie = {
       },
     ],
     totalCount: 100,
+    voteCounts: getVoteCounts(),
   },
 };
 
@@ -244,6 +250,7 @@ export const HidePercentage = {
     ],
     totalCount: 100,
     hidePercentage: true,
+    voteCounts: getVoteCounts(),
   },
 };
 
@@ -304,6 +311,7 @@ export const DisregardBlank = {
     ],
     totalCount: 100,
     disregardBlank: true,
+    voteCounts: getVoteCounts(),
   },
 };
 
@@ -362,5 +370,6 @@ export const OptionsWithImage = {
       },
     ],
     totalCount: 100,
+    voteCounts: getVoteCounts(),
   },
 };
