@@ -37,6 +37,7 @@ import {
   AVAnimatedMenuButton,
   AVTweenedCount,
   AVFileInput,
+  AVResultSummaryItem,
   //   AVVerticalStep,
   //   AVWaitingDots,
 
@@ -99,6 +100,7 @@ export default {
     app.component("AVAnimatedMenuButton", AVAnimatedMenuButton);
     app.component("AVTweenedCount", AVTweenedCount);
     app.component("AVFileInput", AVFileInput);
+    app.component("AVResultSummaryItem", AVResultSummaryItem);
     // app.component("AVVerticalStep", AVVerticalStep);
     // app.component("AVWaitingDots", AVWaitingDots);
 
@@ -161,6 +163,7 @@ export {
   AVAnimatedMenuButton,
   AVTweenedCount,
   AVFileInput,
+  AVResultSummaryItem,
   //   AVVerticalStep,
   //   AVWaitingDots,
 
