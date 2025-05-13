@@ -1,13 +1,15 @@
 import { describe, it, expect } from "vitest";
 import { mount } from "@vue/test-utils";
-import { getOption } from "@/examples";
+import { getOption, getVoteCounts } from "@/examples";
 import localI18n from "@/i18n";
+import AVResultSummaryItem from "@/components/atoms/AVResultSummaryItem";
 
 import AVInstantRunoffSummary from "./AVInstantRunoffSummary.vue";
 
 describe("AVInstantRunoffSummary", () => {
   const wrapper = mount(AVInstantRunoffSummary, {
     props: {
+      voteCounts: getVoteCounts(),
       rounds: [
         {
           counts: {
@@ -75,6 +77,9 @@ describe("AVInstantRunoffSummary", () => {
       provide: {
         i18n: localI18n,
       },
+      components: {
+        AVResultSummaryItem,
+      },
       directives: {
         tooltip: () => {},
       },
@@ -102,9 +107,9 @@ describe("AVInstantRunoffSummary", () => {
     expect(wrapper.find("[data-test=table]").text()).to.contain("Exhausted ballots0000");
 
     expect(wrapper.findAll("[data-test=not-included]").length).to.eq(0);
-    expect(wrapper.find("[data-test=abstain]").text()).to.contain("Abstain: 1");
-    expect(wrapper.find("[data-test=total]").text()).to.contain("Total votes: 10");
-    expect(wrapper.find("[data-test=quota]").text()).to.contain("Quota needed for election: 5");
+    expect(wrapper.find("[data-test=abstain]").text()).to.contain("Abstain:  1");
+    expect(wrapper.find("[data-test=total]").text()).to.contain("Total votes:  10");
+    expect(wrapper.find("[data-test=quota]").text()).to.contain("Quota needed for election:  5");
   });
 
   it("renders in correct position", async () => {
@@ -144,7 +149,7 @@ describe("AVInstantRunoffSummary", () => {
     });
 
     expect(wrapper.find("[data-test=not-included]").text()).to.contain(
-      "Votes for elected candidates not included in the count for this seat: 8",
+      "Votes for elected candidates not included in the count for this seat:  8",
     );
   });
 
@@ -206,7 +211,7 @@ describe("AVInstantRunoffSummary", () => {
   });
 
   it("can switch theme", async () => {
-    expect(wrapper.findAll(".AVInstantRunoffSummary--text-light").length).to.eq(35);
+    expect(wrapper.findAll(".AVInstantRunoffSummary--text-light").length).to.eq(31);
     expect(wrapper.findAll(".AVInstantRunoffSummary--text-dark").length).to.eq(0);
 
     await wrapper.setProps({
@@ -214,13 +219,13 @@ describe("AVInstantRunoffSummary", () => {
     });
 
     expect(wrapper.findAll(".AVInstantRunoffSummary--text-light").length).to.eq(0);
-    expect(wrapper.findAll(".AVInstantRunoffSummary--text-dark").length).to.eq(35);
+    expect(wrapper.findAll(".AVInstantRunoffSummary--text-dark").length).to.eq(31);
 
     await wrapper.setProps({
       theme: "light",
     });
 
-    expect(wrapper.findAll(".AVInstantRunoffSummary--text-light").length).to.eq(35);
+    expect(wrapper.findAll(".AVInstantRunoffSummary--text-light").length).to.eq(31);
     expect(wrapper.findAll(".AVInstantRunoffSummary--text-dark").length).to.eq(0);
   });
 
@@ -234,13 +239,13 @@ describe("AVInstantRunoffSummary", () => {
     expect(wrapper.find("[data-test=table]").text()).to.contain(
       "KandidatRunde 1 Runde 2 Runde 3 Runde 4 Beispieloption 46666000Beispieloption 322211100Beispieloption 29988770Beispieloption 110203040Übertragene Stimmen von ausgeschiedenen Kandidaten4321Erschöpfte Stimmzettel1234",
     );
-    expect(wrapper.find("[data-test=abstain]").text()).to.contain("Verzichten: 1");
-    expect(wrapper.find("[data-test=total]").text()).to.contain("Gesamte stimmen: 10");
+    expect(wrapper.find("[data-test=abstain]").text()).to.contain("Verzichten:  1");
+    expect(wrapper.find("[data-test=total]").text()).to.contain("Gesamte stimmen:  10");
     expect(wrapper.find("[data-test=quota]").text()).to.contain(
-      "Quote für die Wahl erforderlich: 5",
+      "Quote für die Wahl erforderlich:  5",
     );
     expect(wrapper.find("[data-test=not-included]").text()).to.contain(
-      "Stimmen für gewählte Kandidaten, die nicht in die Zählung für diesen Sitz einbezogen werden: 8",
+      "Stimmen für gewählte Kandidaten, die nicht in die Zählung für diesen Sitz einbezogen werden:  8",
     );
   });
 });

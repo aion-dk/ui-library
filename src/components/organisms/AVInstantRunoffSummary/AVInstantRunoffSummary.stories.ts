@@ -1,7 +1,7 @@
 import type { Meta } from "@/types";
 import { AVInstantRunoffSummary } from "@/components";
 import { SUPPORTED_LOCALES } from "@/constants";
-import { getOption } from "@/examples";
+import { getOption, getVoteCounts } from "@/examples";
 
 const meta: Meta<typeof AVInstantRunoffSummary> = {
   title: "Design System/Organisms/AVInstantRunoffSummary",
@@ -28,6 +28,9 @@ const meta: Meta<typeof AVInstantRunoffSummary> = {
     },
     votesNotIncluded: {
       control: { type: "number", min: 0, max: 9999, step: 1 },
+    },
+    voteCounts: {
+      control: { type: "object" },
     },
     theme: {
       control: { type: "select" },
@@ -116,6 +119,7 @@ export const Default = {
     totalVotes: 10,
     blankVotes: 1,
     votesNotIncluded: null,
+    voteCounts: getVoteCounts(),
   },
 };
 
@@ -189,5 +193,6 @@ export const DarkMode = {
     totalVotes: 10,
     blankVotes: 1,
     votesNotIncluded: null,
+    voteCounts: getVoteCounts(),
   },
 };
