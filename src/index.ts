@@ -53,13 +53,7 @@ import {
   AVSplitWizardHeader,
   AVRecommendationList,
   AVResultOption,
-  //   AVAsyncButton,
-  //   AVRadioGroup,
-  //   AVNavigationItemList,
-  //   AVBreadcrumb,
-  //   AVElectionCard,
-  //   AVBallotStyleCard,
-  //   AVElectaContestCard,
+  AVElectaContestCard,
 
   // ORGANISMS
   AVPileSummary,
@@ -116,13 +110,7 @@ export default {
     app.component("AVSplitWizardHeader", AVSplitWizardHeader);
     app.component("AVRecommendationList", AVRecommendationList);
     app.component("AVResultOption", AVResultOption);
-    // app.component("AVAsyncButton", AVAsyncButton);
-    // app.component("AVRadioGroup", AVRadioGroup);
-    // app.component("AVNavigationItemList", AVNavigationItemList);
-    // app.component("AVBreadcrumb", AVBreadcrumb);
-    // app.component("AVElectionCard", AVElectionCard);
-    // app.component("AVBallotStyleCard", AVBallotStyleCard);
-    // app.component("AVElectaContestCard", AVElectaContestCard);
+    app.component("AVElectaContestCard", AVElectaContestCard);
 
     // ORGANISMS
     app.component("AVPileSummary", AVPileSummary);
@@ -134,11 +122,6 @@ export default {
     app.component("AVDhondtAPSummary", AVDhondtAPSummary);
     app.component("AVDhondtSummary", AVDhondtSummary);
     app.component("AVCalculateResultContent", AVCalculateResultContent);
-    // app.component("AVFooter", AVFooter);
-    // app.component("AVSidebar", AVSidebar);
-    // app.component("AVNavbar", AVNavbar);
-    // app.component("AVContent", AVContent);
-    // app.component("AVModal", AVModal);
 
     // TEMPLATES
     app.component("AVSplitHelper", AVSplitHelper);
@@ -179,13 +162,7 @@ export {
   AVSplitWizardHeader,
   AVRecommendationList,
   AVResultOption,
-  //   AVAsyncButton,
-  //   AVRadioGroup,
-  //   AVNavigationItemList,
-  //   AVBreadcrumb,
-  //   AVElectionCard,
-  //   AVBallotStyleCard,
-  //   AVElectaContestCard,
+  AVElectaContestCard,
 
   // ORGANISMS
   AVPileSummary,
@@ -197,11 +174,6 @@ export {
   AVDhondtAPSummary,
   AVDhondtSummary,
   AVCalculateResultContent,
-  //   AVFooter,
-  //   AVSidebar,
-  //   AVNavbar,
-  //   AVContent,
-  //   AVModal,
 
   // TEMPLATES
   AVSplitHelper,
