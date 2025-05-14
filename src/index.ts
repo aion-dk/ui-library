@@ -38,7 +38,7 @@ import {
   AVTweenedCount,
   AVFileInput,
   AVResultSummaryItem,
-  //   AVVerticalStep,
+  AVVerticalStep,
   //   AVWaitingDots,
 
   // MOLECULES
@@ -101,7 +101,7 @@ export default {
     app.component("AVTweenedCount", AVTweenedCount);
     app.component("AVFileInput", AVFileInput);
     app.component("AVResultSummaryItem", AVResultSummaryItem);
-    // app.component("AVVerticalStep", AVVerticalStep);
+    app.component("AVVerticalStep", AVVerticalStep);
     // app.component("AVWaitingDots", AVWaitingDots);
 
     // MOLECULES
@@ -164,7 +164,7 @@ export {
   AVTweenedCount,
   AVFileInput,
   AVResultSummaryItem,
-  //   AVVerticalStep,
+  AVVerticalStep,
   //   AVWaitingDots,
 
   // MOLECULES
