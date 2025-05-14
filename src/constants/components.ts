@@ -48,6 +48,9 @@ const CALCULATE_RESULT_STATUS = [
   "finished",
 ] as const;
 
+// AVASyncButton
+const ASYNC_BUTTON_VARIANTS = ["primary", "brand-dark", "dark", "success", "danger"] as const;
+
 export {
   IMAGE_OPTIONS,
   LOOKUP_DEFAULT_FALLBACKS,
@@ -59,4 +62,5 @@ export {
   ANIMATED_MENU_BUTTON_VARIANTS,
   CALCULATE_RESULT_ROLE,
   CALCULATE_RESULT_STATUS,
+  ASYNC_BUTTON_VARIANTS,
 };

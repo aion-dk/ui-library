@@ -23,6 +23,7 @@ export * from "@/components/atoms/AVAnimatedMenuButton/AVAnimatedMenuButton.type
 // MOLECULES
 export * from "@/components/molecules/AVSummaryOption/AVSummaryOption.types";
 export * from "@/components/molecules/AVRecommendationList/AVRecommendationList.types";
+export * from "@/components/molecules/AVAsyncButton/AVAsyncButton.types";
 
 // ORGANISMS
 export * from "@/components/organisms/AVPileSummary/AVPileSummary.types";

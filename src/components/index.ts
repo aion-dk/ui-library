@@ -28,6 +28,7 @@ export { default as AVSplitWizardHeader } from "@/components/molecules/AVSplitWi
 export { default as AVRecommendationList } from "@/components/molecules/AVRecommendationList";
 export { default as AVResultOption } from "@/components/molecules/AVResultOption";
 export { default as AVElectaContestCard } from "@/components/molecules/AVElectaContestCard";
+export { default as AVAsyncButton } from "@/components/molecules/AVAsyncButton";
 
 // // ORGANISMS
 export { default as AVPileSummary } from "@/components/organisms/AVPileSummary";

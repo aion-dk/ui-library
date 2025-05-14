@@ -54,6 +54,7 @@ import {
   AVRecommendationList,
   AVResultOption,
   AVElectaContestCard,
+  AVAsyncButton,
 
   // ORGANISMS
   AVPileSummary,
@@ -111,6 +112,7 @@ export default {
     app.component("AVRecommendationList", AVRecommendationList);
     app.component("AVResultOption", AVResultOption);
     app.component("AVElectaContestCard", AVElectaContestCard);
+    app.component("AVAsyncButton", AVAsyncButton);
 
     // ORGANISMS
     app.component("AVPileSummary", AVPileSummary);
@@ -163,6 +165,7 @@ export {
   AVRecommendationList,
   AVResultOption,
   AVElectaContestCard,
+  AVAsyncButton,
 
   // ORGANISMS
   AVPileSummary,

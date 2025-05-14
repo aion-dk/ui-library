@@ -34,7 +34,6 @@ import {
   AVTweenedCount,
   AVResultSummaryItem,
   AVWaitingDots,
-  //   AVElectaContestCard,
 } from "../src";
 
 setup((app) => {
@@ -62,7 +61,6 @@ setup((app) => {
   app.component("AVTweenedCount", AVTweenedCount);
   app.component("AVResultSummaryItem", AVResultSummaryItem);
   app.component("AVWaitingDots", AVWaitingDots);
-  // app.component("AVElectaContestCard", AVElectaContestCard);
 
   app.provide("i18n", localI18n);
   app.use(localI18n);
