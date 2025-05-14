@@ -2,6 +2,7 @@ import type { App } from "vue";
 import type { I18n } from "vue-i18n";
 import localI18n from "@/i18n";
 import { iconNames } from "@/helpers/iconHelper";
+import { getMeaningfulLabel } from "@/helpers/meaningfulLabel";
 import FloatingVue from "floating-vue";
 import "floating-vue/dist/style.css";
 
@@ -209,4 +210,5 @@ export {
 
   // HELPERS
   iconNames,
+  getMeaningfulLabel,
 };
