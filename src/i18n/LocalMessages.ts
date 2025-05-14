@@ -26,7 +26,7 @@ import AVRankedSummary from "@/components/organisms/AVRankedSummary/AVRankedSumm
 import AVInstantRunoffSummary from "@/components/organisms/AVInstantRunoffSummary/AVInstantRunoffSummary.messages";
 import AVDhondtAPSummary from "@/components/organisms/AVDhondtAPSummary/AVDhondtAPSummary.messages";
 import AVDhondtSummary from "@/components/organisms/AVDhondtSummary/AVDhondtSummary.messages";
-// import AVCalculateResultContent from "@/components/organisms/AVCalculateResultContent/AVCalculateResultContent.messages";
+import AVCalculateResultContent from "@/components/organisms/AVCalculateResultContent/AVCalculateResultContent.messages";
 
 /* TEMPLATES */
 import AVSplitHelper from "@/components/templates/AVSplitHelper/AVSplitHelper.messages";
@@ -67,7 +67,7 @@ const components: DefineLocaleMessage = {
   AVInstantRunoffSummary,
   AVDhondtAPSummary,
   AVDhondtSummary,
-  // AVCalculateResultContent,
+  AVCalculateResultContent,
 
   /* TEMPLATES */
   AVSplitHelper,

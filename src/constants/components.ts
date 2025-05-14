@@ -37,6 +37,17 @@ const RECOMMENDATION_PUBLIC_TYPES = ["public", "private", "public_count"] as con
 // AVAnimatedMenuButton
 const ANIMATED_MENU_BUTTON_VARIANTS = ["cross", "arrow-down"] as const;
 
+// AVCalculateResultContent
+const CALCULATE_RESULT_ROLE = ["mixer", "decrypter", "all", "observer"] as const;
+
+const CALCULATE_RESULT_STATUS = [
+  "initial",
+  "mixing",
+  "decrypting",
+  "aggregating",
+  "finished",
+] as const;
+
 export {
   IMAGE_OPTIONS,
   LOOKUP_DEFAULT_FALLBACKS,
@@ -46,4 +57,6 @@ export {
   SPLIT_HELPER_STATE,
   RECOMMENDATION_PUBLIC_TYPES,
   ANIMATED_MENU_BUTTON_VARIANTS,
+  CALCULATE_RESULT_ROLE,
+  CALCULATE_RESULT_STATUS,
 };

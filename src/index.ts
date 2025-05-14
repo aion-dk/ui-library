@@ -39,7 +39,7 @@ import {
   AVFileInput,
   AVResultSummaryItem,
   AVVerticalStep,
-  //   AVWaitingDots,
+  AVWaitingDots,
 
   // MOLECULES
   AVSummaryOption,
@@ -69,12 +69,12 @@ import {
   AVInstantRunoffSummary,
   AVDhondtAPSummary,
   AVDhondtSummary,
+  AVCalculateResultContent,
   //   AVFooter,
   //   AVSidebar,
   //   AVNavbar,
   //   AVContent,
   //   AVModal,
-  //   AVCalculateResultContent,
 
   // TEMPLATES
   AVSplitHelper,
@@ -102,7 +102,7 @@ export default {
     app.component("AVFileInput", AVFileInput);
     app.component("AVResultSummaryItem", AVResultSummaryItem);
     app.component("AVVerticalStep", AVVerticalStep);
-    // app.component("AVWaitingDots", AVWaitingDots);
+    app.component("AVWaitingDots", AVWaitingDots);
 
     // MOLECULES
     app.component("AVSummaryOption", AVSummaryOption);
@@ -132,12 +132,12 @@ export default {
     app.component("AVInstantRunoffSummary", AVInstantRunoffSummary);
     app.component("AVDhondtAPSummary", AVDhondtAPSummary);
     app.component("AVDhondtSummary", AVDhondtSummary);
+    app.component("AVCalculateResultContent", AVCalculateResultContent);
     // app.component("AVFooter", AVFooter);
     // app.component("AVSidebar", AVSidebar);
     // app.component("AVNavbar", AVNavbar);
     // app.component("AVContent", AVContent);
     // app.component("AVModal", AVModal);
-    // app.component("AVCalculateResultContent", AVCalculateResultContent);
 
     // TEMPLATES
     app.component("AVSplitHelper", AVSplitHelper);
@@ -165,7 +165,7 @@ export {
   AVFileInput,
   AVResultSummaryItem,
   AVVerticalStep,
-  //   AVWaitingDots,
+  AVWaitingDots,
 
   // MOLECULES
   AVSummaryOption,
@@ -195,12 +195,12 @@ export {
   AVInstantRunoffSummary,
   AVDhondtAPSummary,
   AVDhondtSummary,
+  AVCalculateResultContent,
   //   AVFooter,
   //   AVSidebar,
   //   AVNavbar,
   //   AVContent,
   //   AVModal,
-  //   AVCalculateResultContent,
 
   // TEMPLATES
   AVSplitHelper,

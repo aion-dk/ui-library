@@ -14,8 +14,8 @@ export { default as AVTweenedCount } from "@/components/atoms/AVTweenedCount";
 export { default as AVFileInput } from "@/components/atoms/AVFileInput";
 export { default as AVResultSummaryItem } from "@/components/atoms/AVResultSummaryItem";
 export { default as AVVerticalStep } from "@/components/atoms/AVVerticalStep";
+export { default as AVWaitingDots } from "@/components/atoms/AVWaitingDots";
 // export { default as AVBallotSummary } from "@/components/atoms/AVBallotSummary";
-// export { default as AVWaitingDots } from "@/components/atoms/AVWaitingDots";
 
 // MOLECULES
 export { default as AVSummaryOption } from "@/components/molecules/AVSummaryOption";
@@ -45,12 +45,12 @@ export { default as AVRankedSummary } from "@/components/organisms/AVRankedSumma
 export { default as AVInstantRunoffSummary } from "@/components/organisms/AVInstantRunoffSummary";
 export { default as AVDhondtAPSummary } from "@/components/organisms/AVDhondtAPSummary";
 export { default as AVDhondtSummary } from "@/components/organisms/AVDhondtSummary";
+export { default as AVCalculateResultContent } from "@/components/organisms/AVCalculateResultContent";
 // export { default as AVFooter } from "@/components/organisms/AVFooter";
 // export { default as AVSidebar } from "@/components/organisms/AVSidebar";
 // export { default as AVNavbar } from "@/components/organisms/AVNavbar";
 // export { default as AVContent } from "@/components/organisms/AVContent";
 // export { default as AVModal } from "@/components/organisms/AVModal";
-// export { default as AVCalculateResultContent } from "@/components/organisms/AVCalculateResultContent";
 
 // // TEMPLATES
 export { default as AVSplitHelper } from "@/components/templates/AVSplitHelper";
