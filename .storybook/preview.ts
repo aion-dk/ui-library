@@ -33,8 +33,8 @@ import {
   AVProgressBar,
   AVTweenedCount,
   AVResultSummaryItem,
+  AVWaitingDots,
   //   AVElectaContestCard,
-  //   AVWaitingDots,
 } from "../src";
 
 setup((app) => {
@@ -61,8 +61,8 @@ setup((app) => {
   app.component("AVProgressBar", AVProgressBar);
   app.component("AVTweenedCount", AVTweenedCount);
   app.component("AVResultSummaryItem", AVResultSummaryItem);
+  app.component("AVWaitingDots", AVWaitingDots);
   // app.component("AVElectaContestCard", AVElectaContestCard);
-  // app.component("AVWaitingDots", AVWaitingDots);
 
   app.provide("i18n", localI18n);
   app.use(localI18n);
