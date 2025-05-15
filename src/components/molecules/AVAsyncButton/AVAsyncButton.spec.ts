@@ -44,28 +44,52 @@ describe("AVAsyncButton", () => {
     expect(wrapper.findAll("[data-test=btn-spinner]").length).toEqual(0);
   });
 
-  it("renders properly in custom configuration", async () => {
-    const wrapper = mount(AVAsyncButton, {
-      props: {
-        size: "lg",
-      },
-      slots: {
-        label: "Not saved!",
-        waitingLabel: "Saving...",
-      },
-      global: {
-        stubs: {
-          AVSpinner: {
-            template: "<span />",
-          },
+  const wrapper2 = mount(AVAsyncButton, {
+    props: {
+      size: "lg",
+    },
+    slots: {
+      label: "Not saved!",
+      waitingLabel: "Saving...",
+    },
+    global: {
+      stubs: {
+        AVSpinner: {
+          template: "<span />",
         },
       },
-    });
-    expect(wrapper.text()).toEqual("Not saved!");
-    expect(wrapper.classes()).to.contain("btn-lg");
+    },
+  });
 
-    await wrapper.setProps({ size: "sm" });
+  it("renders properly in custom configuration", async () => {
+    expect(wrapper2.text()).toEqual("Not saved!");
+    expect(wrapper2.classes()).to.contain("btn-lg");
 
-    expect(wrapper.classes()).to.contain("btn-sm");
+    await wrapper2.setProps({ size: "sm" });
+
+    expect(wrapper2.classes()).to.contain("btn-sm");
+  });
+
+  it("supports extra padding", async () => {
+    expect(wrapper2.classes()).to.not.contain("py-1");
+    expect(wrapper2.classes()).to.not.contain("px-3");
+
+    await wrapper2.setProps({ extraPadding: true });
+
+    expect(wrapper2.classes()).to.contain("py-1");
+    expect(wrapper2.classes()).to.contain("px-3");
+
+    await wrapper2.setProps({ size: "md" });
+
+    expect(wrapper2.classes()).to.not.contain("py-1");
+    expect(wrapper2.classes()).to.not.contain("px-3");
+    expect(wrapper2.classes()).to.contain("py-2");
+    expect(wrapper2.classes()).to.contain("px-4");
+
+    await wrapper2.setProps({ size: "lg" });
+
+    expect(wrapper2.classes()).to.not.contain("px-4");
+    expect(wrapper2.classes()).to.contain("py-2");
+    expect(wrapper2.classes()).to.contain("px-5");
   });
 });

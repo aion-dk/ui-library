@@ -20,6 +20,9 @@ const meta: Meta<typeof AVAsyncButton> & {
     disabled: {
       control: { type: "boolean" },
     },
+    extraPadding: {
+      control: { type: "boolean" },
+    },
     "onUpdate:waiting": { action: "onUpdate: WAITING" },
   },
 };
@@ -88,7 +91,6 @@ export const Disabled = {
   render: Template,
 
   args: {
-    label: "Disabled",
     disabled: true,
   },
 };
@@ -97,7 +99,6 @@ export const Large = {
   render: Template,
 
   args: {
-    label: "Large button",
     size: "lg",
   },
 };
@@ -106,7 +107,32 @@ export const Small = {
   render: Template,
 
   args: {
-    label: "Small button",
     size: "sm",
+  },
+};
+
+export const ExtraPadding = {
+  render: Template,
+
+  args: {
+    extraPadding: true,
+  },
+};
+
+export const ExtraPaddingSmall = {
+  render: Template,
+
+  args: {
+    extraPadding: true,
+    size: "sm",
+  },
+};
+
+export const ExtraPaddingLarge = {
+  render: Template,
+
+  args: {
+    extraPadding: true,
+    size: "lg",
   },
 };

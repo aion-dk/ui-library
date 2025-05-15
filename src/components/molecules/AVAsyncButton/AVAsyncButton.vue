@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch } from "vue";
+import { computed, ref, watch } from "vue";
 import type { PropType, AVASyncButtonVariant, BootstrapBasicSize } from "@/types";
 
 const emit = defineEmits(["update:waiting"]);
@@ -17,6 +17,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  extraPadding: {
+    type: Boolean,
+    default: false,
+  },
   onClick: {
     type: Function,
     default: () => new Promise((r) => setTimeout(r, 500)),
@@ -24,6 +28,12 @@ const props = defineProps({
 });
 
 const waiting = ref(false);
+
+const extraPaddings = computed(() => {
+  if (props.size === "sm") return "py-1 px-3";
+  else if (props.size === "lg") return "py-2 px-5";
+  else return "py-2 px-4";
+});
 
 watch(waiting, (newStatus) => emit("update:waiting", newStatus));
 
@@ -47,6 +57,7 @@ async function handleClick(event: MouseEvent) {
       [`btn-${size}`]: size,
       'AVAsyncButton--waiting': waiting,
       disabled: !waiting && disabled,
+      [`${extraPaddings}`]: extraPadding,
     }"
   >
     <template v-if="waiting">
