@@ -12,9 +12,9 @@ export { default as AVProgressBar } from "@/components/atoms/AVProgressBar";
 export { default as AVAnimatedMenuButton } from "@/components/atoms/AVAnimatedMenuButton";
 export { default as AVTweenedCount } from "@/components/atoms/AVTweenedCount";
 export { default as AVFileInput } from "@/components/atoms/AVFileInput";
-// export { default as AVBallotSummary } from "@/components/atoms/AVBallotSummary";
-// export { default as AVVerticalStep } from "@/components/atoms/AVVerticalStep";
-// export { default as AVWaitingDots } from "@/components/atoms/AVWaitingDots";
+export { default as AVResultSummaryItem } from "@/components/atoms/AVResultSummaryItem";
+export { default as AVVerticalStep } from "@/components/atoms/AVVerticalStep";
+export { default as AVWaitingDots } from "@/components/atoms/AVWaitingDots";
 
 // MOLECULES
 export { default as AVSummaryOption } from "@/components/molecules/AVSummaryOption";
@@ -27,13 +27,8 @@ export { default as AVSplitWeightHelper } from "@/components/molecules/AVSplitWe
 export { default as AVSplitWizardHeader } from "@/components/molecules/AVSplitWizardHeader";
 export { default as AVRecommendationList } from "@/components/molecules/AVRecommendationList";
 export { default as AVResultOption } from "@/components/molecules/AVResultOption";
-// export { default as AVAsyncButton } from "@/components/molecules/AVAsyncButton";
-// export { default as AVRadioGroup } from "@/components/molecules/AVRadioGroup";
-// export { default as AVNavigationItemList } from "@/components/molecules/AVNavigationItemList";
-// export { default as AVBreadcrumb } from "@/components/molecules/AVBreadcrumb";
-// export { default as AVElectionCard } from "@/components/molecules/AVElectionCard";
-// export { default as AVBallotStyleCard } from "@/components/molecules/AVBallotStyleCard";
-// export { default as AVElectaContestCard } from "@/components/molecules/AVElectaContestCard";
+export { default as AVElectaContestCard } from "@/components/molecules/AVElectaContestCard";
+export { default as AVAsyncButton } from "@/components/molecules/AVAsyncButton";
 
 // // ORGANISMS
 export { default as AVPileSummary } from "@/components/organisms/AVPileSummary";
@@ -44,12 +39,7 @@ export { default as AVRankedSummary } from "@/components/organisms/AVRankedSumma
 export { default as AVInstantRunoffSummary } from "@/components/organisms/AVInstantRunoffSummary";
 export { default as AVDhondtAPSummary } from "@/components/organisms/AVDhondtAPSummary";
 export { default as AVDhondtSummary } from "@/components/organisms/AVDhondtSummary";
-// export { default as AVFooter } from "@/components/organisms/AVFooter";
-// export { default as AVSidebar } from "@/components/organisms/AVSidebar";
-// export { default as AVNavbar } from "@/components/organisms/AVNavbar";
-// export { default as AVContent } from "@/components/organisms/AVContent";
-// export { default as AVModal } from "@/components/organisms/AVModal";
-// export { default as AVCalculateResultContent } from "@/components/organisms/AVCalculateResultContent";
+export { default as AVCalculateResultContent } from "@/components/organisms/AVCalculateResultContent";
 
 // // TEMPLATES
 export { default as AVSplitHelper } from "@/components/templates/AVSplitHelper";

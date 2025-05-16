@@ -394,6 +394,7 @@ watch(
                 <AVOptionCheckbox
                   v-for="optionIndex in groupIndex"
                   :key="optionIndex"
+                  :excluded="option.excluded"
                   :checked="checkedCount >= optionIndex"
                   :rank="
                     ranked

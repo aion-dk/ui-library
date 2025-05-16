@@ -1,0 +1,50 @@
+.AVCalculateResultContent--container {
+  container-type: inline-size;
+}
+
+.AVCalculateResultContent--label {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: var(--bs-gray-600);
+}
+
+.AVCalculateResultContent--information {
+  display: flex;
+  flex-direction: column;
+}
+
+.AVCalculateResultContent--status-icon {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  margin-bottom: 0.3125rem;
+}
+
+.AVCalculateResultContent--information-set {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.AVCalculateResultContent--elapsed {
+  min-width: 4.5rem;
+}
+
+@container (min-width: 35rem) {
+  .AVCalculateResultContent--information {
+    display: flex;
+    flex-direction: row;
+    padding: 0 0.5rem;
+    gap: 1rem;
+  }
+
+  .AVCalculateResultContent--role {
+    flex-grow: 1;
+  }
+
+  .AVCalculateResultContent--information-set {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+  }
+}

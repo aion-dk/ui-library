@@ -1,7 +1,8 @@
 import { describe, it, expect } from "vitest";
 import { mount } from "@vue/test-utils";
-import { getOption } from "@/examples";
+import { getOption, getVoteCounts } from "@/examples";
 import localI18n from "@/i18n";
+import AVResultSummaryItem from "@/components/atoms/AVResultSummaryItem";
 
 import AVRankedSummary from "./AVRankedSummary.vue";
 
@@ -10,6 +11,7 @@ describe("AVRankedSummary", () => {
     props: {
       distributionNumber: 5,
       seats: 1,
+      voteCounts: getVoteCounts(),
       result: [
         {
           reference: getOption(["selectable"], 2).reference,
@@ -110,6 +112,9 @@ describe("AVRankedSummary", () => {
       provide: {
         i18n: localI18n,
       },
+      components: {
+        AVResultSummaryItem,
+      },
     },
   });
 
@@ -122,9 +127,11 @@ describe("AVRankedSummary", () => {
     expect(wrapper.find("[data-test=table]").text()).to.contain("Example option 1011");
     expect(wrapper.find("[data-test=table]").text()).to.contain("Example option 4001");
 
-    expect(wrapper.find("[data-test=summary]").text()).to.contain("Seats: 1");
-    expect(wrapper.find("[data-test=summary]").text()).to.contain("Distribution number: 5");
-    expect(wrapper.find("[data-test=summary]").text()).to.contain("Elected: Example option 2");
+    expect(wrapper.find("[data-test=seats]").text()).to.contain("Seats:  1");
+    expect(wrapper.find("[data-test=distribution_n]").text()).to.contain("Distribution number:  5");
+    expect(wrapper.find("[data-test=elected]").text()).to.contain("Elected:  Example option 2");
+    expect(wrapper.find("[data-test=null_votes]").text()).to.contain("Null votes:  8");
+    expect(wrapper.find("[data-test=blank_votes]").text()).to.contain("Blank votes:  10");
   });
 
   it("renders in correct order", async () => {
@@ -421,11 +428,13 @@ describe("AVRankedSummary", () => {
     expect(wrapper.find("[data-test=exampleOption4_round_2]").classes()).to.contain(
       "bg-success-faded",
     );
+    expect(wrapper.findAll("[data-test=elected]").length).to.eq(1);
 
     await wrapper.setProps({
       hideElected: true,
     });
 
+    expect(wrapper.findAll("[data-test=elected]").length).to.eq(0);
     expect(wrapper.find("[data-test=exampleOption4_round_2]").classes()).to.not.contain(
       "bg-success-faded",
     );
@@ -529,6 +538,7 @@ describe("AVRankedSummary", () => {
       ],
     });
 
+    expect(wrapper.findAll("[data-test=tied]").length).to.eq(1);
     expect(wrapper.find("[data-test=exampleOption2_round_2]").classes()).to.contain(
       "bg-warning-faded",
     );
@@ -541,12 +551,17 @@ describe("AVRankedSummary", () => {
       hideTied: true,
     });
 
+    expect(wrapper.findAll("[data-test=tied]").length).to.eq(0);
     expect(wrapper.find("[data-test=exampleOption2_round_2]").classes()).to.not.contain(
       "bg-warning-faded",
     );
     expect(wrapper.find("[data-test=exampleOption3_round_2]").classes()).to.not.contain(
       "bg-warning-faded",
     );
+
+    await wrapper.setProps({
+      hideTied: false,
+    });
   });
 
   it("can switch language", async () => {
@@ -562,11 +577,15 @@ describe("AVRankedSummary", () => {
     expect(wrapper.find("[data-test=table]").text()).to.contain("Opción de ejemplo 2");
     expect(wrapper.find("[data-test=table]").text()).to.contain("Opción de ejemplo 1");
 
-    expect(wrapper.find("[data-test=summary]").text()).to.contain("Escaños: 1");
-    expect(wrapper.find("[data-test=summary]").text()).to.contain("Número de distribución: 5");
-    expect(wrapper.find("[data-test=summary]").text()).to.contain(
-      "Empatado: Opción de ejemplo 2, Opción de ejemplo 3",
+    expect(wrapper.find("[data-test=seats]").text()).to.contain("Escaños:  1");
+    expect(wrapper.find("[data-test=distribution_n]").text()).to.contain(
+      "Número de distribución:  5",
     );
+    expect(wrapper.find("[data-test=tied]").text()).to.contain(
+      "Empatado:  Opción de ejemplo 2, Opción de ejemplo 3",
+    );
+    expect(wrapper.find("[data-test=null_votes]").text()).to.contain("Votos nulos:  8");
+    expect(wrapper.find("[data-test=blank_votes]").text()).to.contain("Votos en blanco:  10");
   });
 
   it("prioritizes elected color", async () => {

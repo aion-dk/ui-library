@@ -1,0 +1,20 @@
+.AVElectaContestCard {
+  border-radius: 0.75rem;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.05);
+}
+
+.AVElectaContestCard--title {
+  font-weight: 600;
+}
+
+.AVElectaContestCard--subtitle {
+  font-weight: 300;
+}
+
+.AVElectaContestCard--line {
+  height: 0.25rem;
+  width: 6rem;
+  background-color: var(--bs-accent);
+  border-radius: 9999px;
+  margin: 0.5rem 0;
+}

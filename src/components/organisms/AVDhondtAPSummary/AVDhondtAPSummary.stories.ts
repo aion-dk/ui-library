@@ -1,7 +1,7 @@
 import type { Meta, LocalString } from "@/types";
 import { AVDhondtAPSummary } from "@/components";
 import { SUPPORTED_LOCALES } from "@/constants";
-import { getOption } from "@/examples";
+import { getOption, getVoteCounts } from "@/examples";
 
 const meta: Meta<typeof AVDhondtAPSummary> = {
   title: "Design System/Organisms/AVDhondtAPSummary",
@@ -25,6 +25,9 @@ const meta: Meta<typeof AVDhondtAPSummary> = {
     },
     hideTied: {
       control: { type: "boolean" },
+    },
+    voteCounts: {
+      control: { type: "object" },
     },
     theme: {
       control: { type: "select" },
@@ -122,6 +125,7 @@ export const Elected = {
         tied: false,
       },
     ],
+    voteCounts: getVoteCounts(),
   },
 };
 
@@ -200,6 +204,7 @@ export const Tied = {
         tied: false,
       },
     ],
+    voteCounts: getVoteCounts(),
   },
 };
 
@@ -282,6 +287,7 @@ export const ElectedDark = {
         tied: false,
       },
     ],
+    voteCounts: getVoteCounts(),
   },
 };
 
@@ -364,5 +370,6 @@ export const TiedDark = {
         tied: false,
       },
     ],
+    voteCounts: getVoteCounts(),
   },
 };

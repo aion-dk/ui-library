@@ -23,41 +23,16 @@ export * from "@/components/atoms/AVAnimatedMenuButton/AVAnimatedMenuButton.type
 // MOLECULES
 export * from "@/components/molecules/AVSummaryOption/AVSummaryOption.types";
 export * from "@/components/molecules/AVRecommendationList/AVRecommendationList.types";
+export * from "@/components/molecules/AVAsyncButton/AVAsyncButton.types";
 
 // ORGANISMS
 export * from "@/components/organisms/AVPileSummary/AVPileSummary.types";
 export * from "@/components/organisms/AVRankedSummary/AVRankedSummary.types";
 export * from "@/components/organisms/AVDhondtAPSummary/AVDhondtAPSummary.types";
 export * from "@/components/organisms/AVDhondtSummary/AVDhondtSummary.types";
+export * from "@/components/organisms/AVCalculateResultContent/AVCalculateResultContent.types";
 
 // TEMPLATES
 export * from "@/components/templates/AVSplitHelper/AVSplitHelper.types";
 
-// -------- Old stuff
-
-interface AVDropdownOption {
-  value: unknown;
-  label: string;
-}
-
-type AVCalculateResultContentRole = "mixer" | "decrypter" | "all" | "observer";
-
-type AVCalculateResultContentStatus =
-  | "initial"
-  | "mixing"
-  | "decrypting"
-  | "aggregating"
-  | "finished";
-
-type AVCalculateResultContentElapsed = `${string}:${string}:${string}`;
-
-export type {
-  BootstrapColor,
-  BootstrapBasicSize,
-  BootstrapExpandedSize,
-  AVDropdownOption,
-  AVCalculateResultContentRole,
-  AVCalculateResultContentStatus,
-  AVCalculateResultContentElapsed,
-  ImageOption,
-};
+export type { BootstrapColor, BootstrapBasicSize, BootstrapExpandedSize, ImageOption };

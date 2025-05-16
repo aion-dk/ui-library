@@ -1,7 +1,7 @@
 import type { Meta } from "@/types";
 import { AVRankedSummary } from "@/components";
 import { SUPPORTED_LOCALES } from "@/constants";
-import { getOption } from "@/examples";
+import { getOption, getVoteCounts } from "@/examples";
 
 const meta: Meta<typeof AVRankedSummary> = {
   title: "Design System/Organisms/AVRankedSummary",
@@ -22,6 +22,9 @@ const meta: Meta<typeof AVRankedSummary> = {
     },
     hideTied: {
       control: { type: "boolean" },
+    },
+    voteCounts: {
+      control: { type: "object" },
     },
     theme: {
       control: { type: "select" },
@@ -144,6 +147,7 @@ export const Elected = {
         tied: false,
       },
     ],
+    voteCounts: getVoteCounts(),
   },
 };
 
@@ -247,6 +251,7 @@ export const Tied = {
         tied: false,
       },
     ],
+    voteCounts: getVoteCounts(),
   },
 };
 
@@ -350,6 +355,7 @@ export const TiedAndElected = {
         tied: false,
       },
     ],
+    voteCounts: getVoteCounts(),
   },
 };
 
@@ -457,6 +463,7 @@ export const ElectedDark = {
         tied: false,
       },
     ],
+    voteCounts: getVoteCounts(),
   },
 };
 
@@ -564,5 +571,6 @@ export const TiedDark = {
         tied: false,
       },
     ],
+    voteCounts: getVoteCounts(),
   },
 };

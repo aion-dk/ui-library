@@ -1,12 +1,15 @@
 import { describe, it, expect } from "vitest";
 import { mount } from "@vue/test-utils";
-import { getOption } from "@/examples";
+import { getOption, getVoteCounts } from "@/examples";
+import localI18n from "@/i18n";
+import AVResultSummaryItem from "@/components/atoms/AVResultSummaryItem";
 
 import AVNormalSummary from "./AVNormalSummary.vue";
 
 describe("AVNormalSummary", () => {
   const wrapper = mount(AVNormalSummary, {
     props: {
+      voteCounts: getVoteCounts(),
       sortedResult: [
         {
           reference: getOption(["selectable"], 1).reference,
@@ -19,10 +22,16 @@ describe("AVNormalSummary", () => {
       totalCount: 100,
     },
     global: {
+      provide: {
+        i18n: localI18n,
+      },
       stubs: {
         AVResultOption: {
           template: "<span />",
         },
+      },
+      components: {
+        AVResultSummaryItem,
       },
     },
   });
@@ -166,7 +175,7 @@ describe("AVNormalSummary", () => {
     });
   });
 
-  it("hides elected color", async () => {
+  it("hides elected", async () => {
     const electedBefore: Array<string> = [];
     wrapper
       .findAll("[data-test=result-option]")
@@ -185,7 +194,7 @@ describe("AVNormalSummary", () => {
     expect(electedAfter.every((e) => e === "false")).to.be.true;
   });
 
-  it("hides tied color", async () => {
+  it("hides tied", async () => {
     await wrapper.setProps({
       sortedResult: [
         {
@@ -235,5 +244,15 @@ describe("AVNormalSummary", () => {
       .findAll("[data-test=result-option]")
       .forEach((e) => tiedAfter.push(e.attributes()["tied"]));
     expect(tiedAfter.every((e) => e === "false")).to.be.true;
+  });
+
+  it("can switch language", async () => {
+    expect(wrapper.find("[data-test=null_votes]").text()).to.contain("Null votes:  8");
+
+    await wrapper.setProps({
+      locale: "cy",
+    });
+
+    expect(wrapper.find("[data-test=null_votes]").text()).to.contain("Pleidleisiau gwag:  8");
   });
 });

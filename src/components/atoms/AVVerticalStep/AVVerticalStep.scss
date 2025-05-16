@@ -1,0 +1,168 @@
+.AVVerticalStep {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: fit-content;
+}
+
+.AVVerticalStep--line {
+  margin-inline-start: 0.925rem;
+  background-color: var(--bs-gray-500);
+  width: 0.125rem;
+  transition: all 300ms linear;
+}
+
+.AVVerticalStep--container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  position: relative;
+  min-height: 2.25rem;
+}
+
+.AVVerticalStep--link-container {
+  cursor: pointer;
+  margin-bottom: 0.5rem;
+}
+
+.AVVerticalStep--link-container.AVVerticalStep--link-active {
+  cursor: default;
+}
+
+.AVVerticalStep--link-container:hover > .AVVerticalStep--step-default {
+  background-color: var(bg-gray-300);
+}
+
+.AVVerticalStep--link-container:hover
+  > .AVVerticalStep--text:not(.AVVerticalStep--text-link-active)
+  > * {
+  color: var(--bs-gray-300);
+}
+
+.AVVerticalStep--step {
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  z-index: 10;
+  min-width: 2rem;
+  min-height: 2rem;
+  max-width: 2rem;
+  max-height: 2rem;
+}
+
+.AVVerticalStep--acronym {
+  font-weight: 600;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  line-height: 1;
+}
+
+.AVVerticalStep--step-default {
+  background-color: var(--bs-gray-400);
+}
+
+.AVVerticalStep--step-active {
+  background-color: white;
+}
+
+.AVVerticalStep--step-done {
+  background-color: var(--bs-gray-500);
+}
+
+.AVVerticalStep--icon {
+  color: var(--bs-brand-dark);
+}
+
+.AVVerticalStep--text {
+  display: flex;
+  flex-direction: column;
+}
+
+.AVVerticalStep--text-default {
+  color: var(--bs-gray-400);
+}
+
+.AVVerticalStep--text-active {
+  color: white;
+}
+
+.AVVerticalStep--text-done {
+  color: var(--bs-gray-500);
+}
+
+.AVVerticalStep--title {
+  font-weight: 600;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  margin: 0;
+}
+
+.AVVerticalStep--subtitle {
+  font-weight: 400;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  margin: 0;
+}
+
+.AVVerticalStep--bullet-wrapper {
+  height: 1rem;
+  width: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 200ms ease-in-out;
+}
+
+.v-leave-active {
+  transition-delay: 0ms;
+}
+
+.v-enter-active {
+  transition-delay: 200ms;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+}
+
+.AVVerticalStep--transition-icon {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  transform: translateY(1rem);
+  transition: all 500ms ease-in-out;
+}
+
+.AVVerticalStep--link-container:hover > .AVVerticalStep--step > .AVVerticalStep--transition-icon {
+  transform: translateY(-1rem);
+  transition: all 500ms ease-in-out;
+}
+
+.AVVerticalStep--in-progress {
+  background-color: var(--bs-danger);
+  border-radius: 999px;
+  position: absolute;
+  top: 0;
+  z-index: 20;
+  height: 0.625rem;
+  width: 0.625rem;
+  margin-top: 0.125rem;
+}
+
+*[dir="ltr"] .AVVerticalStep--in-progress {
+  left: 0;
+  margin-left: 1.5rem;
+}
+
+*[dir="rtl"] .AVVerticalStep--in-progress {
+  right: 0;
+  margin-right: 1.5rem;
+}

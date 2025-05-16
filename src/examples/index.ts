@@ -5,6 +5,7 @@ import { getSelectionPile } from "@/examples/selectionPile";
 import { getLiveResult } from "@/examples/liveResult";
 import { getUrl, getCandidate } from "@/examples/candidacy";
 import { getRecommendationsList } from "@/examples/recommenders";
+import { getVoteCounts } from "@/examples/results";
 
 export {
   getContest,
@@ -16,4 +17,5 @@ export {
   getUrl,
   getCandidate,
   getRecommendationsList,
+  getVoteCounts,
 };

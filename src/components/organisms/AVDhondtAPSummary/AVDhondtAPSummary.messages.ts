@@ -14,6 +14,7 @@ const translations: DefineLocaleMessage = {
       distribution: "رقم التوزيع",
       elected: "المنتخبون",
       tied: "متعادلون",
+      null_votes: "الأصوات الفارغة",
     },
   },
   ca: {
@@ -29,6 +30,7 @@ const translations: DefineLocaleMessage = {
       distribution: "Número de distribució",
       elected: "Elegit",
       tied: "Lligat",
+      null_votes: "Vots nuls",
     },
   },
   cy: {
@@ -44,6 +46,7 @@ const translations: DefineLocaleMessage = {
       distribution: "Rhif dosbarthu",
       elected: "Etholedig",
       tied: "Clymu",
+      null_votes: "Pleidleisiau gwag",
     },
   },
   da: {
@@ -59,6 +62,7 @@ const translations: DefineLocaleMessage = {
       distribution: "Distributionsnummer",
       elected: "Valgt",
       tied: "Bundet",
+      null_votes: "Nul stemmer",
     },
   },
   de: {
@@ -74,6 +78,7 @@ const translations: DefineLocaleMessage = {
       distribution: "Verteilungszahl",
       elected: "Gewählt",
       tied: "Gleichstand",
+      null_votes: "Nullstimmen",
     },
   },
   en: {
@@ -89,6 +94,7 @@ const translations: DefineLocaleMessage = {
       distribution: "Distribution number",
       elected: "Elected",
       tied: "Tied",
+      null_votes: "Null votes",
     },
   },
   es: {
@@ -104,6 +110,7 @@ const translations: DefineLocaleMessage = {
       distribution: "Número de distribución",
       elected: "Electo",
       tied: "Empatado",
+      null_votes: "Votos nulos",
     },
   },
   fi: {
@@ -119,6 +126,7 @@ const translations: DefineLocaleMessage = {
       distribution: "Jakelunumero",
       elected: "Valittu",
       tied: "Sidottu",
+      null_votes: "Nollaäänet",
     },
   },
   fr: {
@@ -134,6 +142,7 @@ const translations: DefineLocaleMessage = {
       distribution: "Répartition",
       elected: "Élus",
       tied: "Égalité",
+      null_votes: "Votes nuls",
     },
   },
   is: {
@@ -149,6 +158,7 @@ const translations: DefineLocaleMessage = {
       distribution: "Dreifingarnúmer",
       elected: "Kosið",
       tied: "Jafnt",
+      null_votes: "Núll atkvæði",
     },
   },
   it: {
@@ -164,6 +174,7 @@ const translations: DefineLocaleMessage = {
       distribution: "Numero distribuzione",
       elected: "Eletto",
       tied: "Pareggio",
+      null_votes: "Voti nulli",
     },
   },
   nl: {
@@ -179,6 +190,7 @@ const translations: DefineLocaleMessage = {
       distribution: "Verdelingsnummer",
       elected: "Gekozen",
       tied: "Gelijkspel",
+      null_votes: "Nul stemmen",
     },
   },
   pl: {
@@ -194,6 +206,7 @@ const translations: DefineLocaleMessage = {
       distribution: "Liczba dystrybucji",
       elected: "Wybrany",
       tied: "Remis",
+      null_votes: "Głosy zerowe",
     },
   },
   pt: {
@@ -209,6 +222,7 @@ const translations: DefineLocaleMessage = {
       distribution: "Número de distribuição",
       elected: "Eleito",
       tied: "Ligado",
+      null_votes: "Votos nulos",
     },
   },
   ro: {
@@ -224,6 +238,7 @@ const translations: DefineLocaleMessage = {
       distribution: "Numărul de distribuție",
       elected: "Ales",
       tied: "Legat",
+      null_votes: "Voturi nule",
     },
   },
   ru: {
@@ -239,6 +254,7 @@ const translations: DefineLocaleMessage = {
       distribution: "Распределение номеров",
       elected: "Избранные",
       tied: "Равноправные",
+      null_votes: "Нулевые голоса",
     },
   },
   sv: {
@@ -254,6 +270,7 @@ const translations: DefineLocaleMessage = {
       distribution: "Distributionsnummer",
       elected: "Invald",
       tied: "Bunden",
+      null_votes: "Nollröster",
     },
   },
 };

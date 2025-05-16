@@ -6,6 +6,7 @@ import type {
   Result,
   Theme,
   IterableObject,
+  VoteCounts,
 } from "@/types";
 import { inject, onMounted, watch, computed } from "vue";
 import { switchLocale } from "@/i18n";
@@ -39,6 +40,10 @@ const props = defineProps({
   votesNotIncluded: {
     type: Number,
     default: null,
+  },
+  voteCounts: {
+    type: Object as PropType<VoteCounts>,
+    required: true,
   },
   locale: {
     type: String as PropType<SupportedLocale>,
@@ -183,35 +188,44 @@ watch(
           </tbody>
         </table>
       </div>
-      <p
-        v-if="votesNotIncluded"
-        class="m-0"
-        :class="`AVInstantRunoffSummary--text-${theme}`"
-        data-test="not-included"
-      >
-        <strong>
-          {{ t("js.components.AVInstantRunoffSummary.summary.not_included_count") }}
-        </strong>
-        {{ votesNotIncluded }}
-      </p>
-      <p class="m-0" :class="`AVInstantRunoffSummary--text-${theme}`" data-test="abstain">
-        <strong>
-          {{ t("js.components.AVInstantRunoffSummary.summary.abstain") }}
-        </strong>
-        {{ blankVotes }}
-      </p>
-      <p class="m-0" :class="`AVInstantRunoffSummary--text-${theme}`" data-test="total">
-        <strong>
-          {{ t("js.components.AVInstantRunoffSummary.summary.total_votes") }}
-        </strong>
-        {{ totalVotes }}
-      </p>
-      <p class="m-0" :class="`AVInstantRunoffSummary--text-${theme}`" data-test="quota">
-        <strong>
-          {{ t("js.components.AVInstantRunoffSummary.summary.quota") }}
-        </strong>
-        {{ quota }}
-      </p>
+
+      <div class="vstack gap-1" data-test="summary">
+        <AVResultSummaryItem
+          v-if="votesNotIncluded"
+          :title="t('js.components.AVInstantRunoffSummary.summary.not_included_count')"
+          :value="votesNotIncluded"
+          reference="not-included"
+          :theme="theme"
+        />
+
+        <AVResultSummaryItem
+          :title="t('js.components.AVInstantRunoffSummary.summary.abstain')"
+          :value="blankVotes"
+          reference="abstain"
+          :theme="theme"
+        />
+
+        <AVResultSummaryItem
+          :title="t('js.components.AVInstantRunoffSummary.summary.null_votes')"
+          :value="voteCounts.excludedCount"
+          reference="null_votes"
+          :theme="theme"
+        />
+
+        <AVResultSummaryItem
+          :title="t('js.components.AVInstantRunoffSummary.summary.total_votes')"
+          :value="totalVotes"
+          reference="total"
+          :theme="theme"
+        />
+
+        <AVResultSummaryItem
+          :title="t('js.components.AVInstantRunoffSummary.summary.quota')"
+          :value="quota"
+          reference="quota"
+          :theme="theme"
+        />
+      </div>
     </div>
   </div>
 </template>

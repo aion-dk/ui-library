@@ -2,6 +2,7 @@ import type { App } from "vue";
 import type { I18n } from "vue-i18n";
 import localI18n from "@/i18n";
 import { iconNames } from "@/helpers/iconHelper";
+import { getMeaningfulLabel } from "@/helpers/meaningfulLabel";
 import FloatingVue from "floating-vue";
 import "floating-vue/dist/style.css";
 
@@ -37,8 +38,9 @@ import {
   AVAnimatedMenuButton,
   AVTweenedCount,
   AVFileInput,
-  //   AVVerticalStep,
-  //   AVWaitingDots,
+  AVResultSummaryItem,
+  AVVerticalStep,
+  AVWaitingDots,
 
   // MOLECULES
   AVSummaryOption,
@@ -51,13 +53,8 @@ import {
   AVSplitWizardHeader,
   AVRecommendationList,
   AVResultOption,
-  //   AVAsyncButton,
-  //   AVRadioGroup,
-  //   AVNavigationItemList,
-  //   AVBreadcrumb,
-  //   AVElectionCard,
-  //   AVBallotStyleCard,
-  //   AVElectaContestCard,
+  AVElectaContestCard,
+  AVAsyncButton,
 
   // ORGANISMS
   AVPileSummary,
@@ -68,12 +65,7 @@ import {
   AVInstantRunoffSummary,
   AVDhondtAPSummary,
   AVDhondtSummary,
-  //   AVFooter,
-  //   AVSidebar,
-  //   AVNavbar,
-  //   AVContent,
-  //   AVModal,
-  //   AVCalculateResultContent,
+  AVCalculateResultContent,
 
   // TEMPLATES
   AVSplitHelper,
@@ -99,8 +91,9 @@ export default {
     app.component("AVAnimatedMenuButton", AVAnimatedMenuButton);
     app.component("AVTweenedCount", AVTweenedCount);
     app.component("AVFileInput", AVFileInput);
-    // app.component("AVVerticalStep", AVVerticalStep);
-    // app.component("AVWaitingDots", AVWaitingDots);
+    app.component("AVResultSummaryItem", AVResultSummaryItem);
+    app.component("AVVerticalStep", AVVerticalStep);
+    app.component("AVWaitingDots", AVWaitingDots);
 
     // MOLECULES
     app.component("AVSummaryOption", AVSummaryOption);
@@ -113,13 +106,8 @@ export default {
     app.component("AVSplitWizardHeader", AVSplitWizardHeader);
     app.component("AVRecommendationList", AVRecommendationList);
     app.component("AVResultOption", AVResultOption);
-    // app.component("AVAsyncButton", AVAsyncButton);
-    // app.component("AVRadioGroup", AVRadioGroup);
-    // app.component("AVNavigationItemList", AVNavigationItemList);
-    // app.component("AVBreadcrumb", AVBreadcrumb);
-    // app.component("AVElectionCard", AVElectionCard);
-    // app.component("AVBallotStyleCard", AVBallotStyleCard);
-    // app.component("AVElectaContestCard", AVElectaContestCard);
+    app.component("AVElectaContestCard", AVElectaContestCard);
+    app.component("AVAsyncButton", AVAsyncButton);
 
     // ORGANISMS
     app.component("AVPileSummary", AVPileSummary);
@@ -130,12 +118,7 @@ export default {
     app.component("AVInstantRunoffSummary", AVInstantRunoffSummary);
     app.component("AVDhondtAPSummary", AVDhondtAPSummary);
     app.component("AVDhondtSummary", AVDhondtSummary);
-    // app.component("AVFooter", AVFooter);
-    // app.component("AVSidebar", AVSidebar);
-    // app.component("AVNavbar", AVNavbar);
-    // app.component("AVContent", AVContent);
-    // app.component("AVModal", AVModal);
-    // app.component("AVCalculateResultContent", AVCalculateResultContent);
+    app.component("AVCalculateResultContent", AVCalculateResultContent);
 
     // TEMPLATES
     app.component("AVSplitHelper", AVSplitHelper);
@@ -161,8 +144,9 @@ export {
   AVAnimatedMenuButton,
   AVTweenedCount,
   AVFileInput,
-  //   AVVerticalStep,
-  //   AVWaitingDots,
+  AVResultSummaryItem,
+  AVVerticalStep,
+  AVWaitingDots,
 
   // MOLECULES
   AVSummaryOption,
@@ -175,13 +159,8 @@ export {
   AVSplitWizardHeader,
   AVRecommendationList,
   AVResultOption,
-  //   AVAsyncButton,
-  //   AVRadioGroup,
-  //   AVNavigationItemList,
-  //   AVBreadcrumb,
-  //   AVElectionCard,
-  //   AVBallotStyleCard,
-  //   AVElectaContestCard,
+  AVElectaContestCard,
+  AVAsyncButton,
 
   // ORGANISMS
   AVPileSummary,
@@ -192,12 +171,7 @@ export {
   AVInstantRunoffSummary,
   AVDhondtAPSummary,
   AVDhondtSummary,
-  //   AVFooter,
-  //   AVSidebar,
-  //   AVNavbar,
-  //   AVContent,
-  //   AVModal,
-  //   AVCalculateResultContent,
+  AVCalculateResultContent,
 
   // TEMPLATES
   AVSplitHelper,
@@ -206,4 +180,5 @@ export {
 
   // HELPERS
   iconNames,
+  getMeaningfulLabel,
 };
