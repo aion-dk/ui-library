@@ -66,11 +66,6 @@ import {
   AVDhondtAPSummary,
   AVDhondtSummary,
   AVCalculateResultContent,
-  //   AVFooter,
-  //   AVSidebar,
-  //   AVNavbar,
-  //   AVContent,
-  //   AVModal,
 
   // TEMPLATES
   AVSplitHelper,

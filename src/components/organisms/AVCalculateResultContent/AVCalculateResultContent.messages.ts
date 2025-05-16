@@ -235,6 +235,32 @@ const translations: DefineLocaleMessage = {
       label: "Liðinn:",
     },
   },
+  it: {
+    roles: {
+      label: "Il tuo ruolo:",
+      mixer: "Mixer",
+      decrypter: "Decrypter",
+      observer: "Osservatore",
+      all: "Mixer e Decrypter",
+    },
+    status: {
+      label: "Stato:",
+      initial: "Inizializzazione in corso",
+      mixing: "Mixing in corso",
+      decrypting: "Decrypting in corso",
+      aggregating: "Aggregazione in corso",
+      finished: "Completato",
+    },
+    mixes: {
+      label: "Mix:",
+    },
+    decryptions: {
+      label: "Decryptions:",
+    },
+    elapsed: {
+      label: "Trascorso:",
+    },
+  },
   nl: {
     roles: {
       label: "Jouw rol:",
@@ -315,28 +341,28 @@ const translations: DefineLocaleMessage = {
   },
   ro: {
     roles: {
-      label: "Your role:",
+      label: "Rolul tău:",
       mixer: "Mixer",
-      decrypter: "Decrypter",
+      decrypter: "Decriptor",
       observer: "Observator",
-      all: "Mixer and Decrypter",
+      all: "Mixer și Decriptor",
     },
     status: {
-      label: "Status:",
-      initial: "Initializing",
+      label: "Stare:",
+      initial: "Inițializare",
       mixing: "Mixing",
-      decrypting: "Decrypting",
-      aggregating: "Aggregating",
-      finished: "Finished",
+      decrypting: "Decriptare",
+      aggregating: "Agregare",
+      finished: "Terminat",
     },
     mixes: {
-      label: "Mixes:",
+      label: "Mixuri:",
     },
     decryptions: {
-      label: "Decryptions:",
+      label: "Decriptări:",
     },
     elapsed: {
-      label: "Elapsed:",
+      label: "Trecut:",
     },
   },
   ru: {
