@@ -27,7 +27,7 @@ interface VoteCounts {
   eligibleWeight: number;
   invalidVotes: number;
   votedMultipleChannels: number;
-  excludedCount: number;
+  excludedCount?: number;
   blankCount: number;
 }
 

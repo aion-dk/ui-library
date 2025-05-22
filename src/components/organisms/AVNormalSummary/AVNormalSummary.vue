@@ -90,7 +90,7 @@ watch(
     <div class="vstack gap-1" data-test="summary">
       <AVResultSummaryItem
         :title="t('js.components.AVNormalSummary.summary.null_votes')"
-        :value="voteCounts.excludedCount"
+        :value="voteCounts.excludedCount ?? 0"
         reference="null_votes"
         :theme="theme"
       />

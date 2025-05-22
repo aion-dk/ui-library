@@ -210,7 +210,7 @@ watch(
 
     <AVResultSummaryItem
       :title="t('js.components.AVRankedSummary.summary.null_votes')"
-      :value="voteCounts.excludedCount"
+      :value="voteCounts.excludedCount ?? 0"
       reference="null_votes"
       :theme="theme"
     />
