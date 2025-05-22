@@ -227,7 +227,7 @@ watch(
 
     <AVResultSummaryItem
       :title="t('js.components.AVDhondtSummary.summary.null_votes')"
-      :value="voteCounts.excludedCount"
+      :value="voteCounts.excludedCount ?? 0"
       reference="null_votes"
       :theme="theme"
     />
