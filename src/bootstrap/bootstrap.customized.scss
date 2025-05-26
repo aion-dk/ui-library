@@ -36,10 +36,11 @@ $grid-breakpoints: (
 @import "../../node_modules/bootstrap/scss/functions";
 
 $primary: #1226aa;
-$secondary: #f8f8f8;
-$brand-dark: #1d1934;
-$accent: #e1251b;
-$dark: #54565a;
+$secondary: #d4d7d8;
+$brand-dark: #061128;
+$accent: #f39200;
+$dark: #5e6769;
+$info: #51c2fd;
 
 $custom-colors: (
   "brand-dark": $brand-dark,
