@@ -127,7 +127,7 @@ watch(
             </h4>
             <button
               v-if="!!inviteRecommendersPath"
-              class="AVRecommendationList--intive-btn btn btn-sm btn-secondary"
+              class="AVRecommendationList--intive-btn btn btn-sm btn-theme-outline"
               @click.stop.prevent="goToInviteRecommendersPath"
             >
               <AVIcon icon="envelope" />
@@ -202,7 +202,7 @@ watch(
         </h4>
         <button
           v-if="!!inviteRecommendersPath"
-          class="AVRecommendationList--intive-btn btn btn-sm btn-secondary"
+          class="AVRecommendationList--intive-btn btn btn-sm btn-theme-outline"
           @click.stop.prevent="goToInviteRecommendersPath"
         >
           <AVIcon icon="envelope" />
@@ -217,16 +217,27 @@ watch(
     </div>
   </div>
 
-  <div v-else-if="recommendationsPublic !== 'private'">
-    <div class="vstack gap-3 text-dark">
+  <div
+    v-else-if="recommendationsPublic !== 'private'"
+    class="AVRecommendationList--header d-flex flex-column flex-sm-row"
+  >
+    <div class="vstack gap-3">
       <h4 class="m-0">
         {{
           t("js.components.AVRecommendationList.header_title", {
             n: recommendations.length,
           })
         }}
+        <button
+          v-if="!!inviteRecommendersPath"
+          class="AVRecommendationList--intive-btn btn btn-sm btn-theme-outline"
+          @click.stop.prevent="goToInviteRecommendersPath"
+        >
+          <AVIcon icon="envelope" />
+          {{ t("js.components.AVRecommendationList.invite_recommenders_button_label") }}
+        </button>
       </h4>
-      <p class="m-0">
+      <p class="m-0 text-dark">
         <AVIcon icon="user-check" />
         {{
           t("js.components.AVRecommendationList.public_count_text", {

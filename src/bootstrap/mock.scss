@@ -57,7 +57,7 @@
   border-color: var(--av-theme-background);
 
   &:hover {
-    background-color: var(--av-theme-background);
+    background-color: var(--av-theme-background) !important;
     color: var(--av-theme-text);
   }
 }
