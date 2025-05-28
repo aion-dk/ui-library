@@ -1,6 +1,6 @@
 import type { Meta } from "@/types";
 import { AVAsyncButton } from "@/components";
-import { ASYNC_BUTTON_VARIANTS, BOOTSTRAP_BASIC_SIZES } from "@/constants";
+import { BOOTSTRAP_COLORS, BOOTSTRAP_BASIC_SIZES } from "@/constants";
 
 const meta: Meta<typeof AVAsyncButton> & {
   argTypes: { "onUpdate:waiting": { action: string } };
@@ -15,7 +15,7 @@ const meta: Meta<typeof AVAsyncButton> & {
     },
     variant: {
       control: { type: "select" },
-      options: ASYNC_BUTTON_VARIANTS,
+      options: BOOTSTRAP_COLORS,
     },
     disabled: {
       control: { type: "boolean" },
