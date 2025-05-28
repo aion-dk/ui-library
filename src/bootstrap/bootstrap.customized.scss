@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&family=PT+Mono&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Lora:wght@600&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@600&display=swap');
 
 $enable-caret: true !default;
 $enable-rounded: true !default;
@@ -35,16 +35,39 @@ $grid-breakpoints: (
 
 @import "../../node_modules/bootstrap/scss/functions";
 
-$primary: #1226aa;
-$secondary: #d4d7d8;
-$brand-dark: #061128;
-$accent: #f39200;
-$dark: #5e6769;
-$info: #51c2fd;
+$primary: #00203E; // LUMI's Midnight blue
+$secondary: #EEEEEE; // LUMI's Mist grey
+$brand-dark: #061128; // LUMI's Oxford blue
+$accent: #F39200; // LUMI's Golden bell orange
+$dark: #26425C;
+$ballot: #23292A; // LUMI's dark grey
+// Tints
+$primary-10: #BFC7CF;
+$primary-30: #99A6B2;
+$primary-50: #738594;
+$primary-70: #4D6378;
+$primary-90: #26425C;
+$secondary-10: #FCE3BF;
+$secondary-30: #FAD499;
+$secondary-50: #F7C273;
+$secondary-70: #F7B24D;
+$secondary-90: #F5A326;
+
 
 $custom-colors: (
   "brand-dark": $brand-dark,
   "accent": $accent,
+  "ballot": $ballot,
+  "primary-10": $primary-10,
+  "primary-30": $primary-30,
+  "primary-50": $primary-50,
+  "primary-70": $primary-70,
+  "primary-90": $primary-90,
+  "secondary-10": $secondary-10,
+  "secondary-30": $secondary-30,
+  "secondary-50": $secondary-50,
+  "secondary-70": $secondary-70,
+  "secondary-90": $secondary-90,
 );
 
 $font-family-base: "Open Sans", sans-serif;
@@ -135,9 +158,11 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
   height: 100vh;
 }
 
-.text-lora {
-  font-family: "Lora", "Open Sans", sans-serif;
+.text-rubik {
+  font-family: "Rubik", sans-serif;
+  font-optical-sizing: auto;
   font-weight: 600;
+  font-style: normal;
 }
 
 // Override floating labels to be a bit lighter

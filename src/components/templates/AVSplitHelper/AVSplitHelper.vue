@@ -284,7 +284,7 @@ watch(
           <div class="col-12 col-sm-6 order-2 order-sm-1 d-flex justify-content-sm-end">
             <button
               key="assign"
-              class="btn btn-lg btn-dark AVSplitHelper--full-width-mobile"
+              class="btn btn-lg btn-brand-dark AVSplitHelper--full-width-mobile"
               :disabled="!isComplete(activePile) || hasError(activePile)"
               data-test="split-helper-confirm"
               @click="activeState = 'assign'"
@@ -342,7 +342,7 @@ watch(
           <div class="col-12 col-sm-6 order-2 order-sm-1 d-flex justify-content-sm-start">
             <button
               key="ballot"
-              class="btn btn-lg btn-outline-dark AVSplitHelper--full-width-mobile"
+              class="btn btn-lg btn-outline-ballot AVSplitHelper--full-width-mobile"
               data-test="split-helper-assign-back"
               @click="activeState = 'ballot'"
             >
@@ -353,7 +353,7 @@ watch(
           <div class="col-12 col-sm-6 order-2 order-sm-1 d-flex justify-content-sm-end">
             <button
               key="confirm"
-              class="btn btn-lg btn-dark AVSplitHelper--full-width-mobile"
+              class="btn btn-lg btn-outline-ballot btn-ballot AVSplitHelper--full-width-mobile"
               :disabled="activePile?.multiplier < 1 || activePile?.multiplier > maxAssignable"
               data-test="split-helper-assign-confirm"
               @click="persistActivePile()"
