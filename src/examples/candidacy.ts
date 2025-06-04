@@ -142,6 +142,17 @@ const getCandidate = (): Resource => {
         item_type: "video",
         form_content: "https://www.youtube.com/watch?v=P_qnA3jdLno",
       },
+      {
+        id: 10,
+        attribute_name: "generic_long_text",
+        label: fieldLabel,
+        localised: false,
+        position: 16,
+        purpose: "generic",
+        item_type: "text",
+        form_content:
+          "Some text that is very long for some unknown reason, that you shouldn't even try to think about. Does it even wrap properly when it is supposed to?",
+      },
     ],
     title: [
       {
@@ -186,7 +197,8 @@ const getCandidate = (): Resource => {
         position: 15,
         purpose: "summary",
         item_type: "text",
-        form_content: "Some text",
+        form_content:
+          "Some text that is very long for some unknown reason, that you shouldn't even try to think about",
       },
     ],
     groups: [
