@@ -94,7 +94,7 @@ describe("AVResourceSection", () => {
     expect(wrapper.findAll("[data-test=heading-title]").length).to.eq(0);
     expect(wrapper.findAll("[data-test=heading-subtitle]").length).to.eq(0);
     expect(wrapper.findAll("[data-test=heading-group]").length).to.eq(0);
-    expect(wrapper.findAll("[data-test=resource-content]").length).to.eq(4);
+    expect(wrapper.findAll("[data-test=resource-content]").length).to.eq(5);
 
     wrapper
       .findAll("[data-test=resource-title]")
