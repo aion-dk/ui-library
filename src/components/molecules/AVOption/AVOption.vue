@@ -314,7 +314,7 @@ watch(
                 >
                   <button
                     v-if="!!option.candidateId"
-                    class="btn btn-sm btn-outline-dark"
+                    class="btn btn-sm btn-outline-ballot"
                     @click.stop="emits('view-candidate', option.candidateId)"
                     data-test="option-candidacy"
                   >
@@ -325,7 +325,7 @@ watch(
                     v-for="link in links"
                     :key="link.toString()"
                     :href="link.url"
-                    class="btn btn-sm btn-outline-dark"
+                    class="btn btn-sm btn-outline-ballot"
                     target="_blank"
                     @click.stop
                     data-test="option-link"
