@@ -1,4 +1,4 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, beforeEach } from "vitest";
 import { mount } from "@vue/test-utils";
 import { getOption, getVoteCounts } from "@/examples";
 import localI18n from "@/i18n";
@@ -674,5 +674,18 @@ describe("AVRankedSummary", () => {
     expect(wrapper.find("[data-test=exampleOption2_round_2]").classes()).to.contain(
       "bg-warning-faded",
     );
+  });
+
+  describe("when voteCounts don't include excludedCount", async () => {
+    beforeEach(async () => {
+      const voteCounts = getVoteCounts();
+      delete voteCounts.excludedCount;
+
+      await wrapper.setProps({ voteCounts });
+    });
+
+    it("doesn't show null votes", async () => {
+      expect(wrapper.find("[data-test=null_votes]").exists()).to.be.false;
+    });
   });
 });
