@@ -206,8 +206,9 @@ watch(
         />
 
         <AVResultSummaryItem
+          v-if="Number.isFinite(voteCounts.excludedCount)"
           :title="t('js.components.AVInstantRunoffSummary.summary.null_votes')"
-          :value="voteCounts.excludedCount ?? 0"
+          :value="voteCounts.excludedCount"
           reference="null_votes"
           :theme="theme"
         />
