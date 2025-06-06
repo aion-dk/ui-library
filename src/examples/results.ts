@@ -1,4 +1,6 @@
-const getVoteCounts = () => {
+import type { VoteCounts } from "@/types";
+
+const getVoteCounts = (): VoteCounts => {
   return {
     voted: 100,
     disabledCount: 2,

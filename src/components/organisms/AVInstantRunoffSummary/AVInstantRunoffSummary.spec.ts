@@ -1,4 +1,4 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, beforeEach } from "vitest";
 import { mount } from "@vue/test-utils";
 import { getOption, getVoteCounts } from "@/examples";
 import localI18n from "@/i18n";
@@ -247,5 +247,18 @@ describe("AVInstantRunoffSummary", () => {
     expect(wrapper.find("[data-test=not-included]").text()).to.contain(
       "Stimmen für gewählte Kandidaten, die nicht in die Zählung für diesen Sitz einbezogen werden:  8",
     );
+  });
+
+  describe("when voteCounts don't include excludedCount", async () => {
+    beforeEach(async () => {
+      const voteCounts = getVoteCounts();
+      delete voteCounts.excludedCount;
+
+      await wrapper.setProps({ voteCounts });
+    });
+
+    it("doesn't show null votes", async () => {
+      expect(wrapper.find("[data-test=null_votes]").exists()).to.be.false;
+    });
   });
 });
