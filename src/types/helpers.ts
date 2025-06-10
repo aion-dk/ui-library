@@ -21,4 +21,10 @@ type LookUpMethod = (
   fallbacks?: Array<LookUpFallback>,
 ) => string;
 
-export type { IterableObject, LookUpMethod, LookUpFallback };
+type HexaNumber = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
+type HexaLetter = "A" | "B" | "C" | "D" | "E" | "F";
+type HexaChar = HexaLetter | HexaNumber;
+type Hexa3 = `${HexaChar}${HexaChar}`;
+type HexaColor = `${Hexa3}${Hexa3}`;
+
+export type { IterableObject, LookUpMethod, LookUpFallback, HexaColor };

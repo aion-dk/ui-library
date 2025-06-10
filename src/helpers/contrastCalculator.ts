@@ -1,4 +1,5 @@
 // https://www.w3.org/TR/WCAG20/#relativeluminancedef
+import type { HexaColor } from "@/types";
 
 const RED = 0.2126;
 const GREEN = 0.7152;
@@ -21,11 +22,11 @@ const getContrast = (color1: [number, number, number], color2: [number, number, 
   return (brightest + 0.05) / (darkest + 0.05);
 };
 
-const hexToRgb = (hexColor: string) => {
+const hexToRgb = (hexColor: HexaColor) => {
   return /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hexColor);
 };
 
-const getTextContrastColor = (backgroundColorHex: string) => {
+const getTextContrastColor = (backgroundColorHex: HexaColor) => {
   const result = hexToRgb(backgroundColorHex);
 
   if (result) {

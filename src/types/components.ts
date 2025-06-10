@@ -3,6 +3,7 @@ import type {
   BOOTSTRAP_BASIC_SIZES,
   BOOTSTRAP_EXPANDED_SIZES,
   IMAGE_OPTIONS,
+  CONTEST_MODE,
 } from "@/constants";
 
 type BootstrapColor = (typeof BOOTSTRAP_COLORS)[number];
@@ -12,6 +13,8 @@ type BootstrapBasicSize = (typeof BOOTSTRAP_BASIC_SIZES)[number];
 type BootstrapExpandedSize = (typeof BOOTSTRAP_EXPANDED_SIZES)[number];
 
 type ImageOption = (typeof IMAGE_OPTIONS)[number];
+
+type ContestMode = (typeof CONTEST_MODE)[number];
 
 // ATOMS
 export * from "@/components/atoms/AVSpinner/AVSpinner.types";
@@ -34,4 +37,4 @@ export * from "@/components/organisms/AVCalculateResultContent/AVCalculateResult
 // TEMPLATES
 export * from "@/components/templates/AVSplitHelper/AVSplitHelper.types";
 
-export type { BootstrapColor, BootstrapBasicSize, BootstrapExpandedSize, ImageOption };
+export type { BootstrapColor, BootstrapBasicSize, BootstrapExpandedSize, ImageOption, ContestMode };

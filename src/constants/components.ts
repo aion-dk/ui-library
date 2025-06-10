@@ -1,5 +1,7 @@
 const IMAGE_OPTIONS = ["square", "passport"] as const;
 
+const CONTEST_MODE = ["list", "gallery"] as const;
+
 const LOOKUP_DEFAULT_FALLBACKS: Array<string> = [
   "title",
   "label",
@@ -29,9 +31,7 @@ const LINK_VISUALIZER_KEYS = [
 
 // AVOptionLiveResults
 const LIVE_RESULT_MODES = ["internal", "external"] as const;
-
 const SPLIT_HELPER_STATE = ["ballot", "assign", "overview"] as const;
-
 const RECOMMENDATION_PUBLIC_TYPES = ["public", "private", "public_count"] as const;
 
 // AVAnimatedMenuButton
@@ -39,7 +39,6 @@ const ANIMATED_MENU_BUTTON_VARIANTS = ["cross", "arrow-down"] as const;
 
 // AVCalculateResultContent
 const CALCULATE_RESULT_ROLE = ["mixer", "decrypter", "all", "observer"] as const;
-
 const CALCULATE_RESULT_STATUS = [
   "initial",
   "mixing",
@@ -59,4 +58,5 @@ export {
   ANIMATED_MENU_BUTTON_VARIANTS,
   CALCULATE_RESULT_ROLE,
   CALCULATE_RESULT_STATUS,
+  CONTEST_MODE,
 };
