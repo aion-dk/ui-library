@@ -334,7 +334,11 @@ watch(
               <template
                 v-else-if="item.item_type !== 'rich_text_area' && item.item_type !== 'check_box'"
               >
-                <p class="AVResourceSection--regular-content" data-test="resource-regular-content">
+                <p
+                  class="AVResourceSection--regular-content"
+                  :class="{ 'text-truncate': summary }"
+                  data-test="resource-regular-content"
+                >
                   <span v-if="summary">{{
                     `${getMeaningfulLabel(item as unknown as IterableObject, i18nLocale, `${t("js.components.AVResourceSection.human")} ${item.item_type}`)}: `
                   }}</span>

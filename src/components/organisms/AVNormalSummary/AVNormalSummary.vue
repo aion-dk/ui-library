@@ -89,8 +89,9 @@ watch(
 
     <div class="vstack gap-1" data-test="summary">
       <AVResultSummaryItem
+        v-if="Number.isFinite(voteCounts.excludedCount)"
         :title="t('js.components.AVNormalSummary.summary.null_votes')"
-        :value="voteCounts.excludedCount ?? 0"
+        :value="voteCounts.excludedCount"
         reference="null_votes"
         :theme="theme"
       />
