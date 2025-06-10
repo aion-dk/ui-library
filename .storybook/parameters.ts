@@ -6,11 +6,10 @@ const parameters = {
   locales: SUPPORTED_LOCALES,
   actions: { argTypesRegex: "^on.*" },
   backgrounds: {
-    default: "light",
-    values: [
-      { name: "light", value: "#FFFFFF" },
-      { name: "dark", value: "#1e293b" },
-    ],
+    options: {
+      light: { name: "Light", value: "#FFFFFF" },
+      dark: { name: "Dark", value: "#1e293b" },
+    },
   },
   controls: {
     matchers: {
@@ -20,7 +19,7 @@ const parameters = {
   },
   // See https://github.com/dequelabs/axe-core/blob/develop/doc/API.md#options-parameter
   a11y: {
-    element: "#storybook-root",
+    context: "#storybook-root",
     config: {
       rules: [
         {

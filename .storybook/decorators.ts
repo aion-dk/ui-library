@@ -1,5 +1,5 @@
-import { useEffect, useGlobals } from "@storybook/preview-api";
-import type { Decorator } from "@storybook/vue3";
+import { useEffect, useGlobals } from "storybook/preview-api";
+import type { Decorator } from "@storybook/vue3-vite";
 import localI18n from "../src/i18n";
 import { ref, watch } from "vue";
 import type { Locale } from "vue-i18n";

@@ -18,8 +18,8 @@ const meta: Meta<typeof AVOptionSelect> = {
       options: SUPPORTED_LOCALES,
     },
   },
-  parameters: {
-    backgrounds: { default: "dark" },
+  globals: {
+    backgrounds: { value: "dark" },
   },
 };
 

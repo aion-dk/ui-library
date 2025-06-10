@@ -126,8 +126,8 @@ export const Default = {
 export const DarkMode = {
   render: Template,
 
-  parameters: {
-    backgrounds: { default: "dark" },
+  globals: {
+    backgrounds: { value: "dark" },
   },
   args: {
     theme: "dark",

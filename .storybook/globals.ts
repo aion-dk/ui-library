@@ -1,4 +1,5 @@
 const globals = {
+  backgrounds: { value: "Light" },
   rtlDirection: {
     autoLocales: ["ar"],
     reload: true,
