@@ -38,7 +38,6 @@
     "test-storybook-coverage": "test-storybook --maxWorkers 1 --coverage"
   },
   "dependencies": {
-    "@aion-dk/js-client": "^4.4.3",
     "@fortawesome/fontawesome-svg-core": "^6.7.2",
     "@fortawesome/free-brands-svg-icons": "^6.7.2",
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
@@ -49,6 +48,7 @@
     "vue-i18n": "^11.1.2"
   },
   "devDependencies": {
+    "@aion-dk/js-client": "^4.4.4",
     "@chromatic-com/storybook": "^4.0.0",
     "@fortawesome/fontawesome-common-types": "^6.7.2",
     "@storybook/addon-a11y": "^9.0.6",
