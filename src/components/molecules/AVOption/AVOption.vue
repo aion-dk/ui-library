@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import useEventsBus from "@/helpers/eventBus";
 import { getMeaningfulLabel } from "@/helpers/meaningfulLabel";
+import { getTextContrastColor } from "@/helpers/contrastCalculator";
 import { watch, ref, nextTick, computed, inject, onMounted, onUnmounted } from "vue";
 import type {
   PropType,
@@ -50,6 +51,14 @@ const props = defineProps({
   },
   partialResults: {
     type: Object as PropType<PartialResults>,
+    default: null,
+  },
+  parentColor: {
+    type: String as PropType<`#${string}`>,
+    default: null,
+  },
+  parentTitle: {
+    type: String,
     default: null,
   },
   locale: {
@@ -183,6 +192,28 @@ const openChildrenCandidate = (reference: string) => {
   emits("view-candidate", reference);
 };
 
+const bsBorderColor = computed(() =>
+  getComputedStyle(document.documentElement).getPropertyValue("--bs-border-color"),
+);
+
+const parentBagdeStyles = computed(() => {
+  const parentColor = props.parentColor || bsBorderColor.value;
+  return `
+    background-color: ${parentColor};
+    color: ${getTextContrastColor(parentColor)};
+  `;
+});
+
+const coloredEdgeStyle = computed(() => {
+  if (props.option.accentColor || props.parentColor || props.parentTitle) {
+    const color = props.option.accentColor || props.parentColor || bsBorderColor.value;
+    return `
+      border-${isRtl.value ? "right" : "left"}-color: ${color};
+      border-${isRtl.value ? "right" : "left"}-width: 0.5rem;
+    `;
+  } else return "";
+});
+
 watch(
   () => eventBus.value.get("highlight-option"),
   (val) => {
@@ -229,12 +260,16 @@ watch(
     class="position-relative"
     :class="{
       'AVOption--disabled': disabled,
+      'h-100': contest.mode === 'gallery',
     }"
     data-test="option"
   >
     <a
       :id="option.reference"
       class="AVOption--scroll-anchor visually-hidden"
+      :class="{
+        'h-100': contest.mode === 'gallery',
+      }"
       :href="`option_${option.reference}_checkbox`"
       :aria-labelledby="`option_${option.reference}_title`"
     />
@@ -250,16 +285,24 @@ watch(
           class="AVOption card"
           :class="{
             'AVOption--highlight': highlighted,
-            'AVOption--accent': option.accentColor,
+            'h-100': contest.mode === 'gallery',
           }"
-          :style="
-            props.option.accentColor
-              ? `border-${isRtl ? 'right' : 'left'}-color: ${props.option.accentColor};`
-              : ''
-          "
+          :style="coloredEdgeStyle"
           :aria-label="`${t('js.components.AVOption.aria_labels.option')} ${getMeaningfulLabel(option as unknown as IterableObject, i18nLocale, t('js.components.AVOption.aria_labels.option'))}`"
           data-test="option-section"
         >
+          <!-- PARENT BADGE -->
+          <div v-if="contest.mode === 'gallery'" class="AVOption--parent-container w-100 ps-3 pt-3">
+            <div
+              v-if="parentTitle"
+              class="badge"
+              :style="parentBagdeStyles"
+              data-test="parent-bagde"
+            >
+              {{ parentTitle }}
+            </div>
+          </div>
+
           <div
             class="d-flex justify-content-between"
             :class="{
@@ -270,10 +313,16 @@ watch(
           >
             <div
               class="vstack gap-2 p-3 align-items-start justify-content-center"
+              :class="{
+                'pt-0': contest.mode === 'gallery',
+              }"
               data-test="option-content"
             >
+              <!-- OPTION HEADER -->
               <header
-                class="AVOption--header d-flex flex-column flex-sm-row align-items-sm-center gap-3"
+                class="d-flex flex-column flex-sm-row align-items-sm-center justify-content-center gap-3"
+                :style="`min-height: ${contest.mode !== 'gallery' ? '2.375rem' : '4.375rem'};`"
+                data-test="option-header"
               >
                 <img
                   v-if="option.image"
@@ -283,98 +332,19 @@ watch(
                   data-test="option-image"
                 />
                 <h5
+                  v-if="contest.mode !== 'gallery' || !option.image"
                   class="AVOption--title m-0"
                   :id="`option_${option.reference}_title`"
+                  data-test="option-title"
                   v-text="title"
                 />
-                <span :id="`option_${option.reference}_handle`" class="visually-hidden">{{
-                  option.reference
-                }}</span>
+                <span :id="`option_${option.reference}_handle`" class="visually-hidden">
+                  {{ option.reference }}
+                </span>
               </header>
-              <div
-                v-if="
-                  description ||
-                  links.length ||
-                  (hasChildren && collapsable) ||
-                  !!option.candidateId
-                "
-                class="vstack gap-2"
-                data-test="option-summary"
-              >
-                <div
-                  v-if="description"
-                  :id="`option_${option.reference}_description`"
-                  class="AVOption--description vstack gap-1 mt-2"
-                  data-test="option-description"
-                  v-html="description"
-                />
-                <div
-                  class="AVOption--links-container hstack gap-2"
-                  v-if="links.length > 0 || !!option.candidateId"
-                >
-                  <button
-                    v-if="!!option.candidateId"
-                    class="btn btn-sm btn-outline-ballot"
-                    @click.stop="emits('view-candidate', option.candidateId)"
-                    data-test="option-candidacy"
-                  >
-                    {{ t("js.components.AVOption.view_candidate") }}
-                  </button>
-
-                  <a
-                    v-for="link in links"
-                    :key="link.toString()"
-                    :href="link.url"
-                    class="btn btn-sm btn-outline-ballot"
-                    target="_blank"
-                    @click.stop
-                    data-test="option-link"
-                  >
-                    {{ link.text }}
-                  </a>
-                </div>
-                <div
-                  v-if="collapsable && hasChildren"
-                  class="hstack gap-2 mt-2"
-                  data-test="option-children"
-                >
-                  <div
-                    :id="`option_${option.reference}_dropdown`"
-                    class="hstack gap-1 text-dark"
-                    aria-hidden="true"
-                    data-test="option-expander"
-                  >
-                    <AVIcon
-                      icon="chevron-down"
-                      class="AVOption--expander-icon"
-                      :class="{
-                        'AVOption--expander-icon-opened': isOpen,
-                      }"
-                    />
-                    <span
-                      v-html="
-                        isOpen
-                          ? t('js.components.AVOption.collapse_text')
-                          : t('js.components.AVOption.expand_text')
-                      "
-                    />
-                  </div>
-
-                  <span
-                    v-if="subOptionSelected && !isOpen"
-                    class="badge"
-                    :class="{
-                      'bg-theme-danger': invalid,
-                      'bg-dark': !invalid,
-                    }"
-                    data-test="option-child-selected"
-                  >
-                    {{ t("js.components.AVOption.sub_options_select", { n: subOptionSelected }) }}
-                  </span>
-                </div>
-              </div>
             </div>
 
+            <!-- MULTIVOTE CROSSES -->
             <div
               v-if="votesAllowedPerOption >= 1"
               :class="{
@@ -412,6 +382,8 @@ watch(
                 />
               </div>
             </div>
+
+            <!-- LIVE COUNT (INSIDE) -->
             <AVOptionLiveResults
               v-if="optionPartialResults && (observerMode || disabled)"
               :option-reference="option.reference"
@@ -421,9 +393,102 @@ watch(
               class="px-3"
             />
           </div>
+
+          <!-- DESCRIPTION, LINKS, CANDIDACY -->
+          <div
+            v-if="
+              description ||
+              links.length ||
+              (hasChildren && collapsable) ||
+              !!option.candidateId ||
+              (option.image && contest.mode === 'gallery')
+            "
+            class="vstack gap-2 px-3 pb-3"
+            data-test="option-summary"
+          >
+            <h5
+              v-if="option.image && contest.mode === 'gallery'"
+              class="AVOption--title m-0"
+              :id="`option_${option.reference}_title`"
+              data-test="option-title"
+              v-text="title"
+            />
+            <div
+              v-if="description"
+              :id="`option_${option.reference}_description`"
+              class="AVOption--description vstack gap-1 mt-2"
+              data-test="option-description"
+              v-html="description"
+            />
+            <div
+              class="AVOption--links-container hstack gap-2"
+              v-if="links.length > 0 || !!option.candidateId"
+            >
+              <button
+                v-if="!!option.candidateId"
+                class="btn btn-sm btn-outline-ballot"
+                @click.stop="emits('view-candidate', option.candidateId)"
+                data-test="option-candidacy"
+              >
+                {{ t("js.components.AVOption.view_candidate") }}
+              </button>
+
+              <a
+                v-for="link in links"
+                :key="link.toString()"
+                :href="link.url"
+                class="btn btn-sm btn-outline-ballot"
+                target="_blank"
+                @click.stop
+                data-test="option-link"
+              >
+                {{ link.text }}
+              </a>
+            </div>
+            <div
+              v-if="collapsable && hasChildren"
+              class="hstack gap-2 mt-2"
+              data-test="option-children"
+            >
+              <div
+                :id="`option_${option.reference}_dropdown`"
+                class="hstack gap-1 text-dark"
+                aria-hidden="true"
+                data-test="option-expander"
+              >
+                <AVIcon
+                  icon="chevron-down"
+                  class="AVOption--expander-icon"
+                  :class="{
+                    'AVOption--expander-icon-opened': isOpen,
+                  }"
+                />
+                <span
+                  v-html="
+                    isOpen
+                      ? t('js.components.AVOption.collapse_text')
+                      : t('js.components.AVOption.expand_text')
+                  "
+                />
+              </div>
+
+              <span
+                v-if="subOptionSelected && !isOpen"
+                class="badge"
+                :class="{
+                  'bg-theme-danger': invalid,
+                  'bg-dark': !invalid,
+                }"
+                data-test="option-child-selected"
+              >
+                {{ t("js.components.AVOption.sub_options_select", { n: subOptionSelected }) }}
+              </span>
+            </div>
+          </div>
         </section>
       </template>
 
+      <!-- LIVE COUNT (OUTSIDE) -->
       <template #results v-if="!disabled && optionPartialResults && !observerMode">
         <AVOptionLiveResults
           :option-reference="option.reference"
@@ -433,9 +498,10 @@ watch(
         />
       </template>
 
+      <!-- CHILDREN -->
       <template #pane="{ toggleCollapse }">
         <div
-          v-if="hasChildren"
+          v-if="hasChildren && contest.mode !== 'gallery'"
           class="AVOption--children vstack gap-2 py-2"
           data-test="option-children"
         >
