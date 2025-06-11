@@ -29,7 +29,8 @@ type ContestArg =
   | "default_options"
   | "complete_options"
   | "many_options"
-  | "huge";
+  | "huge"
+  | "gallery";
 
 type SelectionPileArg =
   | "single"

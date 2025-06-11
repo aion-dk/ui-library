@@ -88,6 +88,7 @@ const getContest = (args: ContestArg[]): ContestContent => {
     searchForm: args.includes("search_form"),
     randomizeOptions: args.includes("randomize"),
     blankOptionColor: args.includes("color_options") ? "#BB22FF" : "",
+    mode: args.includes("gallery") ? "gallery" : "list",
     markingType: {
       votesAllowedPerOption: getVotesAllowedPerOption(args),
       blankSubmission: args.includes("blank") ? "active_choice" : "disabled",

@@ -1,7 +1,5 @@
 const IMAGE_OPTIONS = ["square", "passport"] as const;
 
-const CONTEST_MODE = ["list", "gallery"] as const;
-
 const LOOKUP_DEFAULT_FALLBACKS: Array<string> = [
   "title",
   "label",
@@ -58,5 +56,4 @@ export {
   ANIMATED_MENU_BUTTON_VARIANTS,
   CALCULATE_RESULT_ROLE,
   CALCULATE_RESULT_STATUS,
-  CONTEST_MODE,
 };
