@@ -28,6 +28,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  galleryMode: {
+    type: Boolean,
+    default: false,
+  },
   locale: {
     type: String as PropType<SupportedLocale>,
     default: null,
@@ -82,6 +86,7 @@ watch(
   <div
     :class="{
       'AVBlankOption--disabled': disabled,
+      'h-100': galleryMode,
     }"
     data-test="blank-option"
   >
@@ -89,11 +94,13 @@ watch(
       class="AVBlankOption card position-relative"
       :class="{
         'AVBlankOption--accent': accentColor,
+        'h-100': galleryMode,
       }"
       :style="accentColor ? `border-${isRtl ? 'right' : 'left'}-color: ${accentColor};` : ''"
       :aria-label="t('js.components.AVBlankOption.aria_labels.option')"
       data-test="option-container"
     >
+      <div v-if="galleryMode" class="AVBlankOption--parent-container w-100 ps-3 pt-3" />
       <div class="hstack justify-content-between p-3" data-test="option-content">
         <h5 id="option_blank_title" class="AVBlankOption--title m-0">
           {{ t("js.components.AVBlankOption.title") }}
