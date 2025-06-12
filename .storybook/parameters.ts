@@ -19,13 +19,19 @@ const parameters = {
   },
   // See https://github.com/dequelabs/axe-core/blob/develop/doc/API.md#options-parameter
   a11y: {
-    context: "#storybook-root",
+    context: "body",
     config: {
       rules: [
         {
           // Don't show accesibility warnings regarding VUE devtools.
           id: "aria-prohibited-attr",
           selector: ".panel-entry-btn",
+          enabled: false,
+        },
+        {
+          // Don't show accesibility warnings on Playwright messups.
+          id: "region",
+          selector: "#storybook-root",
           enabled: false,
         },
         {
