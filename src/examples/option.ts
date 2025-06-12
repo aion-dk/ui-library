@@ -116,19 +116,38 @@ const getOption = (
     },
     description: args.includes("description")
       ? description
-      : args.includes("gallery") && children
+      : (args.includes("gallery") || args.includes("gallery_parents")) && children
         ? gallery_description
         : {},
-    image: args.includes("image") || (args.includes("gallery") && children) ? image : "",
-    selectable: args.includes("gallery") ? (children ? true : false) : args.includes("selectable"),
+    image:
+      args.includes("image") ||
+      ((args.includes("gallery") || args.includes("gallery_parents")) && children)
+        ? image
+        : "",
+    selectable: args.includes("gallery_parents")
+      ? true
+      : args.includes("gallery")
+        ? children
+          ? true
+          : false
+        : args.includes("selectable"),
     exclusive: args.includes("exclusive") || (args.includes("gallery") && !children),
     children:
-      (args.includes("gallery") || args.includes("children")) && !children
-        ? getOptions(args, args.includes("gallery") ? 6 : 2, true, index)
+      (args.includes("gallery") || args.includes("gallery_parents") || args.includes("children")) &&
+      !children
+        ? getOptions(
+            args,
+            args.includes("gallery") || args.includes("gallery_parents") ? 6 : 2,
+            true,
+            index,
+          )
         : [],
     randomizeChildren: args.includes("randomizeChildren"),
     accentColor:
-      args.includes("color") || (args.includes("gallery") && !children) ? colors[index] : "",
+      args.includes("color") ||
+      ((args.includes("gallery") || args.includes("gallery_parents")) && !children)
+        ? colors[index]
+        : "",
     url: args.includes("url") ? url : {},
     videoUrl: args.includes("video") ? video : {},
     candidateId: args.includes("candidacy") ? index : undefined,

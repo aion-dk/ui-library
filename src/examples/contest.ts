@@ -38,6 +38,8 @@ const question: LocalString = {
 };
 
 const getContestOptions = (args: ContestArg[]): OptionContent[] => {
+  if (args.includes("gallery_short")) return getOptions(["gallery"], 2);
+  if (args.includes("gallery_parents")) return getOptions(["gallery_parents"], 2);
   if (args.includes("gallery")) return getOptions(["gallery"], 9);
   else if (args.includes("children_options")) return getOptions(["selectable", "children"], 3);
   else if (args.includes("color_options")) return getOptions(["selectable", "color"], 3);
@@ -89,10 +91,14 @@ const getContest = (args: ContestArg[]): ContestContent => {
     searchForm: args.includes("search_form"),
     randomizeOptions: args.includes("randomize"),
     blankOptionColor: args.includes("color_options") ? "#BB22FF" : "",
-    mode: args.includes("gallery") ? "gallery" : "list",
+    mode:
+      args.includes("gallery") || args.includes("gallery_parents") || args.includes("gallery_short")
+        ? "gallery"
+        : "list",
     markingType: {
       votesAllowedPerOption: getVotesAllowedPerOption(args),
-      blankSubmission: args.includes("blank") ? "active_choice" : "disabled",
+      blankSubmission:
+        args.includes("blank") || args.includes("gallery_parents") ? "active_choice" : "disabled",
       minMarks: 1,
       maxMarks: getMaxMarks(args),
       voteVariation: args.includes("ranked") ? "ranked" : "normal",

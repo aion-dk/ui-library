@@ -191,3 +191,12 @@ export const GalleryMode = {
     selectionPile: getSelectionPile([]),
   },
 };
+
+export const GalleryModeWithParentsAndBlank = {
+  render: Template,
+
+  args: {
+    contest: getContest(["gallery_parents"]),
+    selectionPile: getSelectionPile([]),
+  },
+};

@@ -11,7 +11,8 @@ type OptionArg =
   | "randomizeChildren"
   | "image"
   | "candidacy"
-  | "gallery";
+  | "gallery"
+  | "gallery_parents";
 
 type ContestArg =
   | "description"
@@ -31,7 +32,9 @@ type ContestArg =
   | "complete_options"
   | "many_options"
   | "huge"
-  | "gallery";
+  | "gallery"
+  | "gallery_parents"
+  | "gallery_short";
 
 type SelectionPileArg =
   | "single"
