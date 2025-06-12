@@ -182,3 +182,12 @@ export const HugeContest = {
     selectionPile: getSelectionPile([]),
   },
 };
+
+export const GalleryMode = {
+  render: Template,
+
+  args: {
+    contest: getContest(["gallery"]),
+    selectionPile: getSelectionPile([]),
+  },
+};
