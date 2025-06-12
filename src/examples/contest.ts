@@ -38,7 +38,8 @@ const question: LocalString = {
 };
 
 const getContestOptions = (args: ContestArg[]): OptionContent[] => {
-  if (args.includes("children_options")) return getOptions(["selectable", "children"], 3);
+  if (args.includes("gallery")) return getOptions(["gallery"], 9);
+  else if (args.includes("children_options")) return getOptions(["selectable", "children"], 3);
   else if (args.includes("color_options")) return getOptions(["selectable", "color"], 3);
   else if (args.includes("complete_options"))
     return getOptions(["selectable", "description", "image"], 3);

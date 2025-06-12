@@ -10,7 +10,8 @@ type OptionArg =
   | "video"
   | "randomizeChildren"
   | "image"
-  | "candidacy";
+  | "candidacy"
+  | "gallery";
 
 type ContestArg =
   | "description"

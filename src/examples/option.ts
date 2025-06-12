@@ -18,6 +18,24 @@ const description: LocalString = {
   sv: "<p>Detta är en beskrivning...</p>",
 };
 
+const gallery_description: LocalString = {
+  ar: "<p><strong>🇩🇰 DEN<br>🏊🏻 سباحة</strong></p>",
+  ca: "<p><strong>🇩🇰 DEN<br>🏊🏻 Natació</strong></p>",
+  da: "<p><strong>🇩🇰 DEN<br>🏊🏻 Svømning</strong></p>",
+  de: "<p><strong>🇩🇰 DEN<br>🏊🏻 Baden</strong></p>",
+  en: "<p><strong>🇩🇰 DEN<br>🏊🏻 Swimming</strong></p>",
+  es: "<p><strong>🇩🇰 DEN<br>🏊🏻 Natación</strong></p>",
+  fi: "<p><strong>🇩🇰 DEN<br>🏊🏻 Uima</strong></p>",
+  fr: "<p><strong>🇩🇰 DEN<br>🏊🏻 Natation</strong></p>",
+  is: "<p><strong>🇩🇰 DEN<br>🏊🏻 Sund</strong></p>",
+  nl: "<p><strong>🇩🇰 DEN<br>🏊🏻 Zwemmen</strong></p>",
+  pl: "<p><strong>🇩🇰 DEN<br>🏊🏻 Pływacki</strong></p>",
+  pt: "<p><strong>🇩🇰 DEN<br>🏊🏻 Natação</strong></p>",
+  ro: "<p><strong>🇩🇰 DEN<br>🏊🏻 Înot</strong></p>",
+  ru: "<p><strong>🇩🇰 DEN<br>🏊🏻 Плавание</strong></p>",
+  sv: "<p><strong>🇩🇰 DEN<br>🏊🏻 Simning</strong></p>",
+};
+
 const url: LocalString = {
   ar: "https://www.google.ar",
   ca: "https://www.google.ca",
@@ -61,6 +79,12 @@ const colors: ExampleColor = {
   1: "#FF0000",
   2: "#00FF00",
   3: "#0000FF",
+  4: "#FFFF00",
+  5: "#FF00FF",
+  6: "#00FFFF",
+  7: "#880000",
+  8: "#008800",
+  9: "#000088",
 };
 
 const getOption = (
@@ -90,13 +114,21 @@ const getOption = (
       ru: children ? `Детский вариант ${parent}.${index}` : `Пример варианта ${index}`,
       sv: children ? `Alternativ för barn ${parent}.${index}` : `Exempelalternativ ${index}`,
     },
-    description: args.includes("description") ? description : {},
-    image: args.includes("image") ? image : "",
-    selectable: args.includes("selectable"),
-    exclusive: args.includes("exclusive"),
-    children: args.includes("children") && !children ? getOptions(args, 2, true, index) : [],
+    description: args.includes("description")
+      ? description
+      : args.includes("gallery") && children
+        ? gallery_description
+        : {},
+    image: args.includes("image") || (args.includes("gallery") && children) ? image : "",
+    selectable: args.includes("gallery") ? (children ? true : false) : args.includes("selectable"),
+    exclusive: args.includes("exclusive") || (args.includes("gallery") && !children),
+    children:
+      (args.includes("gallery") || args.includes("children")) && !children
+        ? getOptions(args, args.includes("gallery") ? 6 : 2, true, index)
+        : [],
     randomizeChildren: args.includes("randomizeChildren"),
-    accentColor: args.includes("color") ? colors[index] : "",
+    accentColor:
+      args.includes("color") || (args.includes("gallery") && !children) ? colors[index] : "",
     url: args.includes("url") ? url : {},
     videoUrl: args.includes("video") ? video : {},
     candidateId: args.includes("candidacy") ? index : undefined,
