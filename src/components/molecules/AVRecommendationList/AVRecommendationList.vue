@@ -29,6 +29,10 @@ const props = defineProps({
     type: String as PropType<SupportedLocale>,
     default: null,
   },
+  recommendationPhaseActive: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const isOpen = ref<boolean>(false);
@@ -127,7 +131,8 @@ watch(
             </h4>
             <button
               v-if="!!inviteRecommendersPath"
-              class="AVRecommendationList--intive-btn btn btn-sm btn-theme-outline"
+              :disabled="recommendationPhaseActive"
+              class="AVRecommendationList--invite-btn btn btn-sm btn-theme-outline"
               @click.stop.prevent="goToInviteRecommendersPath"
             >
               <AVIcon icon="envelope" />
@@ -202,7 +207,8 @@ watch(
         </h4>
         <button
           v-if="!!inviteRecommendersPath"
-          class="AVRecommendationList--intive-btn btn btn-sm btn-theme-outline"
+          :disabled="recommendationPhaseActive"
+          class="AVRecommendationList--invite-btn btn btn-sm btn-theme-outline"
           @click.stop.prevent="goToInviteRecommendersPath"
         >
           <AVIcon icon="envelope" />
@@ -230,7 +236,8 @@ watch(
         }}
         <button
           v-if="!!inviteRecommendersPath"
-          class="AVRecommendationList--intive-btn btn btn-sm btn-theme-outline"
+          :disabled="recommendationPhaseActive"
+          class="AVRecommendationList--invite-btn btn btn-sm btn-theme-outline"
           @click.stop.prevent="goToInviteRecommendersPath"
         >
           <AVIcon icon="envelope" />

@@ -14,6 +14,7 @@ describe("AVRecommendationList", () => {
     props: {
       recommendations: [],
       locale: "en",
+      recommendationPhaseActive: true,
     },
     global: {
       provide: {
@@ -154,20 +155,34 @@ describe("AVRecommendationList", () => {
   });
 
   it("can display invite recommenders button", async () => {
-    expect(wrapper.findAll(".AVRecommendationList--intive-btn").length).to.eq(0);
+    expect(wrapper.findAll(".AVRecommendationList--invite-btn").length).to.eq(0);
 
     await wrapper.setProps({
       inviteRecommendersPath: "www.some-url.com",
     });
 
-    expect(wrapper.find(".AVRecommendationList--intive-btn").text()).to.contain(
+    expect(wrapper.find(".AVRecommendationList--invite-btn").text()).to.contain(
       "Invite recommenders",
     );
 
     expect(window.location.href).to.eq("www.initial.com");
     expect(window.location.href).not.to.eq("www.some-url.com");
-    await wrapper.find(".AVRecommendationList--intive-btn").trigger("click");
+    await wrapper.find(".AVRecommendationList--invite-btn").trigger("click");
     expect(window.location.href).to.eq("www.some-url.com");
+  });
+
+  it("disables invite recommenders button", async () => {
+    expect(wrapper.findAll(".AVRecommendationList--invite-btn").length).to.eq(0);
+
+    await wrapper.setProps({
+      inviteRecommendersPath: "www.some-url.com",
+      recommendationPhaseActive: false,
+    });
+
+    expect(wrapper.find(".AVRecommendationList--invite-btn").text()).to.contain(
+      "Invite recommenders",
+    );
+    expect(wrapper.find(".AVRecommendationList--invite-btn").attributes().disabled).toBeTruthy;
   });
 
   it("can switch language", async () => {
@@ -185,7 +200,7 @@ describe("AVRecommendationList", () => {
     await wrapper.find("[data-test=collapser-button]").trigger("click");
 
     expect(wrapper.find("[data-test=list-collapse]").text()).to.contain("Tiivistä luettelo");
-    expect(wrapper.find(".AVRecommendationList--intive-btn").text()).to.contain(
+    expect(wrapper.find(".AVRecommendationList--invite-btn").text()).to.contain(
       "Kutsu suosittelijoita",
     );
   });
