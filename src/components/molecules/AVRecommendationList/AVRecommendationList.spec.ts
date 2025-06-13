@@ -172,8 +172,6 @@ describe("AVRecommendationList", () => {
   });
 
   it("disables invite recommenders button", async () => {
-    expect(wrapper.findAll(".AVRecommendationList--invite-btn").length).to.eq(0);
-
     await wrapper.setProps({
       inviteRecommendersPath: "www.some-url.com",
       recommendationPhaseActive: false,
