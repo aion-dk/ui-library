@@ -261,10 +261,10 @@ watch(
         :error="!isBelgianBallot && errors.some((err) => err.message.includes('blank'))"
         :disabled="disabled"
         :invalid="!isValid"
-        :observerMode="observerMode"
-        :accentColor="contest.blankOptionColor"
+        :observer-mode="observerMode"
+        :accent-color="contest.blankOptionColor"
         :partial-results="partialResults ? partialResults['blank'] : null"
-        :galleryMode="contest.mode === 'gallery'"
+        gallery-mode
         @toggle-blank="toggleBlank"
       />
     </div>
@@ -310,8 +310,8 @@ watch(
         :error="!isBelgianBallot && errors.some((err) => err.message.includes('blank'))"
         :disabled="disabled"
         :invalid="!isValid"
-        :observerMode="observerMode"
-        :accentColor="contest.blankOptionColor"
+        :observer-mode="observerMode"
+        :accent-color="contest.blankOptionColor"
         :partial-results="partialResults ? partialResults['blank'] : null"
         @toggle-blank="toggleBlank"
       />

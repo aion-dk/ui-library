@@ -187,6 +187,7 @@ watch(
           option.parent ? getAllParents(option.parent, option.parent ? [option.parent] : []) : []
         "
         :image-option="imageOption"
+        :gallery-mode="contest.mode === 'gallery'"
       />
       <AVSummaryOption v-if="blankSelected" :blank="blankSelected" />
     </div>
