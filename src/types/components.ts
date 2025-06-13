@@ -23,7 +23,6 @@ export * from "@/components/atoms/AVAnimatedMenuButton/AVAnimatedMenuButton.type
 // MOLECULES
 export * from "@/components/molecules/AVSummaryOption/AVSummaryOption.types";
 export * from "@/components/molecules/AVRecommendationList/AVRecommendationList.types";
-export * from "@/components/molecules/AVAsyncButton/AVAsyncButton.types";
 
 // ORGANISMS
 export * from "@/components/organisms/AVPileSummary/AVPileSummary.types";
@@ -31,6 +30,7 @@ export * from "@/components/organisms/AVRankedSummary/AVRankedSummary.types";
 export * from "@/components/organisms/AVDhondtAPSummary/AVDhondtAPSummary.types";
 export * from "@/components/organisms/AVDhondtSummary/AVDhondtSummary.types";
 export * from "@/components/organisms/AVCalculateResultContent/AVCalculateResultContent.types";
+export * from "@/components/organisms/AVBallot/AVBallot.types";
 
 // TEMPLATES
 export * from "@/components/templates/AVSplitHelper/AVSplitHelper.types";

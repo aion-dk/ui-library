@@ -25,6 +25,9 @@ const meta: Meta<typeof AVBlankOption> & {
     observerMode: {
       control: { type: "boolean" },
     },
+    galleryMode: {
+      control: { type: "boolean" },
+    },
     partialResults: {
       control: { type: "object" },
     },
@@ -170,5 +173,18 @@ export const ExclusiveError = {
   args: {
     checked: true,
     error: true,
+  },
+};
+
+export const GalleryMode = {
+  render: Template,
+
+  globals: {
+    viewport: { value: "mobile1" },
+  },
+  args: {
+    checked: false,
+    error: true,
+    galleryMode: true,
   },
 };

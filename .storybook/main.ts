@@ -9,12 +9,9 @@ const config: StorybookConfig = {
     "../src/**/*.stories.@(js|jsx|ts|tsx)",
   ],
   addons: [
-    "@storybook/addon-essentials",
     "@storybook/addon-a11y",
     "storybook-addon-rtl",
     "@storybook/addon-links",
-    "@storybook/addon-actions",
-    "@storybook/addon-interactions",
     "@chromatic-com/storybook",
     {
       name: "@storybook/addon-coverage",
@@ -24,12 +21,17 @@ const config: StorybookConfig = {
         },
       },
     },
+    "@storybook/addon-docs",
   ],
   framework: {
     name: "@storybook/vue3-vite",
     options: {},
   },
   docs: {},
+  features: {
+    backgrounds: true,
+    viewport: true,
+  },
 };
 
 export default config;

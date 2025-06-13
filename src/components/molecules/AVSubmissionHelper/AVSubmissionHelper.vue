@@ -95,7 +95,7 @@ watch(
   <div class="sticky-bottom">
     <button
       v-if="displayScrollToBottom"
-      class="btn btn-light rounded-0 border-0 w-100 AVSubmissionHelper--btn-override"
+      class="btn btn-primary-10 rounded-0 border-0 w-100"
       data-test="scroll-bottom"
       @click="scrollToBottom"
     >

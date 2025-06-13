@@ -118,6 +118,53 @@ describe("AVSummaryOption", () => {
     expect(wrapper.find("[data-test=summary-option-image]").attributes().alt).to.eq("Option image");
   });
 
+  it("can display accent color", async () => {
+    expect(wrapper.find("[data-test=summary-option]").attributes().style).to.not.contain(
+      "border-left-color: #FF0000; border-left-width: 0.5rem",
+    );
+
+    await wrapper.setProps({
+      option: {
+        title: getOption([], 1).title,
+        handle: getOption([], 1).reference,
+        crosses: 1,
+        accentColor: "#FF0000",
+      },
+      multipleVotesAllowed: false,
+    });
+
+    expect(wrapper.find("[data-test=summary-option]").attributes().style).to.contain(
+      "border-left-color: #FF0000; border-left-width: 0.5rem;",
+    );
+  });
+
+  it("can render in gallery mode", async () => {
+    expect(wrapper.find("[data-test=summary-option]").attributes().style).to.not.contain(
+      "border-left-color: #FF00FF; border-left-width: 0.5rem",
+    );
+    expect(wrapper.findAll("[data-test=parent-bagde]").length).to.eq(0);
+
+    await wrapper.setProps({
+      option: {
+        title: getOption([], 1).title,
+        handle: getOption([], 1).reference,
+        image: "http://image.com",
+        crosses: 1,
+      },
+      multipleVotesAllowed: false,
+      parents: [{ title: { en: "Parent 1" }, accentColor: "#FF00FF" }],
+      galleryMode: true,
+    });
+
+    expect(wrapper.find("[data-test=summary-option]").attributes().style).to.contain(
+      "border-left-color: #FF00FF; border-left-width: 0.5rem;",
+    );
+    expect(wrapper.find("[data-test=parent-bagde]").text()).to.contain("Parent 1");
+    expect(wrapper.find("[data-test=parent-bagde]").attributes().style).to.contain(
+      "rgb(255, 0, 255); color: black",
+    );
+  });
+
   it("can switch language", async () => {
     await wrapper.setProps({
       locale: "nl",

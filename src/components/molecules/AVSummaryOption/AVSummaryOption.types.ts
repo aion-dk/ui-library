@@ -7,10 +7,12 @@ interface AVSummaryOptionObject {
   crosses: number;
   rank?: number;
   parent?: OptionContent;
+  accentColor?: `#${string}`;
 }
 
 interface AVSummaryOptionParent {
   title: LocalString;
+  accentColor?: `#${string}`;
 }
 
 export type { AVSummaryOptionObject, AVSummaryOptionParent };

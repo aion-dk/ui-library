@@ -64,8 +64,8 @@ export const Light = {
     color: "light",
   },
 
-  parameters: {
-    backgrounds: { default: "dark" },
+  globals: {
+    backgrounds: { value: "dark" },
   },
 };
 

@@ -20,7 +20,7 @@ defineProps({
   <div class="hstack gap-1">
     <div
       v-if="!hidePercentage"
-      class="AVProgressBar--percentage hstack justify-content-center small rounded-1 text-white"
+      class="AVProgressBar--percentage hstack justify-content-center small rounded-1 text-white text-rubik"
       :class="{
         'bg-success': value === 100,
         'bg-brand-dark': value !== 100,

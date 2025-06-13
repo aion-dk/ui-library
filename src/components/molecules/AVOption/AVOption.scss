@@ -17,18 +17,8 @@
   animation-iteration-count: 3;
 }
 
-.AVOption--accent {
-  [dir="ltr"] & {
-    border-left-width: 8px;
-  }
-
-  [dir="rtl"] & {
-    border-right-width: 8px;
-  }
-}
-
-.AVOption--header {
-  min-height: 2.375rem;
+.AVOption--parent-container {
+  height: 3rem;
 }
 
 .AVOption-image {
@@ -95,6 +85,7 @@
 .AVOption--singlevote {
   align-items: flex-start;
   padding: 1.25rem;
+  height: fit-content;
 }
 
 .AVOption--children {

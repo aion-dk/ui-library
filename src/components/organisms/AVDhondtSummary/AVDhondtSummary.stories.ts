@@ -323,8 +323,8 @@ export const TiedAndElected = {
 export const ElectedDark = {
   render: Template,
 
-  parameters: {
-    backgrounds: { default: "dark" },
+  globals: {
+    backgrounds: { value: "dark" },
   },
   args: {
     theme: "dark",
@@ -418,8 +418,8 @@ export const ElectedDark = {
 export const TiedDark = {
   render: Template,
 
-  parameters: {
-    backgrounds: { default: "dark" },
+  globals: {
+    backgrounds: { value: "dark" },
   },
   args: {
     theme: "dark",
@@ -513,8 +513,8 @@ export const TiedDark = {
 export const TiedAndElectedDark = {
   render: Template,
 
-  parameters: {
-    backgrounds: { default: "dark" },
+  globals: {
+    backgrounds: { value: "dark" },
   },
   args: {
     theme: "dark",

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, ref, watch } from "vue";
-import type { PropType, AVASyncButtonVariant, BootstrapBasicSize } from "@/types";
+import type { PropType, BootstrapColor, BootstrapBasicSize } from "@/types";
 
 const emit = defineEmits(["update:waiting"]);
 
@@ -10,7 +10,7 @@ const props = defineProps({
     default: "md",
   },
   variant: {
-    type: String as PropType<AVASyncButtonVariant>,
+    type: String as PropType<BootstrapColor>,
     default: "brand-dark",
   },
   disabled: {

@@ -11,6 +11,17 @@ const BOOTSTRAP_COLORS = [
   "brand-dark",
   "theme",
   "theme-danger",
+  "ballot",
+  "primary-10",
+  "primary-30",
+  "primary-50",
+  "primary-70",
+  "primary-90",
+  "secondary-10",
+  "secondary-30",
+  "secondary-50",
+  "secondary-70",
+  "secondary-90",
 ] as const;
 
 const BOOTSTRAP_BASIC_SIZES = ["sm", "md", "lg"] as const;

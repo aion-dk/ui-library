@@ -46,8 +46,8 @@ export const Light = {
 export const Dark = {
   render: Template,
 
-  parameters: {
-    backgrounds: { default: "dark" },
+  globals: {
+    backgrounds: { value: "dark" },
   },
   args: {
     title: "Some result summary information",
