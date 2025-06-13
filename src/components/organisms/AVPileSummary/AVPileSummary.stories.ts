@@ -182,3 +182,17 @@ export const SummaryRankedWithChildren = {
     selectionPile: getSelectionPile(["children", "weighted"]),
   },
 };
+
+export const GalleryMode = {
+  render: Template,
+
+  args: {
+    contest: getContest(["children_options", "gallery_parents", "color_options"]),
+    activeState: "summary",
+    isEditing: false,
+    pileIndex: 0,
+    totalPiles: 1,
+    selectionPile: getSelectionPile(["children"]),
+    galleryMode: true,
+  },
+};

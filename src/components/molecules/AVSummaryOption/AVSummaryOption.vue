@@ -108,7 +108,11 @@ const parentBagdeStyles = computed(() => {
 });
 
 const coloredEdgeStyle = computed(() => {
-  if (props.option?.accentColor || props.parents[0]?.accentColor || ancestryTitles.value?.length) {
+  if (
+    props.option?.accentColor ||
+    props.parents[0]?.accentColor ||
+    (ancestryTitles.value?.length && props.galleryMode)
+  ) {
     const color = props.option.accentColor || props.parents[0]?.accentColor || bsBorderColor.value;
     return `
       border-${isRtl.value ? "right" : "left"}-color: ${color};
