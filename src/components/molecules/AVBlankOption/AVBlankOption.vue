@@ -95,6 +95,7 @@ watch(
       :class="{
         'AVBlankOption--accent': accentColor,
         'h-100': galleryMode,
+        'AVBlankOption--min-height': galleryMode,
       }"
       :style="accentColor ? `border-${isRtl ? 'right' : 'left'}-color: ${accentColor};` : ''"
       :aria-label="t('js.components.AVBlankOption.aria_labels.option')"

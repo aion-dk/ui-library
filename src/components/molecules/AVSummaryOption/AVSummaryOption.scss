@@ -22,3 +22,11 @@
 .AVSummaryOption--ancestry {
   color: var(--bs-gray-700);
 }
+
+.AVSummaryOption--parent-container {
+  height: 3rem;
+}
+
+.AVSummaryOption--min-height {
+  min-height: 10.75rem; /* 2x Parent container + Main content so it doesn't look horrible */
+}

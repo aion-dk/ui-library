@@ -122,3 +122,24 @@ export const MultipleVotes = {
     multipleVotesAllowed: true,
   },
 };
+
+export const GalleryMode = {
+  render: Template,
+
+  globals: {
+    viewport: { value: "mobile1" },
+  },
+  args: {
+    option: {
+      title: getOption([], 1).title,
+      handle: getOption([], 1).reference,
+      image: getOption(["image"], 1).image,
+      crosses: 1,
+      rank: null,
+    },
+    blank: false,
+    multipleVotesAllowed: false,
+    galleryMode: true,
+    parents: [{ title: { en: "Parent 1" }, accentColor: "#FF00FF" }],
+  },
+};

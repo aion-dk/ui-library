@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { computed, inject, onMounted, watch } from "vue";
+import { watch, ref, computed, inject, onMounted, onUnmounted } from "vue";
 import { switchLocale } from "@/i18n";
 import type {
   PropType,
@@ -10,6 +10,7 @@ import type {
   IterableObject,
 } from "@/types";
 import { getMeaningfulLabel } from "@/helpers/meaningfulLabel";
+import { getTextContrastColor } from "@/helpers/contrastCalculator";
 
 const props = defineProps({
   option: {
@@ -28,6 +29,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  galleryMode: {
+    type: Boolean,
+    default: false,
+  },
   parents: {
     type: Array as PropType<Array<AVSummaryOptionParent>>,
     default: () => [],
@@ -37,6 +42,12 @@ const props = defineProps({
     default: "square",
   },
 });
+
+const isRtl = ref<boolean>(false);
+
+const mutationObserver = ref<MutationObserver | null>(null);
+
+const mutationObserverTarget = document.getElementsByTagName("html")[0];
 
 const useFooter = computed(
   () =>
@@ -84,6 +95,40 @@ const imageUrl = computed(() =>
     : `${props.option.image}/${props.imageOption}`,
 );
 
+const bsBorderColor = computed(() =>
+  getComputedStyle(document.documentElement).getPropertyValue("--bs-border-color"),
+);
+
+const parentBagdeStyles = computed(() => {
+  const parentColor = props.parents[0]?.accentColor || bsBorderColor.value;
+  return `
+    background-color: ${parentColor};
+    color: ${getTextContrastColor(parentColor as `#${string}`)};
+  `;
+});
+
+const coloredEdgeStyle = computed(() => {
+  if (props.option.accentColor || props.parents[0]?.accentColor || ancestryTitles.value?.length) {
+    const color = props.option.accentColor || props.parents[0]?.accentColor || bsBorderColor.value;
+    return `
+      border-${isRtl.value ? "right" : "left"}-color: ${color};
+      border-${isRtl.value ? "right" : "left"}-width: 0.5rem;
+    `;
+  } else return "";
+});
+
+onMounted(() => {
+  if (props.locale) switchLocale(props.locale); // DO NOT REMOVE (If in doubt, read the next block comment)
+
+  mutationObserver.value = new MutationObserver(() => {
+    const dirAttr = mutationObserverTarget.attributes.getNamedItem("dir")?.value;
+    isRtl.value = !!dirAttr && dirAttr === "rtl";
+  });
+  mutationObserver.value.observe(mutationObserverTarget, { attributes: true });
+});
+
+onUnmounted(() => mutationObserver.value && mutationObserver.value.disconnect());
+
 /**
  * This is necesary in order to support both provided i18n and local i18n.
  * The used locale will be taken from the provided i18n as long as there is one
@@ -95,9 +140,6 @@ const imageUrl = computed(() =>
 const i18n: any = inject("i18n");
 const { t } = i18n.global;
 const i18nLocale = computed(() => i18n.global.locale.value || i18n.global.locale);
-onMounted(() => {
-  if (props.locale) switchLocale(props.locale);
-});
 watch(
   () => props.locale,
   () => {
@@ -111,11 +153,12 @@ watch(
 <template>
   <div
     class="AVSummaryOption card rounded-0 position-relative"
+    :style="coloredEdgeStyle"
     :aria-label="t('js.components.AVSummaryOption.aria_label.option')"
     data-test="summary-option"
   >
-    <!-- ANCESTRY -->
-    <div v-if="ancestryTitles" class="AVSummaryOption--ancestry card-header small">
+    <!-- ANCESTRY (NORMAL) -->
+    <div v-if="ancestryTitles && !galleryMode" class="AVSummaryOption--ancestry card-header small">
       <div aria-label="breadcrumb">
         <ol class="breadcrumb mb-0" data-test="summary-option-ancestry">
           <li
@@ -129,9 +172,18 @@ watch(
         </ol>
       </div>
     </div>
+    <!-- ANCESTRY (GALLERY) -->
+    <div
+      v-if="ancestryTitles && galleryMode"
+      class="AVSummaryOption--parent-container w-100 ps-3 pt-3"
+    >
+      <div class="badge" :style="parentBagdeStyles" data-test="parent-bagde">
+        {{ ancestryTitles[0] }}
+      </div>
+    </div>
 
     <!-- OPTION -->
-    <div class="card-body hstack gap-2" :class="{ 'p-4': useFooter }">
+    <div class="card-body hstack gap-2" :class="{ 'p-4': useFooter, 'py-0': galleryMode }">
       <img
         v-if="option?.image"
         :src="imageUrl"
@@ -144,7 +196,7 @@ watch(
           {{ displayTitle }}
         </div>
       </div>
-      <div v-if="!useFooter" class="align-self-start">
+      <div v-if="!useFooter" :class="{ 'align-self-start': !galleryMode }">
         <AVOptionCheckbox
           :checked="true"
           :rank="option?.rank"
@@ -174,6 +226,9 @@ watch(
         />
       </div>
     </div>
+
+    <!-- IF GALLERY COMPENSATE HEIGHT -->
+    <div v-if="ancestryTitles && galleryMode" class="AVSummaryOption--parent-container"></div>
   </div>
 </template>
 
