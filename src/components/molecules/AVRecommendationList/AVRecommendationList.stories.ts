@@ -25,6 +25,9 @@ const meta: Meta<typeof AVRecommendationList> = {
       control: { type: "select" },
       options: SUPPORTED_LOCALES,
     },
+    recommendationPhaseActive: {
+      control: { type: "boolean" },
+    },
   },
 };
 
