@@ -159,6 +159,7 @@ describe("AVRecommendationList", () => {
 
     await wrapper.setProps({
       inviteRecommendersPath: "www.some-url.com",
+      recommendationPhaseActive: true,
     });
 
     expect(wrapper.find(".AVRecommendationList--invite-btn").text()).to.contain(

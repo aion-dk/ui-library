@@ -131,7 +131,7 @@ watch(
             </h4>
             <button
               v-if="!!inviteRecommendersPath"
-              :disabled="recommendationPhaseActive"
+              :disabled="!recommendationPhaseActive"
               class="AVRecommendationList--invite-btn btn btn-sm btn-theme-outline"
               @click.stop.prevent="goToInviteRecommendersPath"
             >
@@ -207,7 +207,7 @@ watch(
         </h4>
         <button
           v-if="!!inviteRecommendersPath"
-          :disabled="recommendationPhaseActive"
+          :disabled="!recommendationPhaseActive"
           class="AVRecommendationList--invite-btn btn btn-sm btn-theme-outline"
           @click.stop.prevent="goToInviteRecommendersPath"
         >
@@ -236,7 +236,7 @@ watch(
         }}
         <button
           v-if="!!inviteRecommendersPath"
-          :disabled="recommendationPhaseActive"
+          :disabled="!recommendationPhaseActive"
           class="AVRecommendationList--invite-btn btn btn-sm btn-theme-outline"
           @click.stop.prevent="goToInviteRecommendersPath"
         >
