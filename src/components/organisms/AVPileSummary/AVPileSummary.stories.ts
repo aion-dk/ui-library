@@ -187,7 +187,7 @@ export const GalleryMode = {
   render: Template,
 
   args: {
-    contest: getContest(["children_options", "gallery_parents", "color_options"]),
+    contest: getContest(["gallery_parents"]),
     activeState: "summary",
     isEditing: false,
     pileIndex: 0,

@@ -121,6 +121,7 @@ const optionSummaries = computed(() => {
           title: optionContent.title,
           handle: selection.reference,
           image: optionContent.image,
+          accentColor: optionContent.accentColor as `#${string}`,
           crosses: 1,
           parent: optionContent.parentContent,
           rank:
