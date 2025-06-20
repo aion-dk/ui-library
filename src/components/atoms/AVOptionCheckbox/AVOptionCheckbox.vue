@@ -36,6 +36,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  galleryMode: {
+    type: Boolean,
+    default: false,
+  },
   locale: {
     type: String as PropType<SupportedLocale>,
     default: null,
@@ -84,7 +88,11 @@ watch(
   <div class="AVOptionCheckbox--container">
     <div
       v-if="exclusiveError && checked"
-      class="AVOptionCheckbox--exclusive-container mb-2"
+      :class="{
+        'AVOptionCheckbox--exclusive-container': true,
+        'AVOptionCheckbox--exclusive-container-list': !galleryMode,
+        'AVOptionCheckbox--exclusive-container-gallery': galleryMode,
+      }"
       data-test="exclusive-error"
     >
       <div class="AVOptionCheckbox--exclusive text-white px-2 d-block bg-theme-danger">

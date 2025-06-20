@@ -60,7 +60,7 @@ watch(
     :data-test="`partial-results-${mode}`"
   >
     <AVIcon icon="user" />
-    <span>
+    <span class="text-nowrap">
       <AVTweenedCount
         :id="`count_for_option_${optionReference}`"
         :count="partialResults.results.count"

@@ -90,9 +90,9 @@ const optionGroups = computed(() => {
 });
 
 const imageUrl = computed(() =>
-  props.option.image?.includes("square") // backward compatibility for old boards which had the variant as part of the imageurl
-    ? props.option.image
-    : `${props.option.image}/${props.imageOption}`,
+  props.option?.image?.includes("square") // backward compatibility for old boards which had the variant as part of the imageurl
+    ? props.option?.image
+    : `${props.option?.image}/${props.imageOption}`,
 );
 
 const bsBorderColor = computed(() =>
@@ -187,7 +187,14 @@ watch(
     </div>
 
     <!-- OPTION -->
-    <div class="card-body hstack gap-2" :class="{ 'p-4': useFooter, 'py-0': galleryMode }">
+    <div
+      class="card-body hstack gap-2"
+      :class="{
+        'p-4': useFooter,
+        'py-0': galleryMode,
+        'justify-content-between': galleryMode && option?.image,
+      }"
+    >
       <img
         v-if="option?.image"
         :src="imageUrl"
@@ -195,8 +202,19 @@ watch(
         :alt="t('js.components.AVSummaryOption.aria_label.option_image')"
         data-test="summary-option-image"
       />
-      <div class="AVSummaryOption--body pb-0 d-flex align-items-center">
-        <div class="AVSummaryOption--title m-0">
+      <div
+        v-if="!galleryMode || (galleryMode && !option?.image)"
+        class="AVSummaryOption--body pb-0 d-flex align-items-center"
+        :class="{
+          'AVSummaryOption--body-inline': galleryMode,
+        }"
+      >
+        <div
+          class="AVSummaryOption--title m-0"
+          :class="{
+            'AVSummaryOption--title-inline': galleryMode,
+          }"
+        >
           {{ displayTitle }}
         </div>
       </div>
@@ -208,6 +226,10 @@ watch(
           data-test="summary-cross"
         />
       </div>
+    </div>
+
+    <div v-if="galleryMode && option?.image" class="AVSummaryOption--title m-0 p-3">
+      {{ displayTitle }}
     </div>
 
     <!-- IF MULTIVOTE -->
@@ -232,7 +254,10 @@ watch(
     </div>
 
     <!-- IF GALLERY COMPENSATE HEIGHT -->
-    <div v-if="ancestryTitles && galleryMode" class="AVSummaryOption--parent-container"></div>
+    <div
+      v-if="ancestryTitles && galleryMode && !option?.image"
+      class="AVSummaryOption--parent-container"
+    ></div>
   </div>
 </template>
 

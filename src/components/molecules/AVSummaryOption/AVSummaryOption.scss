@@ -19,6 +19,15 @@
   font-weight: 500;
 }
 
+.AVSummaryOption--body-inline {
+  inline-size: calc(100% - 70px);
+}
+
+.AVSummaryOption--title-inline {
+  inline-size: 100%;
+  overflow-wrap: break-word;
+}
+
 .AVSummaryOption--ancestry {
   color: var(--bs-gray-700);
 }

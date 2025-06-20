@@ -14,8 +14,6 @@
 }
 
 .AVOptionCheckbox--exclusive-container {
-  margin-top: -1.25rem;
-
   [dir="ltr"] & {
     margin-right: -1.25rem;
   }
@@ -23,6 +21,16 @@
   [dir="rtl"] & {
     margin-left: -1.25rem;
   }
+}
+
+.AVOptionCheckbox--exclusive-container-list {
+  margin-top: -1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.AVOptionCheckbox--exclusive-container-gallery {
+  margin-top: -4.25rem;
+  margin-bottom: calc(3rem - 1px);
 }
 
 .AVOptionCheckbox {

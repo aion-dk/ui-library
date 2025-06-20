@@ -115,6 +115,7 @@ watch(
             :exclusive-error="error"
             :invalid="invalid"
             :disabled="disabled || observerMode"
+            :gallery-mode="galleryMode"
             @toggled="$emit('toggleBlank')"
             data-test="blank-checkbox"
           />
