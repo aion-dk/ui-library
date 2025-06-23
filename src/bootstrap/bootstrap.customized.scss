@@ -47,11 +47,11 @@ $primary-30: #99a6b2;
 $primary-50: #738594;
 $primary-70: #4d6378;
 $primary-90: #26425c;
-$secondary-10: #fce3bf;
-$secondary-30: #fad499;
-$secondary-50: #f7c273;
-$secondary-70: #f7b24d;
-$secondary-90: #f5a326;
+$accent-10: #fce3bf;
+$accent-30: #fad499;
+$accent-50: #f7c273;
+$accent-70: #f7b24d;
+$accent-90: #f5a326;
 
 $custom-colors: (
   "brand-dark": $brand-dark,
@@ -62,11 +62,11 @@ $custom-colors: (
   "primary-50": $primary-50,
   "primary-70": $primary-70,
   "primary-90": $primary-90,
-  "secondary-10": $secondary-10,
-  "secondary-30": $secondary-30,
-  "secondary-50": $secondary-50,
-  "secondary-70": $secondary-70,
-  "secondary-90": $secondary-90,
+  "accent-10": $accent-10,
+  "accent-30": $accent-30,
+  "accent-50": $accent-50,
+  "accent-70": $accent-70,
+  "accent-90": $accent-90,
 );
 
 $font-family-base: "Open Sans", sans-serif;
