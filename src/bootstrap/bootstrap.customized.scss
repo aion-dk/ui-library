@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&family=PT+Mono&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=PT+Mono&family=Rubik:wght@600&display=swap');
 
 $enable-caret: true !default;
 $enable-rounded: true !default;
@@ -156,8 +156,8 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
   height: 100vh;
 }
 
-.text-alternative-heading {
-  font-family: "Open sans", sans-serif;
+.text-rubik {
+  font-family: "Rubik", sans-serif;
   font-optical-sizing: auto;
   font-weight: 600;
   font-style: normal;
