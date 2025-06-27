@@ -164,7 +164,6 @@ watch(
         <!-- Title (only summary) -->
         <h4
           v-if="summary && !!title"
-          class="text-rubik"
           :class="{
             h3: !card,
             h5: card,
@@ -180,7 +179,6 @@ watch(
         <!-- Subtitle (only summary) -->
         <h5
           v-if="summary && !!subtitle"
-          class="text-rubik"
           :class="{
             h4: !card,
             h6: card,
@@ -196,7 +194,7 @@ watch(
         <!-- Group (only when enabled) -->
         <h6
           v-if="summary && candidate.groups && !card"
-          class="text-rubik h5"
+          class="h5"
           :class="{
             'AVResourceSection--header-text': !card,
             'text-gray-800': card,
