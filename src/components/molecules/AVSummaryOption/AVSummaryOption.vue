@@ -176,49 +176,37 @@ watch(
         </ol>
       </div>
     </div>
-    <!-- ANCESTRY (GALLERY) -->
-    <div
-      v-if="ancestryTitles && galleryMode"
-      class="AVSummaryOption--parent-container w-100 ps-3 pt-3"
-    >
-      <div class="badge" :style="parentBagdeStyles" data-test="parent-bagde">
-        {{ ancestryTitles[0] }}
-      </div>
-    </div>
 
     <!-- OPTION -->
     <div
       class="card-body hstack gap-2"
-      :class="{
-        'p-4': useFooter,
-        'py-0': galleryMode,
-        'justify-content-between': galleryMode && option?.image,
-      }"
+      :class="{ 'p-4': useFooter, 'justify-content-between': !galleryMode }"
     >
-      <img
-        v-if="option?.image"
-        :src="imageUrl"
-        class="AVSummaryOption--img me-2 me-sm-3"
-        :alt="t('js.components.AVSummaryOption.aria_label.option_image')"
-        data-test="summary-option-image"
-      />
-      <div
-        v-if="!galleryMode || (galleryMode && !option?.image)"
-        class="AVSummaryOption--body pb-0 d-flex align-items-center"
-        :class="{
-          'AVSummaryOption--body-inline': galleryMode,
-        }"
+      <header
+        :class="{ vstack: galleryMode, hstack: !galleryMode }"
+        style="max-width: calc(100%-70px)"
       >
-        <div
-          class="AVSummaryOption--title m-0"
-          :class="{
-            'AVSummaryOption--title-inline': galleryMode,
-          }"
-        >
-          {{ displayTitle }}
+        <!-- ANCESTRY (GALLERY) -->
+        <div v-if="ancestryTitles && galleryMode" class="mb-2">
+          <div class="badge" :style="parentBagdeStyles" data-test="parent-bagde">
+            {{ ancestryTitles[0] }}
+          </div>
         </div>
-      </div>
-      <div v-if="!useFooter" :class="{ 'align-self-start': !galleryMode }">
+        <img
+          v-if="option?.image"
+          :src="imageUrl"
+          class="AVSummaryOption--img me-2 me-sm-3"
+          :class="{
+            'mb-3': galleryMode,
+          }"
+          :alt="t('js.components.AVSummaryOption.aria_label.option_image')"
+          data-test="summary-option-image"
+        />
+        <h5 class="AVSummaryOption--title m-0">
+          {{ displayTitle }}
+        </h5>
+      </header>
+      <div v-if="!useFooter" class="align-self-start">
         <AVOptionCheckbox
           :checked="true"
           :rank="option?.rank"
@@ -226,10 +214,6 @@ watch(
           data-test="summary-cross"
         />
       </div>
-    </div>
-
-    <div v-if="galleryMode && option?.image" class="AVSummaryOption--title m-0 p-3">
-      {{ displayTitle }}
     </div>
 
     <!-- IF MULTIVOTE -->
@@ -252,12 +236,6 @@ watch(
         />
       </div>
     </div>
-
-    <!-- IF GALLERY COMPENSATE HEIGHT -->
-    <div
-      v-if="ancestryTitles && galleryMode && !option?.image"
-      class="AVSummaryOption--parent-container"
-    ></div>
   </div>
 </template>
 

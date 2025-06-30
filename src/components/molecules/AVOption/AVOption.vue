@@ -317,6 +317,7 @@ watch(
               <!-- OPTION HEADER -->
               <header
                 class="AVOption--header d-flex flex-column flex-sm-row align-items-sm-center gap-3"
+                data-test="option-header"
               >
                 <img
                   v-if="option.image"
