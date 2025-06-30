@@ -95,13 +95,11 @@ watch(
       :class="{
         'AVBlankOption--accent': accentColor,
         'h-100': galleryMode,
-        'AVBlankOption--min-height': galleryMode,
       }"
       :style="accentColor ? `border-${isRtl ? 'right' : 'left'}-color: ${accentColor};` : ''"
       :aria-label="t('js.components.AVBlankOption.aria_labels.option')"
       data-test="option-container"
     >
-      <div v-if="galleryMode" class="AVBlankOption--parent-container w-100 ps-3 pt-3" />
       <div class="hstack justify-content-between p-3" data-test="option-content">
         <h5 id="option_blank_title" class="AVBlankOption--title m-0">
           {{ t("js.components.AVBlankOption.title") }}

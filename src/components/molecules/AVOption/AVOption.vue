@@ -291,18 +291,6 @@ watch(
           :aria-label="`${t('js.components.AVOption.aria_labels.option')} ${getMeaningfulLabel(option as unknown as IterableObject, i18nLocale, t('js.components.AVOption.aria_labels.option'))}`"
           data-test="option-section"
         >
-          <!-- PARENT BADGE -->
-          <div v-if="contest.mode === 'gallery'" class="AVOption--parent-container w-100 ps-3 pt-3">
-            <div
-              v-if="parentTitle"
-              class="badge"
-              :style="parentBagdeStyles"
-              data-test="parent-bagde"
-            >
-              {{ parentTitle }}
-            </div>
-          </div>
-
           <div
             class="d-flex justify-content-between"
             :class="{
@@ -313,17 +301,22 @@ watch(
           >
             <div
               class="vstack gap-2 p-3 align-items-start justify-content-center"
-              :class="{
-                'pt-0': contest.mode === 'gallery',
-              }"
-              style="width: calc(100% - 70px)"
+              style="max-width: calc(100% - 70px)"
               data-test="option-content"
             >
+              <!-- PARENT BADGE -->
+              <div
+                v-if="contest.mode === 'gallery' && parentTitle"
+                class="AVOption--parent-container w-100 pb-2"
+              >
+                <div class="badge" :style="parentBagdeStyles" data-test="parent-bagde">
+                  {{ parentTitle }}
+                </div>
+              </div>
+
               <!-- OPTION HEADER -->
               <header
-                class="d-flex flex-column flex-sm-row align-items-sm-center justify-content-center gap-3 w-100"
-                :style="`min-height: ${contest.mode !== 'gallery' ? '2.375rem' : '4.375rem'};`"
-                data-test="option-header"
+                class="AVOption--header d-flex flex-column flex-sm-row align-items-sm-center gap-3"
               >
                 <img
                   v-if="option.image"
