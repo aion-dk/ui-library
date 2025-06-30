@@ -182,7 +182,7 @@ watch(
       class="card-body hstack gap-2"
       :class="{ 'p-4': useFooter, 'justify-content-between': !galleryMode }"
     >
-      <header
+      <div
         :class="{ vstack: galleryMode, hstack: !galleryMode }"
         style="max-width: calc(100%-70px)"
       >
@@ -202,10 +202,12 @@ watch(
           :alt="t('js.components.AVSummaryOption.aria_label.option_image')"
           data-test="summary-option-image"
         />
-        <h5 class="AVSummaryOption--title m-0">
-          {{ displayTitle }}
-        </h5>
-      </header>
+        <div class="hstack" style="min-height: 30px">
+          <h5 class="AVSummaryOption--title m-0">
+            {{ displayTitle }}
+          </h5>
+        </div>
+      </div>
       <div v-if="!useFooter" class="align-self-start">
         <AVOptionCheckbox
           :checked="true"
