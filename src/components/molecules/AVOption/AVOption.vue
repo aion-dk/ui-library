@@ -214,6 +214,11 @@ const coloredEdgeStyle = computed(() => {
   } else return "";
 });
 
+const toggleFromOption = () => {
+  if (props.contest.mode !== "gallery") return;
+  toggleOption(props.option.reference);
+};
+
 watch(
   () => eventBus.value.get("highlight-option"),
   (val) => {
@@ -286,10 +291,12 @@ watch(
           :class="{
             'AVOption--highlight': highlighted,
             'h-100': contest.mode === 'gallery',
+            'cursor-pointer': contest.mode === 'gallery',
           }"
           :style="coloredEdgeStyle"
           :aria-label="`${t('js.components.AVOption.aria_labels.option')} ${getMeaningfulLabel(option as unknown as IterableObject, i18nLocale, t('js.components.AVOption.aria_labels.option'))}`"
           data-test="option-section"
+          @click="toggleFromOption"
         >
           <div
             class="d-flex justify-content-between"

@@ -42,13 +42,18 @@ const props = defineProps({
   },
 });
 
-defineEmits(["toggleBlank"]);
+const emits = defineEmits(["toggleBlank"]);
 
 const isRtl = ref<boolean>(false);
 
 const mutationObserver = ref<MutationObserver | null>(null);
 
 const mutationObserverTarget = document.getElementsByTagName("html")[0];
+
+const toggleFromOption = () => {
+  if (!props.galleryMode) return;
+  emits("toggleBlank");
+};
 
 onMounted(() => {
   if (props.locale) switchLocale(props.locale); // DO NOT REMOVE (If in doubt, read the next block comment)
@@ -89,6 +94,7 @@ watch(
       'h-100': galleryMode,
     }"
     data-test="blank-option"
+    @click="toggleFromOption"
   >
     <div
       class="AVBlankOption card position-relative"

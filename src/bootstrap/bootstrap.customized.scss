@@ -183,3 +183,7 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
 .text-decoration-hover:hover {
   text-decoration: underline !important;
 }
+
+.cursor-pointer {
+  cursor: pointer !important;
+}
