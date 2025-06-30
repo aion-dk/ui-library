@@ -63,6 +63,8 @@ describe("AVOption", () => {
 
     expect(wrapper.findAll("[data-test=check]").length).to.eq(0);
     expect(wrapper.emitted().checked).to.not.exist;
+    await wrapper.find("[data-test=option-section]").trigger("click");
+    expect(wrapper.emitted().checked).to.not.exist;
     await wrapper.find("[data-test=option-checkbox]").trigger("click");
     expect(wrapper.emitted().checked).to.exist;
     expect((wrapper.emitted().checked as VitestEmitted)[0][0].reference).to.eq("exampleOption1");
@@ -423,6 +425,9 @@ describe("AVOption", () => {
     expect(wrapper.find("[data-test=option-section]").attributes().style).to.include(
       "border-left-color: #FF0000;",
     );
+    await wrapper.find("[data-test=option-section]").trigger("click");
+    expect((wrapper.emitted().checked as VitestEmitted)[2][0].reference).to.eq("exampleOption1");
+    expect((wrapper.emitted().checked as VitestEmitted)[2][0].amount).to.eq(1);
   });
 
   it("can inherit parent accent color", async () => {
