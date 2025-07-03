@@ -291,7 +291,7 @@ watch(
           :class="{
             'AVOption--highlight': highlighted,
             'h-100': contest.mode === 'gallery',
-            'cursor-pointer': votesAllowedPerOption !== 1,
+            'cursor-pointer': votesAllowedPerOption === 1,
           }"
           :style="coloredEdgeStyle"
           :aria-label="`${t('js.components.AVOption.aria_labels.option')} ${getMeaningfulLabel(option as unknown as IterableObject, i18nLocale, t('js.components.AVOption.aria_labels.option'))}`"
