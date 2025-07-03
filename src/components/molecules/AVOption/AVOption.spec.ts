@@ -64,7 +64,8 @@ describe("AVOption", () => {
     expect(wrapper.findAll("[data-test=check]").length).to.eq(0);
     expect(wrapper.emitted().checked).to.not.exist;
     await wrapper.find("[data-test=option-section]").trigger("click");
-    expect(wrapper.emitted().checked).to.not.exist;
+    expect(wrapper.emitted().checked).to.exist;
+    await wrapper.find("[data-test=option-checkbox]").trigger("click");
     await wrapper.find("[data-test=option-checkbox]").trigger("click");
     expect(wrapper.emitted().checked).to.exist;
     expect((wrapper.emitted().checked as VitestEmitted)[0][0].reference).to.eq("exampleOption1");
@@ -332,11 +333,11 @@ describe("AVOption", () => {
       "AVOption--multivote-footer",
     );
 
-    expect(wrapper.emitted().checked.length).to.eq(1);
+    expect(wrapper.emitted().checked.length).to.eq(3);
     await wrapper.findAll("[data-test=option-checkbox]")[6].trigger("click");
-    expect(wrapper.emitted().checked.length).to.eq(2);
-    expect((wrapper.emitted().checked as VitestEmitted)[1][0].reference).to.eq("exampleOption1");
-    expect((wrapper.emitted().checked as VitestEmitted)[1][0].amount).to.eq(7);
+    expect(wrapper.emitted().checked.length).to.eq(4);
+    expect((wrapper.emitted().checked as VitestEmitted)[3][0].reference).to.eq("exampleOption1");
+    expect((wrapper.emitted().checked as VitestEmitted)[3][0].amount).to.eq(7);
   });
 
   it("can have a candidacy attached", async () => {
