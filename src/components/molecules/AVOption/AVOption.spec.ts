@@ -324,7 +324,6 @@ describe("AVOption", () => {
     await wrapper.setProps({
       contest: getContest(["multiple_votes_lg"]),
     });
-
     expect(wrapper.findAll("[data-test=option-checkbox]").length).to.eq(10);
     expect(wrapper.find("[data-test=option-multivote]").classes()).to.not.contain(
       "AVOption--singlevote",
