@@ -84,7 +84,7 @@ watch(
   <div class="AVOptionCheckbox--container">
     <div
       v-if="exclusiveError && checked"
-      class="AVOptionCheckbox--exclusive-container mb-2"
+      class="AVOptionCheckbox--exclusive-container"
       data-test="exclusive-error"
     >
       <div class="AVOptionCheckbox--exclusive text-white px-2 d-block bg-theme-danger">

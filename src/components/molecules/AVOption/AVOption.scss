@@ -17,17 +17,7 @@
   animation-iteration-count: 3;
 }
 
-.AVOption--accent {
-  [dir="ltr"] & {
-    border-left-width: 8px;
-  }
-
-  [dir="rtl"] & {
-    border-right-width: 8px;
-  }
-}
-
-.AVOption--header {
+.AVOption--option-header {
   min-height: 2.375rem;
 }
 
@@ -42,6 +32,8 @@
   line-height: 1.25rem;
   text-transform: none;
   font-weight: 500;
+  inline-size: 100%;
+  overflow-wrap: break-word;
 }
 
 .AVOption--description {
@@ -95,6 +87,7 @@
 .AVOption--singlevote {
   align-items: flex-start;
   padding: 1.25rem;
+  height: fit-content;
 }
 
 .AVOption--children {

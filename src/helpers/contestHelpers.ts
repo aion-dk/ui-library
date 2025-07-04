@@ -10,6 +10,7 @@ const flattenOptions = (
         reference: parent.reference,
         code: parent.code,
         title: { ...parent.title },
+        accentColor: parent.accentColor,
       };
 
     if (option.children) return [option, ...flattenOptions(option.children, option)];

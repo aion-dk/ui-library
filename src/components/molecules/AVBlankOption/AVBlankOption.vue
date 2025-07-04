@@ -28,6 +28,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  galleryMode: {
+    type: Boolean,
+    default: false,
+  },
   locale: {
     type: String as PropType<SupportedLocale>,
     default: null,
@@ -38,13 +42,18 @@ const props = defineProps({
   },
 });
 
-defineEmits(["toggleBlank"]);
+const emits = defineEmits(["toggleBlank"]);
 
 const isRtl = ref<boolean>(false);
 
 const mutationObserver = ref<MutationObserver | null>(null);
 
 const mutationObserverTarget = document.getElementsByTagName("html")[0];
+
+const toggleFromOption = () => {
+  if (!props.galleryMode) return;
+  emits("toggleBlank");
+};
 
 onMounted(() => {
   if (props.locale) switchLocale(props.locale); // DO NOT REMOVE (If in doubt, read the next block comment)
@@ -82,13 +91,16 @@ watch(
   <div
     :class="{
       'AVBlankOption--disabled': disabled,
+      'h-100': galleryMode,
     }"
     data-test="blank-option"
+    @click="toggleFromOption"
   >
     <div
       class="AVBlankOption card position-relative"
       :class="{
         'AVBlankOption--accent': accentColor,
+        'h-100': galleryMode,
       }"
       :style="accentColor ? `border-${isRtl ? 'right' : 'left'}-color: ${accentColor};` : ''"
       :aria-label="t('js.components.AVBlankOption.aria_labels.option')"
@@ -107,6 +119,7 @@ watch(
             :exclusive-error="error"
             :invalid="invalid"
             :disabled="disabled || observerMode"
+            :gallery-mode="galleryMode"
             @toggled="$emit('toggleBlank')"
             data-test="blank-checkbox"
           />

@@ -55,6 +55,10 @@ const props = defineProps({
     type: String as PropType<ImageOption>,
     default: "square",
   },
+  galleryMode: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const showAllOptions = ref(false);
@@ -117,6 +121,7 @@ const optionSummaries = computed(() => {
           title: optionContent.title,
           handle: selection.reference,
           image: optionContent.image,
+          accentColor: optionContent.accentColor as `#${string}`,
           crosses: 1,
           parent: optionContent.parentContent,
           rank:
@@ -175,7 +180,7 @@ watch(
       <span>{{ t("js.components.AVPileSummary.selection") }}</span>
     </header>
 
-    <div class="vstack gap-2 p-3 border">
+    <div class="p-3 border" :class="galleryMode ? 'AVPileSummary--grid' : 'vstack gap-2'">
       <AVSummaryOption
         v-for="(option, index) in optionSummaries.options"
         :key="index"
@@ -187,6 +192,7 @@ watch(
           option.parent ? getAllParents(option.parent, option.parent ? [option.parent] : []) : []
         "
         :image-option="imageOption"
+        :gallery-mode="galleryMode"
       />
       <AVSummaryOption v-if="blankSelected" :blank="blankSelected" />
     </div>

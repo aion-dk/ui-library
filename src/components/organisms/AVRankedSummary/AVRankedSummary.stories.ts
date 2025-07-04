@@ -362,8 +362,8 @@ export const TiedAndElected = {
 export const ElectedDark = {
   render: Template,
 
-  parameters: {
-    backgrounds: { default: "dark" },
+  globals: {
+    backgrounds: { value: "dark" },
   },
   args: {
     distributionNumber: 5,
@@ -470,8 +470,8 @@ export const ElectedDark = {
 export const TiedDark = {
   render: Template,
 
-  parameters: {
-    backgrounds: { default: "dark" },
+  globals: {
+    backgrounds: { value: "dark" },
   },
   args: {
     distributionNumber: 5,

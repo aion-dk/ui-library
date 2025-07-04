@@ -95,7 +95,7 @@ watch(
   <div class="sticky-bottom">
     <button
       v-if="displayScrollToBottom"
-      class="btn btn-light rounded-0 border-0 w-100 AVSubmissionHelper--btn-override"
+      class="btn bg-gray-300 rounded-0 border-0 w-100"
       data-test="scroll-bottom"
       @click="scrollToBottom"
     >
@@ -105,7 +105,7 @@ watch(
     <div
       class="p-3"
       :class="{
-        'bg-dark': !errors.length,
+        'bg-gray-700': !errors.length,
         'text-white': !errors.length,
         'bg-theme-danger': errors.length > 0,
       }"

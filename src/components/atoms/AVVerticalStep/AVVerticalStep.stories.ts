@@ -5,6 +5,9 @@ const meta: Meta<typeof AVVerticalStep> = {
   title: "Design System/Atoms/AVVerticalStep",
   component: AVVerticalStep,
   tags: ["autodocs"],
+  globals: {
+    backgrounds: { value: "dark" },
+  },
   argTypes: {
     stepNumber: {
       control: { type: "number", min: 1, max: 9, step: 1 },
@@ -60,10 +63,6 @@ export const Default = {
     collapsed: false,
     hasNextStep: false,
   },
-
-  parameters: {
-    backgrounds: { default: "dark" },
-  },
 };
 
 export const Active = {
@@ -76,10 +75,6 @@ export const Active = {
     subtitle: "Choose location for partial key",
     collapsed: false,
     hasNextStep: false,
-  },
-
-  parameters: {
-    backgrounds: { default: "dark" },
   },
 };
 
@@ -94,10 +89,6 @@ export const Done = {
     collapsed: false,
     hasNextStep: false,
   },
-
-  parameters: {
-    backgrounds: { default: "dark" },
-  },
 };
 
 export const LinkMode = {
@@ -107,10 +98,6 @@ export const LinkMode = {
     linkMode: true,
     title: "Voting Round 1",
     subtitle: "3 contests",
-  },
-
-  parameters: {
-    backgrounds: { default: "dark" },
   },
 };
 
@@ -122,10 +109,6 @@ export const LinkModeSummary = {
     summary: true,
     title: "Overview",
     subtitle: "All Voting Rounds",
-  },
-
-  parameters: {
-    backgrounds: { default: "dark" },
   },
 };
 
@@ -139,10 +122,6 @@ export const LinkModeSummaryActive = {
     title: "Overview",
     subtitle: "All Voting Rounds",
   },
-
-  parameters: {
-    backgrounds: { default: "dark" },
-  },
 };
 
 export const WithoutSubtitle = {
@@ -154,10 +133,6 @@ export const WithoutSubtitle = {
     title: "Connect to election",
     collapsed: false,
     hasNextStep: false,
-  },
-
-  parameters: {
-    backgrounds: { default: "dark" },
   },
 };
 
@@ -172,10 +147,6 @@ export const Collapsed = {
     collapsed: true,
     hasNextStep: false,
   },
-
-  parameters: {
-    backgrounds: { default: "dark" },
-  },
 };
 
 export const WithPreviousStep = {
@@ -189,10 +160,6 @@ export const WithPreviousStep = {
     collapsed: false,
     hasPrevStep: true,
   },
-
-  parameters: {
-    backgrounds: { default: "dark" },
-  },
 };
 
 export const WithNextStep = {
@@ -205,10 +172,6 @@ export const WithNextStep = {
     subtitle: "Choose location for partial key",
     collapsed: false,
     hasNextStep: true,
-  },
-
-  parameters: {
-    backgrounds: { default: "dark" },
   },
 };
 
@@ -224,10 +187,6 @@ export const WithLongText = {
     hasPrevStep: true,
     hasNextStep: true,
   },
-
-  parameters: {
-    backgrounds: { default: "dark" },
-  },
 };
 
 export const InProgress = {
@@ -238,9 +197,5 @@ export const InProgress = {
     title: "Voting Round 1",
     subtitle: "3 contests",
     inProgress: true,
-  },
-
-  parameters: {
-    backgrounds: { default: "dark" },
   },
 };

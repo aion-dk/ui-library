@@ -2,6 +2,7 @@
 import { ref, computed, inject, onMounted, watch } from "vue";
 import { switchLocale } from "@/i18n";
 import { flattenOptions } from "@/helpers/contestHelpers";
+import { getMeaningfulLabel } from "@/helpers/meaningfulLabel";
 import type {
   PropType,
   SupportedLocale,
@@ -11,6 +12,8 @@ import type {
   PartialResults,
   Error,
   ImageOption,
+  IterableObject,
+  AVBallotGalleryOption,
 } from "@/types";
 import SelectionPileValidator from "@aion-dk/js-client/dist/lib/validators/selectionPileValidator";
 import BelgiumBallotValidator from "@aion-dk/js-client/dist/lib/validators/belgiumBallotValidator";
@@ -153,6 +156,29 @@ const toggleOption = ({ reference, amount }: CheckedEventArgs) => {
 
 const viewCandidate = (reference: string) => emits("view-candidate", reference);
 
+const galleryOptions = computed(() => {
+  const options: AVBallotGalleryOption[] = [];
+
+  props.contest.options.forEach((parent) => {
+    if (parent.selectable) options.push({ ...parent, isChildren: false });
+
+    parent.children?.forEach((children) =>
+      options.push({
+        ...children,
+        isChildren: true,
+        parentTitle: getMeaningfulLabel(
+          parent as unknown as IterableObject,
+          i18nLocale.value,
+          t("js.components.AVOption.aria_labels.option"),
+        ),
+        parentColor: parent.accentColor,
+      }),
+    );
+  });
+
+  return options;
+});
+
 /**
  * This is necesary in order to support both provided i18n and local i18n.
  * The used locale will be taken from the provided i18n as long as there is one
@@ -204,7 +230,47 @@ watch(
 
     <hr class="my-3" />
 
+    <div v-if="contest.mode === 'gallery'" class="AVBAllot--gallery-grid">
+      <div v-for="option in galleryOptions" :key="option.reference">
+        <AVOption
+          v-if="!option.writeIn"
+          :selections="selections"
+          :option="option"
+          :invalid="!isValid"
+          :exclusive-error="
+            !isBelgianBallot &&
+            option.exclusive &&
+            errors.some((err) => err.message.includes('exclusive'))
+          "
+          :contest="contest"
+          :disabled="disabled"
+          :observerMode="observerMode"
+          :partial-results="partialResults"
+          :image-option="imageOption"
+          :parentTitle="option.parentTitle"
+          :parentColor="option.parentColor"
+          @checked="toggleOption"
+          @view-candidate="viewCandidate"
+        />
+        <!-- Possible write in options here -->
+      </div>
+
+      <AVBlankOption
+        v-if="contest.markingType.blankSubmission === 'active_choice'"
+        :checked="selectionPile.explicitBlank"
+        :error="!isBelgianBallot && errors.some((err) => err.message.includes('blank'))"
+        :disabled="disabled"
+        :invalid="!isValid"
+        :observer-mode="observerMode"
+        :accent-color="contest.blankOptionColor"
+        :partial-results="partialResults ? partialResults['blank'] : null"
+        gallery-mode
+        @toggle-blank="toggleBlank"
+      />
+    </div>
+
     <div
+      v-else
       id="ballot_options"
       class="vstack gap-2"
       :aria-label="t('js.components.AVBallot.aria_labels.ballot_options')"
@@ -244,8 +310,8 @@ watch(
         :error="!isBelgianBallot && errors.some((err) => err.message.includes('blank'))"
         :disabled="disabled"
         :invalid="!isValid"
-        :observerMode="observerMode"
-        :accentColor="contest.blankOptionColor"
+        :observer-mode="observerMode"
+        :accent-color="contest.blankOptionColor"
         :partial-results="partialResults ? partialResults['blank'] : null"
         @toggle-blank="toggleBlank"
       />

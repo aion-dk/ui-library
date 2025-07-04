@@ -51,7 +51,7 @@ describe("AVBallot", () => {
     },
   });
 
-  it("renders properly", async () => {
+  it("renders properly in list mode", async () => {
     expect(wrapper.findAll("[data-test=option]").length).to.eq(3);
     expect(wrapper.findAll("[data-test=option]")[0].text()).to.eq("Example option 1exampleOption1");
     expect(wrapper.findAll("[data-test=option]")[1].text()).to.eq("Example option 2exampleOption2");
@@ -103,7 +103,53 @@ describe("AVBallot", () => {
     ).to.eq("false");
   });
 
+  it("renders properly in gallery mode", async () => {
+    await wrapper.setProps({
+      contest: getContest(["gallery_short"]),
+    });
+
+    expect(wrapper.findAll("[data-test=option]").length).to.eq(12);
+    expect(wrapper.findAll("[data-test=parent-bagde]").length).to.eq(12);
+    expect(wrapper.findAll("[data-test=option-image]").length).to.eq(12);
+    expect(wrapper.findAll("[data-test=option-description]").length).to.eq(12);
+    wrapper.findAll("[data-test=parent-bagde]").forEach((badge, index) => {
+      if (index < 6) {
+        expect(badge.text()).to.contain("Example option 1");
+        expect(badge.html()).to.contain("background-color: rgb(255, 0, 0); color: black;");
+      } else {
+        expect(badge.text()).to.contain("Example option 2");
+        expect(badge.html()).to.contain("background-color: rgb(0, 255, 0); color: black;");
+      }
+    });
+  });
+
+  it("displays selectable parents in gallery mode", async () => {
+    await wrapper.setProps({
+      contest: getContest(["gallery_parents"]),
+    });
+
+    expect(wrapper.findAll("[data-test=option]").length).to.eq(14);
+    expect(wrapper.findAll("[data-test=parent-bagde]").length).to.eq(12);
+    expect(wrapper.findAll("[data-test=option-image]").length).to.eq(12);
+    expect(wrapper.findAll("[data-test=option-description]").length).to.eq(12);
+    wrapper.findAll("[data-test=option]").forEach((option, index) => {
+      if (index === 0 || index === 7) {
+        expect(option.findAll("[data-test=parent-bagde]").length).to.eq(0);
+        expect(option.findAll("[data-test=option-image]").length).to.eq(0);
+        expect(option.findAll("[data-test=option-description]").length).to.eq(0);
+      } else {
+        expect(option.findAll("[data-test=parent-bagde]").length).to.eq(1);
+        expect(option.findAll("[data-test=option-image]").length).to.eq(1);
+        expect(option.findAll("[data-test=option-description]").length).to.eq(1);
+      }
+    });
+  });
+
   it("can display blank option", async () => {
+    await wrapper.setProps({
+      contest: getContest([]),
+    });
+
     expect(wrapper.findAll("[data-test=blank-option]").length).to.eq(0);
 
     await wrapper.setProps({

@@ -6,11 +6,10 @@ const parameters = {
   locales: SUPPORTED_LOCALES,
   actions: { argTypesRegex: "^on.*" },
   backgrounds: {
-    default: "light",
-    values: [
-      { name: "light", value: "#FFFFFF" },
-      { name: "dark", value: "#1e293b" },
-    ],
+    options: {
+      light: { name: "Light", value: "#FFFFFF" },
+      dark: { name: "Dark", value: "#1e293b" },
+    },
   },
   controls: {
     matchers: {
@@ -20,13 +19,19 @@ const parameters = {
   },
   // See https://github.com/dequelabs/axe-core/blob/develop/doc/API.md#options-parameter
   a11y: {
-    element: "#storybook-root",
+    context: "body",
     config: {
       rules: [
         {
           // Don't show accesibility warnings regarding VUE devtools.
           id: "aria-prohibited-attr",
           selector: ".panel-entry-btn",
+          enabled: false,
+        },
+        {
+          // Don't show accesibility warnings on Playwright messups.
+          id: "region",
+          selector: "#storybook-root",
           enabled: false,
         },
         {

@@ -39,8 +39,8 @@ const Template = (args: Meta) => ({
 export const DarkClosed = {
   render: Template,
 
-  parameters: {
-    backgrounds: { default: "dark" },
+  globals: {
+    backgrounds: { value: "dark" },
   },
 
   args: {
@@ -51,8 +51,8 @@ export const DarkClosed = {
 export const DarkCrossOpened = {
   render: Template,
 
-  parameters: {
-    backgrounds: { default: "dark" },
+  globals: {
+    backgrounds: { value: "dark" },
   },
 
   args: {
@@ -65,8 +65,8 @@ export const DarkCrossOpened = {
 export const DarkArrowDownOpened = {
   render: Template,
 
-  parameters: {
-    backgrounds: { default: "dark" },
+  globals: {
+    backgrounds: { value: "dark" },
   },
 
   args: {

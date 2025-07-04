@@ -41,6 +41,12 @@ const meta: Meta<typeof AVOption> & {
       control: { type: "select" },
       options: IMAGE_OPTIONS,
     },
+    parentTitle: {
+      control: { type: "text" },
+    },
+    parentColor: {
+      control: { type: "color" },
+    },
     locale: {
       control: { type: "select" },
       options: SUPPORTED_LOCALES,
@@ -346,5 +352,95 @@ export const WithEverything = {
     selections: [],
     contest: getContest(["children_options", "collapsable"]),
     invalid: false,
+  },
+};
+
+export const GalleryMode = {
+  render: Template,
+
+  globals: {
+    viewport: { value: "mobile1" },
+  },
+  args: {
+    option: {
+      ...getOption(["selectable", "description", "image"], 1),
+      description: { en: "<p><strong>🇩🇰 DEN<br>🏊🏻 Swimming</strong></p>" },
+    },
+    selections: [],
+    contest: getContest(["gallery"]),
+    invalid: false,
+    parentTitle: "Water Sports",
+    parentColor: "#0000FF",
+  },
+};
+
+export const GalleryModeChildrenDifferentColor = {
+  render: Template,
+
+  globals: {
+    viewport: { value: "mobile1" },
+  },
+  args: {
+    option: {
+      ...getOption(["selectable", "description", "image", "color"], 1),
+      description: { en: "<p><strong>🇩🇰 DEN<br>🏊🏻 Swimming</strong></p>" },
+    },
+    selections: [],
+    contest: getContest(["gallery"]),
+    invalid: false,
+    parentTitle: "Water Sports",
+    parentColor: "#0000FF",
+  },
+};
+
+export const GalleryModeChildrenNoColors = {
+  render: Template,
+
+  globals: {
+    viewport: { value: "mobile1" },
+  },
+  args: {
+    option: {
+      ...getOption(["selectable", "description", "image"], 1),
+      description: { en: "<p><strong>🇩🇰 DEN<br>🏊🏻 Swimming</strong></p>" },
+    },
+    selections: [],
+    contest: getContest(["gallery"]),
+    invalid: false,
+    parentTitle: "Water Sports",
+  },
+};
+
+export const GalleryModeNoImage = {
+  render: Template,
+
+  globals: {
+    viewport: { value: "mobile1" },
+  },
+  args: {
+    option: {
+      ...getOption(["selectable", "description"], 1),
+      description: { en: "<p><strong>🇩🇰 DEN<br>🏊🏻 Swimming</strong></p>" },
+    },
+    selections: [],
+    contest: getContest(["gallery"]),
+    invalid: false,
+    parentTitle: "Water Sports",
+    parentColor: "#0000FF",
+  },
+};
+
+export const GalleryModeNoImageNoDescription = {
+  render: Template,
+
+  globals: {
+    viewport: { value: "mobile1" },
+  },
+  args: {
+    option: getOption(["selectable"], 1),
+    selections: [],
+    contest: getContest(["gallery"]),
+    invalid: false,
+    parentColor: "#0000FF",
   },
 };

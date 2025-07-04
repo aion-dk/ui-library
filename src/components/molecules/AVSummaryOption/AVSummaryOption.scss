@@ -8,15 +8,19 @@
   max-height: 90px;
 }
 
-.AVSummaryOption--body {
-  height: 100%;
-  flex-grow: 1;
-}
-
 .AVSummaryOption--title {
   font-size: 1.25rem;
   line-height: 1.25rem;
   font-weight: 500;
+}
+
+.AVSummaryOption--body-inline {
+  inline-size: calc(100% - 70px);
+}
+
+.AVSummaryOption--title-inline {
+  inline-size: 100%;
+  overflow-wrap: break-word;
 }
 
 .AVSummaryOption--ancestry {

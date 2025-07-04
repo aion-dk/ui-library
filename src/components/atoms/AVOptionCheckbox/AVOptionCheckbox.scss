@@ -15,6 +15,7 @@
 
 .AVOptionCheckbox--exclusive-container {
   margin-top: -1.25rem;
+  margin-bottom: 0.5rem;
 
   [dir="ltr"] & {
     margin-right: -1.25rem;
@@ -49,8 +50,8 @@
   }
 
   &.AVOptionCheckbox--checked {
-    background-color: var(--bs-gray-600);
-    border-color: var(--bs-gray-700);
+    background-color: var(--bs-ballot);
+    border-color: var(--bs-ballot);
 
     &.AVOptionCheckbox--error {
       background-color: var(--av-theme-danger-background);
@@ -69,8 +70,8 @@
 
   &:disabled,
   &.AVOptionCheckbox--checked[disabled] {
-    background-color: var(--bs-gray-500);
-    border-color: var(--bs-gray-600);
+    background-color: var(--bs-gray-600);
+    border-color: var(--bs-gray-700);
     pointer-events: none;
     cursor: default;
   }

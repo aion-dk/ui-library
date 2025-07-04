@@ -63,6 +63,8 @@ describe("AVOption", () => {
 
     expect(wrapper.findAll("[data-test=check]").length).to.eq(0);
     expect(wrapper.emitted().checked).to.not.exist;
+    await wrapper.find("[data-test=option-section]").trigger("click");
+    expect(wrapper.emitted().checked).to.not.exist;
     await wrapper.find("[data-test=option-checkbox]").trigger("click");
     expect(wrapper.emitted().checked).to.exist;
     expect((wrapper.emitted().checked as VitestEmitted)[0][0].reference).to.eq("exampleOption1");
@@ -120,7 +122,9 @@ describe("AVOption", () => {
   });
 
   it("can display accent color", async () => {
-    expect(wrapper.find("[data-test=option-section]").classes()).to.not.include("AVOption--accent");
+    expect(wrapper.find("[data-test=option-section]").attributes().style).to.not.include(
+      "border-left-color: #FF0000;",
+    );
     expect(wrapper.find("[data-test=option-section]").attributes().style).to.not.include(
       "border-left-color: #FF0000;",
     );
@@ -130,7 +134,9 @@ describe("AVOption", () => {
       exclusiveError: false,
     });
 
-    expect(wrapper.find("[data-test=option-section]").classes()).to.include("AVOption--accent");
+    expect(wrapper.find("[data-test=option-section]").attributes().style).to.include(
+      "border-left-width: 0.5rem;",
+    );
     expect(wrapper.find("[data-test=option-section]").attributes().style).to.include(
       "border-left-color: #FF0000;",
     );
@@ -256,7 +262,6 @@ describe("AVOption", () => {
     expect(wrapper.findAll("[data-test=option-children]").length).to.eq(0);
     expect(wrapper.findAll("[data-test=option-expander]").length).to.eq(0);
     expect(wrapper.findAll("[data-test=option-child-selected]").length).to.eq(0);
-    expect(wrapper.findAll("[data-test=option-children]").length).to.eq(0);
 
     await wrapper.setProps({
       option: getOption(["selectable", "children"], 1),
@@ -318,7 +323,6 @@ describe("AVOption", () => {
     await wrapper.setProps({
       contest: getContest(["multiple_votes_lg"]),
     });
-
     expect(wrapper.findAll("[data-test=option-checkbox]").length).to.eq(10);
     expect(wrapper.find("[data-test=option-multivote]").classes()).to.not.contain(
       "AVOption--singlevote",
@@ -397,12 +401,75 @@ describe("AVOption", () => {
     );
   });
 
+  it("can work on gallery mode", async () => {
+    expect(wrapper.findAll("[data-test=parent-bagde]").length).to.eq(0);
+    expect(wrapper.find("[data-test=option-section]").attributes().style).to.not.include(
+      "border-left-width: 0.5rem;",
+    );
+    expect(wrapper.find("[data-test=option-section]").attributes().style).to.not.include(
+      "border-left-color: #FF0000;",
+    );
+
+    await wrapper.setProps({
+      option: getOption(["selectable", "image", "color", "children"], 1),
+      contest: getContest(["gallery", "children_options"]),
+      parentTitle: "Fruit",
+    });
+
+    expect(wrapper.findAll("[data-test=option-children]").length).to.eq(0);
+    expect(wrapper.find("[data-test=parent-bagde]").text()).to.contain("Fruit");
+    expect(wrapper.find("[data-test=option-section]").attributes().style).to.include(
+      "border-left-width: 0.5rem;",
+    );
+    expect(wrapper.find("[data-test=option-section]").attributes().style).to.include(
+      "border-left-color: #FF0000;",
+    );
+    await wrapper.find("[data-test=option-section]").trigger("click");
+    expect((wrapper.emitted().checked as VitestEmitted)[2][0].reference).to.eq("exampleOption1");
+    expect((wrapper.emitted().checked as VitestEmitted)[2][0].amount).to.eq(1);
+  });
+
+  it("can inherit parent accent color", async () => {
+    await wrapper.setProps({
+      parentColor: "#0000FF",
+    });
+
+    expect(wrapper.find("[data-test=option-section]").attributes().style).to.include(
+      "border-left-color: #FF0000;",
+    );
+    expect(wrapper.find("[data-test=parent-bagde]").attributes().style).to.include(
+      "background-color: rgb(0, 0, 255); color: white;",
+    );
+
+    await wrapper.setProps({
+      option: getOption(["selectable", "image", "children"], 1),
+    });
+
+    expect(wrapper.find("[data-test=option-section]").attributes().style).to.include(
+      "border-left-color: #0000FF;",
+    );
+  });
+
+  it("can relocate title on gallery mode when no image", async () => {
+    expect(wrapper.find("[data-test=option-header]").text()).to.not.include("Example option 1");
+    expect(wrapper.find("[data-test=option-summary]").text()).to.include("Example option 1");
+
+    await wrapper.setProps({
+      option: getOption(["selectable", "children", "description", "url"], 1),
+    });
+
+    expect(wrapper.find("[data-test=option-header]").text()).to.include("Example option 1");
+    expect(wrapper.find("[data-test=option-summary]").text()).to.not.include("Example option 1");
+  });
+
   it("can switch language", async () => {
     await wrapper.setProps({
       locale: "da",
     });
 
-    expect(wrapper.find("[data-test=option-content]").text()).to.contain("Eksempel mulighed 1");
+    expect(wrapper.find("[data-test=parent-bagde]").text()).to.contain("Fruit"); // Doesn't change because is sent from parent
+
+    expect(wrapper.find("[data-test=option-title]").text()).to.contain("Eksempel mulighed 1");
     expect(wrapper.find("[data-test=option-description]").text()).to.contain(
       "Dette er en beskrivelse...",
     );
