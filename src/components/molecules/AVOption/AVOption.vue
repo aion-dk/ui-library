@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import useEventsBus from "@/helpers/eventBus";
 import { getMeaningfulLabel } from "@/helpers/meaningfulLabel";
-import { getTextContrastColor } from "@/helpers/contrastCalculator";
 import { watch, ref, nextTick, computed, inject, onMounted, onUnmounted } from "vue";
 import type {
   PropType,
@@ -196,14 +195,6 @@ const bsBorderColor = computed(() =>
   getComputedStyle(document.documentElement).getPropertyValue("--bs-border-color"),
 );
 
-const parentBagdeStyles = computed(() => {
-  const parentColor = props.parentColor || bsBorderColor.value;
-  return `
-    background-color: ${parentColor};
-    color: ${getTextContrastColor(parentColor)};
-  `;
-});
-
 const coloredEdgeStyle = computed(() => {
   if (props.option.accentColor || props.parentColor || props.parentTitle) {
     const color = props.option.accentColor || props.parentColor || bsBorderColor.value;
@@ -306,6 +297,15 @@ watch(
           data-test="option-section"
           @click="toggleFromOption"
         >
+          <!-- PARENT BADGE -->
+          <div v-if="contest.mode === 'gallery' && parentTitle" class="vstack p-0">
+            <div
+              class="ps-3 pe-2 py-1 small rounded-0 text-wrap text-start w-100 bg-light"
+              data-test="parent-bagde"
+            >
+              {{ parentTitle }}
+            </div>
+          </div>
           <div
             class="d-flex justify-content-between"
             :class="{
@@ -319,16 +319,6 @@ watch(
               style="max-width: calc(100% - 70px)"
               data-test="option-content"
             >
-              <!-- PARENT BADGE -->
-              <div
-                v-if="contest.mode === 'gallery' && parentTitle"
-                class="AVOption--parent-container w-100 pb-2"
-              >
-                <div class="badge" :style="parentBagdeStyles" data-test="parent-bagde">
-                  {{ parentTitle }}
-                </div>
-              </div>
-
               <!-- OPTION HEADER -->
               <header
                 class="AVOption--header d-flex flex-column flex-sm-row align-items-sm-center gap-3"
