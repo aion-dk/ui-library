@@ -215,7 +215,15 @@ const coloredEdgeStyle = computed(() => {
 });
 
 const toggleFromOption = () => {
-  if (props.contest.mode !== "gallery") return;
+  if (props.disabled || props.observerMode) return;
+  if (votesAllowedPerOption.value > 1) {
+    if (props.selections.length) {
+      toggleOption(props.option.reference, 0);
+    } else {
+      toggleOption(props.option.reference, votesAllowedPerOption.value);
+    }
+    return;
+  }
   toggleOption(props.option.reference);
 };
 
@@ -291,7 +299,7 @@ watch(
           :class="{
             'AVOption--highlight': highlighted,
             'h-100': contest.mode === 'gallery',
-            'cursor-pointer': contest.mode === 'gallery',
+            'cursor-pointer': option.selectable && !(disabled || observerMode),
           }"
           :style="coloredEdgeStyle"
           :aria-label="`${t('js.components.AVOption.aria_labels.option')} ${getMeaningfulLabel(option as unknown as IterableObject, i18nLocale, t('js.components.AVOption.aria_labels.option'))}`"

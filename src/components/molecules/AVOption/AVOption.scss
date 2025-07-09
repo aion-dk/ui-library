@@ -55,11 +55,11 @@
 
 .AVOption--expander-icon-opened {
   [dir="ltr"] & {
-    transform: rotate(-90deg);
+    transform: rotate(90deg);
   }
 
   [dir="rtl"] & {
-    transform: rotate(90deg);
+    transform: rotate(-90deg);
   }
 }
 
