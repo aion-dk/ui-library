@@ -298,7 +298,11 @@ watch(
           @click="toggleFromOption"
         >
           <!-- PARENT BADGE -->
-          <div v-if="contest.mode === 'gallery' && parentTitle" class="vstack p-0">
+          <div
+            v-if="contest.mode === 'gallery' && parentTitle"
+            class="vstack p-0"
+            style="max-height: fit-content"
+          >
             <div
               class="ps-3 pe-2 py-1 small rounded-0 text-wrap text-start w-100 bg-light"
               data-test="parent-bagde"
