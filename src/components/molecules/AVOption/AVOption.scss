@@ -104,6 +104,10 @@
   box-shadow: unset;
 }
 
+.AVOption-collapse-btn:hover {
+  background-color: var(--bs-gray-100);
+}
+
 @keyframes grow-in-highlight {
   from {
     outline: var(--bs-gray-600) solid 0;

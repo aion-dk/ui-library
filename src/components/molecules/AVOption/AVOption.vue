@@ -458,7 +458,7 @@ watch(
             </div>
             <div
               v-if="collapsable && hasChildren"
-              class="hstack gap-2 mt-2"
+              class="AVOption-collapse-btn hstack gap-2 mt-2 mb-n3 mx-n3 p-3"
               data-test="option-children"
             >
               <div
@@ -468,7 +468,7 @@ watch(
                 data-test="option-expander"
               >
                 <AVIcon
-                  icon="chevron-down"
+                  icon="chevron-right"
                   class="AVOption--expander-icon"
                   :class="{
                     'AVOption--expander-icon-opened': isOpen,
@@ -482,7 +482,6 @@ watch(
                   "
                 />
               </div>
-
               <span
                 v-if="subOptionSelected && !isOpen"
                 class="badge"
