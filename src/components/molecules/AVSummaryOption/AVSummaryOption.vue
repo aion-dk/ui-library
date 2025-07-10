@@ -10,7 +10,6 @@ import type {
   IterableObject,
 } from "@/types";
 import { getMeaningfulLabel } from "@/helpers/meaningfulLabel";
-import { getTextContrastColor } from "@/helpers/contrastCalculator";
 
 const props = defineProps({
   option: {
@@ -99,14 +98,6 @@ const bsBorderColor = computed(() =>
   getComputedStyle(document.documentElement).getPropertyValue("--bs-border-color"),
 );
 
-const parentBagdeStyles = computed(() => {
-  const parentColor = props.parents[0]?.accentColor || bsBorderColor.value;
-  return `
-    background-color: ${parentColor};
-    color: ${getTextContrastColor(parentColor as `#${string}`)};
-  `;
-});
-
 const coloredEdgeStyle = computed(() => {
   if (
     props.option?.accentColor ||
@@ -176,6 +167,16 @@ watch(
       </div>
     </div>
 
+    <!-- ANCESTRY (GALLERY) -->
+    <div v-if="ancestryTitles && galleryMode" class="vstack p-0" style="max-height: fit-content">
+      <div
+        class="ps-3 pe-2 py-1 small rounded-0 text-wrap text-start w-100 bg-light"
+        data-test="parent-bagde"
+      >
+        {{ ancestryTitles[0] }}
+      </div>
+    </div>
+
     <!-- OPTION -->
     <div
       class="card-body hstack gap-2"
@@ -185,26 +186,22 @@ watch(
         :class="{ vstack: galleryMode, hstack: !galleryMode }"
         style="max-width: calc(100%-70px)"
       >
-        <!-- ANCESTRY (GALLERY) -->
-        <div v-if="ancestryTitles && galleryMode" class="mb-2">
-          <div class="badge" :style="parentBagdeStyles" data-test="parent-bagde">
-            {{ ancestryTitles[0] }}
+        <div class="w-100">
+          <img
+            v-if="option?.image"
+            :src="imageUrl"
+            class="AVSummaryOption--img me-2 me-sm-3"
+            :class="{
+              'mb-3': galleryMode,
+            }"
+            :alt="t('js.components.AVSummaryOption.aria_label.option_image')"
+            data-test="summary-option-image"
+          />
+          <div class="hstack" style="min-height: 30px">
+            <h5 class="AVSummaryOption--title m-0">
+              {{ displayTitle }}
+            </h5>
           </div>
-        </div>
-        <img
-          v-if="option?.image"
-          :src="imageUrl"
-          class="AVSummaryOption--img me-2 me-sm-3"
-          :class="{
-            'mb-3': galleryMode,
-          }"
-          :alt="t('js.components.AVSummaryOption.aria_label.option_image')"
-          data-test="summary-option-image"
-        />
-        <div class="hstack" style="min-height: 30px">
-          <h5 class="AVSummaryOption--title m-0">
-            {{ displayTitle }}
-          </h5>
         </div>
       </div>
       <div v-if="!useFooter" class="align-self-start">
