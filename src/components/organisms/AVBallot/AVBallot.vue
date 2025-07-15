@@ -230,7 +230,7 @@ watch(
 
     <hr class="my-3" />
 
-    <div v-if="contest.mode === 'gallery'" class="AVBAllot--gallery-grid">
+    <div v-if="contest.mode === 'gallery'" class="AVBallot--gallery-grid">
       <div v-for="option in galleryOptions" :key="option.reference">
         <AVOption
           v-if="!option.writeIn"
