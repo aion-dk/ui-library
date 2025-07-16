@@ -281,9 +281,14 @@ watch(
       :pane-id="`pane_for_option_${option.reference}`"
       :collapsable="contest.collapsable && hasChildren"
       :start-collapsed="contest.collapseDefault && !observerMode"
+      :option-reference="option.reference"
+      :sub-option-selected="subOptionSelected"
+      :invalid="invalid"
+      :use-deferred-button="true"
+      :locale="locale"
       @accordion-open="emits('accordion-open')"
     >
-      <template #toggle="{ isOpen, collapsable }">
+      <template #toggle="{ collapsable }">
         <section
           ref="el"
           class="AVOption card"
@@ -452,42 +457,10 @@ watch(
             </div>
             <div
               v-if="collapsable && hasChildren"
-              class="AVOption-collapse-btn hstack gap-2 mt-2 mb-n3 mx-n3 p-3"
-              data-test="option-children"
-            >
-              <div
-                :id="`option_${option.reference}_dropdown`"
-                class="hstack gap-1 text-dark"
-                aria-hidden="true"
-                data-test="option-expander"
-              >
-                <AVIcon
-                  icon="chevron-right"
-                  class="AVOption--expander-icon"
-                  :class="{
-                    'AVOption--expander-icon-opened': isOpen,
-                  }"
-                />
-                <span
-                  v-html="
-                    isOpen
-                      ? t('js.components.AVOption.collapse_text')
-                      : t('js.components.AVOption.expand_text')
-                  "
-                />
-              </div>
-              <span
-                v-if="subOptionSelected && !isOpen"
-                class="badge"
-                :class="{
-                  'bg-theme-danger': invalid,
-                  'bg-dark': !invalid,
-                }"
-                data-test="option-child-selected"
-              >
-                {{ t("js.components.AVOption.sub_options_select", { n: subOptionSelected }) }}
-              </span>
-            </div>
+              :id="`pane_for_option_${option.reference}_btn`"
+              class="mt-2 mb-n3 mx-n3"
+              style="width: calc(100% + 2rem)"
+            ></div>
           </div>
         </section>
       </template>
