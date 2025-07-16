@@ -163,7 +163,7 @@ watch(
             class="AVRecommendationList--icon-container d-flex align-items-center justify-content-center"
           >
             <AVIcon
-              icon="chevron-down"
+              icon="chevron-right"
               class="AVRecommendationList--collapser-icon"
               :class="{
                 'AVRecommendationList--collapser-icon-opened': isOpen,

@@ -21,17 +21,24 @@
 }
 
 .AVRecommendationList--collapser-icon {
-  transform: rotate(0deg);
+  [dir="ltr"] & {
+    transform: rotate(0deg);
+  }
+
+  [dir="rtl"] & {
+    transform: rotate(180deg);
+  }
+
   transition: all 500ms ease-in-out;
 }
 
 .AVRecommendationList--collapser-icon-opened {
   [dir="ltr"] & {
-    transform: rotate(-180deg);
+    transform: rotate(90deg);
   }
 
   [dir="rtl"] & {
-    transform: rotate(180deg);
+    transform: rotate(90deg);
   }
 }
 
