@@ -1,10 +1,17 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, beforeAll } from "vitest";
 import { mount } from "@vue/test-utils";
+import localI18n from "@/i18n";
 import AVAnimatedTransition from "@/components/atoms/AVAnimatedTransition";
 
 import AVCollapser from "./AVCollapser.vue";
 
 describe("AVCollapser", () => {
+  beforeAll(() => {
+    const el = document.createElement("div");
+    el.id = "test2_btn";
+    document.body.appendChild(el);
+  });
+
   const wrapper = mount(AVCollapser, {
     props: {
       paneId: "test",
@@ -16,8 +23,16 @@ describe("AVCollapser", () => {
       pane: "Main content",
     },
     global: {
+      provide: {
+        i18n: localI18n,
+      },
       components: {
         AVAnimatedTransition,
+      },
+      stubs: {
+        AVIcon: {
+          template: "<span />",
+        },
       },
     },
   });
@@ -46,5 +61,26 @@ describe("AVCollapser", () => {
     expect(wrapper.findAll("#test").length).to.eq(0);
 
     expect(wrapper.text()).to.contain("Button contentMain content");
+  });
+
+  it("can teleport button", async () => {
+    expect(document.body.innerHTML).to.eq(`<div id="test2_btn"></div>`);
+
+    await wrapper.setProps({
+      paneId: "test2",
+      collapsable: true,
+      useDeferredButton: true,
+      optionReference: "option1",
+    });
+
+    expect(document.body.innerHTML).to.contain("AVCollapser-collapse-btn");
+    expect(document.body.innerHTML).to.contain("Click to expand");
+    expect(document.body.innerHTML).to.contain(`id="option_option1_dropdown"`);
+  });
+
+  it("can switch languages", async () => {
+    expect(document.body.innerHTML).to.contain("Click to expand");
+    await wrapper.setProps({ locale: "es" });
+    expect(document.body.innerHTML).to.contain("Click para expandir");
   });
 });

@@ -135,6 +135,8 @@ describe("AVSubmissionHelper", () => {
 
     expect(wrapper.findAll("[data-test=scroll-bottom]").length).to.eq(1);
     expect(wrapper.find("[data-test=scroll-bottom]").text()).to.contain("Go to the bottom");
+
+    await wrapper.find("[data-test=scroll-bottom]").trigger("click");
     // Can't actually test the scrolling as it is pointing to an external HTML element.
   });
 
