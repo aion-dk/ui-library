@@ -11,6 +11,10 @@ const meta: Meta<typeof AVCollapser> & {
     collapsable: { control: { type: "boolean" } },
     startCollapsed: { control: { type: "boolean" } },
     paneId: { control: { type: "text" } },
+    optionReference: { control: { type: "text" } },
+    subOptionSelected: { control: { type: "number", min: "1", max: "9" } },
+    invalid: { control: { type: "boolean" } },
+    useDeferredButton: { control: { type: "boolean" } },
     onAccordionOpen: { action: "@accordion-open: EMITTED" },
   },
 };
