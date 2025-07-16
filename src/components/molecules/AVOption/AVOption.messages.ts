@@ -4,9 +4,6 @@ const translations: DefineLocaleMessage = {
   ar: {
     info_link_text_html: "معلومات",
     video_link_text_html: "فيديو",
-    collapse_text: "ينهار",
-    expand_text: "انقر فوق لتوسيع",
-    sub_options_select: "المحدد {n}",
     vote_count_singular: "صوت",
     vote_count_plural: "أصوات",
     view_candidate: "عرض المرشح",
@@ -18,9 +15,6 @@ const translations: DefineLocaleMessage = {
   ca: {
     info_link_text_html: "Informació",
     video_link_text_html: "Vídeo",
-    collapse_text: "Col·lapsar",
-    expand_text: "Cliqueu per expandir",
-    sub_options_select: "{n} seleccionades",
     vote_count_singular: "vot",
     vote_count_plural: "vots",
     view_candidate: "Veure candidat/a",
@@ -32,9 +26,6 @@ const translations: DefineLocaleMessage = {
   cy: {
     info_link_text_html: "Gwybodaeth",
     video_link_text_html: "Fideo",
-    collapse_text: "Cau",
-    expand_text: "CCliciwch i ehangu",
-    sub_options_select: "{n} dewiswyd",
     vote_count_singular: "vot",
     vote_count_plural: "vots",
     view_candidate: "Veure candidat/a",
@@ -46,9 +37,6 @@ const translations: DefineLocaleMessage = {
   da: {
     info_link_text_html: "Info",
     video_link_text_html: "Video",
-    collapse_text: "Skjul",
-    expand_text: "Tryk for at udvide",
-    sub_options_select: "{n} valgt",
     view_candidate: "Se kandidat",
     aria_labels: {
       option: "Valgmulighed",
@@ -58,9 +46,6 @@ const translations: DefineLocaleMessage = {
   de: {
     info_link_text_html: "Info",
     video_link_text_html: "Video",
-    collapse_text: "Zusammenbruch",
-    expand_text: "Zum erweitern klicken",
-    sub_options_select: "{n} ausgewählt",
     view_candidate: "Kandidaten ansehen",
     aria_labels: {
       option: "Option",
@@ -70,9 +55,6 @@ const translations: DefineLocaleMessage = {
   en: {
     info_link_text_html: "Info",
     video_link_text_html: "Video",
-    collapse_text: "Collapse",
-    expand_text: "Click to expand",
-    sub_options_select: "{n} selected",
     view_candidate: "View candidate",
     aria_labels: {
       option: "Option",
@@ -82,9 +64,6 @@ const translations: DefineLocaleMessage = {
   es: {
     info_link_text_html: "Información",
     video_link_text_html: "Vídeo",
-    collapse_text: "Colapsar",
-    expand_text: "Click para expandir",
-    sub_options_select: "{n} seleccionadas",
     view_candidate: "Ver candidato",
     aria_labels: {
       option: "Opción",
@@ -94,9 +73,6 @@ const translations: DefineLocaleMessage = {
   fi: {
     info_link_text_html: "Tiedot",
     video_link_text_html: "Video",
-    collapse_text: "Piilota",
-    expand_text: "Laajenna napsauttamalla",
-    sub_options_select: "{n} valittu",
     view_candidate: "Katso ehdokas",
     aria_labels: {
       option: "Vaihtoehto",
@@ -106,9 +82,6 @@ const translations: DefineLocaleMessage = {
   fr: {
     info_link_text_html: "Infos",
     video_link_text_html: "Vidéo",
-    collapse_text: "Effondrer",
-    expand_text: "Cliquez pour agrandir",
-    sub_options_select: "{n} choisie",
     view_candidate: "Voir le candidat",
     aria_labels: {
       option: "Option",
@@ -118,9 +91,6 @@ const translations: DefineLocaleMessage = {
   is: {
     info_link_text_html: "Upplýsingar",
     video_link_text_html: "Myndband",
-    collapse_text: "Hrun",
-    expand_text: "Smelltu til að stækka",
-    sub_options_select: "{n} valdir",
     view_candidate: "Skoða frambjóðanda",
     aria_labels: {
       option: "Valkostur",
@@ -130,9 +100,6 @@ const translations: DefineLocaleMessage = {
   it: {
     info_link_text_html: "Informazioni",
     video_link_text_html: "Video",
-    collapse_text: "Clicca per comprimere",
-    expand_text: "Clicca per espandere",
-    sub_options_select: "{n} selezionato",
     view_candidate: "Visualizza candidato",
     aria_labels: {
       option: "Opzione",
@@ -142,9 +109,6 @@ const translations: DefineLocaleMessage = {
   nl: {
     info_link_text_html: "Info",
     video_link_text_html: "Video",
-    collapse_text: "Dichtklappen",
-    expand_text: "Klik om te vergroten",
-    sub_options_select: "{n} geselecteerd",
     view_candidate: "Bekijk kandidaat",
     aria_labels: {
       option: "Optie",
@@ -154,9 +118,6 @@ const translations: DefineLocaleMessage = {
   pl: {
     info_link_text_html: "Informacje",
     video_link_text_html: "Wideo",
-    collapse_text: "Zwiń",
-    expand_text: "Kliknij, aby rozwinąć",
-    sub_options_select: "{n} wybrane",
     view_candidate: "Zobacz kandydata",
     aria_labels: {
       option: "Opcja",
@@ -166,9 +127,6 @@ const translations: DefineLocaleMessage = {
   pt: {
     info_link_text_html: "Informação",
     video_link_text_html: "Vídeo",
-    collapse_text: "Recolher",
-    expand_text: "Clique para expandir",
-    sub_options_select: "{n} selecionado",
     aria_labels: {
       option: "Opção",
       option_image: "Opção imagem",
@@ -177,9 +135,6 @@ const translations: DefineLocaleMessage = {
   ro: {
     info_link_text_html: "Info",
     video_link_text_html: "Video",
-    collapse_text: "Restrânge",
-    expand_text: "Click pentru a extinde",
-    sub_options_select: "{n} selectat",
     vote_count_singular: "vot",
     vote_count_plural: "voturi",
     view_candidate: "Vedeți candidatul",
@@ -191,9 +146,6 @@ const translations: DefineLocaleMessage = {
   ru: {
     info_link_text_html: "Информация",
     video_link_text_html: "Видео",
-    collapse_text: "Крах",
-    expand_text: "Нажмите, чтобы развернуть",
-    sub_options_select: "{n} выбранный",
     view_candidate: "Посмотреть кандидата",
     aria_labels: {
       option: "Вариант",
@@ -203,9 +155,6 @@ const translations: DefineLocaleMessage = {
   sv: {
     info_link_text_html: "Info",
     video_link_text_html: "Video",
-    collapse_text: "Fäll ihop",
-    expand_text: "Klicka för att visa mer",
-    sub_options_select: "{n} valda",
     view_candidate: "Se kandidat",
     aria_labels: {
       option: "Alternativ",
