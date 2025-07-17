@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, onMounted, inject, watch } from "vue";
+import { ref, computed, onMounted, inject, watch, nextTick } from "vue";
 import type { PropType, SupportedLocale } from "@/types";
 import { switchLocale } from "@/i18n";
 
@@ -42,6 +42,8 @@ const emit = defineEmits<{
   (event: "accordionOpen"): void;
 }>();
 
+const isMounted = ref<boolean>(false);
+
 const isOpen = ref<boolean>(false);
 
 const animateAccordion = ref<boolean>(true);
@@ -56,6 +58,8 @@ const reactiveProps = computed(() => {
 onMounted(() => {
   const { collapsable, startCollapsed } = reactiveProps.value;
   isOpen.value = collapsable && !startCollapsed;
+  nextTick();
+  if (document.querySelector(`#${props.paneId}_btn`)) isMounted.value = true;
 });
 
 const toggleAccordion = (force: boolean | null = null, animate = true) => {
@@ -95,7 +99,25 @@ watch(
 
 <template>
   <template v-if="collapsable">
-    <Teleport v-if="useDeferredButton" defer :to="`#${paneId}_btn`">
+    <div
+      :aria-controls="paneId"
+      tabindex="0"
+      :class="{
+        AVCollapser: !useDeferredButton,
+      }"
+      data-test="collapser-button"
+      @click="triggerAccordion()"
+    >
+      <slot name="toggle" :is-open="isOpen" :collapsable="collapsable" />
+    </div>
+    <slot name="results" />
+    <AVAnimatedTransition :skip-transition="!animateAccordion">
+      <div v-show="isOpen" :id="paneId" :aria-hidden="!isOpen">
+        <slot name="pane" :is-open="isOpen" :toggle-collapse="toggleAccordion" />
+      </div>
+    </AVAnimatedTransition>
+
+    <Teleport v-if="useDeferredButton && isMounted" defer :to="`#${paneId}_btn`">
       <button
         class="AVCollapser-collapse-btn w-100 border-0 hstack gap-2 p-3"
         data-test="option-children"
@@ -140,23 +162,6 @@ watch(
         </span>
       </button>
     </Teleport>
-    <div
-      :aria-controls="paneId"
-      tabindex="0"
-      :class="{
-        AVCollapser: !useDeferredButton,
-      }"
-      data-test="collapser-button"
-      @click="triggerAccordion()"
-    >
-      <slot name="toggle" :is-open="isOpen" :collapsable="collapsable" />
-    </div>
-    <slot name="results" />
-    <AVAnimatedTransition :skip-transition="!animateAccordion">
-      <div v-show="isOpen" :id="paneId" :aria-hidden="!isOpen">
-        <slot name="pane" :is-open="isOpen" :toggle-collapse="toggleAccordion" />
-      </div>
-    </AVAnimatedTransition>
   </template>
   <template v-else>
     <slot name="toggle" :is-open="true" :collapsable="false" />

@@ -187,8 +187,6 @@ const mutationObserver = ref<MutationObserver | null>(null);
 
 const mutationObserverTarget = document.getElementsByTagName("html")[0];
 
-const isMounted = ref<boolean>(false);
-
 const openChildrenCandidate = (reference: string) => {
   emits("view-candidate", reference);
 };
@@ -236,9 +234,6 @@ onMounted(() => {
     isRtl.value = !!dirAttr && dirAttr === "rtl";
   });
   mutationObserver.value.observe(mutationObserverTarget, { attributes: true });
-
-  nextTick();
-  isMounted.value = true;
 });
 
 onUnmounted(() => mutationObserver.value && mutationObserver.value.disconnect());
@@ -283,7 +278,6 @@ watch(
       :aria-labelledby="`option_${option.reference}_title`"
     />
     <AVCollapser
-      v-if="isMounted"
       :pane-id="`pane_for_option_${option.reference}`"
       :collapsable="contest.collapsable && hasChildren"
       :start-collapsed="contest.collapseDefault && !observerMode"
