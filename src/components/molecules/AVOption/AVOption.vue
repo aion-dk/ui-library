@@ -206,7 +206,7 @@ const coloredEdgeStyle = computed(() => {
 });
 
 const toggleFromOption = () => {
-  if (props.disabled || props.observerMode) return;
+  if (props.disabled || props.observerMode || !props.option.selectable) return;
   if (votesAllowedPerOption.value > 1) {
     if (props.selections.length) {
       toggleOption(props.option.reference, 0);
