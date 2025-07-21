@@ -62,25 +62,4 @@ describe("AVCollapser", () => {
 
     expect(wrapper.text()).to.contain("Button contentMain content");
   });
-
-  it.skip("can teleport button", async () => {
-    expect(document.body.innerHTML).to.eq(`<div id="test2_btn"></div>`);
-
-    await wrapper.setProps({
-      paneId: "test2",
-      collapsable: true,
-      useDeferredButton: true,
-      optionReference: "option1",
-    });
-
-    expect(document.body.innerHTML).to.contain("AVCollapser-collapse-btn");
-    expect(document.body.innerHTML).to.contain("Click to expand");
-    expect(document.body.innerHTML).to.contain(`id="option_option1_dropdown"`);
-  });
-
-  it.skip("can switch languages", async () => {
-    expect(document.body.innerHTML).to.contain("Click to expand");
-    await wrapper.setProps({ locale: "es" });
-    expect(document.body.innerHTML).to.contain("Click para expandir");
-  });
 });
