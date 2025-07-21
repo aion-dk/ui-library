@@ -64,8 +64,6 @@ describe("AVOption", () => {
     expect(wrapper.findAll("[data-test=check]").length).to.eq(0);
     expect(wrapper.emitted().checked).to.not.exist;
     await wrapper.find("[data-test=option-section]").trigger("click");
-    expect(wrapper.emitted().checked).to.not.exist;
-    await wrapper.find("[data-test=option-checkbox]").trigger("click");
     expect(wrapper.emitted().checked).to.exist;
     expect((wrapper.emitted().checked as VitestEmitted)[0][0].reference).to.eq("exampleOption1");
     expect((wrapper.emitted().checked as VitestEmitted)[0][0].amount).to.eq(1);
@@ -123,7 +121,7 @@ describe("AVOption", () => {
 
   it("can display accent color", async () => {
     expect(wrapper.find("[data-test=option-section]").attributes().style).to.not.include(
-      "border-left-color: #FF0000;",
+      "border-left-width: 0.5rem;",
     );
     expect(wrapper.find("[data-test=option-section]").attributes().style).to.not.include(
       "border-left-color: #FF0000;",
@@ -274,25 +272,6 @@ describe("AVOption", () => {
     expect(wrapper.find("[data-test=option-children]").text()).to.contain("Child option 1.2");
   });
 
-  it("can be collapsed", async () => {
-    expect(wrapper.findAll("[data-test=option-expander]").length).to.eq(0);
-
-    await wrapper.setProps({
-      contest: getContest(["children_options", "collapsable"]),
-      selections: [{ reference: "exampleChildren1-2" }],
-    });
-
-    expect(wrapper.findAll("[data-test=option-expander]").length).to.eq(1);
-    expect(wrapper.find("[data-test=option-expander]").text()).to.contain("Click to expand");
-    expect(wrapper.find("[data-test=option-children]").text()).to.contain("1 selected");
-    await wrapper.find("[data-test=collapser-button]").trigger("click");
-    expect(wrapper.find("[data-test=option-expander]").text()).to.contain("Collapse");
-    expect(wrapper.find("[data-test=option-children]").text()).to.not.contain("1 selected");
-    await wrapper.find("[data-test=collapser-button]").trigger("click");
-    expect(wrapper.find("[data-test=option-expander]").text()).to.contain("Click to expand");
-    expect(wrapper.find("[data-test=option-children]").text()).to.contain("1 selected");
-  });
-
   it("can handle multivote with less than 5 crosses", async () => {
     await wrapper.setProps({
       option: getOption(["selectable"], 1),
@@ -317,6 +296,16 @@ describe("AVOption", () => {
       "AVOption--multivote-aside",
     );
     expect(wrapper.find("[data-test=option-multivote]").classes()).to.contain("bg-secondary");
+
+    await wrapper.find("[data-test=option-section]").trigger("click");
+    expect((wrapper.emitted().checked as VitestEmitted)[1][0].reference).to.eq("exampleOption1");
+    expect((wrapper.emitted().checked as VitestEmitted)[1][0].amount).to.eq(5);
+    await wrapper.findAll("[data-test=option-checkbox]")[2].trigger("click");
+    expect((wrapper.emitted().checked as VitestEmitted)[2][0].reference).to.eq("exampleOption1");
+    expect((wrapper.emitted().checked as VitestEmitted)[2][0].amount).to.eq(3);
+    await wrapper.find("[data-test=option-section]").trigger("click");
+    expect((wrapper.emitted().checked as VitestEmitted)[3][0].reference).to.eq("exampleOption1");
+    expect((wrapper.emitted().checked as VitestEmitted)[3][0].amount).to.eq(5);
   });
 
   it("can handle multivote with more than 5 crosses", async () => {
@@ -331,33 +320,36 @@ describe("AVOption", () => {
       "AVOption--multivote-footer",
     );
 
-    expect(wrapper.emitted().checked.length).to.eq(1);
+    expect(wrapper.emitted().checked.length).to.eq(4);
     await wrapper.findAll("[data-test=option-checkbox]")[6].trigger("click");
-    expect(wrapper.emitted().checked.length).to.eq(2);
-    expect((wrapper.emitted().checked as VitestEmitted)[1][0].reference).to.eq("exampleOption1");
-    expect((wrapper.emitted().checked as VitestEmitted)[1][0].amount).to.eq(7);
+    expect(wrapper.emitted().checked.length).to.eq(5);
+    expect((wrapper.emitted().checked as VitestEmitted)[4][0].reference).to.eq("exampleOption1");
+    expect((wrapper.emitted().checked as VitestEmitted)[4][0].amount).to.eq(7);
   });
 
   it("can have a candidacy attached", async () => {
     expect(wrapper.findAll("[data-test=option-candidacy]").length).to.eq(0);
 
     await wrapper.setProps({
-      contest: getContest([]),
-      option: getOption(["selectable", "candidacy"], 1),
+      contest: getContest(["children_options"]),
+      option: getOption(["selectable", "candidacy", "children"], 1),
     });
 
-    expect(wrapper.findAll("[data-test=option-candidacy]").length).to.eq(1);
-    expect(wrapper.find("[data-test=option-candidacy]").text()).to.contain("View candidate");
+    expect(wrapper.findAll("[data-test=option-candidacy]").length).to.eq(3);
+    expect(wrapper.findAll("[data-test=option-candidacy]")[0].text()).to.contain("View candidate");
 
     expect(wrapper.emitted()["view-candidate"]).to.not.exist;
-    await wrapper.find("[data-test=option-candidacy]").trigger("click");
+    await wrapper.findAll("[data-test=option-candidacy]")[0].trigger("click");
     expect((wrapper.emitted()["view-candidate"] as VitestEmitted)[0][0]).to.eq(1); // candidate ID
+    await wrapper.findAll("[data-test=option-candidacy]")[2].trigger("click");
+    expect((wrapper.emitted()["view-candidate"] as VitestEmitted)[1][0]).to.eq(2); // candidate ID
   });
 
   it("can display links", async () => {
     expect(wrapper.findAll("[data-test=option-link]").length).to.eq(0);
 
     await wrapper.setProps({
+      contest: getContest([]),
       option: getOption(["selectable", "url"], 1),
     });
 
@@ -425,8 +417,8 @@ describe("AVOption", () => {
       "border-left-color: #FF0000;",
     );
     await wrapper.find("[data-test=option-section]").trigger("click");
-    expect((wrapper.emitted().checked as VitestEmitted)[2][0].reference).to.eq("exampleOption1");
-    expect((wrapper.emitted().checked as VitestEmitted)[2][0].amount).to.eq(1);
+    expect((wrapper.emitted().checked as VitestEmitted)[5][0].reference).to.eq("exampleOption1");
+    expect((wrapper.emitted().checked as VitestEmitted)[5][0].amount).to.eq(1);
   });
 
   it("can inherit parent accent color", async () => {
@@ -436,9 +428,6 @@ describe("AVOption", () => {
 
     expect(wrapper.find("[data-test=option-section]").attributes().style).to.include(
       "border-left-color: #FF0000;",
-    );
-    expect(wrapper.find("[data-test=parent-bagde]").attributes().style).to.include(
-      "background-color: rgb(0, 0, 255); color: white;",
     );
 
     await wrapper.setProps({

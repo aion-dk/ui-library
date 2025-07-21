@@ -1,10 +1,17 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, beforeAll } from "vitest";
 import { mount } from "@vue/test-utils";
+import localI18n from "@/i18n";
 import AVAnimatedTransition from "@/components/atoms/AVAnimatedTransition";
 
 import AVCollapser from "./AVCollapser.vue";
 
 describe("AVCollapser", () => {
+  beforeAll(() => {
+    const el = document.createElement("div");
+    el.id = "test2_btn";
+    document.body.appendChild(el);
+  });
+
   const wrapper = mount(AVCollapser, {
     props: {
       paneId: "test",
@@ -16,8 +23,16 @@ describe("AVCollapser", () => {
       pane: "Main content",
     },
     global: {
+      provide: {
+        i18n: localI18n,
+      },
       components: {
         AVAnimatedTransition,
+      },
+      stubs: {
+        AVIcon: {
+          template: "<span />",
+        },
       },
     },
   });

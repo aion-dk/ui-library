@@ -1,6 +1,6 @@
 {
   "name": "@assemblyvoting/electa-ui",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "license": "MIT",
   "publishConfig": {
     "access": "public"
@@ -46,7 +46,7 @@
     "floating-vue": "^5.2.2",
     "motion": "^12.4.7",
     "vue": "^3.5.13",
-    "vue-i18n": "^11.1.2"
+    "vue-i18n": "^11.1.10"
   },
   "devDependencies": {
     "@aion-dk/js-client": "^4.4.4",

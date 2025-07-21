@@ -115,10 +115,8 @@ describe("AVBallot", () => {
     wrapper.findAll("[data-test=parent-bagde]").forEach((badge, index) => {
       if (index < 6) {
         expect(badge.text()).to.contain("Example option 1");
-        expect(badge.html()).to.contain("background-color: rgb(255, 0, 0); color: black;");
       } else {
         expect(badge.text()).to.contain("Example option 2");
-        expect(badge.html()).to.contain("background-color: rgb(0, 255, 0); color: black;");
       }
     });
   });

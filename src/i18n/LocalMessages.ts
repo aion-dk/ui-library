@@ -5,6 +5,7 @@ import AVOptionCheckbox from "@/components/atoms/AVOptionCheckbox/AVOptionCheckb
 import AVOptionLiveResults from "@/components/atoms/AVOptionLiveResults/AVOptionLiveResults.messages";
 import AVAnimatedMenuButton from "@/components/atoms/AVAnimatedMenuButton/AVAnimatedMenuButton.messages";
 import AVFileInput from "@/components/atoms/AVFileInput/AVFileInput.messages";
+import AVCollapser from "@/components/atoms/AVCollapser/AVCollapser.messages";
 
 /* MOLECULES */
 import AVSummaryOption from "@/components/molecules/AVSummaryOption/AVSummaryOption.messages";
@@ -46,6 +47,7 @@ const components: DefineLocaleMessage = {
   AVOptionLiveResults,
   AVAnimatedMenuButton,
   AVFileInput,
+  AVCollapser,
 
   /* MOLECULES */
   AVSummaryOption,

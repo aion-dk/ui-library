@@ -7,3 +7,33 @@
     box-shadow: 0 0 0 0.125rem rgb(82 88 93 / 50%);
   }
 }
+
+.AVCollapser-collapse-btn {
+  background-color: var(--bs-light);
+}
+
+.AVCollapser-collapse-btn:hover {
+  background-color: var(--bs-gray-200);
+}
+
+.AVCollapser--expander-icon {
+  [dir="ltr"] & {
+    transform: rotate(0deg);
+  }
+
+  [dir="rtl"] & {
+    transform: rotate(180deg);
+  }
+
+  transition: all 500ms ease-in-out;
+}
+
+.AVCollapser--expander-icon-opened {
+  [dir="ltr"] & {
+    transform: rotate(90deg);
+  }
+
+  [dir="rtl"] & {
+    transform: rotate(90deg);
+  }
+}

@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import useEventsBus from "@/helpers/eventBus";
 import { getMeaningfulLabel } from "@/helpers/meaningfulLabel";
-import { getTextContrastColor } from "@/helpers/contrastCalculator";
 import { watch, ref, nextTick, computed, inject, onMounted, onUnmounted } from "vue";
 import type {
   PropType,
@@ -196,14 +195,6 @@ const bsBorderColor = computed(() =>
   getComputedStyle(document.documentElement).getPropertyValue("--bs-border-color"),
 );
 
-const parentBagdeStyles = computed(() => {
-  const parentColor = props.parentColor || bsBorderColor.value;
-  return `
-    background-color: ${parentColor};
-    color: ${getTextContrastColor(parentColor)};
-  `;
-});
-
 const coloredEdgeStyle = computed(() => {
   if (props.option.accentColor || props.parentColor || props.parentTitle) {
     const color = props.option.accentColor || props.parentColor || bsBorderColor.value;
@@ -215,7 +206,15 @@ const coloredEdgeStyle = computed(() => {
 });
 
 const toggleFromOption = () => {
-  if (props.contest.mode !== "gallery") return;
+  if (props.disabled || props.observerMode || !props.option.selectable) return;
+  if (votesAllowedPerOption.value > 1) {
+    if (props.selections.length) {
+      toggleOption(props.option.reference, 0);
+    } else {
+      toggleOption(props.option.reference, votesAllowedPerOption.value);
+    }
+    return;
+  }
   toggleOption(props.option.reference);
 };
 
@@ -282,22 +281,40 @@ watch(
       :pane-id="`pane_for_option_${option.reference}`"
       :collapsable="contest.collapsable && hasChildren"
       :start-collapsed="contest.collapseDefault && !observerMode"
+      :option-reference="option.reference"
+      :sub-option-selected="subOptionSelected"
+      :invalid="invalid"
+      :use-deferred-button="true"
+      :locale="locale"
       @accordion-open="emits('accordion-open')"
     >
-      <template #toggle="{ isOpen, collapsable }">
+      <template #toggle="{ collapsable }">
         <section
           ref="el"
           class="AVOption card"
           :class="{
             'AVOption--highlight': highlighted,
             'h-100': contest.mode === 'gallery',
-            'cursor-pointer': contest.mode === 'gallery',
+            'cursor-pointer': option.selectable && !(disabled || observerMode),
           }"
           :style="coloredEdgeStyle"
           :aria-label="`${t('js.components.AVOption.aria_labels.option')} ${getMeaningfulLabel(option as unknown as IterableObject, i18nLocale, t('js.components.AVOption.aria_labels.option'))}`"
           data-test="option-section"
           @click="toggleFromOption"
         >
+          <!-- PARENT BADGE -->
+          <div
+            v-if="contest.mode === 'gallery' && parentTitle"
+            class="vstack p-0"
+            style="max-height: fit-content"
+          >
+            <div
+              class="ps-3 pe-2 py-1 small rounded-0 text-wrap text-start w-100 bg-light"
+              data-test="parent-bagde"
+            >
+              {{ parentTitle }}
+            </div>
+          </div>
           <div
             class="d-flex justify-content-between"
             :class="{
@@ -311,16 +328,6 @@ watch(
               style="max-width: calc(100% - 70px)"
               data-test="option-content"
             >
-              <!-- PARENT BADGE -->
-              <div
-                v-if="contest.mode === 'gallery' && parentTitle"
-                class="AVOption--parent-container w-100 pb-2"
-              >
-                <div class="badge" :style="parentBagdeStyles" data-test="parent-bagde">
-                  {{ parentTitle }}
-                </div>
-              </div>
-
               <!-- OPTION HEADER -->
               <header
                 class="AVOption--header d-flex flex-column flex-sm-row align-items-sm-center gap-3"
@@ -450,43 +457,10 @@ watch(
             </div>
             <div
               v-if="collapsable && hasChildren"
-              class="hstack gap-2 mt-2"
-              data-test="option-children"
-            >
-              <div
-                :id="`option_${option.reference}_dropdown`"
-                class="hstack gap-1 text-dark"
-                aria-hidden="true"
-                data-test="option-expander"
-              >
-                <AVIcon
-                  icon="chevron-down"
-                  class="AVOption--expander-icon"
-                  :class="{
-                    'AVOption--expander-icon-opened': isOpen,
-                  }"
-                />
-                <span
-                  v-html="
-                    isOpen
-                      ? t('js.components.AVOption.collapse_text')
-                      : t('js.components.AVOption.expand_text')
-                  "
-                />
-              </div>
-
-              <span
-                v-if="subOptionSelected && !isOpen"
-                class="badge"
-                :class="{
-                  'bg-theme-danger': invalid,
-                  'bg-dark': !invalid,
-                }"
-                data-test="option-child-selected"
-              >
-                {{ t("js.components.AVOption.sub_options_select", { n: subOptionSelected }) }}
-              </span>
-            </div>
+              :id="`pane_for_option_${option.reference}_btn`"
+              class="mt-2 mb-n3 mx-n3"
+              style="width: calc(100% + 2rem)"
+            ></div>
           </div>
         </section>
       </template>

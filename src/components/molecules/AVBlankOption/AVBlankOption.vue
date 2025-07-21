@@ -50,11 +50,6 @@ const mutationObserver = ref<MutationObserver | null>(null);
 
 const mutationObserverTarget = document.getElementsByTagName("html")[0];
 
-const toggleFromOption = () => {
-  if (!props.galleryMode) return;
-  emits("toggleBlank");
-};
-
 onMounted(() => {
   if (props.locale) switchLocale(props.locale); // DO NOT REMOVE (If in doubt, read the next block comment)
 
@@ -89,12 +84,13 @@ watch(
 
 <template>
   <div
+    class="cursor-pointer"
     :class="{
       'AVBlankOption--disabled': disabled,
       'h-100': galleryMode,
     }"
     data-test="blank-option"
-    @click="toggleFromOption"
+    @click="emits('toggleBlank')"
   >
     <div
       class="AVBlankOption card position-relative"
@@ -120,7 +116,7 @@ watch(
             :invalid="invalid"
             :disabled="disabled || observerMode"
             :gallery-mode="galleryMode"
-            @toggled="$emit('toggleBlank')"
+            @toggled="emits('toggleBlank')"
             data-test="blank-checkbox"
           />
         </div>
