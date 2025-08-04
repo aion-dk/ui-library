@@ -34,6 +34,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  forceLightTheme: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const title = computed(() =>
@@ -168,8 +172,8 @@ watch(
             h3: !card,
             h5: card,
             'mb-0': card && !subtitle,
-            'AVResourceSection--header-text': !card,
-            'text-gray-800': card,
+            'AVResourceSection--header-text': !card && !forceLightTheme,
+            'text-gray-800': card || forceLightTheme,
           }"
           data-test="heading-title"
         >
