@@ -8,6 +8,7 @@ const translations: DefineLocaleMessage = {
     and_more: "و {n} أكثر...",
     public_count_text: "هذا المرشح لديه {n} من التوصيات",
     invite_recommenders_button_label: "دعوة المزكين",
+    view_recommendations_button_label: "عرض التوصيات",
   },
   ca: {
     header_title: "Avals ({n})",
@@ -16,6 +17,7 @@ const translations: DefineLocaleMessage = {
     and_more: "i {n} més...",
     public_count_text: "Aquest candidat té {n} avals",
     invite_recommenders_button_label: "Convida avals",
+    view_recommendations_button_label: "Veure recomanacions",
   },
   cy: {
     header_title: "Argymhellwr ({n})",
@@ -24,6 +26,7 @@ const translations: DefineLocaleMessage = {
     and_more: "ac eraill {n}...",
     public_count_text: "Mae gan yr ymgeisydd hwn {n} argymhelliad.",
     invite_recommenders_button_label: "Gwahodd Atgyfeirwyr",
+    view_recommendations_button_label: "Gweld argymhellion",
   },
   da: {
     header_title: "Anbefalinger ({n})",
@@ -32,6 +35,7 @@ const translations: DefineLocaleMessage = {
     and_more: "og {n} mere...",
     public_count_text: "Denne kandidat har {n} anbefalinger",
     invite_recommenders_button_label: "Anmod om stiller",
+    view_recommendations_button_label: "Vis stillere",
   },
   de: {
     header_title: "Empfehlungsgeber ({n})",
@@ -40,6 +44,7 @@ const translations: DefineLocaleMessage = {
     and_more: "und {n} mehr...",
     public_count_text: "Dieser Kandidat hat {n} Empfehlungen",
     invite_recommenders_button_label: "Empfehlungsgeber einladen",
+    view_recommendations_button_label: "Empfehlungen anzeigen",
   },
   en: {
     header_title: "Recommenders ({n})",
@@ -48,6 +53,7 @@ const translations: DefineLocaleMessage = {
     and_more: "and {n} more...",
     public_count_text: "This candidate has {n} recommendations",
     invite_recommenders_button_label: "Invite recommenders",
+    view_recommendations_button_label: "View recommendations",
   },
   es: {
     header_title: "Avales ({n})",
@@ -56,6 +62,7 @@ const translations: DefineLocaleMessage = {
     and_more: "y {n} más...",
     public_count_text: "Este candidato tiene {n} avales",
     invite_recommenders_button_label: "Invitar avales",
+    view_recommendations_button_label: "Ver avales",
   },
   fi: {
     header_title: "Suosittelijat ({n})",
@@ -64,6 +71,7 @@ const translations: DefineLocaleMessage = {
     and_more: "ja {n} muuta...",
     public_count_text: "Tällä ehdokkaalla on {n} suositusta",
     invite_recommenders_button_label: "Kutsu suosittelijoita",
+    view_recommendations_button_label: "Näytä suositukset",
   },
   fr: {
     header_title: "Recommandateurs ({n})",
@@ -72,6 +80,7 @@ const translations: DefineLocaleMessage = {
     and_more: "et {n} plus...",
     public_count_text: "Ce candidat a {n} recommandations",
     invite_recommenders_button_label: "Inviter des recommandeurs",
+    view_recommendations_button_label: "Voir les recommandations",
   },
   is: {
     header_title: "Meðmælendur ({n})",
@@ -80,6 +89,7 @@ const translations: DefineLocaleMessage = {
     and_more: "og {n} í viðbót...",
     public_count_text: "Þessi frambjóðandi hefur {n} meðmæli",
     invite_recommenders_button_label: "Bjóddu meðmælendum",
+    view_recommendations_button_label: "Skoða tillögur",
   },
   it: {
     header_title: "Raccomandatori ({n})",
@@ -88,6 +98,7 @@ const translations: DefineLocaleMessage = {
     and_more: "e altri {n}...",
     public_count_text: "Questo candidato ha {n} raccomandazioni.",
     invite_recommenders_button_label: "Invita i referenti",
+    view_recommendations_button_label: "Visualizza i consigli",
   },
   nl: {
     header_title: "Aanbevelers ({n})",
@@ -96,6 +107,7 @@ const translations: DefineLocaleMessage = {
     and_more: "en {n} meer...",
     public_count_text: "Deze kandidaat heeft {n} aanbevelingen",
     invite_recommenders_button_label: "Aanbevelers uitnodigen",
+    view_recommendations_button_label: "Bekijk aanbevelingen",
   },
   pl: {
     header_title: "Polecający ({n})",
@@ -104,6 +116,7 @@ const translations: DefineLocaleMessage = {
     and_more: "i {n} więcej...",
     public_count_text: "Ten kandydat ma {n} rekomendacji",
     invite_recommenders_button_label: "Zaproś rekomendujących",
+    view_recommendations_button_label: "Wyświetl rekomendacje",
   },
   pt: {
     header_title: "Recomendadores ({n})",
@@ -112,6 +125,7 @@ const translations: DefineLocaleMessage = {
     and_more: "e {n} mais...",
     public_count_text: "Este candidato tem {n} recomendações",
     invite_recommenders_button_label: "Convidar recomendadores",
+    view_recommendations_button_label: "Ver recomendações",
   },
   ro: {
     header_title: "Recomandatori ({n})",
@@ -120,6 +134,7 @@ const translations: DefineLocaleMessage = {
     and_more: "și încă {n}...",
     public_count_text: "Acest candidat are {n} recomandări",
     invite_recommenders_button_label: "Invitați recomandari",
+    view_recommendations_button_label: "Vedeți recomandările",
   },
   ru: {
     header_title: "Рекомендатели ({n})",
@@ -128,6 +143,7 @@ const translations: DefineLocaleMessage = {
     and_more: "и {n} больше...",
     public_count_text: "У этого кандидата {n} рекомендаций",
     invite_recommenders_button_label: "Пригласить рекомендателей",
+    view_recommendations_button_label: "Посмотреть рекомендации",
   },
   sv: {
     header_title: "Rekommendationer ({n})",
@@ -136,6 +152,7 @@ const translations: DefineLocaleMessage = {
     and_more: "och {n} till...",
     public_count_text: "Den här kandidaten har {n} rekommendationer",
     invite_recommenders_button_label: "Bjud in rekommendationer",
+    view_recommendations_button_label: "Visa rekommendationer",
   },
 };
 

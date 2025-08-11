@@ -172,6 +172,24 @@ describe("AVRecommendationList", () => {
     expect(window.location.href).to.eq("www.some-url.com");
   });
 
+  it("can display view recommendations button", async () => {
+    expect(wrapper.findAll(".AVRecommendationList--invite-btn").length).to.eq(1);
+
+    await wrapper.setProps({
+      viewRecommendationsPath: "www.other-url.com",
+      recommendationPhaseActive: true,
+    });
+
+    expect(wrapper.findAll(".AVRecommendationList--invite-btn")[1].text()).to.contain(
+      "View recommendations",
+    );
+
+    expect(window.location.href).to.eq("www.some-url.com");
+    expect(window.location.href).not.to.eq("www.other-url.com");
+    await wrapper.findAll(".AVRecommendationList--invite-btn")[1].trigger("click");
+    expect(window.location.href).to.eq("www.other-url.com");
+  });
+
   it("disables invite recommenders button", async () => {
     await wrapper.setProps({
       inviteRecommendersPath: "www.some-url.com",
@@ -201,6 +219,9 @@ describe("AVRecommendationList", () => {
     expect(wrapper.find("[data-test=list-collapse]").text()).to.contain("Tiivistä luettelo");
     expect(wrapper.find(".AVRecommendationList--invite-btn").text()).to.contain(
       "Kutsu suosittelijoita",
+    );
+    expect(wrapper.findAll(".AVRecommendationList--invite-btn")[1].text()).to.contain(
+      "Näytä suositukset",
     );
   });
 });

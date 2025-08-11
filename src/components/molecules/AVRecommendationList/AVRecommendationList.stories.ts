@@ -21,6 +21,9 @@ const meta: Meta<typeof AVRecommendationList> = {
     inviteRecommendersPath: {
       control: { type: "text" },
     },
+    viewRecommendationsPath: {
+      control: { type: "text" },
+    },
     locale: {
       control: { type: "select" },
       options: SUPPORTED_LOCALES,
