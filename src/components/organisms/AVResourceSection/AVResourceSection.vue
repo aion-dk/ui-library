@@ -246,13 +246,19 @@ watch(
             {{ t("js.components.AVResourceSection.party_leader") }}:
           </span>
           <a
+            v-if="partyLeaderData.url"
             :href="partyLeaderData.url"
             class="AVResourceSection--party-leader-badge btn btn-theme btn-sm rounded-pill"
             data-test="party-leader-btn"
           >
             <AVIcon icon="certificate" />
-            {{ partyLeaderData.label[i18nLocale] }}
+            {{ partyLeaderData.label }}
           </a>
+
+          <span v-else class="text-theme">
+            <AVIcon icon="certificate" />
+            {{ partyLeaderData.label }}
+          </span>
         </div>
 
         <!-- Content -->

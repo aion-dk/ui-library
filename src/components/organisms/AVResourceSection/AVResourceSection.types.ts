@@ -1,8 +1,6 @@
-import type { LocalString } from "@/types";
-
 interface AVResourceSectionPartyLeader {
-  label: LocalString;
-  url: string;
+  label: string;
+  url?: string;
 }
 
 export type { AVResourceSectionPartyLeader };

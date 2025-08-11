@@ -89,15 +89,27 @@ export const Summary = {
   },
 };
 
-export const PartySummary = {
+export const PartySummaryWLeaderProfile = {
   render: SummaryTemplate,
 
   args: {
     candidate: getCandidate(),
     summary: true,
     partyLeaderData: {
-      label: { en: "Someone Important" },
+      label: "Someone Important",
       url: "https://www.google.com",
+    },
+  },
+};
+
+export const PartySummaryWoLeaderProfile = {
+  render: SummaryTemplate,
+
+  args: {
+    candidate: getCandidate(),
+    summary: true,
+    partyLeaderData: {
+      label: "Someone Important",
     },
   },
 };

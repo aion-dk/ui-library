@@ -101,7 +101,7 @@ describe("AVResourceSection", () => {
 
     await wrapper.setProps({
       partyLeaderData: {
-        label: { en: "Someone Important" },
+        label: "Someone Important",
         url: "https://www.link.com",
       },
     });
