@@ -8,6 +8,7 @@ const translations: DefineLocaleMessage = {
     false: "غير مدقق",
     video: "مشغل الفيديو من مصدر خارجي",
     human: "عنصر النموذج",
+    party_leader: "زعيم الحزب",
   },
   ca: {
     and_more: "i {amount} més",
@@ -16,6 +17,7 @@ const translations: DefineLocaleMessage = {
     alt_candidate: "Imatge del candidat/a",
     video: "Reproductor de vídeo d'una font externa",
     human: "Element de formulari",
+    party_leader: "Líder del partit",
   },
   cy: {
     and_more: "a {amount} mwy",
@@ -24,6 +26,7 @@ const translations: DefineLocaleMessage = {
     alt_candidate: "Delwedd yr ymgeisydd",
     video: "Chwaraewr fideo o ffynhonnell allanol",
     human: "Ffurflen eitem",
+    party_leader: "Arweinydd y blaid",
   },
   da: {
     alt_candidate: "Portræt af kandidaten",
@@ -32,6 +35,7 @@ const translations: DefineLocaleMessage = {
     false: "Slået fra",
     video: "Videoafspiller fra ekstern kilde",
     human: "Formularelement",
+    party_leader: "Partileder",
   },
   de: {
     alt_candidate: "Porträt des Kandidaten",
@@ -40,6 +44,7 @@ const translations: DefineLocaleMessage = {
     false: "Nicht geprüft",
     video: "Videoplayer von externer Quelle",
     human: "Formularelement",
+    party_leader: "Parteivorsitzender",
   },
   en: {
     alt_candidate: "Portrait of the candidate",
@@ -48,6 +53,7 @@ const translations: DefineLocaleMessage = {
     false: "Not checked",
     video: "Video player from external source",
     human: "Form item",
+    party_leader: "Party leader",
   },
   es: {
     alt_candidate: "Retrato del candidato",
@@ -56,6 +62,7 @@ const translations: DefineLocaleMessage = {
     false: "No marcado",
     video: "Reproductor de vídeo de fuente externa",
     human: "Item del formulario",
+    party_leader: "Lider del partido",
   },
   fi: {
     alt_candidate: "Ehdokkaan muotokuva",
@@ -64,6 +71,7 @@ const translations: DefineLocaleMessage = {
     false: "Ei tarkistettu",
     video: "Videosoitin ulkoisesta lähteestä",
     human: "Lomakekohde",
+    party_leader: "Puolueen johtaja",
   },
   fr: {
     alt_candidate: "Portrait du candidat",
@@ -72,6 +80,7 @@ const translations: DefineLocaleMessage = {
     false: "Non vérifié",
     video: "Lecteur vidéo à partir d'une source externe",
     human: "Élément de formulaire",
+    party_leader: "Chef du parti",
   },
   is: {
     alt_candidate: "Andlitsmynd af frambjóðandanum",
@@ -80,6 +89,7 @@ const translations: DefineLocaleMessage = {
     false: "Ekki athugað",
     video: "Myndbandsspilari frá ytri uppruna",
     human: "Form atriði",
+    party_leader: "Flokksleiðtogi",
   },
   it: {
     alt_candidate: "Ritratto del candidato",
@@ -88,6 +98,7 @@ const translations: DefineLocaleMessage = {
     false: "Non selezionato",
     video: "Lettore video da fonte esterna",
     human: "Elemento del modulo",
+    party_leader: "Leader del partito",
   },
   nl: {
     alt_candidate: "Portret van de kandidaat",
@@ -96,6 +107,7 @@ const translations: DefineLocaleMessage = {
     false: "Niet gecontroleerd",
     video: "Videospeler van externe bron",
     human: "Formulier item",
+    party_leader: "Partijleider",
   },
   pl: {
     alt_candidate: "Portret kandydata",
@@ -104,6 +116,7 @@ const translations: DefineLocaleMessage = {
     false: "Niesprawdzone",
     video: "Odtwarzacz wideo ze źródła zewnętrznego",
     human: "Element formularza",
+    party_leader: "Lider partii",
   },
   pt: {
     alt_candidate: "Retrato do candidato",
@@ -112,6 +125,7 @@ const translations: DefineLocaleMessage = {
     false: "Não marcado",
     video: "Reprodutor de vídeo de fonte externa",
     human: "Item de formulário",
+    party_leader: "Líder do partido",
   },
   ro: {
     alt_candidate: "Portretul candidatului",
@@ -120,6 +134,7 @@ const translations: DefineLocaleMessage = {
     false: "Nu a verificat",
     video: "Player video din sursă externă",
     human: "Element de formular",
+    party_leader: "Liderul partidului",
   },
   ru: {
     alt_candidate: "Портрет кандидата",
@@ -128,6 +143,7 @@ const translations: DefineLocaleMessage = {
     false: "Не проверено",
     video: "Видеоплеер из внешнего источника",
     human: "Элемент формы",
+    party_leader: "Лидер партии",
   },
   sv: {
     alt_candidate: "Porträtt av kandidaten",
@@ -136,6 +152,7 @@ const translations: DefineLocaleMessage = {
     false: "Inte kontrollerad",
     video: "Videospelare från extern källa",
     human: "Formulärobjekt",
+    party_leader: "Partiledare",
   },
 };
 

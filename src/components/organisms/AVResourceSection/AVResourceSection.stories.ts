@@ -17,6 +17,18 @@ const meta: Meta<typeof AVResourceSection> = {
     summary: {
       control: { type: "boolean" },
     },
+    card: {
+      control: { type: "boolean" },
+    },
+    forceLightTheme: {
+      control: { type: "boolean" },
+    },
+    isPartyLeader: {
+      control: { type: "boolean" },
+    },
+    partyLeaderData: {
+      control: { type: "object" },
+    },
     locale: {
       control: { type: "select" },
       options: SUPPORTED_LOCALES,
@@ -74,6 +86,29 @@ export const Summary = {
   args: {
     candidate: getCandidate(),
     summary: true,
+  },
+};
+
+export const PartySummary = {
+  render: SummaryTemplate,
+
+  args: {
+    candidate: getCandidate(),
+    summary: true,
+    partyLeaderData: {
+      label: { en: "Someone Important" },
+      url: "https://www.google.com",
+    },
+  },
+};
+
+export const PartyLeaderSummary = {
+  render: SummaryTemplate,
+
+  args: {
+    candidate: getCandidate(),
+    summary: true,
+    isPartyLeader: true,
   },
 };
 

@@ -11,6 +11,7 @@ import type {
   ResourceGroup,
   LocalString,
   IterableObject,
+  AVResourceSectionPartyLeader,
 } from "@/types";
 
 const props = defineProps({
@@ -26,10 +27,6 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-  locale: {
-    type: String as PropType<SupportedLocale>,
-    default: null,
-  },
   card: {
     type: Boolean,
     default: false,
@@ -37,6 +34,18 @@ const props = defineProps({
   forceLightTheme: {
     type: Boolean,
     default: false,
+  },
+  isPartyLeader: {
+    type: Boolean,
+    default: false,
+  },
+  partyLeaderData: {
+    type: Object as PropType<AVResourceSectionPartyLeader>,
+    default: null,
+  },
+  locale: {
+    type: String as PropType<SupportedLocale>,
+    default: null,
   },
 });
 
@@ -153,6 +162,14 @@ watch(
           }"
           data-test="resource-image"
         />
+        <div
+          v-if="isPartyLeader"
+          class="hstack gap-1 bg-theme px-2 py-1"
+          data-test="party-leader-tag"
+        >
+          <AVIcon icon="certificate" />
+          {{ t("js.components.AVResourceSection.party_leader") }}
+        </div>
       </div>
 
       <div
@@ -222,6 +239,21 @@ watch(
             }}
           </span>
         </h6>
+
+        <!-- Party leader tag (when is party profile) -->
+        <div v-if="partyLeaderData" class="hstack gap-2 mb-2">
+          <span class="d-block m-0">
+            {{ t("js.components.AVResourceSection.party_leader") }}:
+          </span>
+          <a
+            :href="partyLeaderData.url"
+            class="AVResourceSection--party-leader-badge btn btn-theme btn-sm rounded-pill"
+            data-test="party-leader-btn"
+          >
+            <AVIcon icon="certificate" />
+            {{ partyLeaderData.label[i18nLocale] }}
+          </a>
+        </div>
 
         <!-- Content -->
         <template v-if="!card">

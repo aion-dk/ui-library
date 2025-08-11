@@ -85,6 +85,34 @@ describe("AVResourceSection", () => {
     expect(wrapper.find("[data-test=heading-group]").text()).to.contain("Jutland& 1 more");
   });
 
+  it("can be party leader", async () => {
+    expect(wrapper.findAll("[data-test=party-leader-tag]").length).to.eq(0);
+
+    await wrapper.setProps({
+      isPartyLeader: true,
+    });
+
+    expect(wrapper.find("[data-test=party-leader-tag]").text()).to.contain("Party leader");
+    expect(wrapper.find("[data-test=party-leader-tag]").html()).to.contain('icon="certificate"');
+  });
+
+  it("party can display party leader", async () => {
+    expect(wrapper.findAll("[data-test=party-leader-btn]").length).to.eq(0);
+
+    await wrapper.setProps({
+      partyLeaderData: {
+        label: { en: "Someone Important" },
+        url: "https://www.link.com",
+      },
+    });
+
+    expect(wrapper.find("[data-test=party-leader-btn]").text()).to.contain("Someone Important");
+    expect(wrapper.find("[data-test=party-leader-btn]").html()).to.contain('icon="certificate"');
+    expect(wrapper.find("[data-test=party-leader-btn]").html()).to.contain(
+      'href="https://www.link.com"',
+    );
+  });
+
   it("renders properly as content", async () => {
     await wrapper.setProps({
       summary: false,

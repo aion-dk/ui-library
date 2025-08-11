@@ -31,6 +31,7 @@ export * from "@/components/organisms/AVDhondtAPSummary/AVDhondtAPSummary.types"
 export * from "@/components/organisms/AVDhondtSummary/AVDhondtSummary.types";
 export * from "@/components/organisms/AVCalculateResultContent/AVCalculateResultContent.types";
 export * from "@/components/organisms/AVBallot/AVBallot.types";
+export * from "@/components/organisms/AVResourceSection/AVResourceSection.types";
 
 // TEMPLATES
 export * from "@/components/templates/AVSplitHelper/AVSplitHelper.types";
