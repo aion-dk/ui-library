@@ -10,11 +10,11 @@ const translations: DefineLocaleMessage = {
     view_recommendations_button_label: "عرض التوصيات",
     candidate: {
       public_count_text: "هذا المرشح لديه {n} من التوصيات",
-      no_recommendations: "",
+      no_recommendations: "هذا المرشح ليس لديه أي توصيات حتى الآن.",
     },
     party: {
-      public_count_text: "",
-      no_recommendations: "",
+      public_count_text: "هذا الحزب لديه {n} توصيات.",
+      no_recommendations: "هذا الحزب ليس لديه أي توصيات حتى الآن.",
     },
   },
   ca: {
@@ -26,11 +26,11 @@ const translations: DefineLocaleMessage = {
     view_recommendations_button_label: "Veure recomanacions",
     candidate: {
       public_count_text: "Aquest candidat té {n} avals",
-      no_recommendations: "",
+      no_recommendations: "Aquest candidat encara no té cap avals",
     },
     party: {
-      public_count_text: "",
-      no_recommendations: "",
+      public_count_text: "Aquest partit té {n} avals",
+      no_recommendations: "Aquest partit encara no té cap avals",
     },
   },
   cy: {
@@ -42,11 +42,11 @@ const translations: DefineLocaleMessage = {
     view_recommendations_button_label: "Gweld argymhellion",
     candidate: {
       public_count_text: "Mae gan yr ymgeisydd hwn {n} argymhelliad",
-      no_recommendations: "",
+      no_recommendations: "Nid oes gan yr ymgeisydd hwn unrhyw argymhellion eto",
     },
     party: {
-      public_count_text: "",
-      no_recommendations: "",
+      public_count_text: "Mae gan y blaid hon {n} o argymhellion",
+      no_recommendations: "Nid oes gan y blaid hon unrhyw argymhellion eto",
     },
   },
   da: {
@@ -57,12 +57,12 @@ const translations: DefineLocaleMessage = {
     invite_recommenders_button_label: "Anmod om stiller",
     view_recommendations_button_label: "Vis stillere",
     candidate: {
-      public_count_text: "Denne kandidat har {n} anbefalinger",
-      no_recommendations: "",
+      public_count_text: "Denne kandidat har {n} stillere",
+      no_recommendations: "Denne kandidat har endnu ingen stillere",
     },
     party: {
-      public_count_text: "",
-      no_recommendations: "",
+      public_count_text: "Dette parti har {n} stillere",
+      no_recommendations: "Dette parti har endnu ingen stillere",
     },
   },
   de: {
@@ -74,11 +74,11 @@ const translations: DefineLocaleMessage = {
     view_recommendations_button_label: "Empfehlungen anzeigen",
     candidate: {
       public_count_text: "Dieser Kandidat hat {n} Empfehlungen",
-      no_recommendations: "",
+      no_recommendations: "Dieser Kandidat hat noch keine Empfehlungen",
     },
     party: {
-      public_count_text: "",
-      no_recommendations: "",
+      public_count_text: "Diese Partei hat {n} Empfehlungen",
+      no_recommendations: "Diese Partei hat noch keine Empfehlungen",
     },
   },
   en: {
@@ -106,11 +106,11 @@ const translations: DefineLocaleMessage = {
     view_recommendations_button_label: "Ver avales",
     candidate: {
       public_count_text: "Este candidato tiene {n} avales",
-      no_recommendations: "",
+      no_recommendations: "Este candidato aún no tiene avales",
     },
     party: {
-      public_count_text: "",
-      no_recommendations: "",
+      public_count_text: "Este partido tiene {n} avales",
+      no_recommendations: "Este partido aún no tiene avales",
     },
   },
   fi: {
@@ -122,11 +122,11 @@ const translations: DefineLocaleMessage = {
     view_recommendations_button_label: "Näytä suositukset",
     candidate: {
       public_count_text: "Tällä ehdokkaalla on {n} suositusta",
-      no_recommendations: "",
+      no_recommendations: "Tällä ehdokkaalla ei ole vielä suosituksia",
     },
     party: {
-      public_count_text: "",
-      no_recommendations: "",
+      public_count_text: "Tällä puolueella on {n} suositusta",
+      no_recommendations: "Tällä puolueella ei ole vielä suosituksia",
     },
   },
   fr: {
@@ -138,11 +138,11 @@ const translations: DefineLocaleMessage = {
     view_recommendations_button_label: "Voir les recommandations",
     candidate: {
       public_count_text: "Ce candidat a {n} recommandations",
-      no_recommendations: "",
+      no_recommendations: "Ce candidat n'a pas encore reçu de recommandations",
     },
     party: {
-      public_count_text: "",
-      no_recommendations: "",
+      public_count_text: "Ce parti a reçu {n} recommandations",
+      no_recommendations: "Ce parti n'a pas encore reçu de recommandations",
     },
   },
   is: {
@@ -154,11 +154,11 @@ const translations: DefineLocaleMessage = {
     view_recommendations_button_label: "Skoða tillögur",
     candidate: {
       public_count_text: "Þessi frambjóðandi hefur {n} meðmæli",
-      no_recommendations: "",
+      no_recommendations: "Þessi frambjóðandi hefur engar tillögur ennþá",
     },
     party: {
-      public_count_text: "",
-      no_recommendations: "",
+      public_count_text: "Þessi flokkur hefur {n} tillögur",
+      no_recommendations: "Þessi flokkur hefur engar tillögur ennþá",
     },
   },
   it: {
@@ -170,11 +170,11 @@ const translations: DefineLocaleMessage = {
     view_recommendations_button_label: "Visualizza i consigli",
     candidate: {
       public_count_text: "Questo candidato ha {n} raccomandazioni",
-      no_recommendations: "",
+      no_recommendations: "Questo candidato non ha ancora ricevuto raccomandazioni",
     },
     party: {
-      public_count_text: "",
-      no_recommendations: "",
+      public_count_text: "Questo partito ha {n} raccomandazioni",
+      no_recommendations: "Questo partito non ha ancora ricevuto raccomandazioni",
     },
   },
   nl: {
@@ -186,11 +186,11 @@ const translations: DefineLocaleMessage = {
     view_recommendations_button_label: "Bekijk aanbevelingen",
     candidate: {
       public_count_text: "Deze kandidaat heeft {n} aanbevelingen",
-      no_recommendations: "",
+      no_recommendations: "Deze kandidaat heeft nog geen aanbevelingen",
     },
     party: {
-      public_count_text: "",
-      no_recommendations: "",
+      public_count_text: "Deze partij heeft {n} aanbevelingen",
+      no_recommendations: "Deze partij heeft nog geen aanbevelingen",
     },
   },
   pl: {
@@ -202,11 +202,11 @@ const translations: DefineLocaleMessage = {
     view_recommendations_button_label: "Wyświetl rekomendacje",
     candidate: {
       public_count_text: "Ten kandydat ma {n} rekomendacji",
-      no_recommendations: "",
+      no_recommendations: "Ten kandydat nie ma jeszcze żadnych rekomendacji",
     },
     party: {
-      public_count_text: "",
-      no_recommendations: "",
+      public_count_text: "Ta partia ma {n} rekomendacji",
+      no_recommendations: "Ta partia nie ma jeszcze żadnych rekomendacji",
     },
   },
   pt: {
@@ -218,11 +218,11 @@ const translations: DefineLocaleMessage = {
     view_recommendations_button_label: "Ver recomendações",
     candidate: {
       public_count_text: "Este candidato tem {n} recomendações",
-      no_recommendations: "",
+      no_recommendations: "Este candidato ainda não tem nenhuma recomendação",
     },
     party: {
-      public_count_text: "",
-      no_recommendations: "",
+      public_count_text: "Este partido tem {n} recomendações",
+      no_recommendations: "Este partido ainda não tem qualquer recomendação",
     },
   },
   ro: {
@@ -234,11 +234,11 @@ const translations: DefineLocaleMessage = {
     view_recommendations_button_label: "Vedeți recomandările",
     candidate: {
       public_count_text: "Acest candidat are {n} recomandări",
-      no_recommendations: "",
+      no_recommendations: "Acest candidat nu are încă nicio recomandare",
     },
     party: {
-      public_count_text: "",
-      no_recommendations: "",
+      public_count_text: "Acest partid are {n} recomandări",
+      no_recommendations: "Acest partid nu are încă nicio recomandare",
     },
   },
   ru: {
@@ -250,11 +250,11 @@ const translations: DefineLocaleMessage = {
     view_recommendations_button_label: "Посмотреть рекомендации",
     candidate: {
       public_count_text: "У этого кандидата {n} рекомендаций",
-      no_recommendations: "",
+      no_recommendations: "У этого кандидата пока нет рекомендаций",
     },
     party: {
-      public_count_text: "",
-      no_recommendations: "",
+      public_count_text: "У этой партии {n} рекомендаций",
+      no_recommendations: "У этой партии пока нет рекомендаций",
     },
   },
   sv: {
@@ -266,11 +266,11 @@ const translations: DefineLocaleMessage = {
     view_recommendations_button_label: "Visa rekommendationer",
     candidate: {
       public_count_text: "Den här kandidaten har {n} rekommendationer",
-      no_recommendations: "",
+      no_recommendations: "Denna kandidat har inga rekommendationer ännu",
     },
     party: {
-      public_count_text: "",
-      no_recommendations: "",
+      public_count_text: "Detta parti har {n} rekommendationer",
+      no_recommendations: "Detta parti har inga rekommendationer ännu",
     },
   },
 };
