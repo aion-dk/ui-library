@@ -21,6 +21,7 @@ export default mergeConfig(
           "**/atoms/AVAnimatedTransition/**",
           "**/atoms/AVWaitingDots/**",
           "**/atoms/AVFileInput/**", // Lot of stuff can't be easily tested, but covered in Liminal.
+          "**/atoms/AVShowMore/**", // Same as above.
           "**/molecules/AVWriteInOption/**", // Not needed until we actually start using the component.
         ],
         thresholds: {

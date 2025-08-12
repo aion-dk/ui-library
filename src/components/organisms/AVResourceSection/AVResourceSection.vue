@@ -204,8 +204,8 @@ watch(
             h4: !card,
             h6: card,
             'mb-0': card,
-            'AVResourceSection--header-text': !card,
-            'text-gray-800': card,
+            'AVResourceSection--header-text': !card && !forceLightTheme,
+            'text-gray-800': card || forceLightTheme,
           }"
           data-test="heading-subtitle"
         >
@@ -217,8 +217,8 @@ watch(
           v-if="summary && candidate.groups && !card"
           class="h5"
           :class="{
-            'AVResourceSection--header-text': !card,
-            'text-gray-800': card,
+            'AVResourceSection--header-text': !card && !forceLightTheme,
+            'text-gray-800': card || forceLightTheme,
           }"
           data-test="heading-group"
         >
