@@ -40,7 +40,9 @@ describe("AVRecommendationList", () => {
     expect(wrapper.text()).to.not.contain("Uncollapse the list");
     expect(wrapper.text()).to.not.contain("Collapse the list");
     expect(wrapper.findAll("[data-test=recommendation]").length).to.eq(0);
-    expect(wrapper.findAll("[data-test=recommendation-summary]").length).to.eq(0);
+    expect(wrapper.find("[data-test=recommendation-summary]").text()).to.contain(
+      "This candidate doesn\'t have any recommendations",
+    );
 
     await wrapper.setProps({
       recommendations: [
@@ -55,7 +57,6 @@ describe("AVRecommendationList", () => {
     expect(wrapper.text()).to.contain("Recommenders (1)");
     expect(wrapper.text()).to.contain("R1");
     expect(wrapper.findAll("[data-test=recommendation]").length).to.eq(0);
-    expect(wrapper.findAll("[data-test=recommendation-summary]").length).to.eq(1);
     expect(wrapper.find("[data-test=recommendation-summary]").text()).to.contain("R1");
   });
 
