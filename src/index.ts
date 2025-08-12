@@ -42,6 +42,7 @@ import {
   AVResultSummaryItem,
   AVVerticalStep,
   AVWaitingDots,
+  AVShowMore,
 
   // MOLECULES
   AVSummaryOption,
@@ -95,6 +96,7 @@ export default {
     app.component("AVResultSummaryItem", AVResultSummaryItem);
     app.component("AVVerticalStep", AVVerticalStep);
     app.component("AVWaitingDots", AVWaitingDots);
+    app.component("AVShowMore", AVShowMore);
 
     // MOLECULES
     app.component("AVSummaryOption", AVSummaryOption);
@@ -148,6 +150,7 @@ export {
   AVResultSummaryItem,
   AVVerticalStep,
   AVWaitingDots,
+  AVShowMore,
 
   // MOLECULES
   AVSummaryOption,
