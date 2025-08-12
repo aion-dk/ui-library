@@ -29,8 +29,13 @@ const LINK_VISUALIZER_KEYS = [
 
 // AVOptionLiveResults
 const LIVE_RESULT_MODES = ["internal", "external"] as const;
+
+// AVSplitHelper
 const SPLIT_HELPER_STATE = ["ballot", "assign", "overview"] as const;
+
+// AVRecommendationList
 const RECOMMENDATION_PUBLIC_TYPES = ["public", "private", "public_count"] as const;
+const CANDIDACY_RESOURCES = ["candidate", "party", "resource", "recommender", "group"] as const;
 
 // AVAnimatedMenuButton
 const ANIMATED_MENU_BUTTON_VARIANTS = ["cross", "arrow-down"] as const;
@@ -53,6 +58,7 @@ export {
   LIVE_RESULT_MODES,
   SPLIT_HELPER_STATE,
   RECOMMENDATION_PUBLIC_TYPES,
+  CANDIDACY_RESOURCES,
   ANIMATED_MENU_BUTTON_VARIANTS,
   CALCULATE_RESULT_ROLE,
   CALCULATE_RESULT_STATUS,
