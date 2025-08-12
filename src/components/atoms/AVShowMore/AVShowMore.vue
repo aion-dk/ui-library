@@ -3,13 +3,13 @@ import type { PropType, SupportedLocale } from "@/types";
 import { ref, computed, inject, onMounted, watch } from "vue";
 import { switchLocale } from "@/i18n";
 
-const slots = defineSlots<{
-  content(): Array<{ el: HTMLElement }>;
-}>();
-
 const props = defineProps({
   id: {
     type: String,
+    required: true,
+  },
+  contentHeight: {
+    type: Number,
     required: true,
   },
   customHeightInPx: {
@@ -28,10 +28,8 @@ const props = defineProps({
 
 const isOpened = ref<boolean>(false);
 
-const contentHeight = ref<number>(0);
-
 const displayAll = computed(
-  () => props.displayFullContent || contentHeight.value < props.customHeightInPx,
+  () => props.displayFullContent || props.contentHeight < props.customHeightInPx,
 );
 
 /**
@@ -46,8 +44,6 @@ const i18n: any = inject("i18n");
 const { t } = i18n.global;
 onMounted(() => {
   if (props.locale) switchLocale(props.locale);
-
-  contentHeight.value = slots.content().reduce((sum, el) => sum + el.el.clientHeight, 0);
 });
 watch(
   () => props.locale,
@@ -61,9 +57,10 @@ watch(
 
 <template>
   <div
-    role=""
-    class="overflow-hidden position-relative"
-    :style="isOpened || displayAll ? 'height: fit-content;' : `max-height: ${customHeightInPx}px;`"
+    class="AVShowMore--content overflow-hidden position-relative"
+    :style="
+      isOpened || displayAll ? `height: ${contentHeight}px;` : `height: ${customHeightInPx}px;`
+    "
     :id="id"
   >
     <slot name="content" />
@@ -75,7 +72,7 @@ watch(
   </div>
   <button
     v-if="!displayAll"
-    class="w-100 bg-white border-0 p-3"
+    class="w-100 bg-white border-0 p-3 small text-decoration-underline"
     :aria-expanded="displayFullContent || isOpened"
     :aria-controls="id"
     @click="isOpened = !isOpened"

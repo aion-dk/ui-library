@@ -10,6 +10,9 @@ const meta: Meta<typeof AVShowMore> = {
     id: {
       control: { type: "text" },
     },
+    contentHeight: {
+      control: { type: "number", min: "0", max: "999", step: "10" },
+    },
     customHeightInPx: {
       control: { type: "number", min: "0", max: "999", step: "10" },
     },
@@ -48,6 +51,7 @@ export const Default = {
 
   args: {
     id: "test1",
+    contentHeight: 500,
   },
 };
 
@@ -57,6 +61,7 @@ export const ForceShowAll = {
   args: {
     displayFullContent: true,
     id: "test2",
+    contentHeight: 920,
   },
 };
 
@@ -65,5 +70,6 @@ export const ShowAllByShortContent = {
 
   args: {
     id: "test3",
+    contentHeight: 68,
   },
 };
