@@ -3,6 +3,7 @@ import type {
   PropType,
   Recommendation,
   AVRecommendationListPublicType,
+  AVRecommendationListResource,
   SupportedLocale,
 } from "@/types";
 import { ref, onMounted, watch, inject, computed } from "vue";
@@ -25,13 +26,21 @@ const props = defineProps({
     type: String,
     default: null,
   },
-  locale: {
-    type: String as PropType<SupportedLocale>,
+  viewRecommendationsPath: {
+    type: String,
     default: null,
   },
   recommendationPhaseActive: {
     type: Boolean,
     default: false,
+  },
+  resourceType: {
+    type: String as PropType<AVRecommendationListResource>,
+    default: "candidate",
+  },
+  locale: {
+    type: String as PropType<SupportedLocale>,
+    default: null,
   },
 });
 
@@ -82,6 +91,10 @@ const goToInviteRecommendersPath = () => {
   return (window.location.href = props.inviteRecommendersPath);
 };
 
+const goToViewRecommendationsPath = () => {
+  return (window.location.href = props.viewRecommendationsPath);
+};
+
 /**
  * This is necesary in order to support both provided i18n and local i18n.
  * The used locale will be taken from the provided i18n as long as there is one
@@ -106,6 +119,47 @@ watch(
 </script>
 
 <template>
+  <template v-if="recommendationsPublic !== 'private'">
+    <div
+      class="d-flex flex-column flex-sm-row align-items-start align-items-sm-center justify-content-between gap-3"
+    >
+      <div class="w-100">
+        <h4 class="m-0 mb-n2">
+          {{
+            t("js.components.AVRecommendationList.header_title", {
+              n: recommendations.length,
+            })
+          }}
+        </h4>
+      </div>
+
+      <div
+        class="d-flex flex-column flex-sm-row align-items-center justify-content-end gap-2 w-100"
+      >
+        <button
+          v-if="!!inviteRecommendersPath"
+          :disabled="!recommendationPhaseActive"
+          class="party-invite-btn btn btn-theme"
+          @click.stop.prevent="goToInviteRecommendersPath"
+        >
+          <AVIcon icon="envelope" />
+          {{ t("js.components.AVRecommendationList.invite_recommenders_button_label") }}
+        </button>
+
+        <button
+          v-if="!!viewRecommendationsPath"
+          :disabled="!recommendationPhaseActive"
+          class="party-invite-btn btn btn-theme"
+          @click.stop.prevent="goToViewRecommendationsPath"
+        >
+          {{ t("js.components.AVRecommendationList.view_recommendations_button_label") }}
+        </button>
+      </div>
+    </div>
+
+    <hr class="m-0 mt-2" />
+  </template>
+
   <AVCollapser
     v-if="
       Boolean(recommendations.length) &&
@@ -119,38 +173,23 @@ watch(
     @accordion-open="isOpen = true"
   >
     <template #toggle="{ isOpen }">
-      <div class="AVRecommendationList--header d-flex flex-column flex-sm-row">
-        <div class="vstack gap-3">
-          <div class="hstack gap-3">
-            <h4 class="m-0">
-              {{
-                t("js.components.AVRecommendationList.header_title", {
-                  n: recommendations.length,
-                })
-              }}
-            </h4>
-            <button
-              v-if="!!inviteRecommendersPath"
-              :disabled="!recommendationPhaseActive"
-              class="AVRecommendationList--invite-btn btn btn-sm btn-theme-outline"
-              @click.stop.prevent="goToInviteRecommendersPath"
-            >
-              <AVIcon icon="envelope" />
-              {{ t("js.components.AVRecommendationList.invite_recommenders_button_label") }}
-            </button>
-          </div>
-
-          <p
-            v-if="orderedRecommendations.length >= summaryRecommenders && !isOpen"
-            class="hstack gap-1 text-dark mb-0"
-            data-test="recommendation-summary"
-          >
+      <div
+        class="AVRecommendationList--header d-flex flex-column flex-sm-row"
+        :class="{
+          'justify-content-end': isOpen,
+        }"
+      >
+        <div
+          v-if="orderedRecommendations.length >= summaryRecommenders && !isOpen"
+          class="vstack gap-3"
+        >
+          <p class="hstack gap-1 text-dark mb-0" data-test="recommendation-summary">
             <AVIcon icon="user-check" class="align-self-start py-1" />
             {{ previewRecommendations.short }}
           </p>
         </div>
 
-        <div class="hstack gap-2 text-dark" data-test="list-collapse">
+        <div class="hstack gap-2 text-dark align-self-end" data-test="list-collapse">
           <span class="small text-nowrap">
             {{
               isOpen
@@ -193,32 +232,29 @@ watch(
   </AVCollapser>
 
   <div
-    v-else-if="Boolean(recommendations.length) && recommendationsPublic == 'public'"
+    v-else-if="Boolean(recommendations.length) && recommendationsPublic === 'public'"
     class="AVRecommendationList--header d-flex flex-column flex-sm-row"
   >
     <div class="vstack gap-3">
-      <div class="hstack gap-3">
-        <h4 class="m-0">
-          {{
-            t("js.components.AVRecommendationList.header_title", {
-              n: recommendations.length,
-            })
-          }}
-        </h4>
-        <button
-          v-if="!!inviteRecommendersPath"
-          :disabled="!recommendationPhaseActive"
-          class="AVRecommendationList--invite-btn btn btn-sm btn-theme-outline"
-          @click.stop.prevent="goToInviteRecommendersPath"
-        >
-          <AVIcon icon="envelope" />
-          {{ t("js.components.AVRecommendationList.invite_recommenders_button_label") }}
-        </button>
-      </div>
-
       <p class="hstack gap-1 text-dark mb-0" data-test="recommendation-summary">
         <AVIcon icon="user-check" class="align-self-start py-1" />
         {{ previewRecommendations.short }}
+      </p>
+    </div>
+  </div>
+
+  <div
+    v-else-if="Boolean(recommendations.length) && recommendationsPublic === 'public_count'"
+    class="AVRecommendationList--header d-flex flex-column flex-sm-row"
+  >
+    <div class="vstack gap-3">
+      <p class="hstack gap-1 text-dark mb-0" data-test="recommendation-summary">
+        <AVIcon icon="user-check" class="align-self-start py-1" />
+        {{
+          t(`js.components.AVRecommendationList.${resourceType}.public_count_text`, {
+            n: recommendations.length,
+          })
+        }}
       </p>
     </div>
   </div>
@@ -228,29 +264,9 @@ watch(
     class="AVRecommendationList--header d-flex flex-column flex-sm-row"
   >
     <div class="vstack gap-3">
-      <h4 class="m-0">
-        {{
-          t("js.components.AVRecommendationList.header_title", {
-            n: recommendations.length,
-          })
-        }}
-        <button
-          v-if="!!inviteRecommendersPath"
-          :disabled="!recommendationPhaseActive"
-          class="AVRecommendationList--invite-btn btn btn-sm btn-theme-outline"
-          @click.stop.prevent="goToInviteRecommendersPath"
-        >
-          <AVIcon icon="envelope" />
-          {{ t("js.components.AVRecommendationList.invite_recommenders_button_label") }}
-        </button>
-      </h4>
-      <p class="m-0 text-dark">
-        <AVIcon icon="user-check" />
-        {{
-          t("js.components.AVRecommendationList.public_count_text", {
-            n: recommendations.length,
-          })
-        }}
+      <p class="hstack gap-1 text-dark mb-0" data-test="recommendation-summary">
+        <AVIcon icon="user-check" class="align-self-start py-1" />
+        {{ t(`js.components.AVRecommendationList.${resourceType}.no_recommendations`) }}
       </p>
     </div>
   </div>

@@ -15,6 +15,7 @@ export { default as AVFileInput } from "@/components/atoms/AVFileInput";
 export { default as AVResultSummaryItem } from "@/components/atoms/AVResultSummaryItem";
 export { default as AVVerticalStep } from "@/components/atoms/AVVerticalStep";
 export { default as AVWaitingDots } from "@/components/atoms/AVWaitingDots";
+export { default as AVShowMore } from "@/components/atoms/AVShowMore";
 
 // MOLECULES
 export { default as AVSummaryOption } from "@/components/molecules/AVSummaryOption";

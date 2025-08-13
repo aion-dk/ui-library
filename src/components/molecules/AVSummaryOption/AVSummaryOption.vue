@@ -182,11 +182,8 @@ watch(
       class="card-body hstack gap-2"
       :class="{ 'p-4': useFooter, 'justify-content-between': !galleryMode }"
     >
-      <div
-        :class="{ vstack: galleryMode, hstack: !galleryMode }"
-        style="max-width: calc(100%-70px)"
-      >
-        <div class="w-100">
+      <div :class="{ vstack: galleryMode }" style="max-width: calc(100%-70px)">
+        <div class="w-100" :class="{ hstack: !galleryMode }">
           <img
             v-if="option?.image"
             :src="imageUrl"
@@ -217,7 +214,7 @@ watch(
     <!-- IF MULTIVOTE -->
     <div
       v-if="useFooter"
-      class="card-footer bg-secondary d-flex gap-2 justify-content-end py-3 flex-wrap"
+      class="card-footer bg-light d-flex gap-2 justify-content-end py-3 flex-wrap"
     >
       <div
         v-for="groupIndex in optionGroups"

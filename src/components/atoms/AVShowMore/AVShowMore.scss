@@ -1,0 +1,23 @@
+.AVShowMore--content {
+  transition: height 500ms ease-out;
+  -webkit-transition: height 500ms ease-out;
+  -moz-transition: height 500ms ease-out;
+  -o-transition: height 500ms ease-out;
+}
+
+.AVShowMore--overlay {
+  width: 100%;
+  transition: all 500ms ease-out;
+  -webkit-transition: all 500ms ease-out;
+  -moz-transition: all 500ms ease-out;
+  -o-transition: all 500ms ease-out;
+  background: linear-gradient(0deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
+}
+
+.AVShowMore--overlay-opened {
+  height: 0rem;
+}
+
+.AVShowMore--overlay-closed {
+  height: 6rem;
+}

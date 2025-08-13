@@ -1,6 +1,6 @@
 :root {
   --av-theme-background: #744ba3;
-  --av-theme-secondary: #f7edcd;
+  --av-theme-secondary: #f6edfc;
   --av-theme-secondary-text: black;
   --av-theme-text: white;
   --av-theme-danger-background: rgb(230, 0, 118);
@@ -33,6 +33,11 @@
 
 .text-theme-danger {
   color: var(--av-theme-danger-background) !important;
+}
+
+.bg-theme {
+  background-color: var(--av-theme-background);
+  color: var(--av-theme-text);
 }
 
 .bg-theme-danger {
@@ -107,4 +112,14 @@
 .bg-theme-secondary {
   color: var(--av-theme-secondary-text) !important;
   background-color: var(--av-theme-secondary) !important;
+}
+
+.party-invite-btn {
+  width: 100%;
+}
+
+@media (min-width: 576px) {
+  .party-invite-btn {
+    width: fit-content;
+  }
 }
