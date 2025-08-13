@@ -113,3 +113,13 @@
   color: var(--av-theme-secondary-text) !important;
   background-color: var(--av-theme-secondary) !important;
 }
+
+.party-invite-btn {
+  width: 100%;
+}
+
+@media (min-width: 576px) {
+  .party-invite-btn {
+    width: fit-content;
+  }
+}

@@ -139,7 +139,7 @@ watch(
         <button
           v-if="!!inviteRecommendersPath"
           :disabled="!recommendationPhaseActive"
-          class="AVRecommendationList--invite-btn btn btn-theme"
+          class="party-invite-btn btn btn-theme"
           @click.stop.prevent="goToInviteRecommendersPath"
         >
           <AVIcon icon="envelope" />
@@ -149,7 +149,7 @@ watch(
         <button
           v-if="!!viewRecommendationsPath"
           :disabled="!recommendationPhaseActive"
-          class="AVRecommendationList--invite-btn btn btn-theme"
+          class="party-invite-btn btn btn-theme"
           @click.stop.prevent="goToViewRecommendationsPath"
         >
           {{ t("js.components.AVRecommendationList.view_recommendations_button_label") }}
