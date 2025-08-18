@@ -1,4 +1,17 @@
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=PT+Mono&family=Rubik:wght@600&display=swap");
+@font-face {
+  font-family: "Open Sans";
+  src: local("../fonts/OpenSans.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "PT Mono";
+  src: local("../fonts/PTMono.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Rubik";
+  src: local("../fonts/Rubik.ttf") format("truetype");
+}
 
 $enable-caret: true !default;
 $enable-rounded: true !default;
