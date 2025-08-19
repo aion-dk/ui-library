@@ -1,6 +1,6 @@
 {
   "name": "@assemblyvoting/electa-ui",
-  "version": "5.1.0-beta.0",
+  "version": "5.1.0-beta.1",
   "license": "MIT",
   "publishConfig": {
     "access": "public"
@@ -38,6 +38,9 @@
     "test-storybook-coverage": "test-storybook --maxWorkers 1 --coverage"
   },
   "dependencies": {
+    "@fontsource/open-sans": "^5.2.6",
+    "@fontsource/pt-mono": "^5.2.6",
+    "@fontsource/rubik": "^5.2.6",
     "@fortawesome/fontawesome-svg-core": "^6.7.2",
     "@fortawesome/free-brands-svg-icons": "^6.7.2",
     "@fortawesome/free-solid-svg-icons": "^6.7.2",

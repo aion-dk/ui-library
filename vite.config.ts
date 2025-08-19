@@ -34,10 +34,6 @@ export default defineConfig({
           src: resolve(__dirname, "src/bootstrap/bootstrap.customized.scss"),
           dest: "src/bootstrap",
         },
-        {
-          src: resolve(__dirname, "src/fonts"),
-          dest: "src/fonts",
-        },
       ],
     }),
   ],

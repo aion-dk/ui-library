@@ -1,17 +1,10 @@
-@font-face {
-  font-family: "Open Sans";
-  src: local("../fonts/OpenSans.ttf") format("truetype");
-}
+@import "@fontsource/open-sans";
+@import "@fontsource/pt-mono";
+@import "@fontsource/rubik";
 
-@font-face {
-  font-family: "PT Mono";
-  src: local("../fonts/PTMono.ttf") format("truetype");
-}
-
-@font-face {
-  font-family: "Rubik";
-  src: local("../fonts/Rubik.ttf") format("truetype");
-}
+$font-family-base: "Open Sans", sans-serif;
+$font-rubik: "Rubik", sans-serif;
+$font-mono: "PT Mono", monospace;
 
 $enable-caret: true !default;
 $enable-rounded: true !default;
@@ -81,8 +74,6 @@ $custom-colors: (
   "accent-70": $accent-70,
   "accent-90": $accent-90,
 );
-
-$font-family-base: "Open Sans", sans-serif;
 
 $custom-file-text: (
   ar: "تصفح",
@@ -171,9 +162,16 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
 }
 
 .text-rubik {
-  font-family: "Rubik", sans-serif;
+  font-family: $font-rubik;
   font-optical-sizing: auto;
-  font-weight: 600;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.text-mono {
+  font-family: $font-mono;
+  font-optical-sizing: auto;
+  font-weight: 400;
   font-style: normal;
 }
 
