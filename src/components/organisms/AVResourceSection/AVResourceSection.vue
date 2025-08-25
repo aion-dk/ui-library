@@ -142,7 +142,13 @@ watch(
 <template>
   <section class="vstack">
     <div
-      :class="`d-flex gap-3 ${card ? 'flex-column' : 'flex-column flex-sm-row gap-sm-4 gap-md-5'}`"
+      class="d-flex gap-3"
+      :class="{
+        'flex-column': card,
+        'flex-column flex-sm-row gap-sm-4 gap-md-5': !card,
+        'mt-4 mb-5': summary && !image && card,
+        'my-5': summary && !image && !card,
+      }"
       data-test="resource-section"
     >
       <div
