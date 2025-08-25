@@ -38,6 +38,9 @@ const meta: Meta<typeof AVResourceSection> = {
 
 export default meta;
 
+const noPicture = { ...getCandidate() };
+noPicture.generic.shift();
+
 const Template = (args: Meta) => ({
   components: { AVResourceSection },
   setup() {
@@ -85,6 +88,15 @@ export const Summary = {
 
   args: {
     candidate: getCandidate(),
+    summary: true,
+  },
+};
+
+export const SummaryWithoutPicture = {
+  render: SummaryTemplate,
+
+  args: {
+    candidate: noPicture,
     summary: true,
   },
 };
@@ -139,6 +151,17 @@ export const SmallCard = {
 
   args: {
     candidate: getCandidate(),
+    currentCandidateGroup: 2,
+    summary: true,
+    card: true,
+  },
+};
+
+export const CardWithoutPicture = {
+  render: SmallCardTemplate,
+
+  args: {
+    candidate: noPicture,
     currentCandidateGroup: 2,
     summary: true,
     card: true,
