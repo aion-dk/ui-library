@@ -115,6 +115,12 @@ const image = computed(
       ?.form_content as string,
 );
 
+const groupPillStyles = computed(() =>
+  window.getComputedStyle(document.body).getPropertyValue("--av-theme-secondary-text") === "black"
+    ? `background-color: var(--bs-gray-700) !important; color: white !important;`
+    : `background-color: var(--bs-gray-200) !important; color: black !important;`,
+);
+
 /**
  * This is necesary in order to support both provided i18n and local i18n.
  * The used locale will be taken from the provided i18n as long as there is one
@@ -235,8 +241,8 @@ watch(
           <span
             v-if="!!groups?.surplus"
             v-tooltip:top="groups.remaining"
-            class="cursor-help badge rounded-pill text-bg-secondary"
-            style="color: black !important"
+            class="cursor-help badge rounded-pill"
+            :style="groupPillStyles"
           >
             {{
               t("js.components.AVResourceSection.and_more", {
@@ -261,7 +267,13 @@ watch(
             {{ partyLeaderData.label }}
           </a>
 
-          <span v-else class="text-theme">
+          <span
+            v-else
+            :class="{
+              'AVResourceSection--header-text': !forceLightTheme,
+              'text-gray-800': forceLightTheme,
+            }"
+          >
             <AVIcon icon="certificate" />
             {{ partyLeaderData.label }}
           </span>
