@@ -251,8 +251,12 @@ watch(
           <a
             v-if="groups?.remaining.length"
             class="small w-fit cursor-pointer"
-            @click="toggleGroups"
+            :class="{
+              'AVResourceSection--header-text': !forceLightTheme,
+              'text-gray-800': forceLightTheme,
+            }"
             style="font-size: 14px"
+            @click="toggleGroups"
           >
             {{
               groupsOpened
