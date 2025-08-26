@@ -219,12 +219,14 @@ watch(
         <!-- Group (only when enabled) -->
         <div
           v-if="summary && candidate.groups && !card"
-          class="gap-2 mb-3"
+          class="gap-2"
           :class="{
             'AVResourceSection--header-text': !card && !forceLightTheme,
             'text-gray-800': card || forceLightTheme,
             hstack: groups?.surplus && !groupsOpened,
             vstack: groups?.surplus && groupsOpened,
+            'mb-3': groups?.remaining.length,
+            'mb-2': !groups?.remaining.length,
           }"
           style="flex: 0 1 auto"
           data-test="heading-group"
@@ -246,7 +248,12 @@ watch(
             </h6>
           </template>
 
-          <a class="small w-fit cursor-pointer" @click="toggleGroups" style="font-size: 14px">
+          <a
+            v-if="groups?.remaining.length"
+            class="small w-fit cursor-pointer"
+            @click="toggleGroups"
+            style="font-size: 14px"
+          >
             {{
               groupsOpened
                 ? t("js.components.AVResourceSection.show_less")
