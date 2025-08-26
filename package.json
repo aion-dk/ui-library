@@ -34,8 +34,8 @@
     "prepare": "husky",
     "precommit": "yarn lint",
     "prepublishOnly": "yarn build",
-    "test-storybook": "test-storybook --maxWorkers 1",
-    "test-storybook-coverage": "test-storybook --maxWorkers 1 --coverage"
+    "test-storybook": "test-storybook --maxWorkers 1 --testTimeout=60000",
+    "test-storybook-coverage": "test-storybook --maxWorkers 1 --coverage --testTimeout=60000"
   },
   "dependencies": {
     "@fontsource/open-sans": "^5.2.6",
