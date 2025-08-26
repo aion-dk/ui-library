@@ -9,6 +9,8 @@ const translations: DefineLocaleMessage = {
     video: "مشغل الفيديو من مصدر خارجي",
     human: "عنصر النموذج",
     party_leader: "زعيم الحزب",
+    show_all: "عرض الكل",
+    show_less: "عرض أقل",
   },
   ca: {
     and_more: "i {amount} més",
@@ -18,6 +20,8 @@ const translations: DefineLocaleMessage = {
     video: "Reproductor de vídeo d'una font externa",
     human: "Element de formulari",
     party_leader: "Líder del partit",
+    show_all: "mostra-ho tot",
+    show_less: "mostra-ho menys",
   },
   cy: {
     and_more: "a {amount} mwy",
@@ -27,6 +31,8 @@ const translations: DefineLocaleMessage = {
     video: "Chwaraewr fideo o ffynhonnell allanol",
     human: "Ffurflen eitem",
     party_leader: "Arweinydd y blaid",
+    show_all: "dangos y cyfan",
+    show_less: "dangos llai",
   },
   da: {
     alt_candidate: "Portræt af kandidaten",
@@ -36,6 +42,8 @@ const translations: DefineLocaleMessage = {
     video: "Videoafspiller fra ekstern kilde",
     human: "Formularelement",
     party_leader: "Partileder",
+    show_all: "vis alle",
+    show_less: "vis mindre",
   },
   de: {
     alt_candidate: "Porträt des Kandidaten",
@@ -45,6 +53,8 @@ const translations: DefineLocaleMessage = {
     video: "Videoplayer von externer Quelle",
     human: "Formularelement",
     party_leader: "Parteivorsitzender",
+    show_all: "alle anzeigen",
+    show_less: "weniger anzeigen",
   },
   en: {
     alt_candidate: "Portrait of the candidate",
@@ -54,6 +64,8 @@ const translations: DefineLocaleMessage = {
     video: "Video player from external source",
     human: "Form item",
     party_leader: "Party leader",
+    show_all: "show all",
+    show_less: "show less",
   },
   es: {
     alt_candidate: "Retrato del candidato",
@@ -63,6 +75,8 @@ const translations: DefineLocaleMessage = {
     video: "Reproductor de vídeo de fuente externa",
     human: "Item del formulario",
     party_leader: "Lider del partido",
+    show_all: "mostrar todos",
+    show_less: "mostrar menos",
   },
   fi: {
     alt_candidate: "Ehdokkaan muotokuva",
@@ -72,6 +86,8 @@ const translations: DefineLocaleMessage = {
     video: "Videosoitin ulkoisesta lähteestä",
     human: "Lomakekohde",
     party_leader: "Puolueen johtaja",
+    show_all: "näytä kaikki",
+    show_less: "näytä vähemmän",
   },
   fr: {
     alt_candidate: "Portrait du candidat",
@@ -81,6 +97,8 @@ const translations: DefineLocaleMessage = {
     video: "Lecteur vidéo à partir d'une source externe",
     human: "Élément de formulaire",
     party_leader: "Chef du parti",
+    show_all: "tout afficher",
+    show_less: "afficher moins",
   },
   is: {
     alt_candidate: "Andlitsmynd af frambjóðandanum",
@@ -90,6 +108,8 @@ const translations: DefineLocaleMessage = {
     video: "Myndbandsspilari frá ytri uppruna",
     human: "Form atriði",
     party_leader: "Flokksleiðtogi",
+    show_all: "sýna allt",
+    show_less: "sýna minna",
   },
   it: {
     alt_candidate: "Ritratto del candidato",
@@ -99,6 +119,8 @@ const translations: DefineLocaleMessage = {
     video: "Lettore video da fonte esterna",
     human: "Elemento del modulo",
     party_leader: "Leader del partito",
+    show_all: "mostra tutto",
+    show_less: "mostra meno",
   },
   nl: {
     alt_candidate: "Portret van de kandidaat",
@@ -108,6 +130,8 @@ const translations: DefineLocaleMessage = {
     video: "Videospeler van externe bron",
     human: "Formulier item",
     party_leader: "Partijleider",
+    show_all: "alles weergeven",
+    show_less: "minder weergeven",
   },
   pl: {
     alt_candidate: "Portret kandydata",
@@ -117,6 +141,8 @@ const translations: DefineLocaleMessage = {
     video: "Odtwarzacz wideo ze źródła zewnętrznego",
     human: "Element formularza",
     party_leader: "Lider partii",
+    show_all: "pokaż wszystko",
+    show_less: "pokaż mniej",
   },
   pt: {
     alt_candidate: "Retrato do candidato",
@@ -126,6 +152,8 @@ const translations: DefineLocaleMessage = {
     video: "Reprodutor de vídeo de fonte externa",
     human: "Item de formulário",
     party_leader: "Líder do partido",
+    show_all: "mostrar tudo",
+    show_less: "mostrar menos",
   },
   ro: {
     alt_candidate: "Portretul candidatului",
@@ -135,6 +163,8 @@ const translations: DefineLocaleMessage = {
     video: "Player video din sursă externă",
     human: "Element de formular",
     party_leader: "Liderul partidului",
+    show_all: "arată tot",
+    show_less: "arată mai puțin",
   },
   ru: {
     alt_candidate: "Портрет кандидата",
@@ -144,6 +174,8 @@ const translations: DefineLocaleMessage = {
     video: "Видеоплеер из внешнего источника",
     human: "Элемент формы",
     party_leader: "Лидер партии",
+    show_all: "показать все",
+    show_less: "показать меньше",
   },
   sv: {
     alt_candidate: "Porträtt av kandidaten",
@@ -153,6 +185,8 @@ const translations: DefineLocaleMessage = {
     video: "Videospelare från extern källa",
     human: "Formulärobjekt",
     party_leader: "Partiledare",
+    show_all: "visa alla",
+    show_less: "visa mindre",
   },
 };
 
