@@ -199,3 +199,11 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
 .cursor-pointer {
   cursor: pointer !important;
 }
+
+.w-fit {
+  width: fit-content !important;
+}
+
+.h-fit {
+  height: fit-content !important;
+}

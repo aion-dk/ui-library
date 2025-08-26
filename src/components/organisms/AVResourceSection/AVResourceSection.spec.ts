@@ -4,7 +4,6 @@ import { getCandidate } from "@/examples";
 import localI18n from "@/i18n";
 
 import AVResourceSection from "./AVResourceSection.vue";
-import AVTooltip from "@/components/atoms/AVTooltip";
 
 describe("AVResourceSection", () => {
   const wrapper = mount(AVResourceSection, {
@@ -15,7 +14,6 @@ describe("AVResourceSection", () => {
       locale: "en",
     },
     global: {
-      components: { AVTooltip },
       provide: {
         i18n: localI18n,
       },
@@ -59,7 +57,7 @@ describe("AVResourceSection", () => {
     );
     expect(wrapper.find("[data-test=heading-title]").text()).to.contain("Jhon Doe");
     expect(wrapper.find("[data-test=heading-subtitle]").text()).to.contain("Developer");
-    expect(wrapper.find("[data-test=heading-group]").text()).to.contain("Zealand& 1 more");
+    expect(wrapper.find("[data-test=heading-group]").text()).to.contain("Zealand & 1 moreshow all");
 
     expect(wrapper.findAll("[data-test=resource-content]").length).to.eq(2);
     expect(wrapper.find("[data-test=resource-link-list]").findAll("span")[0].text()).to.contain(
@@ -81,8 +79,30 @@ describe("AVResourceSection", () => {
       currentCandidateGroup: 2,
     });
 
-    expect(wrapper.find("[data-test=heading-group]").text()).to.not.contain("Zealand& 1 more");
-    expect(wrapper.find("[data-test=heading-group]").text()).to.contain("Jutland& 1 more");
+    expect(wrapper.find("[data-test=heading-group]").text()).to.not.contain(
+      "Zealand & 1 moreshow all",
+    );
+    expect(wrapper.find("[data-test=heading-group]").text()).to.contain("Jutland & 1 moreshow all");
+  });
+
+  it("can display all groups", async () => {
+    expect(wrapper.find("[data-test=heading-group]").text()).to.not.contain(
+      "Jutland Zealandshow less",
+    );
+
+    await wrapper.find("[data-test=heading-group] a").trigger("click");
+
+    expect(wrapper.find("[data-test=heading-group]").text()).to.contain("Jutland Zealandshow less");
+    expect(wrapper.find("[data-test=heading-group]").text()).to.not.contain(
+      "Jutland & 1 moreshow all",
+    );
+
+    await wrapper.find("[data-test=heading-group] a").trigger("click");
+
+    expect(wrapper.find("[data-test=heading-group]").text()).to.not.contain(
+      "Jutland Zealandshow less",
+    );
+    expect(wrapper.find("[data-test=heading-group]").text()).to.contain("Jutland & 1 moreshow all");
   });
 
   it("can be party leader", async () => {
@@ -161,7 +181,9 @@ describe("AVResourceSection", () => {
       summary: true,
     });
 
-    expect(wrapper.find("[data-test=heading-group]").text()).to.contain("Jutlandiay 1 más");
+    expect(wrapper.find("[data-test=heading-group]").text()).to.contain(
+      "Jutlandia y 1 másmostrar todos",
+    );
     expect(wrapper.find("[data-test=resource-regular-content]").text()).to.contain(
       "Etiqueta del campo: Some text",
     );

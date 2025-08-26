@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { watch, onMounted, computed, inject } from "vue";
+import { watch, onMounted, computed, inject, ref } from "vue";
 import { switchLocale } from "@/i18n";
 import { getMeaningfulLabel } from "@/helpers/meaningfulLabel";
 import type {
@@ -49,6 +49,8 @@ const props = defineProps({
   },
 });
 
+const groupsOpened = ref(false);
+
 const title = computed(() =>
   props.candidate.title?.[0]?.localised
     ? (props.candidate.title?.[0]?.form_content as LocalString)[i18nLocale.value]
@@ -66,7 +68,6 @@ const groups = computed(() => {
 
   let displayed: ResourceGroup[] = [];
   let remaining: ResourceGroup[] = [];
-  let remainingString = "";
 
   if (props.currentCandidateGroup) {
     props.candidate.groups.forEach((group: ResourceGroup) => {
@@ -77,17 +78,12 @@ const groups = computed(() => {
     displayed = remaining.splice(0, 1);
   }
 
-  remaining.forEach((group: ResourceGroup, i: number) => {
-    if (i === 0 || props.candidate.groups?.length === 1)
-      remainingString = group.title[i18nLocale.value];
-    else if (i === remaining.length - 1) remainingString += ` & ${group.title[i18nLocale.value]}`;
-    else remainingString += `, ${group.title[i18nLocale.value]}`;
-  });
+  const remainingNames = remaining.map((group: ResourceGroup) => group.title[i18nLocale.value]);
 
   return {
     title: displayed[0]?.title[i18nLocale.value],
     surplus: remaining.length || null,
-    remaining: remainingString,
+    remaining: remainingNames,
   };
 });
 
@@ -115,11 +111,7 @@ const image = computed(
       ?.form_content as string,
 );
 
-const groupPillStyles = computed(() =>
-  window.getComputedStyle(document.body).getPropertyValue("--av-theme-secondary-text") === "black"
-    ? `background-color: var(--bs-gray-700) !important; color: white !important;`
-    : `background-color: var(--bs-gray-200) !important; color: black !important;`,
-);
+const toggleGroups = () => (groupsOpened.value = !groupsOpened.value);
 
 /**
  * This is necesary in order to support both provided i18n and local i18n.
@@ -225,32 +217,43 @@ watch(
         </h5>
 
         <!-- Group (only when enabled) -->
-        <h6
+        <div
           v-if="summary && candidate.groups && !card"
-          class="h5"
+          class="gap-2 mb-3"
           :class="{
             'AVResourceSection--header-text': !card && !forceLightTheme,
             'text-gray-800': card || forceLightTheme,
+            hstack: groups?.surplus && !groupsOpened,
+            vstack: groups?.surplus && groupsOpened,
           }"
+          style="flex: 0 1 auto"
           data-test="heading-group"
         >
-          <span class="align-middle me-2">
+          <h6 class="h5 m-0 w-fit">
             {{ groups?.title }}
-          </span>
+            <span v-if="!!groups?.surplus && !groupsOpened">
+              {{
+                t("js.components.AVResourceSection.and_more", {
+                  amount: groups.surplus,
+                })
+              }}
+            </span>
+          </h6>
 
-          <span
-            v-if="!!groups?.surplus"
-            v-tooltip:top="groups.remaining"
-            class="cursor-help badge rounded-pill"
-            :style="groupPillStyles"
-          >
+          <template v-if="groups?.remaining && groupsOpened">
+            <h6 v-for="group in groups.remaining" :key="`group_${group}`" class="h5 m-0">
+              {{ group }}
+            </h6>
+          </template>
+
+          <a class="small w-fit cursor-pointer" @click="toggleGroups" style="font-size: 14px">
             {{
-              t("js.components.AVResourceSection.and_more", {
-                amount: groups.surplus,
-              })
+              groupsOpened
+                ? t("js.components.AVResourceSection.show_less")
+                : t("js.components.AVResourceSection.show_all")
             }}
-          </span>
-        </h6>
+          </a>
+        </div>
 
         <!-- Party leader tag (when is party profile) -->
         <div v-if="partyLeaderData" class="hstack gap-2 mb-2">
