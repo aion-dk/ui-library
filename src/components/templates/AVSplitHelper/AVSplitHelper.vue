@@ -186,7 +186,8 @@ const updateErrors = (errors: string[]) => {
   contestErrors.value = errors;
 };
 
-const viewCandidate = (reference: string) => emits("view-candidate", reference);
+const viewCandidate = (contestReference: string, optionReference: string) =>
+  emits("view-candidate", contestReference, optionReference);
 
 watch(readyForSubmission, (newValue) => emits("update:complete", newValue));
 

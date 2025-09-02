@@ -154,7 +154,8 @@ const toggleOption = ({ reference, amount }: CheckedEventArgs) => {
   });
 };
 
-const viewCandidate = (reference: string) => emits("view-candidate", reference);
+const viewCandidate = (contestReference: string, optionReference: string) =>
+  emits("view-candidate", contestReference, optionReference);
 
 const galleryOptions = computed(() => {
   const options: AVBallotGalleryOption[] = [];
