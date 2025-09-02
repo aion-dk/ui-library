@@ -187,8 +187,10 @@ const mutationObserver = ref<MutationObserver | null>(null);
 
 const mutationObserverTarget = document.getElementsByTagName("html")[0];
 
-const openChildrenCandidate = (reference: string) => {
-  emits("view-candidate", reference);
+const openChildrenCandidate = (contestReference: string, optionReference: string) => {
+  console.log("openChildrenCandidate", contestReference, optionReference);
+
+  emits("view-candidate", contestReference, optionReference);
 };
 
 const bsBorderColor = computed(() =>
@@ -437,10 +439,15 @@ watch(
               <button
                 v-if="!!option.candidateId"
                 class="btn btn-sm btn-outline-ballot"
-                @click.stop="emits('view-candidate', option.candidateId)"
+                @click.stop="emits('view-candidate', contest.reference, option.reference)"
                 data-test="option-candidacy"
               >
-                {{ t("js.components.AVOption.view_candidate") }}
+                <template v-if="option.isParty">
+                  {{ t("js.components.AVOption.view_party") }}
+                </template>
+                <template v-else>
+                  {{ t("js.components.AVOption.view_candidate") }}
+                </template>
               </button>
 
               <a
