@@ -340,13 +340,13 @@ describe("AVOption", () => {
 
     expect(wrapper.emitted()["view-candidate"]).to.not.exist;
     await wrapper.findAll("[data-test=option-candidacy]")[0].trigger("click");
-    expect((wrapper.emitted()["view-candidate"] as VitestEmitted)[0][0]).to.eq("exampleContest"); // candidate ID
-    expect((wrapper.emitted()["view-candidate"] as VitestEmitted)[0][1]).to.eq("exampleOption1"); // candidate ID
+    expect((wrapper.emitted()["view-candidate"] as VitestEmitted)[0][0]).to.eq("exampleContest"); // contest reference
+    expect((wrapper.emitted()["view-candidate"] as VitestEmitted)[0][1]).to.eq("exampleOption1"); // option reference
     await wrapper.findAll("[data-test=option-candidacy]")[2].trigger("click");
-    expect((wrapper.emitted()["view-candidate"] as VitestEmitted)[1][0]).to.eq("exampleContest"); // candidate ID
+    expect((wrapper.emitted()["view-candidate"] as VitestEmitted)[1][0]).to.eq("exampleContest"); // contest reference
     expect((wrapper.emitted()["view-candidate"] as VitestEmitted)[1][1]).to.eq(
       "exampleChildren1-2",
-    ); // candidate ID
+    ); // option reference
   });
 
   it("can display links", async () => {
