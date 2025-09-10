@@ -87,7 +87,7 @@
     "storybook": "^9.1.1",
     "storybook-addon-rtl": "^2.0.0",
     "typescript": "^5.7.3",
-    "vite": "^6.2.7",
+    "vite": "^6.3.6",
     "vite-plugin-static-copy": "^2.3.2",
     "vite-plugin-vue-devtools": "^7.6.8",
     "vitest": "^3.0.7",
