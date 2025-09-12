@@ -45,9 +45,6 @@ const meta: Meta<typeof AVPileSummary> & {
     onDeleteSelection: {
       action: "deleteSelection: DELETE SELECTION",
     },
-    changeSelection: {
-      action: "changeSelection: CHANGE SELECTION",
-    },
   },
 };
 
@@ -169,7 +166,7 @@ export const Summary = {
     pileIndex: 0,
     totalPiles: 3,
     selectionPile: getSelectionPile(["single", "weighted"]),
-    changeSelection: true,
+    isPrefilled: true,
   },
 };
 

@@ -59,8 +59,8 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-  changeSelection: {
-    type: String,
+  isPrefilled: {
+    type: Boolean,
     default: null,
   },
 });
@@ -176,7 +176,7 @@ watch(
         {{ totalPiles }}</span
       >
       <button
-        v-if="changeSelection"
+        v-if="isPrefilled"
         class="btn btn-secondary btn-sm border my-0"
         @click="emits('editCurrentSelection', pileIndex)"
       >

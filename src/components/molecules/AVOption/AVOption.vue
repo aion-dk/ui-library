@@ -188,7 +188,6 @@ const mutationObserver = ref<MutationObserver | null>(null);
 const mutationObserverTarget = document.getElementsByTagName("html")[0];
 
 const openChildrenCandidate = (contestReference: string, optionReference: string) => {
-
   emits("view-candidate", contestReference, optionReference);
 };
 
