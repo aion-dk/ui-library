@@ -59,6 +59,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  changeSelection: {
+    type: String,
+    default: null,
+  },
 });
 
 const showAllOptions = ref(false);
@@ -171,7 +175,14 @@ watch(
         >{{ t("js.components.AVPileSummary.selection") }} {{ pileIndex + 1 }} /
         {{ totalPiles }}</span
       >
-      <span class="AVPileSummary--summary-header-text my-0"
+      <button
+        v-if="changeSelection"
+        class="btn btn-secondary btn-sm border my-0"
+        @click="emits('editCurrentSelection', pileIndex)"
+      >
+        {{ t("js.components.AVPileSummary.change_selection_btn") }}
+      </button>
+      <span v-else class="AVPileSummary--summary-header-text my-0"
         >{{ selectionPile.multiplier }} {{ t("js.components.AVPileSummary.ballots") }}</span
       >
     </header>
