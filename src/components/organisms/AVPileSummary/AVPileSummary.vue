@@ -59,6 +59,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  isPrefilled: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const showAllOptions = ref(false);
@@ -176,8 +180,15 @@ watch(
       >
     </header>
 
-    <header v-else class="AVPileSummary--summary-header hstack px-3 py-1">
+    <header v-else class="AVPileSummary--summary-header hstack px-3 py-1 justify-content-between">
       <span>{{ t("js.components.AVPileSummary.selection") }}</span>
+      <button
+        v-if="isPrefilled"
+        class="btn btn-secondary btn-sm border"
+        @click="emits('editCurrentSelection')"
+      >
+        {{ t("js.components.AVPileSummary.change_selection_btn") }}
+      </button>
     </header>
 
     <div class="p-3 border" :class="galleryMode ? 'AVPileSummary--grid' : 'vstack gap-2'">

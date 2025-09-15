@@ -52,6 +52,7 @@ const translations: DefineLocaleMessage = {
       delete_selection: "Slet dette valg",
       edit_selection: "Rediger dette valg",
     },
+    change_selection_btn: "Ændr valg",
   },
   de: {
     selection: "Auswahl",
@@ -78,6 +79,7 @@ const translations: DefineLocaleMessage = {
       delete_selection: "Delete this selection",
       edit_selection: "Edit this selection",
     },
+    change_selection_btn: "Change selection",
   },
   es: {
     selection: "Selección",
