@@ -61,7 +61,7 @@ const props = defineProps({
   },
   isPrefilled: {
     type: Boolean,
-    default: null,
+    default: false,
   },
 });
 
@@ -175,20 +175,20 @@ watch(
         >{{ t("js.components.AVPileSummary.selection") }} {{ pileIndex + 1 }} /
         {{ totalPiles }}</span
       >
-      <button
-        v-if="isPrefilled"
-        class="btn btn-secondary btn-sm border my-0"
-        @click="emits('editCurrentSelection', pileIndex)"
-      >
-        {{ t("js.components.AVPileSummary.change_selection_btn") }}
-      </button>
-      <span v-else class="AVPileSummary--summary-header-text my-0"
+      <span class="AVPileSummary--summary-header-text my-0"
         >{{ selectionPile.multiplier }} {{ t("js.components.AVPileSummary.ballots") }}</span
       >
     </header>
 
-    <header v-else class="AVPileSummary--summary-header hstack px-3 py-1">
+    <header v-else class="AVPileSummary--summary-header hstack px-3 py-1 justify-content-between">
       <span>{{ t("js.components.AVPileSummary.selection") }}</span>
+      <button
+        v-if="isPrefilled"
+        class="btn btn-secondary btn-sm border"
+        @click="emits('editCurrentSelection', pileIndex)"
+      >
+        {{ t("js.components.AVPileSummary.change_selection_btn") }}
+      </button>
     </header>
 
     <div class="p-3 border" :class="galleryMode ? 'AVPileSummary--grid' : 'vstack gap-2'">
