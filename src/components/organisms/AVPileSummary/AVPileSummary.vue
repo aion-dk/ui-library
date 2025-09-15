@@ -185,7 +185,7 @@ watch(
       <button
         v-if="isPrefilled"
         class="btn btn-secondary btn-sm border"
-        @click="emits('editCurrentSelection', pileIndex)"
+        @click="emits('editCurrentSelection')"
       >
         {{ t("js.components.AVPileSummary.change_selection_btn") }}
       </button>
