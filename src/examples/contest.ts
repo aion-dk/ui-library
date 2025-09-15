@@ -103,7 +103,6 @@ const getContest = (args: ContestArg[]): ContestContent => {
       maxMarks: getMaxMarks(args),
       voteVariation: args.includes("ranked") ? "ranked" : "normal",
       encoding: { codeSize: 1, maxSize: 1, cryptogramCount: 1 },
-      maxPiles: 1,
     },
     resultType: { name: "regular" },
     options: getContestOptions(args),
