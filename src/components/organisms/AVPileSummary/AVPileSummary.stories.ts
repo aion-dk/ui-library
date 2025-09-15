@@ -166,6 +166,20 @@ export const Summary = {
     pileIndex: 0,
     totalPiles: 3,
     selectionPile: getSelectionPile(["single", "weighted"]),
+  },
+};
+
+export const SummaryWithPrefilled = {
+  render: Template,
+
+  args: {
+    contest: getContest([]),
+    activeState: "summary",
+    isEditing: false,
+    maximumOptionsShown: 3,
+    pileIndex: 0,
+    totalPiles: 3,
+    selectionPile: getSelectionPile(["single", "weighted"]),
     isPrefilled: true,
   },
 };
