@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import useEventsBus from "@/helpers/eventBus";
 import { getMeaningfulLabel } from "@/helpers/meaningfulLabel";
+import { getTextContrastColor } from "@/helpers/contrastCalculator";
 import { watch, ref, nextTick, computed, inject, onMounted, onUnmounted } from "vue";
 import type {
   PropType,
@@ -201,6 +202,18 @@ const coloredEdgeStyle = computed(() => {
     return `
       border-${isRtl.value ? "right" : "left"}-color: ${color};
       border-${isRtl.value ? "right" : "left"}-width: 0.5rem;
+      border-top-color: ${color};
+      border-top-width: 0.5rem;
+    `;
+  } else return "";
+});
+
+const parentStyle = computed(() => {
+  if (props.option.accentColor || props.parentColor || props.parentTitle) {
+    const color = props.option.accentColor || props.parentColor || bsBorderColor.value;
+    return `
+      background-color: ${color};
+      color: ${getTextContrastColor(color)};
     `;
   } else return "";
 });
@@ -309,7 +322,8 @@ watch(
             style="max-height: fit-content"
           >
             <div
-              class="ps-3 pe-2 py-1 small rounded-0 text-wrap text-start w-100 bg-light"
+              class="ps-1 pe-2 pb-1 mt-n1 small rounded-0 text-wrap text-start w-100"
+              :style="parentStyle"
               data-test="parent-bagde"
             >
               {{ parentTitle }}
