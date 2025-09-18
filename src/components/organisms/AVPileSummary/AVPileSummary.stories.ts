@@ -35,6 +35,9 @@ const meta: Meta<typeof AVPileSummary> & {
     totalPiles: {
       control: { type: "number", min: 0, max: 10, step: 1 },
     },
+    showOptionsDescription: {
+      control: { type: "boolean" },
+    },
     locale: {
       control: { type: "select" },
       options: SUPPORTED_LOCALES,
@@ -165,6 +168,21 @@ export const Summary = {
     maximumOptionsShown: 3,
     pileIndex: 0,
     totalPiles: 3,
+    selectionPile: getSelectionPile(["single", "weighted"]),
+  },
+};
+
+export const SummaryWithDescriptions = {
+  render: Template,
+
+  args: {
+    contest: getContest(["complete_options"]),
+    activeState: "summary",
+    isEditing: false,
+    maximumOptionsShown: 3,
+    pileIndex: 0,
+    totalPiles: 3,
+    showOptionsDescription: true,
     selectionPile: getSelectionPile(["single", "weighted"]),
   },
 };
