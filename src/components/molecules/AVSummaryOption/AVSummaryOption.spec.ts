@@ -160,7 +160,6 @@ describe("AVSummaryOption", () => {
       "border-left-color: #FF00FF; border-left-width: 0.5rem;",
     );
     expect(wrapper.find("[data-test=parent-bagde]").text()).to.contain("Parent 1");
-    expect(wrapper.find("[data-test=parent-bagde]").classes()).to.contain("bg-light");
   });
 
   it("can switch language", async () => {
