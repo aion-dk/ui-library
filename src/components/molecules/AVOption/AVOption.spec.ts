@@ -138,6 +138,12 @@ describe("AVOption", () => {
     expect(wrapper.find("[data-test=option-section]").attributes().style).to.include(
       "border-left-color: #FF0000;",
     );
+    expect(wrapper.find("[data-test=option-section]").attributes().style).to.not.include(
+      "border-top-width: 0.5rem;",
+    );
+    expect(wrapper.find("[data-test=option-section]").attributes().style).to.not.include(
+      "border-top-color: #FF0000;",
+    );
   });
 
   it("can display partial results", async () => {
@@ -420,6 +426,13 @@ describe("AVOption", () => {
     expect(wrapper.find("[data-test=option-section]").attributes().style).to.include(
       "border-left-color: #FF0000;",
     );
+    expect(wrapper.find("[data-test=option-section]").attributes().style).to.include(
+      "border-top-width: 0.5rem;",
+    );
+    expect(wrapper.find("[data-test=option-section]").attributes().style).to.include(
+      "border-top-color: #FF0000;",
+    );
+
     await wrapper.find("[data-test=option-section]").trigger("click");
     expect((wrapper.emitted().checked as VitestEmitted)[5][0].reference).to.eq("exampleOption1");
     expect((wrapper.emitted().checked as VitestEmitted)[5][0].amount).to.eq(1);
@@ -439,8 +452,31 @@ describe("AVOption", () => {
     });
 
     expect(wrapper.find("[data-test=option-section]").attributes().style).to.include(
+      "border-left-width: 0.5rem;",
+    );
+    expect(wrapper.find("[data-test=option-section]").attributes().style).to.include(
       "border-left-color: #0000FF;",
     );
+    expect(wrapper.find("[data-test=option-section]").attributes().style).to.include(
+      "border-top-width: 0.5rem;",
+    );
+    expect(wrapper.find("[data-test=option-section]").attributes().style).to.include(
+      "border-top-color: #0000FF;",
+    );
+
+    expect(wrapper.find("[data-test=parent-bagde]").attributes().style).to.include(
+      "background-color: rgb(0, 0, 255);",
+    );
+    expect(wrapper.find("[data-test=parent-bagde]").attributes().style).to.include("color: white;");
+
+    await wrapper.setProps({
+      parentColor: "#00FF00",
+    });
+
+    expect(wrapper.find("[data-test=parent-bagde]").attributes().style).to.include(
+      "background-color: rgb(0, 255, 0);",
+    );
+    expect(wrapper.find("[data-test=parent-bagde]").attributes().style).to.include("color: black;");
   });
 
   it("can relocate title on gallery mode when no image", async () => {
