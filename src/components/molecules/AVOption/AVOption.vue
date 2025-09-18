@@ -197,14 +197,21 @@ const bsBorderColor = computed(() =>
 );
 
 const coloredEdgeStyle = computed(() => {
-  if (props.option.accentColor || props.parentColor || props.parentTitle) {
+  if (props.option?.accentColor || props.parentColor || props.parentTitle) {
     const color = props.option.accentColor || props.parentColor || bsBorderColor.value;
-    return `
+    let baseStyleText = `
       border-${isRtl.value ? "right" : "left"}-color: ${color};
       border-${isRtl.value ? "right" : "left"}-width: 0.5rem;
-      border-top-color: ${color};
-      border-top-width: 0.5rem;
     `;
+
+    if (props.option?.accentColor && !props.parentTitle) return baseStyleText;
+    else if (props.parentTitle) {
+      baseStyleText += `
+        border-top-color: ${color};
+        border-top-width: 0.5rem;
+      `;
+      return baseStyleText;
+    } else return baseStyleText;
   } else return "";
 });
 

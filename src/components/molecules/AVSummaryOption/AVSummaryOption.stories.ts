@@ -68,6 +68,39 @@ export const WithImage = {
   },
 };
 
+export const WithDescription = {
+  render: Template,
+
+  args: {
+    option: {
+      title: getOption([], 1).title,
+      handle: getOption([], 1).reference,
+      description: getOption(["description"], 1).description,
+      crosses: 1,
+      rank: null,
+    },
+    blank: false,
+    multipleVotesAllowed: false,
+  },
+};
+
+export const WithImageAndDescription = {
+  render: Template,
+
+  args: {
+    option: {
+      title: getOption([], 1).title,
+      handle: getOption([], 1).reference,
+      description: getOption(["description"], 1).description,
+      image: getOption(["image"], 1).image,
+      crosses: 1,
+      rank: null,
+    },
+    blank: false,
+    multipleVotesAllowed: false,
+  },
+};
+
 export const Ranked = {
   render: Template,
 
@@ -133,6 +166,50 @@ export const GalleryMode = {
     option: {
       title: getOption([], 1).title,
       handle: getOption([], 1).reference,
+      image: getOption(["image"], 1).image,
+      crosses: 1,
+      rank: null,
+    },
+    blank: false,
+    multipleVotesAllowed: false,
+    galleryMode: true,
+    parents: [{ title: { en: "Parent 1" }, accentColor: "#FF00FF" }],
+  },
+};
+
+export const GalleryModeWithDescription = {
+  render: Template,
+
+  globals: {
+    viewport: { value: "mobile1" },
+  },
+  args: {
+    option: {
+      title: getOption([], 1).title,
+      handle: getOption([], 1).reference,
+      description: getOption(["description"], 1).description,
+      // image: getOption(["image"], 1).image,
+      crosses: 1,
+      rank: null,
+    },
+    blank: false,
+    multipleVotesAllowed: false,
+    galleryMode: true,
+    parents: [{ title: { en: "Parent 1" }, accentColor: "#FF00FF" }],
+  },
+};
+
+export const GalleryModeWithImageAndDescription = {
+  render: Template,
+
+  globals: {
+    viewport: { value: "mobile1" },
+  },
+  args: {
+    option: {
+      title: getOption([], 1).title,
+      handle: getOption([], 1).reference,
+      description: getOption(["description"], 1).description,
       image: getOption(["image"], 1).image,
       crosses: 1,
       rank: null,
