@@ -136,6 +136,9 @@ describe("AVSummaryOption", () => {
     expect(wrapper.find("[data-test=summary-option]").attributes().style).to.contain(
       "border-left-color: #FF0000; border-left-width: 0.5rem;",
     );
+    expect(wrapper.find("[data-test=summary-option]").attributes().style).to.not.contain(
+      "border-top-color: #FF0000; border-top-width: 0.5rem;",
+    );
   });
 
   it("can render in gallery mode", async () => {
@@ -159,7 +162,41 @@ describe("AVSummaryOption", () => {
     expect(wrapper.find("[data-test=summary-option]").attributes().style).to.contain(
       "border-left-color: #FF00FF; border-left-width: 0.5rem;",
     );
+    expect(wrapper.find("[data-test=summary-option]").attributes().style).to.contain(
+      "border-top-color: #FF00FF; border-top-width: 0.5rem;",
+    );
     expect(wrapper.find("[data-test=parent-bagde]").text()).to.contain("Parent 1");
+    expect(wrapper.find("[data-test=parent-bagde]").attributes().style).to.contain(
+      "background-color: rgb(255, 0, 255);",
+    );
+    expect(wrapper.find("[data-test=parent-bagde]").attributes().style).to.contain("color: black;");
+
+    await wrapper.setProps({
+      parents: [{ title: { en: "Parent 1" }, accentColor: "#0000AA" }],
+    });
+
+    expect(wrapper.find("[data-test=parent-bagde]").attributes().style).to.contain(
+      "background-color: rgb(0, 0, 170);",
+    );
+    expect(wrapper.find("[data-test=parent-bagde]").attributes().style).to.contain("color: white;");
+  });
+
+  it("can display description", async () => {
+    expect(wrapper.findAll("[data-test=summary-option-description]").length).to.eq(0);
+
+    await wrapper.setProps({
+      option: {
+        title: getOption([], 1).title,
+        description: getOption(["description"], 1).description,
+        handle: getOption([], 1).reference,
+        image: "http://image.com",
+        crosses: 1,
+      },
+    });
+
+    expect(wrapper.find("[data-test=summary-option-description]").html()).to.contain(
+      "<p>This is a description...</p>",
+    );
   });
 
   it("can switch language", async () => {
@@ -170,6 +207,9 @@ describe("AVSummaryOption", () => {
     expect(wrapper.find("[data-test=summary-option]").attributes()["aria-label"]).to.eq("Optie");
     expect(wrapper.find("[data-test=summary-option-image]").attributes().alt).to.eq(
       "Optie afbeelding",
+    );
+    expect(wrapper.find("[data-test=summary-option-description]").html()).to.contain(
+      "<p>Dit is een beschrijving...</p>",
     );
   });
 });

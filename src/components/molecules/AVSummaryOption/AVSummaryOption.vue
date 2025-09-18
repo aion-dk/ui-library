@@ -227,6 +227,7 @@ watch(
         <div
           v-if="option?.description"
           class="mt-3 mb-n3"
+          data-test="summary-option-description"
           v-html="option.description[i18nLocale]"
         ></div>
       </div>
