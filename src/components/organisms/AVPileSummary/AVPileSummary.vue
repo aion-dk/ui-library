@@ -63,6 +63,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  showOptionsDescription: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const showAllOptions = ref(false);
@@ -125,6 +129,7 @@ const optionSummaries = computed(() => {
           title: optionContent.title,
           handle: selection.reference,
           image: optionContent.image,
+          description: props.showOptionsDescription ? optionContent.description : undefined,
           accentColor: optionContent.accentColor as `#${string}`,
           crosses: 1,
           parent: optionContent.parentContent,
