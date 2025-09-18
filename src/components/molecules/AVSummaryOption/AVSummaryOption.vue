@@ -10,6 +10,7 @@ import type {
   IterableObject,
 } from "@/types";
 import { getMeaningfulLabel } from "@/helpers/meaningfulLabel";
+import { getTextContrastColor } from "@/helpers/contrastCalculator";
 
 const props = defineProps({
   option: {
@@ -104,9 +105,31 @@ const coloredEdgeStyle = computed(() => {
     (props.galleryMode && (props.parents[0]?.accentColor || ancestryTitles.value?.length))
   ) {
     const color = props.option.accentColor || props.parents[0]?.accentColor || bsBorderColor.value;
-    return `
+    let baseStyleText = `
       border-${isRtl.value ? "right" : "left"}-color: ${color};
       border-${isRtl.value ? "right" : "left"}-width: 0.5rem;
+    `;
+
+    if (props.option?.accentColor && !ancestryTitles.value?.length) return baseStyleText;
+    else if (ancestryTitles.value?.length) {
+      baseStyleText += `
+        border-top-color: ${color};
+        border-top-width: 0.5rem;
+      `;
+      return baseStyleText;
+    } else return baseStyleText;
+  } else return "";
+});
+
+const parentStyle = computed(() => {
+  if (
+    props.option?.accentColor ||
+    (props.galleryMode && (props.parents[0]?.accentColor || ancestryTitles.value?.length))
+  ) {
+    const color = props.option.accentColor || props.parents[0]?.accentColor || bsBorderColor.value;
+    return `
+      background-color: ${color};
+      color: ${getTextContrastColor(color)};
     `;
   } else return "";
 });
@@ -170,7 +193,8 @@ watch(
     <!-- ANCESTRY (GALLERY) -->
     <div v-if="ancestryTitles && galleryMode" class="vstack p-0" style="max-height: fit-content">
       <div
-        class="ps-3 pe-2 py-1 small rounded-0 text-wrap text-start w-100 bg-light"
+        class="ps-1 pe-2 pb-1 mt-n1 small rounded-0 text-wrap text-start w-100"
+        :style="parentStyle"
         data-test="parent-bagde"
       >
         {{ ancestryTitles[0] }}
