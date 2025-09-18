@@ -218,12 +218,17 @@ watch(
             :alt="t('js.components.AVSummaryOption.aria_label.option_image')"
             data-test="summary-option-image"
           />
-          <div class="hstack" style="min-height: 30px">
+          <div class="hstack gap-3" style="min-height: 30px">
             <h5 class="AVSummaryOption--title m-0">
               {{ displayTitle }}
             </h5>
           </div>
         </div>
+        <div
+          v-if="option?.description"
+          class="mt-3 mb-n3"
+          v-html="option.description[i18nLocale]"
+        ></div>
       </div>
       <div v-if="!useFooter" class="align-self-start">
         <AVOptionCheckbox
