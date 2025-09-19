@@ -189,6 +189,7 @@ watch(
       <span>{{ t("js.components.AVPileSummary.selection") }}</span>
       <button
         v-if="isPrefilled"
+        type="button"
         class="btn btn-secondary btn-sm border"
         @click="emits('editCurrentSelection')"
       >

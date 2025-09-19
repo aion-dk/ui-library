@@ -93,6 +93,7 @@ watch(
     </div>
     <button
       role="checkbox"
+      type="button"
       class="AVOptionCheckbox float-end p-0 m-0"
       :class="{
         'AVOptionCheckbox--checked': checked,

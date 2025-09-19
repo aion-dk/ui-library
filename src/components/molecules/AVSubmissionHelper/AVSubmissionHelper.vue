@@ -95,6 +95,7 @@ watch(
   <div class="sticky-bottom">
     <button
       v-if="displayScrollToBottom"
+      type="button"
       class="btn bg-gray-300 rounded-0 border-0 w-100"
       data-test="scroll-bottom"
       @click="scrollToBottom"
