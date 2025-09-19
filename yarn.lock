@@ -7,10 +7,10 @@
   resolved "https://registry.yarnpkg.com/@adobe/css-tools/-/css-tools-4.4.2.tgz#c836b1bd81e6d62cd6cdf3ee4948bcdce8ea79c8"
   integrity sha512-baYZExFpsdkBNuvGKTKWCwKH57HRZLVtycZS05WTQNVOiXVSeAki3nU35zlRbToeMW8aHlJfyS+1C4BOv27q0A==
 
-"@aion-dk/js-client@^4.4.8":
-  version "4.4.8"
-  resolved "https://registry.yarnpkg.com/@aion-dk/js-client/-/js-client-4.4.8.tgz#dbdc688230f6315bcf2ecb1139f6a95893f5e3d2"
-  integrity sha512-nVrGGWSbTDGuBRg/hp355mRzmY5/RmmXrEI3zchU967b+hYlBV43PRhoBeSKgyCJ8pDptOmdHyV3SBlM8t1x/w==
+"@aion-dk/js-client@^4.4.10":
+  version "4.4.10"
+  resolved "https://registry.yarnpkg.com/@aion-dk/js-client/-/js-client-4.4.10.tgz#79b5cd1203a705dca040c02b653e9bbf255f3c00"
+  integrity sha512-FLIdCw3BxmbCXxWW+MeATPNAOkUx3JpyaS504F9FMlsYWgip2HWZu3yHfDRwgjy4ubFQzYrAcUEIk5Vmrh7a5g==
   dependencies:
     axios "^1.7.9"
     base-x "^5.0.0"

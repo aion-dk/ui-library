@@ -4,6 +4,7 @@ interface AVSummaryOptionObject {
   title: LocalString;
   handle: string;
   image?: string;
+  description?: LocalString;
   crosses: number;
   rank?: number;
   parent?: OptionContent;
