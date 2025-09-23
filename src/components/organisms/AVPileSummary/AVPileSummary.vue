@@ -182,7 +182,7 @@ watch(
         class="btn btn-link btn-sm stretched-link"
         @click="emits('editCurrentSelection')"
       >
-        <AVIcon icon="edit"></AVIcon>
+        <AVIcon icon="pen-to-square"></AVIcon>
         <span class="visually-hidden">{{
           t("js.components.AVPileSummary.change_selection_btn")
         }}</span>
@@ -238,7 +238,7 @@ watch(
             :aria-label="t('js.components.AVPileSummary.aria_labels.edit_selection')"
             @click="emits('editCurrentSelection')"
           >
-            <AVIcon icon="edit"></AVIcon>
+            <AVIcon icon="pen-to-square"></AVIcon>
             <span class="visually-hidden">{{
               t("js.components.AVPileSummary.change_selection_btn")
             }}</span>
