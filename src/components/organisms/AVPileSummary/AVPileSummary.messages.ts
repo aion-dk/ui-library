@@ -13,6 +13,7 @@ const translations: DefineLocaleMessage = {
       delete_selection: "حذف هذا التحديد",
       edit_selection: "تحرير هذا التحديد",
     },
+    change_selection_btn: "تغيير التحديد",
   },
   ca: {
     selection: "Selecció",
@@ -26,6 +27,7 @@ const translations: DefineLocaleMessage = {
       delete_selection: "Borrar aquesta selecció",
       edit_selection: "Modificar aquesta selecció",
     },
+    change_selection_btn: "Canviar selecció",
   },
   cy: {
     selection: "Dewis",
@@ -39,6 +41,7 @@ const translations: DefineLocaleMessage = {
       delete_selection: "Dileu'r dewis hwn",
       edit_selection: "Golygu’r dewis hwn",
     },
+    change_selection_btn: "Newid dewis",
   },
   da: {
     selection: "Valgkombination",
@@ -66,6 +69,7 @@ const translations: DefineLocaleMessage = {
       delete_selection: "Diese Auswahl löschen",
       edit_selection: "",
     },
+    change_selection_btn: "Auswahl ändern",
   },
   en: {
     selection: "Selection",
@@ -93,6 +97,7 @@ const translations: DefineLocaleMessage = {
       delete_selection: "Borrar esta selección",
       edit_selection: "Modificar esta selección",
     },
+    change_selection_btn: "Cambiar selección",
   },
   fi: {
     selection: "Valinta",
@@ -106,6 +111,7 @@ const translations: DefineLocaleMessage = {
       delete_selection: "Poista tämä valinta",
       edit_selection: "Muokkaa tätä valintaa",
     },
+    change_selection_btn: "Muuta valintaa",
   },
   fr: {
     selection: "Sélection",
@@ -119,6 +125,7 @@ const translations: DefineLocaleMessage = {
       delete_selection: "Supprimer cette sélection",
       edit_selection: "Modifier cette sélection",
     },
+    change_selection_btn: "Changer la sélection",
   },
   is: {
     selection: "Val",
@@ -132,6 +139,7 @@ const translations: DefineLocaleMessage = {
       delete_selection: "Eyða þessu vali",
       edit_selection: "Breyttu þessu vali",
     },
+    change_selection_btn: "Breyta vali",
   },
   it: {
     selection: "Selezione",
@@ -145,6 +153,7 @@ const translations: DefineLocaleMessage = {
       delete_selection: "Elimina questa selezione",
       edit_selection: "Modifica questa selezione",
     },
+    change_selection_btn: "Cambia selezione",
   },
   nl: {
     selection: "Selectie",
@@ -158,6 +167,7 @@ const translations: DefineLocaleMessage = {
       delete_selection: "Verwijder deze selectie",
       edit_selection: "Bewerk deze selectie",
     },
+    change_selection_btn: "Selectie wijzigen",
   },
   pl: {
     selection: "Wybór",
@@ -171,6 +181,7 @@ const translations: DefineLocaleMessage = {
       delete_selection: "Usuń ten wybór",
       edit_selection: "Edytuj ten wybór",
     },
+    change_selection_btn: "Zmień zaznaczenie",
   },
   pt: {
     selection: "Seleção",
@@ -184,6 +195,7 @@ const translations: DefineLocaleMessage = {
       delete_selection: "Eliminar esta seleção",
       edit_selection: "Editar esta seleção",
     },
+    change_selection_btn: "Alterar seleção",
   },
   ro: {
     selection: "Selecție",
@@ -197,6 +209,7 @@ const translations: DefineLocaleMessage = {
       delete_selection: "Ștergeți această selecție",
       edit_selection: "Editați această selecție",
     },
+    change_selection_btn: "Schimbă selecția",
   },
   ru: {
     selection: "Выбор",
@@ -210,6 +223,7 @@ const translations: DefineLocaleMessage = {
       delete_selection: "Удалить этот выбор",
       edit_selection: "Изменить этот выбор",
     },
+    change_selection_btn: "Изменить выбор",
   },
   sv: {
     selection: "Urval",
@@ -223,6 +237,7 @@ const translations: DefineLocaleMessage = {
       delete_selection: "Ta bort detta val",
       edit_selection: "Redigera detta val",
     },
+    change_selection_btn: "Ändra val",
   },
 };
 
