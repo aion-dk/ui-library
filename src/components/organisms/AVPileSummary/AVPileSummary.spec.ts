@@ -36,7 +36,7 @@ describe("AVPileSummary", () => {
   });
 
   it("renders properly", async () => {
-    expect(wrapper.find("[data-test=pile-summary-edit]").text()).to.contain("Ballot selection 1");
+    expect(wrapper.find("[data-test=pile-summary-header]").text()).to.contain("Ballot selection 1");
     expect(wrapper.find("[data-test=pile-summary-body]").text()).to.contain("Example option 1");
     expect(wrapper.find("[data-test=pile-summary-edit]").get("span").attributes().icon).to.eq(
       "pen-to-square",
@@ -169,7 +169,7 @@ describe("AVPileSummary", () => {
       locale: "pl",
     });
 
-    expect(wrapper.find("[data-test=pile-summary-edit]").text()).to.contain(
+    expect(wrapper.find("[data-test=pile-summary-header]").text()).to.contain(
       "Wybór karty do głosowania 1",
     );
     expect(wrapper.find("[data-test=pile-summary-assigned]").text()).to.contain("Przypisane: 10");

@@ -121,6 +121,7 @@ watch(
       <button
         class="AVCollapser-collapse-btn w-100 border-0 hstack gap-2 p-3"
         data-test="option-children"
+        type="button"
         :aria-label="
           isOpen
             ? t('js.components.AVCollapser.collapse_text')
