@@ -284,6 +284,7 @@ watch(
 
           <div class="col-12 col-sm-6 order-2 order-sm-1 d-flex justify-content-sm-end">
             <button
+              type="button"
               key="assign"
               class="btn btn-lg btn-ballot AVSplitHelper--full-width-mobile"
               :disabled="!isComplete(activePile) || hasError(activePile)"
@@ -342,6 +343,7 @@ watch(
         <div class="mt-3 row gap-3 gap-sm-0">
           <div class="col-12 col-sm-6 order-2 order-sm-1 d-flex justify-content-sm-start">
             <button
+              type="button"
               key="ballot"
               class="btn btn-lg btn-outline-ballot AVSplitHelper--full-width-mobile"
               data-test="split-helper-assign-back"
@@ -353,6 +355,7 @@ watch(
 
           <div class="col-12 col-sm-6 order-2 order-sm-1 d-flex justify-content-sm-end">
             <button
+              type="button"
               key="confirm"
               class="btn btn-lg btn-ballot AVSplitHelper--full-width-mobile"
               :disabled="activePile?.multiplier < 1 || activePile?.multiplier > maxAssignable"
@@ -379,6 +382,7 @@ watch(
             {{ t("js.components.AVSplitHelper.overview.ballots_left") }}
           </p>
           <button
+            type="button"
             key="newSelection"
             class="AVSplitHelper--overview-new-ballot-btn btn bg-white border rounded-0 p-3"
             :disabled="unusedWeight === 0"

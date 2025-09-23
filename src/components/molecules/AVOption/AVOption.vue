@@ -457,6 +457,7 @@ watch(
             >
               <button
                 v-if="!!option.candidateId"
+                type="button"
                 class="btn btn-sm btn-outline-ballot"
                 @click.stop="emits('view-candidate', contest.reference, option.reference)"
                 data-test="option-candidacy"
