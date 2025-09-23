@@ -179,7 +179,7 @@ watch(
       <button
         v-if="isPrefilled"
         type="button"
-        class="btn btn-outline-ballot btn-sm border-0 stretched-link"
+        class="btn btn-link btn-sm stretched-link"
         @click="emits('editCurrentSelection')"
       >
         <AVIcon icon="edit"></AVIcon>
@@ -230,12 +230,11 @@ watch(
       <header
         class="hstack justify-content-between gap-2 py-2 px-3 mb-0 rounded-0 btn btn-secondary border-0 border-bottom position-relative"
         data-test="pile-summary-edit"
-        @click="emits('editCurrentSelection')"
       >
         <div class="hstack gap-2 text-dark">
           <button
             type="button"
-            class="btn btn-outline-ballot btn-sm border-0 stretched-link"
+            class="btn btn-link btn-sm stretched-link"
             :aria-label="t('js.components.AVPileSummary.aria_labels.edit_selection')"
             @click="emits('editCurrentSelection')"
           >
