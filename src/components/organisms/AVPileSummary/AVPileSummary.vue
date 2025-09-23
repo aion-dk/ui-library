@@ -180,6 +180,7 @@ watch(
         v-if="isPrefilled"
         type="button"
         class="btn btn-link btn-sm stretched-link"
+        data-test="pile-summary-edit"
         @click="emits('editCurrentSelection')"
       >
         <AVIcon icon="pen-to-square"></AVIcon>
@@ -189,9 +190,8 @@ watch(
       </button>
       <template v-if="contest.markingType.maxPiles !== 1">
         <span
-          >{{ t("js.components.AVPileSummary.selection") }} {{ pileIndex + 1 }} /{{
-            totalPiles
-          }}</span
+          >{{ t("js.components.AVPileSummary.selection") }} {{ pileIndex + 1 }} /
+          {{ totalPiles }}</span
         >
         <span class="AVPileSummary--summary-header-text my-0">
           {{ selectionPile.multiplier }} {{ t("js.components.AVPileSummary.ballots") }}
@@ -229,13 +229,14 @@ watch(
     >
       <header
         class="hstack justify-content-between gap-2 py-2 px-3 mb-0 rounded-0 btn btn-secondary border-0 border-bottom position-relative"
-        data-test="pile-summary-edit"
+        data-test="pile-summary-header"
       >
         <div class="hstack gap-2 text-dark">
           <button
             type="button"
             class="btn btn-link btn-sm stretched-link"
             :aria-label="t('js.components.AVPileSummary.aria_labels.edit_selection')"
+            data-test="pile-summary-edit"
             @click="emits('editCurrentSelection')"
           >
             <AVIcon icon="pen-to-square"></AVIcon>

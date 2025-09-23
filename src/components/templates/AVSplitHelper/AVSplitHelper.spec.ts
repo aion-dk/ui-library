@@ -219,7 +219,7 @@ describe("AVSplitHelper", () => {
     expect(wrapper.find("[data-test=split-helper-contest-question]").text()).to.contain(
       "How many ballots should have this combination of choices?",
     );
-    expect(wrapper.find("[data-test=pile-summary-edit]").text()).to.eq("Ballot selection 1");
+    expect(wrapper.find("[data-test=pile-summary-header]").text()).to.contain("Ballot selection 1");
     expect(wrapper.find("[data-test=pile-summary-body]").text()).to.eq("Example option 3");
     expect(wrapper.find("[data-test=split-helper-assign-label]").text()).to.contain(
       "Number of ballots to assign:",
@@ -306,7 +306,7 @@ describe("AVSplitHelper", () => {
     expect(wrapper.find("[data-test=split-helper-overview]").text()).to.contain(
       "5  ballots left to assign",
     );
-    expect(wrapper.find("[data-test=pile-summary-edit]").text()).to.contain("Ballot selection 1");
+    expect(wrapper.find("[data-test=pile-summary-header]").text()).to.contain("Ballot selection 1");
     expect(wrapper.find("[data-test=pile-summary-assigned]").text()).to.contain("Assigned: 5");
     expect(wrapper.find("[data-test=pile-summary-body]").text()).to.contain("Example option 3");
     expect(wrapper.findAll("[data-test=pile-summary-delete]").length).to.eq(1);
@@ -422,10 +422,10 @@ describe("AVSplitHelper", () => {
     expect(wrapper.findAll("[data-test=pile-summary-edit]").length).to.eq(2);
     expect(wrapper.findAll("[data-test=split-helper-new-selection]").length).to.eq(0);
 
-    expect(wrapper.findAll("[data-test=pile-summary-edit]")[0].text()).to.contain(
+    expect(wrapper.findAll("[data-test=pile-summary-header]")[0].text()).to.contain(
       "Ballot selection 1",
     );
-    expect(wrapper.findAll("[data-test=pile-summary-edit]")[1].text()).to.contain(
+    expect(wrapper.findAll("[data-test=pile-summary-header]")[1].text()).to.contain(
       "Ballot selection 2",
     );
     expect(wrapper.findAll("[data-test=pile-summary-assigned]")[0].text()).to.contain(

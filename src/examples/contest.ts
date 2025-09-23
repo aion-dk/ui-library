@@ -96,7 +96,7 @@ const getContest = (args: ContestArg[]): ContestContent => {
         ? "gallery"
         : "list",
     markingType: {
-      maxPiles: args.includes("allow_splitting") ? undefined : 1,
+      maxPiles: args.includes("disallow_splitting") ? 1 : undefined,
       votesAllowedPerOption: getVotesAllowedPerOption(args),
       blankSubmission:
         args.includes("blank") || args.includes("gallery_parents") ? "active_choice" : "disabled",
