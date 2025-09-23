@@ -196,7 +196,7 @@ export const SummaryWithPrefilled = {
     isEditing: false,
     maximumOptionsShown: 3,
     pileIndex: 0,
-    totalPiles: 3,
+    totalPiles: 1,
     selectionPile: getSelectionPile(["single", "weighted"]),
     isPrefilled: true,
   },

@@ -34,7 +34,8 @@ type ContestArg =
   | "huge"
   | "gallery"
   | "gallery_parents"
-  | "gallery_short";
+  | "gallery_short"
+  | "allow_splitting";
 
 type SelectionPileArg =
   | "single"

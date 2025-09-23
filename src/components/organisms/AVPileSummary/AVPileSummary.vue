@@ -15,6 +15,7 @@ import type {
   IterableObject,
 } from "@/types";
 import { getMeaningfulLabel } from "@/helpers/meaningfulLabel";
+import { AVIcon } from "@/components";
 
 const emits = defineEmits(["editCurrentSelection", "deleteSelection"]);
 
@@ -172,28 +173,33 @@ watch(
 <template>
   <div v-if="activeState === 'summary'" class="d-grid flex-grow-1">
     <header
-      v-if="contest.markingType.maxPiles !== 1"
-      class="AVPileSummary--summary-header hstack justify-content-between px-3 py-2"
+      class="bg-secondary hstack gap-2 px-3 py-2 position-relative"
       data-test="pile-summary-header"
     >
-      <span
-        >{{ t("js.components.AVPileSummary.selection") }} {{ pileIndex + 1 }} /
-        {{ totalPiles }}</span
-      >
-      <span class="AVPileSummary--summary-header-text my-0"
-        >{{ selectionPile.multiplier }} {{ t("js.components.AVPileSummary.ballots") }}</span
-      >
-    </header>
-
-    <header v-else class="AVPileSummary--summary-header hstack px-3 py-1 justify-content-between">
-      <span>{{ t("js.components.AVPileSummary.selection") }}</span>
       <button
         v-if="isPrefilled"
-        class="btn btn-secondary btn-sm border"
+        type="button"
+        class="btn btn-outline-ballot btn-sm border-0 stretched-link"
         @click="emits('editCurrentSelection')"
       >
-        {{ t("js.components.AVPileSummary.change_selection_btn") }}
+        <AVIcon icon="edit"></AVIcon>
+        <span class="visually-hidden">{{
+          t("js.components.AVPileSummary.change_selection_btn")
+        }}</span>
       </button>
+      <template v-if="contest.markingType.maxPiles !== 1">
+        <span
+          >{{ t("js.components.AVPileSummary.selection") }} {{ pileIndex + 1 }} /{{
+            totalPiles
+          }}</span
+        >
+        <span class="AVPileSummary--summary-header-text my-0">
+          {{ selectionPile.multiplier }} {{ t("js.components.AVPileSummary.ballots") }}
+        </span>
+      </template>
+      <template v-else>
+        <span>{{ t("js.components.AVPileSummary.selection") }}</span>
+      </template>
     </header>
 
     <div class="p-3 border" :class="galleryMode ? 'AVPileSummary--grid' : 'vstack gap-2'">
@@ -221,22 +227,30 @@ watch(
         'border-end-0': activeState === 'overview',
       }"
     >
-      <div
-        class="hstack justify-content-between gap-2 py-2 px-3 mb-0 rounded-0 btn btn-secondary border-0 border-bottom"
-        :aria-label="t('js.components.AVPileSummary.aria_labels.edit_selection')"
-        role="button"
+      <header
+        class="hstack justify-content-between gap-2 py-2 px-3 mb-0 rounded-0 btn btn-secondary border-0 border-bottom position-relative"
         data-test="pile-summary-edit"
         @click="emits('editCurrentSelection')"
       >
         <div class="hstack gap-2 text-dark">
-          <AVIcon icon="pen-to-square" />
+          <button
+            type="button"
+            class="btn btn-outline-ballot btn-sm border-0 stretched-link"
+            :aria-label="t('js.components.AVPileSummary.aria_labels.edit_selection')"
+            @click="emits('editCurrentSelection')"
+          >
+            <AVIcon icon="edit"></AVIcon>
+            <span class="visually-hidden">{{
+              t("js.components.AVPileSummary.change_selection_btn")
+            }}</span>
+          </button>
           <span>{{ t("js.components.AVPileSummary.ballot_selection") }} {{ pileIndex + 1 }}</span>
         </div>
         <span v-if="activeState === 'overview' || isEditing" data-test="pile-summary-assigned">
           {{ t("js.components.AVPileSummary.assigned") }}
           {{ selectionPile.multiplier }}
         </span>
-      </div>
+      </header>
 
       <div class="bg-white p-3" data-test="pile-summary-body">
         <p v-if="blankSelected" class="mb-0">
