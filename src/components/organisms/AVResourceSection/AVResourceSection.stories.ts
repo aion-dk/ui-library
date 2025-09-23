@@ -33,6 +33,9 @@ const meta: Meta<typeof AVResourceSection> = {
       control: { type: "select" },
       options: SUPPORTED_LOCALES,
     },
+    isStoryBook: {
+      control: { type: "boolean" },
+    },
   },
 };
 
@@ -80,6 +83,7 @@ export const Default = {
 
   args: {
     candidate: getCandidate(),
+    isStoryBook: true,
   },
 };
 
@@ -89,6 +93,7 @@ export const Summary = {
   args: {
     candidate: getCandidate(),
     summary: true,
+    isStoryBook: true,
   },
 };
 
@@ -98,6 +103,7 @@ export const SummaryWithoutPicture = {
   args: {
     candidate: noPicture,
     summary: true,
+    isStoryBook: true,
   },
 };
 
@@ -111,6 +117,7 @@ export const PartySummaryWLeaderProfile = {
       label: "Someone Important",
       url: "https://www.google.com",
     },
+    isStoryBook: true,
   },
 };
 
@@ -123,6 +130,7 @@ export const PartySummaryWoLeaderProfile = {
     partyLeaderData: {
       label: "Someone Important",
     },
+    isStoryBook: true,
   },
 };
 
@@ -134,6 +142,7 @@ export const PartyLeaderSummary = {
     summary: true,
     isPartyLeader: true,
   },
+  isStoryBook: true,
 };
 
 export const WithCustomGroup = {
@@ -143,6 +152,7 @@ export const WithCustomGroup = {
     candidate: getCandidate(),
     currentCandidateGroup: 2,
     summary: true,
+    isStoryBook: true,
   },
 };
 
@@ -153,6 +163,7 @@ export const SmallCard = {
     candidate: getCandidate(),
     currentCandidateGroup: 2,
     summary: true,
+    isStoryBook: true,
     card: true,
   },
 };
@@ -165,6 +176,7 @@ export const CardWithoutPicture = {
     currentCandidateGroup: 2,
     summary: true,
     card: true,
+    isStoryBook: true,
   },
 };
 
@@ -176,5 +188,6 @@ export const LargeCard = {
     currentCandidateGroup: 2,
     summary: true,
     card: true,
+    isStoryBook: true,
   },
 };

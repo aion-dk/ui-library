@@ -47,6 +47,11 @@ const props = defineProps({
     type: String as PropType<SupportedLocale>,
     default: null,
   },
+  // This is added because timeout was exceeded for the smoke test (only happened for video links)
+  isStoryBook: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const groupsOpened = ref(false);
@@ -385,7 +390,15 @@ watch(
                 v-else-if="item.item_type === 'video' && itemHasContent(item)"
                 data-test="resource-video"
               >
+                <div
+                  v-if="isStoryBook"
+                  class="bg-black text-white text-center p-4"
+                  style="width: 100%; height: 100%; min-height: 400px"
+                >
+                  Video not available in Storybook.
+                </div>
                 <iframe
+                  v-else
                   style="width: 100%; height: 100%; min-height: 400px"
                   :src="item.form_content.toString()"
                   :aria-label="t('js.components.AVResourceSection.video')"
