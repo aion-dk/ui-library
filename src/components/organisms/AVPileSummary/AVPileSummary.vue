@@ -216,7 +216,11 @@ watch(
         :image-option="imageOption"
         :gallery-mode="galleryMode"
       />
-      <AVSummaryOption v-if="blankSelected" :blank="blankSelected" />
+      <AVSummaryOption
+        v-if="blankSelected"
+        :blank="blankSelected"
+        :blank-accent-color="contest.blankOptionColor"
+      />
     </div>
   </div>
 

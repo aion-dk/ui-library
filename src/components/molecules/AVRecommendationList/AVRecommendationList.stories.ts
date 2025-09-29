@@ -1,5 +1,5 @@
 import type { Meta } from "@/types";
-import { RECOMMENDATION_PUBLIC_TYPES, SUPPORTED_LOCALES } from "@/constants";
+import { RECOMMENDATION_PUBLIC_TYPES, SUPPORTED_LOCALES, CANDIDACY_RESOURCES } from "@/constants";
 import { AVRecommendationList } from "@/components";
 import { getRecommendationsList } from "@/examples";
 
@@ -23,6 +23,10 @@ const meta: Meta<typeof AVRecommendationList> = {
     },
     viewRecommendationsPath: {
       control: { type: "text" },
+    },
+    resourceType: {
+      control: { type: "select" },
+      options: CANDIDACY_RESOURCES,
     },
     locale: {
       control: { type: "select" },
@@ -80,6 +84,15 @@ export const PublicLessRecommendations = {
   args: {
     recommendationsPublic: "public",
     recommendations: getRecommendationsList(2),
+  },
+};
+
+export const NoRecommendations = {
+  render: Template,
+
+  args: {
+    recommendationsPublic: "public",
+    recommendations: getRecommendationsList(0),
   },
 };
 

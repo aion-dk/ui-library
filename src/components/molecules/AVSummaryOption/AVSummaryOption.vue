@@ -29,6 +29,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  blankAccentColor: {
+    type: String,
+    default: null,
+  },
   galleryMode: {
     type: Boolean,
     default: false,
@@ -100,6 +104,13 @@ const bsBorderColor = computed(() =>
 );
 
 const coloredEdgeStyle = computed(() => {
+  if (props.blank && props.blankAccentColor) {
+    return `
+      border-${isRtl.value ? "right" : "left"}-color: ${props.blankAccentColor};
+      border-${isRtl.value ? "right" : "left"}-width: 0.5rem;
+    `;
+  }
+
   if (
     props.option?.accentColor ||
     (props.galleryMode && (props.parents[0]?.accentColor || ancestryTitles.value?.length))
