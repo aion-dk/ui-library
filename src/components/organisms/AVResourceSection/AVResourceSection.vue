@@ -168,7 +168,7 @@ watch(
       >
         <img
           :src="image"
-          :alt="t(`js.components.AVResourceSection.${resourceType}`)"
+          :alt="t(`js.components.AVResourceSection.alt_${resourceType}`)"
           class="AVResourceSection--image img-fluid ratio ratio-1x1"
           :class="{
             'shadow-lg': !card,
