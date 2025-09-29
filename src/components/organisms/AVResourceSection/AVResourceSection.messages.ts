@@ -3,6 +3,7 @@ import type { DefineLocaleMessage } from "@/types";
 const translations: DefineLocaleMessage = {
   ar: {
     alt_candidate: "صورة للمرشح",
+    alt_party: "شعار الحزب",
     and_more: "أخرى {amount} &",
     true: "التحقق",
     false: "غير مدقق",
@@ -14,6 +15,7 @@ const translations: DefineLocaleMessage = {
   },
   ca: {
     and_more: "i {amount} més",
+    alt_party: "Logotip del partit",
     true: "Seleccionat",
     false: "No seleccionat",
     alt_candidate: "Imatge del candidat/a",
@@ -25,6 +27,7 @@ const translations: DefineLocaleMessage = {
   },
   cy: {
     and_more: "a {amount} mwy",
+    alt_party: "Logo'r blaid",
     true: "Wedi'i ddewis",
     false: "Heb ei ddewis",
     alt_candidate: "Delwedd yr ymgeisydd",
@@ -36,6 +39,7 @@ const translations: DefineLocaleMessage = {
   },
   da: {
     alt_candidate: "Portræt af kandidaten",
+    alt_party: "Listelogo",
     and_more: "& {amount} mere",
     true: "Slået til",
     false: "Slået fra",
@@ -47,6 +51,7 @@ const translations: DefineLocaleMessage = {
   },
   de: {
     alt_candidate: "Porträt des Kandidaten",
+    alt_party: "Parteilogo",
     and_more: "& {amount} weitere",
     true: "Geprüft",
     false: "Nicht geprüft",
@@ -58,6 +63,7 @@ const translations: DefineLocaleMessage = {
   },
   en: {
     alt_candidate: "Portrait of the candidate",
+    alt_party: "Party logo",
     and_more: "& {amount} more",
     true: "Checked",
     false: "Not checked",
@@ -69,6 +75,7 @@ const translations: DefineLocaleMessage = {
   },
   es: {
     alt_candidate: "Retrato del candidato",
+    alt_party: "Logotipo del partido político",
     and_more: "y {amount} más",
     true: "Marcado",
     false: "No marcado",
@@ -80,6 +87,7 @@ const translations: DefineLocaleMessage = {
   },
   fi: {
     alt_candidate: "Ehdokkaan muotokuva",
+    alt_party: "Puolueen logo",
     and_more: "& {amount} muuta",
     true: "Tarkistettu",
     false: "Ei tarkistettu",
@@ -91,6 +99,7 @@ const translations: DefineLocaleMessage = {
   },
   fr: {
     alt_candidate: "Portrait du candidat",
+    alt_party: "Logo du parti",
     and_more: "et {amount} de plus",
     true: "Vérifié",
     false: "Non vérifié",
@@ -102,6 +111,7 @@ const translations: DefineLocaleMessage = {
   },
   is: {
     alt_candidate: "Andlitsmynd af frambjóðandanum",
+    alt_party: "Merki flokksins",
     and_more: "& {amount} í viðbót",
     true: "Merkt",
     false: "Ekki athugað",
@@ -113,6 +123,7 @@ const translations: DefineLocaleMessage = {
   },
   it: {
     alt_candidate: "Ritratto del candidato",
+    alt_party: "Logo del partito",
     and_more: "& %{amount} in più",
     true: "Selezionato",
     false: "Non selezionato",
@@ -124,6 +135,7 @@ const translations: DefineLocaleMessage = {
   },
   nl: {
     alt_candidate: "Portret van de kandidaat",
+    alt_party: "Partijlogo",
     and_more: "& nog {amount}",
     true: "Gecontroleerd",
     false: "Niet gecontroleerd",
@@ -135,6 +147,7 @@ const translations: DefineLocaleMessage = {
   },
   pl: {
     alt_candidate: "Portret kandydata",
+    alt_party: "Logo partii",
     and_more: "i jeszcze {amount}",
     true: "Sprawdzony",
     false: "Niesprawdzone",
@@ -146,6 +159,7 @@ const translations: DefineLocaleMessage = {
   },
   pt: {
     alt_candidate: "Retrato do candidato",
+    alt_party: "Logótipo do partido",
     and_more: "& {amount} mais",
     true: "Marcado",
     false: "Não marcado",
@@ -157,6 +171,7 @@ const translations: DefineLocaleMessage = {
   },
   ro: {
     alt_candidate: "Portretul candidatului",
+    alt_party: "Sigla partidului",
     and_more: "și încă {amount}",
     true: "Verificat",
     false: "Nu a verificat",
@@ -168,6 +183,7 @@ const translations: DefineLocaleMessage = {
   },
   ru: {
     alt_candidate: "Портрет кандидата",
+    alt_party: "Логотип партии",
     and_more: "и еще {amount}",
     true: "Проверено",
     false: "Не проверено",
@@ -179,6 +195,7 @@ const translations: DefineLocaleMessage = {
   },
   sv: {
     alt_candidate: "Porträtt av kandidaten",
+    alt_party: "Partilogotyp",
     and_more: "& {amount} till",
     true: "Kontrollerade",
     false: "Inte kontrollerad",

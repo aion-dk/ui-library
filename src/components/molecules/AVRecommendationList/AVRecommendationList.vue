@@ -3,7 +3,7 @@ import type {
   PropType,
   Recommendation,
   AVRecommendationListPublicType,
-  AVRecommendationListResource,
+  CandidacyResource,
   SupportedLocale,
 } from "@/types";
 import { ref, onMounted, watch, inject, computed } from "vue";
@@ -35,7 +35,7 @@ const props = defineProps({
     default: false,
   },
   resourceType: {
-    type: String as PropType<AVRecommendationListResource>,
+    type: String as PropType<CandidacyResource>,
     default: "candidate",
   },
   locale: {

@@ -11,6 +11,7 @@ import type {
   ResourceGroup,
   LocalString,
   IterableObject,
+  CandidacyResource,
   AVResourceSectionPartyLeader,
 } from "@/types";
 
@@ -42,6 +43,10 @@ const props = defineProps({
   partyLeaderData: {
     type: Object as PropType<AVResourceSectionPartyLeader>,
     default: null,
+  },
+  resourceType: {
+    type: String as PropType<CandidacyResource>,
+    default: "candidate",
   },
   locale: {
     type: String as PropType<SupportedLocale>,
@@ -163,7 +168,7 @@ watch(
       >
         <img
           :src="image"
-          :alt="t('js.components.AVResourceSection.alt_candidate')"
+          :alt="t(`js.components.AVResourceSection.${resourceType}`)"
           class="AVResourceSection--image img-fluid ratio ratio-1x1"
           :class="{
             'shadow-lg': !card,

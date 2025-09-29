@@ -1,6 +1,6 @@
 import type { Meta } from "@/types";
 import { AVResourceSection } from "@/components";
-import { SUPPORTED_LOCALES } from "@/constants";
+import { SUPPORTED_LOCALES, CANDIDACY_RESOURCES } from "@/constants";
 import { getCandidate } from "@/examples";
 
 const meta: Meta<typeof AVResourceSection> = {
@@ -28,6 +28,10 @@ const meta: Meta<typeof AVResourceSection> = {
     },
     partyLeaderData: {
       control: { type: "object" },
+    },
+    resourceType: {
+      control: { type: "select" },
+      options: CANDIDACY_RESOURCES,
     },
     locale: {
       control: { type: "select" },
