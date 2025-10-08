@@ -103,7 +103,7 @@ watch(
           }}
         </span>
       </div>
-      <div class="vstack align-items-end gap-1" data-test="result-results">
+      <div class="vstack align-items-end justify-content-center gap-1" data-test="result-results">
         <p class="mb-0">{{ truncatedVotes }}</p>
         <p v-if="!hidePercentage" class="text-dark mb-0">{{ optionPercent }}%</p>
       </div>
