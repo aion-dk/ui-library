@@ -504,9 +504,11 @@ watch(
 
       <!-- CHILDREN -->
       <template #pane="{ toggleCollapse }">
+        <!-- Due to accesibility reasons, link/button targets should be spaced at least 12px (0.75rem). I'm avoiding to use gap-3 px-3 to still have a size difference between children and parent options spacing -->
         <div
           v-if="hasChildren && contest.mode !== 'gallery'"
-          class="AVOption--children vstack gap-2 py-2"
+          class="AVOption--children vstack"
+          style="gap: 0.75rem; padding-top: 0.75rem; padding-bottom: 0.75rem"
           data-test="option-children"
         >
           <AVOption

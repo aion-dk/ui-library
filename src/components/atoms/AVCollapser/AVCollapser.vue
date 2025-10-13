@@ -125,7 +125,7 @@ watch(
         :aria-label="
           isOpen
             ? t('js.components.AVCollapser.collapse_text')
-            : t('js.components.AVCollapser.expand_text')
+            : `${t('js.components.AVCollapser.expand_text')} ${subOptionSelected && !isOpen ? t('js.components.AVCollapser.sub_options_select', { n: subOptionSelected }) : ''}`
         "
         @click.stop.prevent="toggleAccordion()"
       >

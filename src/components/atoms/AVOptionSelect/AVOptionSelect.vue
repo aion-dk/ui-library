@@ -67,7 +67,15 @@ watch(
     data-test="option-select"
   >
     <strong v-if="rank" aria-hidden="true" data-test="rank">{{ rank }}</strong>
-    <svg v-else width="26" height="26" stroke="white" stroke-width="0.25rem" data-test="check">
+    <svg
+      v-else
+      width="26"
+      height="26"
+      stroke="white"
+      stroke-width="0.25rem"
+      aria-hidden="true"
+      data-test="check"
+    >
       <line x1="25%" y1="25%" x2="75%" y2="75%" />
       <line x1="75%" y1="25%" x2="25%" y2="75%" />
     </svg>
