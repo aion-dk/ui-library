@@ -194,7 +194,6 @@ watch(
       <div class="hstack align-items-center justify-content-center">
         <AVIcon icon="cloud-arrow-up" class="text-gray-500 fs-1" data-test="input-icon" />
       </div>
-
       <p class="AVFileInput--dragdroptext text-gray-700 text-center m-0" data-test="draggable-text">
         <span v-if="isDragging">
           {{ t("js.components.AVFileInput.release") }}
