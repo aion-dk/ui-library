@@ -173,7 +173,7 @@ watch(
 <template>
   <div v-if="activeState === 'summary'" class="d-grid flex-grow-1">
     <header
-      class="bg-secondary hstack gap-2 px-3 py-2 position-relative"
+      class="bg-secondary hstack gap-2 px-3 py-2 position-relative justify-content-between"
       data-test="pile-summary-header"
     >
       <button
@@ -239,14 +239,15 @@ watch(
           <button
             type="button"
             class="btn btn-link btn-sm stretched-link"
-            :aria-label="t('js.components.AVPileSummary.aria_labels.edit_selection')"
+            :aria-label="
+              t('js.components.AVPileSummary.aria_labels.edit_selection', {
+                ballot_selection: pileIndex + 1,
+              })
+            "
             data-test="pile-summary-edit"
             @click="emits('editCurrentSelection')"
           >
             <AVIcon icon="pen-to-square"></AVIcon>
-            <span class="visually-hidden">{{
-              t("js.components.AVPileSummary.change_selection_btn")
-            }}</span>
           </button>
           <span>{{ t("js.components.AVPileSummary.ballot_selection") }} {{ pileIndex + 1 }}</span>
         </div>
