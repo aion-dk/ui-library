@@ -233,7 +233,7 @@ watch(
           :class="{
             'AVResourceSection--header-text': !card && !forceLightTheme,
             'text-gray-800': card || forceLightTheme,
-            hstack: groups?.surplus && !groupsOpened,
+            'd-flex flex-column flex-md-row': groups?.surplus && !groupsOpened,
             vstack: groups?.surplus && groupsOpened,
             'mb-3': groups?.remaining.length,
             'mb-2': !groups?.remaining.length,
