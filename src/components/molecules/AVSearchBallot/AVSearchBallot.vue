@@ -106,6 +106,7 @@ watch(
     <div
       id="ballot_searcher_results"
       class="AVSearchBallot--results vstack overflow-auto"
+      tabindex="0"
       aria-live="polite"
       data-test="search-results"
     >
