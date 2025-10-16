@@ -191,22 +191,9 @@ watch(
       @drop="drop"
       data-test="dropzone"
     >
-      <input
-        type="file"
-        :multiple="multiple"
-        :name="id"
-        :id="id"
-        class="AVFileInput-hidden-input opacity-0 overflow-hidden"
-        @change="onChange"
-        ref="fileInput"
-        :accept="accept"
-        :disabled="disabled"
-      />
-
       <div class="hstack align-items-center justify-content-center">
         <AVIcon icon="cloud-arrow-up" class="text-gray-500 fs-1" data-test="input-icon" />
       </div>
-
       <p class="AVFileInput--dragdroptext text-gray-700 text-center m-0" data-test="draggable-text">
         <span v-if="isDragging">
           {{ t("js.components.AVFileInput.release") }}
@@ -226,6 +213,17 @@ watch(
         </span>
       </p>
     </label>
+    <input
+      type="file"
+      :multiple="multiple"
+      :name="id"
+      :id="id"
+      class="AVFileInput-hidden-input opacity-0 overflow-hidden"
+      @change="onChange"
+      ref="fileInput"
+      :accept="accept"
+      :disabled="disabled"
+    />
 
     <p v-if="!disableAcceptedFormats" class="my-2 small text-gray-600" data-test="accepted-formats">
       <strong>
