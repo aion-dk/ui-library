@@ -148,7 +148,6 @@ watch(
 
         <button
           v-if="!!viewRecommendationsPath"
-          :disabled="!recommendationPhaseActive"
           class="party-invite-btn btn btn-theme"
           @click.stop.prevent="goToViewRecommendationsPath"
         >
