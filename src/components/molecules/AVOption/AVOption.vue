@@ -232,7 +232,6 @@ const toggleFromOption = () => {
   if (props.disabled || props.observerMode || !props.option.selectable) return;
   console.log("AVOption");
   console.log(writeInText.value);
-
   if (votesAllowedPerOption.value > 1) {
     if (props.selections.length) {
       toggleOption(props.option.reference, 0, writeInText.value);
@@ -386,7 +385,6 @@ watch(
                 />
               </header>
             </div>
-
             <!-- MULTIVOTE CROSSES -->
             <div
               v-if="votesAllowedPerOption >= 1"
