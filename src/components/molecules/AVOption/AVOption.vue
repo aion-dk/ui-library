@@ -135,6 +135,7 @@ const subOptionSelected = computed(() => {
 });
 
 const exclusive = computed(() => props.option.exclusive);
+const isWriteIn = computed(() => !!props.option.writeIn);
 
 const optionGroups = computed(() => {
   const options = Array.from(Array(votesAllowedPerOption.value).keys());
@@ -150,10 +151,11 @@ const optionPartialResults = computed(() => {
   return props.partialResults ? props.partialResults[props.option.reference] : null;
 });
 
-const toggleOption = (reference: string, amount = 1) => {
+const toggleOption = (reference: string, amount = 1, text?: string) => {
   emits("checked", {
     reference: reference,
     amount: amount,
+    text: text,
   } as CheckedEventArgs);
 };
 
@@ -183,6 +185,7 @@ const handleHighlightOptionChange = (reference: string) => {
 };
 
 const isRtl = ref<boolean>(false);
+const writeInText = ref<string>("");
 
 const mutationObserver = ref<MutationObserver | null>(null);
 
@@ -227,15 +230,18 @@ const parentStyle = computed(() => {
 
 const toggleFromOption = () => {
   if (props.disabled || props.observerMode || !props.option.selectable) return;
+  console.log("AVOption");
+  console.log(writeInText.value);
+
   if (votesAllowedPerOption.value > 1) {
     if (props.selections.length) {
-      toggleOption(props.option.reference, 0);
+      toggleOption(props.option.reference, 0, writeInText.value);
     } else {
-      toggleOption(props.option.reference, votesAllowedPerOption.value);
+      toggleOption(props.option.reference, votesAllowedPerOption.value, writeInText.value);
     }
     return;
   }
-  toggleOption(props.option.reference);
+  toggleOption(props.option.reference, 1, writeInText.value);
 };
 
 watch(
@@ -320,7 +326,7 @@ watch(
           :style="coloredEdgeStyle"
           :aria-label="`${t('js.components.AVOption.aria_labels.option')} ${getMeaningfulLabel(option as unknown as IterableObject, i18nLocale, t('js.components.AVOption.aria_labels.option'))}`"
           data-test="option-section"
-          @click="toggleFromOption"
+          @click="isWriteIn ? null : toggleFromOption"
         >
           <!-- PARENT BADGE -->
           <div
@@ -371,6 +377,13 @@ watch(
                 <span :id="`option_${option.reference}_handle`" class="visually-hidden">
                   {{ option.reference }}
                 </span>
+                <input
+                  v-if="isWriteIn"
+                  v-model="writeInText"
+                  type="text"
+                  class="form-control w-100"
+                  :placeholder="t('js.components.AVOption.write_in_placeholder')"
+                />
               </header>
             </div>
 
@@ -409,7 +422,7 @@ watch(
                   :check-box-index="optionIndex"
                   :disabled="disabled || observerMode"
                   :gallery-mode="contest.mode === 'gallery'"
-                  @toggled="toggleOption(option.reference, optionIndex)"
+                  @toggled="toggleOption(option.reference, optionIndex, writeInText)"
                 />
               </div>
             </div>
