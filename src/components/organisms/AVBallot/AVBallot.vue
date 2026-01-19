@@ -15,8 +15,8 @@ import type {
   IterableObject,
   AVBallotGalleryOption,
 } from "@/types";
-import SelectionPileValidator from "@aion-dk/js-client/dist/lib/validators/selectionPileValidator";
-import BelgiumBallotValidator from "@aion-dk/js-client/dist/lib/validators/belgiumBallotValidator";
+import SelectionPileValidator from "@assemblyvoting/js-client/dist/lib/validators/selectionPileValidator";
+import BelgiumBallotValidator from "@assemblyvoting/js-client/dist/lib/validators/belgiumBallotValidator";
 
 const props = defineProps({
   contest: {
@@ -62,10 +62,6 @@ const props = defineProps({
 });
 
 const emits = defineEmits(["update:selectionPile", "update:errors", "view-candidate"]);
-
-// const writeInChecked = ref<boolean>(false);
-// const writeInParty = ref<string>("");
-// const writeInCandidate = ref<string>("");
 
 const search = ref<HTMLInputElement | null>(null);
 
@@ -139,11 +135,11 @@ const toggleBlank = () => {
   });
 };
 
-const toggleOption = ({ reference, amount, text }: CheckedEventArgs) => {
+const toggleOption = ({ reference, amount, text, onlyUpdate }: CheckedEventArgs) => {
   const currentAmount = selections.value.filter(
     (selection) => selection.reference === reference,
   ).length;
-  if (amount === currentAmount) amount = amount - 1;
+  if (amount === currentAmount && !onlyUpdate) amount = amount - 1;
   const newSelections = selections.value.filter((selection) => selection.reference !== reference);
   for (let i = 0; i < amount; i++) {
     newSelections.push({ reference, text });
@@ -252,15 +248,6 @@ watch(
           @checked="toggleOption"
           @view-candidate="viewCandidate"
         />
-        <!-- <AVWriteInOption
-          v-else
-          v-model:candidate-value="writeInCandidate"
-          v-model:party-value="writeInParty"
-          v-model:checked-value="writeInChecked"
-          :parties="[] /* contest.parties // TODO: we need to figure out how this should work */"
-          :disabled="disabled"
-          :observerMode="observerMode"
-        /> -->
       </div>
 
       <AVBlankOption
@@ -301,15 +288,6 @@ watch(
           @checked="toggleOption"
           @view-candidate="viewCandidate"
         />
-        <!-- <AVWriteInOption
-          v-else
-          v-model:candidate-value="writeInCandidate"
-          v-model:party-value="writeInParty"
-          v-model:checked-value="writeInChecked"
-          :parties="[] /* contest.parties // TODO: we need to figure out how this should work */"
-          :disabled="disabled"
-          :observerMode="observerMode"
-        /> -->
       </template>
       <AVBlankOption
         v-if="contest.markingType.blankSubmission === 'active_choice'"
