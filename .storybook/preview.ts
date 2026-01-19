@@ -25,7 +25,6 @@ import {
   AVOption,
   AVSearchBallot,
   AVSubmissionHelper,
-  AVWriteInOption,
   AVBallot,
   AVSplitWeightHelper,
   AVSplitWizardHeader,
@@ -52,7 +51,6 @@ setup((app) => {
   app.component("AVOption", AVOption);
   app.component("AVSearchBallot", AVSearchBallot);
   app.component("AVSubmissionHelper", AVSubmissionHelper);
-  app.component("AVWriteInOption", AVWriteInOption);
   app.component("AVBallot", AVBallot);
   app.component("AVSplitWeightHelper", AVSplitWeightHelper);
   app.component("AVSplitWizardHeader", AVSplitWizardHeader);

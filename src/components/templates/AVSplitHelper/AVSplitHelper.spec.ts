@@ -57,9 +57,6 @@ describe("AVSplitHelper", () => {
         AVIcon: {
           template: "<span />",
         },
-        AVWriteInOption: {
-          template: "<span />",
-        },
       },
     },
   });
