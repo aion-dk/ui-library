@@ -77,13 +77,13 @@ const blankSelected = computed(() => {
 });
 
 const shownOptions = computed(() => {
-  if (!props.maximumOptionsShown || showAllOptions.value) return optionSummaries.value.options;
+  if (!props.maximumOptionsShown || showAllOptions.value) return optionSummaries.value;
 
-  return optionSummaries.value.options.slice(0, props.maximumOptionsShown);
+  return optionSummaries.value.slice(0, props.maximumOptionsShown);
 });
 
 const remainingOptions = computed(() => {
-  return optionSummaries.value.options.length - shownOptions.value.length;
+  return optionSummaries.value.length - shownOptions.value.length;
 });
 
 const selectableOptions = computed(() => {
@@ -102,48 +102,36 @@ const getAllParents = (option: OptionContent, parents: OptionContent[]): OptionC
 };
 
 const optionSummaries = computed(() => {
-  const optionSummary: AVPileSummaryOptionSummary = {
-    options: [],
-    writeIns: [],
-  };
+  const summaryOptions: AVPileSummaryOptionSummary = [];
 
   props.selectionPile.optionSelections.forEach((selection: OptionSelection) => {
-    if (selection.text) {
-      optionSummary.writeIns.push({
-        partyLetter: "?", // TODO: Figure out how this party stuff is supposed to work
-        partyName: "?", // TODO: Figure out how this party stuff is supposed to work
-        candidateName: selection.text,
-      });
+    const preexisting = summaryOptions.find((o) => o.handle === selection.reference);
+
+    const optionContent = selectableOptions.value.find((o) => o.reference === selection.reference);
+
+    if (!optionContent) return;
+
+    if (preexisting) {
+      preexisting.crosses += 1;
     } else {
-      const preexisting = optionSummary.options.find((o) => o.handle === selection.reference);
-
-      const optionContent = selectableOptions.value.find(
-        (o) => o.reference === selection.reference,
-      );
-
-      if (!optionContent) return;
-
-      if (preexisting) {
-        preexisting.crosses += 1;
-      } else {
-        optionSummary.options.push({
-          title: optionContent.title,
-          handle: selection.reference,
-          image: optionContent.image,
-          description: props.showOptionsDescription ? optionContent.description : undefined,
-          accentColor: optionContent.accentColor as `#${string}`,
-          crosses: 1,
-          parent: optionContent.parentContent,
-          rank:
-            props.contest.markingType.voteVariation === "ranked"
-              ? optionSummary.options.length + 1
-              : undefined,
-        });
-      }
+      summaryOptions.push({
+        title: selection.text ? { [i18nLocale.value]: selection.text } : optionContent.title,
+        handle: selection.reference,
+        image: optionContent.image,
+        description: props.showOptionsDescription ? optionContent.description : undefined,
+        accentColor: optionContent.accentColor as `#${string}`,
+        crosses: 1,
+        parent: optionContent.parentContent,
+        rank:
+          props.contest.markingType.voteVariation === "ranked"
+            ? summaryOptions.length + 1
+            : undefined,
+        writeIn: Boolean(selection.text),
+      });
     }
   });
 
-  return optionSummary;
+  return summaryOptions;
 });
 
 /**
@@ -206,7 +194,7 @@ watch(
 
     <div class="p-3 border" :class="galleryMode ? 'AVPileSummary--grid' : 'vstack gap-2'">
       <AVSummaryOption
-        v-for="(option, index) in optionSummaries.options"
+        v-for="(option, index) in optionSummaries"
         :key="index"
         :option="option"
         :multiple-votes-allowed="
@@ -217,6 +205,7 @@ watch(
         "
         :image-option="imageOption"
         :gallery-mode="galleryMode"
+        :is-write-in="option.writeIn"
       />
       <AVSummaryOption
         v-if="blankSelected"
@@ -272,10 +261,6 @@ watch(
               t("js.components.AVOption.aria_labels.option"),
             )
           }}
-        </p>
-        <p v-for="(option, index) in optionSummaries.writeIns" :key="index" class="mb-0">
-          <b>{{ option.partyLetter }} - {{ option.partyName }}</b>
-          <br /><span>{{ option.candidateName }}</span>
         </p>
         <p
           v-if="remainingOptions > 0"
