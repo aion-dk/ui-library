@@ -1,4 +1,4 @@
-export * from "@aion-dk/js-client/dist/lib/av_client/types";
+export * from "@assemblyvoting/js-client/dist/lib/av_client/types";
 export type { PropType, VNode } from "vue";
 export type { Locale, DefineLocaleMessage } from "vue-i18n";
 export type { Meta, Decorator } from "@storybook/vue3-vite";

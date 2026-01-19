@@ -12,8 +12,8 @@ import type {
   ImageOption,
   IterableObject,
 } from "@/types";
-import SelectionPileValidator from "@aion-dk/js-client/dist/lib/validators/selectionPileValidator";
-import ContestSelectionValidator from "@aion-dk/js-client/dist/lib/validators/contestSelectionValidator";
+import SelectionPileValidator from "@assemblyvoting/js-client/dist/lib/validators/selectionPileValidator";
+import ContestSelectionValidator from "@assemblyvoting/js-client/dist/lib/validators/contestSelectionValidator";
 import { getMeaningfulLabel } from "@/helpers/meaningfulLabel";
 
 const props = defineProps({
