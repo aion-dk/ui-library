@@ -1,5 +1,5 @@
 import type { LocalString, ContestContent, OptionContent, ContestArg } from "@/types";
-import { getOptions } from "@/examples/option";
+import { getOptions, getOption } from "@/examples/option";
 
 const description: LocalString = {
   ar: "<p>هذا وصف...</p>",
@@ -42,6 +42,8 @@ const getContestOptions = (args: ContestArg[]): OptionContent[] => {
   if (args.includes("gallery_parents")) return getOptions(["gallery_parents"], 2);
   if (args.includes("gallery")) return getOptions(["gallery"], 9);
   else if (args.includes("children_options")) return getOptions(["selectable", "children"], 3);
+  else if (args.includes("write_in"))
+    return [...getOptions(["selectable"], 3), getOption(["selectable", "write_in"], 4)];
   else if (args.includes("color_options")) return getOptions(["selectable", "color"], 3);
   else if (args.includes("complete_options"))
     return getOptions(["selectable", "description", "image"], 3);

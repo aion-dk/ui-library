@@ -58,6 +58,15 @@ export const Default = {
   },
 };
 
+export const WithWriteIn = {
+  render: Template,
+
+  args: {
+    contest: getContest(["blank", "write_in"]),
+    selectionPile: getSelectionPile([]),
+  },
+};
+
 export const MultipleVotes = {
   render: Template,
 

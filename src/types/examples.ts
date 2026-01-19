@@ -12,7 +12,8 @@ type OptionArg =
   | "image"
   | "candidacy"
   | "gallery"
-  | "gallery_parents";
+  | "gallery_parents"
+  | "write_in";
 
 type ContestArg =
   | "description"
@@ -35,7 +36,8 @@ type ContestArg =
   | "gallery"
   | "gallery_parents"
   | "gallery_short"
-  | "disallow_splitting";
+  | "disallow_splitting"
+  | "write_in";
 
 type SelectionPileArg =
   | "single"

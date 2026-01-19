@@ -20,6 +20,9 @@ const meta: Meta<typeof AVSummaryOption> = {
     parents: {
       control: { type: "object" },
     },
+    isWriteIn: {
+      control: { type: "boolean" },
+    },
     locale: {
       control: { type: "select" },
       options: SUPPORTED_LOCALES,
@@ -49,6 +52,22 @@ export const Default = {
     },
     blank: false,
     multipleVotesAllowed: false,
+  },
+};
+
+export const WriteIn = {
+  render: Template,
+
+  args: {
+    option: {
+      title: getOption([], 1).title,
+      handle: getOption([], 1).reference,
+      crosses: 1,
+      rank: null,
+    },
+    blank: false,
+    multipleVotesAllowed: false,
+    isWriteIn: true,
   },
 };
 

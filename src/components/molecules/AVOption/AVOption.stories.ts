@@ -95,6 +95,17 @@ export const Selected = {
   },
 };
 
+export const WriteIn = {
+  render: Template,
+
+  args: {
+    option: getOption(["selectable", "write_in"], 1),
+    selections: [],
+    contest: getContest([]),
+    invalid: false,
+  },
+};
+
 export const Disabled = {
   render: Template,
 
