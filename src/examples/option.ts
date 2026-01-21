@@ -151,6 +151,7 @@ const getOption = (
     url: args.includes("url") ? url : {},
     videoUrl: args.includes("video") ? video : {},
     candidateId: args.includes("candidacy") ? index : undefined,
+    writeIn: args.includes("write_in") ? { maxSize: 20, encoding: "utf8" } : undefined,
   };
 
   return option;

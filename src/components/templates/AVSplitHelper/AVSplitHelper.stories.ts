@@ -69,6 +69,16 @@ export const NonSplit = {
   },
 };
 
+export const NonSplitWithWriteIn = {
+  render: Template,
+
+  args: {
+    contest: getContest(["blank", "description", "write_in"]),
+    contestSelection: getContestSelection([]),
+    weight: 1,
+  },
+};
+
 export const NormalBallot = {
   render: Template,
 

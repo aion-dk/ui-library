@@ -333,6 +333,45 @@ describe("AVOption", () => {
     expect((wrapper.emitted().checked as VitestEmitted)[4][0].amount).to.eq(7);
   });
 
+  it("can support write-ins", async () => {
+    expect(wrapper.find("[data-test=option-title]").html()).not.to.contain("label");
+    expect(wrapper.findAll("[data-test=write-in-exampleOption1-input]").length).to.eq(0);
+    expect(wrapper.findAll("[data-test=space-counter]").length).to.eq(0);
+
+    await wrapper.setProps({
+      option: getOption(["selectable", "write_in"], 1),
+      contest: getContest([]),
+    });
+
+    expect(wrapper.find("[data-test=option-title]").html()).to.contain("label");
+    expect(wrapper.findAll("[data-test=write-in-exampleOption1-input]").length).to.eq(1);
+    expect(wrapper.find("[data-test=space-counter]").text()).to.eq("0 / 20");
+
+    expect(wrapper.emitted().checked.length).to.eq(5);
+    await wrapper.find("[data-test=write-in-exampleOption1-input]").trigger("click");
+    expect(wrapper.emitted().checked.length).to.eq(6);
+    expect((wrapper.emitted().checked as VitestEmitted)[5][0].text).to.eq("");
+    expect((wrapper.emitted().checked as VitestEmitted)[5][0].onlyUpdate).to.be.false;
+    await wrapper.find("[data-test=write-in-exampleOption1-input]").setValue("Less than 20");
+    expect(wrapper.find("[data-test=space-counter]").text()).to.eq("12 / 20");
+    expect((wrapper.emitted().checked as VitestEmitted)[6][0].text).to.eq("Less than 20");
+    expect((wrapper.emitted().checked as VitestEmitted)[6][0].onlyUpdate).to.be.true;
+    expect(wrapper.findAll(".invalid-feedback").length).to.eq(0);
+    await wrapper
+      .find("[data-test=write-in-exampleOption1-input]")
+      .setValue("Way more than 20 characters");
+    expect(wrapper.find("[data-test=space-counter]").text()).to.eq("27 / 20");
+    await wrapper.find("[data-test=write-in-exampleOption1-input]").trigger("click");
+    expect((wrapper.emitted().checked as VitestEmitted)[7][0].text).to.eq(
+      "Way more than 20 characters",
+    );
+    expect((wrapper.emitted().checked as VitestEmitted)[7][0].onlyUpdate).to.be.true;
+
+    await wrapper.setProps({
+      option: getOption(["selectable"], 1),
+    });
+  });
+
   it("can have a candidacy attached", async () => {
     expect(wrapper.findAll("[data-test=option-candidacy]").length).to.eq(0);
 

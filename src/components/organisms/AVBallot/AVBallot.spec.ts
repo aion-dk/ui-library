@@ -44,9 +44,6 @@ describe("AVBallot", () => {
         AVSubmissionHelper: {
           template: "<span data-test='helper' />",
         },
-        AVWriteInOption: {
-          template: "<span data-test='writein' />",
-        },
       },
     },
   });

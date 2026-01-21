@@ -136,6 +136,16 @@ const subOptionSelected = computed(() => {
 
 const exclusive = computed(() => props.option.exclusive);
 
+const isWriteIn = computed(() => !!props.option.writeIn);
+
+const writeInSize = computed(() => new Blob([writeInText.value]).size);
+
+const writeInInvalid = computed(
+  () =>
+    writeInSize.value > Number(props.option.writeIn?.maxSize) ||
+    (writeInSize.value <= 0 && checkedCount.value),
+);
+
 const optionGroups = computed(() => {
   const options = Array.from(Array(votesAllowedPerOption.value).keys());
   options.forEach((index) => (options[index] = index + 1));
@@ -150,10 +160,12 @@ const optionPartialResults = computed(() => {
   return props.partialResults ? props.partialResults[props.option.reference] : null;
 });
 
-const toggleOption = (reference: string, amount = 1) => {
+const toggleOption = (reference: string, amount = 1, text?: string, onlyUpdate?: boolean) => {
   emits("checked", {
     reference: reference,
     amount: amount,
+    text: text,
+    onlyUpdate: onlyUpdate,
   } as CheckedEventArgs);
 };
 
@@ -183,6 +195,8 @@ const handleHighlightOptionChange = (reference: string) => {
 };
 
 const isRtl = ref<boolean>(false);
+
+const writeInText = ref<string>("");
 
 const mutationObserver = ref<MutationObserver | null>(null);
 
@@ -225,18 +239,36 @@ const parentStyle = computed(() => {
   } else return "";
 });
 
-const toggleFromOption = () => {
+const toggleFromOption = (onlyUpdate: boolean) => {
   if (props.disabled || props.observerMode || !props.option.selectable) return;
+
   if (votesAllowedPerOption.value > 1) {
     if (props.selections.length) {
-      toggleOption(props.option.reference, 0);
+      toggleOption(props.option.reference, 0, writeInText.value, onlyUpdate);
     } else {
-      toggleOption(props.option.reference, votesAllowedPerOption.value);
+      toggleOption(
+        props.option.reference,
+        votesAllowedPerOption.value,
+        writeInText.value,
+        onlyUpdate,
+      );
     }
     return;
   }
-  toggleOption(props.option.reference);
+
+  toggleOption(props.option.reference, 1, writeInText.value, onlyUpdate);
 };
+
+const toggleFromWriteIn = (e: Event) => {
+  e.preventDefault();
+  e.stopPropagation();
+  toggleFromOption(Boolean(writeInText.value));
+};
+
+watch(
+  () => writeInText.value,
+  () => toggleFromOption(true),
+);
 
 watch(
   () => eventBus.value.get("highlight-option"),
@@ -254,6 +286,14 @@ onMounted(() => {
     isRtl.value = !!dirAttr && dirAttr === "rtl";
   });
   mutationObserver.value.observe(mutationObserverTarget, { attributes: true });
+
+  if (isWriteIn.value) {
+    const writeInTextArea = document.querySelector(`#write_in_${props.option.reference}`);
+    writeInTextArea?.addEventListener("keyup", () => {
+      (writeInTextArea as HTMLTextAreaElement).style.height = "";
+      (writeInTextArea as HTMLTextAreaElement).style.height = `${writeInTextArea.scrollHeight}px`;
+    });
+  }
 });
 
 onUnmounted(() => mutationObserver.value && mutationObserver.value.disconnect());
@@ -320,7 +360,7 @@ watch(
           :style="coloredEdgeStyle"
           :aria-label="`${t('js.components.AVOption.aria_labels.option')} ${getMeaningfulLabel(option as unknown as IterableObject, i18nLocale, t('js.components.AVOption.aria_labels.option'))}`"
           data-test="option-section"
-          @click="toggleFromOption"
+          @click="toggleFromOption(false)"
         >
           <!-- PARENT BADGE -->
           <div
@@ -352,6 +392,7 @@ watch(
               <!-- OPTION HEADER -->
               <header
                 class="AVOption--header d-flex flex-column flex-sm-row align-items-sm-center gap-3"
+                :class="{ 'w-100': isWriteIn }"
                 data-test="option-header"
               >
                 <img
@@ -362,7 +403,7 @@ watch(
                   data-test="option-image"
                 />
                 <h5
-                  v-if="contest.mode !== 'gallery' || !option.image"
+                  v-if="(contest.mode !== 'gallery' || !option.image) && !isWriteIn"
                   class="AVOption--title m-0"
                   :id="`option_${option.reference}_title`"
                   data-test="option-title"
@@ -371,9 +412,42 @@ watch(
                 <span :id="`option_${option.reference}_handle`" class="visually-hidden">
                   {{ option.reference }}
                 </span>
+
+                <div v-if="isWriteIn" class="w-100">
+                  <label
+                    :id="`option_${option.reference}_title`"
+                    :for="`write_in_${option.reference}`"
+                    class="form-label AVOption--title"
+                    data-test="option-title"
+                    v-text="title"
+                  ></label>
+                  <div>
+                    <textarea
+                      v-model="writeInText"
+                      class="form-control"
+                      :class="{
+                        'is-invalid': writeInInvalid,
+                        'border-theme-danger': writeInInvalid,
+                      }"
+                      :id="`write_in_${option.reference}`"
+                      :data-test="`write-in-${option.reference}-input`"
+                      :placeholder="t('js.components.AVOption.write_in.placeholder')"
+                      :disabled="disabled"
+                      resize="vertical"
+                      :rows="contest.mode === 'gallery' ? 3 : 1"
+                      @click="toggleFromWriteIn"
+                    />
+                    <div
+                      class="small"
+                      :class="writeInInvalid ? 'text-theme-danger' : 'text-muted'"
+                      data-test="space-counter"
+                    >
+                      {{ `${writeInSize} / ${option.writeIn?.maxSize}` }}
+                    </div>
+                  </div>
+                </div>
               </header>
             </div>
-
             <!-- MULTIVOTE CROSSES -->
             <div
               v-if="votesAllowedPerOption >= 1"
@@ -409,7 +483,7 @@ watch(
                   :check-box-index="optionIndex"
                   :disabled="disabled || observerMode"
                   :gallery-mode="contest.mode === 'gallery'"
-                  @toggled="toggleOption(option.reference, optionIndex)"
+                  @toggled="toggleOption(option.reference, optionIndex, writeInText)"
                 />
               </div>
             </div>

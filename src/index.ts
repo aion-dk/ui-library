@@ -50,7 +50,6 @@ import {
   AVOption,
   AVSearchBallot,
   AVSubmissionHelper,
-  AVWriteInOption,
   AVSplitWeightHelper,
   AVSplitWizardHeader,
   AVRecommendationList,
@@ -104,7 +103,6 @@ export default {
     app.component("AVOption", AVOption);
     app.component("AVSearchBallot", AVSearchBallot);
     app.component("AVSubmissionHelper", AVSubmissionHelper);
-    app.component("AVWriteInOption", AVWriteInOption);
     app.component("AVSplitWeightHelper", AVSplitWeightHelper);
     app.component("AVSplitWizardHeader", AVSplitWizardHeader);
     app.component("AVRecommendationList", AVRecommendationList);
@@ -158,7 +156,6 @@ export {
   AVOption,
   AVSearchBallot,
   AVSubmissionHelper,
-  AVWriteInOption,
   AVSplitWeightHelper,
   AVSplitWizardHeader,
   AVRecommendationList,

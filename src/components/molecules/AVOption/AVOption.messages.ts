@@ -11,6 +11,9 @@ const translations: DefineLocaleMessage = {
       option: "خيار",
       option_image: "صورة الخيار",
     },
+    write_in: {
+      placeholder: "اكتب ردك هنا",
+    },
   },
   ca: {
     info_link_text_html: "Informació",
@@ -21,6 +24,9 @@ const translations: DefineLocaleMessage = {
     aria_labels: {
       option: "Opció",
       option_image: "Imatge de l'opció",
+    },
+    write_in: {
+      placeholder: "Escriu la teva resposta aquí",
     },
   },
   cy: {
@@ -33,6 +39,9 @@ const translations: DefineLocaleMessage = {
       option: "Opsiwn",
       option_image: "Delwedd opsiwn",
     },
+    write_in: {
+      placeholder: "Teipiwch eich ymateb yma",
+    },
   },
   da: {
     info_link_text_html: "Info",
@@ -41,6 +50,9 @@ const translations: DefineLocaleMessage = {
     aria_labels: {
       option: "Valgmulighed",
       option_image: "Valgmulighedsbillede",
+    },
+    write_in: {
+      placeholder: "Skriv dit svar her",
     },
   },
   de: {
@@ -51,6 +63,9 @@ const translations: DefineLocaleMessage = {
       option: "Option",
       option_image: "Optionsbild",
     },
+    write_in: {
+      placeholder: "Geben Sie hier Ihre Antwort ein",
+    },
   },
   en: {
     info_link_text_html: "Info",
@@ -59,6 +74,9 @@ const translations: DefineLocaleMessage = {
     aria_labels: {
       option: "Option",
       option_image: "Option image",
+    },
+    write_in: {
+      placeholder: "Type your input/response here",
     },
   },
   es: {
@@ -69,6 +87,9 @@ const translations: DefineLocaleMessage = {
       option: "Opción",
       option_image: "Imagen de la opción",
     },
+    write_in: {
+      placeholder: "Escribe tu voto aquí",
+    },
   },
   fi: {
     info_link_text_html: "Tiedot",
@@ -77,6 +98,9 @@ const translations: DefineLocaleMessage = {
     aria_labels: {
       option: "Vaihtoehto",
       option_image: "Vaihtoehdon kuva",
+    },
+    write_in: {
+      placeholder: "Kirjoita vastauksesi tähän",
     },
   },
   fr: {
@@ -87,6 +111,9 @@ const translations: DefineLocaleMessage = {
       option: "Option",
       option_image: "Image d'option",
     },
+    write_in: {
+      placeholder: "Saisissez votre réponse ici",
+    },
   },
   is: {
     info_link_text_html: "Upplýsingar",
@@ -95,6 +122,9 @@ const translations: DefineLocaleMessage = {
     aria_labels: {
       option: "Valkostur",
       option_image: "Valmöguleikamynd",
+    },
+    write_in: {
+      placeholder: "Skrifaðu svarið þitt hér",
     },
   },
   it: {
@@ -105,6 +135,9 @@ const translations: DefineLocaleMessage = {
       option: "Opzione",
       option_image: "Immagine dell'opzione",
     },
+    write_in: {
+      placeholder: "Inserisci qui la tua risposta",
+    },
   },
   nl: {
     info_link_text_html: "Info",
@@ -113,6 +146,9 @@ const translations: DefineLocaleMessage = {
     aria_labels: {
       option: "Optie",
       option_image: "Optie afbeelding",
+    },
+    write_in: {
+      placeholder: "Typ hier uw antwoord",
     },
   },
   pl: {
@@ -123,6 +159,9 @@ const translations: DefineLocaleMessage = {
       option: "Opcja",
       option_image: "Obraz opcji",
     },
+    write_in: {
+      placeholder: "Wpisz swoją odpowiedź tutaj",
+    },
   },
   pt: {
     info_link_text_html: "Informação",
@@ -130,6 +169,9 @@ const translations: DefineLocaleMessage = {
     aria_labels: {
       option: "Opção",
       option_image: "Opção imagem",
+    },
+    write_in: {
+      placeholder: "Introduza aqui a sua resposta",
     },
   },
   ro: {
@@ -142,6 +184,9 @@ const translations: DefineLocaleMessage = {
       option: "Opțiune",
       option_image: "Imagine opțiune",
     },
+    write_in: {
+      placeholder: "Scrieți răspunsul aici",
+    },
   },
   ru: {
     info_link_text_html: "Информация",
@@ -151,6 +196,9 @@ const translations: DefineLocaleMessage = {
       option: "Вариант",
       option_image: "Изображение для варианта",
     },
+    write_in: {
+      placeholder: "Введите свой ответ здесь",
+    },
   },
   sv: {
     info_link_text_html: "Info",
@@ -159,6 +207,9 @@ const translations: DefineLocaleMessage = {
     aria_labels: {
       option: "Alternativ",
       option_image: "Alternativ bild",
+    },
+    write_in: {
+      placeholder: "Skriv ditt svar här",
     },
   },
 };

@@ -7,6 +7,7 @@ const translations: DefineLocaleMessage = {
       option_image: "صورة الخيار",
     },
     blank: "فارغ",
+    write_in: "اكتب إجابتك",
   },
   ca: {
     aria_label: {
@@ -14,6 +15,7 @@ const translations: DefineLocaleMessage = {
       option_image: "Imatge de l'opció",
     },
     blank: "Vot en blanc",
+    write_in: "Escriu-ho",
   },
   cy: {
     aria_label: {
@@ -21,6 +23,7 @@ const translations: DefineLocaleMessage = {
       option_image: "Delwedd opsiwn",
     },
     blank: "Gwag",
+    write_in: "Ysgrifennwch i mewn",
   },
   da: {
     aria_label: {
@@ -28,6 +31,7 @@ const translations: DefineLocaleMessage = {
       option_image: "Valgmulighedsbillede",
     },
     blank: "Blank",
+    write_in: "Indskriv",
   },
   de: {
     aria_label: {
@@ -35,6 +39,7 @@ const translations: DefineLocaleMessage = {
       option_image: "Optionsbild",
     },
     blank: "Leere",
+    write_in: "Freitext eingeben",
   },
   en: {
     aria_label: {
@@ -42,6 +47,7 @@ const translations: DefineLocaleMessage = {
       option_image: "Option image",
     },
     blank: "Blank",
+    write_in: "Write in",
   },
   es: {
     aria_label: {
@@ -49,6 +55,7 @@ const translations: DefineLocaleMessage = {
       option_image: "Imagen de la opción",
     },
     blank: "Voto en blanco",
+    write_in: "Voto escrito",
   },
   fi: {
     aria_label: {
@@ -56,6 +63,7 @@ const translations: DefineLocaleMessage = {
       option_image: "Vaihtoehdon kuva",
     },
     blank: "Tyhjä",
+    write_in: "Kirjoita vastauksesi tähän",
   },
   fr: {
     aria_label: {
@@ -63,6 +71,7 @@ const translations: DefineLocaleMessage = {
       option_image: "Image d'option",
     },
     blank: "Blanc",
+    write_in: "Réponse libre",
   },
   is: {
     aria_label: {
@@ -70,6 +79,7 @@ const translations: DefineLocaleMessage = {
       option_image: "Valmöguleikamynd",
     },
     blank: "Autt",
+    write_in: "Skrifaðu svarið.",
   },
   it: {
     aria_label: {
@@ -77,6 +87,7 @@ const translations: DefineLocaleMessage = {
       option_image: "Immagine dell'opzione",
     },
     blank: "Vuoto",
+    write_in: "Scrivi",
   },
   nl: {
     aria_label: {
@@ -84,6 +95,7 @@ const translations: DefineLocaleMessage = {
       option_image: "Optie afbeelding",
     },
     blank: "Blanco",
+    write_in: "Open antwoord",
   },
   pl: {
     aria_label: {
@@ -91,6 +103,7 @@ const translations: DefineLocaleMessage = {
       option_image: "Imagine opțiune",
     },
     blank: "Puste",
+    write_in: "Wpisz",
   },
   pt: {
     aria_label: {
@@ -98,6 +111,7 @@ const translations: DefineLocaleMessage = {
       option_image: "Imagem da opção",
     },
     blank: "Em branco",
+    write_in: "Escrito",
   },
   ro: {
     aria_label: {
@@ -105,6 +119,7 @@ const translations: DefineLocaleMessage = {
       option_image: "Option image",
     },
     blank: "Gol",
+    write_in: "Scrieți",
   },
   ru: {
     aria_label: {
@@ -112,6 +127,7 @@ const translations: DefineLocaleMessage = {
       option_image: "Изображение для варианта",
     },
     blank: "Пустой",
+    write_in: "Впишите ответ",
   },
   sv: {
     aria_label: {
@@ -119,6 +135,7 @@ const translations: DefineLocaleMessage = {
       option_image: "Alternativ bild",
     },
     blank: "Blank",
+    write_in: "Skriv in",
   },
 };
 

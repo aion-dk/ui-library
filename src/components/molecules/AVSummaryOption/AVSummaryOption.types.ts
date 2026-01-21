@@ -9,6 +9,7 @@ interface AVSummaryOptionObject {
   rank?: number;
   parent?: OptionContent;
   accentColor?: `#${string}`;
+  writeIn?: boolean;
 }
 
 interface AVSummaryOptionParent {

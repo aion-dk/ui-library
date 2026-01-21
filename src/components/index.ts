@@ -23,7 +23,6 @@ export { default as AVBlankOption } from "@/components/molecules/AVBlankOption";
 export { default as AVOption } from "@/components/molecules/AVOption";
 export { default as AVSearchBallot } from "@/components/molecules/AVSearchBallot";
 export { default as AVSubmissionHelper } from "@/components/molecules/AVSubmissionHelper";
-export { default as AVWriteInOption } from "@/components/molecules/AVWriteInOption";
 export { default as AVSplitWeightHelper } from "@/components/molecules/AVSplitWeightHelper";
 export { default as AVSplitWizardHeader } from "@/components/molecules/AVSplitWizardHeader";
 export { default as AVRecommendationList } from "@/components/molecules/AVRecommendationList";
