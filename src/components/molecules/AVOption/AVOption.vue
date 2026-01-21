@@ -415,6 +415,7 @@ watch(
 
                 <div v-if="isWriteIn" class="w-100">
                   <label
+                    :id="`option_${option.reference}_title`"
                     :for="`write_in_${option.reference}`"
                     class="form-label AVOption--title"
                     data-test="option-title"
