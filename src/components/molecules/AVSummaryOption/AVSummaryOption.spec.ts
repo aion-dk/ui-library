@@ -24,6 +24,9 @@ describe("AVSummaryOption", () => {
         AVOptionCheckbox: {
           template: "<span />",
         },
+        AVIcon: {
+          template: `<span data-test="write-in-icon" />`,
+        },
       },
     },
   });
@@ -211,5 +214,20 @@ describe("AVSummaryOption", () => {
     expect(wrapper.find("[data-test=summary-option-description]").html()).to.contain(
       "<p>Dit is een beschrijving...</p>",
     );
+  });
+
+  it("can display write-ins", async () => {
+    expect(wrapper.findAll("[data-test=write-in-icon]").length).to.eq(0);
+    expect(wrapper.findAll("[data-test=write-in-badge]").length).to.eq(0);
+
+    await wrapper.setProps({
+      locale: "en",
+      isWriteIn: true,
+    });
+
+    expect(wrapper.findAll("[data-test=write-in-icon]").length).to.eq(1);
+    expect(wrapper.findAll("[data-test=write-in-badge]").length).to.eq(1);
+    expect(wrapper.find("[data-test=write-in-icon]").attributes().icon).to.eq("signature");
+    expect(wrapper.find("[data-test=write-in-badge]").text()).to.contain("Write in");
   });
 });

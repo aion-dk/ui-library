@@ -234,7 +234,10 @@ watch(
             data-test="summary-option-image"
           />
           <div class="hstack gap-3" style="min-height: 30px">
-            <span v-if="isWriteIn" class="text-muted badge text-bg-secondary"
+            <span
+              v-if="isWriteIn"
+              class="text-muted badge text-bg-secondary"
+              data-test="write-in-badge"
               ><AVIcon icon="signature" /> {{ t("js.components.AVSummaryOption.write_in") }}</span
             >
             <h5 class="AVSummaryOption--title m-0">
