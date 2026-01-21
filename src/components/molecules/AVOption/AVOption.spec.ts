@@ -336,7 +336,7 @@ describe("AVOption", () => {
   it("can support write-ins", async () => {
     expect(wrapper.find("[data-test=option-title]").html()).not.to.contain("label");
     expect(wrapper.findAll("[data-test=write-in-exampleOption1-input]").length).to.eq(0);
-    expect(wrapper.findAll(".input-group-text").length).to.eq(0);
+    expect(wrapper.findAll("[data-test=space-counter]").length).to.eq(0);
 
     await wrapper.setProps({
       option: getOption(["selectable", "write_in"], 1),
@@ -345,7 +345,7 @@ describe("AVOption", () => {
 
     expect(wrapper.find("[data-test=option-title]").html()).to.contain("label");
     expect(wrapper.findAll("[data-test=write-in-exampleOption1-input]").length).to.eq(1);
-    expect(wrapper.find(".input-group-text").text()).to.eq("0 / 20");
+    expect(wrapper.find("[data-test=space-counter]").text()).to.eq("0 / 20");
 
     expect(wrapper.emitted().checked.length).to.eq(5);
     await wrapper.find("[data-test=write-in-exampleOption1-input]").trigger("click");
@@ -353,14 +353,14 @@ describe("AVOption", () => {
     expect((wrapper.emitted().checked as VitestEmitted)[5][0].text).to.eq("");
     expect((wrapper.emitted().checked as VitestEmitted)[5][0].onlyUpdate).to.be.false;
     await wrapper.find("[data-test=write-in-exampleOption1-input]").setValue("Less than 20");
-    expect(wrapper.find(".input-group-text").text()).to.eq("12 / 20");
+    expect(wrapper.find("[data-test=space-counter]").text()).to.eq("12 / 20");
     expect((wrapper.emitted().checked as VitestEmitted)[6][0].text).to.eq("Less than 20");
     expect((wrapper.emitted().checked as VitestEmitted)[6][0].onlyUpdate).to.be.true;
     expect(wrapper.findAll(".invalid-feedback").length).to.eq(0);
     await wrapper
       .find("[data-test=write-in-exampleOption1-input]")
       .setValue("Way more than 20 characters");
-    expect(wrapper.find(".input-group-text").text()).to.eq("27 / 20");
+    expect(wrapper.find("[data-test=space-counter]").text()).to.eq("27 / 20");
     expect(wrapper.find(".invalid-feedback").text()).to.contain(
       "Your input/response has exceeded the character limitation. Adjust before submitting.",
     );

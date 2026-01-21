@@ -282,6 +282,14 @@ onMounted(() => {
     isRtl.value = !!dirAttr && dirAttr === "rtl";
   });
   mutationObserver.value.observe(mutationObserverTarget, { attributes: true });
+
+  if (isWriteIn.value) {
+    const writeInTextArea = document.querySelector(`#write_in_${props.option.reference}`);
+    writeInTextArea?.addEventListener("keyup", () => {
+      (writeInTextArea as HTMLTextAreaElement).style.height = "";
+      (writeInTextArea as HTMLTextAreaElement).style.height = `${writeInTextArea.scrollHeight}px`;
+    });
+  }
 });
 
 onUnmounted(() => mutationObserver.value && mutationObserver.value.disconnect());
@@ -408,8 +416,8 @@ watch(
                     data-test="option-title"
                     v-text="title"
                   ></label>
-                  <div class="input-group">
-                    <input
+                  <div>
+                    <textarea
                       v-model="writeInText"
                       class="form-control"
                       :class="{ 'is-invalid': writeInInvalid }"
@@ -417,19 +425,17 @@ watch(
                       :data-test="`write-in-${option.reference}-input`"
                       :placeholder="t('js.components.AVOption.write_in.placeholder')"
                       :disabled="disabled"
+                      resize="vertical"
+                      :rows="contest.mode === 'gallery' ? 3 : 1"
                       @click="toggleFromWriteIn"
                     />
-                    <span
-                      class="input-group-text rounded-end"
-                      style="cursor: default"
-                      :class="{
-                        'bg-transparent': !writeInInvalid,
-                        'border-danger': writeInInvalid,
-                        'text-bg-danger': writeInInvalid,
-                      }"
+                    <div
+                      class="small"
+                      :class="writeInInvalid ? 'text-danger' : 'text-muted'"
+                      data-test="space-counter"
                     >
                       {{ `${writeInSize} / ${option.writeIn?.maxSize}` }}
-                    </span>
+                    </div>
                     <div
                       v-if="writeInInvalid"
                       class="invalid-feedback"
