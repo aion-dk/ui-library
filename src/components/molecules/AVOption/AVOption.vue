@@ -293,6 +293,11 @@ onMounted(() => {
       (writeInTextArea as HTMLTextAreaElement).style.height = "";
       (writeInTextArea as HTMLTextAreaElement).style.height = `${writeInTextArea.scrollHeight}px`;
     });
+
+    props.selections.forEach((selection) => {
+      if (selection.reference === props.option.reference && selection.text)
+        writeInText.value = selection.text;
+    });
   }
 });
 
