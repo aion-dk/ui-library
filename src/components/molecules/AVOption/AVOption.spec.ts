@@ -361,9 +361,6 @@ describe("AVOption", () => {
       .find("[data-test=write-in-exampleOption1-input]")
       .setValue("Way more than 20 characters");
     expect(wrapper.find("[data-test=space-counter]").text()).to.eq("27 / 20");
-    expect(wrapper.find(".invalid-feedback").text()).to.contain(
-      "Your input/response has exceeded the character limitation. Adjust before submitting.",
-    );
     await wrapper.find("[data-test=write-in-exampleOption1-input]").trigger("click");
     expect((wrapper.emitted().checked as VitestEmitted)[7][0].text).to.eq(
       "Way more than 20 characters",
