@@ -333,7 +333,6 @@ watch(
     }"
     data-test="option"
   >
-    {{ selections }}
     <a
       :id="option.reference"
       class="AVOption--scroll-anchor visually-hidden"
