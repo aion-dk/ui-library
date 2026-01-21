@@ -140,7 +140,11 @@ const isWriteIn = computed(() => !!props.option.writeIn);
 
 const writeInSize = computed(() => new Blob([writeInText.value]).size);
 
-const writeInInvalid = computed(() => writeInSize.value > Number(props.option.writeIn?.maxSize));
+const writeInInvalid = computed(
+  () =>
+    writeInSize.value > Number(props.option.writeIn?.maxSize) ||
+    (writeInSize.value <= 0 && checkedCount.value),
+);
 
 const optionGroups = computed(() => {
   const options = Array.from(Array(votesAllowedPerOption.value).keys());
@@ -420,7 +424,10 @@ watch(
                     <textarea
                       v-model="writeInText"
                       class="form-control"
-                      :class="{ 'is-invalid': writeInInvalid }"
+                      :class="{
+                        'is-invalid': writeInInvalid,
+                        'border-theme-danger': writeInInvalid,
+                      }"
                       :id="`write_in_${option.reference}`"
                       :data-test="`write-in-${option.reference}-input`"
                       :placeholder="t('js.components.AVOption.write_in.placeholder')"
@@ -431,17 +438,10 @@ watch(
                     />
                     <div
                       class="small"
-                      :class="writeInInvalid ? 'text-danger' : 'text-muted'"
+                      :class="writeInInvalid ? 'text-theme-danger' : 'text-muted'"
                       data-test="space-counter"
                     >
                       {{ `${writeInSize} / ${option.writeIn?.maxSize}` }}
-                    </div>
-                    <div
-                      v-if="writeInInvalid"
-                      class="invalid-feedback"
-                      :data-test="`write-in-${option.reference}-validation`"
-                    >
-                      {{ t("js.components.AVOption.write_in.invalid_feedback") }}
                     </div>
                   </div>
                 </div>

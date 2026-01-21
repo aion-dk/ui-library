@@ -118,6 +118,10 @@
   width: 100%;
 }
 
+.border-theme-danger {
+  border-color: var(--av-theme-danger-background) !important;
+}
+
 @media (min-width: 576px) {
   .party-invite-btn {
     width: fit-content;

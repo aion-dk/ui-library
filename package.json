@@ -52,7 +52,7 @@
     "vue-i18n": "^11.1.10"
   },
   "devDependencies": {
-    "@assemblyvoting/js-client": "^5.0.2",
+    "@assemblyvoting/js-client": "^5.1.0",
     "@chromatic-com/storybook": "^4.1.1",
     "@fortawesome/fontawesome-common-types": "^6.7.2",
     "@storybook/addon-a11y": "^9.1.13",
