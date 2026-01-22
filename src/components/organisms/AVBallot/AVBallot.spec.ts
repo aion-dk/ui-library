@@ -241,6 +241,47 @@ describe("AVBallot", () => {
       wrapper.find("[data-test=blank-option]").get("[data-test=blank-checkbox]").attributes()
         .disabled,
     ).to.eq("false");
+
+    await wrapper.setProps({
+      contest: getContest(["blank", "children_options", "belgian_rules"]),
+      selectionPile: {
+        multiplier: 1,
+        optionSelections: [
+          { reference: "exampleChildren1-1" },
+          { reference: "exampleChildren2-2" },
+        ],
+        explicitBlank: false,
+      },
+    });
+
+    expect(
+      wrapper.findAll("[data-test=option]")[1].get("[data-test=checkbox]").attributes().checked,
+    ).to.eq("true");
+    expect(
+      wrapper.findAll("[data-test=option]")[1].get("[data-test=checkbox]").attributes()[
+        "exclusive-error"
+      ],
+    ).to.eq("false");
+    expect(
+      wrapper.findAll("[data-test=option]")[1].get("[data-test=checkbox]").attributes().invalid,
+    ).to.eq("true");
+    expect(
+      wrapper.findAll("[data-test=option]")[1].get("[data-test=checkbox]").attributes().disabled,
+    ).to.eq("false");
+    expect(
+      wrapper.findAll("[data-test=option]")[5].get("[data-test=checkbox]").attributes().checked,
+    ).to.eq("true");
+    expect(
+      wrapper.findAll("[data-test=option]")[5].get("[data-test=checkbox]").attributes()[
+        "exclusive-error"
+      ],
+    ).to.eq("false");
+    expect(
+      wrapper.findAll("[data-test=option]")[5].get("[data-test=checkbox]").attributes().invalid,
+    ).to.eq("true");
+    expect(
+      wrapper.findAll("[data-test=option]")[5].get("[data-test=checkbox]").attributes().disabled,
+    ).to.eq("false");
   });
 
   it("can perform search", async () => {

@@ -110,6 +110,7 @@ const getContest = (args: ContestArg[]): ContestContent => {
     resultType: { name: "regular" },
     options: getContestOptions(args),
     displayScrollToBottomBtn: args.includes("huge"),
+    customRulesets: args.includes("belgian_rules") ? ["belgian_ballot_rules"] : undefined,
   };
 };
 

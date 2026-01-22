@@ -37,7 +37,8 @@ type ContestArg =
   | "gallery_parents"
   | "gallery_short"
   | "disallow_splitting"
-  | "write_in";
+  | "write_in"
+  | "belgian_rules";
 
 type SelectionPileArg =
   | "single"
