@@ -146,6 +146,12 @@ const writeInInvalid = computed(
     (writeInSize.value <= 0 && checkedCount.value),
 );
 
+const writeInPlaceholder = computed(() =>
+  props.option.writeIn?.placeholder?.[i18nLocale.value]
+    ? props.option.writeIn?.placeholder[i18nLocale.value]
+    : t("js.components.AVOption.write_in.placeholder"),
+);
+
 const optionGroups = computed(() => {
   const options = Array.from(Array(votesAllowedPerOption.value).keys());
   options.forEach((index) => (options[index] = index + 1));
@@ -437,7 +443,7 @@ watch(
                       }"
                       :id="`write_in_${option.reference}`"
                       :data-test="`write-in-${option.reference}-input`"
-                      :placeholder="t('js.components.AVOption.write_in.placeholder')"
+                      :placeholder="writeInPlaceholder"
                       :disabled="disabled || observerMode"
                       resize="vertical"
                       :rows="contest.mode === 'gallery' ? 3 : 1"
