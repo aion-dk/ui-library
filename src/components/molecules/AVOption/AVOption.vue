@@ -262,7 +262,8 @@ const toggleFromOption = (onlyUpdate: boolean) => {
 const toggleFromWriteIn = (e: Event) => {
   e.preventDefault();
   e.stopPropagation();
-  toggleFromOption(Boolean(writeInText.value));
+  if (writeInText.value) toggleFromOption(Boolean(writeInText.value));
+  else return;
 };
 
 watch(
