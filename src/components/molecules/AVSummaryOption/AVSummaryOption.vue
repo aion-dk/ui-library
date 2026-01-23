@@ -45,9 +45,9 @@ const props = defineProps({
     type: String as PropType<ImageOption>,
     default: "square",
   },
-  isWriteIn: {
-    type: Boolean,
-    default: false,
+  writeIn: {
+    type: String,
+    default: null,
   },
 });
 
@@ -221,7 +221,10 @@ watch(
       class="card-body hstack gap-2"
       :class="{ 'p-4': useFooter, 'justify-content-between': !galleryMode }"
     >
-      <div :class="{ vstack: galleryMode }" style="max-width: calc(100%-70px)">
+      <div
+        :class="{ vstack: galleryMode, 'w-100': !galleryMode }"
+        style="max-width: calc(100%-70px)"
+      >
         <div class="w-100" :class="{ hstack: !galleryMode }">
           <img
             v-if="option?.image"
@@ -234,12 +237,6 @@ watch(
             data-test="summary-option-image"
           />
           <div class="hstack gap-3" style="min-height: 30px">
-            <span
-              v-if="isWriteIn"
-              class="text-muted badge text-bg-secondary"
-              data-test="write-in-badge"
-              ><AVIcon icon="signature" /> {{ t("js.components.AVSummaryOption.write_in") }}</span
-            >
             <h5 class="AVSummaryOption--title m-0">
               {{ displayTitle }}
             </h5>
@@ -251,6 +248,16 @@ watch(
           data-test="summary-option-description"
           v-html="option.description[i18nLocale]"
         ></div>
+        <!-- WRITE-IN -->
+        <div v-if="Boolean(writeIn)" class="pt-2" data-test="write-in-section">
+          <hr class="m-0 me-4" />
+          <div class="hstack mt-3 gap-2">
+            <div class="text-muted badge text-bg-secondary" data-test="write-in-badge">
+              <AVIcon icon="signature" /> {{ t("js.components.AVSummaryOption.write_in") }}
+            </div>
+            <span>{{ writeIn }}</span>
+          </div>
+        </div>
       </div>
       <div v-if="!useFooter" class="align-self-start">
         <AVOptionCheckbox

@@ -20,8 +20,8 @@ const meta: Meta<typeof AVSummaryOption> = {
     parents: {
       control: { type: "object" },
     },
-    isWriteIn: {
-      control: { type: "boolean" },
+    writeIn: {
+      control: { type: "text" },
     },
     locale: {
       control: { type: "select" },
@@ -67,7 +67,7 @@ export const WriteIn = {
     },
     blank: false,
     multipleVotesAllowed: false,
-    isWriteIn: true,
+    writeIn: "Here's something I wrote",
   },
 };
 

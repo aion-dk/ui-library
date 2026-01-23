@@ -187,6 +187,30 @@ export const SummaryWithDescriptions = {
   },
 };
 
+export const SummaryWithWriteIn = {
+  render: Template,
+
+  args: {
+    contest: getContest(["complete_options", "write_in"]),
+    activeState: "summary",
+    isEditing: false,
+    maximumOptionsShown: 3,
+    pileIndex: 0,
+    totalPiles: 3,
+    showOptionsDescription: true,
+    selectionPile: {
+      multiplier: 1,
+      optionSelections: [
+        {
+          reference: "exampleOption4",
+          text: "Here's something I wrote",
+        },
+      ],
+      explicitBlank: false,
+    },
+  },
+};
+
 export const SummaryWithPrefilled = {
   render: Template,
 
