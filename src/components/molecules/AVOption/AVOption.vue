@@ -437,7 +437,7 @@ watch(
                       :id="`write_in_${option.reference}`"
                       :data-test="`write-in-${option.reference}-input`"
                       :placeholder="t('js.components.AVOption.write_in.placeholder')"
-                      :disabled="disabled"
+                      :disabled="disabled || observerMode"
                       resize="vertical"
                       :rows="contest.mode === 'gallery' ? 3 : 1"
                       @click="toggleFromWriteIn"
