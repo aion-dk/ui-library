@@ -219,15 +219,20 @@ describe("AVSummaryOption", () => {
   it("can display write-ins", async () => {
     expect(wrapper.findAll("[data-test=write-in-icon]").length).to.eq(0);
     expect(wrapper.findAll("[data-test=write-in-badge]").length).to.eq(0);
+    expect(wrapper.findAll("[data-test=write-in-section]").length).to.eq(0);
 
     await wrapper.setProps({
       locale: "en",
-      isWriteIn: true,
+      writeIn: "Here's something I wrote",
     });
 
     expect(wrapper.findAll("[data-test=write-in-icon]").length).to.eq(1);
     expect(wrapper.findAll("[data-test=write-in-badge]").length).to.eq(1);
+    expect(wrapper.findAll("[data-test=write-in-section]").length).to.eq(1);
     expect(wrapper.find("[data-test=write-in-icon]").attributes().icon).to.eq("signature");
     expect(wrapper.find("[data-test=write-in-badge]").text()).to.contain("Write in");
+    expect(wrapper.find("[data-test=write-in-section]").text()).to.contain(
+      "Here's something I wrote",
+    );
   });
 });

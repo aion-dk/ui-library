@@ -349,23 +349,20 @@ describe("AVOption", () => {
 
     expect(wrapper.emitted().checked.length).to.eq(5);
     await wrapper.find("[data-test=write-in-exampleOption1-input]").trigger("click");
-    expect(wrapper.emitted().checked.length).to.eq(6);
-    expect((wrapper.emitted().checked as VitestEmitted)[5][0].text).to.eq("");
-    expect((wrapper.emitted().checked as VitestEmitted)[5][0].onlyUpdate).to.be.false;
     await wrapper.find("[data-test=write-in-exampleOption1-input]").setValue("Less than 20");
     expect(wrapper.find("[data-test=space-counter]").text()).to.eq("12 / 20");
-    expect((wrapper.emitted().checked as VitestEmitted)[6][0].text).to.eq("Less than 20");
-    expect((wrapper.emitted().checked as VitestEmitted)[6][0].onlyUpdate).to.be.true;
+    expect((wrapper.emitted().checked as VitestEmitted)[5][0].text).to.eq("Less than 20");
+    expect((wrapper.emitted().checked as VitestEmitted)[5][0].onlyUpdate).to.be.true;
     expect(wrapper.findAll(".invalid-feedback").length).to.eq(0);
     await wrapper
       .find("[data-test=write-in-exampleOption1-input]")
       .setValue("Way more than 20 characters");
     expect(wrapper.find("[data-test=space-counter]").text()).to.eq("27 / 20");
     await wrapper.find("[data-test=write-in-exampleOption1-input]").trigger("click");
-    expect((wrapper.emitted().checked as VitestEmitted)[7][0].text).to.eq(
+    expect((wrapper.emitted().checked as VitestEmitted)[6][0].text).to.eq(
       "Way more than 20 characters",
     );
-    expect((wrapper.emitted().checked as VitestEmitted)[7][0].onlyUpdate).to.be.true;
+    expect((wrapper.emitted().checked as VitestEmitted)[6][0].onlyUpdate).to.be.true;
 
     await wrapper.setProps({
       option: getOption(["selectable"], 1),

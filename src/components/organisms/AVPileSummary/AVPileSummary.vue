@@ -115,7 +115,7 @@ const optionSummaries = computed(() => {
       preexisting.crosses += 1;
     } else {
       summaryOptions.push({
-        title: selection.text ? { [i18nLocale.value]: selection.text } : optionContent.title,
+        title: optionContent.title,
         handle: selection.reference,
         image: optionContent.image,
         description: props.showOptionsDescription ? optionContent.description : undefined,
@@ -126,7 +126,7 @@ const optionSummaries = computed(() => {
           props.contest.markingType.voteVariation === "ranked"
             ? summaryOptions.length + 1
             : undefined,
-        writeIn: Boolean(selection.text),
+        writeIn: selection.text,
       });
     }
   });
@@ -205,7 +205,7 @@ watch(
         "
         :image-option="imageOption"
         :gallery-mode="galleryMode"
-        :is-write-in="option.writeIn"
+        :write-in="option.writeIn"
       />
       <AVSummaryOption
         v-if="blankSelected"
