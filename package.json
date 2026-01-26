@@ -1,6 +1,6 @@
 {
   "name": "@assemblyvoting/electa-ui",
-  "version": "5.3.2",
+  "version": "5.3.3",
   "license": "MIT",
   "publishConfig": {
     "access": "public"
@@ -41,11 +41,11 @@
     "@fontsource/open-sans": "^5.2.6",
     "@fontsource/pt-mono": "^5.2.6",
     "@fontsource/rubik": "^5.2.6",
-    "@fortawesome/fontawesome-svg-core": "^6.7.2",
-    "@fortawesome/free-brands-svg-icons": "^6.7.2",
-    "@fortawesome/free-solid-svg-icons": "^6.7.2",
+    "@fortawesome/fontawesome-svg-core": "^7.1.0",
+    "@fortawesome/free-brands-svg-icons": "^7.1.0",
+    "@fortawesome/free-solid-svg-icons": "^7.1.0",
     "@popperjs/core": "^2.11.8",
-    "bootstrap": "^5.3.6",
+    "bootstrap": "^5.3.8",
     "floating-vue": "^5.2.2",
     "motion": "^12.4.7",
     "vue": "^3.5.13",
