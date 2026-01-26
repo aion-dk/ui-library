@@ -334,7 +334,6 @@ describe("AVOption", () => {
   });
 
   it("can support write-ins", async () => {
-    expect(wrapper.find("[data-test=option-title]").html()).not.to.contain("label");
     expect(wrapper.findAll("[data-test=write-in-exampleOption1-input]").length).to.eq(0);
     expect(wrapper.findAll("[data-test=space-counter]").length).to.eq(0);
 
@@ -343,7 +342,6 @@ describe("AVOption", () => {
       contest: getContest([]),
     });
 
-    expect(wrapper.find("[data-test=option-title]").html()).to.contain("label");
     expect(wrapper.findAll("[data-test=write-in-exampleOption1-input]").length).to.eq(1);
     expect(wrapper.find("[data-test=space-counter]").text()).to.eq("0 / 20");
 

@@ -415,7 +415,7 @@ watch(
                   data-test="option-image"
                 />
                 <h5
-                  v-if="(contest.mode !== 'gallery' || !option.image) && !isWriteIn"
+                  v-if="contest.mode !== 'gallery' || !option.image"
                   class="AVOption--title m-0"
                   :id="`option_${option.reference}_title`"
                   data-test="option-title"
@@ -424,40 +424,6 @@ watch(
                 <span :id="`option_${option.reference}_handle`" class="visually-hidden">
                   {{ option.reference }}
                 </span>
-
-                <div v-if="isWriteIn" class="w-100">
-                  <label
-                    :id="`option_${option.reference}_title`"
-                    :for="`write_in_${option.reference}`"
-                    class="form-label AVOption--title"
-                    data-test="option-title"
-                    v-text="title"
-                  ></label>
-                  <div>
-                    <textarea
-                      v-model="writeInText"
-                      class="form-control"
-                      :class="{
-                        'is-invalid': writeInInvalid,
-                        'border-theme-danger': writeInInvalid,
-                      }"
-                      :id="`write_in_${option.reference}`"
-                      :data-test="`write-in-${option.reference}-input`"
-                      :placeholder="writeInPlaceholder"
-                      :disabled="disabled || observerMode"
-                      resize="vertical"
-                      :rows="contest.mode === 'gallery' ? 3 : 1"
-                      @click="toggleFromWriteIn"
-                    />
-                    <div
-                      class="small"
-                      :class="writeInInvalid ? 'text-theme-danger' : 'text-muted'"
-                      data-test="space-counter"
-                    >
-                      {{ `${writeInSize} / ${option.writeIn?.maxSize}` }}
-                    </div>
-                  </div>
-                </div>
               </header>
             </div>
             <!-- MULTIVOTE CROSSES -->
@@ -518,7 +484,8 @@ watch(
               links.length ||
               (hasChildren && collapsable) ||
               !!option.candidateId ||
-              (option.image && contest.mode === 'gallery')
+              (option.image && contest.mode === 'gallery') ||
+              isWriteIn
             "
             class="vstack gap-2 px-3 pb-3"
             data-test="option-summary"
@@ -567,13 +534,38 @@ watch(
               >
                 {{ link.text }}
               </a>
+              <div
+                v-if="collapsable && hasChildren"
+                :id="`pane_for_option_${option.reference}_btn`"
+                class="mt-2 mb-n3 mx-n3"
+                style="width: calc(100% + 2rem)"
+              ></div>
             </div>
-            <div
-              v-if="collapsable && hasChildren"
-              :id="`pane_for_option_${option.reference}_btn`"
-              class="mt-2 mb-n3 mx-n3"
-              style="width: calc(100% + 2rem)"
-            ></div>
+            <div v-if="isWriteIn" class="w-100">
+              <textarea
+                v-model="writeInText"
+                class="form-control"
+                :class="{
+                  'is-invalid': writeInInvalid,
+                  'border-theme-danger': writeInInvalid,
+                }"
+                :id="`write_in_${option.reference}`"
+                :data-test="`write-in-${option.reference}-input`"
+                :aria-labelledby="`option_${option.reference}_title`"
+                :placeholder="writeInPlaceholder"
+                :disabled="disabled || observerMode"
+                resize="vertical"
+                :rows="contest.mode === 'gallery' ? 3 : 1"
+                @click="toggleFromWriteIn"
+              />
+              <div
+                class="small"
+                :class="writeInInvalid ? 'text-theme-danger' : 'text-muted'"
+                data-test="space-counter"
+              >
+                {{ `${writeInSize} / ${option.writeIn?.maxSize}` }}
+              </div>
+            </div>
           </div>
         </section>
       </template>
