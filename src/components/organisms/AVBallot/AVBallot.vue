@@ -65,7 +65,7 @@ const emits = defineEmits(["update:selectionPile", "update:errors", "view-candid
 
 const search = ref<HTMLInputElement | null>(null);
 
-const selections = computed(() => props.selectionPile.optionSelections);
+const selections = computed(() => [...props.selectionPile.optionSelections]);
 
 const validator = computed(() => new SelectionPileValidator(props.contest));
 
@@ -139,11 +139,28 @@ const toggleOption = ({ reference, amount, text, onlyUpdate }: CheckedEventArgs)
   const currentAmount = selections.value.filter(
     (selection) => selection.reference === reference,
   ).length;
+
+  const selectionIndex = selections.value.findIndex(
+    (selection) => selection.reference === reference,
+  );
+  const newSelection = { reference, text };
+
   if (amount === currentAmount && !onlyUpdate) amount = amount - 1;
-  const newSelections = selections.value.filter((selection) => selection.reference !== reference);
+
+  let newSelections = selections.value.filter((selection) => {
+    if (selection.reference !== reference) return { ...selection };
+  });
+
   for (let i = 0; i < amount; i++) {
-    newSelections.push({ reference, text });
+    newSelections.push(newSelection);
   }
+
+  if (onlyUpdate && selectionIndex >= 0) {
+    const selectionWithUpdatedText = [...selections.value];
+    selectionWithUpdatedText[selectionIndex] = newSelection;
+    newSelections = selectionWithUpdatedText;
+  }
+
   emits("update:selectionPile", {
     ...props.selectionPile,
     optionSelections: newSelections,
