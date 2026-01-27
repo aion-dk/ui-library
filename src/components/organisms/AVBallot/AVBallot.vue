@@ -156,9 +156,9 @@ const toggleOption = ({ reference, amount, text, onlyUpdate }: CheckedEventArgs)
   }
 
   if (onlyUpdate && selectionIndex >= 0) {
-    const updatedText = [...selections.value];
-    updatedText[selectionIndex] = newSelection;
-    newSelections = updatedText;
+    const selectionWithUpdatedText = [...selections.value];
+    selectionWithUpdatedText[selectionIndex] = newSelection;
+    newSelections = selectionWithUpdatedText;
   }
 
   emits("update:selectionPile", {
