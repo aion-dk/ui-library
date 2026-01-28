@@ -17,6 +17,7 @@ const translations: DefineLocaleMessage = {
       blank: "فارغ حصري ولا يمكن دمجه مع خيارات أخرى.",
       write_in_required: 'أنت مطالب بتحديد طرف على الأقل عند تحديد "كتابة".',
       write_in_too_long: "الكتابة في القيمة طويلة جدًا. حاول تقليل طوله.",
+      write_in_not_supported: "'{',.()?!@€£¥'} يُسمح فقط بالأحرف والأرقام والرموز الخاصة التالية:",
       exclusive: "لا يمكن الجمع بين الخيارات الحصرية وخيارات أخرى.",
       cross_party_voting: "اختيارك تضمن أكثر من قائمة. الرجاء الاختيار فقط ضمن قائمة واحدة",
     },
@@ -35,6 +36,8 @@ const translations: DefineLocaleMessage = {
       blank: "El vot en blanc és exclusiu i no es pot combinar amb altres opcions.",
       write_in_required: "S'ha d'especificar almenys una opció quan se selecciona «Opció lliure».",
       write_in_too_long: "El text és massa llarg. Intenta reduir-ne la longitud.",
+      write_in_not_supported:
+        "Només es permeten lletres, números i els caràcters especials següents: '{',.()?!@€£¥'}",
       exclusive: "Les opcions exclusives no es poden combinar amb altres opcions.",
       cross_party_voting:
         "La teva selecció inclou més d'una lllista. Seleccionau només opcions dins d'una única lllista.",
@@ -58,6 +61,8 @@ const translations: DefineLocaleMessage = {
       blank: "Mae gwag yn ddewis unigol ac ni ellir ei gyfuno ag opsiynau eraill.",
       write_in_required: "Mae'n ofynnol i chi nodi plaid o leiaf wrth ddewis 'Ysgrifennu'.",
       write_in_too_long: "Mae'r hyn a ysgrifennwyd yn rhy hir. Ceisiwch ei wneud yn fyrrach.",
+      write_in_not_supported:
+        "Dim ond llythrennau, rhifau, a'r cymeriadau arbennig canlynol sy'n cael eu caniatáu: '{',.()?!@€£¥'}",
       exclusive: "Ni ellir cyfuno opsiynau unigol ag opsiynau eraill.",
       cross_party_voting:
         "Roedd eich dewis yn cynnwys mwy nag un rhestr. Dewiswch o fewn un rhestr yn unig.",
@@ -81,6 +86,8 @@ const translations: DefineLocaleMessage = {
       blank: "Blank stemme kan ikke kombineres med andre valgmuligheder.",
       write_in_required: "Du skal udfylde skrivestemmen når den er valgt.",
       write_in_too_long: "Skrivestemme er for lang. Prøv at reducere længden på teksten.",
+      write_in_not_supported:
+        "Kun bogstaver, tal og følgende specialtegn er tilladt: '{',.()?!@€£¥'}",
       exclusive: "Ekslusive valgmuligheder kan ikke kombineres med andre.",
       exceeded_list_limit:
         "Dit valg overskred det maksimale antal muligheder, der kan være på listen {list_name}. Vælg maks. {max_list_marks} muligheder på denne liste",
@@ -104,6 +111,8 @@ const translations: DefineLocaleMessage = {
         "Sie müssen mindestens eine Partei angeben, wenn 'Write in' ausgewählt ist.",
       write_in_too_long:
         "Der Einschreibewert ist zu lang. Versuchen Sie, seine Länge zu reduzieren.",
+      write_in_not_supported:
+        "Zulässig sind nur Buchstaben, Zahlen und die folgenden Sonderzeichen: '{',.()?!@€£¥'}",
       exclusive: "Ungültige Kombination von Optionen.",
       exceeded_list_limit:
         "Ihre Auswahl hat die maximale Anzahl an Optionen überschritten, die in der Liste {list_name} enthalten sein können. Bitte wählen Sie für diese Liste maximal {max_list_marks} Optionen aus",
@@ -126,6 +135,8 @@ const translations: DefineLocaleMessage = {
       write_in_required:
         "You are required to specify at least a party when 'Write in' is selected.",
       write_in_too_long: "The write in value is too long. Try to reduce its length.",
+      write_in_not_supported:
+        "Only letters, numbers, and the following special characters are allowed: '{',.()?!@€£¥'}",
       exceeded_list_limit:
         "Your selection exceeded the maximum amount of options that can be on {list_name} list. Please select max {max_list_marks} options per this list",
       exclusive: "Exclusive options cannot be combined with other options.",
@@ -150,6 +161,8 @@ const translations: DefineLocaleMessage = {
       write_in_required:
         "Es necesario especificar al menos un partido cuando se selecciona «Añadir opción».",
       write_in_too_long: "El valor insertado es demasiado largo. Intente reducir su longitud.",
+      write_in_not_supported:
+        "Sólo se permiten letras, números y los siguientes caracteres especiales: '{',.()?!@€£¥'}",
       exclusive: "Las opciones exclusivas no pueden ser combinadas con otras opciones.",
       cross_party_voting:
         "Su selección incluye más de un partido político. Porfavor seleccione dentro de un mismo partido.",
@@ -171,6 +184,8 @@ const translations: DefineLocaleMessage = {
       blank: "Tyhjä on eksklusiivinen, eikä sitä voi yhdistää muihin vaihtoehtoihin.",
       write_in_required: "Sinun on määritettävä vähintään osapuoli, kun Kirjoita on valittuna.",
       write_in_too_long: "Kirjoitusarvo on liian pitkä. Yritä lyhentää sen pituutta.",
+      write_in_not_supported:
+        "Vain kirjaimet, numerot ja seuraavat erikoismerkit ovat sallittuja: '{',.()?!@€£¥'}",
       exclusive: "Virheellinen vaihtoehtojen yhdistelmä.",
       cross_party_voting:
         "Valintasi sisälsi useamman kuin yhden luettelon. Valitse vain yhdestä luettelosta.",
@@ -193,6 +208,8 @@ const translations: DefineLocaleMessage = {
       write_in_required:
         "Vous devez spécifier au moins un parti lorsque «Écriture» est sélectionné.",
       write_in_too_long: "La valeur d'écriture est trop longue. Essayez de réduire sa longueur.",
+      write_in_not_supported:
+        "Seules les lettres, les chiffres et les caractères spéciaux suivants sont autorisés : '{',.()?!@€£¥'}",
       exclusive: "Les options exclusives ne peuvent être combinées avec d'autres options.",
       cross_party_voting:
         "Votre sélection comprenait plusieurs listes. Veuillez sélectionner uniquement dans une seule liste.",
@@ -215,6 +232,8 @@ const translations: DefineLocaleMessage = {
       write_in_required:
         "Þú þarft að tilgreina að minnsta kosti aðila þegar 'Skrifa inn' er valið.",
       write_in_too_long: "Innritunin er of löng. Reyndu að minnka lengdina.",
+      write_in_not_supported:
+        "Aðeins eru leyfðir bókstafir, tölustafir og eftirfarandi sérstafir: '{',.()?!@€£¥'}",
       exclusive: "Ekki er hægt að sameina einkavalkosti við aðra valkosti.",
       cross_party_voting:
         "Val þitt innihélt fleiri en einn lista. Vinsamlegast veldu aðeins innan eins lista.",
@@ -234,6 +253,8 @@ const translations: DefineLocaleMessage = {
       blank: "Il voto vuoto è esclusivo e non è cumulabile con altre opzioni.",
       write_in_required: 'È necessario specificare almeno un partito quando si seleziona "Scrivi".',
       write_in_too_long: "Il valore scritto è troppo lungo. Cerca di ridurne la lunghezza.",
+      write_in_not_supported:
+        "Sono consentiti solo lettere, numeri e i seguenti caratteri speciali: '{',.()?!@€£¥'}",
       cross_party_voting:
         "La tua selezione include più di una lista. Si prega di selezionare solo all'interno di una singola lista.",
       exceeded_list_limit:
@@ -259,6 +280,8 @@ const translations: DefineLocaleMessage = {
       blank: "Blanco is exclusief en kan niet worden gecombineerd met andere opties.",
       write_in_required: "U moet ten minste één partij opgeven wanneer 'Write-in' is geselecteerd.",
       write_in_too_long: "De ‘write-in’ waarde is te lang. Probeer deze korter te maken.",
+      write_in_not_supported:
+        "Alleen letters, cijfers en de volgende speciale tekens zijn toegestaan: '{',.()?!@€£¥'}",
       exclusive: "Ongeldige combinatie van opties.",
       cross_party_voting:
         "Uw selectie omvatte meer dan één lijst. Selecteer alleen binnen één lijst.",
@@ -281,6 +304,8 @@ const translations: DefineLocaleMessage = {
       write_in_required:
         "Musisz określić co najmniej partię, gdy jest wybrana opcja 'Napisz własną'.",
       write_in_too_long: "Wartość wprowadzenia jest za długa. Spróbuj skrócić jej długość.",
+      write_in_not_supported:
+        "Dozwolone są wyłącznie litery, cyfry i następujące znaki specjalne: '{',.()?!@€£¥'}",
       exclusive: "Opcje wyłączne nie mogą być połączone z innymi opcjami.",
       cross_party_voting:
         "Twój wybór obejmował więcej niż jedną listę. Wybierz tylko z jednej listy.",
@@ -301,6 +326,8 @@ const translations: DefineLocaleMessage = {
       write_in_required:
         'É necessário especificar pelo menos um grupo quando a opção "Escrever em" está selecionada.',
       write_in_too_long: "O valor introduzido é demasiado longo. Tente reduzir o seu comprimento.",
+      write_in_not_supported:
+        "Apenas são permitidos letras, números e os seguintes caracteres especiais: '{',.()?!@€£¥'}",
       exclusive: "As opções exclusivas não podem ser combinadas com outras opções.",
       cross_party_voting:
         "A sua seleção incluiu mais do que uma lista. Por favor, seleccione apenas dentro de uma única lista.",
@@ -326,6 +353,8 @@ const translations: DefineLocaleMessage = {
         "Trebuie să specificați cel puțin un partid când este selectată opțiunea „Scrieți în”.",
       write_in_too_long:
         "Valoarea introdusă pentru scriere este prea lungă. Încercați să o scurtați.",
+      write_in_not_supported:
+        "Sunt permise doar literele, cifrele și următoarele caractere speciale: '{',.()?!@€£¥'}",
       exclusive: "Opțiunile exclusiv nu pot fi combinate cu alte opțiuni.",
       cross_party_voting:
         "Selecția dvs. a inclus mai mult de o listă. Vă rugăm să selectați doar dintr-o singură listă.",
@@ -348,6 +377,8 @@ const translations: DefineLocaleMessage = {
         "Воздержавшийся голос является эксклюзивным и не может объединяться с другими вариантами.",
       write_in_required: "Вы должны указать хотя бы одну партию, когда выбрано «Записать в».",
       write_in_too_long: "Записанное значение слишком длинное. Попытайтесь сократить его.",
+      write_in_not_supported:
+        "Разрешается использовать только буквы, цифры и следующие специальные символы: '{',.()?!@€£¥'}",
       exclusive: "Неверная комбинация опций.",
       cross_party_voting:
         "Ваш выбор включал более одного списка. Пожалуйста, выбирайте только в пределах одного списка.",
@@ -369,6 +400,8 @@ const translations: DefineLocaleMessage = {
       blank: "Blank är exklusiv och kan inte kombineras med andra alternativ.",
       write_in_required: "Du måste ange minst ett parti när ”write-in-kandidat” är vald.",
       write_in_too_long: "Write-in-värdet är för långt. Försök korta ner det.",
+      write_in_not_supported:
+        "Endast bokstäver, siffror och följande specialtecken är tillåtna: '{',.()?!@€£¥'}",
       exclusive: "Ogiltig kombination av alternativ.",
       cross_party_voting: "Ditt urval inkluderade mer än en lista. Välj endast inom en enda lista.",
     },
