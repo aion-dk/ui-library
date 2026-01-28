@@ -553,7 +553,7 @@ watch(
                 :data-test="`write-in-${option.reference}-input`"
                 :aria-labelledby="`option_${option.reference}_title`"
                 :placeholder="writeInPlaceholder"
-                :disabled="disabled || observerMode"
+                :disabled="disabled || observerMode || !option.selectable"
                 resize="vertical"
                 :rows="contest.mode === 'gallery' ? 3 : 1"
                 @click="toggleFromWriteIn"
