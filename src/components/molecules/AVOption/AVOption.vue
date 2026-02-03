@@ -534,13 +534,13 @@ watch(
               >
                 {{ link.text }}
               </a>
-              <div
-                v-if="collapsable && hasChildren"
-                :id="`pane_for_option_${option.reference}_btn`"
-                class="mt-2 mb-n3 mx-n3"
-                style="width: calc(100% + 2rem)"
-              ></div>
             </div>
+            <div
+              v-if="collapsable && hasChildren"
+              :id="`pane_for_option_${option.reference}_btn`"
+              class="mt-2 mb-n3 mx-n3"
+              style="width: calc(100% + 2rem)"
+            ></div>
             <div v-if="isWriteIn" class="w-100">
               <textarea
                 v-model="writeInText"
