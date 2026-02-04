@@ -140,11 +140,16 @@ const isWriteIn = computed(() => !!props.option.writeIn);
 
 const writeInSize = computed(() => new Blob([writeInText.value]).size);
 
-const writeInInvalid = computed(
-  () =>
-    writeInSize.value > Number(props.option.writeIn?.maxSize) ||
-    (writeInSize.value <= 0 && checkedCount.value),
-);
+const writeInInvalid = computed(() => {
+  const regexp = /[^\p{L}\p{N}\p{Z},.'‘()?!@€£¥\n]/gu;
+  return (
+    checkedCount.value &&
+    (writeInSize.value > Number(props.option.writeIn?.maxSize) ||
+      writeInSize.value <= 0 ||
+      writeInText.value.trim().length <= 0 ||
+      regexp.test(writeInText.value))
+  );
+});
 
 const writeInPlaceholder = computed(() =>
   props.option.writeIn?.placeholder?.[i18nLocale.value]
