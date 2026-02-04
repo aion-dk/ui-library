@@ -1,5 +1,6 @@
 import type { Meta } from "@/types";
 import { AVCollapser } from "@/components";
+import { SUPPORTED_LOCALES } from "@/constants";
 
 const meta: Meta<typeof AVCollapser> & {
   argTypes: { onAccordionOpen: { action: string } };
@@ -15,6 +16,10 @@ const meta: Meta<typeof AVCollapser> & {
     subOptionSelected: { control: { type: "number", min: "1", max: "9" } },
     invalid: { control: { type: "boolean" } },
     useDeferredButton: { control: { type: "boolean" } },
+    locale: {
+      control: { type: "select" },
+      options: SUPPORTED_LOCALES,
+    },
     onAccordionOpen: { action: "@accordion-open: EMITTED" },
   },
 };

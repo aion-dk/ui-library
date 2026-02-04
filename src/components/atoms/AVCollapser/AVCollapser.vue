@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, onMounted, inject, watch, nextTick } from "vue";
+import { ref, onMounted, inject, watch, nextTick } from "vue";
 import type { PropType, SupportedLocale } from "@/types";
 import { switchLocale } from "@/i18n";
 
@@ -48,18 +48,9 @@ const isOpen = ref<boolean>(false);
 
 const animateAccordion = ref<boolean>(true);
 
-const reactiveProps = computed(() => {
-  return {
-    collapsable: props.collapsable,
-    startCollapsed: props.startCollapsed,
-  };
-});
-
 onMounted(() => {
-  const { collapsable, startCollapsed } = reactiveProps.value;
-  isOpen.value = collapsable && !startCollapsed;
-  nextTick();
-  if (document.querySelector(`#${props.paneId}_btn`)) isMounted.value = true;
+  if (props.collapsable) isOpen.value = !props.startCollapsed;
+  nextTick(() => (isMounted.value = true));
 });
 
 const toggleAccordion = (force: boolean | null = null, animate = true) => {
