@@ -124,7 +124,7 @@ watch(
       class="d-flex flex-column flex-sm-row align-items-start align-items-sm-center justify-content-between gap-3"
     >
       <div class="w-100">
-        <h4 class="m-0 mb-n2">
+        <h4 class="m-0 mb-0">
           {{
             t("js.components.AVRecommendationList.header_title", {
               n: recommendations.length,
