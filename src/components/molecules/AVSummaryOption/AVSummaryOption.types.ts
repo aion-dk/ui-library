@@ -1,6 +1,7 @@
 import type { LocalString, OptionContent } from "@/types";
 
 interface AVSummaryOptionObject {
+  reference: string;
   title: LocalString;
   handle: string;
   image?: string;

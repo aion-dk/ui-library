@@ -115,6 +115,7 @@ const optionSummaries = computed(() => {
       preexisting.crosses += 1;
     } else {
       summaryOptions.push({
+        reference: optionContent.reference,
         title: optionContent.title,
         handle: selection.reference,
         image: optionContent.image,
@@ -133,6 +134,12 @@ const optionSummaries = computed(() => {
 
   return summaryOptions;
 });
+
+const getWriteInOption = (reference: string) => {
+  return props.selectionPile.optionSelections.find(
+    (selectedOption) => selectedOption.reference === reference,
+  )?.text;
+};
 
 /**
  * This is necesary in order to support both provided i18n and local i18n.
@@ -261,6 +268,14 @@ watch(
               t("js.components.AVOption.aria_labels.option"),
             )
           }}
+          <span v-if="!!getWriteInOption(option.reference)">
+            -
+            <span class="text-muted badge text-bg-secondary">
+              <AVIcon icon="signature" />
+              {{ t("js.components.AVSummaryOption.write_in") }}
+            </span>
+            {{ getWriteInOption(option.reference) }}
+          </span>
         </p>
         <p
           v-if="remainingOptions > 0"
