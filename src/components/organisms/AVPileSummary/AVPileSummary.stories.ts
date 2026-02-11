@@ -103,6 +103,29 @@ export const RankedBallotWithChildren = {
   },
 };
 
+export const AssingWithWriteIn = {
+  render: Template,
+
+  args: {
+    contest: getContest(["write_in"]),
+    activeState: "assign",
+    isEditing: false,
+    maximumOptionsShown: 3,
+    pileIndex: 0,
+    totalPiles: 0,
+    selectionPile: {
+      multiplier: 1,
+      optionSelections: [
+        {
+          reference: "exampleOption4",
+          text: "Here's something I wrote",
+        },
+      ],
+      explicitBlank: false,
+    },
+  },
+};
+
 export const RankedBallot = {
   render: Template,
 

@@ -14,6 +14,7 @@ describe("AVSummaryOption", () => {
         crosses: 1,
         rank: undefined,
         locale: "en",
+        reference: getOption([], 1).reference,
       },
     },
     global: {
@@ -57,6 +58,7 @@ describe("AVSummaryOption", () => {
         handle: getOption([], 1).reference,
         crosses: 1,
         rank: 2,
+        reference: getOption([], 1).reference,
       },
       blank: false,
     });
@@ -73,6 +75,7 @@ describe("AVSummaryOption", () => {
         handle: getOption([], 1).reference,
         crosses: 1,
         rank: undefined,
+        reference: getOption([], 1).reference,
       },
       parents: [{ title: { en: "Parent 1" } }, { title: { en: "Parent 2" } }],
     });
@@ -92,6 +95,7 @@ describe("AVSummaryOption", () => {
         handle: getOption([], 1).reference,
         crosses: 5,
         rank: undefined,
+        reference: getOption([], 1).reference,
       },
       parents: [],
       multipleVotesAllowed: true,
@@ -110,6 +114,7 @@ describe("AVSummaryOption", () => {
         crosses: 1,
         rank: undefined,
         image: "http://image.com",
+        reference: getOption([], 1).reference,
       },
       multipleVotesAllowed: false,
     });
@@ -132,6 +137,7 @@ describe("AVSummaryOption", () => {
         handle: getOption([], 1).reference,
         crosses: 1,
         accentColor: "#FF0000",
+        reference: getOption([], 1).reference,
       },
       multipleVotesAllowed: false,
     });
@@ -156,6 +162,7 @@ describe("AVSummaryOption", () => {
         handle: getOption([], 1).reference,
         image: "http://image.com",
         crosses: 1,
+        reference: getOption([], 1).reference,
       },
       multipleVotesAllowed: false,
       parents: [{ title: { en: "Parent 1" }, accentColor: "#FF00FF" }],
@@ -194,6 +201,7 @@ describe("AVSummaryOption", () => {
         handle: getOption([], 1).reference,
         image: "http://image.com",
         crosses: 1,
+        reference: getOption([], 1).reference,
       },
     });
 
