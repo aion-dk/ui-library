@@ -1,6 +1,6 @@
 import { fileURLToPath, URL } from "node:url";
 import { resolve } from "path";
-import typescript2 from "rollup-plugin-typescript2";
+import dts from "vite-plugin-dts";
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import vueDevTools from "vite-plugin-vue-devtools";
@@ -11,18 +11,10 @@ export default defineConfig({
   plugins: [
     vue(),
     vueDevTools(),
-    typescript2({
-      check: false,
-      include: ["src/**/*.vue", "src/index.ts"],
-      tsconfigOverride: {
-        compilerOptions: {
-          outDir: "dist",
-          sourceMap: true,
-          declaration: true,
-          declarationMap: true,
-        },
-      },
-      exclude: ["vite.config.ts"],
+    dts({
+      entryRoot: "src",
+      outDir: "dist",
+      tsconfigPath: "tsconfig.build.json",
     }),
     viteStaticCopy({
       targets: [
