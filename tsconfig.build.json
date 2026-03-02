@@ -18,6 +18,6 @@
     "paths": {
       "@/*": ["./src/*"]
     },
-    "lib": ["DOM", "DOM.Iterable", "ES2024", "ESNext"]
+    "lib": ["dom", "dom.iterable", "es2024", "esnext"]
   }
 }
