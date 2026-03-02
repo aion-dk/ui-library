@@ -1,6 +1,6 @@
 {
   "name": "@assemblyvoting/electa-ui",
-  "version": "5.3.12",
+  "version": "5.4.0-beta.0",
   "license": "MIT",
   "publishConfig": {
     "access": "public"
@@ -52,7 +52,7 @@
     "vue-i18n": "^11.1.10"
   },
   "devDependencies": {
-    "@assemblyvoting/js-client": "^5.1.5",
+    "@assemblyvoting/js-client": "5.1.6-beta.0",
     "@chromatic-com/storybook": "^5.0.1",
     "@fortawesome/fontawesome-common-types": "^6.7.2",
     "@storybook/addon-a11y": "^10.2.13",
@@ -85,7 +85,7 @@
     "storybook": "^10.2.13",
     "storybook-addon-rtl": "^3.0.1",
     "typescript": "^5.7.3",
-    "vite": "^6.4.1",
+    "vite": "^7.3.1",
     "vite-plugin-dts": "^4.5.4",
     "vite-plugin-static-copy": "^2.3.2",
     "vite-plugin-vue-devtools": "^7.6.8",
