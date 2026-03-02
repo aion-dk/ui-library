@@ -10,10 +10,10 @@
       "@/*": ["./src/*"]
     },
     "lib": [
-      "DOM",
-      "DOM.Iterable",
-      "ES2024",
-      "ESNext",
-  ]
+      "dom",
+      "dom.iterable",
+      "es2024",
+      "esnext"
+    ]
   }
 }
