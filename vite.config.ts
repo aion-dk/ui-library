@@ -1,28 +1,32 @@
 import { fileURLToPath, URL } from "node:url";
 import { resolve } from "path";
 import dts from "vite-plugin-dts";
-import { defineConfig, type ConfigEnv, type UserConfig } from "vite";
+import { defineConfig, type ConfigEnv } from "vite";
 import vue from "@vitejs/plugin-vue";
 import { viteStaticCopy } from "vite-plugin-static-copy";
 
-// https://vite.dev/config/
-export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const plugins: any[] = [vue()];
-
+let vueDevToolsPlugin: unknown = null;
+try {
   // Only load vueDevTools in dev mode to avoid localStorage access during build
-  if (env.command === "serve") {
-    try {
-      const vueDevToolsModule = await import("vite-plugin-vue-devtools");
-      const vueDevToolsPlugin = vueDevToolsModule.default;
-      if (typeof vueDevToolsPlugin === "function") {
-        const plugin = vueDevToolsPlugin();
-        if (plugin) {
-          plugins.push(plugin);
-        }
-      }
-    } catch {
-      // Silently fail if vueDevTools can't be imported
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  vueDevToolsPlugin = require("vite-plugin-vue-devtools");
+} catch {
+  // Silently fail if vueDevTools can't be imported
+}
+
+// https://vite.dev/config/
+export default defineConfig((env: ConfigEnv) => {
+  const plugins = [vue()];
+
+  if (
+    env.command === "serve" &&
+    vueDevToolsPlugin &&
+    typeof vueDevToolsPlugin === "object" &&
+    "default" in vueDevToolsPlugin
+  ) {
+    const pluginFn = (vueDevToolsPlugin as Record<string, unknown>).default;
+    if (typeof pluginFn === "function") {
+      plugins.push(pluginFn());
     }
   }
 
@@ -90,7 +94,6 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
     css: {
       preprocessorOptions: {
         scss: {
-          // @ts-expect-error - api option is supported in modern sass but not yet in type definitions
           api: "modern-compiler",
           silenceDeprecations: [
             "color-functions",
