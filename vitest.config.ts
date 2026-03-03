@@ -4,7 +4,7 @@ import type { ConfigEnv } from "vite";
 import viteConfig from "./vite.config";
 
 export default defineConfig(
-  mergeConfig(viteConfig({ command: "serve", mode: "test" } as ConfigEnv), {
+  mergeConfig(viteConfig({ command: "build", mode: "test" } as ConfigEnv), {
     test: {
       environment: "jsdom",
       exclude: [...configDefaults.exclude, "e2e/**"],
