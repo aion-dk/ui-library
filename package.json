@@ -92,10 +92,6 @@
     "vitest": "^4.0.18",
     "vue-tsc": "^3.2.5"
   },
-  "resolutions": {
-    "strip-ansi": "^6.0.1",
-    "string-width": "^4.2.2"
-  },
   "eslintConfig": {
     "extends": [
       "plugin:storybook/recommended"
