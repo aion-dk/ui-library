@@ -38,12 +38,12 @@
     "test-storybook-coverage": "test-storybook --maxWorkers 1 --coverage --testTimeout=60000"
   },
   "dependencies": {
-    "@fontsource/open-sans": "^5.2.6",
-    "@fontsource/pt-mono": "^5.2.6",
-    "@fontsource/rubik": "^5.2.6",
-    "@fortawesome/fontawesome-svg-core": "^7.1.0",
-    "@fortawesome/free-brands-svg-icons": "^7.1.0",
-    "@fortawesome/free-solid-svg-icons": "^7.1.0",
+    "@fontsource/open-sans": "^5.2.7",
+    "@fontsource/pt-mono": "^5.2.8",
+    "@fontsource/rubik": "^5.2.8",
+    "@fortawesome/fontawesome-svg-core": "^7.2.0",
+    "@fortawesome/free-brands-svg-icons": "^7.2.0",
+    "@fortawesome/free-solid-svg-icons": "^7.2.0",
     "@popperjs/core": "^2.11.8",
     "bootstrap": "^5.3.8",
     "floating-vue": "^5.2.2",
@@ -54,7 +54,7 @@
   "devDependencies": {
     "@assemblyvoting/js-client": "5.1.6-beta.1",
     "@chromatic-com/storybook": "^5.0.1",
-    "@fortawesome/fontawesome-common-types": "^6.7.2",
+    "@fortawesome/fontawesome-common-types": "^7.2.0",
     "@storybook/addon-a11y": "^10.2.14",
     "@storybook/addon-coverage": "^3.0.0",
     "@storybook/addon-docs": "^10.2.14",
