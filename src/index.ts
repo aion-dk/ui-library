@@ -75,7 +75,8 @@ import {
 } from "@/components";
 
 export default {
-  install: (app: App, i18n: I18n | null = null) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  install: (app: App, i18n: I18n<any, any, any, any, any> | null = null) => {
     app.use(FloatingVue);
 
     // ATOMS
