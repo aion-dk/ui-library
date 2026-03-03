@@ -3,9 +3,8 @@ import { mergeConfig, defineConfig, configDefaults } from "vitest/config";
 import type { ConfigEnv } from "vite";
 import viteConfig from "./vite.config";
 
-export default mergeConfig(
-  viteConfig({ command: "serve", mode: "test" } as ConfigEnv),
-  defineConfig({
+export default defineConfig(
+  mergeConfig(viteConfig({ command: "serve", mode: "test" } as ConfigEnv), {
     test: {
       environment: "jsdom",
       exclude: [...configDefaults.exclude, "e2e/**"],
@@ -16,6 +15,7 @@ export default mergeConfig(
         extension: [".ts", ".vue"],
         exclude: [
           "**/*.stories.ts",
+          "**/*.mdx",
           "**/*.messages.ts",
           "**/*.types.ts",
           "**/atoms/AVIcon/**",
