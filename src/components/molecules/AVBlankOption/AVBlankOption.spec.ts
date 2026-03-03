@@ -91,7 +91,7 @@ describe("AVBlankOption", () => {
       "AVBlankOption--accent",
     );
     expect(wrapper.find("[data-test=option-container]").attributes().style).to.not.include(
-      "border-left-color: #FF0000;",
+      "border-left-color: rgb(255, 0, 0);",
     );
 
     await wrapper.setProps({
@@ -102,7 +102,7 @@ describe("AVBlankOption", () => {
       "AVBlankOption--accent",
     );
     expect(wrapper.find("[data-test=option-container]").attributes().style).to.include(
-      "border-left-color: #FF0000;",
+      "border-left-color: rgb(255, 0, 0);",
     );
   });
 
