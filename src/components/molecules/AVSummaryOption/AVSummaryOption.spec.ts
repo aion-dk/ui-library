@@ -128,7 +128,7 @@ describe("AVSummaryOption", () => {
 
   it("can display accent color", async () => {
     expect(wrapper.find("[data-test=summary-option]").attributes().style).to.not.contain(
-      "border-left-color: #FF0000; border-left-width: 0.5rem",
+      "border-left-color: rgb(255, 0, 0); border-left-width: 0.5rem",
     );
 
     await wrapper.setProps({
@@ -143,16 +143,16 @@ describe("AVSummaryOption", () => {
     });
 
     expect(wrapper.find("[data-test=summary-option]").attributes().style).to.contain(
-      "border-left-color: #FF0000; border-left-width: 0.5rem;",
+      "border-left-color: rgb(255, 0, 0); border-left-width: 0.5rem;",
     );
     expect(wrapper.find("[data-test=summary-option]").attributes().style).to.not.contain(
-      "border-top-color: #FF0000; border-top-width: 0.5rem;",
+      "border-top-color: rgb(255, 0, 0); border-top-width: 0.5rem;",
     );
   });
 
   it("can render in gallery mode", async () => {
     expect(wrapper.find("[data-test=summary-option]").attributes().style).to.not.contain(
-      "border-left-color: #FF00FF; border-left-width: 0.5rem",
+      "border-left-color: rgb(255, 0, 255); border-left-width: 0.5rem",
     );
     expect(wrapper.findAll("[data-test=parent-bagde]").length).to.eq(0);
 
@@ -170,10 +170,10 @@ describe("AVSummaryOption", () => {
     });
 
     expect(wrapper.find("[data-test=summary-option]").attributes().style).to.contain(
-      "border-left-color: #FF00FF; border-left-width: 0.5rem;",
+      "border-left-color: rgb(255, 0, 255); border-left-width: 0.5rem;",
     );
     expect(wrapper.find("[data-test=summary-option]").attributes().style).to.contain(
-      "border-top-color: #FF00FF; border-top-width: 0.5rem;",
+      "border-top-color: rgb(255, 0, 255); border-top-width: 0.5rem;",
     );
     expect(wrapper.find("[data-test=parent-bagde]").text()).to.contain("Parent 1");
     expect(wrapper.find("[data-test=parent-bagde]").attributes().style).to.contain(

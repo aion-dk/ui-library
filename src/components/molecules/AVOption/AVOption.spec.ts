@@ -124,7 +124,7 @@ describe("AVOption", () => {
       "border-left-width: 0.5rem;",
     );
     expect(wrapper.find("[data-test=option-section]").attributes().style).to.not.include(
-      "border-left-color: #FF0000;",
+      "border-left-color: rgb(255, 0, 0);",
     );
 
     await wrapper.setProps({
@@ -136,13 +136,13 @@ describe("AVOption", () => {
       "border-left-width: 0.5rem;",
     );
     expect(wrapper.find("[data-test=option-section]").attributes().style).to.include(
-      "border-left-color: #FF0000;",
+      "border-left-color: rgb(255, 0, 0);",
     );
     expect(wrapper.find("[data-test=option-section]").attributes().style).to.not.include(
       "border-top-width: 0.5rem;",
     );
     expect(wrapper.find("[data-test=option-section]").attributes().style).to.not.include(
-      "border-top-color: #FF0000;",
+      "border-top-color: rgb(255, 0, 0);",
     );
   });
 
@@ -443,7 +443,7 @@ describe("AVOption", () => {
       "border-left-width: 0.5rem;",
     );
     expect(wrapper.find("[data-test=option-section]").attributes().style).to.not.include(
-      "border-left-color: #FF0000;",
+      "border-left-color: rgb(255, 0, 0);",
     );
 
     await wrapper.setProps({
@@ -458,13 +458,13 @@ describe("AVOption", () => {
       "border-left-width: 0.5rem;",
     );
     expect(wrapper.find("[data-test=option-section]").attributes().style).to.include(
-      "border-left-color: #FF0000;",
+      "border-left-color: rgb(255, 0, 0);",
     );
     expect(wrapper.find("[data-test=option-section]").attributes().style).to.include(
       "border-top-width: 0.5rem;",
     );
     expect(wrapper.find("[data-test=option-section]").attributes().style).to.include(
-      "border-top-color: #FF0000;",
+      "border-top-color: rgb(255, 0, 0);",
     );
 
     await wrapper.find("[data-test=option-section]").trigger("click");
@@ -478,7 +478,7 @@ describe("AVOption", () => {
     });
 
     expect(wrapper.find("[data-test=option-section]").attributes().style).to.include(
-      "border-left-color: #FF0000;",
+      "border-left-color: rgb(255, 0, 0);",
     );
 
     await wrapper.setProps({
@@ -489,13 +489,13 @@ describe("AVOption", () => {
       "border-left-width: 0.5rem;",
     );
     expect(wrapper.find("[data-test=option-section]").attributes().style).to.include(
-      "border-left-color: #0000FF;",
+      "border-left-color: rgb(0, 0, 255);",
     );
     expect(wrapper.find("[data-test=option-section]").attributes().style).to.include(
       "border-top-width: 0.5rem;",
     );
     expect(wrapper.find("[data-test=option-section]").attributes().style).to.include(
-      "border-top-color: #0000FF;",
+      "border-top-color: rgb(0, 0, 255);",
     );
 
     expect(wrapper.find("[data-test=parent-bagde]").attributes().style).to.include(

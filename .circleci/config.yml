@@ -1,17 +1,17 @@
 version: 2.1
 orbs:
-  node: circleci/node@7.1.0
-  docker: assemblyvoting/docker@1.6.3
+  node: circleci/node@7.2.1
+  docker: assemblyvoting/docker@1.6.4
 executors:
   playwright:
     docker:
       - image: mcr.microsoft.com/playwright:v1.56.1-noble
-  node22:
+  node24:
     docker:
-      - image: cimg/node:22.14
+      - image: cimg/node:24.14.0
   ruby-node:
     docker:
-      - image: cimg/ruby:3.2-node
+      - image: cimg/ruby:4.0-node
 
 jobs:
   playwright:
@@ -36,7 +36,7 @@ jobs:
               "npx wait-on tcp:127.0.0.1:6006 && yarn test-storybook"
   lint_test_build:
     executor:
-      name: node22
+      name: node24
     steps:
       - checkout
       - restore_cache:
@@ -54,7 +54,7 @@ jobs:
       - run: yarn run build
   publish:
     executor:
-      name: node22
+      name: node24
     steps:
       - checkout
       - restore_cache:
