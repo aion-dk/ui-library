@@ -39,20 +39,20 @@
   resolved "https://registry.npmjs.org/@asamuzakjp/nwsapi/-/nwsapi-2.3.9.tgz"
   integrity sha512-n8GuYSrI9bF7FFZ/SjhwevlHc8xaVlb/7HmHelnc/PZXBD2ZR49NnN9sMMuDdEGPeeRQ5d0hqlSlEpgCX3Wl0Q==
 
-"@assemblyvoting/av-crypto@~1.1.0":
-  version "1.1.0"
-  resolved "https://registry.npmjs.org/@assemblyvoting/av-crypto/-/av-crypto-1.1.0.tgz"
-  integrity sha512-rMubdNMhhdR1lL1FQa/8eo5R2rOucc7xtBrmU8prk4Q1G3CKy+ogmnRK9V6n6BUiOavk8Fd80FW/bsKr7za+0A==
+"@assemblyvoting/av-crypto@^1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@assemblyvoting/av-crypto/-/av-crypto-1.1.1.tgz#fe53e5f41e2e88fbd3b5bc0d53a6c17db574268e"
+  integrity sha512-bJB4StgyQX+h1P2edAt2U1lqAl84UH/lQ4L6H1Gj5gJIdXgNwca5+hFvjgIK+umU0d3rmfUXXrkH+z0wwj63kQ==
   dependencies:
-    "@noble/hashes" "^1.3.1"
+    "@noble/hashes" "^1.8.0"
     sjcl-with-all "^1.0.8"
 
-"@assemblyvoting/js-client@5.2.0-beta.1":
-  version "5.2.0-beta.1"
-  resolved "https://registry.yarnpkg.com/@assemblyvoting/js-client/-/js-client-5.2.0-beta.1.tgz#e37f366c479ae590db9c32129416666096b44c03"
-  integrity sha512-HKwHVL1mJfN2fn83p7nOhka77kp6QvCi9HhC6aNo9fb/bTCGFlj8dYnDMB656Ih7q7y3lqB9Y340lYZvX9VXaw==
+"@assemblyvoting/js-client@^5.2.0":
+  version "5.2.0"
+  resolved "https://registry.yarnpkg.com/@assemblyvoting/js-client/-/js-client-5.2.0.tgz#da64724f852de23ae751ed228f578792b8de15f1"
+  integrity sha512-M8RXOnEmkwEnnbZqUoRgGgIA+bJLbPi1h0rrVBY4xoL/vFeNsJhxAMiPiJU/c1/JO+hckS7ZHq74gKJ/tOQixw==
   dependencies:
-    "@assemblyvoting/av-crypto" "~1.1.0"
+    "@assemblyvoting/av-crypto" "^1.1.1"
     axios "^1.13.6"
     base-x "^5.0.0"
     buffer "^6.0.3"
@@ -1308,9 +1308,9 @@
   resolved "https://registry.npmjs.org/@neoconfetti/react/-/react-1.0.0.tgz"
   integrity sha512-klcSooChXXOzIm+SE5IISIAn3bYzYfPjbX7D7HoqZL84oAfgREeSg5vSIaSFH+DaGzzvImTyWe1OyrJ67vik4A==
 
-"@noble/hashes@^1.3.1":
+"@noble/hashes@^1.8.0":
   version "1.8.0"
-  resolved "https://registry.npmjs.org/@noble/hashes/-/hashes-1.8.0.tgz"
+  resolved "https://registry.yarnpkg.com/@noble/hashes/-/hashes-1.8.0.tgz#cee43d801fcef9644b11b8194857695acd5f815a"
   integrity sha512-jCs9ldd7NwzpgXDIf6P3+NrHh9/sD6CQdxHyjQI+h/6rDNo88ypBxxz45UDuZHz9r3tNz7N/VInSVoVdtXEI4A==
 
 "@nodelib/fs.scandir@2.1.5":
