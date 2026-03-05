@@ -24,6 +24,22 @@ export {
 
 export { animate } from "motion";
 
+export type {
+  SupportedLocale,
+  IterableObject,
+  ItemType,
+  ItemPurpose,
+  ResourceDataContent,
+  ResourceItem,
+  ResourceData,
+  Resource,
+  BootstrapColor,
+  BootstrapBasicSize,
+  BootstrapExpandedSize,
+  ImageOption,
+  CandidacyResource,
+} from "@/types";
+
 import {
   // ATOMS
   AVIcon,
