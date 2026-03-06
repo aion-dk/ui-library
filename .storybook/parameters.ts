@@ -2,7 +2,7 @@ import { SUPPORTED_LOCALES } from "../src/constants/i18n";
 import localI18n from "../src/i18n";
 
 const parameters = {
-  locale: localI18n.global.locale,
+  locale: localI18n.global.locale.value,
   locales: SUPPORTED_LOCALES,
   actions: { argTypesRegex: "^on.*" },
   backgrounds: {

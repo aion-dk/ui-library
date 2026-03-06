@@ -2,7 +2,8 @@
 <!-- Please do not commit this file -->
 <script setup lang="ts">
 /* DO NOT REMOVE (START) */
-import i18n from "@/i18n";
+import { useI18n } from "vue-i18n";
+const i18n = useI18n();
 const changeLocale = (e: Event) => {
   if ((e.target as HTMLSelectElement).value === "ar")
     document.querySelector("html")?.setAttribute("dir", "rtl");
@@ -21,7 +22,7 @@ import * as examples from "@/examples";
     <!-- DO NOT REMOVE (START) -->
     <select
       id="localeSelector"
-      v-model="i18n.global.locale"
+      v-model="i18n.locale.value"
       @change="changeLocale"
     >
       <option value="ar">🇸🇦 AR - Arabic (RTL)</option>

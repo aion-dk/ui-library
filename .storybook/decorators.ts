@@ -1,8 +1,7 @@
 import { useEffect, useGlobals } from "storybook/preview-api";
 import type { Decorator } from "@storybook/vue3-vite";
-import localI18n from "../src/i18n";
+import { switchLocale } from "../src/i18n";
 import { ref, watch } from "vue";
-import type { Locale } from "vue-i18n";
 
 const sbLocale = ref<Locale>("en");
 
@@ -20,7 +19,7 @@ const decorators: Decorator[] = [
       setup() {
         const element = ref("");
         watch(sbLocale, (newLocale) => {
-          localI18n.global.locale = newLocale;
+          switchLocale(newLocale);
           const dir = newLocale === "ar" ? "rtl" : "ltr";
           document.querySelector("html")?.setAttribute("dir", dir);
           document.querySelector("html")?.setAttribute("lang", newLocale);
