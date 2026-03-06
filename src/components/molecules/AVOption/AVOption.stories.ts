@@ -46,6 +46,7 @@ const meta: Meta<typeof AVOption> & {
     },
     parentColor: {
       control: { type: "color" },
+      defaultValue: "#000000",
     },
     locale: {
       control: { type: "select" },

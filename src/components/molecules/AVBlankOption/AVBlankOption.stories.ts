@@ -21,6 +21,7 @@ const meta: Meta<typeof AVBlankOption> & {
     },
     accentColor: {
       control: { type: "color" },
+      defaultValue: "#000000",
     },
     observerMode: {
       control: { type: "boolean" },

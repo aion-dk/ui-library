@@ -7,7 +7,7 @@ import { getMeaningfulLabel } from "./meaningfulLabel";
 const INITIAL_OPTION = { ...getOption(["selectable"], 1), id: 5 };
 const INITIAL_CONTEST = { ...getContest([]), id: 7 };
 const INITIAL_RESOURCE = { ...getCandidate().generic[1], internal_name: "Some internal name" };
-localI18n.global.locale = "es";
+localI18n.global.locale.value = "es";
 
 describe("Respects fallback order", () => {
   it("Gets Item ID", async () => {
