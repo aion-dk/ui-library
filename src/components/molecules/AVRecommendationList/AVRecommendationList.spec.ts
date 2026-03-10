@@ -60,6 +60,37 @@ describe("AVRecommendationList", () => {
     expect(wrapper.find("[data-test=recommendation-summary]").text()).to.contain("R1");
   });
 
+  it("renders properly with own profile and private", async () => {
+    await wrapper.setProps({
+      isOwnProfile: true,
+      recommendationsPublic: "private",
+      locale: "en",
+    });
+
+    expect(wrapper.text()).to.contain("Recommenders");
+    expect(wrapper.text()).to.not.contain("Uncollapse the list");
+    expect(wrapper.text()).to.not.contain("Collapse the list");
+    expect(wrapper.findAll("[data-test=recommendation]").length).to.eq(0);
+    expect(wrapper.find("[data-test=recommendation-summary]").text()).to.contain(
+      "This candidate doesn\'t have any recommendations",
+    );
+
+    await wrapper.setProps({
+      recommendations: [
+        {
+          id: 1,
+          label: "R1",
+          position: 1,
+        },
+      ],
+    });
+
+    expect(wrapper.text()).to.contain("Recommenders (1)");
+    expect(wrapper.text()).to.contain("R1");
+    expect(wrapper.findAll("[data-test=recommendation]").length).to.eq(0);
+    expect(wrapper.find("[data-test=recommendation-summary]").text()).to.contain("R1");
+  });
+
   it("can collapse and uncollapse", async () => {
     await wrapper.setProps({
       recommendations: [
@@ -214,35 +245,5 @@ describe("AVRecommendationList", () => {
     expect(wrapper.find("[data-test=list-collapse]").text()).to.contain("Tiivistä luettelo");
     expect(wrapper.find(".party-invite-btn").text()).to.contain("Kutsu suosittelijoita");
     expect(wrapper.findAll(".party-invite-btn")[1].text()).to.contain("Näytä suositukset");
-  });
-
-  it("renders properly with own profile and private", async () => {
-    await wrapper.setProps({
-      isOwnProfile: true,
-      recommendationsPublic: "private",
-    });
-
-    expect(wrapper.text()).to.contain("Recommenders");
-    expect(wrapper.text()).to.not.contain("Uncollapse the list");
-    expect(wrapper.text()).to.not.contain("Collapse the list");
-    expect(wrapper.findAll("[data-test=recommendation]").length).to.eq(0);
-    expect(wrapper.find("[data-test=recommendation-summary]").text()).to.contain(
-      "This candidate doesn\'t have any recommendations",
-    );
-
-    await wrapper.setProps({
-      recommendations: [
-        {
-          id: 1,
-          label: "R1",
-          position: 1,
-        },
-      ],
-    });
-
-    expect(wrapper.text()).to.contain("Recommenders (1)");
-    expect(wrapper.text()).to.contain("R1");
-    expect(wrapper.findAll("[data-test=recommendation]").length).to.eq(0);
-    expect(wrapper.find("[data-test=recommendation-summary]").text()).to.contain("R1");
   });
 });
