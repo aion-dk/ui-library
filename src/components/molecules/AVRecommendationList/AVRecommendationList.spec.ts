@@ -65,6 +65,7 @@ describe("AVRecommendationList", () => {
       isOwnProfile: true,
       recommendationsPublic: "private",
       locale: "en",
+      recommendations: [],
     });
 
     expect(wrapper.text()).to.contain("Recommenders");
@@ -90,7 +91,6 @@ describe("AVRecommendationList", () => {
     expect(wrapper.findAll("[data-test=recommendation]").length).to.eq(0);
     expect(wrapper.find("[data-test=recommendation-summary]").text()).to.contain("R1");
   });
-
   it("can collapse and uncollapse", async () => {
     await wrapper.setProps({
       recommendations: [
