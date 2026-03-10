@@ -38,6 +38,10 @@ const props = defineProps({
     type: String as PropType<CandidacyResource>,
     default: "candidate",
   },
+  isOwnProfile: {
+    type: Boolean,
+    default: false,
+  },
   locale: {
     type: String as PropType<SupportedLocale>,
     default: null,
@@ -119,7 +123,7 @@ watch(
 </script>
 
 <template>
-  <template v-if="recommendationsPublic !== 'private'">
+  <template v-if="isOwnProfile || recommendationsPublic !== 'private'">
     <div
       class="d-flex flex-column flex-sm-row align-items-start align-items-sm-center justify-content-between gap-3"
     >
@@ -163,7 +167,7 @@ watch(
     v-if="
       Boolean(recommendations.length) &&
       recommendations.length > summaryRecommenders &&
-      recommendationsPublic === 'public'
+      (recommendationsPublic === 'public' || isOwnProfile)
     "
     ref="recommendationList"
     collapsable
@@ -231,7 +235,9 @@ watch(
   </AVCollapser>
 
   <div
-    v-else-if="Boolean(recommendations.length) && recommendationsPublic === 'public'"
+    v-else-if="
+      Boolean(recommendations.length) && (recommendationsPublic === 'public' || isOwnProfile)
+    "
     class="AVRecommendationList--header d-flex flex-column flex-sm-row"
   >
     <div class="vstack gap-3">
@@ -243,7 +249,9 @@ watch(
   </div>
 
   <div
-    v-else-if="Boolean(recommendations.length) && recommendationsPublic === 'public_count'"
+    v-else-if="
+      Boolean(recommendations.length) && (recommendationsPublic === 'public_count' || isOwnProfile)
+    "
     class="AVRecommendationList--header d-flex flex-column flex-sm-row"
   >
     <div class="vstack gap-3">
@@ -259,7 +267,7 @@ watch(
   </div>
 
   <div
-    v-else-if="recommendationsPublic !== 'private'"
+    v-else-if="recommendationsPublic !== 'private' || isOwnProfile"
     class="AVRecommendationList--header d-flex flex-column flex-sm-row"
   >
     <div class="vstack gap-3">
