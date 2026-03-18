@@ -251,9 +251,9 @@ describe("AVOption", () => {
   });
 
   it("can change image format", async () => {
-    expect(wrapper.find("[data-test=option-image]").classes()).to.contain("AVOption-image-square");
+    expect(wrapper.find("[data-test=option-image]").classes()).to.contain("AVOption--image-square");
     expect(wrapper.find("[data-test=option-image]").classes()).to.not.contain(
-      "AVOption-image-passport",
+      "AVOption--image-passport",
     );
 
     await wrapper.setProps({
