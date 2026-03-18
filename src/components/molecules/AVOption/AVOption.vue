@@ -15,7 +15,6 @@ import type {
   IterableObject,
 } from "@/types";
 import { switchLocale } from "@/i18n";
-import { AVCollapser } from "@/components";
 
 const { eventBus } = useEventsBus();
 const highlighted = ref(false);
