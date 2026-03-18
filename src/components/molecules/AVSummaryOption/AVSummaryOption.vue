@@ -226,8 +226,8 @@ watch(
             class="AVSummaryOption--img me-2 me-sm-3"
             :class="{
               'mb-3': galleryMode,
-              'AVOption-image-square': imageOption === 'square',
-              'AVOption-image-passport': imageOption === 'passport',
+              'AVSummaryOption--img-square': imageOption === 'square',
+              'AVSummaryOption--img-passport': imageOption === 'passport',
             }"
             :alt="t('js.components.AVSummaryOption.aria_label.option_image')"
             data-test="summary-option-image"

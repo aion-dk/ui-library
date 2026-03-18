@@ -21,19 +21,19 @@
   min-height: 2.375rem;
 }
 
-.AVOption-image {
+.AVOption--image {
   object-fit: cover;
   max-height: 90px;
   max-width: 70px;
 }
 
-.AVOption-image-square {
+.AVOption--image-square {
   object-fit: cover;
   height: 70px;
   width: 70px;
 }
 
-.AVOption-image-passport {
+.AVOption--image-passport {
   object-fit: cover;
   height: 90px;
   width: 70px;

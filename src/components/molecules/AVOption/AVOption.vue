@@ -15,6 +15,7 @@ import type {
   IterableObject,
 } from "@/types";
 import { switchLocale } from "@/i18n";
+import { AVCollapser } from "@/components";
 
 const { eventBus } = useEventsBus();
 const highlighted = ref(false);
@@ -410,8 +411,9 @@ watch(
                   v-if="option.image"
                   :src="option.image"
                   :alt="t('js.components.AVOption.aria_labels.option_image')"
+                  class="AVOption--image"
                   :class="
-                    imageOption === 'square' ? 'AVOption-image-square' : 'AVOption-image-passport'
+                    imageOption === 'square' ? 'AVOption--image-square' : 'AVOption--image-passport'
                   "
                   data-test="option-image"
                 />
