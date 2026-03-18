@@ -245,21 +245,27 @@ describe("AVOption", () => {
 
     expect(wrapper.findAll("[data-test=option-image]").length).to.eq(1);
     expect(wrapper.find("[data-test=option-image]").attributes().src).to.eq(
-      "https://electa.staging-1.assemblyvoting.net/uploads_proxy/option/image/657750/square",
+      "https://electa.staging-1.assemblyvoting.net/uploads_proxy/option/image/657750",
     );
     expect(wrapper.find("[data-test=option-image]").attributes().alt).to.contain("Option image");
   });
 
   it("can change image format", async () => {
-    expect(wrapper.find("[data-test=option-image]").attributes().src).to.contain("square");
-    expect(wrapper.find("[data-test=option-image]").attributes().src).to.not.contain("passport");
+    expect(wrapper.find("[data-test=option-image]").classes()).to.contain("AVOption--image-square");
+    expect(wrapper.find("[data-test=option-image]").classes()).to.not.contain(
+      "AVOption--image-passport",
+    );
 
     await wrapper.setProps({
       imageOption: "passport",
     });
 
-    expect(wrapper.find("[data-test=option-image]").attributes().src).to.not.contain("square");
-    expect(wrapper.find("[data-test=option-image]").attributes().src).to.contain("passport");
+    expect(wrapper.find("[data-test=option-image]").classes()).to.not.contain(
+      "AVOption--image-square",
+    );
+    expect(wrapper.find("[data-test=option-image]").classes()).to.contain(
+      "AVOption--image-passport",
+    );
   });
 
   it("can have children", async () => {

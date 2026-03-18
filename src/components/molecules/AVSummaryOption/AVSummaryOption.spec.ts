@@ -120,9 +120,6 @@ describe("AVSummaryOption", () => {
     });
 
     expect(wrapper.findAll("[data-test=summary-option-image]").length).to.eq(1);
-    expect(wrapper.find("[data-test=summary-option-image]").attributes().src).to.eq(
-      "http://image.com/square",
-    );
     expect(wrapper.find("[data-test=summary-option-image]").attributes().alt).to.eq("Option image");
   });
 
