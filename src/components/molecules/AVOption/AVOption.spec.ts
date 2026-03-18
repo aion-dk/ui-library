@@ -261,10 +261,10 @@ describe("AVOption", () => {
     });
 
     expect(wrapper.find("[data-test=option-image]").classes()).to.not.contain(
-      "AVOption-image-square",
+      "AVOption--image-square",
     );
     expect(wrapper.find("[data-test=option-image]").classes()).to.contain(
-      "AVOption-image-passport",
+      "AVOption--image-passport",
     );
   });
 
