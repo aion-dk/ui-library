@@ -8,6 +8,18 @@
   max-height: 90px;
 }
 
+.AVSummaryOption--img-square {
+  object-fit: cover;
+  height: 70px;
+  width: 70px;
+}
+
+.AVSummaryOption--img-passport {
+  object-fit: cover;
+  height: 90px;
+  width: 70px;
+}
+
 .AVSummaryOption--title {
   font-size: 1.25rem;
   line-height: 1.25rem;

@@ -97,12 +97,6 @@ const url = computed(() => props.option.url?.[i18nLocale.value] ?? "");
 
 const videoUrl = computed(() => props.option.videoUrl?.[i18nLocale.value] ?? "");
 
-const imageUrl = computed(() =>
-  props.option.image?.includes("square") // backward compatibility for old boards which had the variant as part of the imageurl
-    ? props.option.image
-    : `${props.option.image}/${props.imageOption}`,
-);
-
 const links = computed(() => {
   const links = [];
   if (url.value)
@@ -414,9 +408,12 @@ watch(
               >
                 <img
                   v-if="option.image"
-                  :src="imageUrl"
+                  :src="option.image"
                   :alt="t('js.components.AVOption.aria_labels.option_image')"
-                  class="AVOption-image"
+                  class="AVOption--image"
+                  :class="
+                    imageOption === 'square' ? 'AVOption--image-square' : 'AVOption--image-passport'
+                  "
                   data-test="option-image"
                 />
                 <h5
