@@ -3,7 +3,7 @@
 <script setup lang="ts">
 /* DO NOT REMOVE (START) */
 import { useI18n } from "vue-i18n";
-const i18n = useI18n();
+const { locale } = useI18n();
 const changeLocale = (e: Event) => {
   if ((e.target as HTMLSelectElement).value === "ar")
     document.querySelector("html")?.setAttribute("dir", "rtl");
@@ -11,10 +11,12 @@ const changeLocale = (e: Event) => {
   document.querySelector("html")?.setAttribute("lang", (e.target as HTMLSelectElement).value);
 };
 /* DO NOT REMOVE (END) */
+/***********************/
+/* ⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇ PLAYGROUND (START) ⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇ */
 
-/* PLAYGROUND (START) */
 import * as examples from "@/examples";
-/* PLAYGROUND (END) */
+
+/* ⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆  PLAYGROUND (END)  ⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆ */
 </script>
 
 <template>
@@ -22,7 +24,7 @@ import * as examples from "@/examples";
     <!-- DO NOT REMOVE (START) -->
     <select
       id="localeSelector"
-      v-model="i18n.locale.value"
+      v-model="locale"
       @change="changeLocale"
     >
       <option value="ar">🇸🇦 AR - Arabic (RTL)</option>
@@ -47,8 +49,9 @@ import * as examples from "@/examples";
       <option value="zh">🇨🇳 ZH - Chinese (LTR)</option>
     </select>
     <!-- DO NOT REMOVE (END) -->
+    <!------------------------->
+    <!-- ⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇ PLAYGROUND (START) ⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇ -->
 
-    <!-- PLAYGROUND (START) -->
     <div style="width: 50%; display: flex; flex-direction: column; gap: 1rem">
       <AVSplitHelper
         :contest="examples.getContest([])"
@@ -70,15 +73,15 @@ import * as examples from "@/examples";
       <AVBlankOption :error="false" :checked="false" />
     </div>
 
-    <!-- PLAYGORUND (END) -->
+    <!-- ⬆⬆⬆⬆⬆⬆⬆⬆⬆   PLAYGORUND (END)    ⬆⬆⬆⬆⬆⬆⬆⬆⬆ -->
   </div>
 </template>
 
 <style>
-/* PLAYGROUND (START) */
+/* ⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇ PLAYGROUND (START) ⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇ */
 
-/* PLAYGROUND (END) */
-
+/* ⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆  PLAYGROUND (END)  ⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆ */
+/*************************/
 /* DO NOT REMOVE (START) */
 #localeSelector {
   position: absolute;
@@ -86,7 +89,6 @@ import * as examples from "@/examples";
   right: 1rem;
   border: solid 1px var(--bs-border-color);
 }
-
 #playground {
   display: flex;
   align-items: center;
