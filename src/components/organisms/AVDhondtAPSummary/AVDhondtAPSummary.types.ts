@@ -5,6 +5,7 @@ interface AVDhondtResultOptionRow {
   title: LocalString;
   count: number;
   tied: boolean;
+  ineligible?: boolean;
   elected: boolean;
   group?: LocalString | null | undefined;
   comparativeFigure?: number | null | undefined;

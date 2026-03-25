@@ -21,6 +21,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  ineligible: {
+    type: Boolean,
+    default: false,
+  },
   tied: {
     type: Boolean,
     default: false,
@@ -69,9 +73,10 @@ watch(
   <div
     class="d-flex p-3"
     :class="{
-      'bg-secondary': !tied && !elected,
+      'bg-secondary': !tied && !elected && !ineligible,
       'bg-success-faded': elected,
       'bg-warning-faded': tied && !elected,
+      'bg-danger-faded': ineligible,
     }"
     data-test="result-option"
   >

@@ -75,14 +75,15 @@ watch(
       :class="{ 'dynamic-columns': sortedResult.length > 8 }"
     >
       <AVResultOption
-        v-for="result in sortedResult"
-        :key="`result_for_${result.reference}`"
-        :option="{ title: result.title, reference: result.reference, image: result.image }"
-        :votes="result.count"
+        v-for="option in sortedResult"
+        :key="`result_for_${option.reference}`"
+        :option="{ title: option.title, reference: option.reference, image: option.image }"
+        :votes="option.count"
         :total="totalCount"
-        :elected="!hideElected && result.elected"
-        :tied="!hideTied && result.tied"
-        :hide-percentage="isPercentageHidden(result.reference)"
+        :elected="!hideElected && option.elected"
+        :tied="!hideTied && option.tied"
+        :ineligible="option.ineligible"
+        :hide-percentage="isPercentageHidden(option.reference)"
         data-test="result-option"
       />
     </div>
