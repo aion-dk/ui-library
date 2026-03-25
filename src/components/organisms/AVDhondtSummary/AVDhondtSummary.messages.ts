@@ -290,6 +290,57 @@ const translations: DefineLocaleMessage = {
       },
     },
   },
+  ja: {
+    header: {
+      party: "様",
+      seat_n: "称号 {n}",
+    },
+    summary: {
+      distribution: "配布番号",
+      seats: "称号合計",
+      blank: "空白票",
+      null_votes: "空白票",
+      seat_count: {
+        no_seats: "称号なし",
+        one_seat: "1 称号",
+        n_seats: "{n} 称号",
+      },
+    },
+  },
+  ko: {
+    header: {
+      party: "정당",
+      seat_n: "메메 {n}",
+    },
+    summary: {
+      distribution: "분배 순서",
+      seats: "총 메면",
+      blank: "기타 중중중",
+      null_votes: "무효 중",
+      seat_count: {
+        no_seats: "메메 없",
+        one_seat: "1 메메",
+        n_seats: "{n} 메메",
+      },
+    },
+  },
+  zh: {
+    header: {
+      party: "正党",
+      seat_n: "位置 {n}",
+    },
+    summary: {
+      distribution: "配置号",
+      seats: "总位置",
+      blank: "空白票",
+      null_votes: "无效票",
+      seat_count: {
+        no_seats: "没有位置",
+        one_seat: "1 位置",
+        n_seats: "{n} 位置",
+      },
+    },
+  },
 };
 
 export default translations;

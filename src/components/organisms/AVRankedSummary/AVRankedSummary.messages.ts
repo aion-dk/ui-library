@@ -256,6 +256,51 @@ const translations: DefineLocaleMessage = {
       null_votes: "Nollröster",
     },
   },
+  ja: {
+    header: {
+      position: "位置",
+      candidate: "候補者",
+      round_n: "ラウンド {n}",
+    },
+    summary: {
+      seats: "席",
+      distribution: "配布番号",
+      elected: "選出",
+      tied: "症服",
+      blank_votes: "空白票",
+      null_votes: "空白票",
+    },
+  },
+  ko: {
+    header: {
+      position: "위치",
+      candidate: "후보자",
+      round_n: "단계 {n}",
+    },
+    summary: {
+      seats: "진출",
+      distribution: "분배 순서",
+      elected: "당선",
+      tied: "동뢰",
+      blank_votes: "기타 투표",
+      null_votes: "무효 투표",
+    },
+  },
+  zh: {
+    header: {
+      position: "位置",
+      candidate: "侦选人",
+      round_n: "轮 {n}",
+    },
+    summary: {
+      seats: "位置",
+      distribution: "配置号",
+      elected: "选中",
+      tied: "平手",
+      blank_votes: "空白票",
+      null_votes: "无效票",
+    },
+  },
 };
 
 export default translations;

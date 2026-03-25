@@ -239,6 +239,48 @@ const translations: DefineLocaleMessage = {
     },
     change_selection_btn: "Ändra val",
   },
+  ja: {
+    selection: "Selection",
+    assigned: "Assigned:",
+    ballots: "ballots",
+    ballot_selection: "Ballot selection",
+    blank: "Blank",
+    and_n_more: "And {n} more...",
+    show_less: "Show less options",
+    aria_labels: {
+      delete_selection: "Delete this selection",
+      edit_selection: "Edit this selection",
+    },
+    change_selection_btn: "Change selection",
+  },
+  ko: {
+    selection: "Selection",
+    assigned: "Assigned:",
+    ballots: "ballots",
+    ballot_selection: "Ballot selection",
+    blank: "Blank",
+    and_n_more: "And {n} more...",
+    show_less: "Show less options",
+    aria_labels: {
+      delete_selection: "Delete this selection",
+      edit_selection: "Edit this selection",
+    },
+    change_selection_btn: "Change selection",
+  },
+  zh: {
+    selection: "Selection",
+    assigned: "Assigned:",
+    ballots: "ballots",
+    ballot_selection: "Ballot selection",
+    blank: "Blank",
+    and_n_more: "And {n} more...",
+    show_less: "Show less options",
+    aria_labels: {
+      delete_selection: "Delete this selection",
+      edit_selection: "Edit this selection",
+    },
+    change_selection_btn: "Change selection",
+  },
 };
 
 export default translations;

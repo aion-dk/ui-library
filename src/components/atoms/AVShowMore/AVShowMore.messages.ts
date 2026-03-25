@@ -69,6 +69,18 @@ const translations: DefineLocaleMessage = {
     show_more: "Visa mer",
     show_less: "Visa mindre",
   },
+  ja: {
+    show_more: "もっと表示",
+    show_less: "表示を減らす",
+  },
+  ko: {
+    show_more: "더보기",
+    show_less: "숨기기",
+  },
+  zh: {
+    show_more: "显示更多",
+    show_less: "显示较少",
+  },
 };
 
 export default translations;

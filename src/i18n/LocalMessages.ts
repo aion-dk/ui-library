@@ -141,6 +141,16 @@ const messages = {
       components: getTranslations("it"),
     },
   },
+  ja: {
+    js: {
+      components: getTranslations("ja"),
+    },
+  },
+  ko: {
+    js: {
+      components: getTranslations("ko"),
+    },
+  },
   nl: {
     js: {
       components: getTranslations("nl"),
@@ -169,6 +179,11 @@ const messages = {
   sv: {
     js: {
       components: getTranslations("sv"),
+    },
+  },
+  zh: {
+    js: {
+      components: getTranslations("zh"),
     },
   },
 };

@@ -52,6 +52,15 @@ const translations: DefineLocaleMessage = {
   sv: {
     loading: "Belastning...",
   },
+  ja: {
+    loading: "読み込み中...",
+  },
+  ko: {
+    loading: "로딩 중...",
+  },
+  zh: {
+    loading: "加载中...",
+  },
 };
 
 export default translations;

@@ -69,6 +69,18 @@ const translations: DefineLocaleMessage = {
     vote_count_singular: "{n} röst",
     vote_count_plural: "{n} röster",
   },
+  ja: {
+    vote_count_singular: "{n}票",
+    vote_count_plural: "{n}票",
+  },
+  ko: {
+    vote_count_singular: "{n}표",
+    vote_count_plural: "{n}표",
+  },
+  zh: {
+    vote_count_singular: "{n}票",
+    vote_count_plural: "{n}票",
+  },
 };
 
 export default translations;

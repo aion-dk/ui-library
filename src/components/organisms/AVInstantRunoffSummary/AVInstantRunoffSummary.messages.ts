@@ -280,6 +280,54 @@ const translations: DefineLocaleMessage = {
       null_votes: "Nollröster",
     },
   },
+  ja: {
+    seat_n: "位置 {n}",
+    header: {
+      candidate: "候補者",
+      round_n: "ラウンド {n}",
+    },
+    summary: {
+      transfered_votes: "除外候補者から転送された投票",
+      exhausted: "使用済みの投票用紙",
+      not_included_count: "選出候補者の投票がこの座席の計算に含まれていません",
+      abstain: "棄権",
+      total_votes: "総投票数",
+      quota: "選挙に必要な定数",
+      null_votes: "空白票",
+    },
+  },
+  ko: {
+    seat_n: "메메 {n}",
+    header: {
+      candidate: "후보자",
+      round_n: "단계 {n}",
+    },
+    summary: {
+      transfered_votes: "제외된 후보자로부터 전달된 중",
+      exhausted: "다된 기문",
+      not_included_count: "당선된 후보자의 을통 칫 메메등기 계산에 포함되지 않음",
+      abstain: "보유하기",
+      total_votes: "총 중잔량",
+      quota: "선거에 필요한 초나르라고 수정 특정...",
+      null_votes: "무효 중",
+    },
+  },
+  zh: {
+    seat_n: "位置 {n}",
+    header: {
+      candidate: "侦选人",
+      round_n: "轮 {n}",
+    },
+    summary: {
+      transfered_votes: "从人选不帖转上的投票",
+      exhausted: "已地口杨小户水份赋记振齐谈邪时腑誡京撮翻分勐辺咢介志边帏赐村潮汶...",
+      not_included_count: "选中侦选人投票未纳入此位置计算",
+      abstain: "乡汗",
+      total_votes: "总投票数",
+      quota: "主选所需的邪室弟亲贝纷绩约谒杰亲豺葶靃吴冷爹玲迹...",
+      null_votes: "无效票",
+    },
+  },
 };
 
 export default translations;

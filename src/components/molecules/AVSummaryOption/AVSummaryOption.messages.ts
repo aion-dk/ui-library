@@ -97,6 +97,30 @@ const translations: DefineLocaleMessage = {
     blank: "Blanco",
     write_in: "Open antwoord",
   },
+  ja: {
+    aria_label: {
+      option: "オプション",
+      option_image: "オプション画像",
+    },
+    blank: "空白",
+    write_in: "記入してください",
+  },
+  ko: {
+    aria_label: {
+      option: "옵션",
+      option_image: "옵션 이미지",
+    },
+    blank: "공백",
+    write_in: "기입하기",
+  },
+  zh: {
+    aria_label: {
+      option: "选项",
+      option_image: "选项图像",
+    },
+    blank: "空白",
+    write_in: "填写",
+  },
   pl: {
     aria_label: {
       option: "Opcja",

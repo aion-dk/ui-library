@@ -423,6 +423,81 @@ const translations: DefineLocaleMessage = {
       cross_party_voting: "Ditt urval inkluderade mer än en lista. Välj endast inom en enda lista.",
     },
   },
+  ja: {
+    select_exactly: "Select {min_marks} options.",
+    select_multiple: "Select between {min_marks} and {max_marks} options.",
+    select_multiple_with_exclusives:
+      "Select between {min_marks} and {max_marks} options. Or select one (1) exclusive option.",
+    select_single: "Select one (1) option.",
+    selected: "Selected: <b>{selected}</b>",
+    your_vote_weight: "Your vote has a weight of {weight}",
+    go_to_bottom: "Go to the bottom",
+    errors: {
+      too_many: "Too many options selected.",
+      blank: "Blank is exclusive and cannot be combined with other options.",
+      write_in_required:
+        "You are required to specify at least a party when 'Write in' is selected.",
+      write_in_too_long: "The write in value is too long. Try to reduce its length.",
+      write_in_not_supported:
+        "Only letters, numbers, and the following special characters are allowed: '{',.()?!@€£¥'}",
+      write_in_empty: "The write-in value cannot be empty.",
+      exceeded_list_limit:
+        "Your selection exceeded the maximum amount of options that can be on {list_name} list. Please select max {max_list_marks} options per this list",
+      exclusive: "Exclusive options cannot be combined with other options.",
+      cross_party_voting:
+        "Your selection included more than one list. Please select only within a single list.",
+    },
+  },
+  ko: {
+    select_exactly: "Select {min_marks} options.",
+    select_multiple: "Select between {min_marks} and {max_marks} options.",
+    select_multiple_with_exclusives:
+      "Select between {min_marks} and {max_marks} options. Or select one (1) exclusive option.",
+    select_single: "Select one (1) option.",
+    selected: "Selected: <b>{selected}</b>",
+    your_vote_weight: "Your vote has a weight of {weight}",
+    go_to_bottom: "Go to the bottom",
+    errors: {
+      too_many: "Too many options selected.",
+      blank: "Blank is exclusive and cannot be combined with other options.",
+      write_in_required:
+        "You are required to specify at least a party when 'Write in' is selected.",
+      write_in_too_long: "The write in value is too long. Try to reduce its length.",
+      write_in_not_supported:
+        "Only letters, numbers, and the following special characters are allowed: '{',.()?!@€£¥'}",
+      write_in_empty: "The write-in value cannot be empty.",
+      exceeded_list_limit:
+        "Your selection exceeded the maximum amount of options that can be on {list_name} list. Please select max {max_list_marks} options per this list",
+      exclusive: "Exclusive options cannot be combined with other options.",
+      cross_party_voting:
+        "Your selection included more than one list. Please select only within a single list.",
+    },
+  },
+  zh: {
+    select_exactly: "Select {min_marks} options.",
+    select_multiple: "Select between {min_marks} and {max_marks} options.",
+    select_multiple_with_exclusives:
+      "Select between {min_marks} and {max_marks} options. Or select one (1) exclusive option.",
+    select_single: "Select one (1) option.",
+    selected: "Selected: <b>{selected}</b>",
+    your_vote_weight: "Your vote has a weight of {weight}",
+    go_to_bottom: "Go to the bottom",
+    errors: {
+      too_many: "Too many options selected.",
+      blank: "Blank is exclusive and cannot be combined with other options.",
+      write_in_required:
+        "You are required to specify at least a party when 'Write in' is selected.",
+      write_in_too_long: "The write in value is too long. Try to reduce its length.",
+      write_in_not_supported:
+        "Only letters, numbers, and the following special characters are allowed: '{',.()?!@€£¥'}",
+      write_in_empty: "The write-in value cannot be empty.",
+      exceeded_list_limit:
+        "Your selection exceeded the maximum amount of options that can be on {list_name} list. Please select max {max_list_marks} options per this list",
+      exclusive: "Exclusive options cannot be combined with other options.",
+      cross_party_voting:
+        "Your selection included more than one list. Please select only within a single list.",
+    },
+  },
 };
 
 export default translations;

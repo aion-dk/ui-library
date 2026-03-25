@@ -18,6 +18,9 @@ const translations: DefineLocaleMessage = {
   ro: { aria_label: "Clasat" },
   ru: { aria_label: "Рейтинг" },
   sv: { aria_label: "Rankad" },
+  ja: { aria_label: "順位付け" },
+  ko: { aria_label: "순위" },
+  zh: { aria_label: "排序" },
 };
 
 export default translations;
