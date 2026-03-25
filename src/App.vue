@@ -36,12 +36,15 @@ import * as examples from "@/examples";
       <option value="fr">🇫🇷 FR - French (LTR)</option>
       <option value="is">🇮🇸 IS - Icelandic (LTR)</option>
       <option value="it">🇮🇹 IT - Italian (LTR)</option>
+      <option value="ja">🇯🇵 JA - Japanese (LTR)</option>
+      <option value="ko">🇰🇷 KO - Korean (LTR)</option>
       <option value="nl">🇳🇱 NL - Dutch (LTR)</option>
       <option value="pl">🇵🇱 PL - Polish (LTR)</option>
       <option value="pt">🇵🇹 PT - Portuguese (LTR)</option>
       <option value="ro">🇷🇴 RO - Romanian (LTR)</option>
       <option value="ru">🇷🇺 RU - Russian (LTR)</option>
       <option value="sv">🇸🇪 SV - Swedish (LTR)</option>
+      <option value="zh">🇨🇳 ZH - Chinese (LTR)</option>
     </select>
     <!-- DO NOT REMOVE (END) -->
 
