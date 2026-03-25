@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted, onUnmounted, ref, inject, watch } from "vue";
+import { computed, onMounted, onUnmounted, ref, inject, watch, nextTick } from "vue";
 
 const props = defineProps({
   stepNumber: {
@@ -105,7 +105,14 @@ onUnmounted(() => window.removeEventListener("resize", updateValues));
 /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
 const i18n: any = inject("i18n");
 const i18nLocale = computed(() => i18n.global.locale.value || i18n.global.locale);
-watch(i18nLocale, () => updateValues(), { deep: true });
+watch(
+  i18nLocale,
+  () => {
+    nextTick();
+    updateValues();
+  },
+  { deep: true },
+);
 /* END */
 </script>
 
