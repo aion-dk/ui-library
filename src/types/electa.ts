@@ -14,6 +14,7 @@ interface Result {
   title: LocalString;
   elected?: boolean;
   tied?: boolean;
+  ineligible?: boolean;
 }
 
 interface VoteCounts {
