@@ -182,8 +182,7 @@ watch(
                 getOptionForSeat(seatNumber, optionReference).tied,
               'bg-success-faded':
                 getOptionForSeat(seatNumber, optionReference).elected && !hideElected,
-              'bg-danger-faded':
-                getOptionForSeat(seatNumber, optionReference).ineligible,
+              'bg-danger-faded': getOptionForSeat(seatNumber, optionReference).ineligible,
               'AVDhondtSummary--text-semibold':
                 (getOptionForSeat(seatNumber, optionReference).elected && !hideElected) ||
                 (getOptionForSeat(seatNumber, optionReference).tied && !hideTied),
