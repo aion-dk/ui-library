@@ -5,6 +5,7 @@ interface AVDhondtSummaryBlankOption {
   title: LocalString;
   tied: boolean;
   elected: boolean;
+  ineligible?: boolean;
   count?: number;
 }
 
