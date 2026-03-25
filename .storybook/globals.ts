@@ -1,4 +1,4 @@
-import { GlobalTypes } from "@storybook/types";
+import { GlobalTypes } from "storybook/internal/types";
 
 const globals: GlobalTypes = {
   backgrounds: { value: "Light" },
