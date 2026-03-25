@@ -10,12 +10,15 @@ const SUPPORTED_LOCALES = [
   "fr",
   "is",
   "it",
+  "ja",
+  "ko",
   "nl",
   "pl",
   "pt",
   "ro",
   "ru",
   "sv",
+  "zh",
 ] as const;
 
 export { SUPPORTED_LOCALES };
