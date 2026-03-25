@@ -226,6 +226,51 @@ const translations: DefineLocaleMessage = {
     remove_file: "Ta bort",
     download_file: "Ladda ner",
   },
+  ja: {
+    acceptedFormats: "Accepted File Types:",
+    primary: "Drag & drop any file here",
+    secondary: {
+      start: "or",
+      strong: "browse file",
+      end: "from device",
+    },
+    release: "Release to drop files here.",
+    current: "Current version:",
+    uploading: "Uploading:",
+    alt_preview: "Current image preview",
+    remove_file: "Remove",
+    download_file: "Download",
+  },
+  ko: {
+    acceptedFormats: "Accepted File Types:",
+    primary: "Drag & drop any file here",
+    secondary: {
+      start: "or",
+      strong: "browse file",
+      end: "from device",
+    },
+    release: "Release to drop files here.",
+    current: "Current version:",
+    uploading: "Uploading:",
+    alt_preview: "Current image preview",
+    remove_file: "Remove",
+    download_file: "Download",
+  },
+  zh: {
+    acceptedFormats: "Accepted File Types:",
+    primary: "Drag & drop any file here",
+    secondary: {
+      start: "or",
+      strong: "browse file",
+      end: "from device",
+    },
+    release: "Release to drop files here.",
+    current: "Current version:",
+    uploading: "Uploading:",
+    alt_preview: "Current image preview",
+    remove_file: "Remove",
+    download_file: "Download",
+  },
 };
 
 export default translations;

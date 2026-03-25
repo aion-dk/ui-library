@@ -86,6 +86,21 @@ const translations: DefineLocaleMessage = {
       null_votes: "Nollröster",
     },
   },
+  ja: {
+    summary: {
+      null_votes: "空白票",
+    },
+  },
+  ko: {
+    summary: {
+      null_votes: "무효 중",
+    },
+  },
+  zh: {
+    summary: {
+      null_votes: "无效票",
+    },
+  },
 };
 
 export default translations;

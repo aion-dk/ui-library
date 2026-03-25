@@ -97,6 +97,24 @@ const translations: DefineLocaleMessage = {
       ballot: "Бюллетень",
     },
   },
+  ja: {
+    aria_labels: {
+      ballot_options: "投票オプション",
+      ballot: "投票",
+    },
+  },
+  ko: {
+    aria_labels: {
+      ballot_options: "투표 옵션",
+      ballot: "투표",
+    },
+  },
+  zh: {
+    aria_labels: {
+      ballot_options: "投票选项",
+      ballot: "投票",
+    },
+  },
   sv: {
     aria_labels: {
       ballot_options: "Valsedelsalternativ",

@@ -86,6 +86,21 @@ const translations: DefineLocaleMessage = {
     assigned: "Redan tilldelad:",
     unused: "Vänster till vänster för att tilldela:",
   },
+  ja: {
+    total: "投票用紙の総数:",
+    assigned: "既に割り当てられています:",
+    unused: "割り当てて残ったもの:",
+  },
+  ko: {
+    total: "투표 총수:",
+    assigned: "이미 할당됨:",
+    unused: "할당 남아있는:",
+  },
+  zh: {
+    total: "投票总数:",
+    assigned: "已分配:",
+    unused: "剩余需分配:",
+  },
 };
 
 export default translations;

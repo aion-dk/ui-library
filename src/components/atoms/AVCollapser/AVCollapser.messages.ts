@@ -86,6 +86,21 @@ const translations: DefineLocaleMessage = {
     expand_text: "Klicka för att visa mer",
     sub_options_select: "{n} valda",
   },
+  ja: {
+    collapse_text: "折りたたむ",
+    expand_text: "クリックして展開",
+    sub_options_select: "{n}個選択済み",
+  },
+  ko: {
+    collapse_text: "축소",
+    expand_text: "클릭하여 확장",
+    sub_options_select: "{n}개 선택",
+  },
+  zh: {
+    collapse_text: "收起",
+    expand_text: "点击展开",
+    sub_options_select: "{n}个已选择",
+  },
 };
 
 export default translations;

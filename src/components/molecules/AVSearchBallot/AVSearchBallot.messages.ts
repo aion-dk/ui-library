@@ -109,6 +109,33 @@ const translations: DefineLocaleMessage = {
       go_to_option: "Ga naar optie",
     },
   },
+  ja: {
+    search_the_ballot: "投票用紙を検索",
+    no_results: "結果なし",
+    enter_option_name: "候補者名",
+    aria_labels: {
+      ballot_options: "投票オプション",
+      go_to_option: "オプションに移動",
+    },
+  },
+  ko: {
+    search_the_ballot: "투표 검색",
+    no_results: "결과 없음",
+    enter_option_name: "후보자 이름",
+    aria_labels: {
+      ballot_options: "투표 옵션",
+      go_to_option: "옵션으로 이동",
+    },
+  },
+  zh: {
+    search_the_ballot: "搜索投票",
+    no_results: "无结果",
+    enter_option_name: "候选人姓名",
+    aria_labels: {
+      ballot_options: "投票选项",
+      go_to_option: "转到选项",
+    },
+  },
   pl: {
     search_the_ballot: "Szukaj karty do głosowania",
     no_results: "Brak wyników",

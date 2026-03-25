@@ -91,6 +91,42 @@ const translations: DefineLocaleMessage = {
       placeholder: "Escribe tu voto aquí",
     },
   },
+  ja: {
+    info_link_text_html: "情報",
+    video_link_text_html: "ビデオ",
+    view_candidate: "候補者を表示",
+    aria_labels: {
+      option: "オプション",
+      option_image: "オプション画像",
+    },
+    write_in: {
+      placeholder: "ここに入力してください",
+    },
+  },
+  ko: {
+    info_link_text_html: "정보",
+    video_link_text_html: "동영상",
+    view_candidate: "후보자 보기",
+    aria_labels: {
+      option: "옵션",
+      option_image: "옵션 이미지",
+    },
+    write_in: {
+      placeholder: "여기에 입력하세요",
+    },
+  },
+  zh: {
+    info_link_text_html: "信息",
+    video_link_text_html: "视频",
+    view_candidate: "查看候选人",
+    aria_labels: {
+      option: "选项",
+      option_image: "选项图像",
+    },
+    write_in: {
+      placeholder: "在此输入您的回复",
+    },
+  },
   fi: {
     info_link_text_html: "Tiedot",
     video_link_text_html: "Video",

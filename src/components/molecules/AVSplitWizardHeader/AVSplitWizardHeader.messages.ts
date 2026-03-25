@@ -282,6 +282,54 @@ const translations: DefineLocaleMessage = {
       header: "Steg 3: Översikt över valen av röstsedlar",
     },
   },
+  ja: {
+    ballot: {
+      adding: "ステップ 1: 投票第 {n} 番の選択を作成",
+      editing: "ステップ 1: 投票第 {n} 番の選択を編集",
+      can_assign_ballots: "最大5票まで選択を適用できます",
+      can_assign_description:
+        "最大8票をすべて重ねて削正するか、分散することを選択できます。ステップ 1: 何を選択したいかを選択してください。ステップ 2: このオプションを何票に記載するかを選択し、適用表に追加します。ステップ 3: 選択結果を確認して投票。",
+    },
+    assign: {
+      header: "ステップ 2: 投票第 {n} 番の票数を決定",
+      header_edit_mode: "ステップ 2: 投票第 {n} 番の割り当てを編集",
+    },
+    overview: {
+      header: "ステップ 3: 投票第何番が何を投票したか確認",
+    },
+  },
+  ko: {
+    ballot: {
+      adding: "단계 1: 투표 {n}의 선택 만들기",
+      editing: "단계 1: 투표 {n}의 선택 편집",
+      can_assign_ballots: "{n}장단계까지 선택을 지정할 수 있습니다.",
+      can_assign_description:
+        "{n}장 모두들 같은 선택지나 분산직중 빠는 오는 → 단계 1: 남축막대 원하는 용도를 선택전 단계 2: 이 옵션을 등록할 투표를 등록하게씩 으로 거르거 단계 3: 선택을 확인 캡가 초나짜라고숨정보뜯.",
+    },
+    assign: {
+      header: "단계 2: 투표 {n}에 할당할 투표 수 단계",
+      header_edit_mode: "단계 2: 투표 {n}으로 할당된 투표 수 동지",
+    },
+    overview: {
+      header: "단계 3: 투표 선택 개요",
+    },
+  },
+  zh: {
+    ballot: {
+      adding: "第 1 步：谈判 {n} 的选择",
+      editing: "第 1 步：编集谈判 {n} 的选择",
+      can_assign_ballots: "您最多可选择 {n} 个选项。",
+      can_assign_description:
+        "您可以选择将所有 {n} 投票提交相同选择或分散。第 1 步：选择您不想选择的选项。第 2 步：决定需要该选项记录的投票数、第 3 步：撬查您的选择并投票。",
+    },
+    assign: {
+      header: "第 2 步：谈判 {n} 分配投票数",
+      header_edit_mode: "第 2 步：编集已分配谈判 {n} 的投票数",
+    },
+    overview: {
+      header: "第 3 步：谈判选择概述",
+    },
+  },
 };
 
 export default translations;

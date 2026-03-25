@@ -69,6 +69,18 @@ const translations: DefineLocaleMessage = {
     aria_expand: "Expandera",
     aria_collapse: "Kollapsa",
   },
+  ja: {
+    aria_expand: "展開",
+    aria_collapse: "折りたたむ",
+  },
+  ko: {
+    aria_expand: "확장",
+    aria_collapse: "축소",
+  },
+  zh: {
+    aria_expand: "展开",
+    aria_collapse: "收起",
+  },
 };
 
 export default translations;

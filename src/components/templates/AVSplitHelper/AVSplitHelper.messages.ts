@@ -310,6 +310,60 @@ const translations: DefineLocaleMessage = {
       new_ballot_selection: "Lägg till ett nytt val av röstsedel",
     },
   },
+  ja: {
+    ballot: {
+      back_button: "戻る",
+      confirm_button: "選択を確認",
+    },
+    assign: {
+      split_question: "この選択肢の組み合わせを持つべき投票用紙は何枚ですか？",
+      ballots_to_assign: "割り当てる投票用紙の枚数:",
+      ballots_to_assign_edit_mode: "割り当てられた投票用紙の枚数を編集:",
+      back_button: "選択に戻る",
+      confirm_button: "確認して割り当て",
+    },
+    overview: {
+      all_ballots_assigned: "すべての投票用紙を割り当て、続行できます",
+      ballots_left: " 割り当てる投票用紙が残っています",
+      new_ballot_selection: "新しい投票用紙の選択を追加",
+    },
+  },
+  ko: {
+    ballot: {
+      back_button: "뒤로",
+      confirm_button: "선택 확인",
+    },
+    assign: {
+      split_question: "이 선택 조합을 가져야 하는 투표는 몇 장인가요?",
+      ballots_to_assign: "할당할 투표 수:",
+      ballots_to_assign_edit_mode: "할당된 투표 수 편집:",
+      back_button: "선택으로 돌아가기",
+      confirm_button: "확인 및 할당",
+    },
+    overview: {
+      all_ballots_assigned: "모든 투표를 할당했으며 계속할 수 있습니다",
+      ballots_left: " 할당할 투표가 남아 있습니다",
+      new_ballot_selection: "새 투표 선택 추가",
+    },
+  },
+  zh: {
+    ballot: {
+      back_button: "返回",
+      confirm_button: "确认选择",
+    },
+    assign: {
+      split_question: "有多少张投票应该有这种选择组合?",
+      ballots_to_assign: "要分配的投票数:",
+      ballots_to_assign_edit_mode: "编辑分配的投票数:",
+      back_button: "返回选择",
+      confirm_button: "确认并分配",
+    },
+    overview: {
+      all_ballots_assigned: "您已分配所有投票，可以继续",
+      ballots_left: " 投票留待分配",
+      new_ballot_selection: "添加新投票选择",
+    },
+  },
 };
 
 export default translations;

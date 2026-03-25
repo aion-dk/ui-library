@@ -273,6 +273,54 @@ const translations: DefineLocaleMessage = {
       null_votes: "Nollröster",
     },
   },
+  ja: {
+    header: {
+      title: "オプション",
+      group: "リスト",
+      count: "投票数",
+      comparative_figure: "比較図",
+    },
+    total_count: "総数",
+    summary: {
+      seats: "席",
+      distribution: "配布番号",
+      elected: "選出",
+      tied: "症服",
+      null_votes: "空白票",
+    },
+  },
+  ko: {
+    header: {
+      title: "옵션",
+      group: "목록",
+      count: "중잔량",
+      comparative_figure: "비교 도형",
+    },
+    total_count: "총 중",
+    summary: {
+      seats: "논",
+      distribution: "분배 순서",
+      elected: "당선",
+      tied: "동뢰",
+      null_votes: "무효 중",
+    },
+  },
+  zh: {
+    header: {
+      title: "选项",
+      group: "列表",
+      count: "票数",
+      comparative_figure: "比较数个",
+    },
+    total_count: "总约",
+    summary: {
+      seats: "位置",
+      distribution: "配置号",
+      elected: "选中",
+      tied: "平手",
+      null_votes: "无效票",
+    },
+  },
 };
 
 export default translations;
