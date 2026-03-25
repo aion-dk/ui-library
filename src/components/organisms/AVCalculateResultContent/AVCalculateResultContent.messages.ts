@@ -417,6 +417,84 @@ const translations: DefineLocaleMessage = {
       label: "Förfluten:",
     },
   },
+  ja: {
+    roles: {
+      label: "あなたの役割:",
+      mixer: "ミキサー",
+      decrypter: "復号化",
+      observer: "監視者",
+      all: "ミキサーと復号化",
+    },
+    status: {
+      label: "ステータス:",
+      initial: "初期化中",
+      mixing: "ミキシング",
+      decrypting: "復号化中",
+      aggregating: "集約中",
+      finished: "完了",
+    },
+    mixes: {
+      label: "ミキシング:",
+    },
+    decryptions: {
+      label: "復号化:",
+    },
+    elapsed: {
+      label: "経過:",
+    },
+  },
+  ko: {
+    roles: {
+      label: "여신 역",
+      mixer: "믹서",
+      decrypter: "복호화",
+      observer: "감시자",
+      all: "믹서 및 복호화",
+    },
+    status: {
+      label: "상태:",
+      initial: "초기화 중",
+      mixing: "혼합",
+      decrypting: "복호화 중",
+      aggregating: "집계 중",
+      finished: "완료",
+    },
+    mixes: {
+      label: "혼합:",
+    },
+    decryptions: {
+      label: "복호화:",
+    },
+    elapsed: {
+      label: "경과:",
+    },
+  },
+  zh: {
+    roles: {
+      label: "您的角色:",
+      mixer: "混音机",
+      decrypter: "解密",
+      observer: "观察者",
+      all: "混音机和解密",
+    },
+    status: {
+      label: "状态:",
+      initial: "初始化",
+      mixing: "混合",
+      decrypting: "解密",
+      aggregating: "聚合",
+      finished: "完成",
+    },
+    mixes: {
+      label: "混合:",
+    },
+    decryptions: {
+      label: "解密:",
+    },
+    elapsed: {
+      label: "已用时间:",
+    },
+  },
 };
 
 export default translations;

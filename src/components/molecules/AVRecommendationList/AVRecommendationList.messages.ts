@@ -97,6 +97,54 @@ const translations: DefineLocaleMessage = {
       no_recommendations: "This party doesn't have any recommendations yet",
     },
   },
+  ja: {
+    header_title: "推薦者 ({n})",
+    collapse: "リストを折りたたむ",
+    uncollapse: "リストを展開",
+    and_more: "その他 {n}...",
+    invite_recommenders_button_label: "推薦者に招待",
+    view_recommendations_button_label: "推奨事項を表示",
+    candidate: {
+      public_count_text: "この候補者は {n} の推奨事項があります",
+      no_recommendations: "この候補者はまだ推奨事項がありません",
+    },
+    party: {
+      public_count_text: "このパーティは {n} の推奨事項があります",
+      no_recommendations: "このパーティはまだ推奨事項がありません",
+    },
+  },
+  ko: {
+    header_title: "추천자 ({n})",
+    collapse: "목록 축소",
+    uncollapse: "목록 확장",
+    and_more: "그리고 {n} 더 많은...",
+    invite_recommenders_button_label: "추천자 초대",
+    view_recommendations_button_label: "추천 보기",
+    candidate: {
+      public_count_text: "이 후보자는 {n}개의 추천을 받았습니다",
+      no_recommendations: "이 후보자는 아직 추천이 없습니다",
+    },
+    party: {
+      public_count_text: "이 정당은 {n}개의 추천을 받았습니다",
+      no_recommendations: "이 정당은 아직 추천이 없습니다",
+    },
+  },
+  zh: {
+    header_title: "推荐者 ({n})",
+    collapse: "折叠列表",
+    uncollapse: "展开列表",
+    and_more: "及 {n} 更多...",
+    invite_recommenders_button_label: "邀请推荐者",
+    view_recommendations_button_label: "查看推荐",
+    candidate: {
+      public_count_text: "该候选人有 {n} 个推荐",
+      no_recommendations: "该候选人暂无推荐",
+    },
+    party: {
+      public_count_text: "该政党有 {n} 个推荐",
+      no_recommendations: "该政党暂无推荐",
+    },
+  },
   es: {
     header_title: "Avales ({n})",
     collapse: "Colapsar lista",

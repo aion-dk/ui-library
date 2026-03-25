@@ -103,6 +103,24 @@ const translations: DefineLocaleMessage = {
       option: "Alternativ",
     },
   },
+  ja: {
+    title: "空白",
+    aria_labels: {
+      option: "オプション",
+    },
+  },
+  ko: {
+    title: "공백",
+    aria_labels: {
+      option: "옵션",
+    },
+  },
+  zh: {
+    title: "空白",
+    aria_labels: {
+      option: "选项",
+    },
+  },
 };
 
 export default translations;

@@ -97,6 +97,30 @@ const translations: DefineLocaleMessage = {
       unchecked: "Niet gecontroleerd",
     },
   },
+  ja: {
+    exclusive_option: "排他的",
+    aria_label: {
+      checked_normal: "チェック済み",
+      checked_ranked: "ランク{rank}でチェック済み",
+      unchecked: "チェックなし",
+    },
+  },
+  ko: {
+    exclusive_option: "배타적",
+    aria_label: {
+      checked_normal: "확인됨",
+      checked_ranked: "순위 {rank}으로 확인됨",
+      unchecked: "확인되지 않음",
+    },
+  },
+  zh: {
+    exclusive_option: "排他性",
+    aria_label: {
+      checked_normal: "已选中",
+      checked_ranked: "已用排序{rank}选中",
+      unchecked: "未选中",
+    },
+  },
   pl: {
     exclusive_option: "Ekskluzywne",
     aria_label: {
