@@ -2,7 +2,16 @@
 import useEventsBus from "@/helpers/eventBus";
 import { getMeaningfulLabel } from "@/helpers/meaningfulLabel";
 import { getTextContrastColor } from "@/helpers/contrastCalculator";
-import { watch, ref, nextTick, computed, inject, onMounted, onUnmounted } from "vue";
+import {
+  watch,
+  ref,
+  nextTick,
+  computed,
+  inject,
+  onMounted,
+  onUnmounted,
+  useTemplateRef,
+} from "vue";
 import type {
   PropType,
   SupportedLocale,
@@ -72,6 +81,8 @@ const props = defineProps({
 });
 
 const emits = defineEmits(["accordion-open", "checked", "view-candidate"]);
+
+const crosses = useTemplateRef<HTMLDivElement | null>(`crossesFor${props.option.reference}`);
 
 const ranked = computed(() => props.contest.markingType.voteVariation === "ranked");
 
@@ -164,6 +175,21 @@ const optionGroups = computed(() => {
 const optionPartialResults = computed(() => {
   return props.partialResults ? props.partialResults[props.option.reference] : null;
 });
+
+const getCrossesWidth = computed(() => {
+  if (votesAllowedPerOption.value > 5 || !crosses.value) return 0;
+  if (props.contest.mode === "gallery") return -crosses.value?.clientWidth;
+  return crosses.value?.clientWidth;
+});
+
+const hasSecondaryElements = computed(
+  () =>
+    description.value ||
+    links.value.length ||
+    !!props.option.candidateId ||
+    (props.option.image && props.contest.mode === "gallery") ||
+    isWriteIn.value,
+);
 
 const toggleOption = (reference: string, amount = 1, text?: string, onlyUpdate?: boolean) => {
   emits("checked", {
@@ -347,7 +373,7 @@ watch(
       }"
       :href="`option_${option.reference}_checkbox`"
       :aria-labelledby="`option_${option.reference}_title`"
-    />
+    ></a>
     <AVCollapser
       :pane-id="`pane_for_option_${option.reference}`"
       :collapsable="contest.collapsable && hasChildren"
@@ -397,13 +423,16 @@ watch(
           >
             <div
               class="vstack gap-2 p-3 align-items-start justify-content-center"
-              style="max-width: calc(100% - 70px)"
+              :style="`max-width: calc(100% - ${getCrossesWidth}px);`"
               data-test="option-content"
             >
               <!-- OPTION HEADER -->
               <header
                 class="AVOption--header d-flex flex-column flex-sm-row align-items-sm-center gap-3"
                 :class="{ 'w-100': isWriteIn }"
+                :style="
+                  contest.mode === 'gallery' && !hasSecondaryElements ? 'min-height: 40px' : ''
+                "
                 data-test="option-header"
               >
                 <img
@@ -422,15 +451,120 @@ watch(
                   :id="`option_${option.reference}_title`"
                   data-test="option-title"
                   v-text="title"
-                />
+                ></h5>
                 <span :id="`option_${option.reference}_handle`" class="visually-hidden">
                   {{ option.reference }}
                 </span>
+
+                <!-- CROSS (GALLERY MODE - ONLY SUPPORTS SINGLE CROSS) -->
+                <div
+                  v-if="votesAllowedPerOption >= 1 && contest.mode === 'gallery'"
+                  :ref="`crossesFor${option.reference}`"
+                  class="AVOption--singlevote end-0 position-absolute"
+                  :style="contest.mode === 'gallery' && parentTitle ? 'top: 1rem' : 'top: 0'"
+                  data-test="option-multivote"
+                >
+                  <div class="hstack gap-2 flex-nowrap">
+                    <AVOptionCheckbox
+                      :excluded="option.excluded"
+                      :checked="checkedCount >= optionGroups[0][0]"
+                      :rank="
+                        ranked
+                          ? selections
+                              .map((s: OptionSelection) => s.reference)
+                              .indexOf(option.reference) + 1
+                          : null
+                      "
+                      :exclusive-error="exclusiveError"
+                      :invalid="invalid"
+                      :option-reference="option.reference"
+                      :check-box-index="optionGroups[0][0]"
+                      :disabled="disabled || observerMode"
+                      :gallery-mode="contest.mode === 'gallery'"
+                      @toggled="toggleOption(option.reference, optionGroups[0][0], writeInText)"
+                    />
+                  </div>
+                </div>
               </header>
+
+              <!-- DESCRIPTION, LINKS, CANDIDACY -->
+              <div v-if="hasSecondaryElements" class="vstack gap-2 p-0" data-test="option-summary">
+                <h5
+                  v-if="option.image && contest.mode === 'gallery'"
+                  class="AVOption--title m-0"
+                  :id="`option_${option.reference}_title`"
+                  data-test="option-title"
+                  v-text="title"
+                ></h5>
+                <div
+                  v-if="description"
+                  :id="`option_${option.reference}_description`"
+                  class="AVOption--description vstack gap-1 mt-2"
+                  data-test="option-description"
+                  v-html="description"
+                ></div>
+                <div
+                  class="AVOption--links-container hstack gap-2"
+                  v-if="links.length > 0 || !!option.candidateId"
+                >
+                  <button
+                    v-if="!!option.candidateId"
+                    type="button"
+                    class="btn btn-sm btn-outline-ballot"
+                    @click.stop="emits('view-candidate', contest.reference, option.reference)"
+                    data-test="option-candidacy"
+                  >
+                    <template v-if="option.isParty">
+                      {{ t("js.components.AVOption.view_party") }}
+                    </template>
+                    <template v-else>
+                      {{ t("js.components.AVOption.view_candidate") }}
+                    </template>
+                  </button>
+
+                  <a
+                    v-for="link in links"
+                    :key="link.toString()"
+                    :href="link.url"
+                    class="btn btn-sm btn-outline-ballot"
+                    target="_blank"
+                    @click.stop
+                    data-test="option-link"
+                  >
+                    {{ link.text }}
+                  </a>
+                </div>
+                <div v-if="isWriteIn" class="w-100">
+                  <textarea
+                    v-model="writeInText"
+                    class="form-control"
+                    :class="{
+                      'is-invalid': writeInInvalid,
+                      'border-theme-danger': writeInInvalid,
+                    }"
+                    :id="`write_in_${option.reference}`"
+                    :data-test="`write-in-${option.reference}-input`"
+                    :aria-labelledby="`option_${option.reference}_title`"
+                    :placeholder="writeInPlaceholder"
+                    :disabled="disabled || observerMode || !option.selectable"
+                    resize="vertical"
+                    :rows="contest.mode === 'gallery' ? 3 : 1"
+                    @click="toggleFromWriteIn"
+                  ></textarea>
+                  <div
+                    class="small"
+                    :class="writeInInvalid ? 'text-theme-danger' : 'text-muted'"
+                    data-test="space-counter"
+                  >
+                    {{ `${writeInSize} / ${option.writeIn?.maxSize}` }}
+                  </div>
+                </div>
+              </div>
             </div>
-            <!-- MULTIVOTE CROSSES -->
+            <!-- CROSSES (STACKED MODE) -->
             <div
-              v-if="votesAllowedPerOption >= 1"
+              v-if="votesAllowedPerOption >= 1 && contest.mode !== 'gallery'"
+              :ref="`crossesFor${option.reference}`"
               :class="{
                 'AVOption--multivote-aside hstack gap-2 justify-content-end bg-secondary':
                   votesAllowedPerOption <= 5 && votesAllowedPerOption !== 1,
@@ -462,7 +596,7 @@ watch(
                   :option-reference="option.reference"
                   :check-box-index="optionIndex"
                   :disabled="disabled || observerMode"
-                  :gallery-mode="contest.mode === 'gallery'"
+                  :gallery-mode="false"
                   @toggled="toggleOption(option.reference, optionIndex, writeInText)"
                 />
               </div>
@@ -479,96 +613,12 @@ watch(
             />
           </div>
 
-          <!-- DESCRIPTION, LINKS, CANDIDACY -->
           <div
-            v-if="
-              description ||
-              links.length ||
-              (hasChildren && collapsable) ||
-              !!option.candidateId ||
-              (option.image && contest.mode === 'gallery') ||
-              isWriteIn
-            "
-            class="vstack gap-2 px-3 pb-3"
-            data-test="option-summary"
-          >
-            <h5
-              v-if="option.image && contest.mode === 'gallery'"
-              class="AVOption--title m-0"
-              :id="`option_${option.reference}_title`"
-              data-test="option-title"
-              v-text="title"
-            />
-            <div
-              v-if="description"
-              :id="`option_${option.reference}_description`"
-              class="AVOption--description vstack gap-1 mt-2"
-              data-test="option-description"
-              v-html="description"
-            />
-            <div
-              class="AVOption--links-container hstack gap-2"
-              v-if="links.length > 0 || !!option.candidateId"
-            >
-              <button
-                v-if="!!option.candidateId"
-                type="button"
-                class="btn btn-sm btn-outline-ballot"
-                @click.stop="emits('view-candidate', contest.reference, option.reference)"
-                data-test="option-candidacy"
-              >
-                <template v-if="option.isParty">
-                  {{ t("js.components.AVOption.view_party") }}
-                </template>
-                <template v-else>
-                  {{ t("js.components.AVOption.view_candidate") }}
-                </template>
-              </button>
-
-              <a
-                v-for="link in links"
-                :key="link.toString()"
-                :href="link.url"
-                class="btn btn-sm btn-outline-ballot"
-                target="_blank"
-                @click.stop
-                data-test="option-link"
-              >
-                {{ link.text }}
-              </a>
-            </div>
-            <div
-              v-if="collapsable && hasChildren"
-              :id="`pane_for_option_${option.reference}_btn`"
-              class="mt-2 mb-n3 mx-n3"
-              style="width: calc(100% + 2rem)"
-            ></div>
-            <div v-if="isWriteIn" class="w-100">
-              <textarea
-                v-model="writeInText"
-                class="form-control"
-                :class="{
-                  'is-invalid': writeInInvalid,
-                  'border-theme-danger': writeInInvalid,
-                }"
-                :id="`write_in_${option.reference}`"
-                :data-test="`write-in-${option.reference}-input`"
-                :aria-labelledby="`option_${option.reference}_title`"
-                :placeholder="writeInPlaceholder"
-                :disabled="disabled || observerMode || !option.selectable"
-                resize="vertical"
-                :rows="contest.mode === 'gallery' ? 3 : 1"
-                @click="toggleFromWriteIn"
-              />
-              <div
-                class="small"
-                :class="writeInInvalid ? 'text-theme-danger' : 'text-muted'"
-                data-test="space-counter"
-              >
-                {{ `${writeInSize} / ${option.writeIn?.maxSize}` }}
-              </div>
-            </div>
-          </div>
+            v-if="collapsable && hasChildren"
+            :id="`pane_for_option_${option.reference}_btn`"
+            class="w-100"
+            style="width: calc(100% + 2rem)"
+          ></div>
         </section>
       </template>
 
