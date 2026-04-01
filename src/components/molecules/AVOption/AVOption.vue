@@ -191,6 +191,12 @@ const hasSecondaryElements = computed(
     isWriteIn.value,
 );
 
+const counterInterface = computed(
+  () =>
+    props.contest.markingType.quadraticVoting ||
+    props.contest.multipleVotingInterface === "counter",
+);
+
 const toggleOption = (reference: string, amount = 1, text?: string, onlyUpdate?: boolean) => {
   emits("checked", {
     reference: reference,
@@ -271,7 +277,8 @@ const parentStyle = computed(() => {
 });
 
 const toggleFromOption = (onlyUpdate: boolean) => {
-  if (props.disabled || props.observerMode || !props.option.selectable) return;
+  if (props.disabled || props.observerMode || !props.option.selectable || counterInterface.value)
+    return;
 
   if (votesAllowedPerOption.value > 1) {
     if (props.selections.length) {
@@ -417,7 +424,7 @@ watch(
             class="d-flex justify-content-between"
             :class="{
               'flex-column': votesAllowedPerOption > 1,
-              'flex-sm-row': votesAllowedPerOption <= 5,
+              'flex-sm-row': votesAllowedPerOption <= 5 || counterInterface,
             }"
             data-test="option-container"
           >
@@ -458,7 +465,7 @@ watch(
 
                 <!-- CROSS (GALLERY MODE - ONLY SUPPORTS SINGLE CROSS) -->
                 <div
-                  v-if="votesAllowedPerOption >= 1 && contest.mode === 'gallery'"
+                  v-if="contest.mode === 'gallery'"
                   :ref="`crossesFor${option.reference}`"
                   class="AVOption--singlevote end-0 position-absolute"
                   :style="contest.mode === 'gallery' && parentTitle ? 'top: 1rem' : 'top: 0'"
@@ -561,9 +568,22 @@ watch(
                 </div>
               </div>
             </div>
+
+            <!-- COUNTER (STACKED MODE) -->
+            <div v-if="counterInterface" class="AVOption--singlevote hstack">
+              <AVOptionCounter
+                :amount="checkedCount"
+                :max-amount="votesAllowedPerOption"
+                :disabled="disabled || observerMode"
+                :invalid="invalid"
+                @update-crosses="
+                  (amount: number) => toggleOption(props.option.reference, amount, writeInText)
+                "
+              />
+            </div>
             <!-- CROSSES (STACKED MODE) -->
             <div
-              v-if="votesAllowedPerOption >= 1 && contest.mode !== 'gallery'"
+              v-else-if="votesAllowedPerOption >= 1 && contest.mode !== 'gallery'"
               :ref="`crossesFor${option.reference}`"
               :class="{
                 'AVOption--multivote-aside hstack gap-2 justify-content-end bg-secondary':

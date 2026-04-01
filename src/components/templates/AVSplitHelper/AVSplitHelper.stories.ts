@@ -128,3 +128,13 @@ export const OverviewSuccess = {
     weight: 10,
   },
 };
+
+export const MultiVotingWithCounterInterface = {
+  render: Template,
+
+  args: {
+    contest: getContest(["blank", "multiple_votes_lg", "counter", "many_options"]),
+    contestSelection: getContestSelection([]),
+    weight: 1,
+  },
+};

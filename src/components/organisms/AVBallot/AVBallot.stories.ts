@@ -154,6 +154,15 @@ export const MoreThan5VotesPerOption = {
   },
 };
 
+export const MultivoteWithCounterInterface = {
+  render: Template,
+
+  args: {
+    contest: getContest(["multiple_votes_lg", "counter"]),
+    selectionPile: getSelectionPile(["multivote"]),
+  },
+};
+
 export const WithChildren = {
   render: Template,
 
