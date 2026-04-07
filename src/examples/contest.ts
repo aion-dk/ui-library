@@ -53,7 +53,7 @@ const getContestOptions = (args: ContestArg[]): OptionContent[] => {
 };
 
 const getVotesAllowedPerOption = (args: ContestArg[]) => {
-  if (args.includes("quadratic_voting")) return 100;
+  if (args.includes("quadratic_voting")) return 6;
   else if (args.includes("multiple_votes_lg")) return 10;
   else if (args.includes("multiple_votes_sm")) return 5;
   else return 1;

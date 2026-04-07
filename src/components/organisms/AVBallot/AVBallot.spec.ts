@@ -10,6 +10,7 @@ import AVSearchBallot from "@/components/molecules/AVSearchBallot";
 import AVOption from "@/components/molecules/AVOption";
 import AVBlankOption from "@/components/molecules/AVBlankOption";
 import AVOptionLiveResults from "@/components/atoms/AVOptionLiveResults";
+import AVOptionCounter from "@/components/atoms/AVOptionCounter";
 
 describe("AVBallot", () => {
   const wrapper = mount(AVBallot, {
@@ -27,6 +28,7 @@ describe("AVBallot", () => {
         AVBlankOption,
         AVSearchBallot,
         AVOptionLiveResults,
+        AVOptionCounter,
       },
       provide: {
         i18n: localI18n,

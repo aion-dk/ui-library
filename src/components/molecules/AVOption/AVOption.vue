@@ -22,6 +22,7 @@ import type {
   PartialResults,
   ImageOption,
   IterableObject,
+  VoiceCredits,
 } from "@/types";
 import { switchLocale } from "@/i18n";
 
@@ -77,6 +78,10 @@ const props = defineProps({
   imageOption: {
     type: String as PropType<ImageOption>,
     default: "square",
+  },
+  voiceCredits: {
+    type: Object as PropType<VoiceCredits>,
+    default: null,
   },
 });
 
@@ -243,6 +248,14 @@ const openChildrenCandidate = (contestReference: string, optionReference: string
   emits("view-candidate", contestReference, optionReference);
 };
 
+const usageOnBackground = computed(() => {
+  if (!props.contest.markingType.quadraticVoting || !props.voiceCredits) return ``;
+  const totalCredits = props.contest.markingType.quadraticVotingVoiceCredits || 0;
+  const usedCredits = props.voiceCredits.credits.get(props.option.reference) || 0;
+  const percentage = (100 / totalCredits) * usedCredits;
+  return `width: ${percentage}%`;
+});
+
 const bsBorderColor = computed(() =>
   getComputedStyle(document.documentElement).getPropertyValue("--bs-border-color"),
 );
@@ -400,12 +413,22 @@ watch(
             'AVOption--highlight': highlighted,
             'h-100': contest.mode === 'gallery',
             'cursor-pointer': option.selectable && !(disabled || observerMode),
+            'bg-transparent': contest.markingType.quadraticVoting,
           }"
           :style="coloredEdgeStyle"
           :aria-label="`${t('js.components.AVOption.aria_labels.option')} ${getMeaningfulLabel(option as unknown as IterableObject, i18nLocale, t('js.components.AVOption.aria_labels.option'))}`"
           data-test="option-section"
           @click="toggleFromOption(false)"
         >
+          <!-- CREDIT USAGE ON BACKGROUND -->
+          <div
+            class="h-100 position-absolute z-n1"
+            :class="{
+              'bg-ballot': !invalid,
+              'bg-theme-danger': invalid,
+            }"
+            :style="`${usageOnBackground}; opacity: 0.1;`"
+          ></div>
           <!-- PARENT BADGE -->
           <div
             v-if="contest.mode === 'gallery' && parentTitle"
@@ -673,6 +696,7 @@ watch(
             :partial-results="partialResults"
             :exclusive-error="childOption.exclusive && exclusiveError"
             :image-option="imageOption"
+            :voice-credits="voiceCredits"
             @checked="(args: boolean) => emits('checked', args)"
             @accordion-open="() => toggleCollapse(true, false)"
             @view-candidate="openChildrenCandidate"

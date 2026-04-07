@@ -218,3 +218,12 @@ export const GalleryModeWithParentsAndBlank = {
     selectionPile: getSelectionPile([]),
   },
 };
+
+export const QuadraticVoting = {
+  render: Template,
+
+  args: {
+    contest: getContest(["multiple_votes_lg", "counter", "quadratic_voting"]),
+    selectionPile: getSelectionPile([]),
+  },
+};

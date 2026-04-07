@@ -22,11 +22,11 @@ const meta: Meta<typeof AVSubmissionHelper> = {
     hasExclusiveOptions: {
       control: { type: "boolean" },
     },
-    weight: {
-      control: { type: "number", min: 0, max: 999, step: 1 },
-    },
     displayScrollToBottom: {
       control: { type: "boolean" },
+    },
+    voiceCredits: {
+      control: { type: "object" },
     },
     locale: {
       control: { type: "select" },
@@ -52,7 +52,6 @@ export const Single = {
     minMarks: 1,
     maxMarks: 1,
     chosenCount: 1,
-    weight: 1,
     errors: [],
   },
 };
@@ -64,7 +63,6 @@ export const Multiple = {
     minMarks: 1,
     maxMarks: 5,
     chosenCount: 3,
-    weight: 1,
     errors: [],
   },
 };
@@ -76,7 +74,6 @@ export const MultipleWithExclusives = {
     minMarks: 1,
     maxMarks: 5,
     chosenCount: 5,
-    weight: 1,
     errors: [],
     hasExclusiveOptions: true,
   },
@@ -89,7 +86,6 @@ export const Error = {
     minMarks: 1,
     maxMarks: 1,
     chosenCount: 3,
-    weight: 1,
     errors: [{ message: "too_many" }],
   },
 };
@@ -101,7 +97,6 @@ export const MultipleWithExclusivesError = {
     minMarks: 1,
     maxMarks: 4,
     chosenCount: 2,
-    weight: 1,
     errors: [{ message: "too_many" }, { message: "exclusive" }],
     hasExclusiveOptions: true,
   },

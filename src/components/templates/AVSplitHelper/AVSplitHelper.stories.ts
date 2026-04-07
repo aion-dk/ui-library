@@ -138,3 +138,13 @@ export const MultiVotingWithCounterInterface = {
     weight: 1,
   },
 };
+
+export const QuadraticVoting = {
+  render: Template,
+
+  args: {
+    contest: getContest(["multiple_votes_lg", "huge", "quadratic_voting"]),
+    contestSelection: getContestSelection([]),
+    weight: 1,
+  },
+};

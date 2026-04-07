@@ -32,6 +32,15 @@ const value = ref<number>(props.amount);
 
 const checked = computed(() => Boolean(value.value));
 
+const creditsUsed = computed(() => {
+  let usedCredits = 0;
+  for (let i = 1; i <= props.amount; i++) {
+    usedCredits += i * i;
+  }
+
+  return t("js.components.AVOptionCounter.used_credits", { n: usedCredits });
+});
+
 const add = () => {
   value.value = value.value + 1;
   emits("updateCrosses", value.value);
@@ -77,13 +86,14 @@ watch(
       <AVIcon icon="minus" />
     </button>
     <div
-      class="AVOptionCounter--base"
+      class="AVOptionCounter--base cursor-help"
       :class="{
         'AVOptionCounter--checked': checked,
         'AVOptionCounter--error': invalid,
       }"
       :aria-label="t('js.components.AVOptionCounter.amount', { n: value })"
       data-test="option-counter-votes"
+      v-tooltip="creditsUsed"
     >
       <strong>{{ value }}</strong>
     </div>

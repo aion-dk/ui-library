@@ -11,6 +11,7 @@ import AVOptionCheckbox from "@/components/atoms/AVOptionCheckbox";
 import AVAnimatedTransition from "@/components/atoms/AVAnimatedTransition";
 import AVOptionLiveResults from "@/components/atoms/AVOptionLiveResults";
 import AVTweenedCount from "@/components/atoms/AVTweenedCount";
+import AVOptionCounter from "@/components/atoms/AVOptionCounter";
 
 describe("AVOption", () => {
   const wrapper = mount(AVOption, {
@@ -32,6 +33,7 @@ describe("AVOption", () => {
         AVOptionSelect,
         AVOptionLiveResults,
         AVTweenedCount,
+        AVOptionCounter,
       },
       stubs: {
         AVIcon: {
