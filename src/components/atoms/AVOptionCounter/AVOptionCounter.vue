@@ -89,7 +89,7 @@ watch(
       class="AVOptionCounter--base cursor-help"
       :class="{
         'AVOptionCounter--checked': checked,
-        'AVOptionCounter--error': invalid,
+        'AVOptionCounter--error': invalid && !!value,
       }"
       :aria-label="t('js.components.AVOptionCounter.amount', { n: value })"
       data-test="option-counter-votes"
