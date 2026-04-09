@@ -23,6 +23,12 @@ const meta: Meta<typeof AVSummaryOption> = {
     writeIn: {
       control: { type: "text" },
     },
+    counterInterface: {
+      control: { type: "boolean" },
+    },
+    isQuadratic: {
+      control: { type: "boolean" },
+    },
     locale: {
       control: { type: "select" },
       options: SUPPORTED_LOCALES,
@@ -172,6 +178,39 @@ export const MultipleVotes = {
     },
     blank: false,
     multipleVotesAllowed: true,
+  },
+};
+
+export const MultipleVotesCounterInterface = {
+  render: Template,
+
+  args: {
+    option: {
+      title: getOption([], 1).title,
+      handle: getOption([], 1).reference,
+      crosses: 5,
+      rank: null,
+    },
+    blank: false,
+    multipleVotesAllowed: true,
+    counterInterface: true,
+  },
+};
+
+export const QuadraticVoting = {
+  render: Template,
+
+  args: {
+    option: {
+      title: getOption([], 1).title,
+      handle: getOption([], 1).reference,
+      crosses: 5,
+      rank: null,
+    },
+    blank: false,
+    multipleVotesAllowed: true,
+    counterInterface: true,
+    isQuadratic: true,
   },
 };
 

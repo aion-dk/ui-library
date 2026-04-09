@@ -308,6 +308,17 @@ export const MultivoteWithCounterInterface = {
   },
 };
 
+export const QuadraticVoting = {
+  render: Template,
+
+  args: {
+    option: getOption(["selectable", "description"], 1),
+    selections: [],
+    contest: getContest(["multiple_votes_lg", "counter", "quadratic_voting"]),
+    invalid: false,
+  },
+};
+
 export const Error = {
   render: Template,
 

@@ -412,7 +412,9 @@ watch(
           :class="{
             'AVOption--highlight': highlighted,
             'h-100': contest.mode === 'gallery',
-            'cursor-pointer': option.selectable && !(disabled || observerMode),
+            'cursor-pointer':
+              option.selectable &&
+              !(disabled || observerMode || contest.multipleVotingInterface === 'counter'),
             'bg-transparent': contest.markingType.quadraticVoting,
           }"
           :style="coloredEdgeStyle"
@@ -599,8 +601,9 @@ watch(
                 :max-amount="votesAllowedPerOption"
                 :disabled="disabled || observerMode"
                 :invalid="invalid"
+                :is-quadratic="contest.markingType.quadraticVoting"
                 @update-crosses="
-                  (amount: number) => toggleOption(props.option.reference, amount, writeInText)
+                  (amount: number) => toggleOption(option.reference, amount, writeInText)
                 "
               />
             </div>

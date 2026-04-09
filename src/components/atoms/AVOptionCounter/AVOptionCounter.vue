@@ -20,6 +20,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  isQuadratic: {
+    type: Boolean,
+    default: false,
+  },
   locale: {
     type: String as PropType<SupportedLocale>,
     default: null,
@@ -86,14 +90,15 @@ watch(
       <AVIcon icon="minus" />
     </button>
     <div
-      class="AVOptionCounter--base cursor-help"
+      class="AVOptionCounter--base"
       :class="{
         'AVOptionCounter--checked': checked,
         'AVOptionCounter--error': invalid && !!value,
+        'cursor-help': isQuadratic,
       }"
       :aria-label="t('js.components.AVOptionCounter.amount', { n: value })"
       data-test="option-counter-votes"
-      v-tooltip="creditsUsed"
+      v-tooltip="isQuadratic ? creditsUsed : undefined"
     >
       <strong>{{ value }}</strong>
     </div>

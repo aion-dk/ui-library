@@ -16,6 +16,9 @@ const meta: Meta<typeof AVOptionCounter> = {
     invalid: {
       control: { type: "boolean" },
     },
+    isQuadratic: {
+      control: { type: "boolean" },
+    },
     locale: {
       control: { type: "select" },
       options: SUPPORTED_LOCALES,
@@ -47,6 +50,16 @@ export const Checked = {
   args: {
     amount: 6,
     maxAmount: 15,
+  },
+};
+
+export const QuadraticCheckedWithHelpTooltip = {
+  render: Template,
+
+  args: {
+    amount: 6,
+    maxAmount: 15,
+    isQuadratic: true,
   },
 };
 
