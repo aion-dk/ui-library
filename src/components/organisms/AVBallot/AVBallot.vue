@@ -48,10 +48,6 @@ const props = defineProps({
     type: Object as PropType<PartialResults>,
     default: null,
   },
-  weight: {
-    type: Number,
-    default: null,
-  },
   includeLazyErrors: {
     type: Boolean,
     default: false,
@@ -69,8 +65,6 @@ const search = ref<HTMLInputElement | null>(null);
 const selections = computed(() => [...props.selectionPile.optionSelections]);
 
 const validator = computed(() => new SelectionPileValidator(props.contest));
-
-const displayedWeight = computed(() => (props.contest.disregardVoterWeight ? null : props.weight));
 
 const customValidators = computed(() => {
   const validators = [];
@@ -354,7 +348,6 @@ watch(
       v-if="showSubmissionHelper && !disabled && !observerMode"
       :chosen-count="selections.length"
       :errors="errors"
-      :weight="displayedWeight"
       :min-marks="contest.markingType.minMarks"
       :max-marks="contest.markingType.maxMarks"
       :has-exclusive-options="contestHasExclusiveOptions"

@@ -118,6 +118,8 @@ const maxAssignable = computed(() =>
     .reduce((sum: number, bs: SelectionPile) => sum - bs.multiplier, props.weight),
 );
 
+const displayedWeight = computed(() => (props.contest.disregardVoterWeight ? null : props.weight));
+
 const userCanSplit = computed(() => props.contest.markingType.maxPiles !== 1 && props.weight > 1);
 
 const isEditing = computed(() => activeSelectionPileIndex.value !== null);
@@ -245,8 +247,8 @@ watch(
       }}
     </h3>
     <!-- WEIGHT -->
-    <div v-if="weight" class="text-gray-700 small" data-test="split-helper-contest-weight">
-      {{ t("js.components.AVSplitHelper.your_vote_weight", { weight }) }}
+    <div v-if="displayedWeight" class="text-gray-700 small" data-test="split-helper-contest-weight">
+      {{ t("js.components.AVSplitHelper.your_vote_weight", { displayedWeight }) }}
     </div>
   </div>
 
