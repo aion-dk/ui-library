@@ -265,18 +265,18 @@ watch(
         </div>
       </div>
       <div v-if="!useFooter" class="align-self-start">
+        <AVOptionCounter
+          v-if="counterInterface || isQuadratic"
+          :amount="props.option?.crosses"
+          :disabled="true"
+          :is-quadratic="isQuadratic"
+        />
         <AVOptionCheckbox
-          v-if="!counterInterface"
+          v-else
           :checked="true"
           :rank="option?.rank"
           :disabled="true"
           data-test="summary-cross"
-        />
-        <AVOptionCounter
-          v-else
-          :amount="props.option?.crosses"
-          :disabled="true"
-          :is-quadratic="isQuadratic"
         />
       </div>
     </div>
