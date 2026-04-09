@@ -6,7 +6,7 @@ const translations: DefineLocaleMessage = {
     used_credits: "لا أرصدة صوتية مستخدمة | {n} رصيد صوتي مستخدم | {n} أرصدة صوتية مستخدمة",
     aria_label: {
       add: "إضافة صوت واحد",
-      substract: "طرح صوت واحد",
+      subtract: "طرح صوت واحد",
     },
   },
   ca: {
@@ -15,7 +15,7 @@ const translations: DefineLocaleMessage = {
       "cap crèdit de veu utilitzat | {n} crèdit de veu utilitzat | {n} crèdits de veu utilitzats",
     aria_label: {
       add: "Afegeix un vot",
-      substract: "Resta un vot",
+      subtract: "Resta un vot",
     },
   },
   cy: {
@@ -24,7 +24,7 @@ const translations: DefineLocaleMessage = {
       "dim credydau llais wedi'u defnyddio | {n} credyd llais wedi'i ddefnyddio | {n} credyd llais wedi'u defnyddio",
     aria_label: {
       add: "Ychwanegu un bleidlais",
-      substract: "Tynnu un bleidlais",
+      subtract: "Tynnu un bleidlais",
     },
   },
   da: {
@@ -33,7 +33,7 @@ const translations: DefineLocaleMessage = {
       "ingen stemmekreditter brugt | {n} stemmekredit brugt | {n} stemmekreditter brugt",
     aria_label: {
       add: "Tilføj én stemme",
-      substract: "Fratræk én stemme",
+      subtract: "Fratræk én stemme",
     },
   },
   de: {
@@ -42,7 +42,7 @@ const translations: DefineLocaleMessage = {
       "keine Stimmguthaben verwendet | {n} Stimmguthaben verwendet | {n} Stimmguthaben verwendet",
     aria_label: {
       add: "Eine Stimme hinzufügen",
-      substract: "Eine Stimme entfernen",
+      subtract: "Eine Stimme entfernen",
     },
   },
   en: {
@@ -50,7 +50,7 @@ const translations: DefineLocaleMessage = {
     used_credits: "No voice credits used | {n} voice credit used | {n} voice credits used",
     aria_label: {
       add: "Add one vote",
-      substract: "Subtract one vote",
+      subtract: "Subtract one vote",
     },
   },
   es: {
@@ -59,7 +59,7 @@ const translations: DefineLocaleMessage = {
       "no utiliza créditos de voz | {n} crédito de voz utilizado | {n} créditos de voz utilizados",
     aria_label: {
       add: "Agregar un voto",
-      substract: "Restar un voto",
+      subtract: "Restar un voto",
     },
   },
   fi: {
@@ -68,7 +68,7 @@ const translations: DefineLocaleMessage = {
       "ei käytettyjä äänikrediittejä | {n} äänikrediitti käytetty | {n} äänikrediittiä käytetty",
     aria_label: {
       add: "Lisää yksi ääni",
-      substract: "Vähennä yksi ääni",
+      subtract: "Vähennä yksi ääni",
     },
   },
   fr: {
@@ -77,7 +77,7 @@ const translations: DefineLocaleMessage = {
       "aucun crédit de voix utilisé | {n} crédit de voix utilisé | {n} crédits de voix utilisés",
     aria_label: {
       add: "Ajouter un vote",
-      substract: "Retirer un vote",
+      subtract: "Retirer un vote",
     },
   },
   is: {
@@ -85,7 +85,7 @@ const translations: DefineLocaleMessage = {
     used_credits: "engin raddkreditar notuð | {n} raddkreditur notaður | {n} raddkreditar notaðir",
     aria_label: {
       add: "Bæta við einu atkvæði",
-      substract: "Draga frá einu atkvæði",
+      subtract: "Draga frá einu atkvæði",
     },
   },
   it: {
@@ -94,7 +94,7 @@ const translations: DefineLocaleMessage = {
       "nessun credito voce utilizzato | {n} credito voce utilizzato | {n} crediti voce utilizzati",
     aria_label: {
       add: "Aggiungi un voto",
-      substract: "Rimuovi un voto",
+      subtract: "Rimuovi un voto",
     },
   },
   nl: {
@@ -103,7 +103,7 @@ const translations: DefineLocaleMessage = {
       "geen stemkredieten gebruikt | {n} stemkrediet gebruikt | {n} stemkredieten gebruikt",
     aria_label: {
       add: "Voeg één stem toe",
-      substract: "Verwijder één stem",
+      subtract: "Verwijder één stem",
     },
   },
   ja: {
@@ -111,7 +111,7 @@ const translations: DefineLocaleMessage = {
     used_credits: "音声クレジット未使用 | {n} 音声クレジット使用済み | {n} 音声クレジット使用済み",
     aria_label: {
       add: "1票追加する",
-      substract: "1票減らす",
+      subtract: "1票減らす",
     },
   },
   ko: {
@@ -119,7 +119,7 @@ const translations: DefineLocaleMessage = {
     used_credits: "사용된 음성 크레딧 없음 | {n} 음성 크레딧 사용됨 | {n} 음성 크레딧 사용됨",
     aria_label: {
       add: "한 표 추가",
-      substract: "한 표 빼기",
+      subtract: "한 표 빼기",
     },
   },
   zh: {
@@ -127,7 +127,7 @@ const translations: DefineLocaleMessage = {
     used_credits: "未使用语音积分 | {n} 语音积分已使用 | {n} 语音积分已使用",
     aria_label: {
       add: "添加一票",
-      substract: "减少一票",
+      subtract: "减少一票",
     },
   },
   pl: {
@@ -136,7 +136,7 @@ const translations: DefineLocaleMessage = {
       "brak użytych kredytów głosowych | {n} kredyt głosowy użyty | {n} kredytów głosowych użytych",
     aria_label: {
       add: "Dodaj jeden głos",
-      substract: "Odejmij jeden głos",
+      subtract: "Odejmij jeden głos",
     },
   },
   pt: {
@@ -145,7 +145,7 @@ const translations: DefineLocaleMessage = {
       "sem créditos de voz usados | {n} crédito de voz usado | {n} créditos de voz usados",
     aria_label: {
       add: "Adicionar um voto",
-      substract: "Subtrair um voto",
+      subtract: "Subtrair um voto",
     },
   },
   ro: {
@@ -154,7 +154,7 @@ const translations: DefineLocaleMessage = {
       "fără credite vocale utilizate | {n} credit vocal utilizat | {n} credite vocale utilizate",
     aria_label: {
       add: "Adăugați un vot",
-      substract: "Scădeți un vot",
+      subtract: "Scădeți un vot",
     },
   },
   ru: {
@@ -163,7 +163,7 @@ const translations: DefineLocaleMessage = {
       "голосовые кредиты не использованы | {n} голосовой кредит использован | {n} голосовых кредитов использовано",
     aria_label: {
       add: "Добавить один голос",
-      substract: "Убрать один голос",
+      subtract: "Убрать один голос",
     },
   },
   sv: {
@@ -171,7 +171,7 @@ const translations: DefineLocaleMessage = {
     used_credits: "inga röstpoäng använda | {n} röstpoäng använd | {n} röstpoäng använda",
     aria_label: {
       add: "Lägg till en röst",
-      substract: "Ta bort en röst",
+      subtract: "Ta bort en röst",
     },
   },
 };

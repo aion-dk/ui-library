@@ -50,7 +50,7 @@ const add = () => {
   emits("updateCrosses", value.value);
 };
 
-const substract = () => {
+const subtract = () => {
   value.value = value.value - 1;
   emits("updateCrosses", value.value);
 };
@@ -81,11 +81,11 @@ watch(
 <template>
   <div class="hstack gap-1 z-1" data-test="option-counter">
     <button
-      class="AVOptionCounter--base AVOptionCounter--btn AVOptionCounter--substract"
-      :aria-label="t('js.components.AVOptionCounter.aria_label.substract')"
+      class="AVOptionCounter--base AVOptionCounter--btn AVOptionCounter--subtract"
+      :aria-label="t('js.components.AVOptionCounter.aria_label.subtract')"
       :disabled="disabled || value === 0"
-      data-test="option-counter-substract"
-      @click="substract()"
+      data-test="option-counter-subtract"
+      @click="subtract()"
     >
       <AVIcon icon="minus" />
     </button>
