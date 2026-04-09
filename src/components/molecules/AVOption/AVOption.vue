@@ -183,8 +183,8 @@ const optionPartialResults = computed(() => {
 
 const getCrossesWidth = computed(() => {
   if (votesAllowedPerOption.value > 5 || !crosses.value) return 0;
-  if (props.contest.mode === "gallery") return -crosses.value?.clientWidth;
-  return crosses.value?.clientWidth;
+  if (props.contest.mode === "gallery") return -crosses.value.clientWidth;
+  return crosses.value.clientWidth;
 });
 
 const hasSecondaryElements = computed(
@@ -412,9 +412,7 @@ watch(
           :class="{
             'AVOption--highlight': highlighted,
             'h-100': contest.mode === 'gallery',
-            'cursor-pointer':
-              option.selectable &&
-              !(disabled || observerMode || contest.multipleVotingInterface === 'counter'),
+            'cursor-pointer': option.selectable && !(disabled || observerMode || counterInterface),
             'bg-transparent': contest.markingType.quadraticVoting,
           }"
           :style="coloredEdgeStyle"
@@ -424,7 +422,7 @@ watch(
         >
           <!-- CREDIT USAGE ON BACKGROUND -->
           <div
-            class="h-100 position-absolute"
+            class="h-100 position-absolute pointer-events-none"
             :class="{
               'bg-ballot': !invalid,
               'bg-theme-danger': invalid,
