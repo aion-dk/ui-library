@@ -233,7 +233,7 @@ watch(
 
 <template>
   <div
-    class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-2"
+    class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-2 flex-wrap"
   >
     <h3 class="h4 m-0" aria-live="polite" data-test="split-helper-contest-title">
       {{

@@ -75,7 +75,7 @@ watch(
 </script>
 
 <template>
-  <div class="hstack gap-1" data-test="option-counter">
+  <div class="hstack gap-1 z-1" data-test="option-counter">
     <button
       class="AVOptionCounter--base AVOptionCounter--btn AVOptionCounter--substract"
       :aria-label="t('js.components.AVOptionCounter.aria_label.substract')"

@@ -253,7 +253,7 @@ const usageOnBackground = computed(() => {
   const totalCredits = props.contest.markingType.quadraticVotingVoiceCredits || 0;
   const usedCredits = props.voiceCredits.credits.get(props.option.reference) || 0;
   const percentage = (100 / totalCredits) * usedCredits;
-  return `width: ${percentage}%`;
+  return `width: ${percentage > 100 ? "100" : percentage}%`;
 });
 
 const bsBorderColor = computed(() =>
@@ -422,7 +422,7 @@ watch(
         >
           <!-- CREDIT USAGE ON BACKGROUND -->
           <div
-            class="h-100 position-absolute z-n1"
+            class="h-100 position-absolute"
             :class="{
               'bg-ballot': !invalid,
               'bg-theme-danger': invalid,
