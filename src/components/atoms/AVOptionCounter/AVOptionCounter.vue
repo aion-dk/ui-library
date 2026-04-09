@@ -55,6 +55,11 @@ const subtract = () => {
   emits("updateCrosses", value.value);
 };
 
+watch(
+  () => props.amount,
+  () => (value.value = props.amount),
+);
+
 /**
  * This is necesary in order to support both provided i18n and local i18n.
  * The used locale will be taken from the provided i18n as long as there is one
