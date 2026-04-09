@@ -2,6 +2,7 @@
 import AVSpinner from "@/components/atoms/AVSpinner/AVSpinner.messages";
 import AVOptionSelect from "@/components/atoms/AVOptionSelect/AVOptionSelect.messages";
 import AVOptionCheckbox from "@/components/atoms/AVOptionCheckbox/AVOptionCheckbox.messages";
+import AVOptionCounter from "@/components/atoms/AVOptionCounter/AVOptionCounter.messages";
 import AVOptionLiveResults from "@/components/atoms/AVOptionLiveResults/AVOptionLiveResults.messages";
 import AVAnimatedMenuButton from "@/components/atoms/AVAnimatedMenuButton/AVAnimatedMenuButton.messages";
 import AVFileInput from "@/components/atoms/AVFileInput/AVFileInput.messages";
@@ -44,6 +45,7 @@ const components: DefineLocaleMessage = {
   AVSpinner,
   AVOptionSelect,
   AVOptionCheckbox,
+  AVOptionCounter,
   AVOptionLiveResults,
   AVAnimatedMenuButton,
   AVFileInput,

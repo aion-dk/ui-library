@@ -6,6 +6,7 @@ export { default as AVCollapser } from "@/components/atoms/AVCollapser";
 export { default as AVLinkVisualizer } from "@/components/atoms/AVLinkVisualizer";
 export { default as AVOptionSelect } from "@/components/atoms/AVOptionSelect";
 export { default as AVOptionCheckbox } from "@/components/atoms/AVOptionCheckbox";
+export { default as AVOptionCounter } from "@/components/atoms/AVOptionCounter";
 export { default as AVTooltip } from "@/components/atoms/AVTooltip";
 export { default as AVOptionLiveResults } from "@/components/atoms/AVOptionLiveResults";
 export { default as AVProgressBar } from "@/components/atoms/AVProgressBar";

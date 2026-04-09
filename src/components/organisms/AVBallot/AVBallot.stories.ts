@@ -154,6 +154,15 @@ export const MoreThan5VotesPerOption = {
   },
 };
 
+export const MultivoteWithCounterInterface = {
+  render: Template,
+
+  args: {
+    contest: getContest(["multiple_votes_lg", "counter"]),
+    selectionPile: getSelectionPile(["multivote"]),
+  },
+};
+
 export const WithChildren = {
   render: Template,
 
@@ -206,6 +215,15 @@ export const GalleryModeWithParentsAndBlank = {
 
   args: {
     contest: getContest(["gallery_parents"]),
+    selectionPile: getSelectionPile([]),
+  },
+};
+
+export const QuadraticVoting = {
+  render: Template,
+
+  args: {
+    contest: getContest(["multiple_votes_lg", "counter", "quadratic_voting"]),
     selectionPile: getSelectionPile([]),
   },
 };

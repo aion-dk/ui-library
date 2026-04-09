@@ -128,3 +128,23 @@ export const OverviewSuccess = {
     weight: 10,
   },
 };
+
+export const MultiVotingWithCounterInterface = {
+  render: Template,
+
+  args: {
+    contest: getContest(["blank", "multiple_votes_lg", "counter", "many_options"]),
+    contestSelection: getContestSelection([]),
+    weight: 1,
+  },
+};
+
+export const QuadraticVoting = {
+  render: Template,
+
+  args: {
+    contest: getContest(["multiple_votes_lg", "huge", "quadratic_voting"]),
+    contestSelection: getContestSelection([]),
+    weight: 1,
+  },
+};

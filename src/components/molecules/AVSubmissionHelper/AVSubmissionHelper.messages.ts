@@ -8,10 +8,10 @@ const translations: DefineLocaleMessage = {
       "حدد من بين {min_marks} و {max_marks} خياري. أو حدد خيارًا واحدًا (1) حصريًا.",
     select_single: "حدد خيارًا واحدًا (1).",
     selected: "المحدد: <b>{selected}</b>",
-    your_vote_weight: "قدره ترجيح صوتك {weight}",
     exceeded_list_limit:
       "لقد تجاوز اختيارك الحد الأقصى لعدد الخيارات التي يمكن أن تكون في قائمة {list_name}. يرجى تحديد الحد الأقصى لعدد {max_list_marks} من الخيارات في هذه القائمة",
     go_to_bottom: "انتقل إلى الأسفل",
+    remaining_credits: "الاعتمادات الصوتية المتبقية:",
     errors: {
       too_many: "تم تحديد عدد كبير جدًا من الخيارات",
       blank: "فارغ حصري ولا يمكن دمجه مع خيارات أخرى.",
@@ -21,6 +21,8 @@ const translations: DefineLocaleMessage = {
       write_in_empty: "لا يمكن أن تكون القيمة المدخلة فارغة.",
       exclusive: "لا يمكن الجمع بين الخيارات الحصرية وخيارات أخرى.",
       cross_party_voting: "اختيارك تضمن أكثر من قائمة. الرجاء الاختيار فقط ضمن قائمة واحدة",
+      too_many_credits:
+        "اختيارك للأصوات يتجاوز عدد الاعتمادات الصوتية المتاحة للتوزيع. يرجى تعديل اختيارك.",
     },
   },
   ca: {
@@ -30,8 +32,8 @@ const translations: DefineLocaleMessage = {
       "Selecciona entre {min_marks} i {max_marks} opcions. O selecciona una (1) opció exclusiva.",
     select_single: "Selecciona 1 (una) opció.",
     selected: "Seleccionades: <b>{selected}</b>",
-    your_vote_weight: "El seu vot té un pes de {weight}",
     go_to_bottom: "Anar al fons",
+    remaining_credits: "Crèdits de veu restants:",
     errors: {
       too_many: "S'han seleccionat massa opcions.",
       blank: "El vot en blanc és exclusiu i no es pot combinar amb altres opcions.",
@@ -47,6 +49,8 @@ const translations: DefineLocaleMessage = {
         "La teva selecció està per sota de la quantitat mínima d'opcions que s'han poden triar a la lllista \"{list_name}\". Selecciona un mínim de ({min_list_marks}) opcions d'aquaquesta lllista.",
       exceeded_list_limit:
         "La teva selecció ha superat la quantitat màxima d'opcions que es poden triar a la lllista {list_name}. Selecciona un màxim de ({max_list_marks}) opcions d'aquaquesta lllista.",
+      too_many_credits:
+        "La teva selecció de vots supera la quantitat de crèdits de veu disponibles per distribuir. Si us plau, ajusta la teva selecció.",
     },
   },
   cy: {
@@ -56,8 +60,8 @@ const translations: DefineLocaleMessage = {
       "Dewiswch rhwng {min_marks} a {max_marks}. Neu dewiswch un (1) opsiwn unigol.",
     select_single: "Dewiswch un (1) opsiwn.",
     selected: "Dewiswyd: <b>{selected}</b>",
-    your_vote_weight: "Mae gan eich pleidlais bwysoliad o {weight}",
     go_to_bottom: "Ewch i'r gwaelod",
+    remaining_credits: "Credydau llais sy'n weddill:",
     errors: {
       too_many: "Gormod o opsiynau wedi'u dewis.",
       blank: "Mae gwag yn ddewis unigol ac ni ellir ei gyfuno ag opsiynau eraill.",
@@ -73,6 +77,8 @@ const translations: DefineLocaleMessage = {
         "Mae eich dewisiad yn is na'r lleiafswm o opsiynau y gellir eu dewis yn y rhestr \"{list_name}\". Dewiswch leiafswm o ({ min_list_marks}) opsiynau o'r rhestr hon.",
       exceeded_list_limit:
         "Mae eich dewis yn fwy na’r uchafswm o opsiynau a all fod ar y rhestr {list_name}. Dewiswch uchafswm o ({max_list_marks}) o opsiynau o'r rhestr hon.",
+      too_many_credits:
+        "Mae eich dewis o bleidleisiau yn fwy na'r nifer o gredydau llais sydd ar gael i'w dosbarthu. Addasu eich dewisiad os gwelwch yn dda.",
     },
   },
   da: {
@@ -82,8 +88,8 @@ const translations: DefineLocaleMessage = {
       "Sæt kryds ved {min_marks} til {max_marks} valgmuligheder. Eller vælg en (1) eksklusiv valgmulighed.",
     select_single: "Sæt ét (1) kryds.",
     selected: "Krydser: <b>{selected}</b>",
-    your_vote_weight: "Du har en stemmevægt på {weight}",
     go_to_bottom: "Gå til bunden",
+    remaining_credits: "Resterende stemmekreditter:",
     errors: {
       too_many: "Du har sat for mange krydser.",
       blank: "Blank stemme kan ikke kombineres med andre valgmuligheder.",
@@ -97,6 +103,8 @@ const translations: DefineLocaleMessage = {
         "Dit valg overskred det maksimale antal muligheder, der kan være på listen {list_name}. Vælg maks. {max_list_marks} muligheder på denne liste",
       cross_party_voting:
         "Dine valg omfattede mere end én liste. Vælg venligst kun inden for en enkelt liste.",
+      too_many_credits:
+        "Dit valg af stemmer overstiger antallet af tilgængelige stemmekreditter til fordeling. Juster venligst dit valg.",
     },
   },
   de: {
@@ -106,8 +114,8 @@ const translations: DefineLocaleMessage = {
       "Sie können {min_marks} bis {max_marks} Stimmen vergeben. Oder wählen Sie eine (1) exklusive Option.",
     select_single: "Vergeben Sie eine Stimme.",
     selected: "Gewählt: <b>{selected}</b>",
-    your_vote_weight: "Ihre Stimme hat ein Gewicht von {weight}",
     go_to_bottom: "Nach unten gehen",
+    remaining_credits: "Verbleibende Stimmguthaben:",
     errors: {
       too_many: "Zu viele Optionen gewählt.",
       blank: "Blank ist exklusiv und kann nicht mit anderen Optionen kombiniert werden.",
@@ -123,6 +131,8 @@ const translations: DefineLocaleMessage = {
         "Ihre Auswahl hat die maximale Anzahl an Optionen überschritten, die in der Liste {list_name} enthalten sein können. Bitte wählen Sie für diese Liste maximal {max_list_marks} Optionen aus",
       cross_party_voting:
         "Ihre Auswahl umfasste mehr als eine Liste. Bitte wählen Sie nur innerhalb einer einzigen Liste aus.",
+      too_many_credits:
+        "Ihre Stimmauswahl überschreitet die Anzahl der verfügbaren Stimmguthaben zur Verteilung. Bitte passen Sie Ihre Auswahl an.",
     },
   },
   en: {
@@ -132,8 +142,8 @@ const translations: DefineLocaleMessage = {
       "Select between {min_marks} and {max_marks} options. Or select one (1) exclusive option.",
     select_single: "Select one (1) option.",
     selected: "Selected: <b>{selected}</b>",
-    your_vote_weight: "Your vote has a weight of {weight}",
     go_to_bottom: "Go to the bottom",
+    remaining_credits: "Remaining voice credits:",
     errors: {
       too_many: "Too many options selected.",
       blank: "Blank is exclusive and cannot be combined with other options.",
@@ -148,6 +158,8 @@ const translations: DefineLocaleMessage = {
       exclusive: "Exclusive options cannot be combined with other options.",
       cross_party_voting:
         "Your selection included more than one list. Please select only within a single list.",
+      too_many_credits:
+        "Your selection of votes exceeds the amount of voice credits available to distribute. Please adjust your selection.",
     },
   },
   es: {
@@ -157,8 +169,8 @@ const translations: DefineLocaleMessage = {
       "Seleccione entre {min_marks} y {max_marks} opciones. O seleccione una (1) opción exclusiva.",
     select_single: "Seleccione 1 (una) opción.",
     selected: "Seleccionadas: <b>{selected}</b>",
-    your_vote_weight: "Su voto tiene un peso de {weight}",
     go_to_bottom: "Ir al final de la boleta",
+    remaining_credits: "Créditos de voz restantes:",
     errors: {
       too_many: "Demasiadas opciones seleccionadas.",
       exceeded_list_limit:
@@ -173,6 +185,8 @@ const translations: DefineLocaleMessage = {
       exclusive: "Las opciones exclusivas no pueden ser combinadas con otras opciones.",
       cross_party_voting:
         "Su selección incluye más de un partido político. Porfavor seleccione dentro de un mismo partido.",
+      too_many_credits:
+        "Su selección de votos supera la cantidad de créditos de voz disponibles para distribuir. Por favor, ajuste su selección.",
     },
   },
   fi: {
@@ -182,8 +196,8 @@ const translations: DefineLocaleMessage = {
       "Valitse {min_marks} ja {max_marks} vaihtoehdon väliltä. Tai valitse yksi (1) eksklusiivinen vaihtoehto.",
     select_single: "Valitse yksi (1) vaihtoehto.",
     selected: "Valittu: <b>{selected}</b>",
-    your_vote_weight: "Äänesi painoarvo on {weight}",
     go_to_bottom: "Siirry pohjaan",
+    remaining_credits: "Jäljellä olevat äänipisteet:",
     errors: {
       exceeded_list_limit:
         "Valintasi ylitti luettelossa {list_name} olevien vaihtoehtojen enimmäismäärän. Valitse enintään {max_list_marks} vaihtoehtoa tälle luettelolle",
@@ -197,6 +211,8 @@ const translations: DefineLocaleMessage = {
       exclusive: "Virheellinen vaihtoehtojen yhdistelmä.",
       cross_party_voting:
         "Valintasi sisälsi useamman kuin yhden luettelon. Valitse vain yhdestä luettelosta.",
+      too_many_credits:
+        "Äänivalintasi ylittää jakamiseen käytettävissä olevien äänikrediittien määrän. Muuta valintaasi.",
     },
   },
   fr: {
@@ -206,8 +222,8 @@ const translations: DefineLocaleMessage = {
       "Sélectionnez entre les options {min_marks} et {max_marks}. Ou sélectionnez une (1) option exclusive.",
     select_single: "Sélectionnez une (1) option.",
     selected: "Sélection: <b>{selected}</b>",
-    your_vote_weight: "Votre vote a un poids de {weight}",
     go_to_bottom: "Aller au bas de la page",
+    remaining_credits: "Crédits de voix restants :",
     errors: {
       exceeded_list_limit:
         "Votre sélection a dépassé le nombre maximum d'options pouvant figurer sur la liste {list_name}. Veuillez sélectionner un maximum de {max_list_marks} options dans cette liste.",
@@ -222,6 +238,8 @@ const translations: DefineLocaleMessage = {
       exclusive: "Les options exclusives ne peuvent être combinées avec d'autres options.",
       cross_party_voting:
         "Votre sélection comprenait plusieurs listes. Veuillez sélectionner uniquement dans une seule liste.",
+      too_many_credits:
+        "Votre sélection de votes dépasse la quantité de crédits de voix disponibles à distribuer. Veuillez ajuster votre sélection.",
     },
   },
   is: {
@@ -231,8 +249,8 @@ const translations: DefineLocaleMessage = {
       "Veldu á milli {min_marks} og {max_marks} valkosta. Eða veldu einn (1) einkarétt.",
     select_single: "Veldu einn (1) valmöguleika.",
     selected: "Valið: <b>{selected}</b>",
-    your_vote_weight: "Vægi atkvæðis þíns er {weight}",
     go_to_bottom: "Fara til botns",
+    remaining_credits: "Eftirstandandi raddkreditar:",
     errors: {
       exceeded_list_limit:
         "Val þitt fór yfir hámarksfjölda valkosta sem geta verið á listanum {list_name}. Vinsamlegast veldu hámark {max_list_marks} valkosti á þessum lista",
@@ -247,6 +265,8 @@ const translations: DefineLocaleMessage = {
       exclusive: "Ekki er hægt að sameina einkavalkosti við aðra valkosti.",
       cross_party_voting:
         "Val þitt innihélt fleiri en einn lista. Vinsamlegast veldu aðeins innan eins lista.",
+      too_many_credits:
+        "Val þitt á atkvæðum fer yfir fjölda tiltækra raddkredita til úthlutunnar. Vinsamlegast breyttu vali þínu.",
     },
   },
   it: {
@@ -256,8 +276,8 @@ const translations: DefineLocaleMessage = {
       "Seleziona tra {min_marks} e {max_marks}. Oppure seleziona una (1) opzione esclusiva.",
     select_single: "Seleziona una (1) opzione.",
     selected: "Selezionato: <b>{selected}</b>",
-    your_vote_weight: "Il tuo voto ha un peso di {weight}",
     go_to_bottom: "Vai in fondo",
+    remaining_credits: "Crediti voce rimanenti:",
     errors: {
       too_many: "Troppe opzioni selezionate.",
       blank: "Il voto vuoto è esclusivo e non è cumulabile con altre opzioni.",
@@ -273,6 +293,8 @@ const translations: DefineLocaleMessage = {
       exclusive: "Le opzioni esclusive non possono essere combinate con altre opzioni.",
       below_list_limit:
         'La tua selezione è inferiore al numero minimo di opzioni che devono essere effettuate per la lista "{list_name}". Si prega di selezionare un minimo di ({min_list_marks}) opzioni da questa lista.',
+      too_many_credits:
+        "La tua selezione di voti supera la quantità di crediti voce disponibili da distribuire. Si prega di modificare la selezione.",
     },
   },
   nl: {
@@ -282,8 +304,8 @@ const translations: DefineLocaleMessage = {
       "Selecteer tussen {min_marks} en {max_marks} opties. Of selecteer één (1) exclusieve optie.",
     select_single: "Selecteer één (1) optie.",
     selected: "Geselecteerd: <b>{selected}</b>",
-    your_vote_weight: "Uw stem heeft een gewicht van {weight}",
     go_to_bottom: "Naar beneden",
+    remaining_credits: "Resterende stemkredieten:",
     errors: {
       exceeded_list_limit:
         "Je selectie heeft het maximale aantal opties overschreden dat op de lijst {list_name} kan staan. Selecteer maximaal {max_list_marks} opties per deze lijst",
@@ -297,6 +319,8 @@ const translations: DefineLocaleMessage = {
       exclusive: "Ongeldige combinatie van opties.",
       cross_party_voting:
         "Uw selectie omvatte meer dan één lijst. Selecteer alleen binnen één lijst.",
+      too_many_credits:
+        "Uw stemkeuze overschrijdt het aantal beschikbare stemkredieten om te verdelen. Pas uw selectie aan.",
     },
   },
   pl: {
@@ -306,8 +330,8 @@ const translations: DefineLocaleMessage = {
       "Wybierz między {min_marks} a {max_marks} opcjami. Lub wybierz jedną (1) wyłączną opcję.",
     select_single: "Wybierz jedną (1) opcję.",
     selected: "Wybrane: <b>{selected}</b>",
-    your_vote_weight: "Twój głos ma wagę {weight}",
     go_to_bottom: "Przejdź na dół",
+    remaining_credits: "Pozostałe kredyty głosowe:",
     errors: {
       exceeded_list_limit:
         "Twój wybór przekroczył maksymalną liczbę opcji, które mogą znajdować się na liście {list_name}. Wybierz maksymalnie {max_list_marks} opcji z tej listy",
@@ -322,6 +346,8 @@ const translations: DefineLocaleMessage = {
       exclusive: "Opcje wyłączne nie mogą być połączone z innymi opcjami.",
       cross_party_voting:
         "Twój wybór obejmował więcej niż jedną listę. Wybierz tylko z jednej listy.",
+      too_many_credits:
+        "Twój wybór głosów przekracza dostępną liczbę kredytów głosowych do rozdysponowania. Dostosuj swój wybór.",
     },
   },
   pt: {
@@ -331,8 +357,8 @@ const translations: DefineLocaleMessage = {
       "Seleccione entre {min_marks} e {max_marks}. Ou seleccione uma (1) opção exclusiva.",
     select_single: "Seleccione uma (1) opção.",
     selected: "Selecionada: <b>{selected}</b>",
-    your_vote_weight: "O seu voto tem um peso de {weight}",
     go_to_bottom: "Ir para o fundo",
+    remaining_credits: "Créditos de voz restantes:",
     errors: {
       too_many: "Demasiadas opções seleccionadas.",
       blank: "O voto em branco é exclusivo e não pode ser combinado com outras opções.",
@@ -347,6 +373,8 @@ const translations: DefineLocaleMessage = {
         "A sua seleção incluiu mais do que uma lista. Por favor, seleccione apenas dentro de uma única lista.",
       exceeded_list_limit:
         "A sua seleção excedeu o número máximo de opções que podem constar da lista {list_name}. Por favor, seleccione um máximo de ({max_list_marks}) opções desta lista.",
+      too_many_credits:
+        "A sua seleção de votos excede a quantidade de créditos de voz disponíveis para distribuir. Por favor, ajuste a sua seleção.",
     },
   },
   ro: {
@@ -356,8 +384,8 @@ const translations: DefineLocaleMessage = {
       "Selectați între {min_marks} și {max_marks} opțiuni. Sau selectați o (1) opțiune exclusivă.",
     select_single: "Selectați una (1) opțiune.",
     selected: "Selectat: <b>{selected}</b>",
-    your_vote_weight: "Votul dvs. are o greutate de {weight}",
     go_to_bottom: "Mergeți la partea de jos",
+    remaining_credits: "Credite vocale rămase:",
     errors: {
       exceeded_list_limit:
         "Selecția dvs. a depășit numărul maxim de opțiuni care pot fi în lista {list_name}. Selectați maximum {max_list_marks} opțiuni din această listă",
@@ -373,6 +401,8 @@ const translations: DefineLocaleMessage = {
       exclusive: "Opțiunile exclusiv nu pot fi combinate cu alte opțiuni.",
       cross_party_voting:
         "Selecția dvs. a inclus mai mult de o listă. Vă rugăm să selectați doar dintr-o singură listă.",
+      too_many_credits:
+        "Selecția dvs. de voturi depășește numărul de credite vocale disponibile pentru distribuire. Vă rugăm să ajustați selecția.",
     },
   },
   ru: {
@@ -382,8 +412,8 @@ const translations: DefineLocaleMessage = {
       "Выберите между вариантами {min_marks} и {max_marks}. Или выберите один (1) эксклюзивный вариант.",
     select_single: "Выберите один (1) вариант.",
     selected: "Выбрано: <b>{selected}</b>",
-    your_vote_weight: "Ваш голос имеет вес {weight}",
     go_to_bottom: "Перейдите в нижнюю часть",
+    remaining_credits: "Оставшиеся голосовые кредиты:",
     errors: {
       exceeded_list_limit:
         "Ваш выбор превысил максимальное количество вариантов, которые могут быть в списке {list_name}. Выберите максимальное количество параметров: {max_list_marks} в этом списке.",
@@ -398,6 +428,8 @@ const translations: DefineLocaleMessage = {
       exclusive: "Неверная комбинация опций.",
       cross_party_voting:
         "Ваш выбор включал более одного списка. Пожалуйста, выбирайте только в пределах одного списка.",
+      too_many_credits:
+        "Ваш выбор голосов превышает количество доступных голосовых кредитов для распределения. Пожалуйста, скорректируйте свой выбор.",
     },
   },
   sv: {
@@ -407,8 +439,8 @@ const translations: DefineLocaleMessage = {
       "Välj mellan {min_marks} och {max_marks} alternativ. Eller välj ett (1) exklusivt alternativ.",
     select_single: "Välj ett (1) alternativ.",
     selected: "Valda: <b>{selected}</b>",
-    your_vote_weight: "Din röst har en vikt på {weight}",
     go_to_bottom: "Gå till botten",
+    remaining_credits: "Återstående röstpoäng:",
     errors: {
       exceeded_list_limit:
         "Ditt val överskred det maximala antalet alternativ som kan finnas på listan {list_name}. Välj max {max_list_marks} alternativ per den här listan",
@@ -421,6 +453,8 @@ const translations: DefineLocaleMessage = {
       write_in_empty: "Inskrivningsvärdet kan inte vara tomt.",
       exclusive: "Ogiltig kombination av alternativ.",
       cross_party_voting: "Ditt urval inkluderade mer än en lista. Välj endast inom en enda lista.",
+      too_many_credits:
+        "Ditt röstval överstiger antalet tillgängliga röstpoäng att fördela. Justera ditt val.",
     },
   },
   ja: {
@@ -430,8 +464,8 @@ const translations: DefineLocaleMessage = {
       "Select between {min_marks} and {max_marks} options. Or select one (1) exclusive option.",
     select_single: "Select one (1) option.",
     selected: "Selected: <b>{selected}</b>",
-    your_vote_weight: "Your vote has a weight of {weight}",
     go_to_bottom: "Go to the bottom",
+    remaining_credits: "残りの投票クレジット：",
     errors: {
       too_many: "Too many options selected.",
       blank: "Blank is exclusive and cannot be combined with other options.",
@@ -446,6 +480,8 @@ const translations: DefineLocaleMessage = {
       exclusive: "Exclusive options cannot be combined with other options.",
       cross_party_voting:
         "Your selection included more than one list. Please select only within a single list.",
+      too_many_credits:
+        "投票の選択が配布可能な音声クレジット数を超えています。選択を調整してください。",
     },
   },
   ko: {
@@ -455,8 +491,8 @@ const translations: DefineLocaleMessage = {
       "Select between {min_marks} and {max_marks} options. Or select one (1) exclusive option.",
     select_single: "Select one (1) option.",
     selected: "Selected: <b>{selected}</b>",
-    your_vote_weight: "Your vote has a weight of {weight}",
     go_to_bottom: "Go to the bottom",
+    remaining_credits: "남은 투표 크레딧:",
     errors: {
       too_many: "Too many options selected.",
       blank: "Blank is exclusive and cannot be combined with other options.",
@@ -471,6 +507,8 @@ const translations: DefineLocaleMessage = {
       exclusive: "Exclusive options cannot be combined with other options.",
       cross_party_voting:
         "Your selection included more than one list. Please select only within a single list.",
+      too_many_credits:
+        "투표 선택이 배분 가능한 음성 크레딧 수를 초과합니다. 선택을 조정해 주세요.",
     },
   },
   zh: {
@@ -480,8 +518,8 @@ const translations: DefineLocaleMessage = {
       "Select between {min_marks} and {max_marks} options. Or select one (1) exclusive option.",
     select_single: "Select one (1) option.",
     selected: "Selected: <b>{selected}</b>",
-    your_vote_weight: "Your vote has a weight of {weight}",
     go_to_bottom: "Go to the bottom",
+    remaining_credits: "剩余投票积分：",
     errors: {
       too_many: "Too many options selected.",
       blank: "Blank is exclusive and cannot be combined with other options.",
@@ -496,6 +534,7 @@ const translations: DefineLocaleMessage = {
       exclusive: "Exclusive options cannot be combined with other options.",
       cross_party_voting:
         "Your selection included more than one list. Please select only within a single list.",
+      too_many_credits: "您的投票选择超过了可分配的语音积分数量。请调整您的选择。",
     },
   },
 };

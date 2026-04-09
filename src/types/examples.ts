@@ -38,7 +38,9 @@ type ContestArg =
   | "gallery_short"
   | "disallow_splitting"
   | "write_in"
-  | "belgian_rules";
+  | "belgian_rules"
+  | "quadratic_voting"
+  | "counter";
 
 type SelectionPileArg =
   | "single"

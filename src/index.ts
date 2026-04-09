@@ -49,6 +49,7 @@ import {
   AVLinkVisualizer,
   AVOptionSelect,
   AVOptionCheckbox,
+  AVOptionCounter,
   AVTooltip,
   AVOptionLiveResults,
   AVProgressBar,
@@ -102,6 +103,7 @@ export default {
     app.component("AVLinkVisualizer", AVLinkVisualizer);
     app.component("AVOptionSelect", AVOptionSelect);
     app.component("AVOptionCheckbox", AVOptionCheckbox);
+    app.component("AVOptionCounter", AVOptionCounter);
     app.component("AVTooltip", AVTooltip);
     app.component("AVOptionLiveResults", AVOptionLiveResults);
     app.component("AVProgressBar", AVProgressBar);
@@ -155,6 +157,7 @@ export {
   AVLinkVisualizer,
   AVOptionSelect,
   AVOptionCheckbox,
+  AVOptionCounter,
   AVTooltip,
   AVOptionLiveResults,
   AVProgressBar,

@@ -17,6 +17,7 @@ import {
   AVLinkVisualizer,
   AVOptionSelect,
   AVOptionCheckbox,
+  AVOptionCounter,
   AVTooltip,
   AVOptionLiveResults,
   AVSummaryOption,
@@ -43,6 +44,7 @@ setup((app) => {
   app.component("AVLinkVisualizer", AVLinkVisualizer);
   app.component("AVOptionSelect", AVOptionSelect);
   app.component("AVOptionCheckbox", AVOptionCheckbox);
+  app.component("AVOptionCounter", AVOptionCounter);
   app.component("AVTooltip", AVTooltip);
   app.component("AVOptionLiveResults", AVOptionLiveResults);
   app.component("AVSummaryOption", AVSummaryOption);

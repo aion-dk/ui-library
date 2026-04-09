@@ -14,6 +14,7 @@ import type {
   ImageOption,
   IterableObject,
   AVBallotGalleryOption,
+  VoiceCredits,
 } from "@/types";
 import SelectionPileValidator from "@assemblyvoting/js-client/dist/lib/validators/selectionPileValidator";
 import BelgiumBallotValidator from "@assemblyvoting/js-client/dist/lib/validators/belgiumBallotValidator";
@@ -120,6 +121,35 @@ const contestHasExclusiveOptions = computed(() => {
 });
 
 const reactiveContest = computed(() => props.contest);
+
+const totalVoiceCredits = computed(
+  () => props.contest.markingType.quadraticVotingVoiceCredits || 0,
+);
+
+const voiceCredits = computed<VoiceCredits>(() => {
+  const counts = new Map<string, number>();
+  let usedCredits: number = 0;
+
+  for (const selection of selections.value) {
+    counts.set(selection.reference, (counts.get(selection.reference) ?? 0) + 1);
+  }
+
+  const credits = new Map<string, number>();
+  for (const [reference, count] of counts.entries()) {
+    let optionCredits = 0;
+    for (let n = 1; n <= count; n++) {
+      optionCredits += n * n;
+    }
+    credits.set(reference, optionCredits);
+    usedCredits += optionCredits;
+  }
+
+  return {
+    credits,
+    total: totalVoiceCredits.value,
+    remaining: totalVoiceCredits.value - usedCredits,
+  };
+});
 
 watch(reactiveContest, (present, previous) => {
   if (previous && present && present.reference !== previous.reference) {
@@ -302,6 +332,7 @@ watch(
           :observerMode="observerMode"
           :partial-results="partialResults"
           :image-option="imageOption"
+          :voice-credits="voiceCredits"
           @checked="toggleOption"
           @view-candidate="viewCandidate"
         />
@@ -328,6 +359,7 @@ watch(
       :max-marks="contest.markingType.maxMarks"
       :has-exclusive-options="contestHasExclusiveOptions"
       :display-scroll-to-bottom="contest.displayScrollToBottomBtn"
+      :voice-credits="contest.markingType.quadraticVoting ? voiceCredits : null"
       class="mt-3"
       data-test="ballot-submission-helper"
     />

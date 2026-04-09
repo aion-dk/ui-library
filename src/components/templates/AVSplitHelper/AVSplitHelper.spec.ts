@@ -20,6 +20,7 @@ import AVSummaryOption from "@/components/molecules/AVSummaryOption";
 import AVBallot from "@/components/organisms/AVBallot";
 import AVPileSummary from "@/components/organisms/AVPileSummary";
 import AVOptionLiveResults from "@/components/atoms/AVOptionLiveResults";
+import AVOptionCounter from "@/components/atoms/AVOptionCounter";
 
 describe("AVSplitHelper", () => {
   const wrapper = mount(AVSplitHelper, {
@@ -46,6 +47,7 @@ describe("AVSplitHelper", () => {
         AVSearchBallot,
         AVTooltip,
         AVOptionLiveResults,
+        AVOptionCounter,
       },
       provide: {
         i18n: localI18n,
@@ -65,7 +67,7 @@ describe("AVSplitHelper", () => {
     expect(wrapper.find("[data-test=split-helper-contest-title]").text()).to.contain(
       "Example ballot",
     );
-    expect(wrapper.find("[data-test=submission-helper-weight]").text()).to.contain(
+    expect(wrapper.find("[data-test=split-helper-contest-weight]").text()).to.contain(
       "Your vote has a weight of 1",
     );
     expect(wrapper.findAll("[data-test=option]").length).to.eq(3);
@@ -485,7 +487,7 @@ describe("AVSplitHelper", () => {
     expect(wrapper.find("[data-test=ballot-submission-helper]").text()).to.contain(
       "Sæt ét (1) kryds",
     );
-    expect(wrapper.find("[data-test=submission-helper-weight]").text()).to.contain(
+    expect(wrapper.find("[data-test=split-helper-contest-weight]").text()).to.contain(
       "Du har en stemmevægt på 10",
     );
     expect(wrapper.find("[data-test=split-helper-confirm]").text()).to.contain("Bekræft valg");
