@@ -25,6 +25,9 @@ describe("AVSummaryOption", () => {
         AVOptionCheckbox: {
           template: "<span />",
         },
+        AVOptionCounter: {
+          template: "<span />",
+        },
         AVIcon: {
           template: `<span data-test="write-in-icon" />`,
         },
