@@ -27,8 +27,12 @@ import type {
 import { switchLocale } from "@/i18n";
 
 const { eventBus } = useEventsBus();
+
 const highlighted = ref(false);
+
 const el = ref<null | HTMLDivElement>(null);
+
+const elHeight = ref(0);
 
 const props = defineProps({
   option: {
@@ -242,6 +246,8 @@ const writeInText = ref<string>("");
 
 const mutationObserver = ref<MutationObserver | null>(null);
 
+const resizeObserver = ref<ResizeObserver | null>(null);
+
 const mutationObserverTarget = document.getElementsByTagName("html")[0];
 
 const openChildrenCandidate = (contestReference: string, optionReference: string) => {
@@ -255,6 +261,8 @@ const usageOnBackground = computed(() => {
   const percentage = (100 / totalCredits) * usedCredits;
   return `width: ${percentage > 100 ? "100" : percentage}%`;
 });
+
+const backgroundHeight = computed(() => `height: ${elHeight.value}px;`);
 
 const bsBorderColor = computed(() =>
   getComputedStyle(document.documentElement).getPropertyValue("--bs-border-color"),
@@ -339,6 +347,13 @@ onMounted(() => {
   });
   mutationObserver.value.observe(mutationObserverTarget, { attributes: true });
 
+  if (el.value) {
+    resizeObserver.value = new ResizeObserver(() => {
+      elHeight.value = el.value?.clientHeight ?? 0;
+    });
+    resizeObserver.value.observe(el.value);
+  }
+
   if (isWriteIn.value) {
     const writeInTextArea = document.querySelector(`#write_in_${props.option.reference}`);
     writeInTextArea?.addEventListener("keyup", () => {
@@ -353,7 +368,10 @@ onMounted(() => {
   }
 });
 
-onUnmounted(() => mutationObserver.value && mutationObserver.value.disconnect());
+onUnmounted(() => {
+  mutationObserver.value?.disconnect();
+  resizeObserver.value?.disconnect();
+});
 
 /**
  * This is necesary in order to support both provided i18n and local i18n.
@@ -406,6 +424,15 @@ watch(
       @accordion-open="emits('accordion-open')"
     >
       <template #toggle="{ collapsable }">
+        <!-- CREDIT USAGE ON BACKGROUND -->
+        <div
+          class="position-absolute pointer-events-none"
+          :class="{
+            'bg-ballot': !invalid,
+            'bg-theme-danger': invalid,
+          }"
+          :style="`${usageOnBackground}; ${backgroundHeight}; opacity: 0.1;`"
+        ></div>
         <section
           ref="el"
           class="AVOption card"
@@ -420,15 +447,6 @@ watch(
           data-test="option-section"
           @click="toggleFromOption(false)"
         >
-          <!-- CREDIT USAGE ON BACKGROUND -->
-          <div
-            class="h-100 position-absolute pointer-events-none"
-            :class="{
-              'bg-ballot': !invalid,
-              'bg-theme-danger': invalid,
-            }"
-            :style="`${usageOnBackground}; opacity: 0.1;`"
-          ></div>
           <!-- PARENT BADGE -->
           <div
             v-if="contest.mode === 'gallery' && parentTitle"

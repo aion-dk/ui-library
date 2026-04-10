@@ -71,6 +71,7 @@ const useFooter = computed(
     props.option?.crosses > 1 &&
     props.multipleVotesAllowed &&
     !props.counterInterface &&
+    !props.isQuadratic &&
     !props.blank,
 );
 
