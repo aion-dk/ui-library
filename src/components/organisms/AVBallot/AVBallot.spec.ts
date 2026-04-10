@@ -10,6 +10,7 @@ import AVSearchBallot from "@/components/molecules/AVSearchBallot";
 import AVOption from "@/components/molecules/AVOption";
 import AVBlankOption from "@/components/molecules/AVBlankOption";
 import AVOptionLiveResults from "@/components/atoms/AVOptionLiveResults";
+import AVOptionCounter from "@/components/atoms/AVOptionCounter";
 
 describe("AVBallot", () => {
   const wrapper = mount(AVBallot, {
@@ -27,6 +28,7 @@ describe("AVBallot", () => {
         AVBlankOption,
         AVSearchBallot,
         AVOptionLiveResults,
+        AVOptionCounter,
       },
       provide: {
         i18n: localI18n,
@@ -323,6 +325,40 @@ describe("AVBallot", () => {
     expect(
       wrapper.findAll("[data-test=option]")[2].get("[data-test=checkbox]").attributes().disabled,
     ).to.contain("true");
+  });
+
+  it("emits view-candidate from option children", async () => {
+    await wrapper.setProps({
+      contest: getContest([]),
+      selectionPile: getSelectionPile([]),
+      disabled: false,
+    });
+
+    const previousEmits = wrapper.emitted("view-candidate")?.length || 0;
+
+    wrapper.findComponent(AVOption).vm.$emit("view-candidate", "exampleContest", "exampleOption1");
+
+    const emittedEvents = wrapper.emitted("view-candidate");
+
+    expect(emittedEvents).to.have.length(previousEmits + 1);
+    expect(emittedEvents?.[previousEmits]).to.deep.eq(["exampleContest", "exampleOption1"]);
+  });
+
+  it("calculates voice credits for quadratic voting", async () => {
+    await wrapper.setProps({
+      contest: getContest(["quadratic_voting"]),
+      selectionPile: getSelectionPile(["multivote"]),
+      disabled: false,
+    });
+
+    const optionWrappers = wrapper.findAllComponents(AVOption);
+    const firstOptionVoiceCredits = optionWrappers[0].props("voiceCredits");
+    const secondOptionVoiceCredits = optionWrappers[1].props("voiceCredits");
+
+    expect(firstOptionVoiceCredits?.total).to.eq(100);
+    expect(firstOptionVoiceCredits?.remaining).to.eq(70);
+    expect(firstOptionVoiceCredits?.credits.get("exampleOption1")).to.eq(30);
+    expect(secondOptionVoiceCredits?.credits.get("exampleOption2")).to.be.undefined;
   });
 
   it("can switch language", async () => {

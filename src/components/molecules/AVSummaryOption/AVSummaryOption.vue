@@ -49,6 +49,14 @@ const props = defineProps({
     type: String,
     default: null,
   },
+  counterInterface: {
+    type: Boolean,
+    default: false,
+  },
+  isQuadratic: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const isRtl = ref<boolean>(false);
@@ -62,6 +70,8 @@ const useFooter = computed(
     props.option?.crosses &&
     props.option?.crosses > 1 &&
     props.multipleVotesAllowed &&
+    !props.counterInterface &&
+    !props.isQuadratic &&
     !props.blank,
 );
 
@@ -256,7 +266,14 @@ watch(
         </div>
       </div>
       <div v-if="!useFooter" class="align-self-start">
+        <AVOptionCounter
+          v-if="counterInterface || isQuadratic"
+          :amount="props.option?.crosses"
+          :disabled="true"
+          :is-quadratic="isQuadratic"
+        />
         <AVOptionCheckbox
+          v-else
           :checked="true"
           :rank="option?.rank"
           :disabled="true"

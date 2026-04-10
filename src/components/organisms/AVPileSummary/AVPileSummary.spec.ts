@@ -31,6 +31,9 @@ describe("AVPileSummary", () => {
         AVOptionCheckbox: {
           template: "<span />",
         },
+        AVOptionCounter: {
+          template: "<span />",
+        },
       },
     },
   });

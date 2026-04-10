@@ -2,6 +2,7 @@ import type { DefineLocaleMessage } from "@/types";
 
 const translations: DefineLocaleMessage = {
   ar: {
+    your_vote_weight: "قدره ترجيح صوتك {weight}",
     ballot: {
       back_button: "خلف",
       confirm_button: "تأكيد الاختيار",
@@ -20,6 +21,7 @@ const translations: DefineLocaleMessage = {
     },
   },
   ca: {
+    your_vote_weight: "El seu vot té un pes de {weight}",
     ballot: {
       back_button: "Tornar",
       confirm_button: "Confirmar selecció",
@@ -38,6 +40,7 @@ const translations: DefineLocaleMessage = {
     },
   },
   cy: {
+    your_vote_weight: "Mae gan eich pleidlais bwysoliad o {weight}",
     ballot: {
       back_button: "Yn ôl",
       confirm_button: "Cadarnhau Dewis",
@@ -56,6 +59,7 @@ const translations: DefineLocaleMessage = {
     },
   },
   da: {
+    your_vote_weight: "Du har en stemmevægt på {weight}",
     ballot: {
       back_button: "Tilbage",
       confirm_button: "Bekræft valg",
@@ -74,6 +78,7 @@ const translations: DefineLocaleMessage = {
     },
   },
   de: {
+    your_vote_weight: "Ihre Stimme hat ein Gewicht von {weight}",
     ballot: {
       back_button: "Zurück",
       confirm_button: "Auswahl bestätigen",
@@ -93,6 +98,7 @@ const translations: DefineLocaleMessage = {
     },
   },
   en: {
+    your_vote_weight: "Your vote has a weight of {weight}",
     ballot: {
       back_button: "Back",
       confirm_button: "Confirm Selection",
@@ -111,6 +117,7 @@ const translations: DefineLocaleMessage = {
     },
   },
   es: {
+    your_vote_weight: "Su voto tiene un peso de {weight}",
     ballot: {
       back_button: "Volver",
       confirm_button: "Confirmar Selección",
@@ -129,6 +136,7 @@ const translations: DefineLocaleMessage = {
     },
   },
   fi: {
+    your_vote_weight: "Äänesi painoarvo on {weight}",
     ballot: {
       back_button: "Takaisin",
       confirm_button: "Vahvista valinta",
@@ -147,6 +155,7 @@ const translations: DefineLocaleMessage = {
     },
   },
   fr: {
+    your_vote_weight: "Votre vote a un poids de {weight}",
     ballot: {
       back_button: "Retour",
       confirm_button: "Confirmer la sélection",
@@ -167,6 +176,7 @@ const translations: DefineLocaleMessage = {
     },
   },
   is: {
+    your_vote_weight: "Vægi atkvæðis þíns er {weight}",
     ballot: {
       back_button: "Til baka",
       confirm_button: "Staðfestu val",
@@ -185,6 +195,7 @@ const translations: DefineLocaleMessage = {
     },
   },
   it: {
+    your_vote_weight: "Il tuo voto ha un peso di {weight}",
     ballot: {
       back_button: "Indietro",
       confirm_button: "Conferma Selezione",
@@ -203,6 +214,7 @@ const translations: DefineLocaleMessage = {
     },
   },
   nl: {
+    your_vote_weight: "Uw stem heeft een gewicht van {weight}",
     ballot: {
       back_button: "Rug",
       confirm_button: "Selectie bevestigen",
@@ -221,6 +233,7 @@ const translations: DefineLocaleMessage = {
     },
   },
   pl: {
+    your_vote_weight: "Twój głos ma wagę {weight}",
     ballot: {
       back_button: "Wstecz",
       confirm_button: "Potwierdź wybór",
@@ -239,6 +252,7 @@ const translations: DefineLocaleMessage = {
     },
   },
   pt: {
+    your_vote_weight: "O seu voto tem um peso de {weight}",
     ballot: {
       back_button: "Voltar",
       confirm_button: "Confirmar seleção",
@@ -257,6 +271,7 @@ const translations: DefineLocaleMessage = {
     },
   },
   ro: {
+    your_vote_weight: "Votul dvs. are o greutate de {weight}",
     ballot: {
       back_button: "Înapoi",
       confirm_button: "Confirmare selecție",
@@ -275,6 +290,7 @@ const translations: DefineLocaleMessage = {
     },
   },
   ru: {
+    your_vote_weight: "Ваш голос имеет вес {weight}",
     ballot: {
       back_button: "Назад",
       confirm_button: "Подтвердить выбор",
@@ -293,6 +309,7 @@ const translations: DefineLocaleMessage = {
     },
   },
   sv: {
+    your_vote_weight: "Din röst har en vikt på {weight}",
     ballot: {
       back_button: "Tillbaka",
       confirm_button: "Bekräfta val",
@@ -311,6 +328,7 @@ const translations: DefineLocaleMessage = {
     },
   },
   ja: {
+    your_vote_weight: "Your vote has a weight of {weight}",
     ballot: {
       back_button: "戻る",
       confirm_button: "選択を確認",
@@ -329,6 +347,7 @@ const translations: DefineLocaleMessage = {
     },
   },
   ko: {
+    your_vote_weight: "Your vote has a weight of {weight}",
     ballot: {
       back_button: "뒤로",
       confirm_button: "선택 확인",
@@ -347,6 +366,7 @@ const translations: DefineLocaleMessage = {
     },
   },
   zh: {
+    your_vote_weight: "Your vote has a weight of {weight}",
     ballot: {
       back_button: "返回",
       confirm_button: "确认选择",

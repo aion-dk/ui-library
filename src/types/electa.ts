@@ -58,6 +58,12 @@ interface InstantRunoffRound {
 
 type Theme = "dark" | "light";
 
+interface VoiceCredits {
+  total: number;
+  remaining: number;
+  credits: Map<string, number>;
+}
+
 export type {
   PartialResults,
   Party,
@@ -68,4 +74,5 @@ export type {
   RankedResult,
   Theme,
   VoteCounts,
+  VoiceCredits,
 };

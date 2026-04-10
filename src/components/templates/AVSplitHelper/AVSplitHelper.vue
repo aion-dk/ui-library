@@ -232,16 +232,32 @@ watch(
 </script>
 
 <template>
-  <h3 class="h4 mt-0 mb-2" aria-live="polite" data-test="split-helper-contest-title">
-    {{
-      getMeaningfulLabel(
-        contest as unknown as IterableObject,
-        i18nLocale,
-        t("js.components.AVBallot.aria_labels.ballot"),
-      )
-    }}
-  </h3>
-  <div data-test="split-helper-contest-description" v-html="contest.description?.[i18nLocale]" />
+  <div
+    class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-2 flex-wrap"
+  >
+    <h3 class="h4 m-0" aria-live="polite" data-test="split-helper-contest-title">
+      {{
+        getMeaningfulLabel(
+          contest as unknown as IterableObject,
+          i18nLocale,
+          t("js.components.AVBallot.aria_labels.ballot"),
+        )
+      }}
+    </h3>
+    <!-- WEIGHT -->
+    <div
+      v-if="!contest.disregardVoterWeight"
+      class="text-gray-700 small"
+      data-test="split-helper-contest-weight"
+    >
+      {{ t("js.components.AVSplitHelper.your_vote_weight", { weight }) }}
+    </div>
+  </div>
+
+  <div
+    data-test="split-helper-contest-description"
+    v-html="contest.description?.[i18nLocale]"
+  ></div>
   <template v-if="userCanSplit">
     <AVSplitWizardHeader
       v-if="['ballot', 'assign', 'overview'].includes(activeState)"

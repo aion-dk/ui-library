@@ -113,16 +113,20 @@ describe("AVSubmissionHelper", () => {
     );
   });
 
-  it("can display weight", async () => {
-    expect(wrapper.findAll("[data-test=submission-helper-weight]").length).to.eq(0);
+  it("can display credits", async () => {
+    expect(wrapper.findAll("[data-test=submission-helper-quadratic]").length).to.eq(0);
 
     await wrapper.setProps({
-      weight: 14,
+      voiceCredits: {
+        total: 100,
+        remaining: 86,
+        credits: new Map(),
+      },
     });
 
-    expect(wrapper.findAll("[data-test=submission-helper-weight]").length).to.eq(1);
-    expect(wrapper.find("[data-test=submission-helper-weight]").text()).to.contain(
-      "Your vote has a weight of 14",
+    expect(wrapper.findAll("[data-test=submission-helper-quadratic]").length).to.eq(1);
+    expect(wrapper.find("[data-test=submission-helper-quadratic]").text()).to.contain(
+      "Remaining voice credits:86/100",
     );
   });
 
@@ -149,8 +153,8 @@ describe("AVSubmissionHelper", () => {
       "Selectați între 1 și 5 opțiuni",
     );
     expect(wrapper.find("[data-test=submission-helper-count]").text()).to.contain("Selectat: 3");
-    expect(wrapper.find("[data-test=submission-helper-weight]").text()).to.contain(
-      "Votul dvs. are o greutate de 14",
+    expect(wrapper.find("[data-test=submission-helper-quadratic]").text()).to.contain(
+      "Credite vocale rămase:86/100",
     );
     expect(wrapper.findAll("[data-test=submission-helper-error]")[0].text()).to.contain(
       "Golul este exclusiv și nu poate fi combinat cu alte opțiuni",

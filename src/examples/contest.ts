@@ -53,13 +53,15 @@ const getContestOptions = (args: ContestArg[]): OptionContent[] => {
 };
 
 const getVotesAllowedPerOption = (args: ContestArg[]) => {
-  if (args.includes("multiple_votes_lg")) return 10;
+  if (args.includes("quadratic_voting")) return 6;
+  else if (args.includes("multiple_votes_lg")) return 10;
   else if (args.includes("multiple_votes_sm")) return 5;
   else return 1;
 };
 
 const getMaxMarks = (args: ContestArg[]) => {
-  if (args.includes("many_options")) return 10;
+  if (args.includes("quadratic_voting")) return 100;
+  else if (args.includes("many_options")) return 10;
   else if (args.includes("multiple_votes_lg")) return 10;
   else if (args.includes("multiple_votes_sm")) return 5;
   else if (args.includes("multi") || args.includes("ranked")) return 3;
@@ -106,11 +108,15 @@ const getContest = (args: ContestArg[]): ContestContent => {
       maxMarks: getMaxMarks(args),
       voteVariation: args.includes("ranked") ? "ranked" : "normal",
       encoding: { codeSize: 1, maxSize: 1, cryptogramCount: 1 },
+      quadraticVoting: args.includes("quadratic_voting"),
+      quadraticVotingVoiceCredits: args.includes("quadratic_voting") ? 100 : undefined,
     },
     resultType: { name: "regular" },
     options: getContestOptions(args),
     displayScrollToBottomBtn: args.includes("huge"),
     customRulesets: args.includes("belgian_rules") ? ["belgian_ballot_rules"] : undefined,
+    multipleVotingInterface:
+      args.includes("quadratic_voting") || args.includes("counter") ? "counter" : "crosses",
   };
 };
 

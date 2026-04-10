@@ -38,6 +38,12 @@ const meta: Meta<typeof AVPileSummary> & {
     showOptionsDescription: {
       control: { type: "boolean" },
     },
+    counterInterface: {
+      control: { type: "boolean" },
+    },
+    isQuadratic: {
+      control: { type: "boolean" },
+    },
     locale: {
       control: { type: "select" },
       options: SUPPORTED_LOCALES,

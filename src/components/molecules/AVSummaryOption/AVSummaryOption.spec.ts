@@ -25,6 +25,9 @@ describe("AVSummaryOption", () => {
         AVOptionCheckbox: {
           template: "<span />",
         },
+        AVOptionCounter: {
+          template: `<span data-test="option-counter" />`,
+        },
         AVIcon: {
           template: `<span data-test="write-in-icon" />`,
         },
@@ -239,5 +242,88 @@ describe("AVSummaryOption", () => {
     expect(wrapper.find("[data-test=write-in-section]").text()).to.contain(
       "Here's something I wrote",
     );
+  });
+
+  it("can display counter interface", async () => {
+    await wrapper.setProps({
+      option: {
+        title: getOption([], 1).title,
+        handle: getOption([], 1).reference,
+        crosses: 1,
+        rank: undefined,
+        reference: getOption([], 1).reference,
+      },
+      blank: false,
+      parents: [],
+      multipleVotesAllowed: false,
+      isQuadratic: false,
+      counterInterface: false,
+    });
+
+    expect(wrapper.findAll("[data-test=summary-cross]").length).to.eq(1);
+    expect(wrapper.findAll("[data-test=option-counter]").length).to.eq(0);
+
+    await wrapper.setProps({ counterInterface: true });
+
+    expect(wrapper.findAll("[data-test=summary-cross]").length).to.eq(0);
+    expect(wrapper.findAll("[data-test=option-counter]").length).to.eq(1);
+  });
+
+  it("counter interface suppresses footer even with multiple votes", async () => {
+    await wrapper.setProps({
+      option: {
+        title: getOption([], 1).title,
+        handle: getOption([], 1).reference,
+        crosses: 5,
+        rank: undefined,
+        reference: getOption([], 1).reference,
+      },
+      multipleVotesAllowed: true,
+      counterInterface: true,
+    });
+
+    expect(wrapper.findAll("[data-test=summary-cross]").length).to.eq(0);
+    expect(wrapper.findAll("[data-test=option-counter]").length).to.eq(1);
+  });
+
+  it("can display quadratic", async () => {
+    await wrapper.setProps({
+      option: {
+        title: getOption([], 1).title,
+        handle: getOption([], 1).reference,
+        crosses: 1,
+        rank: undefined,
+        reference: getOption([], 1).reference,
+      },
+      blank: false,
+      multipleVotesAllowed: false,
+      counterInterface: false,
+      isQuadratic: false,
+    });
+
+    expect(wrapper.findAll("[data-test=summary-cross]").length).to.eq(1);
+    expect(wrapper.findAll("[data-test=option-counter]").length).to.eq(0);
+
+    await wrapper.setProps({ isQuadratic: true });
+
+    expect(wrapper.findAll("[data-test=summary-cross]").length).to.eq(0);
+    expect(wrapper.findAll("[data-test=option-counter]").length).to.eq(1);
+  });
+
+  it("quadratic suppresses footer even with multiple votes", async () => {
+    await wrapper.setProps({
+      option: {
+        title: getOption([], 1).title,
+        handle: getOption([], 1).reference,
+        crosses: 5,
+        rank: undefined,
+        reference: getOption([], 1).reference,
+      },
+      multipleVotesAllowed: true,
+      isQuadratic: true,
+    });
+
+    expect(wrapper.findAll("[data-test=summary-cross]").length).to.eq(0);
+    expect(wrapper.findAll("[data-test=option-counter]").length).to.eq(1);
   });
 });

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, inject, onMounted, watch } from "vue";
 import { switchLocale } from "@/i18n";
-import type { PropType, SupportedLocale, Error } from "@/types";
+import type { PropType, SupportedLocale, Error, VoiceCredits } from "@/types";
 
 const props = defineProps({
   minMarks: {
@@ -28,8 +28,8 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-  weight: {
-    type: Number as PropType<number | null>,
+  voiceCredits: {
+    type: Object as PropType<VoiceCredits>,
     default: null,
   },
   locale: {
@@ -42,11 +42,14 @@ const errorMessages = computed(() => {
   // Hint to i18n-tasks that these translations should be present:
   // t("submission_helper.errors.too_many")
   // t("submission_helper.errors.blank")
-  // t("submission_helper.errors.cross_party_voting")
   // t("submission_helper.errors.write_in_required")
   // t("submission_helper.errors.write_in_too_long")
-  // t("submission_helper.errors.exclusive")
+  // t("submission_helper.errors.write_in_not_supported")
+  // t("submission_helper.errors.write_in_empty")
   // t("submission_helper.errors.exceeded_list_limit")
+  // t("submission_helper.errors.exclusive")
+  // t("submission_helper.errors.cross_party_voting")
+  // t("submission_helper.errors.too_many_credits")
   return props.errors.map((e) => {
     if (e.keys) {
       Object.keys(e.keys).forEach((key) => {
@@ -112,16 +115,19 @@ watch(
       }"
       data-test="submission-helper"
     >
-      <!-- WEIGHT -->
+      <!-- QUADRATIC VOTING DATA -->
       <div
-        v-if="weight"
-        class="AVSubmissionHelper--weight"
+        v-if="voiceCredits"
+        class="AVSubmissionHelper--quadratic"
         :class="{
           'text-white': !errors.length,
         }"
-        data-test="submission-helper-weight"
+        data-test="submission-helper-quadratic"
       >
-        {{ t("js.components.AVSubmissionHelper.your_vote_weight", { weight }) }}
+        <span>{{ t("js.components.AVSubmissionHelper.remaining_credits") }}</span>
+        <strong>{{ voiceCredits.remaining }}</strong>
+        <span>/</span>
+        <strong>{{ voiceCredits.total }}</strong>
       </div>
 
       <!-- ERRORS -->

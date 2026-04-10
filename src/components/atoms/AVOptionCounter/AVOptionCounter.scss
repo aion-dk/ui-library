@@ -1,0 +1,59 @@
+.AVOptionCounter--base {
+  height: 1.875rem;
+  width: 1.875rem;
+  border-width: 0.125rem;
+  border-style: solid;
+  border-color: var(--bs-gray-600);
+  display: grid;
+  place-content: center;
+  font-family: Arial, monospace;
+  font-weight: bolder;
+  font-size: 1.3rem;
+  line-height: 1.625rem;
+  user-select: none;
+  font-variant-numeric: tabular-nums;
+  color: var(--bs-ballot);
+
+  &.AVOptionCounter--checked {
+    background-color: var(--bs-ballot);
+    border-color: var(--bs-ballot);
+    color: white;
+  }
+
+  &.AVOptionCounter--error {
+    background-color: var(--av-theme-danger-background);
+    color: white;
+  }
+}
+
+.AVOptionCounter--btn {
+  font-size: 1rem;
+  cursor: pointer;
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+}
+
+.AVOptionCounter--add {
+  color: white;
+  border-color: var(--bs-ballot);
+  background-color: var(--bs-ballot);
+
+  &:disabled {
+    background-color: var(--bs-gray-500);
+    border-color: var(--bs-gray-500);
+  }
+}
+
+.AVOptionCounter--subtract {
+  border-color: var(--bs-gray-600);
+  background-color: white;
+  color: var(--bs-gray-600);
+
+  &:disabled {
+    background-color: var(--bs-gray-100);
+    border-color: var(--bs-gray-400);
+    color: var(--bs-gray-400);
+  }
+}

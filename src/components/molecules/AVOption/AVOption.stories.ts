@@ -279,7 +279,7 @@ export const LessThan5VotesPerOption = {
   render: Template,
 
   args: {
-    option: getOption(["selectable"], 1),
+    option: getOption(["selectable", "description"], 1),
     selections: [],
     contest: getContest(["multiple_votes_sm"]),
     invalid: false,
@@ -290,9 +290,31 @@ export const MoreThan5VotesPerOption = {
   render: Template,
 
   args: {
-    option: getOption(["selectable"], 1),
+    option: getOption(["selectable", "description"], 1),
     selections: [],
     contest: getContest(["multiple_votes_lg"]),
+    invalid: false,
+  },
+};
+
+export const MultivoteWithCounterInterface = {
+  render: Template,
+
+  args: {
+    option: getOption(["selectable", "description"], 1),
+    selections: [],
+    contest: getContest(["multiple_votes_lg", "counter"]),
+    invalid: false,
+  },
+};
+
+export const QuadraticVoting = {
+  render: Template,
+
+  args: {
+    option: getOption(["selectable", "description"], 1),
+    selections: [],
+    contest: getContest(["multiple_votes_lg", "counter", "quadratic_voting"]),
     invalid: false,
   },
 };
