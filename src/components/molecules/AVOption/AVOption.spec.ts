@@ -2,7 +2,7 @@ import { describe, it, expect, vi } from "vitest";
 import { mount } from "@vue/test-utils";
 import localI18n from "@/i18n";
 import { getOption, getContest, getLiveResult } from "@/examples";
-import type { VitestEmitted } from "@/types";
+import type { VitestEmitted, VoiceCredits } from "@/types";
 
 import AVOption from "./AVOption.vue";
 import AVCollapser from "@/components/atoms/AVCollapser";
@@ -14,33 +14,61 @@ import AVTweenedCount from "@/components/atoms/AVTweenedCount";
 import AVOptionCounter from "@/components/atoms/AVOptionCounter";
 
 describe("AVOption", () => {
-  const wrapper = mount(AVOption, {
-    props: {
-      option: getOption(["selectable"], 1),
-      selections: [],
-      contest: getContest([]),
-      invalid: false,
-      locale: "en",
-    },
-    global: {
-      provide: {
-        i18n: localI18n,
+  const mountAVOption = (props = {}) =>
+    mount(AVOption, {
+      props: {
+        option: getOption(["selectable"], 1),
+        selections: [],
+        contest: getContest([]),
+        invalid: false,
+        locale: "en",
+        ...props,
       },
-      components: {
-        AVCollapser,
-        AVAnimatedTransition,
-        AVOptionCheckbox,
-        AVOptionSelect,
-        AVOptionLiveResults,
-        AVTweenedCount,
-        AVOptionCounter,
-      },
-      stubs: {
-        AVIcon: {
-          template: "<span />",
+      global: {
+        provide: {
+          i18n: localI18n,
+        },
+        components: {
+          AVCollapser,
+          AVAnimatedTransition,
+          AVOptionCheckbox,
+          AVOptionSelect,
+          AVOptionLiveResults,
+          AVTweenedCount,
+          AVOptionCounter,
+        },
+        stubs: {
+          AVIcon: {
+            template: "<span />",
+          },
+        },
+        directives: {
+          tooltip: () => {},
         },
       },
-    },
+    });
+
+  const wrapper = mountAVOption();
+
+  it("can show voice credits usage on quadratic voting", async () => {
+    const voiceCredits: VoiceCredits = {
+      total: 100,
+      remaining: 64,
+      credits: new Map([["exampleOption1", 36]]),
+    };
+
+    const voiceCreditsWrapper = mountAVOption({
+      contest: getContest(["quadratic_voting"]),
+      voiceCredits,
+    });
+
+    expect(voiceCreditsWrapper.find("[data-test=option-section]").classes()).to.contain(
+      "bg-transparent",
+    );
+    expect(voiceCreditsWrapper.findAll("[data-test=option-counter]").length).to.eq(1);
+    expect(
+      voiceCreditsWrapper.find(".position-absolute.pointer-events-none").attributes().style,
+    ).to.contain("width: 36%");
   });
 
   it("renders properly", async () => {
@@ -341,6 +369,31 @@ describe("AVOption", () => {
     expect((wrapper.emitted().checked as VitestEmitted)[4][0].amount).to.eq(7);
   });
 
+  it("can handle multivote using counter interface", async () => {
+    const counterWrapper = mountAVOption({
+      contest: getContest(["multiple_votes_sm", "counter"]),
+    });
+
+    expect(counterWrapper.findAll("[data-test=option-checkbox]").length).to.eq(0);
+    expect(counterWrapper.findAll("[data-test=option-counter]").length).to.eq(1);
+    expect(counterWrapper.emitted().checked).to.not.exist;
+
+    await counterWrapper.find("[data-test=option-section]").trigger("click");
+    expect(counterWrapper.emitted().checked).to.not.exist;
+
+    await counterWrapper.find("[data-test=option-counter-add]").trigger("click");
+    expect((counterWrapper.emitted().checked as VitestEmitted)[0][0].reference).to.eq(
+      "exampleOption1",
+    );
+    expect((counterWrapper.emitted().checked as VitestEmitted)[0][0].amount).to.eq(1);
+
+    await counterWrapper.find("[data-test=option-counter-add]").trigger("click");
+    expect((counterWrapper.emitted().checked as VitestEmitted)[1][0].amount).to.eq(2);
+
+    await counterWrapper.find("[data-test=option-counter-subtract]").trigger("click");
+    expect((counterWrapper.emitted().checked as VitestEmitted)[2][0].amount).to.eq(1);
+  });
+
   it("can support write-ins", async () => {
     expect(wrapper.findAll("[data-test=write-in-exampleOption1-input]").length).to.eq(0);
     expect(wrapper.findAll("[data-test=space-counter]").length).to.eq(0);
@@ -373,6 +426,38 @@ describe("AVOption", () => {
     await wrapper.setProps({
       option: getOption(["selectable"], 1),
     });
+  });
+
+  it("can initialize and validate prefilled write-ins", async () => {
+    const writeInWrapper = mountAVOption({
+      option: getOption(["selectable", "write_in"], 1),
+      selections: [{ reference: "exampleOption1", text: "Saved text" }],
+    });
+    const getLastCheckedEvent = () => {
+      const emittedEvents = (writeInWrapper.emitted().checked as VitestEmitted) ?? [];
+      return emittedEvents[emittedEvents.length - 1]?.[0];
+    };
+
+    await writeInWrapper.vm.$nextTick();
+
+    expect(
+      (
+        writeInWrapper.find("[data-test=write-in-exampleOption1-input]")
+          .element as HTMLTextAreaElement
+      ).value,
+    ).to.eq("Saved text");
+    expect(writeInWrapper.find("[data-test=space-counter]").text()).to.eq("10 / 20");
+
+    await writeInWrapper.find("[data-test=write-in-exampleOption1-input]").setValue("Invalid*");
+
+    expect(writeInWrapper.find("[data-test=write-in-exampleOption1-input]").classes()).to.contain(
+      "is-invalid",
+    );
+    expect(writeInWrapper.find("[data-test=space-counter]").classes()).to.contain(
+      "text-theme-danger",
+    );
+    expect(getLastCheckedEvent()?.text).to.eq("Invalid*");
+    expect(getLastCheckedEvent()?.onlyUpdate).to.be.true;
   });
 
   it("can have a candidacy attached", async () => {
