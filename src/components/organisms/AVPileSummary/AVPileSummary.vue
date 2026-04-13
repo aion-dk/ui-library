@@ -68,14 +68,6 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-  counterInterface: {
-    type: Boolean,
-    default: false,
-  },
-  isQuadratic: {
-    type: Boolean,
-    default: false,
-  },
 });
 
 const showAllOptions = ref(false);
@@ -221,8 +213,8 @@ watch(
         :image-option="imageOption"
         :gallery-mode="galleryMode"
         :write-in="option.writeIn"
-        :counter-interface="counterInterface"
-        :is-quadratic="isQuadratic"
+        :counter-interface="contest.multipleVotingInterface === 'counter'"
+        :is-quadratic="contest.markingType.quadraticVoting"
       />
       <AVSummaryOption
         v-if="blankSelected"
