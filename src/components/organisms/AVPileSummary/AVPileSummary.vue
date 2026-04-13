@@ -56,15 +56,7 @@ const props = defineProps({
     type: String as PropType<ImageOption>,
     default: "square",
   },
-  galleryMode: {
-    type: Boolean,
-    default: false,
-  },
   isPrefilled: {
-    type: Boolean,
-    default: false,
-  },
-  showOptionsDescription: {
     type: Boolean,
     default: false,
   },
@@ -119,7 +111,9 @@ const optionSummaries = computed(() => {
         title: optionContent.title,
         handle: selection.reference,
         image: optionContent.image,
-        description: props.showOptionsDescription ? optionContent.description : undefined,
+        description: props.contest.displayDescriptionOnSummary
+          ? optionContent.description
+          : undefined,
         accentColor: optionContent.accentColor as `#${string}`,
         crosses: 1,
         parent: optionContent.parentContent,
@@ -199,7 +193,13 @@ watch(
       </template>
     </header>
 
-    <div class="p-3 border" :class="galleryMode ? 'AVPileSummary--grid' : 'vstack gap-2'">
+    <div
+      class="p-3 border"
+      :class="{
+        'AVPileSummary--grid': contest.mode === 'gallery',
+        'vstack gap-2': contest.mode === 'list',
+      }"
+    >
       <AVSummaryOption
         v-for="(option, index) in optionSummaries"
         :key="index"
@@ -211,7 +211,7 @@ watch(
           option.parent ? getAllParents(option.parent, option.parent ? [option.parent] : []) : []
         "
         :image-option="imageOption"
-        :gallery-mode="galleryMode"
+        :gallery-mode="contest.mode === 'gallery'"
         :write-in="option.writeIn"
         :counter-interface="contest.multipleVotingInterface === 'counter'"
         :is-quadratic="contest.markingType.quadraticVoting"
