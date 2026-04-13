@@ -131,9 +131,7 @@ const voiceCredits = computed<VoiceCredits>(() => {
   const credits = new Map<string, number>();
   for (const [reference, count] of counts.entries()) {
     let optionCredits = 0;
-    for (let n = 1; n <= count; n++) {
-      optionCredits += n * n;
-    }
+    optionCredits += count * count;
     credits.set(reference, optionCredits);
     usedCredits += optionCredits;
   }

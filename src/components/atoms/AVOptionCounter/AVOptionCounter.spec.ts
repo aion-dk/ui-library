@@ -97,8 +97,8 @@ describe("AVOptionCounter", () => {
       },
     });
 
-    // amount=3: usedCredits = 1^2 + 2^2 + 3^2 = 14
-    expect(tooltipBindings[tooltipBindings.length - 1]).to.contain("14 voice credits used");
+    // amount=3: usedCredits = 3^2 = 9
+    expect(tooltipBindings[tooltipBindings.length - 1]).to.contain("9 voice credits used");
     expect(quadraticWrapper.find("[data-test=option-counter-votes]").classes()).to.include(
       "cursor-help",
     );
