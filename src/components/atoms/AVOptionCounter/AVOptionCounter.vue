@@ -36,14 +36,11 @@ const value = ref<number>(props.amount);
 
 const checked = computed(() => Boolean(value.value));
 
-const creditsUsed = computed(() => {
-  let usedCredits = 0;
-  for (let i = 1; i <= props.amount; i++) {
-    usedCredits += i * i;
-  }
-
-  return t("js.components.AVOptionCounter.used_credits", { n: usedCredits });
-});
+const creditsUsed = computed(() =>
+  t("js.components.AVOptionCounter.used_credits", {
+    n: value.value * value.value,
+  }),
+);
 
 const add = () => {
   value.value = value.value + 1;

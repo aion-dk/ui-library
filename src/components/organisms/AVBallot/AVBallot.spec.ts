@@ -356,8 +356,8 @@ describe("AVBallot", () => {
     const secondOptionVoiceCredits = optionWrappers[1].props("voiceCredits");
 
     expect(firstOptionVoiceCredits?.total).to.eq(100);
-    expect(firstOptionVoiceCredits?.remaining).to.eq(70);
-    expect(firstOptionVoiceCredits?.credits.get("exampleOption1")).to.eq(30);
+    expect(firstOptionVoiceCredits?.remaining).to.eq(84);
+    expect(firstOptionVoiceCredits?.credits.get("exampleOption1")).to.eq(16);
     expect(secondOptionVoiceCredits?.credits.get("exampleOption2")).to.be.undefined;
   });
 
