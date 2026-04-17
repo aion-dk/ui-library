@@ -47,10 +47,10 @@
     "@noble/hashes" "^1.8.0"
     sjcl-with-all "^1.0.8"
 
-"@assemblyvoting/js-client@^5.3.3-beta.1":
-  version "5.3.3-beta.1"
-  resolved "https://registry.yarnpkg.com/@assemblyvoting/js-client/-/js-client-5.3.3-beta.1.tgz#ffdc657ab6c1b4acb607d57bf12528c9f71add1b"
-  integrity sha512-3XFnPfXRz5ITB6NEUkJyOcr2afVGpF9dfgewzB7GB7qtt3hzwK5VCogqaMFgHQjTwtd8OZhSl55ddn6o59+sRA==
+"@assemblyvoting/js-client@^5.3.3":
+  version "5.3.3"
+  resolved "https://registry.yarnpkg.com/@assemblyvoting/js-client/-/js-client-5.3.3.tgz#6010769c505e72ad233498c20cb4e5eba418fc84"
+  integrity sha512-7Ehpllc0nWtKko42xIsU9qyBwUjRntmeBb49NPSVqX6H8tthZk0wQ95ar5XzVhhI3AzcP/ioPUAKbqVxcoE2nA==
   dependencies:
     "@assemblyvoting/av-crypto" "^1.1.1"
     axios "^1.13.6"
