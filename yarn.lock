@@ -47,10 +47,10 @@
     "@noble/hashes" "^1.8.0"
     sjcl-with-all "^1.0.8"
 
-"@assemblyvoting/js-client@^5.3.1":
-  version "5.3.1"
-  resolved "https://registry.yarnpkg.com/@assemblyvoting/js-client/-/js-client-5.3.1.tgz#18191fda36de19267fb2dd14a23ddd98bbf3e045"
-  integrity sha512-5Nnk2t8/L7ZeC3wnOZZWdwjaqYbMYmT640P0DM0L2H9/Smk/ddQZ1N540hp4JL3vjDhIFJo5ZYPDR+05ZzqnhQ==
+"@assemblyvoting/js-client@^5.3.3-beta.1":
+  version "5.3.3-beta.1"
+  resolved "https://registry.yarnpkg.com/@assemblyvoting/js-client/-/js-client-5.3.3-beta.1.tgz#ffdc657ab6c1b4acb607d57bf12528c9f71add1b"
+  integrity sha512-3XFnPfXRz5ITB6NEUkJyOcr2afVGpF9dfgewzB7GB7qtt3hzwK5VCogqaMFgHQjTwtd8OZhSl55ddn6o59+sRA==
   dependencies:
     "@assemblyvoting/av-crypto" "^1.1.1"
     axios "^1.13.6"
@@ -426,10 +426,10 @@
   dependencies:
     css-tree "^3.0.0"
 
-"@chromatic-com/storybook@^5.0.2":
-  version "5.0.2"
-  resolved "https://registry.yarnpkg.com/@chromatic-com/storybook/-/storybook-5.0.2.tgz#24464c0f0957f3f64db76b952a590f299b20b805"
-  integrity sha512-uLd5gyvcz8q83GI0rYWjml45ryO3ZJwZLretLEZvWFJ3UlFk5C5Km9cwRcKZgZp0F3zYwbb8nEe6PJdgA1eKxg==
+"@chromatic-com/storybook@^5.1.2":
+  version "5.1.2"
+  resolved "https://registry.yarnpkg.com/@chromatic-com/storybook/-/storybook-5.1.2.tgz#bd32f9e9152a14113bdc0737dbb2333077c8a71f"
+  integrity sha512-H/hgvwC3E+OtseP2OT2QYUJH2VfnzT6wM3pWOkaNV6g7QI+VUdWJbeJ3o2jFqvEPQNqzhQKWDOlvM4lu+7is6g==
   dependencies:
     "@neoconfetti/react" "^1.0.0"
     chromatic "^13.3.4"
@@ -1549,10 +1549,10 @@
   resolved "https://registry.npmjs.org/@standard-schema/spec/-/spec-1.1.0.tgz"
   integrity sha512-l2aFy5jALhniG5HgqrD6jXLi/rUWrKvqN/qJx6yoJsgKhblVd+iqqU4RCXavm/jPityDo5TCvKMnpjKnOriy0w==
 
-"@storybook/addon-a11y@^10.3.3":
-  version "10.3.3"
-  resolved "https://registry.yarnpkg.com/@storybook/addon-a11y/-/addon-a11y-10.3.3.tgz#8397d30c16b90c4b9b0de7e4c895c6fd950f6ebc"
-  integrity sha512-1yELCE8NXUJKcfS2k97pujtVw4z95PCwyoy2I6VAPiG/nRnJI8M6ned08YmCMEJhLBgGA1+GBh9HO4uk+xPcYA==
+"@storybook/addon-a11y@^10.3.5":
+  version "10.3.5"
+  resolved "https://registry.yarnpkg.com/@storybook/addon-a11y/-/addon-a11y-10.3.5.tgz#89ae0062da90067ad1122c05f2521188d9e330ec"
+  integrity sha512-5k6lpgfIeLxvNhE8v3wEzdiu73ONKjF4gmH1AHvfqYd8kIVzQJai0KCDxgvqNncXHQhIWkaf1fg6+9hKaYJyaw==
   dependencies:
     "@storybook/global" "^5.0.0"
     axe-core "^4.2.0"
@@ -1571,38 +1571,38 @@
     test-exclude "^6.0.0"
     vite-plugin-istanbul "^6.0.2"
 
-"@storybook/addon-docs@^10.3.3":
-  version "10.3.3"
-  resolved "https://registry.yarnpkg.com/@storybook/addon-docs/-/addon-docs-10.3.3.tgz#5eb2dc7d14a5af76f3ec50932336611727e56c76"
-  integrity sha512-trJQTpOtuOEuNv1Rn8X2Sopp5hSPpb0u0soEJ71BZAbxe4d2Y1d/1MYcxBdRKwncum6sCTsnxTpqQ/qvSJKlTQ==
+"@storybook/addon-docs@^10.3.5":
+  version "10.3.5"
+  resolved "https://registry.yarnpkg.com/@storybook/addon-docs/-/addon-docs-10.3.5.tgz#8385220e1c90c234c1edb95859148bd8367c9bf3"
+  integrity sha512-WuHbxia/o5TX4Rg/IFD0641K5qId/Nk0dxhmAUNoFs5L0+yfZUwh65XOBbzXqrkYmYmcVID4v7cgDRmzstQNkA==
   dependencies:
     "@mdx-js/react" "^3.0.0"
-    "@storybook/csf-plugin" "10.3.3"
+    "@storybook/csf-plugin" "10.3.5"
     "@storybook/icons" "^2.0.1"
-    "@storybook/react-dom-shim" "10.3.3"
+    "@storybook/react-dom-shim" "10.3.5"
     react "^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0"
     react-dom "^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0"
     ts-dedent "^2.0.0"
 
-"@storybook/addon-links@^10.3.3":
-  version "10.3.3"
-  resolved "https://registry.yarnpkg.com/@storybook/addon-links/-/addon-links-10.3.3.tgz#a081480570b41edca882c5d92dbb3fda4258eb45"
-  integrity sha512-tazBHlB+YbU62bde5DWsq0lnxZjcAsPB3YRUpN2hSMfAySsudRingyWrgu5KeOxXhJvKJj0ohjQvGcMx/wgQUA==
+"@storybook/addon-links@^10.3.5":
+  version "10.3.5"
+  resolved "https://registry.yarnpkg.com/@storybook/addon-links/-/addon-links-10.3.5.tgz#cd79b9282de52acf3e8a1aa33e4ceac8a974fc10"
+  integrity sha512-Xe2wCGZ+hpZ0cDqAIBHk+kPc8nODNbu585ghd5bLrlYJMDVXoNM/fIlkrLgjIDVbfpgeJLUEg7vldJrn+FyOLw==
   dependencies:
     "@storybook/global" "^5.0.0"
 
-"@storybook/builder-vite@10.3.3":
-  version "10.3.3"
-  resolved "https://registry.yarnpkg.com/@storybook/builder-vite/-/builder-vite-10.3.3.tgz#a4660efb8a5e9aae92a308d6ef98170333601407"
-  integrity sha512-awspKCTZvXyeV3KabL0id62mFbxR5u/5yyGQultwCiSb2/yVgBfip2MAqLyS850pvTiB6QFVM9deOyd2/G/bEA==
+"@storybook/builder-vite@10.3.5":
+  version "10.3.5"
+  resolved "https://registry.yarnpkg.com/@storybook/builder-vite/-/builder-vite-10.3.5.tgz#809640ef935742cf6298307b85e50f5a9bc5013f"
+  integrity sha512-i4KwCOKbhtlbQIbhm53+Kk7bMnxa0cwTn1pxmtA/x5wm1Qu7FrrBQV0V0DNjkUqzcSKo1CjspASJV/HlY0zYlw==
   dependencies:
-    "@storybook/csf-plugin" "10.3.3"
+    "@storybook/csf-plugin" "10.3.5"
     ts-dedent "^2.0.0"
 
-"@storybook/csf-plugin@10.3.3":
-  version "10.3.3"
-  resolved "https://registry.yarnpkg.com/@storybook/csf-plugin/-/csf-plugin-10.3.3.tgz#41fa24b9d9ae3011ed68b5abfde1895e2caa08b4"
-  integrity sha512-Utlh7zubm+4iOzBBfzLW4F4vD99UBtl2Do4edlzK2F7krQIcFvR2ontjAE8S1FQVLZAC3WHalCOS+Ch8zf3knA==
+"@storybook/csf-plugin@10.3.5":
+  version "10.3.5"
+  resolved "https://registry.yarnpkg.com/@storybook/csf-plugin/-/csf-plugin-10.3.5.tgz#f28adbbd389bf03193022e5a7684aa971a6241a0"
+  integrity sha512-qlEzNKxOjq86pvrbuMwiGD/bylnsXk1dg7ve0j77YFjEEchqtl7qTlrXvFdNaLA89GhW6D/EV6eOCu/eobPDgw==
   dependencies:
     unplugin "^2.3.5"
 
@@ -1616,10 +1616,10 @@
   resolved "https://registry.npmjs.org/@storybook/icons/-/icons-2.0.1.tgz"
   integrity sha512-/smVjw88yK3CKsiuR71vNgWQ9+NuY2L+e8X7IMrFjexjm6ZR8ULrV2DRkTA61aV6ryefslzHEGDInGpnNeIocg==
 
-"@storybook/react-dom-shim@10.3.3":
-  version "10.3.3"
-  resolved "https://registry.yarnpkg.com/@storybook/react-dom-shim/-/react-dom-shim-10.3.3.tgz#adbdd136acf9083442fda44077449d0067b0ded9"
-  integrity sha512-lkhuh4G3UTreU9M3Iz5Dt32c6U+l/4XuvqLtbe1sDHENZH6aPj7y0b5FwnfHyvuTvYRhtbo29xZrF5Bp9kCC0w==
+"@storybook/react-dom-shim@10.3.5":
+  version "10.3.5"
+  resolved "https://registry.yarnpkg.com/@storybook/react-dom-shim/-/react-dom-shim-10.3.5.tgz#8f9a9238a96813c1b5343ecd3bfbd3cf61815977"
+  integrity sha512-Gw8R7XZm0zSUH0XAuxlQJhmizsLzyD6x00KOlP6l7oW9eQHXGfxg3seNDG3WrSAcW07iP1/P422kuiriQlOv7g==
 
 "@storybook/test-runner@^0.24.3":
   version "0.24.3"
@@ -1648,22 +1648,22 @@
     rimraf "^3.0.2"
     uuid "^8.3.2"
 
-"@storybook/vue3-vite@^10.3.3":
-  version "10.3.3"
-  resolved "https://registry.yarnpkg.com/@storybook/vue3-vite/-/vue3-vite-10.3.3.tgz#59ab8c31ed18c9587ed2aa1d684fdf91f0c3679b"
-  integrity sha512-jVZIHutDBpYMx62CFDSPHUe5Y+uuabP5VBItrZbEPf8sqx4mcDXc6wsV0SYcYh7fw0q+5YVfYiGASkoVk3i/VA==
+"@storybook/vue3-vite@^10.3.5":
+  version "10.3.5"
+  resolved "https://registry.yarnpkg.com/@storybook/vue3-vite/-/vue3-vite-10.3.5.tgz#05867a1ad6d9cdd490dc76d377d7eeb9e260ce45"
+  integrity sha512-9a0FDU9lsGDxnTQoDna9fmRx6+tUvnimb61bAcfZeigGyx127qT9rylvSC3WVKTBiQ/o4Dg76v44HIv+ew/DsQ==
   dependencies:
-    "@storybook/builder-vite" "10.3.3"
-    "@storybook/vue3" "10.3.3"
+    "@storybook/builder-vite" "10.3.5"
+    "@storybook/vue3" "10.3.5"
     magic-string "^0.30.0"
     typescript "^5.9.3"
     vue-component-meta "^2.0.0"
     vue-docgen-api "^4.75.1"
 
-"@storybook/vue3@10.3.3":
-  version "10.3.3"
-  resolved "https://registry.yarnpkg.com/@storybook/vue3/-/vue3-10.3.3.tgz#62061e1363dc1cd4cfd9f8dbb687deea42862eba"
-  integrity sha512-crlsH9mjwKg9i/5mVAf/PEqjkHa2FeNoXqfAGzQVelElLZ71R18dEBGGkqGpaHU2ziVlvYKSBWALAU5zT9UZQQ==
+"@storybook/vue3@10.3.5":
+  version "10.3.5"
+  resolved "https://registry.yarnpkg.com/@storybook/vue3/-/vue3-10.3.5.tgz#a71e76c74d2d76e65d16ebe65352d1a1d3eb292d"
+  integrity sha512-PxgnIlem+w0iCxf+YBMPm7T/v75ax1fzqkrVA3C1c/UQ8pckmJxx7Gfs+84GnPWA6Q4G1F2mJ2FsWWneivkQ1g==
   dependencies:
     "@storybook/global" "^5.0.0"
     type-fest "~2.19"
@@ -2554,6 +2554,11 @@
   version "0.9.0"
   resolved "https://registry.npmjs.org/@vue/tsconfig/-/tsconfig-0.9.0.tgz"
   integrity sha512-RP+v9Cpbsk1ZVXltCHHkYBr7+624x6gcijJXVjIcsYk7JXqvIpRtMwU2ARLvWDhmy9ffdFYxhsfJnPztADBohQ==
+
+"@webcontainer/env@^1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@webcontainer/env/-/env-1.1.1.tgz#23021b2bb24befeeef53dba8996d1886b7016515"
+  integrity sha512-6aN99yL695Hi9SuIk1oC88l9o0gmxL1nGWWQ/kNy81HigJ0FoaoTXpytCj6ItzgyCEwA9kF1wixsTuv5cjsgng==
 
 abbrev@^2.0.0:
   version "2.0.0"
@@ -3697,10 +3702,10 @@ eslint-plugin-prettier@^5.2.2:
     prettier-linter-helpers "^1.0.0"
     synckit "^0.9.1"
 
-eslint-plugin-storybook@^10.3.3:
-  version "10.3.3"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-storybook/-/eslint-plugin-storybook-10.3.3.tgz#0a6d177372de2fdb6069200caba07c16760df102"
-  integrity sha512-jo8wZvKaJlxxrNvf4hCsROJP3CdlpaLiYewAs5Ww+PJxCrLelIi5XVHWOAgBvvr3H9WDKvUw8xuvqPYqAlpkFg==
+eslint-plugin-storybook@^10.3.5:
+  version "10.3.5"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-storybook/-/eslint-plugin-storybook-10.3.5.tgz#3f54782d4dc5a01d8acbb299330cbc88fa145411"
+  integrity sha512-rEFkfU3ypF44GpB4tiJ9EFDItueoGvGi3+weLHZax2ON2MB7VIDsxdSUGvIU5tMURg+oWYlpzCyLm4TpDq2deA==
   dependencies:
     "@typescript-eslint/utils" "^8.48.0"
 
@@ -6573,10 +6578,10 @@ storybook-addon-rtl@^3.0.1:
   resolved "https://registry.npmjs.org/storybook-addon-rtl/-/storybook-addon-rtl-3.0.1.tgz"
   integrity sha512-RqnFv/xAUa1ME42xDzUuYvNouwnrlaXdXEwtyv1jEuWAISuUF8vrcfxSUmx7njS+S9IJ4jjvjBuz7x+wkNFs8g==
 
-storybook@^10.3.3:
-  version "10.3.3"
-  resolved "https://registry.yarnpkg.com/storybook/-/storybook-10.3.3.tgz#3e692a3264fdb423daf6e98afda758b14a72136b"
-  integrity sha512-tMoRAts9EVqf+mEMPLC6z1DPyHbcPe+CV1MhLN55IKsl0HxNjvVGK44rVPSePbltPE6vIsn4bdRj6CCUt8SJwQ==
+storybook@^10.3.5:
+  version "10.3.5"
+  resolved "https://registry.yarnpkg.com/storybook/-/storybook-10.3.5.tgz#77bc13217db7b3c2ba5a73c1f2d469bfc0675da1"
+  integrity sha512-uBSZu/GZa9aEIW3QMGvdQPMZWhGxSe4dyRWU8B3/Vd47Gy/XLC7tsBxRr13txmmPOEDHZR94uLuq0H50fvuqBw==
   dependencies:
     "@storybook/global" "^5.0.0"
     "@storybook/icons" "^2.0.1"
@@ -6584,6 +6589,7 @@ storybook@^10.3.3:
     "@testing-library/user-event" "^14.6.1"
     "@vitest/expect" "3.2.4"
     "@vitest/spy" "3.2.4"
+    "@webcontainer/env" "^1.1.1"
     esbuild "^0.18.0 || ^0.19.0 || ^0.20.0 || ^0.21.0 || ^0.22.0 || ^0.23.0 || ^0.24.0 || ^0.25.0 || ^0.26.0 || ^0.27.0"
     open "^10.2.0"
     recast "^0.23.5"
