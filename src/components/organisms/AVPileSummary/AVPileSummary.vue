@@ -135,6 +135,16 @@ const getWriteInOption = (reference: string) => {
   )?.text;
 };
 
+const orderedSummaryOptions = computed(() => {
+  if (props.contest.markingType.voteVariation === "ranked") return optionSummaries.value;
+
+  return [...optionSummaries.value].sort((a, b) => {
+    const indexA = selectableOptions.value.findIndex((o) => o.reference === a.reference);
+    const indexB = selectableOptions.value.findIndex((o) => o.reference === b.reference);
+    return indexA - indexB;
+  });
+});
+
 /**
  * This is necesary in order to support both provided i18n and local i18n.
  * The used locale will be taken from the provided i18n as long as there is one
@@ -201,7 +211,7 @@ watch(
       }"
     >
       <AVSummaryOption
-        v-for="(option, index) in optionSummaries"
+        v-for="(option, index) in orderedSummaryOptions"
         :key="index"
         :option="option"
         :multiple-votes-allowed="
