@@ -104,7 +104,7 @@ $custom-file-text: (
 );
 
 // Boostrap variable overrides
-$card-border-radius: 0;
+$card-border-radius: 0 !default;
 
 @import "../../node_modules/bootstrap/scss/variables";
 
