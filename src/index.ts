@@ -40,6 +40,21 @@ export type {
   CandidacyResource,
 } from "@/types";
 
+export type {
+  Alert as IAlert,
+  Button as IButton,
+  Carousel as ICarousel,
+  Collapse as ICollapse,
+  Dropdown as IDropdown,
+  Modal as IModal,
+  Offcanvas as IOffcanvas,
+  Popover as IPopover,
+  ScrollSpy as IScrollSpy,
+  Tab as ITab,
+  Toast as IToast,
+  Tooltip as ITooltip,
+} from "bootstrap";
+
 import {
   // ATOMS
   AVIcon,
