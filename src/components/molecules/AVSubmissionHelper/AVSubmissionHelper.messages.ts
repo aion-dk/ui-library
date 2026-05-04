@@ -7,7 +7,7 @@ const translations: DefineLocaleMessage = {
     select_multiple_with_exclusives:
       "حدد من بين {min_marks} و {max_marks} خياري. أو حدد خيارًا واحدًا (1) حصريًا.",
     select_single: "حدد خيارًا واحدًا (1).",
-    selected: "المحدد: <b>{selected}</b>",
+    selected: "المحدد: {selected}",
     exceeded_list_limit:
       "لقد تجاوز اختيارك الحد الأقصى لعدد الخيارات التي يمكن أن تكون في قائمة {list_name}. يرجى تحديد الحد الأقصى لعدد {max_list_marks} من الخيارات في هذه القائمة",
     go_to_bottom: "انتقل إلى الأسفل",
@@ -31,7 +31,7 @@ const translations: DefineLocaleMessage = {
     select_multiple_with_exclusives:
       "Selecciona entre {min_marks} i {max_marks} opcions. O selecciona una (1) opció exclusiva.",
     select_single: "Selecciona 1 (una) opció.",
-    selected: "Seleccionades: <b>{selected}</b>",
+    selected: "Seleccionades: {selected}",
     go_to_bottom: "Anar al fons",
     remaining_credits: "Crèdits de veu restants:",
     errors: {
@@ -59,7 +59,7 @@ const translations: DefineLocaleMessage = {
     select_multiple_with_exclusives:
       "Dewiswch rhwng {min_marks} a {max_marks}. Neu dewiswch un (1) opsiwn unigol.",
     select_single: "Dewiswch un (1) opsiwn.",
-    selected: "Dewiswyd: <b>{selected}</b>",
+    selected: "Dewiswyd: {selected}",
     go_to_bottom: "Ewch i'r gwaelod",
     remaining_credits: "Credydau llais sy'n weddill:",
     errors: {
@@ -87,7 +87,7 @@ const translations: DefineLocaleMessage = {
     select_multiple_with_exclusives:
       "Sæt kryds ved {min_marks} til {max_marks} valgmuligheder. Eller vælg en (1) eksklusiv valgmulighed.",
     select_single: "Sæt ét (1) kryds.",
-    selected: "Krydser: <b>{selected}</b>",
+    selected: "Krydser: {selected}",
     go_to_bottom: "Gå til bunden",
     remaining_credits: "Resterende stemmekreditter:",
     errors: {
@@ -113,7 +113,7 @@ const translations: DefineLocaleMessage = {
     select_multiple_with_exclusives:
       "Sie können {min_marks} bis {max_marks} Stimmen vergeben. Oder wählen Sie eine (1) exklusive Option.",
     select_single: "Vergeben Sie eine Stimme.",
-    selected: "Gewählt: <b>{selected}</b>",
+    selected: "Gewählt: {selected}",
     go_to_bottom: "Nach unten gehen",
     remaining_credits: "Verbleibende Stimmguthaben:",
     errors: {
@@ -141,7 +141,7 @@ const translations: DefineLocaleMessage = {
     select_multiple_with_exclusives:
       "Select between {min_marks} and {max_marks} options. Or select one (1) exclusive option.",
     select_single: "Select one (1) option.",
-    selected: "Selected: <b>{selected}</b>",
+    selected: "Selected: {selected}",
     go_to_bottom: "Go to the bottom",
     remaining_credits: "Remaining voice credits:",
     errors: {
@@ -168,7 +168,7 @@ const translations: DefineLocaleMessage = {
     select_multiple_with_exclusives:
       "Seleccione entre {min_marks} y {max_marks} opciones. O seleccione una (1) opción exclusiva.",
     select_single: "Seleccione 1 (una) opción.",
-    selected: "Seleccionadas: <b>{selected}</b>",
+    selected: "Seleccionadas: {selected}",
     go_to_bottom: "Ir al final de la boleta",
     remaining_credits: "Créditos de voz restantes:",
     errors: {
@@ -195,7 +195,7 @@ const translations: DefineLocaleMessage = {
     select_multiple_with_exclusives:
       "Valitse {min_marks} ja {max_marks} vaihtoehdon väliltä. Tai valitse yksi (1) eksklusiivinen vaihtoehto.",
     select_single: "Valitse yksi (1) vaihtoehto.",
-    selected: "Valittu: <b>{selected}</b>",
+    selected: "Valittu: {selected}",
     go_to_bottom: "Siirry pohjaan",
     remaining_credits: "Jäljellä olevat äänipisteet:",
     errors: {
@@ -221,7 +221,7 @@ const translations: DefineLocaleMessage = {
     select_multiple_with_exclusives:
       "Sélectionnez entre les options {min_marks} et {max_marks}. Ou sélectionnez une (1) option exclusive.",
     select_single: "Sélectionnez une (1) option.",
-    selected: "Sélection: <b>{selected}</b>",
+    selected: "Sélection: {selected}",
     go_to_bottom: "Aller au bas de la page",
     remaining_credits: "Crédits de voix restants :",
     errors: {
@@ -248,7 +248,7 @@ const translations: DefineLocaleMessage = {
     select_multiple_with_exclusives:
       "Veldu á milli {min_marks} og {max_marks} valkosta. Eða veldu einn (1) einkarétt.",
     select_single: "Veldu einn (1) valmöguleika.",
-    selected: "Valið: <b>{selected}</b>",
+    selected: "Valið: {selected}",
     go_to_bottom: "Fara til botns",
     remaining_credits: "Eftirstandandi raddkreditar:",
     errors: {
@@ -275,7 +275,7 @@ const translations: DefineLocaleMessage = {
     select_multiple_with_exclusives:
       "Seleziona tra {min_marks} e {max_marks}. Oppure seleziona una (1) opzione esclusiva.",
     select_single: "Seleziona una (1) opzione.",
-    selected: "Selezionato: <b>{selected}</b>",
+    selected: "Selezionato: {selected}",
     go_to_bottom: "Vai in fondo",
     remaining_credits: "Crediti voce rimanenti:",
     errors: {
@@ -303,7 +303,7 @@ const translations: DefineLocaleMessage = {
     select_multiple_with_exclusives:
       "Selecteer tussen {min_marks} en {max_marks} opties. Of selecteer één (1) exclusieve optie.",
     select_single: "Selecteer één (1) optie.",
-    selected: "Geselecteerd: <b>{selected}</b>",
+    selected: "Geselecteerd: {selected}",
     go_to_bottom: "Naar beneden",
     remaining_credits: "Resterende stemkredieten:",
     errors: {
@@ -329,7 +329,7 @@ const translations: DefineLocaleMessage = {
     select_multiple_with_exclusives:
       "Wybierz między {min_marks} a {max_marks} opcjami. Lub wybierz jedną (1) wyłączną opcję.",
     select_single: "Wybierz jedną (1) opcję.",
-    selected: "Wybrane: <b>{selected}</b>",
+    selected: "Wybrane: {selected}",
     go_to_bottom: "Przejdź na dół",
     remaining_credits: "Pozostałe kredyty głosowe:",
     errors: {
@@ -356,7 +356,7 @@ const translations: DefineLocaleMessage = {
     select_multiple_with_exclusives:
       "Seleccione entre {min_marks} e {max_marks}. Ou seleccione uma (1) opção exclusiva.",
     select_single: "Seleccione uma (1) opção.",
-    selected: "Selecionada: <b>{selected}</b>",
+    selected: "Selecionada: {selected}",
     go_to_bottom: "Ir para o fundo",
     remaining_credits: "Créditos de voz restantes:",
     errors: {
@@ -383,7 +383,7 @@ const translations: DefineLocaleMessage = {
     select_multiple_with_exclusives:
       "Selectați între {min_marks} și {max_marks} opțiuni. Sau selectați o (1) opțiune exclusivă.",
     select_single: "Selectați una (1) opțiune.",
-    selected: "Selectat: <b>{selected}</b>",
+    selected: "Selectat: {selected}",
     go_to_bottom: "Mergeți la partea de jos",
     remaining_credits: "Credite vocale rămase:",
     errors: {
@@ -411,7 +411,7 @@ const translations: DefineLocaleMessage = {
     select_multiple_with_exclusives:
       "Выберите между вариантами {min_marks} и {max_marks}. Или выберите один (1) эксклюзивный вариант.",
     select_single: "Выберите один (1) вариант.",
-    selected: "Выбрано: <b>{selected}</b>",
+    selected: "Выбрано: {selected}",
     go_to_bottom: "Перейдите в нижнюю часть",
     remaining_credits: "Оставшиеся голосовые кредиты:",
     errors: {
@@ -438,7 +438,7 @@ const translations: DefineLocaleMessage = {
     select_multiple_with_exclusives:
       "Välj mellan {min_marks} och {max_marks} alternativ. Eller välj ett (1) exklusivt alternativ.",
     select_single: "Välj ett (1) alternativ.",
-    selected: "Valda: <b>{selected}</b>",
+    selected: "Valda: {selected}",
     go_to_bottom: "Gå till botten",
     remaining_credits: "Återstående röstpoäng:",
     errors: {
@@ -463,7 +463,7 @@ const translations: DefineLocaleMessage = {
     select_multiple_with_exclusives:
       "Select between {min_marks} and {max_marks} options. Or select one (1) exclusive option.",
     select_single: "Select one (1) option.",
-    selected: "Selected: <b>{selected}</b>",
+    selected: "Selected: {selected}",
     go_to_bottom: "Go to the bottom",
     remaining_credits: "残りの投票クレジット：",
     errors: {
@@ -490,7 +490,7 @@ const translations: DefineLocaleMessage = {
     select_multiple_with_exclusives:
       "Select between {min_marks} and {max_marks} options. Or select one (1) exclusive option.",
     select_single: "Select one (1) option.",
-    selected: "Selected: <b>{selected}</b>",
+    selected: "Selected: {selected}",
     go_to_bottom: "Go to the bottom",
     remaining_credits: "남은 투표 크레딧:",
     errors: {
@@ -517,7 +517,7 @@ const translations: DefineLocaleMessage = {
     select_multiple_with_exclusives:
       "Select between {min_marks} and {max_marks} options. Or select one (1) exclusive option.",
     select_single: "Select one (1) option.",
-    selected: "Selected: <b>{selected}</b>",
+    selected: "Selected: {selected}",
     go_to_bottom: "Go to the bottom",
     remaining_credits: "剩余投票积分：",
     errors: {
