@@ -22,3 +22,11 @@
   text-transform: none;
   font-weight: 500;
 }
+
+.AVBlankOption--selected-background {
+  background-color: var(--bs-ballot);
+
+  .AVBlankOption--title {
+    color: white;
+  }
+}

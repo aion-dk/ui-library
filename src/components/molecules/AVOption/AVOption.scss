@@ -101,6 +101,26 @@
   box-shadow: unset;
 }
 
+.AVOption--selected-background {
+  background-color: var(--bs-ballot);
+  color: white;
+
+  .AVOption--title,
+  .AVOption--description {
+    color: white;
+  }
+
+  .btn-outline-ballot {
+    color: white;
+    border-color: white;
+
+    &:hover {
+      background-color: white;
+      color: var(--bs-ballot);
+    }
+  }
+}
+
 @keyframes grow-in-highlight {
   from {
     outline: var(--bs-gray-600) solid 0;

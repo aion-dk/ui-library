@@ -1,7 +1,13 @@
 <script setup lang="ts">
-import { computed, inject, onMounted, watch } from "vue";
-import { switchLocale } from "@/i18n";
+import { computed, inject, onMounted, watch, ref } from "vue";
+import localI18n, { switchLocale } from "@/i18n";
 import type { PropType, SupportedLocale, Error, VoiceCredits } from "@/types";
+
+const showErrorModal = ref(false);
+
+const dismissErrorModal = () => {
+  showErrorModal.value = false;
+};
 
 const props = defineProps({
   minMarks: {
@@ -35,6 +41,10 @@ const props = defineProps({
   locale: {
     type: String as PropType<SupportedLocale>,
     default: null,
+  },
+  displayErrorModal: {
+    type: Boolean,
+    default: false,
   },
 });
 
@@ -82,7 +92,7 @@ const i18n: any = inject("i18n");
 const { t } = i18n.global;
 const i18nLocale = computed(() => i18n.global.locale.value || i18n.global.locale);
 onMounted(() => {
-  if (props.locale) switchLocale(props.locale);
+  switchLocale(props.locale || i18nLocale.value);
 });
 watch(
   () => props.locale,
@@ -91,11 +101,24 @@ watch(
   },
   { deep: true },
 );
+watch(i18nLocale, (newLocale) => {
+  if (!props.locale) switchLocale(newLocale);
+});
+
+watch(
+  () => props.errors,
+  (newErrors) => {
+    if (newErrors.length > 0) {
+      showErrorModal.value = true;
+    }
+  },
+  { deep: true },
+);
 /* END */
 </script>
 
 <template>
-  <div class="sticky-bottom">
+  <div class="mt-2 sticky-bottom">
     <button
       v-if="displayScrollToBottom"
       type="button"
@@ -184,6 +207,40 @@ watch(
       </div>
     </div>
   </div>
+
+  <!-- ERROR MODAL -->
+  <div
+    v-if="displayErrorModal && showErrorModal && errors.length > 0"
+    class="modal fade show d-block"
+    tabindex="-1"
+    role="dialog"
+    data-test="error-modal"
+  >
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-body text-center p-4">
+          <div class="mb-3">
+            <AVIcon icon="triangle-exclamation" class="text-warning fs-1" />
+          </div>
+          <p class="mb-4">
+            {{ errorMessages[0] }}
+          </p>
+          <button
+            type="button"
+            class="btn btn-primary"
+            @click="dismissErrorModal"
+            data-test="dismiss-error-modal"
+          >
+            {{ localI18n.global.t("js.components.AVSubmissionHelper.error_modal_dismiss") }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    v-if="displayErrorModal && showErrorModal && errors.length > 0"
+    class="modal-backdrop fade show"
+  ></div>
 </template>
 
 <style scoped lang="scss" src="./AVSubmissionHelper.scss" />

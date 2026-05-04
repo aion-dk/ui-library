@@ -40,6 +40,10 @@ const props = defineProps({
     type: String as PropType<SupportedLocale>,
     default: null,
   },
+  selectionStyle: {
+    type: String as PropType<"checkbox" | "background">,
+    default: "checkbox",
+  },
 });
 
 const emits = defineEmits(["toggled"]);
@@ -96,7 +100,8 @@ watch(
       type="button"
       class="AVOptionCheckbox float-end p-0 m-0"
       :class="{
-        'AVOptionCheckbox--checked': checked,
+        'AVOptionCheckbox--checked': checked && selectionStyle !== 'background',
+        'AVOptionCheckbox--checked-white': checked && selectionStyle === 'background',
         'AVOptionCheckbox--disabled': disabled,
         'AVOptionCheckbox--error': (exclusiveError || invalid) && checked,
       }"
@@ -120,6 +125,7 @@ watch(
         :id="`option_${optionReference}_tick`"
         :rank="excluded ? null : rank"
         :checked="checked"
+        :selection-style="selectionStyle"
         data-test="select"
       />
     </button>

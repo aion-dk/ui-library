@@ -56,6 +56,18 @@ const props = defineProps({
     type: String as PropType<ImageOption>,
     default: "square",
   },
+  reverseOption: {
+    type: Boolean,
+    default: false,
+  },
+  selectionStyle: {
+    type: String as PropType<"checkbox" | "background">,
+    default: "checkbox",
+  },
+  displayErrorModal: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const emits = defineEmits(["update:selectionPile", "update:errors", "view-candidate"]);
@@ -286,6 +298,8 @@ watch(
           :parentColor="option.parentColor"
           @checked="toggleOption"
           @view-candidate="viewCandidate"
+          :reverse-option="reverseOption"
+          :selection-style="selectionStyle"
         />
       </div>
 
@@ -327,6 +341,8 @@ watch(
           :voice-credits="voiceCredits"
           @checked="toggleOption"
           @view-candidate="viewCandidate"
+          :reverse-option="reverseOption"
+          :selection-style="selectionStyle"
         />
       </template>
       <AVBlankOption
@@ -338,6 +354,8 @@ watch(
         :observer-mode="observerMode"
         :accent-color="contest.blankOptionColor"
         :partial-results="partialResults ? partialResults['blank'] : null"
+        :reverse-option="reverseOption"
+        :selection-style="selectionStyle"
         @toggle-blank="toggleBlank"
       />
     </div>
@@ -353,6 +371,7 @@ watch(
       :voice-credits="contest.markingType.quadraticVoting ? voiceCredits : null"
       class="mt-3"
       data-test="ballot-submission-helper"
+      :display-error-modal="displayErrorModal"
     />
   </div>
 </template>

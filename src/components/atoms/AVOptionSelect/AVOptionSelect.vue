@@ -16,6 +16,10 @@ const props = defineProps({
     type: String as PropType<SupportedLocale>,
     default: null,
   },
+  selectionStyle: {
+    type: String as PropType<"checkbox" | "background">,
+    default: "checkbox",
+  },
 });
 
 const optionAriaLabel = computed(() => {
@@ -62,7 +66,8 @@ watch(
 <template>
   <div
     v-show="checked"
-    class="text-white AVOptionSelect"
+    class="AVOptionSelect"
+    :class="selectionStyle === 'background' ? 'text-ballot' : 'text-white'"
     :aria-label="optionAriaLabel"
     data-test="option-select"
   >
@@ -71,7 +76,7 @@ watch(
       v-else
       width="26"
       height="26"
-      stroke="white"
+      :stroke="selectionStyle === 'background' ? 'var(--bs-ballot)' : 'white'"
       stroke-width="0.25rem"
       aria-hidden="true"
       data-test="check"

@@ -49,6 +49,18 @@ const props = defineProps({
     type: String as PropType<ImageOption>,
     default: "square",
   },
+  reverseOption: {
+    type: Boolean,
+    default: false,
+  },
+  selectionStyle: {
+    type: String as PropType<"checkbox" | "background">,
+    default: "checkbox",
+  },
+  displayErrorModal: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const emits = defineEmits([
@@ -284,6 +296,9 @@ watch(
           @update:selection-pile="updateActivePile"
           @update:errors="(errors: string[]) => updateErrors(errors)"
           @view-candidate="viewCandidate"
+          :reverse-option="reverseOption"
+          :selection-style="selectionStyle"
+          :display-error-modal="displayErrorModal"
         />
 
         <div id="ballot-action-buttons" class="mt-3 row">
@@ -441,6 +456,9 @@ watch(
       @update:selection-pile="updateActivePile"
       @update:errors="(errors: string[]) => updateErrors(errors)"
       @view-candidate="viewCandidate"
+      :reverse-option="reverseOption"
+      :selection-style="selectionStyle"
+      :display-error-modal="displayErrorModal"
     />
   </template>
 </template>
