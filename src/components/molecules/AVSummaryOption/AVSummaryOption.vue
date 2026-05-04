@@ -176,7 +176,7 @@ onUnmounted(() => mutationObserver.value && mutationObserver.value.disconnect())
 /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
 const i18n: any = inject("i18n");
 const { t } = i18n.global;
-const i18nLocale = computed(() => i18n.global.locale.value || i18n.global.locale);
+const i18nLocale = computed<SupportedLocale>(() => i18n.global.locale.value || i18n.global.locale);
 watch(
   () => props.locale,
   () => {
@@ -200,7 +200,7 @@ watch(
         <ol class="breadcrumb mb-0" data-test="summary-option-ancestry">
           <li
             v-for="(title, index) in ancestryTitles"
-            :key="title + index"
+            :key="title ?? 'no_name' + index"
             class="breadcrumb-item"
             data-test="breadcrumb-item"
           >
@@ -253,7 +253,7 @@ watch(
           v-if="option?.description"
           class="mt-3 mb-n3"
           data-test="summary-option-description"
-          v-html="option.description[i18nLocale]"
+          v-html="option.description[i18nLocale as SupportedLocale]"
         ></div>
         <!-- WRITE-IN -->
         <div v-if="Boolean(writeIn)" class="pt-2" data-test="write-in-section">
