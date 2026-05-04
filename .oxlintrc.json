@@ -39,7 +39,6 @@
     "typescript/no-use-before-define": "allow",
     "typescript/no-non-null-assertion": "allow",
     "typescript/explicit-function-return-type": "error",
-
     "unicorn/no-array-for-each": "warn",
     "unicorn/no-array-reduce": "warn",
     "eslint/no-undefined": "warn",
