@@ -52,7 +52,7 @@ const isOpen = ref<boolean>(false);
 
 const orderedRecommendations = computed(() => {
   const cloned = Array.from(props.recommendations);
-  return cloned.sort((a, b) => a.position - b.position);
+  return cloned.toSorted((a, b) => a.position - b.position);
 });
 
 const previewRecommendations = computed(() => {
@@ -91,11 +91,11 @@ const processText = (recommendations: Array<Recommendation>, short?: boolean): s
   return string;
 };
 
-const goToInviteRecommendersPath = () => {
+const goToInviteRecommendersPath = (): string => {
   return (window.location.href = props.inviteRecommendersPath);
 };
 
-const goToViewRecommendationsPath = () => {
+const goToViewRecommendationsPath = (): string => {
   return (window.location.href = props.viewRecommendationsPath);
 };
 

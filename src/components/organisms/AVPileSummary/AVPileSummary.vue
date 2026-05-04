@@ -129,7 +129,7 @@ const optionSummaries = computed(() => {
   return summaryOptions;
 });
 
-const getWriteInOption = (reference: string) => {
+const getWriteInOption = (reference: string): string | undefined => {
   return props.selectionPile.optionSelections.find(
     (selectedOption) => selectedOption.reference === reference,
   )?.text;
@@ -138,7 +138,7 @@ const getWriteInOption = (reference: string) => {
 const orderedSummaryOptions = computed(() => {
   if (props.contest.markingType.voteVariation === "ranked") return optionSummaries.value;
 
-  return [...optionSummaries.value].sort((a, b) => {
+  return [...optionSummaries.value].toSorted((a, b) => {
     const indexA = selectableOptions.value.findIndex((o) => o.reference === a.reference);
     const indexB = selectableOptions.value.findIndex((o) => o.reference === b.reference);
     return indexA - indexB;
@@ -155,7 +155,7 @@ const orderedSummaryOptions = computed(() => {
 /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
 const i18n: any = inject("i18n");
 const { t } = i18n.global;
-const i18nLocale = computed(() => i18n.global.locale.value || i18n.global.locale);
+const i18nLocale = computed<SupportedLocale>(() => i18n.global.locale.value || i18n.global.locale);
 onMounted(() => {
   if (props.locale) switchLocale(props.locale);
 });

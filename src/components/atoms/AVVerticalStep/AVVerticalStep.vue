@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref, inject, watch, nextTick } from "vue";
+import type { SupportedLocale } from "@/types";
 
 const props = defineProps({
   stepNumber: {
@@ -73,7 +74,7 @@ const lineStylePost = computed(() => {
   `;
 });
 
-const updateValues = () => {
+const updateValues = (): void => {
   if (!props.linkMode) {
     setTimeout(
       () => (currentStepHeight.value = verticalStepItem.value?.clientHeight || 0),
@@ -82,7 +83,7 @@ const updateValues = () => {
   }
 };
 
-const validateStepNumber = () => {
+const validateStepNumber = (): void => {
   if (!props.linkMode && !props.stepNumber)
     throw new Error("stepNumber prop is required when linkMode is disabled");
 };
@@ -104,7 +105,7 @@ onUnmounted(() => window.removeEventListener("resize", updateValues));
  */
 /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
 const i18n: any = inject("i18n");
-const i18nLocale = computed(() => i18n.global.locale.value || i18n.global.locale);
+const i18nLocale = computed<SupportedLocale>(() => i18n.global.locale.value || i18n.global.locale);
 watch(
   i18nLocale,
   () => {

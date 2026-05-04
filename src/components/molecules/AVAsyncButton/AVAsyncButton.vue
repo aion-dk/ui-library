@@ -37,14 +37,14 @@ const extraPaddings = computed(() => {
 
 watch(waiting, (newStatus) => emit("update:waiting", newStatus));
 
-async function handleClick(event: MouseEvent) {
+const handleClick = async (event: MouseEvent): Promise<void> => {
   waiting.value = true;
   try {
     await Promise.resolve(props.onClick(event));
   } finally {
     waiting.value = false;
   }
-}
+};
 </script>
 
 <template>
@@ -62,10 +62,10 @@ async function handleClick(event: MouseEvent) {
   >
     <template v-if="waiting">
       <AVSpinner color="light" size="sm" data-test="btn-spinner" />
-      <slot name="waitingLabel" />
+      <slot name="waitingLabel"></slot>
     </template>
     <template v-else>
-      <slot name="label" />
+      <slot name="label"></slot>
     </template>
   </button>
 </template>

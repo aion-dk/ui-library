@@ -10,7 +10,9 @@ const localI18n = createI18n({
   messages: localMessages,
 });
 
-const switchLocale = (locale: SupportedLocale) => (localI18n.global.locale.value = locale);
+const switchLocale = (locale: SupportedLocale): void => {
+  localI18n.global.locale.value = locale;
+};
 
 export { switchLocale };
 export default localI18n;

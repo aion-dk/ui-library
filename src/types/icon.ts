@@ -3,6 +3,7 @@ import type {
   IconName,
   IconDefinition,
   IconPack,
+  IconLookup,
 } from "@fortawesome/fontawesome-common-types";
 
 export type IconAttribute = {
@@ -22,4 +23,8 @@ export interface IconMixin {
   attrs: IconAttribute;
 }
 
-export type { IconName, IconPack };
+export interface IconNotFound extends IconLookup {
+  iconName: IconName & "not_found";
+}
+
+export type { IconName, IconPack, IconLookup };

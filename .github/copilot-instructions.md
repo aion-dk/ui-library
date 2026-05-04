@@ -20,7 +20,7 @@
 - Components are expected to support provided i18n from host apps and local fallback i18n.
 - Preserve the `inject("i18n")` + locale switching pattern used in existing components (for example `src/components/atoms/AVSpinner/AVSpinner.vue`).
 - Do not remove i18n fallback behavior; it is required for tests, Storybook, and playground usage.
-- Make sure to add any new i18n keys to all languages (`SUPPORTED_LOCALES` on `src/constants/i18n.ts`) in the appropriate `*.messages.ts` file.
+- Make sure to add any new i18n keys to all languages (`SUPPORTED_LOCALES` on `src/constants`) in the appropriate `*.messages.ts` file.
 
 ## Build And Test
 - Install: `yarn --frozen-lockfile`

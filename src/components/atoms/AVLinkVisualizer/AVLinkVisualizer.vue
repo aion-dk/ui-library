@@ -26,14 +26,14 @@ const regexps: AVLinkVisualizerType = {
 };
 
 const icon = computed(() => {
-  let icon = "link";
+  let tempIcon = "link";
   Object.keys(regexps).map((key) => {
-    if (regexps[key as AVLinkVisualizerKey].test(props.link.attributes.url)) icon = key;
+    if (regexps[key as AVLinkVisualizerKey].test(props.link.attributes.url)) tempIcon = key;
   });
-  return icon;
+  return tempIcon;
 });
 
-const openLink = (url: string) => window.open(url, "_blank")?.focus();
+const openLink = (url: string): void => window.open(url, "_blank")?.focus();
 </script>
 
 <template>

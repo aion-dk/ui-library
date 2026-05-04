@@ -29,7 +29,7 @@ const tweenedCount = ref<number>(0);
 
 const countId = computed(() => `${props.id}_count`);
 
-const animateCount = (initialValue: number, finalValue: number) => {
+const animateCount = (initialValue: number, finalValue: number): void => {
   animate(initialValue, finalValue, {
     onUpdate: (latest) => (tweenedCount.value = latest),
     duration: props.duration,
