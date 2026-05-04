@@ -32,6 +32,7 @@ tmp
 storybook-static
 
 src/App.vue
+App.vue
 
 # Yarn
 .pnp.*

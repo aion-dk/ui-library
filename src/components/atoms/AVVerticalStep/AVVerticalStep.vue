@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref, inject, watch, nextTick } from "vue";
-import type { SupportedLocale } from "@/types";
+import type { PropType, SupportedLocale, Theme } from "@/types";
 
 const props = defineProps({
   stepNumber: {
@@ -43,6 +43,10 @@ const props = defineProps({
   inProgress: {
     type: Boolean,
     default: false,
+  },
+  theme: {
+    type: String as PropType<Theme>,
+    default: "dark",
   },
 });
 
@@ -118,13 +122,13 @@ watch(
 </script>
 
 <template>
-  <div class="AVVerticalStep">
+  <div class="AVVerticalStep" :class="`AVVerticalStep--${theme}`">
     <div
       v-if="hasPrevStep"
       class="AVVerticalStep--line"
       :style="lineStylePre"
       data-test="step-line-pre"
-    />
+    ></div>
 
     <div
       class="AVVerticalStep--container"
@@ -136,7 +140,7 @@ watch(
       :data-index="stepNumber"
     >
       <transition>
-        <div v-if="inProgress" class="AVVerticalStep--in-progress" />
+        <div v-if="inProgress" class="AVVerticalStep--in-progress"></div>
       </transition>
       <div :class="`AVVerticalStep--step AVVerticalStep--step-${status}`" data-test="step-circle">
         <!-- Summary -->
@@ -209,7 +213,7 @@ watch(
       class="AVVerticalStep--line"
       :style="lineStylePost"
       data-test="step-line-post"
-    />
+    ></div>
   </div>
 </template>
 

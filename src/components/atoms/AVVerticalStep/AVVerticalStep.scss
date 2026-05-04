@@ -7,7 +7,6 @@
 
 .AVVerticalStep--line {
   margin-inline-start: 0.925rem;
-  background-color: var(--bs-gray-500);
   width: 0.125rem;
   transition: all 300ms linear;
 }
@@ -30,16 +29,6 @@
   cursor: default;
 }
 
-.AVVerticalStep--link-container:hover > .AVVerticalStep--step-default {
-  background-color: var(bg-gray-300);
-}
-
-.AVVerticalStep--link-container:hover
-  > .AVVerticalStep--text:not(.AVVerticalStep--text-link-active)
-  > * {
-  color: var(--bs-gray-300);
-}
-
 .AVVerticalStep--step {
   border-radius: 999px;
   display: flex;
@@ -60,37 +49,9 @@
   line-height: 1;
 }
 
-.AVVerticalStep--step-default {
-  background-color: var(--bs-gray-400);
-}
-
-.AVVerticalStep--step-active {
-  background-color: white;
-}
-
-.AVVerticalStep--step-done {
-  background-color: var(--bs-gray-500);
-}
-
-.AVVerticalStep--icon {
-  color: var(--bs-brand-dark);
-}
-
 .AVVerticalStep--text {
   display: flex;
   flex-direction: column;
-}
-
-.AVVerticalStep--text-default {
-  color: var(--bs-gray-400);
-}
-
-.AVVerticalStep--text-active {
-  color: white;
-}
-
-.AVVerticalStep--text-done {
-  color: var(--bs-gray-500);
 }
 
 .AVVerticalStep--title {
@@ -147,7 +108,6 @@
 }
 
 .AVVerticalStep--in-progress {
-  background-color: var(--bs-danger);
   border-radius: 999px;
   position: absolute;
   top: 0;
@@ -165,4 +125,101 @@
 *[dir="rtl"] .AVVerticalStep--in-progress {
   right: 0;
   margin-right: 1.5rem;
+}
+
+.AVVerticalStep--dark {
+  .AVVerticalStep--line {
+    background-color: var(--bs-gray-500);
+  }
+
+  .AVVerticalStep--link-container:hover > .AVVerticalStep--step-default {
+    background-color: var(bg-gray-300);
+  }
+
+  .AVVerticalStep--link-container:hover
+    > .AVVerticalStep--text:not(.AVVerticalStep--text-link-active)
+    > * {
+    color: var(--bs-gray-300);
+  }
+
+  .AVVerticalStep--step-default {
+    background-color: var(--bs-gray-400);
+  }
+
+  .AVVerticalStep--step-active {
+    background-color: white;
+  }
+
+  .AVVerticalStep--step-done {
+    background-color: var(--bs-gray-500);
+  }
+
+  .AVVerticalStep--icon {
+    color: var(--bs-brand-dark);
+  }
+
+  .AVVerticalStep--text-default {
+    color: var(--bs-gray-400);
+  }
+
+  .AVVerticalStep--text-active {
+    color: white;
+  }
+
+  .AVVerticalStep--text-done {
+    color: var(--bs-gray-500);
+  }
+
+  .AVVerticalStep--in-progress {
+    background-color: var(--bs-danger);
+  }
+}
+
+.AVVerticalStep--light {
+  .AVVerticalStep--line {
+    background-color: var(--bs-gray-600);
+  }
+
+  .AVVerticalStep--step-default {
+    background-color: var(--bs-white);
+    border: solid var(--bs-gray-500) 1px;
+
+    .AVVerticalStep--icon {
+      color: var(--bs-gray-800);
+    }
+  }
+
+  .AVVerticalStep--step-active {
+    background-color: var(--bs-gray-800);
+    border: solid var(--bs-gray-800) 1px;
+
+    .AVVerticalStep--icon {
+      color: var(--bs-white);
+    }
+  }
+
+  .AVVerticalStep--step-done {
+    background-color: var(--bs-gray-300);
+    border: solid var(--bs-gray-500) 1px;
+
+    .AVVerticalStep--icon {
+      color: var(--bs-gray-600);
+    }
+  }
+
+  .AVVerticalStep--text-default {
+    color: var(--bs-gray-600);
+  }
+
+  .AVVerticalStep--text-active {
+    color: var(--bs-gray-900);
+  }
+
+  .AVVerticalStep--text-done {
+    color: var(--bs-gray-600);
+  }
+
+  .AVVerticalStep--in-progress {
+    background-color: var(--bs-danger);
+  }
 }

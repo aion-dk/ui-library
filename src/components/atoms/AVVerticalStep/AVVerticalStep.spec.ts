@@ -160,4 +160,18 @@ describe("AVVerticalStep", () => {
     expect(wrapper.findAll("[data-test=step-title]").length).toEqual(0);
     expect(wrapper.findAll("[data-test=step-subtitle]").length).toEqual(0);
   });
+
+  it("defaults to dark theme", () => {
+    expect(wrapper.classes()).to.contain("AVVerticalStep--dark");
+    expect(wrapper.classes()).to.not.contain("AVVerticalStep--light");
+  });
+
+  it("can switch to light theme", async () => {
+    await wrapper.setProps({
+      theme: "light",
+    });
+
+    expect(wrapper.classes()).to.contain("AVVerticalStep--light");
+    expect(wrapper.classes()).to.not.contain("AVVerticalStep--dark");
+  });
 });
