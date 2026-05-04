@@ -1,0 +1,48 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["eslint", "typescript", "unicorn", "oxc", "vue", "vitest"],
+  "env": {
+    "browser": true
+  },
+  "ignorePatterns": [
+    "**/*.spec.ts", // False positives as it expects JEST-style assertions and we use Chai-style assertions
+    "**/*.stories.ts",
+    "**/examples/*.ts",
+    "dist/",
+    "storybook-static/",
+    "vite.config.ts",
+    "vitest.setup.ts"
+  ],
+  "categories": {
+    "correctness": "error",
+    "suspicious": "warn",
+    "restriction": "error"
+  },
+  "rules": {
+    "oxc/no-async-await": "allow",
+    "oxc/no-optional-chaining": "allow",
+    "oxc/no-rest-spread-properties": "allow",
+    "vue/max-props": ["error", { "maxProps": 14 }], // As these are independent components that don't rely on stores, etc. we need to allow more props.
+    "eslint/no-shadow": "error",
+    "eslint/no-unneeded-ternary": "error",
+    // Start fixing later
+    // "eslint/no-magic-numbers": ["error", {
+    //   "ignoreArrayIndexes": true,
+    //   "ignoreDefaultValues": true,
+    //   "ignoreClassFieldInitialValues": true,
+    //   "ignoreEnums": true,
+    //   "ignoreNumericLiteralTypes": true,
+    //   "ignoreReadonlyClassProperties": true,
+    //   "ignoreTypeIndexes": true
+    // }],
+    "eslint/no-magic-numbers": "allow",
+    "typescript/no-use-before-define": "allow",
+    "typescript/no-non-null-assertion": "allow",
+    "typescript/explicit-function-return-type": "error",
+
+    "unicorn/no-array-for-each": "warn",
+    "unicorn/no-array-reduce": "warn",
+    "eslint/no-undefined": "warn",
+  }
+}
+
