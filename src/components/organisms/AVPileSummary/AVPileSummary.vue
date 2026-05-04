@@ -129,7 +129,7 @@ const optionSummaries = computed(() => {
   return summaryOptions;
 });
 
-const getWriteInOption = (reference: string) => {
+const getWriteInOption = (reference: string): string | undefined => {
   return props.selectionPile.optionSelections.find(
     (selectedOption) => selectedOption.reference === reference,
   )?.text;
@@ -138,7 +138,7 @@ const getWriteInOption = (reference: string) => {
 const orderedSummaryOptions = computed(() => {
   if (props.contest.markingType.voteVariation === "ranked") return optionSummaries.value;
 
-  return [...optionSummaries.value].sort((a, b) => {
+  return [...optionSummaries.value].toSorted((a, b) => {
     const indexA = selectableOptions.value.findIndex((o) => o.reference === a.reference);
     const indexB = selectableOptions.value.findIndex((o) => o.reference === b.reference);
     return indexA - indexB;

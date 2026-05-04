@@ -6,15 +6,15 @@ const props = defineProps({
   },
 });
 
-const enter = (element: Element) => {
+const enter = (element: Element): void => {
   if (props.skipTransition) return;
   (element as HTMLDivElement).style.height = "auto";
 
   const height = getComputedStyle(element).height;
   (element as HTMLDivElement).style.height = "0";
 
-  // Force redraw to make sure the
-  // animation is triggered correctly.
+  // Force redraw to make sure the animation is triggered correctly.
+  // oxlint-disable-next-line @typescript-eslint/no-unused-expressions
   getComputedStyle(element).height;
 
   // Timeout makes sure the browser has redrawn before we trigger animation
@@ -23,17 +23,17 @@ const enter = (element: Element) => {
   });
 };
 
-const afterEnter = (element: Element) => {
+const afterEnter = (element: Element): void => {
   (element as HTMLDivElement).style.height = "auto";
 };
 
-const leave = (element: Element) => {
+const leave = (element: Element): void => {
   if (props.skipTransition) return;
   const height = getComputedStyle(element).height;
   (element as HTMLDivElement).style.height = height;
 
-  // Force redraw to make sure the
-  // animation is triggered correctly.
+  // Force redraw to make sure the animation is triggered correctly.
+  // oxlint-disable-next-line @typescript-eslint/no-unused-expressions
   getComputedStyle(element).height;
 
   // Timeout makes sure the browser has redrawn before we trigger animation
@@ -45,7 +45,7 @@ const leave = (element: Element) => {
 
 <template>
   <transition name="transition-fade" @enter="enter" @leave="leave" @after-enter="afterEnter">
-    <slot />
+    <slot></slot>
   </transition>
 </template>
 

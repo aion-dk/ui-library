@@ -127,9 +127,7 @@ const getOption = (
     selectable: args.includes("gallery_parents")
       ? true
       : args.includes("gallery")
-        ? children
-          ? true
-          : false
+        ? Boolean(children)
         : args.includes("selectable"),
     exclusive: args.includes("exclusive") || (args.includes("gallery") && !children),
     children:

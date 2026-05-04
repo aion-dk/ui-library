@@ -42,12 +42,12 @@ const creditsUsed = computed(() =>
   }),
 );
 
-const add = () => {
+const add = (): void => {
   value.value = value.value + 1;
   emits("updateCrosses", value.value);
 };
 
-const subtract = () => {
+const subtract = (): void => {
   value.value = value.value - 1;
   emits("updateCrosses", value.value);
 };

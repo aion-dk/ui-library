@@ -107,7 +107,7 @@ import {
 } from "@/components";
 
 export default {
-  install: (app: App, i18n: I18n | null = null) => {
+  install: (app: App, i18n: I18n | null = null): void => {
     app.use(FloatingVue);
 
     // ATOMS

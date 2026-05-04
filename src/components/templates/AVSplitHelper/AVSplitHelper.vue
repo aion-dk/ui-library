@@ -122,15 +122,15 @@ const userCanSplit = computed(() => props.contest.markingType.maxPiles !== 1 && 
 
 const isEditing = computed(() => activeSelectionPileIndex.value !== null);
 
-const isComplete = (pile: SelectionPile) => {
+const isComplete = (pile: SelectionPile): boolean => {
   return selectionPileValidator.value.isComplete(pile);
 };
 
-const hasError = (pile: SelectionPile) => {
+const hasError = (pile: SelectionPile): boolean => {
   return selectionPileValidator.value.validate(pile, props.includeLazyErrors).length > 0;
 };
 
-const persistActivePile = () => {
+const persistActivePile = (): void => {
   if (userCanSplit.value) {
     const newPiles = [...selectionPiles.value];
     if (activeSelectionPileIndex.value === null) {
@@ -155,14 +155,14 @@ const persistActivePile = () => {
   }
 };
 
-const updateActivePile = (newPile: SelectionPile) => {
+const updateActivePile = (newPile: SelectionPile): void => {
   activePile.value = newPile;
   if (!userCanSplit.value) {
     persistActivePile();
   }
 };
 
-const newSplit = () => {
+const newSplit = (): void => {
   activePile.value = {
     optionSelections: [],
     multiplier: maxAssignable.value,
@@ -172,21 +172,21 @@ const newSplit = () => {
   activeState.value = "ballot";
 };
 
-const removeSplit = (splitIndex: number) => {
+const removeSplit = (splitIndex: number): void => {
   selectionPiles.value.splice(splitIndex, 1);
 };
 
-const selectPile = (index: number) => {
+const selectPile = (index: number): void => {
   activePile.value = { ...selectionPiles.value[index] };
   activeSelectionPileIndex.value = index;
   activeState.value = "ballot";
 };
 
-const updateErrors = (errors: string[]) => {
+const updateErrors = (errors: string[]): void => {
   contestErrors.value = errors;
 };
 
-const viewCandidate = (contestReference: string, optionReference: string) =>
+const viewCandidate = (contestReference: string, optionReference: string): void =>
   emits("view-candidate", contestReference, optionReference);
 
 watch(readyForSubmission, (newValue) => emits("update:complete", newValue));

@@ -73,7 +73,7 @@ const lineStylePost = computed(() => {
   `;
 });
 
-const updateValues = () => {
+const updateValues = (): void => {
   if (!props.linkMode) {
     setTimeout(
       () => (currentStepHeight.value = verticalStepItem.value?.clientHeight || 0),
@@ -82,7 +82,7 @@ const updateValues = () => {
   }
 };
 
-const validateStepNumber = () => {
+const validateStepNumber = (): void => {
   if (!props.linkMode && !props.stepNumber)
     throw new Error("stepNumber prop is required when linkMode is disabled");
 };

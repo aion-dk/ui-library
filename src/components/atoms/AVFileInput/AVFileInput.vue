@@ -56,22 +56,22 @@ const files = ref<File[]>([]);
 
 const emit = defineEmits(["update", "fileFormatNotAccepted", "download"]);
 
-const onChange = () => {
+const onChange = (): void => {
   if (fileInput.value?.files) files.value = [...fileInput.value.files];
   emit("update", files.value);
 };
 
-const dragOver = (e: Event) => {
+const dragOver = (e: Event): void => {
   e.preventDefault();
   if (props.disabled) return;
   isDragging.value = true;
 };
 
-const dragLeave = () => {
+const dragLeave = (): void => {
   isDragging.value = false;
 };
 
-const verifyFileType = (transferedFiles: File[]) => {
+const verifyFileType = (transferedFiles: Array<File>): FileList => {
   const fs = Array.from(transferedFiles);
 
   const dataTransfer = new DataTransfer();
@@ -113,11 +113,11 @@ const getFileSize = (fileSize: number): string => {
   }).format(fileSize);
 };
 
-const currentValueFileName = (filePath: string) => {
+const currentValueFileName = (filePath: string): string | undefined => {
   return filePath.split("/").pop();
 };
 
-const drop = (e: DragEvent) => {
+const drop = (e: DragEvent): void => {
   e.preventDefault();
   if (props.disabled) return;
 
@@ -134,12 +134,12 @@ const drop = (e: DragEvent) => {
   isDragging.value = false;
 };
 
-const remove = (i: number) => {
+const remove = (i: number): void => {
   files.value.splice(i, 1);
   emit("update", files.value);
 };
 
-const generateURL = (file: File) => {
+const generateURL = (file: File): string => {
   const fileSrc = URL.createObjectURL(file);
   setTimeout(() => {
     URL.revokeObjectURL(fileSrc);
@@ -147,7 +147,7 @@ const generateURL = (file: File) => {
   return fileSrc;
 };
 
-const downloadFile = (file: string) => {
+const downloadFile = (file: string): void => {
   emit("download", file);
 };
 

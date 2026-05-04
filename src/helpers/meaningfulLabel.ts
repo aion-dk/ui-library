@@ -8,6 +8,7 @@ const getMeaningfulLabel: LookUpMethod = (
   fallbacks = LOOKUP_DEFAULT_FALLBACKS,
 ) => {
   let result: string | null = null;
+  // oxlint-disable-next-line complexity
   fallbacks.forEach((fallback: LookUpFallback) => {
     if (result === null) {
       switch (true) {
@@ -38,6 +39,8 @@ const getMeaningfulLabel: LookUpMethod = (
         case fallback === "id" && Boolean(object.id):
           result = `${humanName} #${object.id}`;
           break;
+        default:
+          result = null;
       }
     }
   });

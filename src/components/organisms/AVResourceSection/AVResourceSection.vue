@@ -63,13 +63,13 @@ const groupsOpened = ref(false);
 
 const title = computed(() =>
   props.candidate.title?.[0]?.localised
-    ? (props.candidate.title?.[0]?.form_content as LocalString)[i18nLocale.value]
+    ? (props.candidate.title?.[0]?.form_content as LocalString)?.[i18nLocale.value]
     : props.candidate.title?.[0]?.form_content,
 );
 
 const subtitle = computed(() =>
   props.candidate.subtitle?.[0]?.localised
-    ? (props.candidate.subtitle?.[0]?.form_content as LocalString)[i18nLocale.value]
+    ? (props.candidate.subtitle?.[0]?.form_content as LocalString)?.[i18nLocale.value]
     : props.candidate.subtitle?.[0]?.form_content,
 );
 
@@ -81,7 +81,11 @@ const groups = computed(() => {
 
   if (props.currentCandidateGroup) {
     props.candidate.groups.forEach((group: ResourceGroup) => {
-      group.id === props.currentCandidateGroup ? displayed.push(group) : remaining.push(group);
+      if (group.id === props.currentCandidateGroup) {
+        displayed.push(group);
+      } else {
+        remaining.push(group);
+      }
     });
   } else {
     remaining = [...props.candidate.groups];
@@ -107,7 +111,7 @@ const hasContent = computed(() =>
   props.summary ? !!props.candidate.summary.length : !!props.candidate.generic.length,
 );
 
-const itemHasContent = (item: ResourceItem) => {
+const itemHasContent = (item: ResourceItem): boolean => {
   if (item.item_type === "check_box") return true;
   if (!item.form_content) return false;
   if (item.item_type === "link_list") return !!(item.form_content as Url[]).length;
@@ -121,7 +125,9 @@ const image = computed(
       ?.form_content as string,
 );
 
-const toggleGroups = () => (groupsOpened.value = !groupsOpened.value);
+const toggleGroups = (): void => {
+  groupsOpened.value = !groupsOpened.value;
+};
 
 /**
  * This is necesary in order to support both provided i18n and local i18n.

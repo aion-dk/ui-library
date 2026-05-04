@@ -82,7 +82,7 @@ const ancestryTitles = computed(() => {
     .map((opt: AVSummaryOptionParent) => {
       return opt.title[i18nLocale.value];
     })
-    .reverse();
+    .toReversed();
 });
 
 const displayTitle = computed(() => {
@@ -111,6 +111,7 @@ const bsBorderColor = computed(() =>
   getComputedStyle(document.documentElement).getPropertyValue("--bs-border-color"),
 );
 
+// oxlint-disable-next-line complexity
 const coloredEdgeStyle = computed(() => {
   if (props.blank && props.blankAccentColor) {
     return `

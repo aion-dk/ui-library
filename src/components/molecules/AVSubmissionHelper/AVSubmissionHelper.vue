@@ -65,7 +65,7 @@ const errorMessages = computed(() => {
   });
 });
 
-const scrollToBottom = () =>
+const scrollToBottom = (): void =>
   document
     .querySelector("#ballot-action-buttons")
     ?.scrollIntoView({ behavior: "smooth", block: "start" });

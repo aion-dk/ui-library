@@ -33,8 +33,8 @@ const searchedOptions = computed(() => {
   );
 });
 
-const optionParents = (option: OptionContent) => {
-  return parentLookup(option, []).reverse();
+const optionParents = (option: OptionContent): Array<OptionContent> => {
+  return parentLookup(option, []).toReversed();
 };
 
 const parentLookup = (option: OptionContent, parents: OptionContent[]): OptionContent[] => {
@@ -46,11 +46,11 @@ const parentLookup = (option: OptionContent, parents: OptionContent[]): OptionCo
   }
 };
 
-const clearSearch = () => {
+const clearSearch = (): void => {
   searchTerm.value = "";
 };
 
-const highlightOption = (option: OptionContent) => {
+const highlightOption = (option: OptionContent): void => {
   eventBusEmit("highlight-option", option.reference);
   clearSearch();
 };

@@ -55,16 +55,16 @@ const props = defineProps({
   },
 });
 
-const count = (reference: string, roundIndex: number) =>
+const count = (reference: string, roundIndex: number): number =>
   props.rounds[roundIndex].counts[reference] || 0;
 
-const isEliminated = (reference: string, roundIndex: number) =>
+const isEliminated = (reference: string, roundIndex: number): boolean =>
   props.rounds[roundIndex].eliminated === reference;
 
-const isElected = (reference: string, roundIndex: number) =>
+const isElected = (reference: string, roundIndex: number): boolean =>
   props.rounds[roundIndex].elected === reference;
 
-const isEliminatedOrElected = (reference: string, roundIndex: number) =>
+const isEliminatedOrElected = (reference: string, roundIndex: number): boolean =>
   isElected(reference, roundIndex) || isEliminated(reference, roundIndex);
 
 /**
