@@ -103,11 +103,12 @@
 
 .AVOption--selected-background {
   background-color: var(--bs-ballot);
-  color: white;
+  color: white !important;
+  --bs-heading-color: white;
 
   .AVOption--title,
   .AVOption--description {
-    color: white;
+    color: white !important;
   }
 
   .btn-outline-ballot {

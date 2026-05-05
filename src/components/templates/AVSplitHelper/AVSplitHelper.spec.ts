@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { mount } from "@vue/test-utils";
-import { getContestSelection, getContest } from "@/examples";
+import { getContestSelection, getContest, getLiveResult } from "@/examples";
 import type { VitestEmitted } from "@/types";
 import localI18n from "@/i18n";
 
@@ -516,5 +516,141 @@ describe("AVSplitHelper", () => {
     expect(wrapper.find("[data-test=split-helper-assign-confirm]").text()).to.contain(
       "Bekræft og tildel",
     );
+  });
+});
+
+describe("AVSplitHelper new props", () => {
+  const createWrapper = (extraProps = {}) =>
+    mount(AVSplitHelper, {
+      props: {
+        contest: getContest([]),
+        contestSelection: getContestSelection([]),
+        weight: 1,
+        locale: "en",
+        ...extraProps,
+      },
+      global: {
+        components: {
+          AVBallot,
+          AVPileSummary,
+          AVSummaryOption,
+          AVSplitWizardHeader,
+          AVSplitWeightHelper,
+          AVSubmissionHelper,
+          AVBlankOption,
+          AVOption,
+          AVOptionCheckbox,
+          AVOptionSelect,
+          AVCollapser,
+          AVAnimatedTransition,
+          AVSearchBallot,
+          AVTooltip,
+          AVOptionLiveResults,
+          AVOptionCounter,
+        },
+        provide: {
+          i18n: localI18n,
+        },
+        directives: {
+          tooltip: () => {},
+        },
+        stubs: {
+          AVIcon: {
+            template: "<span />",
+          },
+        },
+      },
+    });
+
+  it("passes partialResults to AVBallot", async () => {
+    const partialResults = getLiveResult(["exampleOption1"]);
+    const wrapper = createWrapper({ partialResults });
+
+    const ballot = wrapper.findComponent(AVBallot);
+    expect(ballot.props("partialResults")).to.deep.eq(partialResults);
+  });
+
+  it("passes includeLazyErrors to AVBallot", async () => {
+    const wrapper = createWrapper({ includeLazyErrors: true });
+
+    const ballot = wrapper.findComponent(AVBallot);
+    expect(ballot.props("includeLazyErrors")).to.eq(true);
+  });
+
+  it("defaults includeLazyErrors to false", async () => {
+    const wrapper = createWrapper();
+
+    const ballot = wrapper.findComponent(AVBallot);
+    expect(ballot.props("includeLazyErrors")).to.eq(false);
+  });
+
+  it("passes imageOption to AVBallot", async () => {
+    const wrapper = createWrapper({ imageOption: "passport" });
+
+    const ballot = wrapper.findComponent(AVBallot);
+    expect(ballot.props("imageOption")).to.eq("passport");
+  });
+
+  it("defaults imageOption to square", async () => {
+    const wrapper = createWrapper();
+
+    const ballot = wrapper.findComponent(AVBallot);
+    expect(ballot.props("imageOption")).to.eq("square");
+  });
+
+  it("passes reverseOption to AVBallot", async () => {
+    const wrapper = createWrapper({ reverseOption: true });
+
+    const ballot = wrapper.findComponent(AVBallot);
+    expect(ballot.props("reverseOption")).to.eq(true);
+  });
+
+  it("defaults reverseOption to false", async () => {
+    const wrapper = createWrapper();
+
+    const ballot = wrapper.findComponent(AVBallot);
+    expect(ballot.props("reverseOption")).to.eq(false);
+  });
+
+  it("passes selectionStyle to AVBallot", async () => {
+    const wrapper = createWrapper({ selectionStyle: "background" });
+
+    const ballot = wrapper.findComponent(AVBallot);
+    expect(ballot.props("selectionStyle")).to.eq("background");
+  });
+
+  it("defaults selectionStyle to checkbox", async () => {
+    const wrapper = createWrapper();
+
+    const ballot = wrapper.findComponent(AVBallot);
+    expect(ballot.props("selectionStyle")).to.eq("checkbox");
+  });
+
+  it("passes displayErrorModal to AVBallot", async () => {
+    const wrapper = createWrapper({ displayErrorModal: true });
+
+    const ballot = wrapper.findComponent(AVBallot);
+    expect(ballot.props("displayErrorModal")).to.eq(true);
+  });
+
+  it("defaults displayErrorModal to false", async () => {
+    const wrapper = createWrapper();
+
+    const ballot = wrapper.findComponent(AVBallot);
+    expect(ballot.props("displayErrorModal")).to.eq(false);
+  });
+
+  it("passes imageOption to AVPileSummary in split mode", async () => {
+    const wrapper = createWrapper({
+      weight: 10,
+      contestSelection: getContestSelection(["half"]),
+      imageOption: "passport",
+    });
+
+    const pileSummaries = wrapper.findAllComponents(AVPileSummary);
+    expect(pileSummaries.length).to.be.greaterThan(0);
+    pileSummaries.forEach((summary) => {
+      expect(summary.props("imageOption")).to.eq("passport");
+    });
   });
 });

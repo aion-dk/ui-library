@@ -60,4 +60,25 @@ describe("AVOptionSelect", () => {
       "Sijoitus 7",
     );
   });
+
+  it("defaults selectionStyle to checkbox", async () => {
+    await wrapper.setProps({
+      locale: "en",
+      rank: null,
+    });
+
+    expect(wrapper.find("[data-test=option-select]").classes()).to.contain("text-white");
+    expect(wrapper.find("[data-test=option-select]").classes()).to.not.contain("text-ballot");
+    expect(wrapper.find("[data-test=check]").attributes().stroke).to.eq("white");
+  });
+
+  it("can apply background selection style", async () => {
+    await wrapper.setProps({
+      selectionStyle: "background",
+    });
+
+    expect(wrapper.find("[data-test=option-select]").classes()).to.contain("text-ballot");
+    expect(wrapper.find("[data-test=option-select]").classes()).to.not.contain("text-white");
+    expect(wrapper.find("[data-test=check]").attributes().stroke).to.eq("var(--bs-ballot)");
+  });
 });
