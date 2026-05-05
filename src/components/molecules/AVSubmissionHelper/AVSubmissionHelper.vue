@@ -118,129 +118,131 @@ watch(
 </script>
 
 <template>
-  <div class="mt-2 sticky-bottom">
-    <button
-      v-if="displayScrollToBottom"
-      type="button"
-      class="btn bg-gray-300 rounded-0 border-0 w-100"
-      data-test="scroll-bottom"
-      @click="scrollToBottom"
-    >
-      <AVIcon icon="chevron-down" />
-      {{ t("js.components.AVSubmissionHelper.go_to_bottom") }}
-    </button>
-    <div
-      class="p-3"
-      :class="{
-        'bg-gray-700': !errors.length,
-        'text-white': !errors.length,
-        'bg-theme-danger': errors.length > 0,
-      }"
-      data-test="submission-helper"
-    >
-      <!-- QUADRATIC VOTING DATA -->
-      <div
-        v-if="voiceCredits"
-        class="AVSubmissionHelper--quadratic"
-        :class="{
-          'text-white': !errors.length,
-        }"
-        data-test="submission-helper-quadratic"
+  <div>
+    <div class="mt-2 sticky-bottom">
+      <button
+        v-if="displayScrollToBottom"
+        type="button"
+        class="btn bg-gray-300 rounded-0 border-0 w-100"
+        data-test="scroll-bottom"
+        @click="scrollToBottom"
       >
-        <span>{{ t("js.components.AVSubmissionHelper.remaining_credits") }}</span>
-        <strong>{{ voiceCredits.remaining }}</strong>
-        <span>/</span>
-        <strong>{{ voiceCredits.total }}</strong>
-      </div>
-
-      <!-- ERRORS -->
-      <div v-if="errors.length > 0">
+        <AVIcon icon="chevron-down" />
+        {{ t("js.components.AVSubmissionHelper.go_to_bottom") }}
+      </button>
+      <div
+        class="p-3"
+        :class="{
+          'bg-gray-700': !errors.length,
+          'text-white': !errors.length,
+          'bg-theme-danger': errors.length > 0,
+        }"
+        data-test="submission-helper"
+      >
+        <!-- QUADRATIC VOTING DATA -->
         <div
-          v-for="errorMessage in errorMessages"
-          :key="errorMessage"
-          role="alert"
-          v-text="errorMessage"
-          data-test="submission-helper-error"
-        ></div>
-        <hr class="my-3" />
-      </div>
+          v-if="voiceCredits"
+          class="AVSubmissionHelper--quadratic"
+          :class="{
+            'text-white': !errors.length,
+          }"
+          data-test="submission-helper-quadratic"
+        >
+          <span>{{ t("js.components.AVSubmissionHelper.remaining_credits") }}</span>
+          <strong>{{ voiceCredits.remaining }}</strong>
+          <span>/</span>
+          <strong>{{ voiceCredits.total }}</strong>
+        </div>
 
-      <div v-if="maxMarks > 1">
-        <div class="d-block justify-content-between align-items-center">
-          <div v-if="minMarks === maxMarks">
-            {{
-              `${t("js.components.AVSubmissionHelper.select_exactly", {
-                min_marks: minMarks,
-              })}`
-            }}
-          </div>
-          <div v-else>
-            {{
-              `${
-                hasExclusiveOptions
-                  ? t("js.components.AVSubmissionHelper.select_multiple_with_exclusives", {
-                      min_marks: minMarks,
-                      max_marks: maxMarks,
-                    })
-                  : t("js.components.AVSubmissionHelper.select_multiple", {
-                      min_marks: minMarks,
-                      max_marks: maxMarks,
-                    })
-              }`
-            }}
-          </div>
+        <!-- ERRORS -->
+        <div v-if="errors.length > 0">
           <div
-            v-if="chosenCount > 0"
-            v-html="
-              t('js.components.AVSubmissionHelper.selected', {
-                selected: chosenCount,
-              })
-            "
-            class="mt-2 mt-sm-0"
-            data-test="submission-helper-count"
+            v-for="errorMessage in errorMessages"
+            :key="errorMessage"
+            role="alert"
+            v-text="errorMessage"
+            data-test="submission-helper-error"
           ></div>
+          <hr class="my-3" />
         </div>
-      </div>
 
-      <div v-else>
-        <div>{{ t("js.components.AVSubmissionHelper.select_single") }}</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ERROR MODAL -->
-  <div
-    v-if="displayErrorModal && showErrorModal && errors.length > 0"
-    class="modal fade show d-block"
-    tabindex="-1"
-    role="dialog"
-    data-test="error-modal"
-  >
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-body text-center p-4">
-          <div class="mb-3">
-            <AVIcon icon="triangle-exclamation" class="text-warning fs-1" />
+        <div v-if="maxMarks > 1">
+          <div class="d-block justify-content-between align-items-center">
+            <div v-if="minMarks === maxMarks">
+              {{
+                `${t("js.components.AVSubmissionHelper.select_exactly", {
+                  min_marks: minMarks,
+                })}`
+              }}
+            </div>
+            <div v-else>
+              {{
+                `${
+                  hasExclusiveOptions
+                    ? t("js.components.AVSubmissionHelper.select_multiple_with_exclusives", {
+                        min_marks: minMarks,
+                        max_marks: maxMarks,
+                      })
+                    : t("js.components.AVSubmissionHelper.select_multiple", {
+                        min_marks: minMarks,
+                        max_marks: maxMarks,
+                      })
+                }`
+              }}
+            </div>
+            <div
+              v-if="chosenCount > 0"
+              v-html="
+                t('js.components.AVSubmissionHelper.selected', {
+                  selected: chosenCount,
+                })
+              "
+              class="mt-2 mt-sm-0"
+              data-test="submission-helper-count"
+            ></div>
           </div>
-          <p class="mb-4">
-            {{ errorMessages[0] }}
-          </p>
-          <button
-            type="button"
-            class="btn btn-primary"
-            @click="dismissErrorModal"
-            data-test="dismiss-error-modal"
-          >
-            {{ localI18n.global.t("js.components.AVSubmissionHelper.error_modal_dismiss") }}
-          </button>
+        </div>
+
+        <div v-else>
+          <div>{{ t("js.components.AVSubmissionHelper.select_single") }}</div>
         </div>
       </div>
     </div>
+
+    <!-- ERROR MODAL -->
+    <div
+      v-if="displayErrorModal && showErrorModal && errors.length > 0"
+      class="modal fade show d-block"
+      tabindex="-1"
+      role="dialog"
+      data-test="error-modal"
+    >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-body text-center p-4">
+            <div class="mb-3">
+              <AVIcon icon="triangle-exclamation" class="text-warning fs-1" />
+            </div>
+            <p class="mb-4">
+              {{ errorMessages[0] }}
+            </p>
+            <button
+              type="button"
+              class="btn btn-primary"
+              @click="dismissErrorModal"
+              data-test="dismiss-error-modal"
+            >
+              {{ localI18n.global.t("js.components.AVSubmissionHelper.error_modal_dismiss") }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      v-if="displayErrorModal && showErrorModal && errors.length > 0"
+      class="modal-backdrop fade show"
+    ></div>
   </div>
-  <div
-    v-if="displayErrorModal && showErrorModal && errors.length > 0"
-    class="modal-backdrop fade show"
-  ></div>
 </template>
 
 <style scoped lang="scss" src="./AVSubmissionHelper.scss" />

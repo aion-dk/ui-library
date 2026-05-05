@@ -207,8 +207,8 @@ describe("AVBlankOption", () => {
   it("defaults reverseOption to false", async () => {
     await wrapper.setProps({
       locale: "en",
-      partialResults: null,
-      accentColor: null,
+      partialResults: undefined,
+      accentColor: undefined,
       observerMode: false,
     });
 
