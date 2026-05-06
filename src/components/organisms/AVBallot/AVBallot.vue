@@ -314,6 +314,8 @@ watch(
         :partial-results="partialResults ? partialResults['blank'] : null"
         gallery-mode
         @toggle-blank="toggleBlank"
+        :reverse-option="reverseOption"
+        :selection-style="selectionStyle"
       />
     </div>
 
