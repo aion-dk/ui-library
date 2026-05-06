@@ -14,6 +14,7 @@ dist-ssr
 coverage
 *.local
 tmp
+.eslintcache
 
 /cypress/videos/
 /cypress/screenshots/
@@ -31,6 +32,7 @@ tmp
 storybook-static
 
 src/App.vue
+App.vue
 
 # Yarn
 .pnp.*

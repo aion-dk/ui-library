@@ -9,10 +9,22 @@ import type {
   IconAttribute,
   VNode,
   IconPack,
+  IconLookup,
+  IconNotFound,
 } from "@/types";
 
 import { parse as faParse, icon as faIcon } from "@fortawesome/fontawesome-svg-core";
 import { computed, watch, h, defineComponent } from "vue";
+
+const camelize = (str: string): string => {
+  const addFA = `fa-${str}`;
+  const arr = addFA.split("-");
+  const capital = arr.map((item) => item.charAt(0).toUpperCase() + item.slice(1).toLowerCase());
+  const capitalString = capital.join("");
+  const makeFirstLowercase = capitalString.charAt(0).toLowerCase() + capitalString.slice(1);
+
+  return makeFirstLowercase;
+};
 
 export default defineComponent({
   name: "AVIcon",
@@ -23,12 +35,12 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const normalizeIconArgs = (icon: IconName) => {
+    const normalizeIconArgs = (icon: IconName): IconLookup | IconNotFound => {
       if (faParse.icon) {
         return faParse.icon(icon);
       }
 
-      return { iconName: "not_found" };
+      return { iconName: "not_found" } as IconNotFound;
     };
 
     const AllIcons = {
@@ -47,11 +59,11 @@ export default defineComponent({
       if (abstractElement.prefix) return;
 
       const mixins = Object.keys(abstractElement.attributes || {}).reduce(
-        (mixins: IconMixin, key: string) => {
+        (iconMixins: IconMixin, key: string) => {
           const value = abstractElement.attributes[key];
-          mixins.attrs[key] = value;
+          iconMixins.attrs[key] = value;
 
-          return mixins;
+          return iconMixins;
         },
         {
           attrs: {},
@@ -70,16 +82,6 @@ export default defineComponent({
       );
     };
 
-    const camelize = (str: string) => {
-      const addFA = `fa-${str}`;
-      const arr = addFA.split("-");
-      const capital = arr.map((item) => item.charAt(0).toUpperCase() + item.slice(1).toLowerCase());
-      const capitalString = capital.join("");
-      const makeFirstLowercase = capitalString.charAt(0).toLowerCase() + capitalString.slice(1);
-
-      return makeFirstLowercase;
-    };
-
     const iconName = computed(() => camelize(normalizeIconArgs(props.icon).iconName));
     const icon = computed(() => (AllIcons as unknown as IconPack)[iconName.value]);
     const renderedIcon = computed(() => faIcon(icon.value));
@@ -88,7 +90,8 @@ export default defineComponent({
       renderedIcon,
       (value) => {
         if (!value) {
-          return console.log("Could not find one or more icon(s)", icon);
+          // oxlint-disable-next-line no-console
+          return console.error("Could not find one or more icon(s)", icon);
         }
       },
       { immediate: true },
@@ -98,7 +101,7 @@ export default defineComponent({
       renderedIcon.value ? convert(renderedIcon.value.abstract[0]) : null,
     );
 
-    return () => vnode.value;
+    return (): VNode | null | undefined => vnode.value;
   },
 });
 </script>

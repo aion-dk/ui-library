@@ -67,7 +67,7 @@ const optionReferences = computed(() =>
   sortedData.value.seats[0].map((option) => option.reference),
 );
 
-const getElectedSeats = (amount: number) => {
+const getElectedSeats = (amount: number): string => {
   if (amount > 1)
     return t("js.components.AVDhondtSummary.summary.seat_count.n_seats", { n: amount });
   else if (amount === 1) return t("js.components.AVDhondtSummary.summary.seat_count.one_seat");
@@ -87,12 +87,14 @@ const additionalData = computed(() => {
         t("js.components.AVOption.aria_labels.option"),
       ),
       elected: sortedData.value.seats.reduce((accumulator, currentValue) => {
-        if (currentValue.find((option) => option.reference === reference)?.elected) accumulator++;
-        return accumulator;
+        return currentValue.find((option) => option.reference === reference)?.elected
+          ? accumulator + 1
+          : accumulator;
       }, 0),
       tied: sortedData.value.seats.reduce((accumulator, currentValue) => {
-        if (currentValue.find((option) => option.reference === reference)?.tied) accumulator++;
-        return accumulator;
+        return currentValue.find((option) => option.reference === reference)?.tied
+          ? accumulator + 1
+          : accumulator;
       }, 0),
     };
   });
@@ -121,7 +123,7 @@ onMounted(() => {
 /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
 const i18n: any = inject("i18n");
 const { t } = i18n.global;
-const i18nLocale = computed(() => i18n.global.locale.value || i18n.global.locale);
+const i18nLocale = computed<SupportedLocale>(() => i18n.global.locale.value || i18n.global.locale);
 watch(
   () => props.locale,
   () => {

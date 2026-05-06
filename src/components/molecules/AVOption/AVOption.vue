@@ -126,18 +126,18 @@ const url = computed(() => props.option.url?.[i18nLocale.value] ?? "");
 const videoUrl = computed(() => props.option.videoUrl?.[i18nLocale.value] ?? "");
 
 const links = computed(() => {
-  const links = [];
+  const displayedLinks = [];
   if (url.value)
-    links.push({
+    displayedLinks.push({
       url: url.value,
       text: t("js.components.AVOption.info_link_text_html"),
     });
   if (videoUrl.value)
-    links.push({
+    displayedLinks.push({
       url: videoUrl.value,
       text: t("js.components.AVOption.video_link_text_html"),
     });
-  return links;
+  return displayedLinks;
 });
 
 const hasChildren = computed(() => props.option.children && props.option.children.length > 0);
@@ -214,7 +214,7 @@ const counterInterface = computed(
     props.contest.multipleVotingInterface === "counter",
 );
 
-const toggleOption = (reference: string, amount = 1, text?: string, onlyUpdate?: boolean) => {
+const toggleOption = (reference: string, amount = 1, text?: string, onlyUpdate?: boolean): void => {
   emits("checked", {
     reference: reference,
     amount: amount,
@@ -234,7 +234,7 @@ const checkSubOptionSelected = (options: OptionContent[] | undefined): number =>
   }, count);
 };
 
-const handleHighlightOptionChange = (reference: string) => {
+const handleHighlightOptionChange = (reference: string): void => {
   highlighted.value = false;
 
   if (reference === props.option.reference) {
@@ -258,7 +258,7 @@ const resizeObserver = ref<ResizeObserver | null>(null);
 
 const mutationObserverTarget = document.getElementsByTagName("html")[0];
 
-const openChildrenCandidate = (contestReference: string, optionReference: string) => {
+const openChildrenCandidate = (contestReference: string, optionReference: string): void => {
   emits("view-candidate", contestReference, optionReference);
 };
 
@@ -305,7 +305,7 @@ const parentStyle = computed(() => {
   } else return "";
 });
 
-const toggleFromOption = (onlyUpdate: boolean) => {
+const toggleFromOption = (onlyUpdate: boolean): void => {
   if (props.disabled || props.observerMode || !props.option.selectable || counterInterface.value)
     return;
 
@@ -326,7 +326,7 @@ const toggleFromOption = (onlyUpdate: boolean) => {
   toggleOption(props.option.reference, 1, writeInText.value, onlyUpdate);
 };
 
-const toggleFromWriteIn = (e: Event) => {
+const toggleFromWriteIn = (e: Event): void => {
   e.preventDefault();
   e.stopPropagation();
   if (writeInText.value) toggleFromOption(Boolean(writeInText.value));
@@ -391,7 +391,7 @@ onUnmounted(() => {
 /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
 const i18n: any = inject("i18n");
 const { t } = i18n.global;
-const i18nLocale = computed(() => i18n.global.locale.value || i18n.global.locale);
+const i18nLocale = computed<SupportedLocale>(() => i18n.global.locale.value || i18n.global.locale);
 watch(
   () => props.locale,
   () => {

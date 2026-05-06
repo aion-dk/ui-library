@@ -15,6 +15,7 @@ import type {
   IterableObject,
   AVBallotGalleryOption,
   VoiceCredits,
+  OptionContent,
 } from "@/types";
 import SelectionPileValidator from "@assemblyvoting/js-client/dist/lib/validators/selectionPileValidator";
 import BelgiumBallotValidator from "@assemblyvoting/js-client/dist/lib/validators/belgiumBallotValidator";
@@ -89,8 +90,8 @@ const customValidators = computed(() => {
 const errors = computed(() => {
   const customErrors: Error[] = [];
 
-  customValidators.value.forEach((validator) => {
-    customErrors.push(...validator.validate(props.selectionPile));
+  customValidators.value.forEach((defaultValidator) => {
+    customErrors.push(...defaultValidator.validate(props.selectionPile));
   });
 
   const combinedErrors = [
@@ -162,14 +163,14 @@ watch(reactiveContest, (present, previous) => {
   }
 });
 
-const toggleBlank = () => {
+const toggleBlank = (): void => {
   emits("update:selectionPile", {
     ...props.selectionPile,
     explicitBlank: !props.selectionPile.explicitBlank,
   });
 };
 
-const toggleOption = ({ reference, amount, text, onlyUpdate }: CheckedEventArgs) => {
+const toggleOption = ({ reference, amount, text, onlyUpdate }: CheckedEventArgs): void => {
   const currentAmount = selections.value.filter(
     (selection) => selection.reference === reference,
   ).length;
@@ -179,13 +180,14 @@ const toggleOption = ({ reference, amount, text, onlyUpdate }: CheckedEventArgs)
   );
   const newSelection = { reference, text };
 
-  if (amount === currentAmount && !onlyUpdate) amount = amount - 1;
+  let finalAmount = amount;
+  if (amount === currentAmount && !onlyUpdate) finalAmount = amount - 1;
 
   let newSelections = selections.value.filter((selection) => {
     if (selection.reference !== reference) return { ...selection };
   });
 
-  for (let i = 0; i < amount; i++) {
+  for (let i = 0; i < finalAmount; i += 1) {
     newSelections.push(newSelection);
   }
 
@@ -201,7 +203,7 @@ const toggleOption = ({ reference, amount, text, onlyUpdate }: CheckedEventArgs)
   });
 };
 
-const viewCandidate = (contestReference: string, optionReference: string) =>
+const viewCandidate = (contestReference: string, optionReference: string): void =>
   emits("view-candidate", contestReference, optionReference);
 
 const galleryOptions = computed(() => {
@@ -210,7 +212,7 @@ const galleryOptions = computed(() => {
   props.contest.options.forEach((parent) => {
     if (parent.selectable) options.push({ ...parent, isChildren: false });
 
-    parent.children?.forEach((children) =>
+    parent.children?.forEach((children: OptionContent) =>
       options.push({
         ...children,
         isChildren: true,
@@ -237,7 +239,7 @@ const galleryOptions = computed(() => {
 /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
 const i18n: any = inject("i18n");
 const { t } = i18n.global;
-const i18nLocale = computed(() => i18n.global.locale.value || i18n.global.locale);
+const i18nLocale = computed<SupportedLocale>(() => i18n.global.locale.value || i18n.global.locale);
 onMounted(() => {
   if (props.locale) switchLocale(props.locale);
 });

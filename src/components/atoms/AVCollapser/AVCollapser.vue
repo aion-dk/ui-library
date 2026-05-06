@@ -53,7 +53,7 @@ onMounted(() => {
   nextTick(() => (isMounted.value = true));
 });
 
-const toggleAccordion = (force: boolean | null = null, animate = true) => {
+const toggleAccordion = (force: boolean | null = null, animate = true): void => {
   if (!props.collapsable) return;
 
   animateAccordion.value = animate;
@@ -62,7 +62,7 @@ const toggleAccordion = (force: boolean | null = null, animate = true) => {
   if (isOpen.value) emit("accordionOpen");
 };
 
-const triggerAccordion = () => {
+const triggerAccordion = (): void => {
   if (props.useDeferredButton) return;
 
   toggleAccordion();

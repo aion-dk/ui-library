@@ -31,12 +31,24 @@ const meta: Meta<typeof AVVerticalStep> = {
     inProgress: {
       control: { type: "boolean" },
     },
+    theme: {
+      control: { type: "select" },
+      options: ["light", "dark"],
+    },
   },
 };
 
 export default meta;
 
-const Template = (args: Meta) => ({
+const DarkTemplate = (args: Meta) => ({
+  components: { AVVerticalStep },
+  setup() {
+    return { args };
+  },
+  template: '<AVVerticalStep v-bind="args" />',
+});
+
+const LightTemplate = (args: Meta) => ({
   components: { AVVerticalStep },
   setup() {
     return { args };
@@ -52,8 +64,16 @@ const Template2 = (args: Meta) => ({
   template: '<div style="width: 150px;"><AVVerticalStep v-bind="args" /></div>',
 });
 
-export const Default = {
-  render: Template,
+const Template2Light = (args: Meta) => ({
+  components: { AVVerticalStep },
+  setup() {
+    return { args };
+  },
+  template: '<div style="width: 150px;"><AVVerticalStep v-bind="args" /></div>',
+});
+
+export const DefaultDark = {
+  render: DarkTemplate,
 
   args: {
     stepNumber: 1,
@@ -65,8 +85,26 @@ export const Default = {
   },
 };
 
-export const Active = {
-  render: Template,
+export const DefaultLight = {
+  render: LightTemplate,
+
+  globals: {
+    backgrounds: { value: "light" },
+  },
+
+  args: {
+    stepNumber: 1,
+    status: "default",
+    title: "Connect to election",
+    subtitle: "Choose location for partial key",
+    collapsed: false,
+    hasNextStep: false,
+    theme: "light",
+  },
+};
+
+export const ActiveDark = {
+  render: DarkTemplate,
 
   args: {
     stepNumber: 1,
@@ -78,8 +116,26 @@ export const Active = {
   },
 };
 
-export const Done = {
-  render: Template,
+export const ActiveLight = {
+  render: LightTemplate,
+
+  globals: {
+    backgrounds: { value: "light" },
+  },
+
+  args: {
+    stepNumber: 1,
+    status: "active",
+    title: "Connect to election",
+    subtitle: "Choose location for partial key",
+    collapsed: false,
+    hasNextStep: false,
+    theme: "light",
+  },
+};
+
+export const DoneDark = {
+  render: DarkTemplate,
 
   args: {
     stepNumber: 1,
@@ -91,8 +147,26 @@ export const Done = {
   },
 };
 
-export const LinkMode = {
-  render: Template,
+export const DoneLight = {
+  render: LightTemplate,
+
+  globals: {
+    backgrounds: { value: "light" },
+  },
+
+  args: {
+    stepNumber: 1,
+    status: "done",
+    title: "Connect to election",
+    subtitle: "Choose location for partial key",
+    collapsed: false,
+    hasNextStep: false,
+    theme: "light",
+  },
+};
+
+export const LinkModeDark = {
+  render: DarkTemplate,
 
   args: {
     linkMode: true,
@@ -101,8 +175,23 @@ export const LinkMode = {
   },
 };
 
+export const LinkModeLight = {
+  render: LightTemplate,
+
+  globals: {
+    backgrounds: { value: "light" },
+  },
+
+  args: {
+    linkMode: true,
+    title: "Voting Round 1",
+    subtitle: "3 contests",
+    theme: "light",
+  },
+};
+
 export const LinkModeSummary = {
-  render: Template,
+  render: DarkTemplate,
 
   args: {
     linkMode: true,
@@ -113,7 +202,7 @@ export const LinkModeSummary = {
 };
 
 export const LinkModeSummaryActive = {
-  render: Template,
+  render: DarkTemplate,
 
   args: {
     linkMode: true,
@@ -125,7 +214,7 @@ export const LinkModeSummaryActive = {
 };
 
 export const WithoutSubtitle = {
-  render: Template,
+  render: DarkTemplate,
 
   args: {
     stepNumber: 1,
@@ -136,8 +225,8 @@ export const WithoutSubtitle = {
   },
 };
 
-export const Collapsed = {
-  render: Template,
+export const CollapsedDark = {
+  render: DarkTemplate,
 
   args: {
     stepNumber: 1,
@@ -149,8 +238,26 @@ export const Collapsed = {
   },
 };
 
+export const CollapsedLight = {
+  render: LightTemplate,
+
+  globals: {
+    backgrounds: { value: "light" },
+  },
+
+  args: {
+    stepNumber: 1,
+    status: "default",
+    title: "Connect to election",
+    subtitle: "Choose location for partial key",
+    collapsed: true,
+    hasNextStep: false,
+    theme: "light",
+  },
+};
+
 export const WithPreviousStep = {
-  render: Template,
+  render: DarkTemplate,
 
   args: {
     stepNumber: 1,
@@ -163,7 +270,7 @@ export const WithPreviousStep = {
 };
 
 export const WithNextStep = {
-  render: Template,
+  render: DarkTemplate,
 
   args: {
     stepNumber: 1,
@@ -175,7 +282,7 @@ export const WithNextStep = {
   },
 };
 
-export const WithLongText = {
+export const WithLongTextDark = {
   render: Template2,
 
   args: {
@@ -186,6 +293,25 @@ export const WithLongText = {
     collapsed: false,
     hasPrevStep: true,
     hasNextStep: true,
+  },
+};
+
+export const WithLongTextLight = {
+  render: Template2Light,
+
+  globals: {
+    backgrounds: { value: "light" },
+  },
+
+  args: {
+    stepNumber: 1,
+    status: "default",
+    title: "This is a very long text",
+    subtitle: "This is also a very very veeeery long text",
+    collapsed: false,
+    hasPrevStep: true,
+    hasNextStep: true,
+    theme: "light",
   },
 };
 
