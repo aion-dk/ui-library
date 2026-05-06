@@ -448,7 +448,9 @@ watch(
             'AVOption--highlight': highlighted,
             'h-100': contest.mode === 'gallery',
             'cursor-pointer': option.selectable && !(disabled || observerMode || counterInterface),
-            'bg-transparent': contest.markingType.quadraticVoting,
+            'bg-transparent':
+              contest.markingType.quadraticVoting &&
+              !(selectionStyle === 'background' && checkedCount > 0),
             'AVOption--selected-background': selectionStyle === 'background' && checkedCount > 0,
           }"
           :style="coloredEdgeStyle"

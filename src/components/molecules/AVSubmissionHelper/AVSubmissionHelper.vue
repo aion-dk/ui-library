@@ -215,6 +215,7 @@ watch(
       class="modal fade show d-block"
       tabindex="-1"
       role="dialog"
+      aria-modal="true"
       data-test="error-modal"
     >
       <div class="modal-dialog modal-dialog-centered" role="document">
