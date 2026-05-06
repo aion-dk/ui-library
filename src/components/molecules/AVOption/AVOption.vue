@@ -478,6 +478,7 @@ watch(
               'flex-sm-row': (votesAllowedPerOption <= 5 || counterInterface) && !reverseOption,
               'flex-sm-row-reverse':
                 (votesAllowedPerOption <= 5 || counterInterface) && reverseOption,
+              'flex-row-reverse': votesAllowedPerOption === 1 && reverseOption,
             }"
             data-test="option-container"
           >
