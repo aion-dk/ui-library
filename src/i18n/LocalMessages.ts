@@ -77,11 +77,11 @@ const components: DefineLocaleMessage = {
   AVSplitHelper,
 };
 
-const getTranslations = (locale: SupportedLocale) => {
+const getTranslations = (locale: SupportedLocale): ComponentTranslationList => {
   const componentTranslation: ComponentTranslationList = {};
 
   Object.keys(components).forEach((componentKey: string) => {
-    componentTranslation[componentKey] = (components[componentKey] as LocalString)[locale];
+    componentTranslation[componentKey] = (components[componentKey] as LocalString)[locale] ?? "";
   });
 
   return componentTranslation;

@@ -24,7 +24,7 @@ defineProps({
   },
   options: {
     type: Object,
-    default: () => {},
+    default: () => ({}),
   },
 });
 </script>
@@ -40,7 +40,7 @@ defineProps({
     }"
   >
     <span v-if="text" class="me-1">{{ text }}</span>
-    <slot v-else name="text" />
+    <slot v-else name="text"></slot>
     <AVIcon v-if="icon" :icon="icon" class="AVTooltip--icon" aria-hidden="true" />
   </span>
 </template>

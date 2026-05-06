@@ -1,4 +1,4 @@
-import { SUPPORTED_LOCALES } from "../src/constants/i18n";
+import { SUPPORTED_LOCALES } from "../src/constants";
 import localI18n from "../src/i18n";
 
 const parameters = {

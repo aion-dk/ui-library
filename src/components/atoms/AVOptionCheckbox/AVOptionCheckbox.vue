@@ -48,7 +48,7 @@ const props = defineProps({
 
 const emits = defineEmits(["toggled"]);
 
-const onToggled = () => emits("toggled");
+const onToggled = (): void => emits("toggled");
 
 const accessibilityAttributes = computed(() => {
   if (!props.optionReference) return {};

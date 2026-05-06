@@ -1,6 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { getContest, getOption, getCandidate } from "@/examples";
 import localI18n from "@/i18n";
+import type { SupportedLocale } from "@/types";
 
 import { getMeaningfulLabel } from "./meaningfulLabel";
 
@@ -106,7 +107,7 @@ describe("Resource labels", () => {
 
   it("Gets internal name when title missing", async () => {
     Object.keys(INITIAL_RESOURCE.label).forEach((key) => {
-      delete INITIAL_RESOURCE.label[key];
+      delete INITIAL_RESOURCE.label[key as SupportedLocale];
     });
     expect(getMeaningfulLabel(INITIAL_RESOURCE, "es")).to.eq("Some internal name");
   });

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref, inject, watch, nextTick } from "vue";
+import type { PropType, SupportedLocale, Theme } from "@/types";
 
 const props = defineProps({
   stepNumber: {
@@ -43,6 +44,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  theme: {
+    type: String as PropType<Theme>,
+    default: "dark",
+  },
 });
 
 const acronym = computed(() => {
@@ -73,7 +78,7 @@ const lineStylePost = computed(() => {
   `;
 });
 
-const updateValues = () => {
+const updateValues = (): void => {
   if (!props.linkMode) {
     setTimeout(
       () => (currentStepHeight.value = verticalStepItem.value?.clientHeight || 0),
@@ -82,7 +87,7 @@ const updateValues = () => {
   }
 };
 
-const validateStepNumber = () => {
+const validateStepNumber = (): void => {
   if (!props.linkMode && !props.stepNumber)
     throw new Error("stepNumber prop is required when linkMode is disabled");
 };
@@ -104,7 +109,7 @@ onUnmounted(() => window.removeEventListener("resize", updateValues));
  */
 /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
 const i18n: any = inject("i18n");
-const i18nLocale = computed(() => i18n.global.locale.value || i18n.global.locale);
+const i18nLocale = computed<SupportedLocale>(() => i18n.global.locale.value || i18n.global.locale);
 watch(
   i18nLocale,
   () => {
@@ -117,13 +122,13 @@ watch(
 </script>
 
 <template>
-  <div class="AVVerticalStep">
+  <div class="AVVerticalStep" :class="`AVVerticalStep--${theme}`">
     <div
       v-if="hasPrevStep"
       class="AVVerticalStep--line"
       :style="lineStylePre"
       data-test="step-line-pre"
-    />
+    ></div>
 
     <div
       class="AVVerticalStep--container"
@@ -135,7 +140,7 @@ watch(
       :data-index="stepNumber"
     >
       <transition>
-        <div v-if="inProgress" class="AVVerticalStep--in-progress" />
+        <div v-if="inProgress" class="AVVerticalStep--in-progress"></div>
       </transition>
       <div :class="`AVVerticalStep--step AVVerticalStep--step-${status}`" data-test="step-circle">
         <!-- Summary -->
@@ -208,7 +213,7 @@ watch(
       class="AVVerticalStep--line"
       :style="lineStylePost"
       data-test="step-line-post"
-    />
+    ></div>
   </div>
 </template>
 
