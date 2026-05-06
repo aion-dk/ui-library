@@ -5,7 +5,7 @@ import type { PropType, SupportedLocale, Error, VoiceCredits } from "@/types";
 
 const showErrorModal = ref(false);
 
-const dismissErrorModal = () => {
+const dismissErrorModal = (): void => {
   showErrorModal.value = false;
 };
 
