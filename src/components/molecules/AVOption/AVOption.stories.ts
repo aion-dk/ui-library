@@ -119,6 +119,31 @@ export const Disabled = {
   },
 };
 
+export const Reversed = {
+  render: Template,
+
+  args: {
+    option: getOption(["selectable"], 1),
+    selections: [],
+    contest: getContest([]),
+    invalid: false,
+    reverseOption: true,
+  },
+};
+
+export const ReversedBackground = {
+  render: Template,
+
+  args: {
+    option: getOption(["selectable"], 1),
+    selections: [{ reference: "exampleOption1" }],
+    contest: getContest([]),
+    invalid: false,
+    reverseOption: true,
+    selectionStyle: "background",
+  },
+};
+
 export const WithSquarePicture = {
   render: Template,
 
@@ -128,6 +153,19 @@ export const WithSquarePicture = {
     selections: [],
     contest: getContest([]),
     invalid: false,
+  },
+};
+
+export const WithSquarePictureReversed = {
+  render: Template,
+
+  args: {
+    imageOption: "square",
+    option: getOption(["selectable", "image"], 1),
+    selections: [],
+    contest: getContest([]),
+    invalid: false,
+    reverseOption: true,
   },
 };
 
@@ -166,6 +204,19 @@ export const WithLiveResults = {
   },
 };
 
+export const WithLiveResultsReversed = {
+  render: Template,
+
+  args: {
+    option: getOption(["selectable"], 1),
+    selections: [],
+    contest: getContest([]),
+    partialResults: getLiveResult(["exampleOption1"]),
+    invalid: false,
+    reverseOption: true,
+  },
+};
+
 export const WithLiveResultsAndPercentage = {
   render: Template,
 
@@ -175,6 +226,19 @@ export const WithLiveResultsAndPercentage = {
     contest: getContest([]),
     partialResults: getLiveResult(["exampleOption1"], true),
     invalid: false,
+  },
+};
+
+export const WithLiveResultsAndPercentageReversed = {
+  render: Template,
+
+  args: {
+    option: getOption(["selectable"], 1),
+    selections: [],
+    contest: getContest([]),
+    partialResults: getLiveResult(["exampleOption1"], true),
+    invalid: false,
+    reverseOption: true,
   },
 };
 
@@ -212,6 +276,18 @@ export const WithPictureAndDescription = {
     selections: [],
     contest: getContest([]),
     invalid: false,
+  },
+};
+
+export const WithPictureAndDescriptionReversed = {
+  render: Template,
+
+  args: {
+    option: getOption(["selectable", "description", "image"], 1),
+    selections: [],
+    contest: getContest([]),
+    invalid: false,
+    reverseOption: true,
   },
 };
 
@@ -327,6 +403,18 @@ export const Error = {
     selections: [{ reference: "exampleOption1" }],
     contest: getContest([]),
     invalid: true,
+  },
+};
+
+export const ErrorReversed = {
+  render: Template,
+
+  args: {
+    option: getOption(["selectable"], 1),
+    selections: [{ reference: "exampleOption1" }],
+    contest: getContest([]),
+    invalid: true,
+    reverseOption: true,
   },
 };
 

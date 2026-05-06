@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { mount } from "@vue/test-utils";
 import localI18n from "@/i18n";
-import { getContest, getSelectionPile } from "@/examples";
+import { getContest, getSelectionPile, getLiveResult } from "@/examples";
 
 import AVBallot from "./AVBallot.vue";
 import AVCollapser from "@/components/atoms/AVCollapser";
@@ -11,6 +11,7 @@ import AVOption from "@/components/molecules/AVOption";
 import AVBlankOption from "@/components/molecules/AVBlankOption";
 import AVOptionLiveResults from "@/components/atoms/AVOptionLiveResults";
 import AVOptionCounter from "@/components/atoms/AVOptionCounter";
+import AVSubmissionHelper from "@/components/molecules/AVSubmissionHelper";
 
 describe("AVBallot", () => {
   const wrapper = mount(AVBallot, {
@@ -29,6 +30,7 @@ describe("AVBallot", () => {
         AVSearchBallot,
         AVOptionLiveResults,
         AVOptionCounter,
+        AVSubmissionHelper,
       },
       provide: {
         i18n: localI18n,
@@ -42,9 +44,6 @@ describe("AVBallot", () => {
         },
         AVOptionCheckbox: {
           template: "<span data-test='checkbox' />",
-        },
-        AVSubmissionHelper: {
-          template: "<span data-test='helper' />",
         },
       },
     },
@@ -374,5 +373,170 @@ describe("AVBallot", () => {
     expect(wrapper.findAll("[data-test=option]")[0].text()).to.contain("Eksempel mulighed 1");
     expect(wrapper.findAll("[data-test=option]")[1].text()).to.contain("Eksempel mulighed 2");
     expect(wrapper.findAll("[data-test=option]")[2].text()).to.contain("Eksempel mulighed 3");
+  });
+
+  it("passes partialResults to AVOption children", async () => {
+    await wrapper.setProps({
+      locale: "en",
+      contest: getContest([]),
+      selectionPile: getSelectionPile([]),
+    });
+
+    const partialResults = getLiveResult(["exampleOption1"]);
+    await wrapper.setProps({ partialResults });
+
+    const options = wrapper.findAllComponents(AVOption);
+    expect(options[0].props("partialResults")).to.deep.eq(partialResults);
+    expect(options[1].props("partialResults")).to.deep.eq(partialResults);
+    expect(options[2].props("partialResults")).to.deep.eq(partialResults);
+  });
+
+  it("defaults partialResults to null", async () => {
+    await wrapper.setProps({ partialResults: undefined });
+
+    const options = wrapper.findAllComponents(AVOption);
+    expect(options[0].props("partialResults")).to.eq(null);
+  });
+
+  it("passes partialResults blank key to AVBlankOption", async () => {
+    await wrapper.setProps({
+      contest: getContest(["blank"]),
+    });
+
+    const partialResults = getLiveResult(["exampleOption1", "blank"]);
+    await wrapper.setProps({ partialResults });
+
+    const blankOption = wrapper.findComponent(AVBlankOption);
+    expect(blankOption.props("partialResults")).to.deep.eq(partialResults["blank"]);
+  });
+
+  it("passes includeLazyErrors to validator", async () => {
+    await wrapper.setProps({
+      contest: getContest([]),
+      selectionPile: getSelectionPile([]),
+      includeLazyErrors: true,
+    });
+
+    const options = wrapper.findAllComponents(AVOption);
+    expect(options[0].props("invalid")).to.eq(false);
+  });
+
+  it("defaults includeLazyErrors to false", async () => {
+    await wrapper.setProps({ includeLazyErrors: undefined });
+
+    const options = wrapper.findAllComponents(AVOption);
+    expect(options[0].props("invalid")).to.eq(false);
+  });
+
+  it("passes imageOption to AVOption children", async () => {
+    await wrapper.setProps({
+      contest: getContest([]),
+      selectionPile: getSelectionPile([]),
+      imageOption: "passport",
+    });
+
+    const options = wrapper.findAllComponents(AVOption);
+    expect(options[0].props("imageOption")).to.eq("passport");
+    expect(options[1].props("imageOption")).to.eq("passport");
+    expect(options[2].props("imageOption")).to.eq("passport");
+  });
+
+  it("defaults imageOption to square", async () => {
+    await wrapper.setProps({ imageOption: undefined });
+
+    const options = wrapper.findAllComponents(AVOption);
+    expect(options[0].props("imageOption")).to.eq("square");
+  });
+
+  it("passes imageOption to AVOption in gallery mode", async () => {
+    await wrapper.setProps({
+      contest: getContest(["gallery_short"]),
+      imageOption: "passport",
+    });
+
+    const options = wrapper.findAllComponents(AVOption);
+    options.forEach((option) => {
+      expect(option.props("imageOption")).to.eq("passport");
+    });
+  });
+
+  it("passes reverseOption to AVOption children", async () => {
+    await wrapper.setProps({
+      contest: getContest([]),
+      selectionPile: getSelectionPile([]),
+      reverseOption: true,
+    });
+
+    const options = wrapper.findAllComponents(AVOption);
+    expect(options[0].props("reverseOption")).to.eq(true);
+    expect(options[1].props("reverseOption")).to.eq(true);
+    expect(options[2].props("reverseOption")).to.eq(true);
+  });
+
+  it("defaults reverseOption to false", async () => {
+    await wrapper.setProps({ reverseOption: undefined });
+
+    const options = wrapper.findAllComponents(AVOption);
+    expect(options[0].props("reverseOption")).to.eq(false);
+  });
+
+  it("passes reverseOption to AVBlankOption", async () => {
+    await wrapper.setProps({
+      contest: getContest(["blank"]),
+      reverseOption: true,
+    });
+
+    const blankOption = wrapper.findComponent(AVBlankOption);
+    expect(blankOption.props("reverseOption")).to.eq(true);
+  });
+
+  it("passes selectionStyle to AVOption children", async () => {
+    await wrapper.setProps({
+      contest: getContest([]),
+      selectionPile: getSelectionPile([]),
+      selectionStyle: "background",
+    });
+
+    const options = wrapper.findAllComponents(AVOption);
+    expect(options[0].props("selectionStyle")).to.eq("background");
+    expect(options[1].props("selectionStyle")).to.eq("background");
+    expect(options[2].props("selectionStyle")).to.eq("background");
+  });
+
+  it("defaults selectionStyle to checkbox", async () => {
+    await wrapper.setProps({ selectionStyle: undefined });
+
+    const options = wrapper.findAllComponents(AVOption);
+    expect(options[0].props("selectionStyle")).to.eq("checkbox");
+  });
+
+  it("passes selectionStyle to AVBlankOption", async () => {
+    await wrapper.setProps({
+      contest: getContest(["blank"]),
+      selectionStyle: "background",
+    });
+
+    const blankOption = wrapper.findComponent(AVBlankOption);
+    expect(blankOption.props("selectionStyle")).to.eq("background");
+  });
+
+  it("passes displayErrorModal to AVSubmissionHelper", async () => {
+    await wrapper.setProps({
+      contest: getContest([]),
+      selectionPile: getSelectionPile([]),
+      showSubmissionHelper: true,
+      displayErrorModal: true,
+    });
+
+    const submissionHelper = wrapper.findComponent(AVSubmissionHelper);
+    expect(submissionHelper.exists()).to.eq(true);
+    expect(submissionHelper.props("displayErrorModal")).to.eq(true);
+  });
+
+  it("defaults displayErrorModal to false", async () => {
+    await wrapper.setProps({ displayErrorModal: undefined });
+
+    const submissionHelper = wrapper.findComponent(AVSubmissionHelper);
+    expect(submissionHelper.props("displayErrorModal")).to.eq(false);
   });
 });

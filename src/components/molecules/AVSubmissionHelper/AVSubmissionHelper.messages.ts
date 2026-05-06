@@ -12,6 +12,7 @@ const translations: DefineLocaleMessage = {
       "لقد تجاوز اختيارك الحد الأقصى لعدد الخيارات التي يمكن أن تكون في قائمة {list_name}. يرجى تحديد الحد الأقصى لعدد {max_list_marks} من الخيارات في هذه القائمة",
     go_to_bottom: "انتقل إلى الأسفل",
     remaining_credits: "الاعتمادات الصوتية المتبقية:",
+    error_modal_dismiss: "رفض",
     errors: {
       too_many: "تم تحديد عدد كبير جدًا من الخيارات",
       blank: "فارغ حصري ولا يمكن دمجه مع خيارات أخرى.",
@@ -34,6 +35,7 @@ const translations: DefineLocaleMessage = {
     selected: "Seleccionades: {selected}",
     go_to_bottom: "Anar al fons",
     remaining_credits: "Crèdits de veu restants:",
+    error_modal_dismiss: "Descartar",
     errors: {
       too_many: "S'han seleccionat massa opcions.",
       blank: "El vot en blanc és exclusiu i no es pot combinar amb altres opcions.",
@@ -62,6 +64,7 @@ const translations: DefineLocaleMessage = {
     selected: "Dewiswyd: {selected}",
     go_to_bottom: "Ewch i'r gwaelod",
     remaining_credits: "Credydau llais sy'n weddill:",
+    error_modal_dismiss: "Gwneud yn Ddistryw",
     errors: {
       too_many: "Gormod o opsiynau wedi'u dewis.",
       blank: "Mae gwag yn ddewis unigol ac ni ellir ei gyfuno ag opsiynau eraill.",
@@ -90,6 +93,7 @@ const translations: DefineLocaleMessage = {
     selected: "Krydser: {selected}",
     go_to_bottom: "Gå til bunden",
     remaining_credits: "Resterende stemmekreditter:",
+    error_modal_dismiss: "Afvis",
     errors: {
       too_many: "Du har sat for mange krydser.",
       blank: "Blank stemme kan ikke kombineres med andre valgmuligheder.",
@@ -116,6 +120,7 @@ const translations: DefineLocaleMessage = {
     selected: "Gewählt: {selected}",
     go_to_bottom: "Nach unten gehen",
     remaining_credits: "Verbleibende Stimmguthaben:",
+    error_modal_dismiss: "Schließen",
     errors: {
       too_many: "Zu viele Optionen gewählt.",
       blank: "Blank ist exklusiv und kann nicht mit anderen Optionen kombiniert werden.",
@@ -144,6 +149,7 @@ const translations: DefineLocaleMessage = {
     selected: "Selected: {selected}",
     go_to_bottom: "Go to the bottom",
     remaining_credits: "Remaining voice credits:",
+    error_modal_dismiss: "Dismiss",
     errors: {
       too_many: "Too many options selected.",
       blank: "Blank is exclusive and cannot be combined with other options.",
@@ -171,6 +177,7 @@ const translations: DefineLocaleMessage = {
     selected: "Seleccionadas: {selected}",
     go_to_bottom: "Ir al final de la boleta",
     remaining_credits: "Créditos de voz restantes:",
+    error_modal_dismiss: "Descartar",
     errors: {
       too_many: "Demasiadas opciones seleccionadas.",
       exceeded_list_limit:
@@ -198,6 +205,7 @@ const translations: DefineLocaleMessage = {
     selected: "Valittu: {selected}",
     go_to_bottom: "Siirry pohjaan",
     remaining_credits: "Jäljellä olevat äänipisteet:",
+    error_modal_dismiss: "Hylkää",
     errors: {
       exceeded_list_limit:
         "Valintasi ylitti luettelossa {list_name} olevien vaihtoehtojen enimmäismäärän. Valitse enintään {max_list_marks} vaihtoehtoa tälle luettelolle",
@@ -224,6 +232,7 @@ const translations: DefineLocaleMessage = {
     selected: "Sélection: {selected}",
     go_to_bottom: "Aller au bas de la page",
     remaining_credits: "Crédits de voix restants :",
+    error_modal_dismiss: "Fermer",
     errors: {
       exceeded_list_limit:
         "Votre sélection a dépassé le nombre maximum d'options pouvant figurer sur la liste {list_name}. Veuillez sélectionner un maximum de {max_list_marks} options dans cette liste.",
@@ -251,6 +260,7 @@ const translations: DefineLocaleMessage = {
     selected: "Valið: {selected}",
     go_to_bottom: "Fara til botns",
     remaining_credits: "Eftirstandandi raddkreditar:",
+    error_modal_dismiss: "Vísa frá",
     errors: {
       exceeded_list_limit:
         "Val þitt fór yfir hámarksfjölda valkosta sem geta verið á listanum {list_name}. Vinsamlegast veldu hámark {max_list_marks} valkosti á þessum lista",
@@ -278,6 +288,7 @@ const translations: DefineLocaleMessage = {
     selected: "Selezionato: {selected}",
     go_to_bottom: "Vai in fondo",
     remaining_credits: "Crediti voce rimanenti:",
+    error_modal_dismiss: "Chiudi",
     errors: {
       too_many: "Troppe opzioni selezionate.",
       blank: "Il voto vuoto è esclusivo e non è cumulabile con altre opzioni.",
@@ -306,6 +317,7 @@ const translations: DefineLocaleMessage = {
     selected: "Geselecteerd: {selected}",
     go_to_bottom: "Naar beneden",
     remaining_credits: "Resterende stemkredieten:",
+    error_modal_dismiss: "Sluiten",
     errors: {
       exceeded_list_limit:
         "Je selectie heeft het maximale aantal opties overschreden dat op de lijst {list_name} kan staan. Selecteer maximaal {max_list_marks} opties per deze lijst",
@@ -332,6 +344,7 @@ const translations: DefineLocaleMessage = {
     selected: "Wybrane: {selected}",
     go_to_bottom: "Przejdź na dół",
     remaining_credits: "Pozostałe kredyty głosowe:",
+    error_modal_dismiss: "Zamknij",
     errors: {
       exceeded_list_limit:
         "Twój wybór przekroczył maksymalną liczbę opcji, które mogą znajdować się na liście {list_name}. Wybierz maksymalnie {max_list_marks} opcji z tej listy",
@@ -359,6 +372,7 @@ const translations: DefineLocaleMessage = {
     selected: "Selecionada: {selected}",
     go_to_bottom: "Ir para o fundo",
     remaining_credits: "Créditos de voz restantes:",
+    error_modal_dismiss: "Fechar",
     errors: {
       too_many: "Demasiadas opções seleccionadas.",
       blank: "O voto em branco é exclusivo e não pode ser combinado com outras opções.",
@@ -386,6 +400,7 @@ const translations: DefineLocaleMessage = {
     selected: "Selectat: {selected}",
     go_to_bottom: "Mergeți la partea de jos",
     remaining_credits: "Credite vocale rămase:",
+    error_modal_dismiss: "Închide",
     errors: {
       exceeded_list_limit:
         "Selecția dvs. a depășit numărul maxim de opțiuni care pot fi în lista {list_name}. Selectați maximum {max_list_marks} opțiuni din această listă",
@@ -414,6 +429,7 @@ const translations: DefineLocaleMessage = {
     selected: "Выбрано: {selected}",
     go_to_bottom: "Перейдите в нижнюю часть",
     remaining_credits: "Оставшиеся голосовые кредиты:",
+    error_modal_dismiss: "Закрыть",
     errors: {
       exceeded_list_limit:
         "Ваш выбор превысил максимальное количество вариантов, которые могут быть в списке {list_name}. Выберите максимальное количество параметров: {max_list_marks} в этом списке.",
@@ -441,6 +457,7 @@ const translations: DefineLocaleMessage = {
     selected: "Valda: {selected}",
     go_to_bottom: "Gå till botten",
     remaining_credits: "Återstående röstpoäng:",
+    error_modal_dismiss: "Stäng",
     errors: {
       exceeded_list_limit:
         "Ditt val överskred det maximala antalet alternativ som kan finnas på listan {list_name}. Välj max {max_list_marks} alternativ per den här listan",
@@ -466,6 +483,7 @@ const translations: DefineLocaleMessage = {
     selected: "Selected: {selected}",
     go_to_bottom: "Go to the bottom",
     remaining_credits: "残りの投票クレジット：",
+    error_modal_dismiss: "閉じる",
     errors: {
       too_many: "Too many options selected.",
       blank: "Blank is exclusive and cannot be combined with other options.",
@@ -493,6 +511,7 @@ const translations: DefineLocaleMessage = {
     selected: "Selected: {selected}",
     go_to_bottom: "Go to the bottom",
     remaining_credits: "남은 투표 크레딧:",
+    error_modal_dismiss: "닫기",
     errors: {
       too_many: "Too many options selected.",
       blank: "Blank is exclusive and cannot be combined with other options.",
@@ -520,6 +539,7 @@ const translations: DefineLocaleMessage = {
     selected: "Selected: {selected}",
     go_to_bottom: "Go to the bottom",
     remaining_credits: "剩余投票积分：",
+    error_modal_dismiss: "关闭",
     errors: {
       too_many: "Too many options selected.",
       blank: "Blank is exclusive and cannot be combined with other options.",

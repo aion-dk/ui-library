@@ -203,4 +203,65 @@ describe("AVBlankOption", () => {
     expect(wrapper.find("[data-test=option-content]").text()).to.contain("Vot en blanc");
     expect(wrapper.find("[data-test=partial-results-external]").text()).to.contain("5  vots");
   });
+
+  it("defaults reverseOption to false", async () => {
+    await wrapper.setProps({
+      locale: "en",
+      partialResults: undefined,
+      accentColor: undefined,
+      observerMode: false,
+    });
+
+    expect(wrapper.find("[data-test=option-content]").classes()).to.contain(
+      "justify-content-between",
+    );
+    expect(wrapper.find("[data-test=option-content]").classes()).to.not.contain(
+      "justify-content-start",
+    );
+  });
+
+  it("can reverse option layout", async () => {
+    await wrapper.setProps({
+      reverseOption: true,
+    });
+
+    expect(wrapper.find("[data-test=option-content]").classes()).to.contain(
+      "justify-content-start",
+    );
+    expect(wrapper.find("[data-test=option-content]").classes()).to.contain("gap-3");
+    expect(wrapper.find("[data-test=option-content]").classes()).to.not.contain(
+      "justify-content-between",
+    );
+  });
+
+  it("defaults selectionStyle to checkbox", async () => {
+    await wrapper.setProps({
+      checked: true,
+      reverseOption: false,
+    });
+
+    expect(wrapper.find("[data-test=option-container]").classes()).to.not.contain(
+      "AVBlankOption--selected-background",
+    );
+  });
+
+  it("can apply background selection style when checked", async () => {
+    await wrapper.setProps({
+      selectionStyle: "background",
+    });
+
+    expect(wrapper.find("[data-test=option-container]").classes()).to.contain(
+      "AVBlankOption--selected-background",
+    );
+  });
+
+  it("does not apply background selection style when not checked", async () => {
+    await wrapper.setProps({
+      checked: false,
+    });
+
+    expect(wrapper.find("[data-test=option-container]").classes()).to.not.contain(
+      "AVBlankOption--selected-background",
+    );
+  });
 });

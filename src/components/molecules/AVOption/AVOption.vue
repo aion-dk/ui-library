@@ -87,6 +87,14 @@ const props = defineProps({
     type: Object as PropType<VoiceCredits>,
     default: null,
   },
+  reverseOption: {
+    type: Boolean,
+    default: false,
+  },
+  selectionStyle: {
+    type: String as PropType<"checkbox" | "background">,
+    default: "checkbox",
+  },
 });
 
 const emits = defineEmits(["accordion-open", "checked", "view-candidate"]);
@@ -440,7 +448,10 @@ watch(
             'AVOption--highlight': highlighted,
             'h-100': contest.mode === 'gallery',
             'cursor-pointer': option.selectable && !(disabled || observerMode || counterInterface),
-            'bg-transparent': contest.markingType.quadraticVoting,
+            'bg-transparent':
+              contest.markingType.quadraticVoting &&
+              !(selectionStyle === 'background' && checkedCount > 0),
+            'AVOption--selected-background': selectionStyle === 'background' && checkedCount > 0,
           }"
           :style="coloredEdgeStyle"
           :aria-label="`${t('js.components.AVOption.aria_labels.option')} ${getMeaningfulLabel(option as unknown as IterableObject, i18nLocale, t('js.components.AVOption.aria_labels.option'))}`"
@@ -464,8 +475,12 @@ watch(
           <div
             class="d-flex justify-content-between"
             :class="{
-              'flex-column': votesAllowedPerOption > 1,
-              'flex-sm-row': votesAllowedPerOption <= 5 || counterInterface,
+              'flex-column': votesAllowedPerOption > 1 && !reverseOption,
+              'flex-column-reverse': votesAllowedPerOption > 1 && reverseOption,
+              'flex-sm-row': (votesAllowedPerOption <= 5 || counterInterface) && !reverseOption,
+              'flex-sm-row-reverse':
+                (votesAllowedPerOption <= 5 || counterInterface) && reverseOption,
+              'flex-row-reverse': votesAllowedPerOption === 1 && reverseOption,
             }"
             data-test="option-container"
           >
@@ -529,6 +544,7 @@ watch(
                       :check-box-index="optionGroups[0][0]"
                       :disabled="disabled || observerMode"
                       :gallery-mode="contest.mode === 'gallery'"
+                      :selection-style="selectionStyle"
                       @toggled="toggleOption(option.reference, optionGroups[0][0], writeInText)"
                     />
                   </div>
@@ -623,6 +639,7 @@ watch(
                 "
               />
             </div>
+
             <!-- CROSSES (STACKED MODE) -->
             <div
               v-else-if="votesAllowedPerOption >= 1 && contest.mode !== 'gallery'"
@@ -659,6 +676,7 @@ watch(
                   :check-box-index="optionIndex"
                   :disabled="disabled || observerMode"
                   :gallery-mode="false"
+                  :selection-style="selectionStyle"
                   @toggled="toggleOption(option.reference, optionIndex, writeInText)"
                 />
               </div>
@@ -719,6 +737,8 @@ watch(
             @checked="(args: boolean) => emits('checked', args)"
             @accordion-open="() => toggleCollapse(true, false)"
             @view-candidate="openChildrenCandidate"
+            :reverse-option="reverseOption"
+            :selection-style="selectionStyle"
           />
         </div>
       </template>

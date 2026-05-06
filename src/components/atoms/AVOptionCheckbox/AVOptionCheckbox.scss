@@ -68,6 +68,30 @@
     }
   }
 
+  &.AVOptionCheckbox--checked-white {
+    background-color: white;
+    border-color: var(--bs-ballot);
+
+    &:focus {
+      box-shadow: 0 0 0 0.2rem rgba(82, 88, 93, 0.5);
+      outline: 0;
+    }
+
+    &.AVOptionCheckbox--error {
+      background-color: var(--av-theme-danger-background);
+      border-width: 0.125rem;
+      border-style: solid;
+      box-shadow:
+        0 1px 2px rgba(0, 0, 0, 0.05),
+        inset 0px -15px 10px -10px rgba(0, 0, 0, 0.05),
+        inset 15px 10px -10px rgba(255, 255, 255, 0.1);
+
+      &:focus {
+        box-shadow: 0 0 0 0.2rem rgba(234, 78, 44, 0.5);
+      }
+    }
+  }
+
   &:disabled,
   &.AVOptionCheckbox--checked[disabled] {
     background-color: var(--bs-gray-600);
