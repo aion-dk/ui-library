@@ -46,7 +46,7 @@ describe("Option labels", () => {
 
   it("Gets option reference when title missing", async () => {
     Object.keys(INITIAL_OPTION.title).forEach((key) => {
-      delete INITIAL_OPTION.title[key];
+      delete INITIAL_OPTION.title[key as SupportedLocale];
     });
 
     expect(getMeaningfulLabel(INITIAL_OPTION, "es")).to.eq("exampleOption1");
@@ -77,7 +77,7 @@ describe("Contest labels", () => {
 
   it("Gets contest reference when title missing", async () => {
     Object.keys(INITIAL_CONTEST.title).forEach((key) => {
-      delete INITIAL_CONTEST.title[key];
+      delete INITIAL_CONTEST.title[key as SupportedLocale];
     });
     expect(getMeaningfulLabel(INITIAL_CONTEST, "es")).to.eq("exampleContest");
   });
