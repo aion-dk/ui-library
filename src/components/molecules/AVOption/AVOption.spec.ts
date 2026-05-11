@@ -404,22 +404,22 @@ describe("AVOption", () => {
     });
 
     expect(wrapper.findAll("[data-test=write-in-exampleOption1-input]").length).to.eq(1);
-    expect(wrapper.find("[data-test=space-counter]").text()).to.eq("0 / 20");
+    expect(wrapper.find("[data-test=space-counter]").text()).to.eq("0 / 28");
 
     expect(wrapper.emitted().checked.length).to.eq(5);
     await wrapper.find("[data-test=write-in-exampleOption1-input]").trigger("click");
-    await wrapper.find("[data-test=write-in-exampleOption1-input]").setValue("Less than 20");
-    expect(wrapper.find("[data-test=space-counter]").text()).to.eq("12 / 20");
-    expect((wrapper.emitted().checked as VitestEmitted)[5][0].text).to.eq("Less than 20");
+    await wrapper.find("[data-test=write-in-exampleOption1-input]").setValue("Less than 28");
+    expect(wrapper.find("[data-test=space-counter]").text()).to.eq("12 / 28");
+    expect((wrapper.emitted().checked as VitestEmitted)[5][0].text).to.eq("Less than 28");
     expect((wrapper.emitted().checked as VitestEmitted)[5][0].onlyUpdate).to.be.true;
     expect(wrapper.findAll(".invalid-feedback").length).to.eq(0);
     await wrapper
       .find("[data-test=write-in-exampleOption1-input]")
-      .setValue("Way more than 20 characters");
-    expect(wrapper.find("[data-test=space-counter]").text()).to.eq("27 / 20");
+      .setValue("Way more than 28 characters...");
+    expect(wrapper.find("[data-test=space-counter]").text()).to.eq("30 / 28");
     await wrapper.find("[data-test=write-in-exampleOption1-input]").trigger("click");
     expect((wrapper.emitted().checked as VitestEmitted)[6][0].text).to.eq(
-      "Way more than 20 characters",
+      "Way more than 28 characters...",
     );
     expect((wrapper.emitted().checked as VitestEmitted)[6][0].onlyUpdate).to.be.true;
 
@@ -446,7 +446,7 @@ describe("AVOption", () => {
           .element as HTMLTextAreaElement
       ).value,
     ).to.eq("Saved text");
-    expect(writeInWrapper.find("[data-test=space-counter]").text()).to.eq("10 / 20");
+    expect(writeInWrapper.find("[data-test=space-counter]").text()).to.eq("10 / 28");
 
     await writeInWrapper.find("[data-test=write-in-exampleOption1-input]").setValue("Invalid*");
 

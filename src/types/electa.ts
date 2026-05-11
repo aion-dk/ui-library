@@ -9,7 +9,7 @@ interface Party {
   name: string;
 }
 
-interface Result {
+interface OptionResult {
   reference: string;
   title: LocalString;
   elected?: boolean;
@@ -32,12 +32,12 @@ interface VoteCounts {
   blankCount: number;
 }
 
-interface NormalResult extends Result {
+interface NormalResult extends OptionResult {
   image?: string;
   count: number;
 }
 
-interface RankedResult extends Result {
+interface RankedResult extends OptionResult {
   optionPosition: number;
 }
 
@@ -56,8 +56,6 @@ interface InstantRunoffRound {
   event: string;
 }
 
-type Theme = "dark" | "light";
-
 interface VoiceCredits {
   total: number;
   remaining: number;
@@ -67,12 +65,11 @@ interface VoiceCredits {
 export type {
   PartialResults,
   Party,
-  Result,
+  OptionResult,
   Round,
   InstantRunoffRound,
   NormalResult,
   RankedResult,
-  Theme,
   VoteCounts,
   VoiceCredits,
 };
