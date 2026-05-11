@@ -47,10 +47,10 @@
     "@noble/hashes" "^1.8.0"
     sjcl-with-all "^1.0.8"
 
-"@assemblyvoting/js-client@^5.3.3":
-  version "5.3.3"
-  resolved "https://registry.yarnpkg.com/@assemblyvoting/js-client/-/js-client-5.3.3.tgz#6010769c505e72ad233498c20cb4e5eba418fc84"
-  integrity sha512-7Ehpllc0nWtKko42xIsU9qyBwUjRntmeBb49NPSVqX6H8tthZk0wQ95ar5XzVhhI3AzcP/ioPUAKbqVxcoE2nA==
+"@assemblyvoting/js-client@^6.0.0":
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/@assemblyvoting/js-client/-/js-client-6.0.0.tgz#340a845e9672a10631e1035546ac8e779e640811"
+  integrity sha512-ecNK10dQhESf2IGHPqApyCXSMHVYnhigB7SEnmX77RIQKVWtewYtmzFmeSLzY7gmIiB+2xn0AyeEURBjaAXuQA==
   dependencies:
     "@assemblyvoting/av-crypto" "^1.1.1"
     axios "^1.13.6"
@@ -59,10 +59,10 @@
     jwt-decode "^4.0.0"
     xml-js "^1.6.11"
 
-"@assemblyvoting/types@1.0.0-beta.4":
-  version "1.0.0-beta.4"
-  resolved "https://registry.yarnpkg.com/@assemblyvoting/types/-/types-1.0.0-beta.4.tgz#4f676eed2e9a9411903f40cdae108ace700c00e2"
-  integrity sha512-PfaunEJch2DHYjPkeKb6ciV6mc63g+J2+amJGTDD+OH1rnid2GpaIS82tGirHhcEF0RkFZT565L7Hxr364pJeA==
+"@assemblyvoting/types@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@assemblyvoting/types/-/types-1.0.0.tgz#e62cead4802122329cb86085b22dbcfbe6340917"
+  integrity sha512-NlevEP/feI/LzAywywfoe0E2cJ0JKlF9Sii9X42T06R5DqTbdPFyqM2RqCoixmkCWc+JIk5psU+2XkfnHT5wgw==
 
 "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.26.2", "@babel/code-frame@^7.27.1", "@babel/code-frame@^7.28.6", "@babel/code-frame@^7.29.0":
   version "7.29.0"
