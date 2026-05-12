@@ -108,11 +108,20 @@ watch(i18nLocale, (newLocale) => {
 watch(
   () => props.errors,
   (newErrors) => {
-    if (newErrors.length > 0) {
+    if (newErrors.length > 0 && props.displayErrorModal) {
       showErrorModal.value = true;
     }
   },
-  { deep: true },
+  { deep: true, immediate: true },
+);
+
+watch(
+  () => props.displayErrorModal,
+  (newVal) => {
+    if (newVal && props.errors.length > 0) {
+      showErrorModal.value = true;
+    }
+  },
 );
 /* END */
 </script>
@@ -133,9 +142,9 @@ watch(
       <div
         class="p-3"
         :class="{
-          'bg-gray-700': !errors.length,
-          'text-white': !errors.length,
-          'bg-theme-danger': errors.length > 0,
+          'bg-gray-700': !errors.length || displayErrorModal,
+          'text-white': !errors.length || displayErrorModal,
+          'bg-theme-danger': errors.length > 0 && !displayErrorModal,
         }"
         data-test="submission-helper"
       >
@@ -144,7 +153,7 @@ watch(
           v-if="voiceCredits"
           class="AVSubmissionHelper--quadratic"
           :class="{
-            'text-white': !errors.length,
+            'text-white': !errors.length || displayErrorModal,
           }"
           data-test="submission-helper-quadratic"
         >
@@ -154,8 +163,8 @@ watch(
           <strong>{{ voiceCredits.total }}</strong>
         </div>
 
-        <!-- ERRORS -->
-        <div v-if="errors.length > 0">
+        <!-- ERRORS (only shown inline when modal mode is off) -->
+        <div v-if="!displayErrorModal">
           <div
             v-for="errorMessage in errorMessages"
             :key="errorMessage"
@@ -163,8 +172,8 @@ watch(
             v-text="errorMessage"
             data-test="submission-helper-error"
           ></div>
-          <hr class="my-3" />
         </div>
+        <hr class="my-3" />
 
         <div v-if="maxMarks > 1">
           <div class="d-block justify-content-between align-items-center">
@@ -210,39 +219,37 @@ watch(
     </div>
 
     <!-- ERROR MODAL -->
-    <div
-      v-if="displayErrorModal && showErrorModal && errors.length > 0"
-      class="modal fade show d-block"
-      tabindex="-1"
-      role="dialog"
-      aria-modal="true"
-      data-test="error-modal"
-    >
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-body text-center p-4">
-            <div class="mb-3">
-              <AVIcon icon="triangle-exclamation" class="text-warning fs-1" />
+    <template v-if="displayErrorModal && showErrorModal && errors.length > 0">
+      <div class="modal-backdrop fade show"></div>
+      <div
+        class="modal fade show d-block"
+        tabindex="-1"
+        role="dialog"
+        aria-modal="true"
+        data-test="error-modal"
+      >
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-body text-center p-4">
+              <div class="mb-3">
+                <AVIcon icon="triangle-exclamation" class="text-warning fs-1" />
+              </div>
+              <p class="mb-4">
+                {{ errorMessages[0] }}
+              </p>
+              <button
+                type="button"
+                class="btn btn-primary"
+                @click="dismissErrorModal"
+                data-test="dismiss-error-modal"
+              >
+                {{ localI18n.global.t("js.components.AVSubmissionHelper.error_modal_dismiss") }}
+              </button>
             </div>
-            <p class="mb-4">
-              {{ errorMessages[0] }}
-            </p>
-            <button
-              type="button"
-              class="btn btn-primary"
-              @click="dismissErrorModal"
-              data-test="dismiss-error-modal"
-            >
-              {{ localI18n.global.t("js.components.AVSubmissionHelper.error_modal_dismiss") }}
-            </button>
           </div>
         </div>
       </div>
-    </div>
-    <div
-      v-if="displayErrorModal && showErrorModal && errors.length > 0"
-      class="modal-backdrop fade show"
-    ></div>
+    </template>
   </div>
 </template>
 
