@@ -58,7 +58,7 @@ const props = defineProps({
   },
   weight: {
     type: Number,
-    required: true,
+    default: null,
   },
 });
 
@@ -275,14 +275,14 @@ watch(
 
     <hr
       :class="{
-        'mt-3 mb-0': !contest.disregardVoterWeight,
+        'mt-3 mb-0': !contest.disregardVoterWeight && weight,
         'my-3': contest.disregardVoterWeight,
       }"
     />
 
     <!-- WEIGHT -->
     <div
-      v-if="!contest.disregardVoterWeight"
+      v-if="!contest.disregardVoterWeight && weight"
       class="hstack justify-content-end py-1 text-gray-700 small"
       data-test="ballot-voter-weight"
     >
