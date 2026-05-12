@@ -67,9 +67,6 @@ describe("AVSplitHelper", () => {
     expect(wrapper.find("[data-test=split-helper-contest-title]").text()).to.contain(
       "Example ballot",
     );
-    expect(wrapper.find("[data-test=split-helper-contest-weight]").text()).to.contain(
-      "Your vote has a weight of 1",
-    );
     expect(wrapper.findAll("[data-test=option]").length).to.eq(3);
   });
 
@@ -487,7 +484,7 @@ describe("AVSplitHelper", () => {
     expect(wrapper.find("[data-test=ballot-submission-helper]").text()).to.contain(
       "Sæt ét (1) kryds",
     );
-    expect(wrapper.find("[data-test=split-helper-contest-weight]").text()).to.contain(
+    expect(wrapper.find("[data-test=ballot-voter-weight]").text()).to.contain(
       "Du har en stemmevægt på 10",
     );
     expect(wrapper.find("[data-test=split-helper-confirm]").text()).to.contain("Bekræft valg");

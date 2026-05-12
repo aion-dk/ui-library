@@ -1,6 +1,6 @@
 {
   "name": "@assemblyvoting/electa-ui",
-  "version": "5.6.0",
+  "version": "5.6.1",
   "license": "MIT",
   "publishConfig": {
     "access": "public"
@@ -101,6 +101,7 @@
       "plugin:storybook/recommended"
     ]
   },
+  "$schema": "https://json.schemastore.org/package.json",
   "lint-staged": {
     "*.{vue,js,jsx,cjs,mjs,ts,tsx,cts,mts}": "eslint --cache --fix",
     "*.{js,css,md}": "prettier --write"
