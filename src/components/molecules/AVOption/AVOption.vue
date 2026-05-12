@@ -135,7 +135,7 @@ const links = computed(() => {
 const hasChildren = computed(() => props.option.children && props.option.children.length > 0);
 
 const votesAllowedPerOption = computed(() => {
-  if (props.option.selectable !== undefined && !props.option.selectable) return 0;
+  if (!props.option.selectable) return 0;
   if (exclusive.value) return 1;
   return props.option.voteLimit || props.contest.markingType.votesAllowedPerOption || 1;
 });
@@ -173,7 +173,9 @@ const writeInPlaceholder = computed(() =>
 
 const optionGroups = computed(() => {
   const options = Array.from(Array(votesAllowedPerOption.value).keys());
-  options.forEach((index) => (options[index] = index + 1));
+  for (let index = 0; index < options.length; index += 1) {
+    options[index] = index + 1;
+  }
   const half = options.indexOf(Math.ceil(votesAllowedPerOption.value / 2)) + 1;
   const group1 = options.slice(0, half);
   const group2 = options.slice(half);
@@ -361,10 +363,12 @@ onMounted(() => {
       (writeInTextArea as HTMLTextAreaElement).style.height = `${writeInTextArea.scrollHeight}px`;
     });
 
-    props.selections.forEach((selection) => {
-      if (selection.reference === props.option.reference && selection.text)
+    for (const selection of props.selections) {
+      if (selection.reference === props.option.reference && selection.text) {
         writeInText.value = selection.text;
-    });
+        break;
+      }
+    }
   }
 });
 
@@ -611,7 +615,7 @@ watch(
             </div>
 
             <!-- COUNTER (STACKED MODE) -->
-            <div v-if="counterInterface" class="AVOption--singlevote hstack">
+            <div v-if="counterInterface" class="AVOption--singlevote hstack justify-content-end">
               <AVOptionCounter
                 :amount="checkedCount"
                 :max-amount="votesAllowedPerOption"
