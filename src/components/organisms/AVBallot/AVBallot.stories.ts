@@ -58,6 +58,7 @@ export const Default = {
   args: {
     contest: getContest(["blank"]),
     selectionPile: getSelectionPile([]),
+    weight: 1,
   },
 };
 
@@ -67,6 +68,7 @@ export const WithWriteIn = {
   args: {
     contest: getContest(["blank", "write_in"]),
     selectionPile: getSelectionPile([]),
+    weight: 1,
   },
 };
 
@@ -76,6 +78,7 @@ export const MultipleVotes = {
   args: {
     contest: getContest(["blank", "multi"]),
     selectionPile: getSelectionPile(["multi"]),
+    weight: 1,
   },
 };
 
@@ -85,6 +88,7 @@ export const Ranked = {
   args: {
     contest: getContest(["blank", "ranked"]),
     selectionPile: getSelectionPile(["multi"]),
+    weight: 1,
   },
 };
 
@@ -95,6 +99,7 @@ export const WithoutSubmissionHelper = {
     contest: getContest(["blank"]),
     selectionPile: getSelectionPile([]),
     showSubmissionHelper: false,
+    weight: 1,
   },
 };
 
@@ -104,6 +109,7 @@ export const WithError = {
   args: {
     contest: getContest(["blank", "multi"]),
     selectionPile: getSelectionPile(["blank", "multi"]),
+    weight: 1,
   },
 };
 
@@ -113,6 +119,7 @@ export const WithSearchForm = {
   args: {
     contest: getContest(["blank", "search_form"]),
     selectionPile: getSelectionPile([]),
+    weight: 1,
   },
 };
 
@@ -123,6 +130,7 @@ export const Handraise = {
     contest: getContest(["color_options", "blank"]),
     selectionPile: getSelectionPile([]),
     partialResults: getLiveResult(["exampleOption1", "exampleOption2", "exampleOption3", "blank"]),
+    weight: 1,
   },
 };
 
@@ -136,6 +144,7 @@ export const HandraiseWithPercentage = {
       ["exampleOption1", "exampleOption2", "exampleOption3", "blank"],
       true,
     ),
+    weight: 1,
   },
 };
 
@@ -145,6 +154,7 @@ export const LessThan5VotesPerOption = {
   args: {
     contest: getContest(["multiple_votes_sm"]),
     selectionPile: getSelectionPile([]),
+    weight: 1,
   },
 };
 
@@ -154,6 +164,7 @@ export const MoreThan5VotesPerOption = {
   args: {
     contest: getContest(["multiple_votes_lg"]),
     selectionPile: getSelectionPile([]),
+    weight: 1,
   },
 };
 
@@ -163,6 +174,7 @@ export const MultivoteWithCounterInterface = {
   args: {
     contest: getContest(["multiple_votes_lg", "counter"]),
     selectionPile: getSelectionPile(["multivote"]),
+    weight: 1,
   },
 };
 
@@ -172,6 +184,7 @@ export const WithChildren = {
   args: {
     contest: getContest(["children_options", "collapsable", "blank"]),
     selectionPile: getSelectionPile([]),
+    weight: 1,
   },
 };
 
@@ -182,6 +195,7 @@ export const ObserverMode = {
     contest: getContest([]),
     observerMode: true,
     selectionPile: getSelectionPile([]),
+    weight: 1,
   },
 };
 
@@ -192,6 +206,7 @@ export const Disabled = {
     contest: getContest([]),
     disabled: true,
     selectionPile: getSelectionPile([]),
+    weight: 1,
   },
 };
 
@@ -201,6 +216,7 @@ export const HugeContest = {
   args: {
     contest: getContest(["huge"]),
     selectionPile: getSelectionPile([]),
+    weight: 1,
   },
 };
 
@@ -210,6 +226,7 @@ export const GalleryMode = {
   args: {
     contest: getContest(["gallery"]),
     selectionPile: getSelectionPile([]),
+    weight: 1,
   },
 };
 
@@ -219,6 +236,7 @@ export const GalleryModeWithParentsAndBlank = {
   args: {
     contest: getContest(["gallery_parents"]),
     selectionPile: getSelectionPile([]),
+    weight: 1,
   },
 };
 
@@ -228,5 +246,6 @@ export const QuadraticVoting = {
   args: {
     contest: getContest(["multiple_votes_lg", "counter", "quadratic_voting"]),
     selectionPile: getSelectionPile([]),
+    weight: 1,
   },
 };
