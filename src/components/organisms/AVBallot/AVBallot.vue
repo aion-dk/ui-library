@@ -273,7 +273,12 @@ watch(
       :options-container-id="'ballot_options'"
     />
 
-    <hr class="mt-3 mb-0" />
+    <hr
+      :class="{
+        'mt-3 mb-0': !contest.disregardVoterWeight,
+        'my-3': contest.disregardVoterWeight,
+      }"
+    />
 
     <!-- WEIGHT -->
     <div
