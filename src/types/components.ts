@@ -3,6 +3,7 @@ import type {
   BOOTSTRAP_BASIC_SIZES,
   BOOTSTRAP_EXPANDED_SIZES,
   IMAGE_OPTIONS,
+  SELECTION_STYLES,
   CANDIDACY_RESOURCES,
 } from "@/constants";
 
@@ -13,6 +14,8 @@ type BootstrapBasicSize = (typeof BOOTSTRAP_BASIC_SIZES)[number];
 type BootstrapExpandedSize = (typeof BOOTSTRAP_EXPANDED_SIZES)[number];
 
 type ImageOption = (typeof IMAGE_OPTIONS)[number];
+
+type SelectionStyle = (typeof SELECTION_STYLES)[number];
 
 type CandidacyResource = (typeof CANDIDACY_RESOURCES)[number];
 
@@ -44,5 +47,6 @@ export type {
   BootstrapBasicSize,
   BootstrapExpandedSize,
   ImageOption,
+  SelectionStyle,
   CandidacyResource,
 };

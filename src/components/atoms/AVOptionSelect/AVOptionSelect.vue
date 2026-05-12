@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, inject, onMounted, watch } from "vue";
 import { switchLocale } from "@/i18n";
-import type { PropType, SupportedLocale } from "@/types";
+import type { PropType, SupportedLocale, SelectionStyle } from "@/types";
 
 const props = defineProps({
   checked: {
@@ -17,7 +17,7 @@ const props = defineProps({
     default: null,
   },
   selectionStyle: {
-    type: String as PropType<"checkbox" | "background">,
+    type: String as PropType<SelectionStyle>,
     default: "checkbox",
   },
 });

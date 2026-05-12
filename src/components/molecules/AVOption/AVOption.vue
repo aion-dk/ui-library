@@ -21,6 +21,7 @@ import type {
   CheckedEventArgs,
   PartialResults,
   ImageOption,
+  SelectionStyle,
   IterableObject,
   VoiceCredits,
 } from "@/types";
@@ -92,7 +93,7 @@ const props = defineProps({
     default: false,
   },
   selectionStyle: {
-    type: String as PropType<"checkbox" | "background">,
+    type: String as PropType<SelectionStyle>,
     default: "checkbox",
   },
 });
@@ -523,7 +524,8 @@ watch(
                 <div
                   v-if="contest.mode === 'gallery'"
                   :ref="`crossesFor${option.reference}`"
-                  class="AVOption--singlevote end-0 position-absolute"
+                  class="AVOption--singlevote position-absolute"
+                  :class="reverseOption ? 'start-0' : 'end-0'"
                   :style="contest.mode === 'gallery' && parentTitle ? 'top: 1rem' : 'top: 0'"
                   data-test="option-multivote"
                 >
@@ -646,7 +648,9 @@ watch(
               :ref="`crossesFor${option.reference}`"
               :class="{
                 'AVOption--multivote-aside hstack gap-2 justify-content-end bg-secondary':
-                  votesAllowedPerOption <= 5 && votesAllowedPerOption !== 1,
+                  votesAllowedPerOption <= 5 && votesAllowedPerOption !== 1 && !reverseOption,
+                'AVOption--multivote-aside-reversed hstack gap-2 justify-content-end bg-secondary':
+                  votesAllowedPerOption <= 5 && votesAllowedPerOption !== 1 && reverseOption,
                 'AVOption--multivote-footer hstack gap-2 flex-wrap justify-content-end border-top bg-secondary':
                   votesAllowedPerOption > 5,
                 'AVOption--singlevote': votesAllowedPerOption === 1,

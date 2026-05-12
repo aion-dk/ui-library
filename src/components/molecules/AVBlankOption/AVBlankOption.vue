@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { inject, onMounted, watch, ref, onUnmounted } from "vue";
-import type { PropType, SupportedLocale, PartialResult } from "@/types";
+import type { PropType, SupportedLocale, PartialResult, SelectionStyle } from "@/types";
 import { switchLocale } from "@/i18n";
 
 const props = defineProps({
@@ -45,7 +45,7 @@ const props = defineProps({
     default: false,
   },
   selectionStyle: {
-    type: String as PropType<"checkbox" | "background">,
+    type: String as PropType<SelectionStyle>,
     default: "checkbox",
   },
 });

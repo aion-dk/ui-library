@@ -64,7 +64,9 @@ describe("AVOptionSelect", () => {
   it("defaults selectionStyle to checkbox", async () => {
     await wrapper.setProps({
       locale: "en",
+      checked: true,
       rank: null,
+      selectionStyle: "checkbox",
     });
 
     expect(wrapper.find("[data-test=option-select]").classes()).to.contain("text-white");
@@ -74,6 +76,7 @@ describe("AVOptionSelect", () => {
 
   it("can apply background selection style", async () => {
     await wrapper.setProps({
+      checked: true,
       selectionStyle: "background",
     });
 

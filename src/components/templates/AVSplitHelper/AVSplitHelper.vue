@@ -10,6 +10,7 @@ import type {
   AVSplitHelperState,
   PartialResults,
   ImageOption,
+  SelectionStyle,
   IterableObject,
 } from "@/types";
 import SelectionPileValidator from "@assemblyvoting/js-client/dist/lib/validators/selectionPileValidator";
@@ -54,7 +55,7 @@ const props = defineProps({
     default: false,
   },
   selectionStyle: {
-    type: String as PropType<"checkbox" | "background">,
+    type: String as PropType<SelectionStyle>,
     default: "checkbox",
   },
   displayErrorModal: {

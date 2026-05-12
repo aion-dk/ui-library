@@ -12,6 +12,7 @@ import type {
   PartialResults,
   Error,
   ImageOption,
+  SelectionStyle,
   IterableObject,
   AVBallotGalleryOption,
   VoiceCredits,
@@ -62,7 +63,7 @@ const props = defineProps({
     default: false,
   },
   selectionStyle: {
-    type: String as PropType<"checkbox" | "background">,
+    type: String as PropType<SelectionStyle>,
     default: "checkbox",
   },
   displayErrorModal: {

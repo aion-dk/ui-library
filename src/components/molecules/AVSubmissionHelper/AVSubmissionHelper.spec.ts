@@ -172,4 +172,57 @@ describe("AVSubmissionHelper", () => {
       "Selecția dvs. a depășit numărul maxim de opțiuni",
     );
   });
+
+  it("does not render error modal when displayErrorModal is false", async () => {
+    await wrapper.setProps({
+      errors: [{ message: "too_many" }],
+      displayErrorModal: false,
+    });
+
+    expect(wrapper.findAll("[data-test=error-modal]").length).to.eq(0);
+  });
+
+  it("renders error modal when displayErrorModal is true and errors exist", async () => {
+    await wrapper.setProps({
+      locale: "en",
+      errors: [{ message: "too_many" }],
+      displayErrorModal: true,
+    });
+
+    expect(wrapper.findAll("[data-test=error-modal]").length).to.eq(1);
+    expect(wrapper.find("[data-test=dismiss-error-modal]").text()).to.contain("Dismiss");
+  });
+
+  it("closes error modal when dismiss button is clicked", async () => {
+    await wrapper.find("[data-test=dismiss-error-modal]").trigger("click");
+
+    expect(wrapper.findAll("[data-test=error-modal]").length).to.eq(0);
+  });
+
+  it("does not show error modal when there are no errors even with displayErrorModal true", async () => {
+    await wrapper.setProps({
+      errors: [],
+      displayErrorModal: true,
+    });
+
+    expect(wrapper.findAll("[data-test=error-modal]").length).to.eq(0);
+  });
+
+  it("shows inline errors when displayErrorModal is false", async () => {
+    await wrapper.setProps({
+      errors: [{ message: "too_many" }],
+      displayErrorModal: false,
+    });
+
+    expect(wrapper.findAll("[data-test=submission-helper-error]").length).to.eq(1);
+  });
+
+  it("hides inline errors when displayErrorModal is true", async () => {
+    await wrapper.setProps({
+      errors: [{ message: "too_many" }],
+      displayErrorModal: true,
+    });
+
+    expect(wrapper.findAll("[data-test=submission-helper-error]").length).to.eq(0);
+  });
 });
