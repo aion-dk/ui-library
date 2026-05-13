@@ -9,6 +9,7 @@ import type {
   ContestContent,
   OptionContent,
   ImageOption,
+  SelectionStyle,
   AVPileSummaryOptionSummary,
   AVPileSummaryState,
   OptionSelection,
@@ -59,6 +60,14 @@ const props = defineProps({
   isPrefilled: {
     type: Boolean,
     default: false,
+  },
+  reverseOption: {
+    type: Boolean,
+    default: false,
+  },
+  selectionStyle: {
+    type: String as PropType<SelectionStyle>,
+    default: "checkbox",
   },
 });
 
@@ -225,6 +234,8 @@ watch(
         :write-in="option.writeIn"
         :counter-interface="contest.multipleVotingInterface === 'counter'"
         :is-quadratic="contest.markingType.quadraticVoting"
+        :reverse-option="reverseOption"
+        :selection-style="selectionStyle"
       />
       <AVSummaryOption
         v-if="blankSelected"

@@ -7,6 +7,7 @@ import type {
   AVSummaryOptionObject,
   AVSummaryOptionParent,
   ImageOption,
+  SelectionStyle,
   IterableObject,
 } from "@/types";
 import { getMeaningfulLabel } from "@/helpers/meaningfulLabel";
@@ -56,6 +57,14 @@ const props = defineProps({
   isQuadratic: {
     type: Boolean,
     default: false,
+  },
+  reverseOption: {
+    type: Boolean,
+    default: false,
+  },
+  selectionStyle: {
+    type: String as PropType<SelectionStyle>,
+    default: "checkbox",
   },
 });
 
@@ -190,6 +199,7 @@ watch(
 <template>
   <div
     class="AVSummaryOption card rounded-0 position-relative"
+    :class="{ 'AVSummaryOption--selected-background': selectionStyle === 'background' && !blank }"
     :style="coloredEdgeStyle"
     :aria-label="t('js.components.AVSummaryOption.aria_label.option')"
     data-test="summary-option"
@@ -224,7 +234,11 @@ watch(
     <!-- OPTION -->
     <div
       class="card-body hstack gap-2"
-      :class="{ 'p-4': useFooter, 'justify-content-between': !galleryMode }"
+      :class="{
+        'p-4': useFooter,
+        'justify-content-between': !galleryMode && !reverseOption,
+        'flex-row-reverse': reverseOption,
+      }"
     >
       <div
         :class="{ vstack: galleryMode, 'w-100': !galleryMode }"
@@ -278,6 +292,7 @@ watch(
           :checked="true"
           :rank="option?.rank"
           :disabled="true"
+          :selection-style="selectionStyle"
           data-test="summary-cross"
         />
       </div>
@@ -299,6 +314,7 @@ watch(
           :checked="true"
           :rank="option?.rank"
           :disabled="true"
+          :selection-style="selectionStyle"
           data-test="summary-cross"
         />
       </div>
