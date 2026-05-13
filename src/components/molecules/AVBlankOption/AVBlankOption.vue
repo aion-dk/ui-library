@@ -126,6 +126,7 @@ watch(
             :disabled="disabled || observerMode"
             :gallery-mode="galleryMode"
             :selection-style="selectionStyle"
+            :reverse-option="reverseOption"
             @toggled="emits('toggleBlank')"
             data-test="blank-checkbox"
           />
@@ -144,6 +145,7 @@ watch(
             :disabled="disabled || observerMode"
             :gallery-mode="galleryMode"
             :selection-style="selectionStyle"
+            :reverse-option="reverseOption"
             @toggled="emits('toggleBlank')"
             data-test="blank-checkbox"
           />

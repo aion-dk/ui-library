@@ -44,6 +44,10 @@ const props = defineProps({
     type: String as PropType<SelectionStyle>,
     default: "checkbox",
   },
+  reverseOption: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const emits = defineEmits(["toggled"]);
@@ -89,6 +93,7 @@ watch(
     <div
       v-if="exclusiveError && checked"
       class="AVOptionCheckbox--exclusive-container"
+      :class="{ 'AVOptionCheckbox--exclusive-container--reversed': reverseOption }"
       data-test="exclusive-error"
     >
       <div class="AVOptionCheckbox--exclusive text-white px-2 d-block bg-theme-danger">
