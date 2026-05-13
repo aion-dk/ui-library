@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, inject, onMounted, watch, ref } from "vue";
-import localI18n, { switchLocale } from "@/i18n";
+import { switchLocale } from "@/i18n";
 import type { PropType, SupportedLocale, Error, VoiceCredits } from "@/types";
 
 const showErrorModal = ref(false);
@@ -224,8 +224,10 @@ watch(
       <div
         class="modal fade show d-block"
         tabindex="-1"
-        role="dialog"
+        role="alertdialog"
         aria-modal="true"
+        aria-labelledby="error-modal-title"
+        aria-describedby="error-modal-message"
         data-test="error-modal"
       >
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -234,7 +236,10 @@ watch(
               <div class="mb-3">
                 <AVIcon icon="triangle-exclamation" class="text-warning fs-1" />
               </div>
-              <p class="mb-4">
+              <h2 id="error-modal-title" class="visually-hidden">
+                {{ t("js.components.AVSubmissionHelper.error_modal_title") }}
+              </h2>
+              <p id="error-modal-message" class="mb-4">
                 {{ errorMessages[0] }}
               </p>
               <button
@@ -243,7 +248,7 @@ watch(
                 @click="dismissErrorModal"
                 data-test="dismiss-error-modal"
               >
-                {{ localI18n.global.t("js.components.AVSubmissionHelper.error_modal_dismiss") }}
+                {{ t("js.components.AVSubmissionHelper.error_modal_dismiss") }}
               </button>
             </div>
           </div>

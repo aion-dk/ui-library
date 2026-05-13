@@ -12,6 +12,7 @@ const translations: DefineLocaleMessage = {
       "لقد تجاوز اختيارك الحد الأقصى لعدد الخيارات التي يمكن أن تكون في قائمة {list_name}. يرجى تحديد الحد الأقصى لعدد {max_list_marks} من الخيارات في هذه القائمة",
     go_to_bottom: "انتقل إلى الأسفل",
     remaining_credits: "الاعتمادات الصوتية المتبقية:",
+    error_modal_title: "خطأ",
     error_modal_dismiss: "رفض",
     errors: {
       too_many: "تم تحديد عدد كبير جدًا من الخيارات",
@@ -35,6 +36,7 @@ const translations: DefineLocaleMessage = {
     selected: "Seleccionades: {selected}",
     go_to_bottom: "Anar al fons",
     remaining_credits: "Crèdits de veu restants:",
+    error_modal_title: "Error",
     error_modal_dismiss: "Descartar",
     errors: {
       too_many: "S'han seleccionat massa opcions.",
@@ -64,6 +66,7 @@ const translations: DefineLocaleMessage = {
     selected: "Dewiswyd: {selected}",
     go_to_bottom: "Ewch i'r gwaelod",
     remaining_credits: "Credydau llais sy'n weddill:",
+    error_modal_title: "Gwall",
     error_modal_dismiss: "Gwneud yn Ddistryw",
     errors: {
       too_many: "Gormod o opsiynau wedi'u dewis.",
@@ -93,6 +96,7 @@ const translations: DefineLocaleMessage = {
     selected: "Krydser: {selected}",
     go_to_bottom: "Gå til bunden",
     remaining_credits: "Resterende stemmekreditter:",
+    error_modal_title: "Fejl",
     error_modal_dismiss: "Afvis",
     errors: {
       too_many: "Du har sat for mange krydser.",
@@ -120,6 +124,7 @@ const translations: DefineLocaleMessage = {
     selected: "Gewählt: {selected}",
     go_to_bottom: "Nach unten gehen",
     remaining_credits: "Verbleibende Stimmguthaben:",
+    error_modal_title: "Fehler",
     error_modal_dismiss: "Schließen",
     errors: {
       too_many: "Zu viele Optionen gewählt.",
@@ -149,6 +154,7 @@ const translations: DefineLocaleMessage = {
     selected: "Selected: {selected}",
     go_to_bottom: "Go to the bottom",
     remaining_credits: "Remaining voice credits:",
+    error_modal_title: "Error",
     error_modal_dismiss: "Dismiss",
     errors: {
       too_many: "Too many options selected.",
@@ -177,6 +183,7 @@ const translations: DefineLocaleMessage = {
     selected: "Seleccionadas: {selected}",
     go_to_bottom: "Ir al final de la boleta",
     remaining_credits: "Créditos de voz restantes:",
+    error_modal_title: "Error",
     error_modal_dismiss: "Descartar",
     errors: {
       too_many: "Demasiadas opciones seleccionadas.",
@@ -205,6 +212,7 @@ const translations: DefineLocaleMessage = {
     selected: "Valittu: {selected}",
     go_to_bottom: "Siirry pohjaan",
     remaining_credits: "Jäljellä olevat äänipisteet:",
+    error_modal_title: "Virhe",
     error_modal_dismiss: "Hylkää",
     errors: {
       exceeded_list_limit:
@@ -232,6 +240,7 @@ const translations: DefineLocaleMessage = {
     selected: "Sélection: {selected}",
     go_to_bottom: "Aller au bas de la page",
     remaining_credits: "Crédits de voix restants :",
+    error_modal_title: "Erreur",
     error_modal_dismiss: "Fermer",
     errors: {
       exceeded_list_limit:
@@ -260,6 +269,7 @@ const translations: DefineLocaleMessage = {
     selected: "Valið: {selected}",
     go_to_bottom: "Fara til botns",
     remaining_credits: "Eftirstandandi raddkreditar:",
+    error_modal_title: "Villa",
     error_modal_dismiss: "Vísa frá",
     errors: {
       exceeded_list_limit:
@@ -288,6 +298,7 @@ const translations: DefineLocaleMessage = {
     selected: "Selezionato: {selected}",
     go_to_bottom: "Vai in fondo",
     remaining_credits: "Crediti voce rimanenti:",
+    error_modal_title: "Errore",
     error_modal_dismiss: "Chiudi",
     errors: {
       too_many: "Troppe opzioni selezionate.",
@@ -317,6 +328,7 @@ const translations: DefineLocaleMessage = {
     selected: "Geselecteerd: {selected}",
     go_to_bottom: "Naar beneden",
     remaining_credits: "Resterende stemkredieten:",
+    error_modal_title: "Fout",
     error_modal_dismiss: "Sluiten",
     errors: {
       exceeded_list_limit:
@@ -344,6 +356,7 @@ const translations: DefineLocaleMessage = {
     selected: "Wybrane: {selected}",
     go_to_bottom: "Przejdź na dół",
     remaining_credits: "Pozostałe kredyty głosowe:",
+    error_modal_title: "Błąd",
     error_modal_dismiss: "Zamknij",
     errors: {
       exceeded_list_limit:
@@ -372,6 +385,7 @@ const translations: DefineLocaleMessage = {
     selected: "Selecionada: {selected}",
     go_to_bottom: "Ir para o fundo",
     remaining_credits: "Créditos de voz restantes:",
+    error_modal_title: "Erro",
     error_modal_dismiss: "Fechar",
     errors: {
       too_many: "Demasiadas opções seleccionadas.",
@@ -400,6 +414,7 @@ const translations: DefineLocaleMessage = {
     selected: "Selectat: {selected}",
     go_to_bottom: "Mergeți la partea de jos",
     remaining_credits: "Credite vocale rămase:",
+    error_modal_title: "Eroare",
     error_modal_dismiss: "Închide",
     errors: {
       exceeded_list_limit:
@@ -429,6 +444,7 @@ const translations: DefineLocaleMessage = {
     selected: "Выбрано: {selected}",
     go_to_bottom: "Перейдите в нижнюю часть",
     remaining_credits: "Оставшиеся голосовые кредиты:",
+    error_modal_title: "Ошибка",
     error_modal_dismiss: "Закрыть",
     errors: {
       exceeded_list_limit:
@@ -457,6 +473,7 @@ const translations: DefineLocaleMessage = {
     selected: "Valda: {selected}",
     go_to_bottom: "Gå till botten",
     remaining_credits: "Återstående röstpoäng:",
+    error_modal_title: "Fel",
     error_modal_dismiss: "Stäng",
     errors: {
       exceeded_list_limit:
@@ -483,6 +500,7 @@ const translations: DefineLocaleMessage = {
     selected: "Selected: {selected}",
     go_to_bottom: "Go to the bottom",
     remaining_credits: "残りの投票クレジット：",
+    error_modal_title: "エラー",
     error_modal_dismiss: "閉じる",
     errors: {
       too_many: "Too many options selected.",
@@ -511,6 +529,7 @@ const translations: DefineLocaleMessage = {
     selected: "Selected: {selected}",
     go_to_bottom: "Go to the bottom",
     remaining_credits: "남은 투표 크레딧:",
+    error_modal_title: "오류",
     error_modal_dismiss: "닫기",
     errors: {
       too_many: "Too many options selected.",
@@ -539,6 +558,7 @@ const translations: DefineLocaleMessage = {
     selected: "Selected: {selected}",
     go_to_bottom: "Go to the bottom",
     remaining_credits: "剩余投票积分：",
+    error_modal_title: "错误",
     error_modal_dismiss: "关闭",
     errors: {
       too_many: "Too many options selected.",
