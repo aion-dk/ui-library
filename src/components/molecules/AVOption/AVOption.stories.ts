@@ -52,6 +52,13 @@ const meta: Meta<typeof AVOption> & {
       control: { type: "select" },
       options: SUPPORTED_LOCALES,
     },
+    reverseOption: {
+      control: { type: "boolean" },
+    },
+    selectionStyle: {
+      control: { type: "select" },
+      options: ["checkbox", "background"],
+    },
     "onAccordion-open": {
       action: "accordion-open: ACCORDION OPENED",
     },

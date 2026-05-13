@@ -34,6 +34,16 @@ const meta: Meta<typeof AVSplitHelper> & {
     showSubmissionHelper: {
       control: { type: "boolean" },
     },
+    reverseOption: {
+      control: { type: "boolean" },
+    },
+    selectionStyle: {
+      control: { type: "select" },
+      options: ["checkbox", "background"],
+    },
+    displayErrorModal: {
+      control: { type: "boolean" },
+    },
     "onUpdate:activePile": {
       action: "onUpdate:activePile: UPDATED",
     },

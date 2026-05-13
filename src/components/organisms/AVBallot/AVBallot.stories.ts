@@ -32,6 +32,16 @@ const meta: Meta<typeof AVBallot> & {
       control: { type: "select" },
       options: SUPPORTED_LOCALES,
     },
+    reverseOption: {
+      control: { type: "boolean" },
+    },
+    selectionStyle: {
+      control: { type: "select" },
+      options: ["checkbox", "background"],
+    },
+    displayErrorModal: {
+      control: { type: "boolean" },
+    },
     "onUpdate:selectionPile": {
       action: "update:selectionPile: UPDATED SELECTION PILE",
     },
