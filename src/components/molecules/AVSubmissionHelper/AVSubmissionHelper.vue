@@ -1,13 +1,21 @@
 <script setup lang="ts">
-import { computed, inject, onMounted, watch, ref } from "vue";
+import { computed, inject, onMounted, watch, ref, nextTick } from "vue";
 import { switchLocale } from "@/i18n";
 import type { PropType, SupportedLocale, Error, VoiceCredits } from "@/types";
 
 const showErrorModal = ref(false);
+const dismissButtonRef = ref<HTMLElement | null>(null);
 
 const dismissErrorModal = (): void => {
   showErrorModal.value = false;
 };
+
+watch(showErrorModal, async (val) => {
+  if (val) {
+    await nextTick();
+    dismissButtonRef.value?.focus();
+  }
+});
 
 const props = defineProps({
   minMarks: {
@@ -173,7 +181,7 @@ watch(
             data-test="submission-helper-error"
           ></div>
         </div>
-        <hr class="my-3" />
+        <hr v-if="errors.length > 0 && !displayErrorModal" class="my-3" />
 
         <div v-if="maxMarks > 1">
           <div class="d-block justify-content-between align-items-center">
@@ -229,6 +237,7 @@ watch(
         aria-labelledby="error-modal-title"
         aria-describedby="error-modal-message"
         data-test="error-modal"
+        @keydown.esc="dismissErrorModal"
       >
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
@@ -239,10 +248,13 @@ watch(
               <h2 id="error-modal-title" class="visually-hidden">
                 {{ t("js.components.AVSubmissionHelper.error_modal_title") }}
               </h2>
-              <p id="error-modal-message" class="mb-4">
-                {{ errorMessages[0] }}
-              </p>
+              <div id="error-modal-message" class="mb-4">
+                <p v-for="(errorMessage, index) in errorMessages" :key="index" role="alert">
+                  {{ errorMessage }}
+                </p>
+              </div>
               <button
+                ref="dismissButtonRef"
                 type="button"
                 class="btn btn-primary"
                 @click="dismissErrorModal"

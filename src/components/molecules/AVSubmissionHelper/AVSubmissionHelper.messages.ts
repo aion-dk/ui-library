@@ -67,7 +67,7 @@ const translations: DefineLocaleMessage = {
     go_to_bottom: "Ewch i'r gwaelod",
     remaining_credits: "Credydau llais sy'n weddill:",
     error_modal_title: "Gwall",
-    error_modal_dismiss: "Gwneud yn Ddistryw",
+    error_modal_dismiss: "Diystyru",
     errors: {
       too_many: "Gormod o opsiynau wedi'u dewis.",
       blank: "Mae gwag yn ddewis unigol ac ni ellir ei gyfuno ag opsiynau eraill.",
