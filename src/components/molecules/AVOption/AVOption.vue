@@ -494,8 +494,7 @@ watch(
           <div
             class="d-flex justify-content-between"
             :class="{
-              'flex-column': votesAllowedPerOption > 1 && !reverseOption,
-              'flex-column-reverse': votesAllowedPerOption > 1 && reverseOption,
+              'flex-column': votesAllowedPerOption > 1,
               'flex-sm-row': (votesAllowedPerOption <= 5 || counterInterface) && !reverseOption,
               'flex-sm-row-reverse':
                 (votesAllowedPerOption <= 5 || counterInterface) && reverseOption,
@@ -671,10 +670,12 @@ watch(
               :class="{
                 'AVOption--multivote-aside hstack gap-2 justify-content-end bg-secondary':
                   votesAllowedPerOption <= 5 && votesAllowedPerOption !== 1 && !reverseOption,
-                'AVOption--multivote-aside-reversed hstack gap-2 justify-content-end bg-secondary':
+                'AVOption--multivote-aside-reversed hstack gap-2 justify-content-start bg-secondary':
                   votesAllowedPerOption <= 5 && votesAllowedPerOption !== 1 && reverseOption,
                 'AVOption--multivote-footer hstack gap-2 flex-wrap justify-content-end border-top bg-secondary':
-                  votesAllowedPerOption > 5,
+                  votesAllowedPerOption > 5 && !reverseOption,
+                'AVOption--multivote-footer-reversed hstack gap-2 flex-wrap justify-content-start border-top bg-secondary':
+                  votesAllowedPerOption > 5 && reverseOption,
                 'AVOption--singlevote': votesAllowedPerOption === 1,
               }"
               data-test="option-multivote"

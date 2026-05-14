@@ -236,7 +236,7 @@ watch(
       class="card-body hstack gap-2"
       :class="{
         'p-4': useFooter,
-        'justify-content-between': !galleryMode && !reverseOption,
+        'justify-content-between': !galleryMode,
         'flex-row-reverse': reverseOption,
       }"
     >
@@ -301,7 +301,8 @@ watch(
     <!-- IF MULTIVOTE -->
     <div
       v-if="useFooter"
-      class="card-footer bg-light d-flex gap-2 justify-content-end py-3 flex-wrap"
+      class="card-footer bg-light d-flex gap-2 py-3 flex-wrap"
+      :class="reverseOption ? 'justify-content-start' : 'justify-content-end'"
     >
       <div
         v-for="groupIndex in optionGroups"
