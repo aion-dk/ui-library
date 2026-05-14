@@ -494,7 +494,8 @@ watch(
           <div
             class="d-flex justify-content-between"
             :class="{
-              'flex-column': votesAllowedPerOption > 1,
+              'flex-column': votesAllowedPerOption > 1 && !reverseOption,
+              'flex-column-reverse': votesAllowedPerOption > 1 && reverseOption,
               'flex-sm-row': (votesAllowedPerOption <= 5 || counterInterface) && !reverseOption,
               'flex-sm-row-reverse':
                 (votesAllowedPerOption <= 5 || counterInterface) && reverseOption,
