@@ -271,6 +271,27 @@ const usageOnBackground = computed(() => {
   return `width: ${percentage > 100 ? "100" : percentage}%`;
 });
 
+const creditBarBgClass = computed(() => {
+  if (props.selectionStyle === "background" && checkedCount.value > 0) {
+    return "bg-white";
+  }
+  return props.invalid ? "bg-theme-danger" : "bg-ballot";
+});
+
+const creditBarOpacity = computed(() => {
+  if (props.selectionStyle === "background" && checkedCount.value > 0) {
+    return "opacity: 0.3;";
+  }
+  return "opacity: 0.1;";
+});
+
+const creditBarPosition = computed(() => {
+  if (props.reverseOption) {
+    return "right: 0;";
+  }
+  return "left: 0;";
+});
+
 const backgroundHeight = computed(() => `height: ${elHeight.value}px;`);
 
 const bsBorderColor = computed(() =>
@@ -435,12 +456,9 @@ watch(
       <template #toggle="{ collapsable }">
         <!-- CREDIT USAGE ON BACKGROUND -->
         <div
-          class="position-absolute pointer-events-none"
-          :class="{
-            'bg-ballot': !invalid,
-            'bg-theme-danger': invalid,
-          }"
-          :style="`${usageOnBackground}; ${backgroundHeight}; opacity: 0.1;`"
+          class="position-absolute pointer-events-none z-1"
+          :class="creditBarBgClass"
+          :style="`${usageOnBackground}; ${backgroundHeight}; ${creditBarPosition} ${creditBarOpacity}`"
         ></div>
         <section
           ref="el"
