@@ -137,6 +137,13 @@
       color: var(--bs-ballot);
     }
   }
+
+  .AVOption--singlevote.bg-white {
+    background-color: var(--bs-gray-100) !important;
+    border-radius: 0;
+    align-self: stretch;
+    align-items: center;
+  }
 }
 
 @keyframes grow-in-highlight {
