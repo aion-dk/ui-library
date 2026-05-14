@@ -241,18 +241,30 @@ watch(
       }"
     >
       <div
-        :class="{ vstack: galleryMode, 'w-100': !galleryMode }"
+        :class="{
+          vstack: galleryMode,
+          'w-100': !galleryMode,
+          'align-items-end': galleryMode && reverseOption,
+        }"
         style="max-width: calc(100%-70px)"
       >
-        <div class="w-100" :class="{ hstack: !galleryMode }">
+        <div
+          class="w-100"
+          :class="{
+            hstack: !galleryMode,
+            'justify-content-end': galleryMode && reverseOption,
+          }"
+        >
           <img
             v-if="option?.image"
             :src="option?.image"
-            class="AVSummaryOption--img me-2 me-sm-3"
             :class="{
               'mb-3': galleryMode,
+              'AVSummaryOption--img': true,
               'AVSummaryOption--img-square': imageOption === 'square',
               'AVSummaryOption--img-passport': imageOption === 'passport',
+              'me-2 me-sm-3': !reverseOption,
+              'ms-2 ms-sm-3 order-last': reverseOption,
             }"
             :alt="t('js.components.AVSummaryOption.aria_label.option_image')"
             data-test="summary-option-image"
@@ -280,7 +292,11 @@ watch(
           </div>
         </div>
       </div>
-      <div v-if="!useFooter" class="align-self-start">
+      <div
+        v-if="!useFooter"
+        class="AVSummaryOption--checkbox"
+        :class="reverseOption ? 'align-self-start order-last' : 'align-self-start'"
+      >
         <AVOptionCounter
           v-if="counterInterface || isQuadratic"
           :amount="props.option?.crosses"

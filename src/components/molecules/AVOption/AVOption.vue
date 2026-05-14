@@ -503,14 +503,23 @@ watch(
             data-test="option-container"
           >
             <div
-              class="vstack gap-2 p-3 align-items-start justify-content-center"
+              class="vstack gap-2 p-3 justify-content-center"
+              :class="{
+                'align-items-start': !(contest.mode === 'gallery' && reverseOption),
+                'align-items-end': contest.mode === 'gallery' && reverseOption,
+              }"
               :style="`max-width: calc(100% - ${getCrossesWidth}px);`"
               data-test="option-content"
             >
               <!-- OPTION HEADER -->
               <header
-                class="AVOption--header d-flex flex-column flex-sm-row align-items-sm-center gap-3"
-                :class="{ 'w-100': isWriteIn }"
+                class="AVOption--header d-flex flex-column flex-sm-row gap-3"
+                :class="{
+                  'w-100': isWriteIn,
+                  'align-items-sm-center': !(contest.mode === 'gallery' && reverseOption),
+                  'align-items-sm-end': contest.mode === 'gallery' && reverseOption,
+                  'flex-sm-row-reverse': contest.mode === 'gallery' && reverseOption,
+                }"
                 :style="
                   contest.mode === 'gallery' && !hasSecondaryElements ? 'min-height: 40px' : ''
                 "
@@ -521,9 +530,11 @@ watch(
                   :src="option.image"
                   :alt="t('js.components.AVOption.aria_labels.option_image')"
                   class="AVOption--image"
-                  :class="
-                    imageOption === 'square' ? 'AVOption--image-square' : 'AVOption--image-passport'
-                  "
+                  :class="{
+                    'AVOption--image-square': imageOption === 'square',
+                    'AVOption--image-passport': imageOption === 'passport',
+                    'order-last': contest.mode === 'gallery' && reverseOption,
+                  }"
                   data-test="option-image"
                 />
                 <h5

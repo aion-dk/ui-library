@@ -48,3 +48,10 @@
     color: white !important;
   }
 }
+
+.AVSummaryOption--checkbox {
+  &.order-last {
+    margin-left: 0;
+    margin-right: auto;
+  }
+}
