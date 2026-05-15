@@ -26,7 +26,7 @@ const meta: Meta<typeof AVSplitHelper> & {
       options: SUPPORTED_LOCALES,
     },
     weight: {
-      control: { type: "number", min: 0, max: 100, step: 1 },
+      control: { type: "number", min: 1, max: 100, step: 1 },
     },
     partialResults: {
       control: { type: "object" },

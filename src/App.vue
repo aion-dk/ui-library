@@ -61,6 +61,7 @@ import * as examples from "@/examples";
       <AVBallot
         :contest="examples.getContest([])"
         :selection-pile="examples.getSelectionPile([])"
+        :weight="1"
       />
       <AVOption
         :option="

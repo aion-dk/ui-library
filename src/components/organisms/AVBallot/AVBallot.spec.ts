@@ -19,6 +19,7 @@ describe("AVBallot", () => {
       contest: getContest([]),
       selectionPile: getSelectionPile([]),
       showSubmissionHelper: false,
+      weight: 1,
       locale: "en",
     },
     global: {
@@ -50,6 +51,9 @@ describe("AVBallot", () => {
   });
 
   it("renders properly in list mode", async () => {
+    expect(wrapper.find("[data-test=ballot-voter-weight]").text()).to.contain(
+      "Your vote has a weight of 1",
+    );
     expect(wrapper.findAll("[data-test=option]").length).to.eq(3);
     expect(wrapper.findAll("[data-test=option]")[0].text()).to.eq("Example option 1exampleOption1");
     expect(wrapper.findAll("[data-test=option]")[1].text()).to.eq("Example option 2exampleOption2");

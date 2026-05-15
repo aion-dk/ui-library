@@ -16,7 +16,6 @@ import type {
   IterableObject,
   AVBallotGalleryOption,
   VoiceCredits,
-  OptionContent,
 } from "@/types";
 import SelectionPileValidator from "@assemblyvoting/js-client/dist/lib/validators/selectionPileValidator";
 import BelgiumBallotValidator from "@assemblyvoting/js-client/dist/lib/validators/belgiumBallotValidator";
@@ -70,6 +69,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  weight: {
+    type: Number,
+    default: null,
+  },
 });
 
 const emits = defineEmits(["update:selectionPile", "update:errors", "view-candidate"]);
@@ -91,9 +94,9 @@ const customValidators = computed(() => {
 const errors = computed(() => {
   const customErrors: Error[] = [];
 
-  customValidators.value.forEach((defaultValidator) => {
+  for (const defaultValidator of customValidators.value) {
     customErrors.push(...defaultValidator.validate(props.selectionPile));
-  });
+  }
 
   const combinedErrors = [
     ...validator.value.validate(props.selectionPile, props.includeLazyErrors),
@@ -210,22 +213,26 @@ const viewCandidate = (contestReference: string, optionReference: string): void 
 const galleryOptions = computed(() => {
   const options: AVBallotGalleryOption[] = [];
 
-  props.contest.options.forEach((parent) => {
+  for (let i = 0; i < props.contest.options.length; i += 1) {
+    const parent = props.contest.options[i];
     if (parent.selectable) options.push({ ...parent, isChildren: false });
 
-    parent.children?.forEach((children: OptionContent) =>
-      options.push({
-        ...children,
-        isChildren: true,
-        parentTitle: getMeaningfulLabel(
-          parent as unknown as IterableObject,
-          i18nLocale.value,
-          t("js.components.AVOption.aria_labels.option"),
-        ),
-        parentColor: parent.accentColor,
-      }),
-    );
-  });
+    if (parent.children) {
+      for (let j = 0; j < parent.children.length; j += 1) {
+        const children = parent.children[j];
+        options.push({
+          ...children,
+          isChildren: true,
+          parentTitle: getMeaningfulLabel(
+            parent as unknown as IterableObject,
+            i18nLocale.value,
+            t("js.components.AVOption.aria_labels.option"),
+          ),
+          parentColor: parent.accentColor,
+        });
+      }
+    }
+  }
 
   return options;
 });
@@ -279,7 +286,21 @@ watch(
       :options-container-id="'ballot_options'"
     />
 
-    <hr class="my-3" />
+    <hr
+      :class="{
+        'mt-3 mb-0': !contest.disregardVoterWeight && weight,
+        'my-3': contest.disregardVoterWeight,
+      }"
+    />
+
+    <!-- WEIGHT -->
+    <div
+      v-if="!contest.disregardVoterWeight && weight"
+      class="hstack justify-content-end py-1 text-gray-700 small"
+      data-test="ballot-voter-weight"
+    >
+      <span>{{ t("js.components.AVBallot.your_vote_weight", { weight }) }}</span>
+    </div>
 
     <div v-if="contest.mode === 'gallery'" class="AVBallot--gallery-grid">
       <div v-for="option in galleryOptions" :key="option.reference">
