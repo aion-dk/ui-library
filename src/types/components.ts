@@ -5,7 +5,6 @@ import type {
   IMAGE_OPTIONS,
   SELECTION_STYLES,
   CANDIDACY_RESOURCES,
-  THEMES,
 } from "@/constants";
 
 type BootstrapColor = (typeof BOOTSTRAP_COLORS)[number];
@@ -19,8 +18,6 @@ type ImageOption = (typeof IMAGE_OPTIONS)[number];
 type SelectionStyle = (typeof SELECTION_STYLES)[number];
 
 type CandidacyResource = (typeof CANDIDACY_RESOURCES)[number];
-
-type Theme = (typeof THEMES)[number];
 
 // ATOMS
 export * from "@/components/atoms/AVSpinner/AVSpinner.types";
@@ -52,5 +49,4 @@ export type {
   ImageOption,
   SelectionStyle,
   CandidacyResource,
-  Theme,
 };

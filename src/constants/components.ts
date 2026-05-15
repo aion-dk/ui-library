@@ -39,9 +39,6 @@ const SPLIT_HELPER_STATE = ["ballot", "assign", "overview"] as const;
 const RECOMMENDATION_PUBLIC_TYPES = ["public", "private", "public_count"] as const;
 const CANDIDACY_RESOURCES = ["candidate", "party", "resource", "recommender", "group"] as const;
 
-// Theme
-const THEMES = ["light", "dark"] as const;
-
 // AVAnimatedMenuButton
 const ANIMATED_MENU_BUTTON_VARIANTS = ["cross", "arrow-down"] as const;
 
@@ -56,7 +53,6 @@ const CALCULATE_RESULT_STATUS = [
 ] as const;
 
 export {
-  THEMES,
   IMAGE_OPTIONS,
   SELECTION_STYLES,
   LOOKUP_DEFAULT_FALLBACKS,
