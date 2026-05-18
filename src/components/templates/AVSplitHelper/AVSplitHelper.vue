@@ -244,14 +244,6 @@ watch(
         )
       }}
     </h3>
-    <!-- WEIGHT -->
-    <div
-      v-if="!contest.disregardVoterWeight"
-      class="text-gray-700 small"
-      data-test="split-helper-contest-weight"
-    >
-      {{ t("js.components.AVSplitHelper.your_vote_weight", { weight }) }}
-    </div>
   </div>
 
   <div

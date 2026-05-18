@@ -56,6 +56,10 @@ const props = defineProps({
     type: String as PropType<ImageOption>,
     default: "square",
   },
+  weight: {
+    type: Number,
+    default: null,
+  },
 });
 
 const emits = defineEmits(["update:selectionPile", "update:errors", "view-candidate"]);
@@ -264,7 +268,21 @@ watch(
       :options-container-id="'ballot_options'"
     />
 
-    <hr class="my-3" />
+    <hr
+      :class="{
+        'mt-3 mb-0': !contest.disregardVoterWeight && weight,
+        'my-3': contest.disregardVoterWeight,
+      }"
+    />
+
+    <!-- WEIGHT -->
+    <div
+      v-if="!contest.disregardVoterWeight && weight"
+      class="hstack justify-content-end py-1 text-gray-700 small"
+      data-test="ballot-voter-weight"
+    >
+      <span>{{ t("js.components.AVBallot.your_vote_weight", { weight }) }}</span>
+    </div>
 
     <div v-if="contest.mode === 'gallery'" class="AVBallot--gallery-grid">
       <div v-for="option in galleryOptions" :key="option.reference">
