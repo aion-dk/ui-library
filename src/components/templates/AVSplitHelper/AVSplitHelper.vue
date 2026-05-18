@@ -10,6 +10,7 @@ import type {
   AVSplitHelperState,
   PartialResults,
   ImageOption,
+  SelectionStyle,
   IterableObject,
 } from "@/types";
 import SelectionPileValidator from "@assemblyvoting/js-client/dist/lib/validators/selectionPileValidator";
@@ -48,6 +49,18 @@ const props = defineProps({
   imageOption: {
     type: String as PropType<ImageOption>,
     default: "square",
+  },
+  reverseOption: {
+    type: Boolean,
+    default: false,
+  },
+  selectionStyle: {
+    type: String as PropType<SelectionStyle>,
+    default: "checkbox",
+  },
+  displayErrorModal: {
+    type: Boolean,
+    default: false,
   },
 });
 
@@ -244,14 +257,6 @@ watch(
         )
       }}
     </h3>
-    <!-- WEIGHT -->
-    <div
-      v-if="!contest.disregardVoterWeight"
-      class="text-gray-700 small"
-      data-test="split-helper-contest-weight"
-    >
-      {{ t("js.components.AVSplitHelper.your_vote_weight", { weight }) }}
-    </div>
   </div>
 
   <div
@@ -284,6 +289,9 @@ watch(
           @update:selection-pile="updateActivePile"
           @update:errors="(errors: string[]) => updateErrors(errors)"
           @view-candidate="viewCandidate"
+          :reverse-option="reverseOption"
+          :selection-style="selectionStyle"
+          :display-error-modal="displayErrorModal"
         />
 
         <div id="ballot-action-buttons" class="mt-3 row">
@@ -441,6 +449,9 @@ watch(
       @update:selection-pile="updateActivePile"
       @update:errors="(errors: string[]) => updateErrors(errors)"
       @view-candidate="viewCandidate"
+      :reverse-option="reverseOption"
+      :selection-style="selectionStyle"
+      :display-error-modal="displayErrorModal"
     />
   </template>
 </template>

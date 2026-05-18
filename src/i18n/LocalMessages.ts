@@ -80,9 +80,9 @@ const components: DefineLocaleMessage = {
 const getTranslations = (locale: SupportedLocale): ComponentTranslationList => {
   const componentTranslation: ComponentTranslationList = {};
 
-  Object.keys(components).forEach((componentKey: string) => {
+  for (const componentKey of Object.keys(components)) {
     componentTranslation[componentKey] = (components[componentKey] as LocalString)[locale] ?? "";
-  });
+  }
 
   return componentTranslation;
 };

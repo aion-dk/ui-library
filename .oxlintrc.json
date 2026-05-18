@@ -22,7 +22,7 @@
     "oxc/no-async-await": "allow",
     "oxc/no-optional-chaining": "allow",
     "oxc/no-rest-spread-properties": "allow",
-    "vue/max-props": ["error", { "maxProps": 14 }], // As these are independent components that don't rely on stores, etc. we need to allow more props.
+    "vue/max-props": ["error", { "maxProps": 15 }], // As these are independent components that don't rely on stores, etc. we need to allow more props.
     "eslint/no-shadow": "error",
     "eslint/no-unneeded-ternary": "error",
     // Start fixing later

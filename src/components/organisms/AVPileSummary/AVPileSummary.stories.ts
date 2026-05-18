@@ -39,6 +39,13 @@ const meta: Meta<typeof AVPileSummary> & {
       control: { type: "select" },
       options: SUPPORTED_LOCALES,
     },
+    reverseOption: {
+      control: { type: "boolean" },
+    },
+    selectionStyle: {
+      control: { type: "select" },
+      options: ["checkbox", "background"],
+    },
     onEditCurrentSelection: {
       action: "editCurrentSelection: EDIT SELECTION",
     },
@@ -255,6 +262,36 @@ export const SummaryRankedWithChildren = {
     pileIndex: 0,
     totalPiles: 3,
     selectionPile: getSelectionPile(["children", "weighted"]),
+  },
+};
+
+export const SummaryReverseOption = {
+  render: Template,
+
+  args: {
+    contest: getContest([]),
+    activeState: "summary",
+    isEditing: false,
+    maximumOptionsShown: 3,
+    pileIndex: 0,
+    totalPiles: 3,
+    selectionPile: getSelectionPile(["single", "weighted"]),
+    reverseOption: true,
+  },
+};
+
+export const SummaryBackgroundSelectionStyle = {
+  render: Template,
+
+  args: {
+    contest: getContest([]),
+    activeState: "summary",
+    isEditing: false,
+    maximumOptionsShown: 3,
+    pileIndex: 0,
+    totalPiles: 3,
+    selectionPile: getSelectionPile(["single", "weighted"]),
+    selectionStyle: "background",
   },
 };
 

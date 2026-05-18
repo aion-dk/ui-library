@@ -404,22 +404,22 @@ describe("AVOption", () => {
     });
 
     expect(wrapper.findAll("[data-test=write-in-exampleOption1-input]").length).to.eq(1);
-    expect(wrapper.find("[data-test=space-counter]").text()).to.eq("0 / 20");
+    expect(wrapper.find("[data-test=space-counter]").text()).to.eq("0 / 28");
 
     expect(wrapper.emitted().checked.length).to.eq(5);
     await wrapper.find("[data-test=write-in-exampleOption1-input]").trigger("click");
-    await wrapper.find("[data-test=write-in-exampleOption1-input]").setValue("Less than 20");
-    expect(wrapper.find("[data-test=space-counter]").text()).to.eq("12 / 20");
-    expect((wrapper.emitted().checked as VitestEmitted)[5][0].text).to.eq("Less than 20");
+    await wrapper.find("[data-test=write-in-exampleOption1-input]").setValue("Less than 28");
+    expect(wrapper.find("[data-test=space-counter]").text()).to.eq("12 / 28");
+    expect((wrapper.emitted().checked as VitestEmitted)[5][0].text).to.eq("Less than 28");
     expect((wrapper.emitted().checked as VitestEmitted)[5][0].onlyUpdate).to.be.true;
     expect(wrapper.findAll(".invalid-feedback").length).to.eq(0);
     await wrapper
       .find("[data-test=write-in-exampleOption1-input]")
-      .setValue("Way more than 20 characters");
-    expect(wrapper.find("[data-test=space-counter]").text()).to.eq("27 / 20");
+      .setValue("Way more than 28 characters...");
+    expect(wrapper.find("[data-test=space-counter]").text()).to.eq("30 / 28");
     await wrapper.find("[data-test=write-in-exampleOption1-input]").trigger("click");
     expect((wrapper.emitted().checked as VitestEmitted)[6][0].text).to.eq(
-      "Way more than 20 characters",
+      "Way more than 28 characters...",
     );
     expect((wrapper.emitted().checked as VitestEmitted)[6][0].onlyUpdate).to.be.true;
 
@@ -446,7 +446,7 @@ describe("AVOption", () => {
           .element as HTMLTextAreaElement
       ).value,
     ).to.eq("Saved text");
-    expect(writeInWrapper.find("[data-test=space-counter]").text()).to.eq("10 / 20");
+    expect(writeInWrapper.find("[data-test=space-counter]").text()).to.eq("10 / 28");
 
     await writeInWrapper.find("[data-test=write-in-exampleOption1-input]").setValue("Invalid*");
 
@@ -632,5 +632,95 @@ describe("AVOption", () => {
     expect(wrapper.find("[data-test=option-link]").attributes().href).to.eq(
       "https://www.google.dk",
     );
+  });
+
+  it("defaults reverseOption to false", async () => {
+    await wrapper.setProps({
+      option: getOption(["selectable"], 1),
+      contest: getContest(["multiple_votes_sm"]),
+      selections: [],
+      locale: "en",
+    });
+
+    expect(wrapper.find("[data-test=option-container]").classes()).to.contain("flex-column");
+    expect(wrapper.find("[data-test=option-container]").classes()).to.not.contain(
+      "flex-column-reverse",
+    );
+    expect(wrapper.find("[data-test=option-container]").classes()).to.contain("flex-sm-row");
+    expect(wrapper.find("[data-test=option-container]").classes()).to.not.contain(
+      "flex-sm-row-reverse",
+    );
+  });
+
+  it("can reverse option layout", async () => {
+    await wrapper.setProps({
+      reverseOption: true,
+    });
+
+    expect(wrapper.find("[data-test=option-container]").classes()).to.not.contain("flex-column");
+    expect(wrapper.find("[data-test=option-container]").classes()).to.contain(
+      "flex-column-reverse",
+    );
+    expect(wrapper.find("[data-test=option-container]").classes()).to.not.contain("flex-sm-row");
+    expect(wrapper.find("[data-test=option-container]").classes()).to.contain(
+      "flex-sm-row-reverse",
+    );
+  });
+
+  it("defaults selectionStyle to checkbox", async () => {
+    await wrapper.setProps({
+      option: getOption(["selectable"], 1),
+      contest: getContest([]),
+      selections: [{ reference: "exampleOption1" }],
+      reverseOption: false,
+    });
+
+    expect(wrapper.find("[data-test=option-section]").classes()).to.not.contain(
+      "AVOption--selected-background",
+    );
+  });
+
+  it("can apply background selection style when selected", async () => {
+    await wrapper.setProps({
+      selectionStyle: "background",
+    });
+
+    expect(wrapper.find("[data-test=option-section]").classes()).to.contain(
+      "AVOption--selected-background",
+    );
+  });
+
+  it("does not apply background selection style when not selected", async () => {
+    await wrapper.setProps({
+      selections: [],
+    });
+
+    expect(wrapper.find("[data-test=option-section]").classes()).to.not.contain(
+      "AVOption--selected-background",
+    );
+  });
+
+  it("passes selectionStyle to AVOptionCheckbox", async () => {
+    await wrapper.setProps({
+      selections: [{ reference: "exampleOption1" }],
+    });
+
+    const checkbox = wrapper.findComponent(AVOptionCheckbox);
+    expect(checkbox.props("selectionStyle")).to.eq("background");
+  });
+
+  it("passes reverseOption and selectionStyle to child options", async () => {
+    await wrapper.setProps({
+      option: getOption(["selectable", "children"], 1),
+      contest: getContest(["children_options"]),
+      reverseOption: true,
+      selectionStyle: "background",
+    });
+
+    const childOptions = wrapper.findAllComponents(AVOption).slice(1);
+    childOptions.forEach((child) => {
+      expect(child.props("reverseOption")).to.eq(true);
+      expect(child.props("selectionStyle")).to.eq("background");
+    });
   });
 });

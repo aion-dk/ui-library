@@ -77,7 +77,28 @@
   }
 }
 
+.AVOption--multivote-aside-reversed {
+  border-top: 1px solid var(--bs-border-color);
+  padding: 1.25rem;
+
+  @include media-breakpoint-up(md) {
+    border-top: none;
+
+    [dir="ltr"] & {
+      border-right: 1px solid var(--bs-border-color);
+    }
+
+    [dir="rtl"] & {
+      border-left: 1px solid var(--bs-border-color);
+    }
+  }
+}
+
 .AVOption--multivote-footer {
+  padding: 1.25rem;
+}
+
+.AVOption--multivote-footer-reversed {
   padding: 1.25rem;
 }
 
@@ -99,6 +120,34 @@
 
 .AVOption--children .AVOption {
   box-shadow: unset;
+}
+
+.AVOption--selected-background {
+  background-color: var(--bs-ballot);
+  color: white !important;
+  --bs-heading-color: white;
+
+  .AVOption--title,
+  .AVOption--description {
+    color: white !important;
+  }
+
+  .btn-outline-ballot {
+    color: white;
+    border-color: white;
+
+    &:hover {
+      background-color: white;
+      color: var(--bs-ballot);
+    }
+  }
+
+  .AVOption--singlevote.bg-white {
+    background-color: var(--bs-gray-100) !important;
+    border-radius: 0;
+    align-self: stretch;
+    align-items: center;
+  }
 }
 
 @keyframes grow-in-highlight {

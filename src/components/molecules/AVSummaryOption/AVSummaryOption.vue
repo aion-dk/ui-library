@@ -7,6 +7,7 @@ import type {
   AVSummaryOptionObject,
   AVSummaryOptionParent,
   ImageOption,
+  SelectionStyle,
   IterableObject,
 } from "@/types";
 import { getMeaningfulLabel } from "@/helpers/meaningfulLabel";
@@ -56,6 +57,14 @@ const props = defineProps({
   isQuadratic: {
     type: Boolean,
     default: false,
+  },
+  reverseOption: {
+    type: Boolean,
+    default: false,
+  },
+  selectionStyle: {
+    type: String as PropType<SelectionStyle>,
+    default: "checkbox",
   },
 });
 
@@ -190,6 +199,7 @@ watch(
 <template>
   <div
     class="AVSummaryOption card rounded-0 position-relative"
+    :class="{ 'AVSummaryOption--selected-background': selectionStyle === 'background' && !blank }"
     :style="coloredEdgeStyle"
     :aria-label="t('js.components.AVSummaryOption.aria_label.option')"
     data-test="summary-option"
@@ -224,21 +234,37 @@ watch(
     <!-- OPTION -->
     <div
       class="card-body hstack gap-2"
-      :class="{ 'p-4': useFooter, 'justify-content-between': !galleryMode }"
+      :class="{
+        'p-4': useFooter,
+        'justify-content-between': !galleryMode,
+        'flex-row-reverse': reverseOption,
+      }"
     >
       <div
-        :class="{ vstack: galleryMode, 'w-100': !galleryMode }"
+        :class="{
+          vstack: galleryMode,
+          'w-100': !galleryMode,
+          'align-items-end': galleryMode && reverseOption,
+        }"
         style="max-width: calc(100%-70px)"
       >
-        <div class="w-100" :class="{ hstack: !galleryMode }">
+        <div
+          class="w-100"
+          :class="{
+            hstack: !galleryMode,
+            'justify-content-end': galleryMode && reverseOption,
+          }"
+        >
           <img
             v-if="option?.image"
             :src="option?.image"
-            class="AVSummaryOption--img me-2 me-sm-3"
             :class="{
               'mb-3': galleryMode,
+              'AVSummaryOption--img': true,
               'AVSummaryOption--img-square': imageOption === 'square',
               'AVSummaryOption--img-passport': imageOption === 'passport',
+              'me-2 me-sm-3': !reverseOption,
+              'ms-2 ms-sm-3 order-last': reverseOption,
             }"
             :alt="t('js.components.AVSummaryOption.aria_label.option_image')"
             data-test="summary-option-image"
@@ -266,7 +292,11 @@ watch(
           </div>
         </div>
       </div>
-      <div v-if="!useFooter" class="align-self-start">
+      <div
+        v-if="!useFooter"
+        class="AVSummaryOption--checkbox"
+        :class="reverseOption ? 'align-self-start order-last' : 'align-self-start'"
+      >
         <AVOptionCounter
           v-if="counterInterface || isQuadratic"
           :amount="props.option?.crosses"
@@ -278,6 +308,7 @@ watch(
           :checked="true"
           :rank="option?.rank"
           :disabled="true"
+          :selection-style="selectionStyle"
           data-test="summary-cross"
         />
       </div>
@@ -286,7 +317,8 @@ watch(
     <!-- IF MULTIVOTE -->
     <div
       v-if="useFooter"
-      class="card-footer bg-light d-flex gap-2 justify-content-end py-3 flex-wrap"
+      class="card-footer bg-light d-flex gap-2 py-3 flex-wrap"
+      :class="reverseOption ? 'justify-content-start' : 'justify-content-end'"
     >
       <div
         v-for="groupIndex in optionGroups"
@@ -299,6 +331,7 @@ watch(
           :checked="true"
           :rank="option?.rank"
           :disabled="true"
+          :selection-style="selectionStyle"
           data-test="summary-cross"
         />
       </div>

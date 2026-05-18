@@ -3,10 +3,10 @@ import type {
   PropType,
   InstantRunoffRound,
   SupportedLocale,
-  Result,
   Theme,
   IterableObject,
   VoteCounts,
+  OptionResult,
 } from "@/types";
 import { inject, onMounted, watch, computed } from "vue";
 import { switchLocale } from "@/i18n";
@@ -18,7 +18,7 @@ const props = defineProps({
     required: true,
   },
   sortedResult: {
-    type: Array as PropType<Array<Result>>,
+    type: Array as PropType<Array<OptionResult>>,
     required: true,
   },
   seatNumber: {
@@ -134,7 +134,7 @@ watch(
                 <td :class="`AVInstantRunoffSummary--text-${theme}`">
                   {{
                     getMeaningfulLabel(
-                      option as IterableObject,
+                      option as unknown as IterableObject,
                       i18nLocale,
                       t("js.components.AVOption.aria_labels.option"),
                     )

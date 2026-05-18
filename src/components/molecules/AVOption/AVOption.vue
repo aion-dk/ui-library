@@ -21,6 +21,7 @@ import type {
   CheckedEventArgs,
   PartialResults,
   ImageOption,
+  SelectionStyle,
   IterableObject,
   VoiceCredits,
 } from "@/types";
@@ -87,6 +88,14 @@ const props = defineProps({
     type: Object as PropType<VoiceCredits>,
     default: null,
   },
+  reverseOption: {
+    type: Boolean,
+    default: false,
+  },
+  selectionStyle: {
+    type: String as PropType<SelectionStyle>,
+    default: "checkbox",
+  },
 });
 
 const emits = defineEmits(["accordion-open", "checked", "view-candidate"]);
@@ -135,7 +144,7 @@ const links = computed(() => {
 const hasChildren = computed(() => props.option.children && props.option.children.length > 0);
 
 const votesAllowedPerOption = computed(() => {
-  if (props.option.selectable !== undefined && !props.option.selectable) return 0;
+  if (!props.option.selectable) return 0;
   if (exclusive.value) return 1;
   return props.option.voteLimit || props.contest.markingType.votesAllowedPerOption || 1;
 });
@@ -173,7 +182,9 @@ const writeInPlaceholder = computed(() =>
 
 const optionGroups = computed(() => {
   const options = Array.from(Array(votesAllowedPerOption.value).keys());
-  options.forEach((index) => (options[index] = index + 1));
+  for (let index = 0; index < options.length; index += 1) {
+    options[index] = index + 1;
+  }
   const half = options.indexOf(Math.ceil(votesAllowedPerOption.value / 2)) + 1;
   const group1 = options.slice(0, half);
   const group2 = options.slice(half);
@@ -260,6 +271,27 @@ const usageOnBackground = computed(() => {
   const usedCredits = props.voiceCredits.credits.get(props.option.reference) || 0;
   const percentage = (100 / totalCredits) * usedCredits;
   return `width: ${percentage > 100 ? "100" : percentage}%`;
+});
+
+const creditBarBgClass = computed(() => {
+  if (props.selectionStyle === "background" && checkedCount.value > 0) {
+    return "bg-white";
+  }
+  return props.invalid ? "bg-theme-danger" : "bg-ballot";
+});
+
+const creditBarOpacity = computed(() => {
+  if (props.selectionStyle === "background" && checkedCount.value > 0) {
+    return "opacity: 0.3;";
+  }
+  return "opacity: 0.1;";
+});
+
+const creditBarPosition = computed(() => {
+  if (props.reverseOption) {
+    return "right: 0;";
+  }
+  return "left: 0;";
 });
 
 const backgroundHeight = computed(() => `height: ${elHeight.value}px;`);
@@ -361,10 +393,12 @@ onMounted(() => {
       (writeInTextArea as HTMLTextAreaElement).style.height = `${writeInTextArea.scrollHeight}px`;
     });
 
-    props.selections.forEach((selection) => {
-      if (selection.reference === props.option.reference && selection.text)
+    for (const selection of props.selections) {
+      if (selection.reference === props.option.reference && selection.text) {
         writeInText.value = selection.text;
-    });
+        break;
+      }
+    }
   }
 });
 
@@ -426,12 +460,9 @@ watch(
       <template #toggle="{ collapsable }">
         <!-- CREDIT USAGE ON BACKGROUND -->
         <div
-          class="position-absolute pointer-events-none"
-          :class="{
-            'bg-ballot': !invalid,
-            'bg-theme-danger': invalid,
-          }"
-          :style="`${usageOnBackground}; ${backgroundHeight}; opacity: 0.1;`"
+          class="position-absolute pointer-events-none z-1"
+          :class="creditBarBgClass"
+          :style="`${usageOnBackground}; ${backgroundHeight}; ${creditBarPosition} ${creditBarOpacity}`"
         ></div>
         <section
           ref="el"
@@ -440,7 +471,10 @@ watch(
             'AVOption--highlight': highlighted,
             'h-100': contest.mode === 'gallery',
             'cursor-pointer': option.selectable && !(disabled || observerMode || counterInterface),
-            'bg-transparent': contest.markingType.quadraticVoting,
+            'bg-transparent':
+              contest.markingType.quadraticVoting &&
+              !(selectionStyle === 'background' && checkedCount > 0),
+            'AVOption--selected-background': selectionStyle === 'background' && checkedCount > 0,
           }"
           :style="coloredEdgeStyle"
           :aria-label="`${t('js.components.AVOption.aria_labels.option')} ${getMeaningfulLabel(option as unknown as IterableObject, i18nLocale, t('js.components.AVOption.aria_labels.option'))}`"
@@ -464,20 +498,33 @@ watch(
           <div
             class="d-flex justify-content-between"
             :class="{
-              'flex-column': votesAllowedPerOption > 1,
-              'flex-sm-row': votesAllowedPerOption <= 5 || counterInterface,
+              'flex-column': votesAllowedPerOption > 1 && !reverseOption,
+              'flex-column-reverse': votesAllowedPerOption > 1 && reverseOption,
+              'flex-sm-row': (votesAllowedPerOption <= 5 || counterInterface) && !reverseOption,
+              'flex-sm-row-reverse':
+                (votesAllowedPerOption <= 5 || counterInterface) && reverseOption,
+              'flex-row-reverse': votesAllowedPerOption === 1 && reverseOption,
             }"
             data-test="option-container"
           >
             <div
-              class="vstack gap-2 p-3 align-items-start justify-content-center"
+              class="vstack gap-2 p-3 justify-content-center"
+              :class="{
+                'align-items-start': !(contest.mode === 'gallery' && reverseOption),
+                'align-items-end': contest.mode === 'gallery' && reverseOption,
+              }"
               :style="`max-width: calc(100% - ${getCrossesWidth}px);`"
               data-test="option-content"
             >
               <!-- OPTION HEADER -->
               <header
-                class="AVOption--header d-flex flex-column flex-sm-row align-items-sm-center gap-3"
-                :class="{ 'w-100': isWriteIn }"
+                class="AVOption--header d-flex flex-column flex-sm-row gap-3"
+                :class="{
+                  'w-100': isWriteIn,
+                  'align-items-sm-center': !(contest.mode === 'gallery' && reverseOption),
+                  'align-items-sm-end': contest.mode === 'gallery' && reverseOption,
+                  'flex-sm-row-reverse': contest.mode === 'gallery' && reverseOption,
+                }"
                 :style="
                   contest.mode === 'gallery' && !hasSecondaryElements ? 'min-height: 40px' : ''
                 "
@@ -488,9 +535,11 @@ watch(
                   :src="option.image"
                   :alt="t('js.components.AVOption.aria_labels.option_image')"
                   class="AVOption--image"
-                  :class="
-                    imageOption === 'square' ? 'AVOption--image-square' : 'AVOption--image-passport'
-                  "
+                  :class="{
+                    'AVOption--image-square': imageOption === 'square',
+                    'AVOption--image-passport': imageOption === 'passport',
+                    'order-last': contest.mode === 'gallery' && reverseOption,
+                  }"
                   data-test="option-image"
                 />
                 <h5
@@ -508,7 +557,8 @@ watch(
                 <div
                   v-if="contest.mode === 'gallery'"
                   :ref="`crossesFor${option.reference}`"
-                  class="AVOption--singlevote end-0 position-absolute"
+                  class="AVOption--singlevote position-absolute"
+                  :class="reverseOption ? 'start-0' : 'end-0'"
                   :style="contest.mode === 'gallery' && parentTitle ? 'top: 1rem' : 'top: 0'"
                   data-test="option-multivote"
                 >
@@ -529,6 +579,7 @@ watch(
                       :check-box-index="optionGroups[0][0]"
                       :disabled="disabled || observerMode"
                       :gallery-mode="contest.mode === 'gallery'"
+                      :selection-style="selectionStyle"
                       @toggled="toggleOption(option.reference, optionGroups[0][0], writeInText)"
                     />
                   </div>
@@ -611,7 +662,11 @@ watch(
             </div>
 
             <!-- COUNTER (STACKED MODE) -->
-            <div v-if="counterInterface" class="AVOption--singlevote hstack">
+            <div
+              v-if="counterInterface"
+              class="AVOption--singlevote hstack"
+              :class="{ 'bg-white': selectionStyle === 'background' && checkedCount > 0 }"
+            >
               <AVOptionCounter
                 :amount="checkedCount"
                 :max-amount="votesAllowedPerOption"
@@ -623,15 +678,20 @@ watch(
                 "
               />
             </div>
+
             <!-- CROSSES (STACKED MODE) -->
             <div
               v-else-if="votesAllowedPerOption >= 1 && contest.mode !== 'gallery'"
               :ref="`crossesFor${option.reference}`"
               :class="{
                 'AVOption--multivote-aside hstack gap-2 justify-content-end bg-secondary':
-                  votesAllowedPerOption <= 5 && votesAllowedPerOption !== 1,
+                  votesAllowedPerOption <= 5 && votesAllowedPerOption !== 1 && !reverseOption,
+                'AVOption--multivote-aside-reversed hstack gap-2 justify-content-start bg-secondary':
+                  votesAllowedPerOption <= 5 && votesAllowedPerOption !== 1 && reverseOption,
                 'AVOption--multivote-footer hstack gap-2 flex-wrap justify-content-end border-top bg-secondary':
-                  votesAllowedPerOption > 5,
+                  votesAllowedPerOption > 5 && !reverseOption,
+                'AVOption--multivote-footer-reversed hstack gap-2 flex-wrap justify-content-start border-top bg-secondary':
+                  votesAllowedPerOption > 5 && reverseOption,
                 'AVOption--singlevote': votesAllowedPerOption === 1,
               }"
               data-test="option-multivote"
@@ -659,6 +719,7 @@ watch(
                   :check-box-index="optionIndex"
                   :disabled="disabled || observerMode"
                   :gallery-mode="false"
+                  :selection-style="selectionStyle"
                   @toggled="toggleOption(option.reference, optionIndex, writeInText)"
                 />
               </div>
@@ -719,6 +780,8 @@ watch(
             @checked="(args: boolean) => emits('checked', args)"
             @accordion-open="() => toggleCollapse(true, false)"
             @view-candidate="openChildrenCandidate"
+            :reverse-option="reverseOption"
+            :selection-style="selectionStyle"
           />
         </div>
       </template>

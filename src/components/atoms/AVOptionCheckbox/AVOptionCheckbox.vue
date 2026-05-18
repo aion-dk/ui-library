@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, inject, onMounted, watch } from "vue";
 import { switchLocale } from "@/i18n";
-import type { PropType, SupportedLocale } from "@/types";
+import type { PropType, SupportedLocale, SelectionStyle } from "@/types";
 
 const props = defineProps({
   checked: {
@@ -39,6 +39,14 @@ const props = defineProps({
   locale: {
     type: String as PropType<SupportedLocale>,
     default: null,
+  },
+  selectionStyle: {
+    type: String as PropType<SelectionStyle>,
+    default: "checkbox",
+  },
+  reverseOption: {
+    type: Boolean,
+    default: false,
   },
 });
 
@@ -85,6 +93,7 @@ watch(
     <div
       v-if="exclusiveError && checked"
       class="AVOptionCheckbox--exclusive-container"
+      :class="{ 'AVOptionCheckbox--exclusive-container--reversed': reverseOption }"
       data-test="exclusive-error"
     >
       <div class="AVOptionCheckbox--exclusive text-white px-2 d-block bg-theme-danger">
@@ -96,7 +105,8 @@ watch(
       type="button"
       class="AVOptionCheckbox float-end p-0 m-0"
       :class="{
-        'AVOptionCheckbox--checked': checked,
+        'AVOptionCheckbox--checked': checked && selectionStyle !== 'background',
+        'AVOptionCheckbox--checked-white': checked && selectionStyle === 'background',
         'AVOptionCheckbox--disabled': disabled,
         'AVOptionCheckbox--error': (exclusiveError || invalid) && checked,
       }"
@@ -120,6 +130,7 @@ watch(
         :id="`option_${optionReference}_tick`"
         :rank="excluded ? null : rank"
         :checked="checked"
+        :selection-style="selectionStyle"
         data-test="select"
       />
     </button>

@@ -32,6 +32,9 @@ const meta: Meta<typeof AVSubmissionHelper> = {
       control: { type: "select" },
       options: SUPPORTED_LOCALES,
     },
+    displayErrorModal: {
+      control: { type: "boolean" },
+    },
   },
 };
 
