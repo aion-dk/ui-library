@@ -71,8 +71,8 @@ jobs:
           name: Publish to NPM
           command: |
             package_version=$(jq -r '.version' package.json)
-            if echo "${package_version}" | grep -E "alpha|beta" > /dev/null; then
-              prerelease=$(echo "${package_version}" | grep -E -o "alpha|beta")
+            if echo "${package_version}" | grep -E "alpha|beta|hotfix" > /dev/null; then
+              prerelease=$(echo "${package_version}" | grep -E -o "alpha|beta|hotfix")
               echo "Publishing prerelease with tag ${prerelease} to NPM"
               npm publish --tag ${prerelease}
             else
