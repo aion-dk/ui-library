@@ -73,11 +73,39 @@ const props = defineProps({
     type: Number,
     default: null,
   },
+  validateOnChange: {
+    type: Boolean,
+    default: true,
+  },
+  triggerValidation: {
+    type: Number,
+    default: 0,
+  },
 });
 
-const emits = defineEmits(["update:selectionPile", "update:errors", "view-candidate"]);
+const emits = defineEmits([
+  "update:selectionPile",
+  "update:errors",
+  "view-candidate",
+  "update:complete",
+]);
 
 const search = ref<HTMLInputElement | null>(null);
+const shouldValidate = ref(props.validateOnChange);
+
+watch(
+  () => props.triggerValidation,
+  () => {
+    shouldValidate.value = true;
+  },
+);
+
+watch(
+  () => props.validateOnChange,
+  (newValue) => {
+    shouldValidate.value = newValue;
+  },
+);
 
 const selections = computed(() => [...props.selectionPile.optionSelections]);
 
@@ -92,6 +120,11 @@ const customValidators = computed(() => {
 });
 
 const errors = computed(() => {
+  if (!shouldValidate.value) {
+    emits("update:errors", []);
+    return [];
+  }
+
   const customErrors: Error[] = [];
 
   for (const defaultValidator of customValidators.value) {
@@ -398,6 +431,9 @@ watch(
       class="mt-3"
       data-test="ballot-submission-helper"
       :display-error-modal="displayErrorModal"
+      :validate-on-change="validateOnChange"
+      :trigger-validation="triggerValidation"
+      @update:complete="emits('update:complete', $event)"
     />
   </div>
 </template>

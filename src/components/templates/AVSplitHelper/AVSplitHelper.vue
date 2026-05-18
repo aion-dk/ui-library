@@ -62,6 +62,14 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  validateOnChange: {
+    type: Boolean,
+    default: true,
+  },
+  triggerValidation: {
+    type: Number,
+    default: 0,
+  },
 });
 
 const emits = defineEmits([
@@ -89,6 +97,24 @@ const activeState = ref<AVSplitHelperState>(
 );
 
 const contestErrors = ref<string[]>([]);
+const shouldValidate = ref(props.validateOnChange);
+
+watch(
+  () => props.triggerValidation,
+  () => {
+    shouldValidate.value = true;
+    // Force emit the current readyForSubmission value (computed will recalc before this runs with flush: 'post')
+    emits("update:complete", readyForSubmission.value);
+  },
+  { flush: "post" },
+);
+
+watch(
+  () => props.validateOnChange,
+  (newValue) => {
+    shouldValidate.value = newValue;
+  },
+);
 
 const selectionPiles = computed(() => props.contestSelection.piles);
 
@@ -110,13 +136,29 @@ const contestSelectionValidator = computed(
 );
 
 const readyForSubmission = computed(() => {
-  return (
+  // Only validate when shouldValidate is true (immediate mode or after trigger)
+  if (!shouldValidate.value) {
+    return false;
+  }
+
+  // For active_choice blank mode, require explicit selection (blank or candidate)
+  const isActiveChoiceBlank = props.contest.markingType.blankSubmission === "active_choice";
+  if (isActiveChoiceBlank) {
+    const hasExplicitSelection = selectionPiles.value.some(
+      (pile: SelectionPile) => pile.explicitBlank || pile.optionSelections.length > 0,
+    );
+    if (!hasExplicitSelection) {
+      return false;
+    }
+  }
+
+  const result =
     unusedWeight.value === 0 &&
     contestErrors.value.length == 0 &&
     selectionPiles.value.every((pile: SelectionPile) =>
       selectionPileValidator.value.isComplete(pile),
-    )
-  );
+    );
+  return result;
 });
 
 const assignedWeight = computed(() =>
@@ -202,7 +244,16 @@ const updateErrors = (errors: string[]): void => {
 const viewCandidate = (contestReference: string, optionReference: string): void =>
   emits("view-candidate", contestReference, optionReference);
 
-watch(readyForSubmission, (newValue) => emits("update:complete", newValue));
+const handleBallotComplete = (complete: boolean): void => {
+  // In ballot mode (non-split), propagate the completeness state directly
+  // In split mode, this is handled by readyForSubmission watcher
+  // When shouldValidate is true, let readyForSubmission watcher handle emission to avoid race conditions
+  if (!userCanSplit.value && !shouldValidate.value) {
+    emits("update:complete", complete);
+  }
+};
+
+watch(readyForSubmission, (newValue) => emits("update:complete", newValue), { flush: "sync" });
 
 watch(activeWeight, () => {
   if (!activePile.value) return;
@@ -289,9 +340,12 @@ watch(
           @update:selection-pile="updateActivePile"
           @update:errors="(errors: string[]) => updateErrors(errors)"
           @view-candidate="viewCandidate"
+          @update:complete="handleBallotComplete"
           :reverse-option="reverseOption"
           :selection-style="selectionStyle"
           :display-error-modal="displayErrorModal"
+          :validate-on-change="validateOnChange"
+          :trigger-validation="triggerValidation"
         />
 
         <div id="ballot-action-buttons" class="mt-3 row">
@@ -449,9 +503,12 @@ watch(
       @update:selection-pile="updateActivePile"
       @update:errors="(errors: string[]) => updateErrors(errors)"
       @view-candidate="viewCandidate"
+      @update:complete="handleBallotComplete"
       :reverse-option="reverseOption"
       :selection-style="selectionStyle"
       :display-error-modal="displayErrorModal"
+      :validate-on-change="validateOnChange"
+      :trigger-validation="triggerValidation"
     />
   </template>
 </template>

@@ -54,7 +54,17 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  validateOnChange: {
+    type: Boolean,
+    default: true,
+  },
+  triggerValidation: {
+    type: Number,
+    default: 0,
+  },
 });
+
+const emits = defineEmits(["update:complete"]);
 
 const errorMessages = computed(() => {
   // Hint to i18n-tasks that these translations should be present:
@@ -131,6 +141,27 @@ watch(
     }
   },
 );
+
+watch(
+  () => props.triggerValidation,
+  () => {
+    // Trigger validation from parent (e.g., when continue button is clicked)
+    // Emit completeness state based on current errors
+    emits("update:complete", props.errors.length === 0);
+  },
+);
+
+watch(
+  () => props.errors,
+  () => {
+    if (props.validateOnChange) {
+      // Real-time validation: emit completeness whenever errors change
+      emits("update:complete", props.errors.length === 0);
+    }
+  },
+  { deep: true },
+);
+
 /* END */
 </script>
 
