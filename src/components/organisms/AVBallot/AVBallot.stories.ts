@@ -28,6 +28,9 @@ const meta: Meta<typeof AVBallot> & {
     showSubmissionHelper: {
       control: { type: "boolean" },
     },
+    weight: {
+      control: { type: "number", min: 1, step: 1 },
+    },
     locale: {
       control: { type: "select" },
       options: SUPPORTED_LOCALES,
