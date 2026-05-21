@@ -48,6 +48,10 @@ const props = defineProps({
     type: String as PropType<SelectionStyle>,
     default: "checkbox",
   },
+  selectionMode: {
+    type: String as PropType<"checkbox" | "radio">,
+    default: "checkbox",
+  },
 });
 
 const emits = defineEmits(["toggleBlank"]);
@@ -97,6 +101,8 @@ watch(
       'AVBlankOption--disabled': disabled,
       'h-100': galleryMode,
     }"
+    :role="selectionMode === 'radio' ? 'radio' : undefined"
+    :aria-checked="selectionMode === 'radio' ? checked : undefined"
     data-test="blank-option"
     @click="emits('toggleBlank')"
   >

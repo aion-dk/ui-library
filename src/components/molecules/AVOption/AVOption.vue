@@ -96,6 +96,14 @@ const props = defineProps({
     type: String as PropType<SelectionStyle>,
     default: "checkbox",
   },
+  selectionMode: {
+    type: String as PropType<"checkbox" | "radio">,
+    default: "checkbox",
+  },
+  maxSelectionsReached: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const emits = defineEmits(["accordion-open", "checked", "view-candidate"]);
@@ -350,6 +358,12 @@ const toggleFromOption = (onlyUpdate: boolean): void => {
   toggleOption(props.option.reference, 1, writeInText.value, onlyUpdate);
 };
 
+const handleOptionClick = (): void => {
+  if (props.maxSelectionsReached && checkedCount.value === 0 && props.selectionMode !== "radio")
+    return;
+  toggleFromOption(false);
+};
+
 const toggleFromWriteIn = (e: Event): void => {
   e.preventDefault();
   e.stopPropagation();
@@ -475,11 +489,15 @@ watch(
               contest.markingType.quadraticVoting &&
               !(selectionStyle === 'background' && checkedCount > 0),
             'AVOption--selected-background': selectionStyle === 'background' && checkedCount > 0,
+            'AVOption--blocked':
+              maxSelectionsReached && checkedCount === 0 && !disabled && selectionMode !== 'radio',
           }"
           :style="coloredEdgeStyle"
+          :role="selectionMode === 'radio' ? 'radio' : undefined"
+          :aria-checked="selectionMode === 'radio' ? checkedCount > 0 : undefined"
           :aria-label="`${t('js.components.AVOption.aria_labels.option')} ${getMeaningfulLabel(option as unknown as IterableObject, i18nLocale, t('js.components.AVOption.aria_labels.option'))}`"
           data-test="option-section"
-          @click="toggleFromOption(false)"
+          @click="handleOptionClick"
         >
           <!-- PARENT BADGE -->
           <div
@@ -782,6 +800,8 @@ watch(
             @view-candidate="openChildrenCandidate"
             :reverse-option="reverseOption"
             :selection-style="selectionStyle"
+            :selection-mode="selectionMode"
+            :max-selections-reached="maxSelectionsReached"
           />
         </div>
       </template>

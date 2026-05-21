@@ -2,6 +2,7 @@
 import { ref, computed, inject, onMounted, watch } from "vue";
 import { flattenOptions } from "@/helpers/contestHelpers";
 import { switchLocale } from "@/i18n";
+import { useValidationPolicy } from "@/composables/useValidationPolicy";
 import type {
   PropType,
   SupportedLocale,
@@ -18,7 +19,7 @@ import type {
 import { getMeaningfulLabel } from "@/helpers/meaningfulLabel";
 import { AVIcon } from "@/components";
 
-const emits = defineEmits(["editCurrentSelection", "deleteSelection"]);
+const emits = defineEmits(["editCurrentSelection", "deleteSelection", "update:pendingAlerts"]);
 
 const props = defineProps({
   selectionPile: {
@@ -72,6 +73,22 @@ const props = defineProps({
 });
 
 const showAllOptions = ref(false);
+
+const { inlineResults: policyInlineResults, pendingAlerts } = useValidationPolicy(
+  computed(() => props.contest),
+  computed(() => props.selectionPile),
+  "review_page",
+);
+
+watch(
+  pendingAlerts,
+  (alerts) => {
+    if (props.activeState === "summary") {
+      emits("update:pendingAlerts", alerts);
+    }
+  },
+  { deep: true },
+);
 
 const blankSelected = computed(() => {
   return props.selectionPile.optionSelections.length === 0;
@@ -242,6 +259,24 @@ watch(
         :blank="blankSelected"
         :blank-accent-color="contest.blankOptionColor"
       />
+      <div
+        v-if="policyInlineResults.length > 0"
+        class="mt-2 p-2"
+        :class="{
+          'bg-warning bg-opacity-10 text-warning': policyInlineResults[0]?.warning,
+          'bg-theme-danger text-white': policyInlineResults[0]?.blocked,
+        }"
+        data-test="pile-summary-policy-feedback"
+      >
+        <div
+          v-for="result in policyInlineResults"
+          :key="result.scenario"
+          role="alert"
+          class="small"
+        >
+          {{ t(`js.components.AVSubmissionHelper.${result.feedbackMessage}`) }}
+        </div>
+      </div>
     </div>
   </div>
 

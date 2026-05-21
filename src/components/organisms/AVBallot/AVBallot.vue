@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { ref, computed, inject, onMounted, watch } from "vue";
+import { ref, computed, inject, onMounted, watch, watchEffect } from "vue";
 import { switchLocale } from "@/i18n";
 import { flattenOptions } from "@/helpers/contestHelpers";
 import { getMeaningfulLabel } from "@/helpers/meaningfulLabel";
+import { useValidationPolicy } from "@/composables/useValidationPolicy";
 import type {
   PropType,
   SupportedLocale,
@@ -75,11 +76,32 @@ const props = defineProps({
   },
 });
 
-const emits = defineEmits(["update:selectionPile", "update:errors", "view-candidate"]);
+const emits = defineEmits([
+  "update:selectionPile",
+  "update:errors",
+  "update:pendingAlerts",
+  "view-candidate",
+]);
 
 const search = ref<HTMLInputElement | null>(null);
 
 const selections = computed(() => [...props.selectionPile.optionSelections]);
+
+const {
+  validationResults: policyResults,
+  pendingAlerts,
+  inlineResults: policyInlineResults,
+  selectionMode,
+  blockSelectionEnabled,
+} = useValidationPolicy(
+  computed(() => props.contest),
+  computed(() => props.selectionPile),
+  "ballot_page",
+);
+
+watchEffect(() => {
+  emits("update:pendingAlerts", pendingAlerts.value);
+});
 
 const validator = computed(() => new SelectionPileValidator(props.contest));
 
@@ -113,6 +135,11 @@ const errors = computed(() => {
       errorIndex = combinedErrors.findIndex((err) => err.message === "cross_party_voting");
       combinedErrors.splice(errorIndex, 1);
     }
+  }
+
+  if (policyResults.value.some((r) => r.scenario === "overvote")) {
+    const idx = combinedErrors.findIndex((err) => err.message === "too_many");
+    if (idx >= 0) combinedErrors.splice(idx, 1);
   }
 
   emits("update:errors", combinedErrors);
@@ -184,12 +211,24 @@ const toggleOption = ({ reference, amount, text, onlyUpdate }: CheckedEventArgs)
   );
   const newSelection = { reference, text };
 
+  if (
+    blockSelectionEnabled.value &&
+    currentAmount === 0 &&
+    !onlyUpdate &&
+    selectionMode.value !== "radio"
+  )
+    return;
+
   let finalAmount = amount;
   if (amount === currentAmount && !onlyUpdate) finalAmount = amount - 1;
 
   let newSelections = selections.value.filter((selection) => {
     if (selection.reference !== reference) return { ...selection };
   });
+
+  if (selectionMode.value === "radio" && finalAmount > 0 && currentAmount === 0) {
+    newSelections = [];
+  }
 
   for (let i = 0; i < finalAmount; i += 1) {
     newSelections.push(newSelection);
@@ -324,6 +363,8 @@ watch(
           @view-candidate="viewCandidate"
           :reverse-option="reverseOption"
           :selection-style="selectionStyle"
+          :selection-mode="selectionMode"
+          :max-selections-reached="blockSelectionEnabled"
         />
       </div>
 
@@ -340,6 +381,7 @@ watch(
         @toggle-blank="toggleBlank"
         :reverse-option="reverseOption"
         :selection-style="selectionStyle"
+        :selection-mode="selectionMode"
       />
     </div>
 
@@ -347,6 +389,7 @@ watch(
       v-else
       id="ballot_options"
       class="vstack gap-2"
+      :role="selectionMode === 'radio' ? 'radiogroup' : undefined"
       :aria-label="t('js.components.AVBallot.aria_labels.ballot_options')"
     >
       <template v-for="option in contest.options" :key="option.reference">
@@ -369,6 +412,8 @@ watch(
           @view-candidate="viewCandidate"
           :reverse-option="reverseOption"
           :selection-style="selectionStyle"
+          :selection-mode="selectionMode"
+          :max-selections-reached="blockSelectionEnabled"
         />
       </template>
       <AVBlankOption
@@ -382,6 +427,7 @@ watch(
         :partial-results="partialResults ? partialResults['blank'] : null"
         :reverse-option="reverseOption"
         :selection-style="selectionStyle"
+        :selection-mode="selectionMode"
         @toggle-blank="toggleBlank"
       />
     </div>
@@ -395,6 +441,8 @@ watch(
       :has-exclusive-options="contestHasExclusiveOptions"
       :display-scroll-to-bottom="contest.displayScrollToBottomBtn"
       :voice-credits="contest.markingType.quadraticVoting ? voiceCredits : null"
+      :policy-inline-results="policyInlineResults"
+      active-screen="ballot_page"
       class="mt-3"
       data-test="ballot-submission-helper"
       :display-error-modal="displayErrorModal"

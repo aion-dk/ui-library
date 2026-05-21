@@ -226,3 +226,77 @@ describe("AVSubmissionHelper", () => {
     expect(wrapper.findAll("[data-test=submission-helper-error]").length).to.eq(0);
   });
 });
+
+describe("AVSubmissionHelper with policy inline results", () => {
+  const wrapper = mount(AVSubmissionHelper, {
+    props: {
+      minMarks: 1,
+      maxMarks: 3,
+      chosenCount: 0,
+      errors: [],
+      locale: "en",
+    },
+    global: {
+      provide: {
+        i18n: localI18n,
+      },
+      directives: {
+        tooltip: () => {},
+      },
+      stubs: {
+        AVIcon: {
+          template: "<span />",
+        },
+      },
+    },
+  });
+
+  it("renders policy warning feedback inline", async () => {
+    await wrapper.setProps({
+      chosenCount: 1,
+      policyInlineResults: [
+        {
+          scenario: "undervote_between",
+          allowed: true,
+          warning: true,
+          blocked: false,
+          feedbackMessage: "warnings.undervote_between",
+          feedbackScreen: "ballot_page",
+          feedbackType: "on_screen_message",
+        },
+      ],
+    });
+
+    expect(wrapper.findAll("[data-test=submission-helper-policy-feedback]").length).to.eq(1);
+    expect(wrapper.find("[data-test=submission-helper-policy-feedback]").text()).to.contain(
+      "You have selected fewer than the maximum allowed options",
+    );
+  });
+
+  it("renders policy error feedback inline", async () => {
+    await wrapper.setProps({
+      chosenCount: 1,
+      policyInlineResults: [
+        {
+          scenario: "undervote_below_min",
+          allowed: false,
+          warning: false,
+          blocked: true,
+          feedbackMessage: "errors.undervote_below_min",
+          feedbackScreen: "ballot_page",
+          feedbackType: "on_screen_message",
+        },
+      ],
+    });
+
+    expect(wrapper.findAll("[data-test=submission-helper-policy-feedback]").length).to.eq(1);
+  });
+
+  it("does not render policy feedback when no results", async () => {
+    await wrapper.setProps({
+      policyInlineResults: [],
+    });
+
+    expect(wrapper.findAll("[data-test=submission-helper-policy-feedback]").length).to.eq(0);
+  });
+});

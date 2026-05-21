@@ -1,7 +1,14 @@
 <script setup lang="ts">
 import { computed, inject, onMounted, watch, ref, nextTick } from "vue";
 import { switchLocale } from "@/i18n";
-import type { PropType, SupportedLocale, Error, VoiceCredits } from "@/types";
+import type {
+  PropType,
+  SupportedLocale,
+  Error,
+  VoiceCredits,
+  ValidationResult,
+  FeedbackScreen,
+} from "@/types";
 
 const showErrorModal = ref(false);
 const dismissButtonRef = ref<HTMLElement | null>(null);
@@ -53,6 +60,14 @@ const props = defineProps({
   displayErrorModal: {
     type: Boolean,
     default: false,
+  },
+  policyInlineResults: {
+    type: Array as PropType<ValidationResult[]>,
+    default: () => [],
+  },
+  activeScreen: {
+    type: String as PropType<FeedbackScreen>,
+    default: "ballot_page",
   },
 });
 
@@ -150,9 +165,18 @@ watch(
       <div
         class="p-3"
         :class="{
-          'bg-gray-700': !errors.length || displayErrorModal,
-          'text-white': !errors.length || displayErrorModal,
-          'bg-theme-danger': errors.length > 0 && !displayErrorModal,
+          'bg-gray-700':
+            (!errors.length && !policyInlineResults.length) ||
+            displayErrorModal ||
+            chosenCount === 0,
+          'text-white':
+            (!errors.length && !policyInlineResults.length) ||
+            displayErrorModal ||
+            chosenCount === 0,
+          'bg-theme-danger':
+            (errors.length > 0 || policyInlineResults.length > 0) &&
+            !displayErrorModal &&
+            chosenCount > 0,
         }"
         data-test="submission-helper"
       >
@@ -181,7 +205,24 @@ watch(
             data-test="submission-helper-error"
           ></div>
         </div>
-        <hr v-if="errors.length > 0 && !displayErrorModal" class="my-3" />
+        <div v-if="!displayErrorModal && policyInlineResults.length > 0 && chosenCount > 0">
+          <div
+            v-for="result in policyInlineResults"
+            :key="result.scenario"
+            role="alert"
+            :class="{
+              'text-warning': result.warning,
+              'text-white': result.blocked,
+            }"
+            data-test="submission-helper-policy-feedback"
+          >
+            {{ t(`js.components.AVSubmissionHelper.${result.feedbackMessage}`) }}
+          </div>
+        </div>
+        <hr
+          v-if="(errors.length > 0 || policyInlineResults.length > 0) && !displayErrorModal"
+          class="my-3"
+        />
 
         <div v-if="maxMarks > 1">
           <div class="d-block justify-content-between align-items-center">

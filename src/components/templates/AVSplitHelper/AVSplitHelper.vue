@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, computed, inject, onMounted, watch } from "vue";
 import { switchLocale } from "@/i18n";
+import { useValidationPolicy, getPendingAlerts } from "@/composables/useValidationPolicy";
 import type {
   PropType,
   SupportedLocale,
@@ -69,6 +70,7 @@ const emits = defineEmits([
   "update:contestSelection",
   "update:activeState",
   "update:activePile",
+  "update:pendingAlerts",
   "view-candidate",
 ]);
 
@@ -92,6 +94,14 @@ const contestErrors = ref<string[]>([]);
 
 const selectionPiles = computed(() => props.contestSelection.piles);
 
+const { pendingAlerts: policyAlerts } = useValidationPolicy(
+  computed(() => props.contest),
+  activePile,
+  "ballot_page",
+);
+
+const hasPendingAlerts = computed(() => getPendingAlerts(policyAlerts.value).length > 0);
+
 const unusedWeight = computed(() =>
   selectionPiles.value?.reduce(
     (sum: number, bs: SelectionPile) => sum - bs.multiplier,
@@ -110,13 +120,13 @@ const contestSelectionValidator = computed(
 );
 
 const readyForSubmission = computed(() => {
-  return (
+  const baseComplete =
     unusedWeight.value === 0 &&
     contestErrors.value.length == 0 &&
     selectionPiles.value.every((pile: SelectionPile) =>
       selectionPileValidator.value.isComplete(pile),
-    )
-  );
+    );
+  return baseComplete || hasPendingAlerts.value;
 });
 
 const assignedWeight = computed(() =>
@@ -288,6 +298,7 @@ watch(
           :image-option="imageOption"
           @update:selection-pile="updateActivePile"
           @update:errors="(errors: string[]) => updateErrors(errors)"
+          @update:pending-alerts="(alerts: any[]) => emits('update:pendingAlerts', alerts)"
           @view-candidate="viewCandidate"
           :reverse-option="reverseOption"
           :selection-style="selectionStyle"
@@ -448,6 +459,7 @@ watch(
       :show-submission-helper="showSubmissionHelper"
       @update:selection-pile="updateActivePile"
       @update:errors="(errors: string[]) => updateErrors(errors)"
+      @update:pending-alerts="(alerts: any[]) => emits('update:pendingAlerts', alerts)"
       @view-candidate="viewCandidate"
       :reverse-option="reverseOption"
       :selection-style="selectionStyle"

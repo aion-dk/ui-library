@@ -158,3 +158,8 @@
     outline: transparent solid 1rem;
   }
 }
+
+.AVOption--blocked {
+  opacity: 0.6;
+  pointer-events: none;
+}
