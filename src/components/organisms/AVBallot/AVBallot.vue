@@ -66,10 +66,6 @@ const props = defineProps({
     type: String as PropType<SelectionStyle>,
     default: "checkbox",
   },
-  displayErrorModal: {
-    type: Boolean,
-    default: false,
-  },
   weight: {
     type: Number,
     default: null,
@@ -445,7 +441,6 @@ watch(
       active-screen="ballot_page"
       class="mt-3"
       data-test="ballot-submission-helper"
-      :display-error-modal="displayErrorModal"
     />
   </div>
 </template>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, inject, onMounted, watch, ref, nextTick } from "vue";
+import { computed, inject, onMounted, watch } from "vue";
 import { switchLocale } from "@/i18n";
 import type {
   PropType,
@@ -9,20 +9,6 @@ import type {
   ValidationResult,
   FeedbackScreen,
 } from "@/types";
-
-const showErrorModal = ref(false);
-const dismissButtonRef = ref<HTMLElement | null>(null);
-
-const dismissErrorModal = (): void => {
-  showErrorModal.value = false;
-};
-
-watch(showErrorModal, async (val) => {
-  if (val) {
-    await nextTick();
-    dismissButtonRef.value?.focus();
-  }
-});
 
 const props = defineProps({
   minMarks: {
@@ -57,10 +43,6 @@ const props = defineProps({
     type: String as PropType<SupportedLocale>,
     default: null,
   },
-  displayErrorModal: {
-    type: Boolean,
-    default: false,
-  },
   policyInlineResults: {
     type: Array as PropType<ValidationResult[]>,
     default: () => [],
@@ -72,17 +54,6 @@ const props = defineProps({
 });
 
 const errorMessages = computed(() => {
-  // Hint to i18n-tasks that these translations should be present:
-  // t("submission_helper.errors.too_many")
-  // t("submission_helper.errors.blank")
-  // t("submission_helper.errors.write_in_required")
-  // t("submission_helper.errors.write_in_too_long")
-  // t("submission_helper.errors.write_in_not_supported")
-  // t("submission_helper.errors.write_in_empty")
-  // t("submission_helper.errors.exceeded_list_limit")
-  // t("submission_helper.errors.exclusive")
-  // t("submission_helper.errors.cross_party_voting")
-  // t("submission_helper.errors.too_many_credits")
   return props.errors.map((e) => {
     if (e.keys) {
       Object.keys(e.keys).forEach((key) => {
@@ -127,25 +98,6 @@ watch(
 watch(i18nLocale, (newLocale) => {
   if (!props.locale) switchLocale(newLocale);
 });
-
-watch(
-  () => props.errors,
-  (newErrors) => {
-    if (newErrors.length > 0 && props.displayErrorModal) {
-      showErrorModal.value = true;
-    }
-  },
-  { deep: true, immediate: true },
-);
-
-watch(
-  () => props.displayErrorModal,
-  (newVal) => {
-    if (newVal && props.errors.length > 0) {
-      showErrorModal.value = true;
-    }
-  },
-);
 /* END */
 </script>
 
@@ -165,18 +117,10 @@ watch(
       <div
         class="p-3"
         :class="{
-          'bg-gray-700':
-            (!errors.length && !policyInlineResults.length) ||
-            displayErrorModal ||
-            chosenCount === 0,
-          'text-white':
-            (!errors.length && !policyInlineResults.length) ||
-            displayErrorModal ||
-            chosenCount === 0,
+          'bg-gray-700': (!errors.length && !policyInlineResults.length) || chosenCount === 0,
+          'text-white': (!errors.length && !policyInlineResults.length) || chosenCount === 0,
           'bg-theme-danger':
-            (errors.length > 0 || policyInlineResults.length > 0) &&
-            !displayErrorModal &&
-            chosenCount > 0,
+            (errors.length > 0 || policyInlineResults.length > 0) && chosenCount > 0,
         }"
         data-test="submission-helper"
       >
@@ -185,7 +129,7 @@ watch(
           v-if="voiceCredits"
           class="AVSubmissionHelper--quadratic"
           :class="{
-            'text-white': !errors.length || displayErrorModal,
+            'text-white': !errors.length,
           }"
           data-test="submission-helper-quadratic"
         >
@@ -195,8 +139,8 @@ watch(
           <strong>{{ voiceCredits.total }}</strong>
         </div>
 
-        <!-- ERRORS (only shown inline when modal mode is off) -->
-        <div v-if="!displayErrorModal">
+        <!-- ERRORS -->
+        <div>
           <div
             v-for="errorMessage in errorMessages"
             :key="errorMessage"
@@ -205,7 +149,7 @@ watch(
             data-test="submission-helper-error"
           ></div>
         </div>
-        <div v-if="!displayErrorModal && policyInlineResults.length > 0 && chosenCount > 0">
+        <div v-if="policyInlineResults.length > 0 && chosenCount > 0">
           <div
             v-for="result in policyInlineResults"
             :key="result.scenario"
@@ -219,10 +163,7 @@ watch(
             {{ t(`js.components.AVSubmissionHelper.${result.feedbackMessage}`) }}
           </div>
         </div>
-        <hr
-          v-if="(errors.length > 0 || policyInlineResults.length > 0) && !displayErrorModal"
-          class="my-3"
-        />
+        <hr v-if="errors.length > 0 || policyInlineResults.length > 0" class="my-3" />
 
         <div v-if="maxMarks > 1">
           <div class="d-block justify-content-between align-items-center">
@@ -266,48 +207,6 @@ watch(
         </div>
       </div>
     </div>
-
-    <!-- ERROR MODAL -->
-    <template v-if="displayErrorModal && showErrorModal && errors.length > 0">
-      <div class="modal-backdrop fade show"></div>
-      <div
-        class="modal fade show d-block"
-        tabindex="-1"
-        role="alertdialog"
-        aria-modal="true"
-        aria-labelledby="error-modal-title"
-        aria-describedby="error-modal-message"
-        data-test="error-modal"
-        @keydown.esc="dismissErrorModal"
-      >
-        <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content">
-            <div class="modal-body text-center p-4">
-              <div class="mb-3">
-                <AVIcon icon="triangle-exclamation" class="text-warning fs-1" />
-              </div>
-              <h2 id="error-modal-title" class="visually-hidden">
-                {{ t("js.components.AVSubmissionHelper.error_modal_title") }}
-              </h2>
-              <div id="error-modal-message" class="mb-4">
-                <p v-for="(errorMessage, index) in errorMessages" :key="index" role="alert">
-                  {{ errorMessage }}
-                </p>
-              </div>
-              <button
-                ref="dismissButtonRef"
-                type="button"
-                class="btn btn-primary"
-                @click="dismissErrorModal"
-                data-test="dismiss-error-modal"
-              >
-                {{ t("js.components.AVSubmissionHelper.error_modal_dismiss") }}
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </template>
   </div>
 </template>
 

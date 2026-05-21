@@ -42,9 +42,6 @@ const meta: Meta<typeof AVBallot> & {
       control: { type: "select" },
       options: ["checkbox", "background"],
     },
-    displayErrorModal: {
-      control: { type: "boolean" },
-    },
     "onUpdate:selectionPile": {
       action: "update:selectionPile: UPDATED SELECTION PILE",
     },

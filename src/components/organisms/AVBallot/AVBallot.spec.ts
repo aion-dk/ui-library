@@ -523,26 +523,6 @@ describe("AVBallot", () => {
     const blankOption = wrapper.findComponent(AVBlankOption);
     expect(blankOption.props("selectionStyle")).to.eq("background");
   });
-
-  it("passes displayErrorModal to AVSubmissionHelper", async () => {
-    await wrapper.setProps({
-      contest: getContest([]),
-      selectionPile: getSelectionPile([]),
-      showSubmissionHelper: true,
-      displayErrorModal: true,
-    });
-
-    const submissionHelper = wrapper.findComponent(AVSubmissionHelper);
-    expect(submissionHelper.exists()).to.eq(true);
-    expect(submissionHelper.props("displayErrorModal")).to.eq(true);
-  });
-
-  it("defaults displayErrorModal to false", async () => {
-    await wrapper.setProps({ displayErrorModal: undefined });
-
-    const submissionHelper = wrapper.findComponent(AVSubmissionHelper);
-    expect(submissionHelper.props("displayErrorModal")).to.eq(false);
-  });
 });
 
 describe("AVBallot with validation policy", () => {

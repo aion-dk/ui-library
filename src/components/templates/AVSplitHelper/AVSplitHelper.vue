@@ -59,10 +59,6 @@ const props = defineProps({
     type: String as PropType<SelectionStyle>,
     default: "checkbox",
   },
-  displayErrorModal: {
-    type: Boolean,
-    default: false,
-  },
 });
 
 const emits = defineEmits([
@@ -302,7 +298,6 @@ watch(
           @view-candidate="viewCandidate"
           :reverse-option="reverseOption"
           :selection-style="selectionStyle"
-          :display-error-modal="displayErrorModal"
         />
 
         <div id="ballot-action-buttons" class="mt-3 row">
@@ -463,7 +458,6 @@ watch(
       @view-candidate="viewCandidate"
       :reverse-option="reverseOption"
       :selection-style="selectionStyle"
-      :display-error-modal="displayErrorModal"
     />
   </template>
 </template>

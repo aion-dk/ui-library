@@ -623,20 +623,6 @@ describe("AVSplitHelper new props", () => {
     expect(ballot.props("selectionStyle")).to.eq("checkbox");
   });
 
-  it("passes displayErrorModal to AVBallot", async () => {
-    const wrapper = createWrapper({ displayErrorModal: true });
-
-    const ballot = wrapper.findComponent(AVBallot);
-    expect(ballot.props("displayErrorModal")).to.eq(true);
-  });
-
-  it("defaults displayErrorModal to false", async () => {
-    const wrapper = createWrapper();
-
-    const ballot = wrapper.findComponent(AVBallot);
-    expect(ballot.props("displayErrorModal")).to.eq(false);
-  });
-
   it("passes imageOption to AVPileSummary in split mode", async () => {
     const wrapper = createWrapper({
       weight: 10,
