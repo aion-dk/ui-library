@@ -217,7 +217,7 @@ export const WithValidationPolicyMixed = {
   args: {
     contest: {
       ...getContest(["blank", "multi"]),
-      validationPolicy: getValidationPolicy("mixed"),
+      validationPolicy: getValidationPolicy("full"),
     },
     contestSelection: getContestSelection([]),
     weight: 1,
