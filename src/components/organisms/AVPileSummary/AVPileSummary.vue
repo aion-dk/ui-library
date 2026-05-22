@@ -274,7 +274,9 @@ watch(
           role="alert"
           class="small"
         >
-          {{ t(`js.components.AVSubmissionHelper.${result.feedbackMessage}`) }}
+          {{
+            t(`js.components.AVSubmissionHelper.${result.feedbackMessage}`, result.feedbackParams)
+          }}
         </div>
       </div>
     </div>

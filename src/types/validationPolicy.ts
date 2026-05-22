@@ -65,6 +65,7 @@ export interface ValidationResult {
   feedbackMessage: string;
   feedbackScreen: FeedbackScreen;
   feedbackType: FeedbackType;
+  feedbackParams?: Record<string, unknown>;
 }
 
 declare module "@assemblyvoting/types" {

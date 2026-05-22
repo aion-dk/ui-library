@@ -91,6 +91,7 @@ function evaluateScenario(
         feedbackMessage: "errors.undervote_below_min",
         feedbackScreen: p.feedbackScreen,
         feedbackType: p.feedbackType,
+        feedbackParams: { min_marks: minMarks },
       };
     }
 
@@ -129,6 +130,7 @@ function evaluateScenario(
         feedbackMessage: "errors.undervote_below_min",
         feedbackScreen: belowMinPolicy.feedbackScreen,
         feedbackType: belowMinPolicy.feedbackType,
+        feedbackParams: { min_marks: minMarks },
       };
     }
 

@@ -160,7 +160,9 @@ watch(i18nLocale, (newLocale) => {
             }"
             data-test="submission-helper-policy-feedback"
           >
-            {{ t(`js.components.AVSubmissionHelper.${result.feedbackMessage}`) }}
+            {{
+              t(`js.components.AVSubmissionHelper.${result.feedbackMessage}`, result.feedbackParams)
+            }}
           </div>
         </div>
         <hr v-if="errors.length > 0 || policyInlineResults.length > 0" class="my-3" />
