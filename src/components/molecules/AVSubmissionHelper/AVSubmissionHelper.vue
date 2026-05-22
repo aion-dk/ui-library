@@ -227,10 +227,10 @@ watch(
     </div>
 
     <!-- ERROR MODAL -->
-    <transition name="modal" tag="div">
+    <transition name="modal">
       <template v-if="displayErrorModal && showErrorModal && errors.length > 0">
-        <!-- z-index added because "sticky-bottom" bootstrap class used in
-        submission helper adds an z-index of 1020 and this needs to be on top -->
+        <!-- z-index added because "sticky-bottom" Bootstrap class used in
+        submission helper adds a z-index of 1020 and this needs to be on top -->
         <div
           class="d-block modal my-modal-backdrop show fade"
           style="z-index: 1050 !important"
@@ -256,7 +256,7 @@ watch(
               </header>
 
               <!-- BODY -->
-              <main class="modal-body">
+              <div class="modal-body">
                 <div id="error-modal-message">
                   <p
                     v-for="(errorMessage, index) in errorMessages"
@@ -267,7 +267,7 @@ watch(
                     {{ errorMessage }}
                   </p>
                 </div>
-              </main>
+              </div>
 
               <!-- FOOTER -->
               <footer class="modal-footer justify-content-end">

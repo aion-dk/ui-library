@@ -1,5 +1,9 @@
 @import "../../../../node_modules/bootstrap/scss/bootstrap-utilities";
 
+.my-modal-backdrop {
+  background-color: rgba($black, 0.5);
+}
+
 .AVSubmissionHelper--quadratic {
   float: none;
   display: flex;
