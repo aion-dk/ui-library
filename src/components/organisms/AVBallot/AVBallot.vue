@@ -204,9 +204,12 @@ watch(reactiveContest, (present, previous) => {
 });
 
 const toggleBlank = (): void => {
+  const newBlank = !props.selectionPile.explicitBlank;
   emits("update:selectionPile", {
     ...props.selectionPile,
-    explicitBlank: !props.selectionPile.explicitBlank,
+    explicitBlank: newBlank,
+    optionSelections:
+      selectionMode.value === "radio" && newBlank ? [] : props.selectionPile.optionSelections,
   });
 };
 
@@ -252,6 +255,10 @@ const toggleOption = ({ reference, amount, text, onlyUpdate }: CheckedEventArgs)
   emits("update:selectionPile", {
     ...props.selectionPile,
     optionSelections: newSelections,
+    explicitBlank:
+      selectionMode.value === "radio" && finalAmount > 0
+        ? false
+        : props.selectionPile.explicitBlank,
   });
 };
 
