@@ -186,11 +186,24 @@ export function getInlineResults(
   });
 }
 
+function resolveLocalizedMessage(
+  message: Record<string, string> | undefined,
+  locale: string,
+): string | undefined {
+  if (!message) return undefined;
+  return message[locale] || message["en"] || Object.values(message)[0];
+}
+
 export function useValidationPolicy(
   contest: Ref<ContestContent> | ContestContent,
   selectionPile: Ref<SelectionPile> | SelectionPile,
   activeScreen: Ref<FeedbackScreen> | FeedbackScreen,
+  locale?: Ref<string> | string,
 ) {
+  const resolveLocale = computed(() => {
+    if (!locale) return "en";
+    return isRef(locale) ? locale.value : locale;
+  });
   const resolveContest = computed(() => (isRef(contest) ? contest.value : contest));
   const resolvePile = computed(() => (isRef(selectionPile) ? selectionPile.value : selectionPile));
   const resolveScreen = computed(() => (isRef(activeScreen) ? activeScreen.value : activeScreen));
@@ -207,6 +220,8 @@ export function useValidationPolicy(
 
   const maxMarks = computed(() => resolveContest.value.markingType.maxMarks);
 
+  const blankPolicy = computed(() => policy.value.blankVoteFeedback);
+
   const scenario = computed(() =>
     explicitBlank.value
       ? null
@@ -217,7 +232,14 @@ export function useValidationPolicy(
     const s = scenario.value;
     if (s === null) return [];
     const result = evaluateScenario(s, policy.value, selectedCount.value, minMarks.value);
-    return result ? [result] : [];
+    if (!result) return [];
+    if (result.scenario === "blank_vote" && blankPolicy.value?.message) {
+      const resolved = resolveLocalizedMessage(blankPolicy.value.message, resolveLocale.value);
+      if (resolved) {
+        return [{ ...result, feedbackMessage: resolved, isRawMessage: true }];
+      }
+    }
+    return [result];
   });
 
   const isComplete = computed(() => !validationResults.value.some((r) => r.blocked));
