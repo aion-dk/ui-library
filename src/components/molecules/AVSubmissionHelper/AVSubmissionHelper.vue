@@ -155,8 +155,7 @@ watch(i18nLocale, (newLocale) => {
             :key="result.scenario"
             role="alert"
             :class="{
-              'text-warning': result.warning,
-              'text-white': result.blocked,
+              'text-white': result.warning || result.blocked,
             }"
             data-test="submission-helper-policy-feedback"
           >

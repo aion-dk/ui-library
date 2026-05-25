@@ -265,7 +265,7 @@ watch(
         v-if="policyInlineResults.length > 0"
         class="mt-2 p-2"
         :class="{
-          'bg-warning bg-opacity-10 text-warning': policyInlineResults[0]?.warning,
+          'bg-warning bg-opacity-10 text-warning-emphasis': policyInlineResults[0]?.warning,
           'bg-theme-danger text-white': policyInlineResults[0]?.blocked,
         }"
         data-test="pile-summary-policy-feedback"
