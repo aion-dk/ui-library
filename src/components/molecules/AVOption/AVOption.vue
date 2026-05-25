@@ -493,8 +493,6 @@ watch(
               maxSelectionsReached && checkedCount === 0 && !disabled && selectionMode !== 'radio',
           }"
           :style="coloredEdgeStyle"
-          :role="selectionMode === 'radio' ? 'radio' : undefined"
-          :aria-checked="selectionMode === 'radio' ? checkedCount > 0 : undefined"
           :aria-label="`${t('js.components.AVOption.aria_labels.option')} ${getMeaningfulLabel(option as unknown as IterableObject, i18nLocale, t('js.components.AVOption.aria_labels.option'))}`"
           data-test="option-section"
           @click="handleOptionClick"
