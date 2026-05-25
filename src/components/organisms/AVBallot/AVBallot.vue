@@ -394,7 +394,6 @@ watch(
       v-else
       id="ballot_options"
       class="vstack gap-2"
-      :role="selectionMode === 'radio' ? 'radiogroup' : undefined"
       :aria-label="t('js.components.AVBallot.aria_labels.ballot_options')"
     >
       <template v-for="option in contest.options" :key="option.reference">

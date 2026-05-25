@@ -1,3 +1,5 @@
+import type { LocalString } from "@/types";
+
 export type FeedbackScreen = "ballot_page" | "review_page" | "ballot_and_review_page";
 
 export type FeedbackType = "on_screen_message" | "alert" | "on_screen_message_and_alert";
@@ -43,7 +45,7 @@ export interface BlankVoteFeedbackPolicy {
   enabled: boolean;
   feedbackScreen: FeedbackScreen;
   feedbackType: FeedbackType;
-  message?: Record<string, string>;
+  message?: LocalString;
 }
 
 export interface OvervotePolicy extends BaseValidationPolicy {

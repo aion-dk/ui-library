@@ -61,9 +61,9 @@ function handleBlankVote(policy: ValidationPolicy, minMarks: number): Validation
   if (blankPolicy.enabled) {
     return {
       scenario: "blank_vote",
-      allowed: minMarks === 0,
-      warning: minMarks === 0,
-      blocked: minMarks > 0,
+      allowed: false,
+      warning: false,
+      blocked: true,
       feedbackMessage: "warnings.blank_vote",
       feedbackScreen: blankPolicy.feedbackScreen,
       feedbackType: blankPolicy.feedbackType,
