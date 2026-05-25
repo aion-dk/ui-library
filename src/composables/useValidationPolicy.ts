@@ -1,4 +1,4 @@
-import { computed, isRef, type Ref } from "vue";
+import { computed, isRef, type Ref, type ComputedRef } from "vue";
 import type {
   ContestContent,
   SelectionPile,
@@ -51,6 +51,72 @@ function detectScenario(
   return null;
 }
 
+function handleBlankVote(policy: ValidationPolicy, minMarks: number): ValidationResult | null {
+  const blankPolicy: BlankVoteFeedbackPolicy = policy.blankVoteFeedback ?? {
+    enabled: false,
+    feedbackScreen: "ballot_page",
+    feedbackType: "on_screen_message",
+  };
+
+  if (blankPolicy.enabled) {
+    return {
+      scenario: "blank_vote",
+      allowed: minMarks === 0,
+      warning: minMarks === 0,
+      blocked: minMarks > 0,
+      feedbackMessage: blankPolicy.message
+        ? JSON.stringify(blankPolicy.message)
+        : "warnings.blank_vote",
+      feedbackScreen: blankPolicy.feedbackScreen,
+      feedbackType: blankPolicy.feedbackType,
+    };
+  }
+
+  const belowMinPolicy: UndervoteBelowMinPolicy = policy.undervoteBelowMin ?? {
+    behavior: "do_not_allow",
+    feedbackScreen: "ballot_page",
+    feedbackType: "on_screen_message",
+    editable: false,
+  };
+  return {
+    scenario: "undervote_below_min",
+    allowed: false,
+    warning: false,
+    blocked: true,
+    feedbackMessage: "errors.undervote_below_min",
+    feedbackScreen: belowMinPolicy.feedbackScreen,
+    feedbackType: belowMinPolicy.feedbackType,
+    feedbackParams: { min_marks: minMarks },
+  };
+}
+
+function handleOvervote(policy: ValidationPolicy): ValidationResult | null {
+  const p: OvervotePolicy = policy.overvote ?? {
+    behavior: "allow_with_error",
+    feedbackScreen: "ballot_page",
+    feedbackType: "on_screen_message",
+  };
+
+  if (p.behavior === "allow") return null;
+
+  const isBlocked =
+    p.behavior === "allow_with_error" ||
+    p.behavior === "block_selection" ||
+    p.behavior === "behave_as_radio_button";
+
+  const alertBased = p.feedbackType === "alert" || p.feedbackType === "on_screen_message_and_alert";
+
+  return {
+    scenario: "overvote",
+    allowed: !isBlocked || alertBased,
+    warning: p.behavior === "allow_and_warn" || alertBased,
+    blocked: isBlocked && !alertBased,
+    feedbackMessage: isBlocked && !alertBased ? "errors.overvote" : "warnings.overvote",
+    feedbackScreen: p.feedbackScreen,
+    feedbackType: p.feedbackType,
+  };
+}
+
 function evaluateScenario(
   scenario: ValidationScenario,
   policy: ValidationPolicy,
@@ -95,72 +161,11 @@ function evaluateScenario(
       };
     }
 
-    case "blank_vote": {
-      const blankPolicy: BlankVoteFeedbackPolicy = policy.blankVoteFeedback ?? {
-        enabled: false,
-        feedbackScreen: "ballot_page",
-        feedbackType: "on_screen_message",
-      };
+    case "blank_vote":
+      return handleBlankVote(policy, minMarks);
 
-      if (blankPolicy.enabled) {
-        return {
-          scenario: "blank_vote",
-          allowed: minMarks === 0,
-          warning: minMarks === 0,
-          blocked: minMarks > 0,
-          feedbackMessage: blankPolicy.message
-            ? JSON.stringify(blankPolicy.message)
-            : "warnings.blank_vote",
-          feedbackScreen: blankPolicy.feedbackScreen,
-          feedbackType: blankPolicy.feedbackType,
-        };
-      }
-
-      const belowMinPolicy: UndervoteBelowMinPolicy = policy.undervoteBelowMin ?? {
-        behavior: "do_not_allow",
-        feedbackScreen: "ballot_page",
-        feedbackType: "on_screen_message",
-        editable: false,
-      };
-      return {
-        scenario: "undervote_below_min",
-        allowed: false,
-        warning: false,
-        blocked: true,
-        feedbackMessage: "errors.undervote_below_min",
-        feedbackScreen: belowMinPolicy.feedbackScreen,
-        feedbackType: belowMinPolicy.feedbackType,
-        feedbackParams: { min_marks: minMarks },
-      };
-    }
-
-    case "overvote": {
-      const p: OvervotePolicy = policy.overvote ?? {
-        behavior: "allow_with_error",
-        feedbackScreen: "ballot_page",
-        feedbackType: "on_screen_message",
-      };
-
-      if (p.behavior === "allow") return null;
-
-      const isBlocked =
-        p.behavior === "allow_with_error" ||
-        p.behavior === "block_selection" ||
-        p.behavior === "behave_as_radio_button";
-
-      const alertBased =
-        p.feedbackType === "alert" || p.feedbackType === "on_screen_message_and_alert";
-
-      return {
-        scenario,
-        allowed: !isBlocked || alertBased,
-        warning: p.behavior === "allow_and_warn" || alertBased,
-        blocked: isBlocked && !alertBased,
-        feedbackMessage: isBlocked && !alertBased ? "errors.overvote" : "warnings.overvote",
-        feedbackScreen: p.feedbackScreen,
-        feedbackType: p.feedbackType,
-      };
-    }
+    case "overvote":
+      return handleOvervote(policy);
 
     default:
       return null;
@@ -189,9 +194,22 @@ export function getInlineResults(
 function resolveLocalizedMessage(
   message: Record<string, string> | undefined,
   locale: string,
-): string | undefined {
-  if (!message) return undefined;
-  return message[locale] || message["en"] || Object.values(message)[0];
+): string | null {
+  if (!message) return null;
+  return (message[locale] || message["en"] || Object.values(message)[0]) ?? null;
+}
+
+export interface UseValidationPolicyReturn {
+  policy: ComputedRef<ValidationPolicy>;
+  validationResults: ComputedRef<ValidationResult[]>;
+  isComplete: ComputedRef<boolean>;
+  pendingAlerts: ComputedRef<ValidationResult[]>;
+  inlineResults: ComputedRef<ValidationResult[]>;
+  selectionMode: ComputedRef<"checkbox" | "radio">;
+  blockSelectionEnabled: ComputedRef<boolean>;
+  selectedCount: ComputedRef<number>;
+  explicitBlank: ComputedRef<boolean>;
+  scenario: ComputedRef<ValidationScenario | null>;
 }
 
 export function useValidationPolicy(
@@ -199,7 +217,7 @@ export function useValidationPolicy(
   selectionPile: Ref<SelectionPile> | SelectionPile,
   activeScreen: Ref<FeedbackScreen> | FeedbackScreen,
   locale?: Ref<string> | string,
-) {
+): UseValidationPolicyReturn {
   const resolveLocale = computed(() => {
     if (!locale) return "en";
     return isRef(locale) ? locale.value : locale;
