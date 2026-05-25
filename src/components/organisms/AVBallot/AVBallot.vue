@@ -80,7 +80,7 @@ const emits = defineEmits([
 ]);
 
 /**
- * This is necesary in order to support both provided i18n and local i18n.
+ * This is necessary in order to support both provided i18n and local i18n.
  * The used locale will be taken from the provided i18n as long as there is one
  * (this happens when we plug-in the library into a product, as electa or evs),
  * otherwise, it will take the locale from the local i18n instance.
@@ -447,7 +447,6 @@ watch(
       :display-scroll-to-bottom="contest.displayScrollToBottomBtn"
       :voice-credits="contest.markingType.quadraticVoting ? voiceCredits : null"
       :policy-inline-results="policyInlineResults"
-      active-screen="ballot_page"
       class="mt-3"
       data-test="ballot-submission-helper"
     />

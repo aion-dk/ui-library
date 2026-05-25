@@ -75,7 +75,7 @@ const props = defineProps({
 const showAllOptions = ref(false);
 
 /**
- * This is necesary in order to support both provided i18n and local i18n.
+ * This is necessary in order to support both provided i18n and local i18n.
  * The used locale will be taken from the provided i18n as long as there is one
  * (this happens when we plug-in the library into a product, as electa or evs),
  * otherwise, it will take the locale from the local i18n instance.
@@ -277,7 +277,12 @@ watch(
           class="small"
         >
           {{
-            t(`js.components.AVSubmissionHelper.${result.feedbackMessage}`, result.feedbackParams)
+            result.isRawMessage
+              ? result.feedbackMessage
+              : t(
+                  `js.components.AVSubmissionHelper.${result.feedbackMessage}`,
+                  result.feedbackParams,
+                )
           }}
         </div>
       </div>

@@ -1,14 +1,7 @@
 <script setup lang="ts">
 import { computed, inject, onMounted, watch } from "vue";
 import { switchLocale } from "@/i18n";
-import type {
-  PropType,
-  SupportedLocale,
-  Error,
-  VoiceCredits,
-  ValidationResult,
-  FeedbackScreen,
-} from "@/types";
+import type { PropType, SupportedLocale, Error, VoiceCredits, ValidationResult } from "@/types";
 
 const props = defineProps({
   minMarks: {
@@ -47,10 +40,6 @@ const props = defineProps({
     type: Array as PropType<ValidationResult[]>,
     default: () => [],
   },
-  activeScreen: {
-    type: String as PropType<FeedbackScreen>,
-    default: "ballot_page",
-  },
 });
 
 const errorMessages = computed(() => {
@@ -75,7 +64,7 @@ const scrollToBottom = (): void =>
     ?.scrollIntoView({ behavior: "smooth", block: "start" });
 
 /**
- * This is necesary in order to support both provided i18n and local i18n.
+ * This is necessary in order to support both provided i18n and local i18n.
  * The used locale will be taken from the provided i18n as long as there is one
  * (this happens when we plug-in the library into a product, as electa or evs),
  * otherwise, it will take the locale from the local i18n instance.
@@ -160,7 +149,12 @@ watch(i18nLocale, (newLocale) => {
             data-test="submission-helper-policy-feedback"
           >
             {{
-              t(`js.components.AVSubmissionHelper.${result.feedbackMessage}`, result.feedbackParams)
+              result.isRawMessage
+                ? result.feedbackMessage
+                : t(
+                    `js.components.AVSubmissionHelper.${result.feedbackMessage}`,
+                    result.feedbackParams,
+                  )
             }}
           </div>
         </div>

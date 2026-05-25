@@ -64,9 +64,7 @@ function handleBlankVote(policy: ValidationPolicy, minMarks: number): Validation
       allowed: minMarks === 0,
       warning: minMarks === 0,
       blocked: minMarks > 0,
-      feedbackMessage: blankPolicy.message
-        ? JSON.stringify(blankPolicy.message)
-        : "warnings.blank_vote",
+      feedbackMessage: "warnings.blank_vote",
       feedbackScreen: blankPolicy.feedbackScreen,
       feedbackType: blankPolicy.feedbackType,
     };
@@ -92,7 +90,7 @@ function handleBlankVote(policy: ValidationPolicy, minMarks: number): Validation
 
 function handleOvervote(policy: ValidationPolicy): ValidationResult | null {
   const p: OvervotePolicy = policy.overvote ?? {
-    behavior: "allow_with_error",
+    behavior: "allow",
     feedbackScreen: "ballot_page",
     feedbackType: "on_screen_message",
   };
@@ -226,9 +224,17 @@ export function useValidationPolicy(
   const resolvePile = computed(() => (isRef(selectionPile) ? selectionPile.value : selectionPile));
   const resolveScreen = computed(() => (isRef(activeScreen) ? activeScreen.value : activeScreen));
 
-  const policy = computed<ValidationPolicy>(
-    () => resolveContest.value.validationPolicy ?? getDefaultPolicy(),
-  );
+  const policy = computed<ValidationPolicy>(() => {
+    const defaults = getDefaultPolicy();
+    const custom = resolveContest.value.validationPolicy;
+    if (!custom) return defaults;
+    return {
+      undervoteBetween: custom.undervoteBetween ?? defaults.undervoteBetween,
+      undervoteBelowMin: custom.undervoteBelowMin ?? defaults.undervoteBelowMin,
+      blankVoteFeedback: custom.blankVoteFeedback ?? defaults.blankVoteFeedback,
+      overvote: custom.overvote ?? defaults.overvote,
+    };
+  });
 
   const selectedCount = computed(() => resolvePile.value.optionSelections.length);
 
