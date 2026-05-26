@@ -373,6 +373,14 @@ const handleOptionClick = (): void => {
   toggleFromOption(false);
 };
 
+const isBlocked = computed(
+  () =>
+    props.maxSelectionsReached &&
+    checkedCount.value === 0 &&
+    !props.disabled &&
+    props.selectionMode !== "radio",
+);
+
 const toggleFromWriteIn = (e: Event): void => {
   e.preventDefault();
   e.stopPropagation();
@@ -498,10 +506,10 @@ watch(
               contest.markingType.quadraticVoting &&
               !(selectionStyle === 'background' && checkedCount > 0),
             'AVOption--selected-background': selectionStyle === 'background' && checkedCount > 0,
-            'AVOption--blocked':
-              maxSelectionsReached && checkedCount === 0 && !disabled && selectionMode !== 'radio',
+            'AVOption--blocked': isBlocked,
           }"
           :style="coloredEdgeStyle"
+          :aria-disabled="isBlocked || undefined"
           :aria-label="`${t('js.components.AVOption.aria_labels.option')} ${getMeaningfulLabel(option as unknown as IterableObject, i18nLocale, t('js.components.AVOption.aria_labels.option'))}`"
           data-test="option-section"
           @click="handleOptionClick"

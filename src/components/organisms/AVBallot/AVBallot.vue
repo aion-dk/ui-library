@@ -246,14 +246,12 @@ const toggleOption = ({ reference, amount, text, onlyUpdate }: CheckedEventArgs)
     !onlyUpdate &&
     selectionMode.value !== "radio" &&
     wouldIncreaseTotal &&
-    totalSelections >= (props.contest.markingType.maxMarks ?? Infinity)
+    totalSelections - currentAmount + finalAmount > (props.contest.markingType.maxMarks ?? Infinity)
   )
     return;
 
   // Remove all existing selections for this option to rebuild the selection list
-  let newSelections = selections.value.filter((selection) => {
-    if (selection.reference !== reference) return { ...selection };
-  });
+  let newSelections = selections.value.filter((selection) => selection.reference !== reference);
 
   // In radio mode, selecting a new option clears all other selections
   if (selectionMode.value === "radio" && finalAmount > 0 && currentAmount === 0) {
@@ -451,7 +449,6 @@ watch(
         :partial-results="partialResults ? partialResults['blank'] : null"
         :reverse-option="reverseOption"
         :selection-style="selectionStyle"
-        :selection-mode="selectionMode"
         @toggle-blank="toggleBlank"
       />
     </div>

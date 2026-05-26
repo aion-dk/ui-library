@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, inject, onMounted, watch, watchEffect } from "vue";
+import { computed, inject, onMounted, watch } from "vue";
 import { switchLocale } from "@/i18n";
 import type { PropType, SupportedLocale, Error, VoiceCredits, ValidationResult } from "@/types";
 
@@ -62,12 +62,6 @@ const errorMessages = computed(() => {
   });
 });
 
-watchEffect(() => {
-  if (props.displayErrorModal) {
-    // displayErrorModal is deprecated and will be removed in a future version. Use policyInlineResults for inline validation feedback instead.
-  }
-});
-
 const scrollToBottom = (): void =>
   document
     .querySelector("#ballot-action-buttons")
@@ -116,10 +110,12 @@ watch(i18nLocale, (newLocale) => {
       <div
         class="p-3"
         :class="{
-          'bg-gray-700': (!errors.length && !policyInlineResults.length) || chosenCount === 0,
-          'text-white': (!errors.length && !policyInlineResults.length) || chosenCount === 0,
+          'bg-gray-700':
+            (!errors.length && !policyInlineResults.some((r) => r.blocked)) || chosenCount === 0,
+          'text-white':
+            (!errors.length && !policyInlineResults.some((r) => r.blocked)) || chosenCount === 0,
           'bg-theme-danger':
-            (errors.length > 0 || policyInlineResults.length > 0) && chosenCount > 0,
+            (errors.length > 0 || policyInlineResults.some((r) => r.blocked)) && chosenCount > 0,
         }"
         data-test="submission-helper"
       >
