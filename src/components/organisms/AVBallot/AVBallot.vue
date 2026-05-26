@@ -224,6 +224,8 @@ const toggleOption = ({ reference, amount, text, onlyUpdate }: CheckedEventArgs)
   const newSelection = { reference, text };
 
   const totalSelections = selections.value.length;
+  let finalAmount = amount;
+  if (amount === currentAmount && !onlyUpdate) finalAmount = amount - 1;
   const wouldIncreaseTotal = finalAmount > currentAmount;
   if (
     blockSelectionEnabled.value &&
@@ -233,9 +235,6 @@ const toggleOption = ({ reference, amount, text, onlyUpdate }: CheckedEventArgs)
     totalSelections >= (props.contest.markingType.maxMarks ?? Infinity)
   )
     return;
-
-  let finalAmount = amount;
-  if (amount === currentAmount && !onlyUpdate) finalAmount = amount - 1;
 
   let newSelections = selections.value.filter((selection) => {
     if (selection.reference !== reference) return { ...selection };
