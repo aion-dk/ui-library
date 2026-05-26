@@ -13,7 +13,6 @@ import type {
   SelectionStyle,
   AVPileSummaryOptionSummary,
   AVPileSummaryState,
-  OptionSelection,
   IterableObject,
 } from "@/types";
 import { getMeaningfulLabel } from "@/helpers/meaningfulLabel";
@@ -94,8 +93,8 @@ const { inlineResults: policyInlineResults, pendingAlerts } = useValidationPolic
 );
 
 watch(
-  [pendingAlerts, () => props.activeState],
-  ([alerts, state]) => {
+  [pendingAlerts, (): AVPileSummaryState => props.activeState],
+  ([alerts, state]): void => {
     if (state === "summary") {
       emits("update:pendingAlerts", alerts);
     } else {
@@ -137,12 +136,12 @@ const getAllParents = (option: OptionContent, parents: OptionContent[]): OptionC
 const optionSummaries = computed(() => {
   const summaryOptions: AVPileSummaryOptionSummary = [];
 
-  props.selectionPile.optionSelections.forEach((selection: OptionSelection) => {
+  for (const selection of props.selectionPile.optionSelections) {
     const preexisting = summaryOptions.find((o) => o.handle === selection.reference);
 
     const optionContent = selectableOptions.value.find((o) => o.reference === selection.reference);
 
-    if (!optionContent) return;
+    if (!optionContent) continue;
 
     if (preexisting) {
       preexisting.crosses += 1;
@@ -165,7 +164,7 @@ const optionSummaries = computed(() => {
         writeIn: selection.text,
       });
     }
-  });
+  }
 
   return summaryOptions;
 });

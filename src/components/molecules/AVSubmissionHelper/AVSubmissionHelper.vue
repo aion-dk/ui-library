@@ -49,11 +49,11 @@ const props = defineProps({
 const errorMessages = computed(() => {
   return props.errors.map((e) => {
     if (e.keys) {
-      Object.keys(e.keys).forEach((key) => {
+      for (const key of Object.keys(e.keys)) {
         if (typeof e.keys[key] === "object") {
           e.keys[key] = e.keys[key][i18nLocale.value];
         }
-      });
+      }
 
       return t(`js.components.AVSubmissionHelper.errors.${e.message}`, e.keys);
     } else {
@@ -64,9 +64,7 @@ const errorMessages = computed(() => {
 
 watchEffect(() => {
   if (props.displayErrorModal) {
-    console.warn(
-      "[AVSubmissionHelper] displayErrorModal is deprecated and will be removed in a future version. Use policyInlineResults for inline validation feedback instead.",
-    );
+    // displayErrorModal is deprecated and will be removed in a future version. Use policyInlineResults for inline validation feedback instead.
   }
 });
 
