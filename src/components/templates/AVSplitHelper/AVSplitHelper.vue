@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ref, computed, inject, onMounted, watch } from "vue";
 import { switchLocale } from "@/i18n";
-import { useValidationPolicy, getPendingAlerts } from "@/composables/useValidationPolicy";
 import type {
   PropType,
   SupportedLocale,
@@ -102,15 +101,6 @@ const i18n: any = inject("i18n");
 const { t } = i18n.global;
 const i18nLocale = computed<SupportedLocale>(() => i18n.global.locale.value || i18n.global.locale);
 
-const { pendingAlerts: policyAlerts } = useValidationPolicy(
-  computed(() => props.contest),
-  activePile,
-  "ballot_page",
-  i18nLocale,
-);
-
-const hasPendingAlerts = computed(() => getPendingAlerts(policyAlerts.value).length > 0);
-
 const unusedWeight = computed(() =>
   selectionPiles.value?.reduce(
     (sum: number, bs: SelectionPile) => sum - bs.multiplier,
@@ -135,7 +125,7 @@ const readyForSubmission = computed(() => {
     selectionPiles.value.every((pile: SelectionPile) =>
       selectionPileValidator.value.isComplete(pile),
     );
-  return baseComplete || hasPendingAlerts.value;
+  return baseComplete;
 });
 
 const assignedWeight = computed(() =>

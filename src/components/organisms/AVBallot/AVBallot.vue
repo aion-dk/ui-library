@@ -223,11 +223,14 @@ const toggleOption = ({ reference, amount, text, onlyUpdate }: CheckedEventArgs)
   );
   const newSelection = { reference, text };
 
+  const totalSelections = selections.value.length;
+  const wouldIncreaseTotal = finalAmount > currentAmount;
   if (
     blockSelectionEnabled.value &&
-    currentAmount === 0 &&
     !onlyUpdate &&
-    selectionMode.value !== "radio"
+    selectionMode.value !== "radio" &&
+    wouldIncreaseTotal &&
+    totalSelections >= (props.contest.markingType.maxMarks ?? Infinity)
   )
     return;
 
@@ -386,7 +389,6 @@ watch(
         @toggle-blank="toggleBlank"
         :reverse-option="reverseOption"
         :selection-style="selectionStyle"
-        :selection-mode="selectionMode"
       />
     </div>
 

@@ -94,10 +94,12 @@ const { inlineResults: policyInlineResults, pendingAlerts } = useValidationPolic
 );
 
 watch(
-  pendingAlerts,
-  (alerts) => {
-    if (props.activeState === "summary") {
+  [pendingAlerts, () => props.activeState],
+  ([alerts, state]) => {
+    if (state === "summary") {
       emits("update:pendingAlerts", alerts);
+    } else {
+      emits("update:pendingAlerts", []);
     }
   },
   { deep: true },

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, inject, onMounted, watch } from "vue";
+import { computed, inject, onMounted, watch, watchEffect } from "vue";
 import { switchLocale } from "@/i18n";
 import type { PropType, SupportedLocale, Error, VoiceCredits, ValidationResult } from "@/types";
 
@@ -40,6 +40,10 @@ const props = defineProps({
     type: Array as PropType<ValidationResult[]>,
     default: () => [],
   },
+  displayErrorModal: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const errorMessages = computed(() => {
@@ -56,6 +60,14 @@ const errorMessages = computed(() => {
       return t(`js.components.AVSubmissionHelper.errors.${e.message}`);
     }
   });
+});
+
+watchEffect(() => {
+  if (props.displayErrorModal) {
+    console.warn(
+      "[AVSubmissionHelper] displayErrorModal is deprecated and will be removed in a future version. Use policyInlineResults for inline validation feedback instead.",
+    );
+  }
 });
 
 const scrollToBottom = (): void =>
