@@ -233,7 +233,7 @@ watch(
         submission helper adds a z-index of 1020 and this needs to be on top -->
         <div
           class="d-block modal my-modal-backdrop show fade"
-          style="z-index: 1050 !important"
+          style="z-index: 1055 !important"
           tabindex="-1"
           role="alertdialog"
           aria-modal="true"

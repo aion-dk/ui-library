@@ -4,6 +4,16 @@
   background-color: rgba($black, 0.5);
 }
 
+.modal-enter-active,
+.modal-leave-active {
+  transition: opacity 0.15s linear;
+}
+
+.modal-enter-from,
+.modal-leave-to {
+  opacity: 0;
+}
+
 .AVSubmissionHelper--quadratic {
   float: none;
   display: flex;
