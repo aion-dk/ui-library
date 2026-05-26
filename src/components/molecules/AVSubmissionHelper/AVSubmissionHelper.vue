@@ -227,46 +227,65 @@ watch(
     </div>
 
     <!-- ERROR MODAL -->
-    <template v-if="displayErrorModal && showErrorModal && errors.length > 0">
-      <div class="modal-backdrop fade show"></div>
-      <div
-        class="modal fade show d-block"
-        tabindex="-1"
-        role="alertdialog"
-        aria-modal="true"
-        aria-labelledby="error-modal-title"
-        aria-describedby="error-modal-message"
-        data-test="error-modal"
-        @keydown.esc="dismissErrorModal"
-      >
-        <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content">
-            <div class="modal-body text-center p-4">
-              <div class="mb-3">
-                <AVIcon icon="triangle-exclamation" class="text-warning fs-1" />
+    <transition name="modal">
+      <template v-if="displayErrorModal && showErrorModal && errors.length > 0">
+        <!-- z-index added because "sticky-bottom" Bootstrap class used in
+        submission helper adds a z-index of 1020 and this needs to be on top -->
+        <div
+          class="d-block modal my-modal-backdrop show fade"
+          style="z-index: 1055 !important"
+          tabindex="-1"
+          role="alertdialog"
+          aria-modal="true"
+          aria-labelledby="error-modal-title"
+          aria-describedby="error-modal-message"
+          data-test="error-modal"
+          @keydown.esc="dismissErrorModal"
+          @click.self="dismissErrorModal"
+        >
+          <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+              <!-- HEADER -->
+              <header class="modal-header d-flex justify-content-between align-items-center">
+                <div class="d-flex align-items-center gap-2">
+                  <AVIcon icon="triangle-exclamation" class="text-warning fs-5" />
+                  <h5 id="error-modal-title" class="modal-title mb-0">
+                    {{ t("js.components.AVSubmissionHelper.error_modal_title") }}
+                  </h5>
+                </div>
+              </header>
+
+              <!-- BODY -->
+              <div class="modal-body">
+                <div id="error-modal-message">
+                  <p
+                    v-for="(errorMessage, index) in errorMessages"
+                    :key="index"
+                    role="alert"
+                    class="mb-2"
+                  >
+                    {{ errorMessage }}
+                  </p>
+                </div>
               </div>
-              <h2 id="error-modal-title" class="visually-hidden">
-                {{ t("js.components.AVSubmissionHelper.error_modal_title") }}
-              </h2>
-              <div id="error-modal-message" class="mb-4">
-                <p v-for="(errorMessage, index) in errorMessages" :key="index" role="alert">
-                  {{ errorMessage }}
-                </p>
-              </div>
-              <button
-                ref="dismissButtonRef"
-                type="button"
-                class="btn btn-primary"
-                @click="dismissErrorModal"
-                data-test="dismiss-error-modal"
-              >
-                {{ t("js.components.AVSubmissionHelper.error_modal_dismiss") }}
-              </button>
+
+              <!-- FOOTER -->
+              <footer class="modal-footer justify-content-end">
+                <button
+                  ref="dismissButtonRef"
+                  type="button"
+                  class="btn btn-primary"
+                  @click="dismissErrorModal"
+                  data-test="dismiss-error-modal"
+                >
+                  {{ t("js.components.AVSubmissionHelper.error_modal_dismiss") }}
+                </button>
+              </footer>
             </div>
           </div>
         </div>
-      </div>
-    </template>
+      </template>
+    </transition>
   </div>
 </template>
 
