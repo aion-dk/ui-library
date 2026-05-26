@@ -213,20 +213,34 @@ const toggleBlank = (): void => {
   });
 };
 
+/**
+ * Handles selecting/deselecting an option or updating its text.
+ * Manages the selection state based on the contest's marking type constraints.
+ */
 const toggleOption = ({ reference, amount, text, onlyUpdate }: CheckedEventArgs): void => {
+  // Count how many times this option is currently selected (for multi-select contests)
   const currentAmount = selections.value.filter(
     (selection) => selection.reference === reference,
   ).length;
 
+  // Find the position of this option in the current selections array
   const selectionIndex = selections.value.findIndex(
     (selection) => selection.reference === reference,
   );
   const newSelection = { reference, text };
 
+  // Calculate the target selection count for this option
   const totalSelections = selections.value.length;
   let finalAmount = amount;
+  // Toggle off if clicking the same amount again (unless it's a text-only update)
   if (amount === currentAmount && !onlyUpdate) finalAmount = amount - 1;
+
+  // Check if this action would increase the total number of selections
   const wouldIncreaseTotal = finalAmount > currentAmount;
+
+  // Block the selection if:
+  // - Blocking is enabled, it's not a text update, not in radio mode,
+  //   would increase total selections, and we've hit the max marks limit
   if (
     blockSelectionEnabled.value &&
     !onlyUpdate &&
@@ -236,24 +250,29 @@ const toggleOption = ({ reference, amount, text, onlyUpdate }: CheckedEventArgs)
   )
     return;
 
+  // Remove all existing selections for this option to rebuild the selection list
   let newSelections = selections.value.filter((selection) => {
     if (selection.reference !== reference) return { ...selection };
   });
 
+  // In radio mode, selecting a new option clears all other selections
   if (selectionMode.value === "radio" && finalAmount > 0 && currentAmount === 0) {
     newSelections = [];
   }
 
+  // Add the option the required number of times (for multi-select with min/max > 1)
   for (let i = 0; i < finalAmount; i += 1) {
     newSelections.push(newSelection);
   }
 
+  // For text-only updates, preserve the existing selection structure but update the text
   if (onlyUpdate && selectionIndex >= 0) {
     const selectionWithUpdatedText = [...selections.value];
     selectionWithUpdatedText[selectionIndex] = newSelection;
     newSelections = selectionWithUpdatedText;
   }
 
+  // Emit the updated selection state, clearing explicit blank if a radio option was selected
   emits("update:selectionPile", {
     ...props.selectionPile,
     optionSelections: newSelections,

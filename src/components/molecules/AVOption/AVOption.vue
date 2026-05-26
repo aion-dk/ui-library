@@ -358,6 +358,15 @@ const toggleFromOption = (onlyUpdate: boolean): void => {
   toggleOption(props.option.reference, 1, writeInText.value, onlyUpdate);
 };
 
+/*
+This code blocks clicks on unselected options when the selection limit is reached (in multi-select mode).
+Result:
+
+❌ Clicking an unselected option when max is reached → Does nothing (blocked)
+✅ Clicking an already-selected option → Deselects it (allowed)
+✅ Radio mode → Always allowed (radio handles its own logic)
+*/
+
 const handleOptionClick = (): void => {
   if (props.maxSelectionsReached && checkedCount.value === 0 && props.selectionMode !== "radio")
     return;
