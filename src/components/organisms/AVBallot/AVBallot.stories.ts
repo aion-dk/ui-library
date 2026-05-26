@@ -1,7 +1,7 @@
 import type { Meta } from "@/types";
 import { AVBallot } from "@/components";
 import { SUPPORTED_LOCALES } from "@/constants";
-import { getContest, getLiveResult, getSelectionPile } from "@/examples";
+import { getContest, getLiveResult, getSelectionPile, getValidationPolicy } from "@/examples";
 
 const meta: Meta<typeof AVBallot> & {
   argTypes: { "onUpdate:selectionPile": { action: string } };
@@ -41,9 +41,6 @@ const meta: Meta<typeof AVBallot> & {
     selectionStyle: {
       control: { type: "select" },
       options: ["checkbox", "background"],
-    },
-    displayErrorModal: {
-      control: { type: "boolean" },
     },
     "onUpdate:selectionPile": {
       action: "update:selectionPile: UPDATED SELECTION PILE",
@@ -255,6 +252,60 @@ export const QuadraticVoting = {
 
   args: {
     contest: getContest(["multiple_votes_lg", "counter", "quadratic_voting"]),
+    selectionPile: getSelectionPile([]),
+    weight: 1,
+  },
+};
+
+export const WithValidationPolicyUndervoteWarn = {
+  render: Template,
+  args: {
+    contest: {
+      ...getContest(["blank", "multi"]),
+      validationPolicy: getValidationPolicy("undervote_warn"),
+    },
+    selectionPile: getSelectionPile([]),
+    weight: 1,
+  },
+};
+
+export const WithValidationPolicyOvervoteBlockSelection = {
+  render: Template,
+  args: {
+    contest: {
+      ...getContest(["blank", "multi"]),
+      validationPolicy: getValidationPolicy("overvote_block"),
+    },
+    selectionPile: getSelectionPile(["multi"]),
+    weight: 1,
+  },
+};
+
+export const WithValidationPolicyRadioButton = {
+  render: Template,
+  args: {
+    contest: { ...getContest(["blank"]), validationPolicy: getValidationPolicy("radio_button") },
+    selectionPile: getSelectionPile([]),
+    weight: 1,
+  },
+};
+
+export const WithValidationPolicyBlankVoteFeedback = {
+  render: Template,
+  args: {
+    contest: {
+      ...getContest(["blank"]),
+      validationPolicy: getValidationPolicy("blank_vote_feedback"),
+    },
+    selectionPile: getSelectionPile([]),
+    weight: 1,
+  },
+};
+
+export const WithValidationPolicyMixed = {
+  render: Template,
+  args: {
+    contest: { ...getContest(["blank", "multi"]), validationPolicy: getValidationPolicy("full") },
     selectionPile: getSelectionPile([]),
     weight: 1,
   },

@@ -573,3 +573,19 @@ export const GalleryModeNoImageNoDescription = {
     parentColor: "#0000FF",
   },
 };
+
+export const RadioButtonMode = {
+  ...Unselected,
+  args: {
+    ...Unselected.args,
+    selectionMode: "radio",
+  },
+};
+
+export const BlockSelectionMaxReached = {
+  ...Unselected,
+  args: {
+    ...Unselected.args,
+    maxSelectionsReached: true,
+  },
+};

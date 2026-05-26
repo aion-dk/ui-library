@@ -32,9 +32,6 @@ const meta: Meta<typeof AVSubmissionHelper> = {
       control: { type: "select" },
       options: SUPPORTED_LOCALES,
     },
-    displayErrorModal: {
-      control: { type: "boolean" },
-    },
   },
 };
 
@@ -102,5 +99,74 @@ export const MultipleWithExclusivesError = {
     chosenCount: 2,
     errors: [{ message: "too_many" }, { message: "exclusive" }],
     hasExclusiveOptions: true,
+  },
+};
+
+export const PolicyWarningInline = {
+  render: Template,
+  args: {
+    minMarks: 1,
+    maxMarks: 3,
+    chosenCount: 2,
+    errors: [],
+    hasExclusiveOptions: false,
+    policyInlineResults: [
+      {
+        scenario: "undervote_between",
+        allowed: true,
+        warning: true,
+        blocked: false,
+        feedbackMessage: "warnings.undervote_between",
+        feedbackScreen: "ballot_page",
+        feedbackType: "on_screen_message",
+      },
+    ],
+    activeScreen: "ballot_page",
+  },
+};
+
+export const PolicyErrorInline = {
+  render: Template,
+  args: {
+    minMarks: 1,
+    maxMarks: 3,
+    chosenCount: 4,
+    errors: [],
+    hasExclusiveOptions: false,
+    policyInlineResults: [
+      {
+        scenario: "overvote",
+        allowed: false,
+        warning: false,
+        blocked: true,
+        feedbackMessage: "errors.overvote",
+        feedbackScreen: "ballot_page",
+        feedbackType: "on_screen_message",
+      },
+    ],
+    activeScreen: "ballot_page",
+  },
+};
+
+export const PolicyWarningOnReviewPage = {
+  render: Template,
+  args: {
+    minMarks: 1,
+    maxMarks: 3,
+    chosenCount: 2,
+    errors: [],
+    hasExclusiveOptions: false,
+    policyInlineResults: [
+      {
+        scenario: "undervote_between",
+        allowed: true,
+        warning: true,
+        blocked: false,
+        feedbackMessage: "warnings.undervote_between",
+        feedbackScreen: "ballot_and_review_page",
+        feedbackType: "on_screen_message",
+      },
+    ],
+    activeScreen: "review_page",
   },
 };

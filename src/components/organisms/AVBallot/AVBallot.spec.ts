@@ -523,24 +523,96 @@ describe("AVBallot", () => {
     const blankOption = wrapper.findComponent(AVBlankOption);
     expect(blankOption.props("selectionStyle")).to.eq("background");
   });
+});
 
-  it("passes displayErrorModal to AVSubmissionHelper", async () => {
-    await wrapper.setProps({
-      contest: getContest([]),
-      selectionPile: getSelectionPile([]),
-      showSubmissionHelper: true,
-      displayErrorModal: true,
+describe("AVBallot with validation policy", () => {
+  const createWrapper = (contestOverrides = {}, selectionPileOverrides = {}) => {
+    return mount(AVBallot, {
+      props: {
+        contest: { ...getContest(["blank", "multi"]), ...contestOverrides },
+        selectionPile: { ...getSelectionPile([]), ...selectionPileOverrides },
+        showSubmissionHelper: true,
+        weight: 1,
+        locale: "en",
+      },
+      global: {
+        components: {
+          AVCollapser,
+          AVAnimatedTransition,
+          AVOption,
+          AVBlankOption,
+          AVSearchBallot,
+          AVOptionLiveResults,
+          AVOptionCounter,
+          AVSubmissionHelper,
+        },
+        provide: {
+          i18n: localI18n,
+        },
+        directives: {
+          tooltip: () => {},
+        },
+        stubs: {
+          AVIcon: {
+            template: "<span />",
+          },
+          AVOptionCheckbox: {
+            template: "<span data-test='checkbox' />",
+          },
+        },
+      },
     });
+  };
 
-    const submissionHelper = wrapper.findComponent(AVSubmissionHelper);
-    expect(submissionHelper.exists()).to.eq(true);
-    expect(submissionHelper.props("displayErrorModal")).to.eq(true);
+  it("emits update:pendingAlerts when validation policy has alerts", async () => {
+    const wrapper = createWrapper({
+      validationPolicy: {
+        blankVoteFeedback: {
+          enabled: true,
+          feedbackScreen: "ballot_and_review_page",
+          feedbackType: "on_screen_message_and_alert",
+          message: { en: "Blank vote warning" },
+        },
+      },
+    });
+    await wrapper.setProps({ selectionPile: getSelectionPile(["single"]) });
+    await wrapper.setProps({ selectionPile: getSelectionPile([]) });
+    const alerts = wrapper.emitted("update:pendingAlerts");
+    expect(alerts).toBeDefined();
   });
 
-  it("defaults displayErrorModal to false", async () => {
-    await wrapper.setProps({ displayErrorModal: undefined });
+  it("passes selectionMode to AVOption when radio button policy is set", async () => {
+    const wrapper = createWrapper({
+      markingType: { ...getContest(["blank"]).markingType, maxMarks: 1 },
+      validationPolicy: {
+        overvote: {
+          behavior: "behave_as_radio_button",
+          feedbackScreen: "ballot_page",
+          feedbackType: "on_screen_message",
+        },
+      },
+    });
+    await wrapper.vm.$nextTick();
+    const option = wrapper.findComponent(AVOption);
+    expect(option.props("selectionMode")).toBe("radio");
+  });
 
-    const submissionHelper = wrapper.findComponent(AVSubmissionHelper);
-    expect(submissionHelper.props("displayErrorModal")).to.eq(false);
+  it("passes maxSelectionsReached to AVOption when block_selection and max reached", async () => {
+    const wrapper = createWrapper(
+      {
+        markingType: { ...getContest(["blank", "multi"]).markingType, maxMarks: 2 },
+        validationPolicy: {
+          overvote: {
+            behavior: "block_selection",
+            feedbackScreen: "ballot_page",
+            feedbackType: "on_screen_message",
+          },
+        },
+      },
+      getSelectionPile(["multi"]),
+    );
+    await wrapper.vm.$nextTick();
+    const option = wrapper.findComponent(AVOption);
+    expect(option.props("maxSelectionsReached")).toBe(true);
   });
 });

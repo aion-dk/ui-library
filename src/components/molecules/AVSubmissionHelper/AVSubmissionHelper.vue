@@ -1,21 +1,7 @@
 <script setup lang="ts">
-import { computed, inject, onMounted, watch, ref, nextTick } from "vue";
+import { computed, inject, onMounted, watch } from "vue";
 import { switchLocale } from "@/i18n";
-import type { PropType, SupportedLocale, Error, VoiceCredits } from "@/types";
-
-const showErrorModal = ref(false);
-const dismissButtonRef = ref<HTMLElement | null>(null);
-
-const dismissErrorModal = (): void => {
-  showErrorModal.value = false;
-};
-
-watch(showErrorModal, async (val) => {
-  if (val) {
-    await nextTick();
-    dismissButtonRef.value?.focus();
-  }
-});
+import type { PropType, SupportedLocale, Error, VoiceCredits, ValidationResult } from "@/types";
 
 const props = defineProps({
   minMarks: {
@@ -50,6 +36,10 @@ const props = defineProps({
     type: String as PropType<SupportedLocale>,
     default: null,
   },
+  policyInlineResults: {
+    type: Array as PropType<ValidationResult[]>,
+    default: () => [],
+  },
   displayErrorModal: {
     type: Boolean,
     default: false,
@@ -57,24 +47,13 @@ const props = defineProps({
 });
 
 const errorMessages = computed(() => {
-  // Hint to i18n-tasks that these translations should be present:
-  // t("submission_helper.errors.too_many")
-  // t("submission_helper.errors.blank")
-  // t("submission_helper.errors.write_in_required")
-  // t("submission_helper.errors.write_in_too_long")
-  // t("submission_helper.errors.write_in_not_supported")
-  // t("submission_helper.errors.write_in_empty")
-  // t("submission_helper.errors.exceeded_list_limit")
-  // t("submission_helper.errors.exclusive")
-  // t("submission_helper.errors.cross_party_voting")
-  // t("submission_helper.errors.too_many_credits")
   return props.errors.map((e) => {
     if (e.keys) {
-      Object.keys(e.keys).forEach((key) => {
+      for (const key of Object.keys(e.keys)) {
         if (typeof e.keys[key] === "object") {
           e.keys[key] = e.keys[key][i18nLocale.value];
         }
-      });
+      }
 
       return t(`js.components.AVSubmissionHelper.errors.${e.message}`, e.keys);
     } else {
@@ -89,7 +68,7 @@ const scrollToBottom = (): void =>
     ?.scrollIntoView({ behavior: "smooth", block: "start" });
 
 /**
- * This is necesary in order to support both provided i18n and local i18n.
+ * This is necessary in order to support both provided i18n and local i18n.
  * The used locale will be taken from the provided i18n as long as there is one
  * (this happens when we plug-in the library into a product, as electa or evs),
  * otherwise, it will take the locale from the local i18n instance.
@@ -112,25 +91,6 @@ watch(
 watch(i18nLocale, (newLocale) => {
   if (!props.locale) switchLocale(newLocale);
 });
-
-watch(
-  () => props.errors,
-  (newErrors) => {
-    if (newErrors.length > 0 && props.displayErrorModal) {
-      showErrorModal.value = true;
-    }
-  },
-  { deep: true, immediate: true },
-);
-
-watch(
-  () => props.displayErrorModal,
-  (newVal) => {
-    if (newVal && props.errors.length > 0) {
-      showErrorModal.value = true;
-    }
-  },
-);
 /* END */
 </script>
 
@@ -150,9 +110,12 @@ watch(
       <div
         class="p-3"
         :class="{
-          'bg-gray-700': !errors.length || displayErrorModal,
-          'text-white': !errors.length || displayErrorModal,
-          'bg-theme-danger': errors.length > 0 && !displayErrorModal,
+          'bg-gray-700':
+            (!errors.length && !policyInlineResults.some((r) => r.blocked)) || chosenCount === 0,
+          'text-white':
+            (!errors.length && !policyInlineResults.some((r) => r.blocked)) || chosenCount === 0,
+          'bg-theme-danger':
+            (errors.length > 0 || policyInlineResults.some((r) => r.blocked)) && chosenCount > 0,
         }"
         data-test="submission-helper"
       >
@@ -161,7 +124,7 @@ watch(
           v-if="voiceCredits"
           class="AVSubmissionHelper--quadratic"
           :class="{
-            'text-white': !errors.length || displayErrorModal,
+            'text-white': !errors.length,
           }"
           data-test="submission-helper-quadratic"
         >
@@ -171,8 +134,8 @@ watch(
           <strong>{{ voiceCredits.total }}</strong>
         </div>
 
-        <!-- ERRORS (only shown inline when modal mode is off) -->
-        <div v-if="!displayErrorModal">
+        <!-- ERRORS -->
+        <div>
           <div
             v-for="errorMessage in errorMessages"
             :key="errorMessage"
@@ -181,7 +144,27 @@ watch(
             data-test="submission-helper-error"
           ></div>
         </div>
-        <hr v-if="errors.length > 0 && !displayErrorModal" class="my-3" />
+        <div v-if="policyInlineResults.length > 0 && chosenCount > 0">
+          <div
+            v-for="result in policyInlineResults"
+            :key="result.scenario"
+            role="alert"
+            :class="{
+              'text-white': result.warning || result.blocked,
+            }"
+            data-test="submission-helper-policy-feedback"
+          >
+            {{
+              result.isRawMessage
+                ? result.feedbackMessage
+                : t(
+                    `js.components.AVSubmissionHelper.${result.feedbackMessage}`,
+                    result.feedbackParams,
+                  )
+            }}
+          </div>
+        </div>
+        <hr v-if="errors.length > 0 || policyInlineResults.length > 0" class="my-3" />
 
         <div v-if="maxMarks > 1">
           <div class="d-block justify-content-between align-items-center">
@@ -225,67 +208,6 @@ watch(
         </div>
       </div>
     </div>
-
-    <!-- ERROR MODAL -->
-    <transition name="modal">
-      <template v-if="displayErrorModal && showErrorModal && errors.length > 0">
-        <!-- z-index added because "sticky-bottom" Bootstrap class used in
-        submission helper adds a z-index of 1020 and this needs to be on top -->
-        <div
-          class="d-block modal my-modal-backdrop show fade"
-          style="z-index: 1055 !important"
-          tabindex="-1"
-          role="alertdialog"
-          aria-modal="true"
-          aria-labelledby="error-modal-title"
-          aria-describedby="error-modal-message"
-          data-test="error-modal"
-          @keydown.esc="dismissErrorModal"
-          @click.self="dismissErrorModal"
-        >
-          <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-            <div class="modal-content">
-              <!-- HEADER -->
-              <header class="modal-header d-flex justify-content-between align-items-center">
-                <div class="d-flex align-items-center gap-2">
-                  <AVIcon icon="triangle-exclamation" class="text-warning fs-5" />
-                  <h5 id="error-modal-title" class="modal-title mb-0">
-                    {{ t("js.components.AVSubmissionHelper.error_modal_title") }}
-                  </h5>
-                </div>
-              </header>
-
-              <!-- BODY -->
-              <div class="modal-body">
-                <div id="error-modal-message">
-                  <p
-                    v-for="(errorMessage, index) in errorMessages"
-                    :key="index"
-                    role="alert"
-                    class="mb-2"
-                  >
-                    {{ errorMessage }}
-                  </p>
-                </div>
-              </div>
-
-              <!-- FOOTER -->
-              <footer class="modal-footer justify-content-end">
-                <button
-                  ref="dismissButtonRef"
-                  type="button"
-                  class="btn btn-primary"
-                  @click="dismissErrorModal"
-                  data-test="dismiss-error-modal"
-                >
-                  {{ t("js.components.AVSubmissionHelper.error_modal_dismiss") }}
-                </button>
-              </footer>
-            </div>
-          </div>
-        </div>
-      </template>
-    </transition>
   </div>
 </template>
 

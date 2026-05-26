@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { ref, computed, inject, onMounted, watch } from "vue";
+import { ref, computed, inject, onMounted, watch, watchEffect } from "vue";
 import { switchLocale } from "@/i18n";
 import { flattenOptions } from "@/helpers/contestHelpers";
 import { getMeaningfulLabel } from "@/helpers/meaningfulLabel";
+import { useValidationPolicy } from "@/composables/useValidationPolicy";
 import type {
   PropType,
   SupportedLocale,
@@ -65,21 +66,51 @@ const props = defineProps({
     type: String as PropType<SelectionStyle>,
     default: "checkbox",
   },
-  displayErrorModal: {
-    type: Boolean,
-    default: false,
-  },
   weight: {
     type: Number,
     default: null,
   },
 });
 
-const emits = defineEmits(["update:selectionPile", "update:errors", "view-candidate"]);
+const emits = defineEmits([
+  "update:selectionPile",
+  "update:errors",
+  "update:pendingAlerts",
+  "view-candidate",
+]);
+
+/**
+ * This is necessary in order to support both provided i18n and local i18n.
+ * The used locale will be taken from the provided i18n as long as there is one
+ * (this happens when we plug-in the library into a product, as electa or evs),
+ * otherwise, it will take the locale from the local i18n instance.
+ * Removing it, will cause all tests, storybook and the playground to break.
+ */
+/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+const i18n: any = inject("i18n");
+const { t } = i18n.global;
+const i18nLocale = computed<SupportedLocale>(() => i18n.global.locale.value || i18n.global.locale);
 
 const search = ref<HTMLInputElement | null>(null);
 
 const selections = computed(() => [...props.selectionPile.optionSelections]);
+
+const {
+  validationResults: policyResults,
+  pendingAlerts,
+  inlineResults: policyInlineResults,
+  selectionMode,
+  blockSelectionEnabled,
+} = useValidationPolicy(
+  computed(() => props.contest),
+  computed(() => props.selectionPile),
+  "ballot_page",
+  i18nLocale,
+);
+
+watchEffect(() => {
+  emits("update:pendingAlerts", pendingAlerts.value);
+});
 
 const validator = computed(() => new SelectionPileValidator(props.contest));
 
@@ -113,6 +144,11 @@ const errors = computed(() => {
       errorIndex = combinedErrors.findIndex((err) => err.message === "cross_party_voting");
       combinedErrors.splice(errorIndex, 1);
     }
+  }
+
+  if (policyResults.value.some((r) => r.scenario === "overvote")) {
+    const idx = combinedErrors.findIndex((err) => err.message === "too_many");
+    if (idx >= 0) combinedErrors.splice(idx, 1);
   }
 
   emits("update:errors", combinedErrors);
@@ -168,42 +204,80 @@ watch(reactiveContest, (present, previous) => {
 });
 
 const toggleBlank = (): void => {
+  const newBlank = !props.selectionPile.explicitBlank;
   emits("update:selectionPile", {
     ...props.selectionPile,
-    explicitBlank: !props.selectionPile.explicitBlank,
+    explicitBlank: newBlank,
+    optionSelections:
+      selectionMode.value === "radio" && newBlank ? [] : props.selectionPile.optionSelections,
   });
 };
 
+/**
+ * Handles selecting/deselecting an option or updating its text.
+ * Manages the selection state based on the contest's marking type constraints.
+ */
 const toggleOption = ({ reference, amount, text, onlyUpdate }: CheckedEventArgs): void => {
+  // Count how many times this option is currently selected (for multi-select contests)
   const currentAmount = selections.value.filter(
     (selection) => selection.reference === reference,
   ).length;
 
+  // Find the position of this option in the current selections array
   const selectionIndex = selections.value.findIndex(
     (selection) => selection.reference === reference,
   );
   const newSelection = { reference, text };
 
+  // Calculate the target selection count for this option
+  const totalSelections = selections.value.length;
   let finalAmount = amount;
+  // Toggle off if clicking the same amount again (unless it's a text-only update)
   if (amount === currentAmount && !onlyUpdate) finalAmount = amount - 1;
 
-  let newSelections = selections.value.filter((selection) => {
-    if (selection.reference !== reference) return { ...selection };
-  });
+  // Check if this action would increase the total number of selections
+  const wouldIncreaseTotal = finalAmount > currentAmount;
 
+  // Block the selection if:
+  // - Blocking is enabled, it's not a text update, not in radio mode,
+  //   would increase total selections, and we've hit the max marks limit
+  if (
+    blockSelectionEnabled.value &&
+    !onlyUpdate &&
+    selectionMode.value !== "radio" &&
+    wouldIncreaseTotal &&
+    totalSelections - currentAmount + finalAmount > (props.contest.markingType.maxMarks ?? Infinity)
+  )
+    return;
+
+  // Remove all existing selections for this option to rebuild the selection list
+  let newSelections = selections.value.filter((selection) => selection.reference !== reference);
+
+  // In radio mode, selecting a new option clears all other selections
+  if (selectionMode.value === "radio" && finalAmount > 0 && currentAmount === 0) {
+    newSelections = [];
+  }
+
+  // Add the option the required number of times (for multi-select with min/max > 1)
   for (let i = 0; i < finalAmount; i += 1) {
     newSelections.push(newSelection);
   }
 
+  // For text-only updates, preserve the existing selection structure but update the text
   if (onlyUpdate && selectionIndex >= 0) {
     const selectionWithUpdatedText = [...selections.value];
     selectionWithUpdatedText[selectionIndex] = newSelection;
     newSelections = selectionWithUpdatedText;
   }
 
+  // Emit the updated selection state, clearing explicit blank if a radio option was selected
   emits("update:selectionPile", {
     ...props.selectionPile,
     optionSelections: newSelections,
+    explicitBlank:
+      selectionMode.value === "radio" && finalAmount > 0
+        ? false
+        : props.selectionPile.explicitBlank,
   });
 };
 
@@ -237,17 +311,6 @@ const galleryOptions = computed(() => {
   return options;
 });
 
-/**
- * This is necesary in order to support both provided i18n and local i18n.
- * The used locale will be taken from the provided i18n as long as there is one
- * (this happens when we plug-in the library into a product, as electa or evs),
- * otherwise, it will take the locale from the local i18n instance.
- * Removing it, will cause all tests, storybook and the playground to break.
- */
-/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
-const i18n: any = inject("i18n");
-const { t } = i18n.global;
-const i18nLocale = computed<SupportedLocale>(() => i18n.global.locale.value || i18n.global.locale);
 onMounted(() => {
   if (props.locale) switchLocale(props.locale);
 });
@@ -324,6 +387,8 @@ watch(
           @view-candidate="viewCandidate"
           :reverse-option="reverseOption"
           :selection-style="selectionStyle"
+          :selection-mode="selectionMode"
+          :max-selections-reached="blockSelectionEnabled"
         />
       </div>
 
@@ -369,6 +434,8 @@ watch(
           @view-candidate="viewCandidate"
           :reverse-option="reverseOption"
           :selection-style="selectionStyle"
+          :selection-mode="selectionMode"
+          :max-selections-reached="blockSelectionEnabled"
         />
       </template>
       <AVBlankOption
@@ -395,9 +462,9 @@ watch(
       :has-exclusive-options="contestHasExclusiveOptions"
       :display-scroll-to-bottom="contest.displayScrollToBottomBtn"
       :voice-credits="contest.markingType.quadraticVoting ? voiceCredits : null"
+      :policy-inline-results="policyInlineResults"
       class="mt-3"
       data-test="ballot-submission-helper"
-      :display-error-modal="displayErrorModal"
     />
   </div>
 </template>
