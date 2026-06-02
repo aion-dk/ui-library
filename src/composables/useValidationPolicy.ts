@@ -205,6 +205,7 @@ export interface UseValidationPolicyReturn {
   inlineResults: ComputedRef<ValidationResult[]>;
   selectionMode: ComputedRef<"checkbox" | "radio">;
   blockSelectionEnabled: ComputedRef<boolean>;
+  overvoteAlertBased: ComputedRef<boolean>;
   selectedCount: ComputedRef<number>;
   explicitBlank: ComputedRef<boolean>;
   scenario: ComputedRef<ValidationScenario | null>;
@@ -291,6 +292,17 @@ export function useValidationPolicy(
     );
   });
 
+  const overvoteAlertBased = computed(() => {
+    const overvotePolicy = policy.value.overvote;
+    const blockingBehavior =
+      overvotePolicy?.behavior === "block_selection" ||
+      overvotePolicy?.behavior === "behave_as_radio_button";
+    const alertFeedback =
+      overvotePolicy?.feedbackType === "alert" ||
+      overvotePolicy?.feedbackType === "on_screen_message_and_alert";
+    return blockingBehavior && alertFeedback;
+  });
+
   return {
     policy,
     validationResults,
@@ -299,6 +311,7 @@ export function useValidationPolicy(
     inlineResults,
     selectionMode,
     blockSelectionEnabled,
+    overvoteAlertBased,
     selectedCount,
     explicitBlank,
     scenario,

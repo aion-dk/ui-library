@@ -106,7 +106,7 @@ const props = defineProps({
   },
 });
 
-const emits = defineEmits(["accordion-open", "checked", "view-candidate"]);
+const emits = defineEmits(["accordion-open", "checked", "blocked-click", "view-candidate"]);
 
 const crosses = useTemplateRef<HTMLDivElement | null>(`crossesFor${props.option.reference}`);
 
@@ -368,8 +368,10 @@ Result:
 */
 
 const handleOptionClick = (): void => {
-  if (props.maxSelectionsReached && checkedCount.value === 0 && props.selectionMode !== "radio")
+  if (props.maxSelectionsReached && checkedCount.value === 0 && props.selectionMode !== "radio") {
+    emits("blocked-click");
     return;
+  }
   toggleFromOption(false);
 };
 
@@ -812,6 +814,7 @@ watch(
             :voice-credits="voiceCredits"
             @checked="(args: boolean) => emits('checked', args)"
             @accordion-open="() => toggleCollapse(true, false)"
+            @blocked-click="() => emits('blocked-click')"
             @view-candidate="openChildrenCandidate"
             :reverse-option="reverseOption"
             :selection-style="selectionStyle"

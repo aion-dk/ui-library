@@ -66,6 +66,7 @@ const emits = defineEmits([
   "update:activeState",
   "update:activePile",
   "update:pendingAlerts",
+  "show-overvote-alert",
   "view-candidate",
 ]);
 
@@ -287,6 +288,7 @@ watch(
           @update:selection-pile="updateActivePile"
           @update:errors="(errors: string[]) => updateErrors(errors)"
           @update:pending-alerts="(alerts: any[]) => emits('update:pendingAlerts', alerts)"
+          @show-overvote-alert="(alert: any) => emits('show-overvote-alert', alert)"
           @view-candidate="viewCandidate"
           :reverse-option="reverseOption"
           :selection-style="selectionStyle"
@@ -447,6 +449,7 @@ watch(
       @update:selection-pile="updateActivePile"
       @update:errors="(errors: string[]) => updateErrors(errors)"
       @update:pending-alerts="(alerts: any[]) => emits('update:pendingAlerts', alerts)"
+      @show-overvote-alert="(alert: any) => emits('show-overvote-alert', alert)"
       @view-candidate="viewCandidate"
       :reverse-option="reverseOption"
       :selection-style="selectionStyle"

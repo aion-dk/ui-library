@@ -723,4 +723,53 @@ describe("AVOption", () => {
       expect(child.props("selectionStyle")).to.eq("background");
     });
   });
+
+  describe("blocked-click event", () => {
+    it("emits blocked-click when maxSelectionsReached and option is unselected", async () => {
+      const blockedWrapper = mountAVOption({
+        maxSelectionsReached: true,
+        selections: [],
+      });
+      await blockedWrapper.find("[data-test=option-section]").trigger("click");
+      expect(blockedWrapper.emitted("blocked-click")).toBeDefined();
+      expect(blockedWrapper.emitted("blocked-click")).toHaveLength(1);
+    });
+
+    it("does not change selection when blocked-click is emitted", async () => {
+      const blockedWrapper = mountAVOption({
+        maxSelectionsReached: true,
+        selections: [],
+      });
+      await blockedWrapper.find("[data-test=option-section]").trigger("click");
+      expect(blockedWrapper.emitted("checked")).toBeUndefined();
+    });
+
+    it("does not emit blocked-click when option is already selected", async () => {
+      const blockedWrapper = mountAVOption({
+        maxSelectionsReached: true,
+        selections: [{ reference: "exampleOption1" }],
+      });
+      await blockedWrapper.find("[data-test=option-section]").trigger("click");
+      expect(blockedWrapper.emitted("blocked-click")).toBeUndefined();
+    });
+
+    it("does not emit blocked-click when maxSelectionsReached is false", async () => {
+      const normalWrapper = mountAVOption({
+        maxSelectionsReached: false,
+        selections: [],
+      });
+      await normalWrapper.find("[data-test=option-section]").trigger("click");
+      expect(normalWrapper.emitted("blocked-click")).toBeUndefined();
+    });
+
+    it("does not emit blocked-click in radio mode", async () => {
+      const radioWrapper = mountAVOption({
+        maxSelectionsReached: true,
+        selectionMode: "radio",
+        selections: [],
+      });
+      await radioWrapper.find("[data-test=option-section]").trigger("click");
+      expect(radioWrapper.emitted("blocked-click")).toBeUndefined();
+    });
+  });
 });
