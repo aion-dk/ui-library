@@ -88,7 +88,7 @@ function handleBlankVote(policy: ValidationPolicy, minMarks: number): Validation
   };
 }
 
-function handleOvervote(policy: ValidationPolicy): ValidationResult | null {
+export function handleOvervote(policy: ValidationPolicy): ValidationResult | null {
   const p: OvervotePolicy = policy.overvote ?? {
     behavior: "allow",
     feedbackScreen: "ballot_page",

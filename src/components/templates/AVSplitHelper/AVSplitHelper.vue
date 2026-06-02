@@ -12,6 +12,7 @@ import type {
   ImageOption,
   SelectionStyle,
   IterableObject,
+  ValidationResult,
 } from "@/types";
 import SelectionPileValidator from "@assemblyvoting/js-client/dist/lib/validators/selectionPileValidator";
 import ContestSelectionValidator from "@assemblyvoting/js-client/dist/lib/validators/contestSelectionValidator";
@@ -287,8 +288,10 @@ watch(
           :image-option="imageOption"
           @update:selection-pile="updateActivePile"
           @update:errors="(errors: string[]) => updateErrors(errors)"
-          @update:pending-alerts="(alerts: any[]) => emits('update:pendingAlerts', alerts)"
-          @show-overvote-alert="(alert: any) => emits('show-overvote-alert', alert)"
+          @update:pending-alerts="
+            (alerts: ValidationResult[]) => emits('update:pendingAlerts', alerts)
+          "
+          @show-overvote-alert="(alert: ValidationResult) => emits('show-overvote-alert', alert)"
           @view-candidate="viewCandidate"
           :reverse-option="reverseOption"
           :selection-style="selectionStyle"
@@ -448,8 +451,8 @@ watch(
       :show-submission-helper="showSubmissionHelper"
       @update:selection-pile="updateActivePile"
       @update:errors="(errors: string[]) => updateErrors(errors)"
-      @update:pending-alerts="(alerts: any[]) => emits('update:pendingAlerts', alerts)"
-      @show-overvote-alert="(alert: any) => emits('show-overvote-alert', alert)"
+      @update:pending-alerts="(alerts: ValidationResult[]) => emits('update:pendingAlerts', alerts)"
+      @show-overvote-alert="(alert: ValidationResult) => emits('show-overvote-alert', alert)"
       @view-candidate="viewCandidate"
       :reverse-option="reverseOption"
       :selection-style="selectionStyle"

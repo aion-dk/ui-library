@@ -771,5 +771,16 @@ describe("AVOption", () => {
       await radioWrapper.find("[data-test=option-section]").trigger("click");
       expect(radioWrapper.emitted("blocked-click")).toBeUndefined();
     });
+
+    it("emits blocked-click for parent when only child is selected", async () => {
+      const parentWithChildren = getOption(["selectable", "children"], 1);
+      const parentWrapper = mountAVOption({
+        option: parentWithChildren,
+        maxSelectionsReached: true,
+        selections: [{ reference: `exampleChildren1-1` }],
+      });
+      await parentWrapper.find("[data-test=option-section]").trigger("click");
+      expect(parentWrapper.emitted("blocked-click")).toBeDefined();
+    });
   });
 });

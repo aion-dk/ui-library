@@ -3,7 +3,7 @@ import { ref, computed, inject, onMounted, watch, watchEffect } from "vue";
 import { switchLocale } from "@/i18n";
 import { flattenOptions } from "@/helpers/contestHelpers";
 import { getMeaningfulLabel } from "@/helpers/meaningfulLabel";
-import { useValidationPolicy } from "@/composables/useValidationPolicy";
+import { useValidationPolicy, handleOvervote } from "@/composables/useValidationPolicy";
 import type {
   PropType,
   SupportedLocale,
@@ -17,7 +17,6 @@ import type {
   IterableObject,
   AVBallotGalleryOption,
   VoiceCredits,
-  ValidationResult,
 } from "@/types";
 import SelectionPileValidator from "@assemblyvoting/js-client/dist/lib/validators/selectionPileValidator";
 import BelgiumBallotValidator from "@assemblyvoting/js-client/dist/lib/validators/belgiumBallotValidator";
@@ -288,18 +287,10 @@ const toggleOption = ({ reference, amount, text, onlyUpdate }: CheckedEventArgs)
 const handleBlockedClick = (): void => {
   if (!overvoteAlertBased.value) return;
 
-  const overvotePolicy = policy.value.overvote;
-  const alertResult: ValidationResult = {
-    scenario: "overvote",
-    allowed: true,
-    warning: true,
-    blocked: false,
-    feedbackMessage: "warnings.overvote",
-    feedbackScreen: overvotePolicy?.feedbackScreen ?? "ballot_page",
-    feedbackType: overvotePolicy?.feedbackType ?? "alert",
-  };
+  const alertResult = handleOvervote(policy.value);
+  if (!alertResult) return;
 
-  emits("update:pendingAlerts", [alertResult]);
+  emits("update:pendingAlerts", [...pendingAlerts.value, alertResult]);
   emits("show-overvote-alert", alertResult);
 };
 
