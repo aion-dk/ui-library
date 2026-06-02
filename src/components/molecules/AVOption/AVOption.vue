@@ -697,7 +697,7 @@ watch(
             <!-- COUNTER (STACKED MODE) -->
             <div
               v-if="counterInterface"
-              class="AVOption--singlevote hstack hstack justify-content-en"
+              class="AVOption--singlevote hstack justify-content-end"
               :class="{ 'bg-white': selectionStyle === 'background' && checkedCount > 0 }"
             >
               <AVOptionCounter
