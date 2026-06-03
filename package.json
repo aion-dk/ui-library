@@ -55,7 +55,7 @@
   },
   "devDependencies": {
     "@assemblyvoting/js-client": "^6.0.0",
-    "@assemblyvoting/types": "^1.0.0-beta.7",
+    "@assemblyvoting/types": "^1.0.0",
     "@chromatic-com/storybook": "^5.1.2",
     "@fortawesome/fontawesome-common-types": "^7.2.0",
     "@storybook/addon-a11y": "^10.3.6",
