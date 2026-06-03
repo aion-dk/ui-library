@@ -290,7 +290,6 @@ const handleBlockedClick = (): void => {
   const alertResult = handleOvervote(policy.value);
   if (!alertResult) return;
 
-  emits("update:pendingAlerts", [...pendingAlerts.value, alertResult]);
   emits("show-overvote-alert", alertResult);
 };
 

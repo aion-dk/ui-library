@@ -368,6 +368,9 @@ Result:
 */
 
 const handleOptionClick = (): void => {
+  if (props.disabled || props.observerMode || !props.option.selectable || counterInterface.value)
+    return;
+
   if (props.maxSelectionsReached && checkedCount.value === 0 && props.selectionMode !== "radio") {
     emits("blocked-click");
     return;
