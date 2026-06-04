@@ -11,6 +11,7 @@ interface IterableObject {
   internal_name?: string;
   attribute_name?: string;
   id?: number;
+  name?: string;
   [key: string]: unknown;
 }
 
