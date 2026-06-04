@@ -14,6 +14,7 @@ import type {
   AVPileSummaryOptionSummary,
   AVPileSummaryState,
   IterableObject,
+  ValidationResult,
 } from "@/types";
 import { getMeaningfulLabel } from "@/helpers/meaningfulLabel";
 import { AVIcon } from "@/components";
@@ -92,11 +93,35 @@ const { inlineResults: policyInlineResults, pendingAlerts } = useValidationPolic
   i18nLocale,
 );
 
+const REVIEW_KEY_PREFIX = "review_";
+const I18N_BASE = "js.components.AVSubmissionHelper.";
+
+const resolveReviewFeedbackMessage = (result: ValidationResult): string => {
+  if (result.isRawMessage) return result.feedbackMessage;
+  const reviewKey = `${I18N_BASE}${REVIEW_KEY_PREFIX}${result.feedbackMessage}`;
+  if (i18n.global.te(reviewKey)) {
+    return t(reviewKey, result.feedbackParams);
+  }
+  return t(`${I18N_BASE}${result.feedbackMessage}`, result.feedbackParams);
+};
+
+const mapAlertsWithReviewKeys = (alerts: ValidationResult[]): ValidationResult[] => {
+  return alerts.map((result) => {
+    if (result.isRawMessage) return result;
+    const reviewKey = `${REVIEW_KEY_PREFIX}${result.feedbackMessage}`;
+    const fullKey = `${I18N_BASE}${reviewKey}`;
+    if (i18n.global.te(fullKey)) {
+      return { ...result, feedbackMessage: reviewKey };
+    }
+    return result;
+  });
+};
+
 watch(
   [pendingAlerts, (): AVPileSummaryState => props.activeState],
   ([alerts, state]): void => {
     if (state === "summary") {
-      emits("update:pendingAlerts", alerts);
+      emits("update:pendingAlerts", mapAlertsWithReviewKeys(alerts));
     } else {
       emits("update:pendingAlerts", []);
     }
@@ -277,14 +302,7 @@ watch(
           role="alert"
           class="small"
         >
-          {{
-            result.isRawMessage
-              ? result.feedbackMessage
-              : t(
-                  `js.components.AVSubmissionHelper.${result.feedbackMessage}`,
-                  result.feedbackParams,
-                )
-          }}
+          {{ resolveReviewFeedbackMessage(result) }}
         </div>
       </div>
     </div>
