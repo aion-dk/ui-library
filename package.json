@@ -40,7 +40,7 @@
     "test-storybook-coverage": "test-storybook --maxWorkers 1 --coverage --testTimeout=60000"
   },
   "dependencies": {
-    "@assemblyvoting/types": "^1.0.5",
+    "@assemblyvoting/types": "^1.0.6",
     "@fontsource/open-sans": "^5.2.7",
     "@fontsource/pt-mono": "^5.2.8",
     "@fontsource/rubik": "^5.2.8",
