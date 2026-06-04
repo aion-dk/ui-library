@@ -35,6 +35,17 @@ const translations: DefineLocaleMessage = {
         "لم تقم بتحديد أي خيار في هذا التصويت. إذا واصلت، سيتم تقديم هذا التصويت بدون تحديد.",
       overvote: "لقد حددت خيارات أكثر من الحد الأقصى المسموح به.",
     },
+    review_errors: {
+      overvote: "لقد حددت عددًا كبيرًا جدًا من الخيارات.",
+      undervote_below_min: "يجب عليك تحديد خيار {min_marks} على الأقل للمتابعة.",
+    },
+    review_warnings: {
+      undervote_between:
+        "لقد حددت خيارات أقل من الحد الأقصى المسموح به. يمكنك المتابعة أو تحديد المزيد.",
+      blank_vote:
+        "لم تقم بتحديد أي خيار في هذا التصويت. إذا واصلت، سيتم تقديم هذا التصويت بدون تحديد.",
+      overvote: "لقد حددت خيارات أكثر من الحد الأقصى المسموح به.",
+    },
     alert: {
       proceed_anyway: "المتابعة على أي حال",
       go_back: "الرجوع",
@@ -73,6 +84,17 @@ const translations: DefineLocaleMessage = {
       overvote: "Heu seleccionat massa opcions.",
     },
     warnings: {
+      undervote_between:
+        "Heu seleccionat menys opcions de les permeses com a màxim. Podeu continuar o seleccionar-ne més.",
+      blank_vote:
+        "No heu seleccionat cap opció en aquesta contesa. Si continueu, aquesta contesa s'enviarà sense cap selecció.",
+      overvote: "Heu seleccionat més opcions de les permeses com a màxim.",
+    },
+    review_errors: {
+      overvote: "Heu seleccionat massa opcions.",
+      undervote_below_min: "Heu de seleccionar almenys {min_marks} opció(ns) per continuar.",
+    },
+    review_warnings: {
       undervote_between:
         "Heu seleccionat menys opcions de les permeses com a màxim. Podeu continuar o seleccionar-ne més.",
       blank_vote:
@@ -123,6 +145,17 @@ const translations: DefineLocaleMessage = {
         "Nid ydych wedi dewis unrhyw opsiwn yn y gystadleuaeth hon. Os byddwch yn parhau, cyflwynir y gystadleuaeth hon heb ddewis.",
       overvote: "Rydych wedi dewis mwy na'r uchafswm o opsiynau a ganiateir.",
     },
+    review_errors: {
+      overvote: "Rydych wedi dewis gormod o opsiynau.",
+      undervote_below_min: "Rhaid i chi ddewis o leiaf {min_marks} opsiwn(i) i barhau.",
+    },
+    review_warnings: {
+      undervote_between:
+        "Rydych wedi dewis llai na'r uchafswm o opsiynau a ganiateir. Gallwch barhau neu ddewis rhagor.",
+      blank_vote:
+        "Nid ydych wedi dewis unrhyw opsiwn yn y gystadleuaeth hon. Os byddwch yn parhau, cyflwynir y gystadleuaeth hon heb ddewis.",
+      overvote: "Rydych wedi dewis mwy na'r uchafswm o opsiynau a ganiateir.",
+    },
     alert: {
       proceed_anyway: "Parhau beth bynnag",
       go_back: "Mynd yn ôl",
@@ -159,6 +192,17 @@ const translations: DefineLocaleMessage = {
       overvote: "Du har valgt for mange valgmuligheder.",
     },
     warnings: {
+      undervote_between:
+        "Du har valgt færre end det maksimale tilladte antal valgmuligheder. Du kan fortsætte eller vælge flere.",
+      blank_vote:
+        "Du har ikke valgt nogen valgmulighed i denne afstemning. Hvis du fortsætter, vil denne afstemning blive indsendt uden et valg.",
+      overvote: "Du har valgt flere end det maksimale tilladte antal valgmuligheder.",
+    },
+    review_errors: {
+      overvote: "Du har valgt for mange valgmuligheder.",
+      undervote_below_min: "Du skal vælge mindst {min_marks} valgmulighed(er) for at fortsætte.",
+    },
+    review_warnings: {
       undervote_between:
         "Du har valgt færre end det maksimale tilladte antal valgmuligheder. Du kan fortsætte eller vælge flere.",
       blank_vote:
@@ -210,6 +254,18 @@ const translations: DefineLocaleMessage = {
         "Sie haben keine Option in diesem Wettbewerb ausgewählt. Wenn Sie fortfahren, wird dieser Wettbewerb ohne Auswahl eingereicht.",
       overvote: "Sie haben mehr als die maximal zulässigen Optionen ausgewählt.",
     },
+    review_errors: {
+      overvote: "Sie haben zu viele Optionen ausgewählt.",
+      undervote_below_min:
+        "Sie müssen mindestens {min_marks} Option(en) auswählen, um fortzufahren.",
+    },
+    review_warnings: {
+      undervote_between:
+        "Sie haben weniger als die maximal zulässigen Optionen ausgewählt. Sie können fortfahren oder weitere auswählen.",
+      blank_vote:
+        "Sie haben keine Option in diesem Wettbewerb ausgewählt. Wenn Sie fortfahren, wird dieser Wettbewerb ohne Auswahl eingereicht.",
+      overvote: "Sie haben mehr als die maximal zulässigen Optionen ausgewählt.",
+    },
     alert: {
       proceed_anyway: "Trotzdem fortfahren",
       go_back: "Zurück",
@@ -248,7 +304,18 @@ const translations: DefineLocaleMessage = {
     },
     warnings: {
       undervote_between:
-        "You have selected fewer than the maximum allowed options. You can continue or select more.",
+        "Ballot: You have selected fewer than the maximum allowed options. You can continue or select more.",
+      blank_vote:
+        "You have not selected any option in this contest. If you continue, this contest will be submitted without a selection.",
+      overvote: "You have selected more than the maximum allowed options.",
+    },
+    review_errors: {
+      overvote: "You have selected too many options.",
+      undervote_below_min: "You must select at least {min_marks} option(s) to continue.",
+    },
+    review_warnings: {
+      undervote_between:
+        "Summary: You have selected fewer than the maximum allowed options. You can continue or select more.",
       blank_vote:
         "You have not selected any option in this contest. If you continue, this contest will be submitted without a selection.",
       overvote: "You have selected more than the maximum allowed options.",
@@ -290,6 +357,17 @@ const translations: DefineLocaleMessage = {
       overvote: "Ha seleccionado demasiadas opciones.",
     },
     warnings: {
+      undervote_between:
+        "Ha seleccionado menos opciones de las permitidas como máximo. Puede continuar o seleccionar más.",
+      blank_vote:
+        "No ha seleccionado ninguna opción en este concurso. Si continúa, este concurso se enviará sin ninguna selección.",
+      overvote: "Ha seleccionado más opciones de las permitidas como máximo.",
+    },
+    review_errors: {
+      overvote: "Ha seleccionado demasiadas opciones.",
+      undervote_below_min: "Debe seleccionar al menos {min_marks} opción(es) para continuar.",
+    },
+    review_warnings: {
       undervote_between:
         "Ha seleccionado menos opciones de las permitidas como máximo. Puede continuar o seleccionar más.",
       blank_vote:
@@ -338,6 +416,17 @@ const translations: DefineLocaleMessage = {
         "Et ole valinnut yhtään vaihtoehtoa tässä kilpailussa. Jos jatkat, tämä kilpailu lähetetään ilman valintaa.",
       overvote: "Olet valinnut enemmän kuin enimmäismäärän sallittuja vaihtoehtoja.",
     },
+    review_errors: {
+      overvote: "Olet valinnut liian monta vaihtoehtoa.",
+      undervote_below_min: "Sinun on valittava vähintään {min_marks} vaihtoehtoa jatkaaksesi.",
+    },
+    review_warnings: {
+      undervote_between:
+        "Olet valinnut vähemmän kuin enimmäismäärän sallittuja vaihtoehtoja. Voit jatkaa tai valita lisää.",
+      blank_vote:
+        "Et ole valinnut yhtään vaihtoehtoa tässä kilpailussa. Jos jatkat, tämä kilpailu lähetetään ilman valintaa.",
+      overvote: "Olet valinnut enemmän kuin enimmäismäärän sallittuja vaihtoehtoja.",
+    },
     alert: {
       proceed_anyway: "Jatka silti",
       go_back: "Palaa takaisin",
@@ -375,6 +464,17 @@ const translations: DefineLocaleMessage = {
       overvote: "Vous avez sélectionné trop d'options.",
     },
     warnings: {
+      undervote_between:
+        "Vous avez sélectionné moins d'options que le maximum autorisé. Vous pouvez continuer ou en sélectionner davantage.",
+      blank_vote:
+        "Vous n'avez sélectionné aucune option dans ce concours. Si vous continuez, ce concours sera soumis sans sélection.",
+      overvote: "Vous avez sélectionné plus d'options que le maximum autorisé.",
+    },
+    review_errors: {
+      overvote: "Vous avez sélectionné trop d'options.",
+      undervote_below_min: "Vous devez sélectionner au moins {min_marks} option(s) pour continuer.",
+    },
+    review_warnings: {
       undervote_between:
         "Vous avez sélectionné moins d'options que le maximum autorisé. Vous pouvez continuer ou en sélectionner davantage.",
       blank_vote:
@@ -425,6 +525,18 @@ const translations: DefineLocaleMessage = {
         "Þú hefur ekki valið neinn valkost í þessu keppni. Ef þú heldur áfram verður þessi keppni send inn án vals.",
       overvote: "Þú hefur valið fleiri valkosti en hámarksfjöldi leyfir.",
     },
+    review_errors: {
+      overvote: "Þú hefur valið of marga valkosti.",
+      undervote_below_min:
+        "Þú verður að velja að minnsta kosti {min_marks} valkost(i) til að halda áfram.",
+    },
+    review_warnings: {
+      undervote_between:
+        "Þú hefur valið færri valkosti en hámarksfjöldi leyfir. Þú getur haldið áfram eða valið fleiri.",
+      blank_vote:
+        "Þú hefur ekki valið neinn valkost í þessu keppni. Ef þú heldur áfram verður þessi keppni send inn án vals.",
+      overvote: "Þú hefur valið fleiri valkosti en hámarksfjöldi leyfir.",
+    },
     alert: {
       proceed_anyway: "Halda áfram samt",
       go_back: "Fara til baka",
@@ -463,6 +575,17 @@ const translations: DefineLocaleMessage = {
       overvote: "Hai selezionato troppe opzioni.",
     },
     warnings: {
+      undervote_between:
+        "Hai selezionato meno opzioni del massimo consentito. Puoi continuare o selezionarne altre.",
+      blank_vote:
+        "Non hai selezionato alcuna opzione in questa competizione. Se continui, questa competizione sarà inviata senza una selezione.",
+      overvote: "Hai selezionato più opzioni del massimo consentito.",
+    },
+    review_errors: {
+      overvote: "Hai selezionato troppe opzioni.",
+      undervote_below_min: "Devi selezionare almeno {min_marks} opzione(i) per continuare.",
+    },
+    review_warnings: {
       undervote_between:
         "Hai selezionato meno opzioni del massimo consentito. Puoi continuare o selezionarne altre.",
       blank_vote:
@@ -513,6 +636,18 @@ const translations: DefineLocaleMessage = {
         "このコンテストでオプションが選択されていません。続行すると、このコンテストは選択なしで提出されます。",
       overvote: "許可された最大オプション数を超えて選択されています。",
     },
+    review_errors: {
+      overvote: "選択したオプションが多すぎます。",
+      undervote_below_min:
+        "続行するには、少なくとも{min_marks}つのオプションを選択する必要があります。",
+    },
+    review_warnings: {
+      undervote_between:
+        "許可された最大オプション数より少なく選択されています。そのまま続けるか、さらに選択できます。",
+      blank_vote:
+        "このコンテストでオプションが選択されていません。続行すると、このコンテストは選択なしで提出されます。",
+      overvote: "許可された最大オプション数を超えて選択されています。",
+    },
     alert: {
       proceed_anyway: "とにかく続行",
       go_back: "戻る",
@@ -556,6 +691,17 @@ const translations: DefineLocaleMessage = {
         "이 경쟁에서 옵션을 선택하지 않았습니다. 계속하면 이 경쟁은 선택 없이 제출됩니다.",
       overvote: "허용된 최대 옵션 수를 초과하여 선택했습니다.",
     },
+    review_errors: {
+      overvote: "너무 많은 옵션을 선택했습니다.",
+      undervote_below_min: "계속하려면 최소 {min_marks}개의 옵션을 선택해야 합니다.",
+    },
+    review_warnings: {
+      undervote_between:
+        "허용된 최대 옵션 수보다 적게 선택했습니다. 계속하거나 더 선택할 수 있습니다.",
+      blank_vote:
+        "이 경쟁에서 옵션을 선택하지 않았습니다. 계속하면 이 경쟁은 선택 없이 제출됩니다.",
+      overvote: "허용된 최대 옵션 수를 초과하여 선택했습니다.",
+    },
     alert: {
       proceed_anyway: "그래도 계속",
       go_back: "돌아가기",
@@ -592,6 +738,17 @@ const translations: DefineLocaleMessage = {
       overvote: "U heeft te veel opties geselecteerd.",
     },
     warnings: {
+      undervote_between:
+        "U heeft minder opties geselecteerd dan het maximaal toegestane aantal. U kunt doorgaan of meer opties selecteren.",
+      blank_vote:
+        "U heeft geen optie geselecteerd in dit concours. Als u doorgaat, wordt dit concours zonder selectie ingediend.",
+      overvote: "U heeft meer opties geselecteerd dan het maximaal toegestane aantal.",
+    },
+    review_errors: {
+      overvote: "U heeft te veel opties geselecteerd.",
+      undervote_below_min: "U moet minstens {min_marks} optie(s) selecteren om door te gaan.",
+    },
+    review_warnings: {
       undervote_between:
         "U heeft minder opties geselecteerd dan het maximaal toegestane aantal. U kunt doorgaan of meer opties selecteren.",
       blank_vote:
@@ -641,6 +798,17 @@ const translations: DefineLocaleMessage = {
         "Nie wybrano żadnej opcji w tym konkursie. Jeśli kontynuujesz, ten konkurs zostanie przesłany bez wyboru.",
       overvote: "Wybrano więcej opcji niż maksymalna dozwolona liczba.",
     },
+    review_errors: {
+      overvote: "Wybrano zbyt wiele opcji.",
+      undervote_below_min: "Musisz wybrać co najmniej {min_marks} opcję(i), aby kontynuować.",
+    },
+    review_warnings: {
+      undervote_between:
+        "Wybrano mniej opcji niż maksymalna dozwolona liczba. Możesz kontynuować lub wybrać więcej.",
+      blank_vote:
+        "Nie wybrano żadnej opcji w tym konkursie. Jeśli kontynuujesz, ten konkurs zostanie przesłany bez wyboru.",
+      overvote: "Wybrano więcej opcji niż maksymalna dozwolona liczba.",
+    },
     alert: {
       proceed_anyway: "Kontynuuj mimo to",
       go_back: "Wróć",
@@ -678,6 +846,17 @@ const translations: DefineLocaleMessage = {
       overvote: "Selecionou demasiadas opções.",
     },
     warnings: {
+      undervote_between:
+        "Selecionou menos opções do que o máximo permitido. Pode continuar ou selecionar mais.",
+      blank_vote:
+        "Não selecionou nenhuma opção neste concurso. Se continuar, este concurso será submetido sem qualquer seleção.",
+      overvote: "Selecionou mais opções do que o máximo permitido.",
+    },
+    review_errors: {
+      overvote: "Selecionou demasiadas opções.",
+      undervote_below_min: "Deve selecionar pelo menos {min_marks} opção(ões) para continuar.",
+    },
+    review_warnings: {
       undervote_between:
         "Selecionou menos opções do que o máximo permitido. Pode continuar ou selecionar mais.",
       blank_vote:
@@ -729,6 +908,18 @@ const translations: DefineLocaleMessage = {
         "Nu ați selectat nicio opțiune în acest concurs. Dacă continuați, acest concurs va fi trimis fără o selecție.",
       overvote: "Ați selectat mai multe opțiuni decât numărul maxim permis.",
     },
+    review_errors: {
+      overvote: "Ați selectat prea multe opțiuni.",
+      undervote_below_min:
+        "Trebuie să selectați cel puțin {min_marks} opțiune(i) pentru a continua.",
+    },
+    review_warnings: {
+      undervote_between:
+        "Ați selectat mai puține opțiuni decât numărul maxim permis. Puteți continua sau selecta mai multe.",
+      blank_vote:
+        "Nu ați selectat nicio opțiune în acest concurs. Dacă continuați, acest concurs va fi trimis fără o selecție.",
+      overvote: "Ați selectat mai multe opțiuni decât numărul maxim permis.",
+    },
     alert: {
       proceed_anyway: "Continuați oricum",
       go_back: "Înapoi",
@@ -767,6 +958,18 @@ const translations: DefineLocaleMessage = {
       overvote: "Вы выбрали слишком много вариантов.",
     },
     warnings: {
+      undervote_between:
+        "Вы выбрали меньше максимально допустимого количества вариантов. Вы можете продолжить или выбрать больше.",
+      blank_vote:
+        "Вы не выбрали ни одного варианта в этом конкурсе. Если вы продолжите, этот конкурс будет отправлен без выбора.",
+      overvote: "Вы выбрали больше максимально допустимого количества вариантов.",
+    },
+    review_errors: {
+      overvote: "Вы выбрали слишком много вариантов.",
+      undervote_below_min:
+        "Вы должны выбрать как минимум {min_marks} вариант(ов), чтобы продолжить.",
+    },
+    review_warnings: {
       undervote_between:
         "Вы выбрали меньше максимально допустимого количества вариантов. Вы можете продолжить или выбрать больше.",
       blank_vote:
@@ -814,6 +1017,17 @@ const translations: DefineLocaleMessage = {
         "Du har inte valt något alternativ i denna tävling. Om du fortsätter kommer denna tävling att skickas in utan ett val.",
       overvote: "Du har valt fler alternativ än det maximalt tillåtna antalet.",
     },
+    review_errors: {
+      overvote: "Du har valt för många alternativ.",
+      undervote_below_min: "Du måste välja minst {min_marks} alternativ för att fortsätta.",
+    },
+    review_warnings: {
+      undervote_between:
+        "Du har valt färre alternativ än det maximalt tillåtna antalet. Du kan fortsätta eller välja fler.",
+      blank_vote:
+        "Du har inte valt något alternativ i denna tävling. Om du fortsätter kommer denna tävling att skickas in utan ett val.",
+      overvote: "Du har valt fler alternativ än det maximalt tillåtna antalet.",
+    },
     alert: {
       proceed_anyway: "Fortsätt ändå",
       go_back: "Gå tillbaka",
@@ -850,6 +1064,15 @@ const translations: DefineLocaleMessage = {
       overvote: "您选择了过多的选项。",
     },
     warnings: {
+      undervote_between: "您选择的选项少于最大允许数量。您可以继续或选择更多。",
+      blank_vote: "您未在此竞赛中选择任何选项。如果继续，此竞赛将在未作选择的情况下提交。",
+      overvote: "您选择的选项超过了最大允许数量。",
+    },
+    review_errors: {
+      overvote: "您选择了过多的选项。",
+      undervote_below_min: "您必须至少选择{min_marks}个选项才能继续。",
+    },
+    review_warnings: {
       undervote_between: "您选择的选项少于最大允许数量。您可以继续或选择更多。",
       blank_vote: "您未在此竞赛中选择任何选项。如果继续，此竞赛将在未作选择的情况下提交。",
       overvote: "您选择的选项超过了最大允许数量。",
