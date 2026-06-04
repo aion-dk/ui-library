@@ -59,10 +59,10 @@
     jwt-decode "^4.0.0"
     xml-js "^1.6.11"
 
-"@assemblyvoting/types@^1.0.4":
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/@assemblyvoting/types/-/types-1.0.4.tgz#95d18d78e5d8d0775bba7c7ddee9962f8b852dca"
-  integrity sha512-fOl6Us/UMJQscelMOZozyMT1OkptcRvr0NFL4gHLWDE17Wrfb7DfZpR846tSo+PZy5reXLLQQ5Uaf4OfIvnKZA==
+"@assemblyvoting/types@^1.0.5":
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/@assemblyvoting/types/-/types-1.0.5.tgz#711ec6669bbe8078740b9af5363cda5679e7d873"
+  integrity sha512-y3541yI4knfpIQeHCrhljkHfFdQ/sx+MGNji/0lXK86K/j03JtdzA7yZqkqpFE3FJ0PobiaAnq7y2BAPUu10xA==
 
 "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.26.2", "@babel/code-frame@^7.27.1", "@babel/code-frame@^7.28.6", "@babel/code-frame@^7.29.0":
   version "7.29.0"
