@@ -40,6 +40,7 @@
     "test-storybook-coverage": "test-storybook --maxWorkers 1 --coverage --testTimeout=60000"
   },
   "dependencies": {
+    "@assemblyvoting/types": "^1.0.5",
     "@fontsource/open-sans": "^5.2.7",
     "@fontsource/pt-mono": "^5.2.8",
     "@fontsource/rubik": "^5.2.8",
@@ -55,7 +56,6 @@
   },
   "devDependencies": {
     "@assemblyvoting/js-client": "^6.0.0",
-    "@assemblyvoting/types": "^1.0.5",
     "@chromatic-com/storybook": "^5.1.2",
     "@fortawesome/fontawesome-common-types": "^7.2.0",
     "@storybook/addon-a11y": "^10.3.6",
