@@ -1,5 +1,11 @@
-import type { LookUpFallback, LookUpMethod } from "@/types";
+import type { LocalString, LookUpMethod } from "@/types";
 import { LOOKUP_DEFAULT_FALLBACKS } from "@/constants";
+
+const getFirstLocalizedValue = (source?: LocalString): string | null => {
+  if (!source) return null;
+  const [firstLocale] = Object.keys(source) as Array<keyof typeof source>;
+  return firstLocale ? (source[firstLocale] ?? null) : null;
+};
 
 const getMeaningfulLabel: LookUpMethod = (
   object,
@@ -7,50 +13,25 @@ const getMeaningfulLabel: LookUpMethod = (
   humanName = "Item",
   fallbacks = LOOKUP_DEFAULT_FALLBACKS,
 ) => {
-  let result: string | null = null;
-  // oxlint-disable-next-line complexity
-  fallbacks.forEach((fallback: LookUpFallback) => {
-    if (result === null) {
-      switch (true) {
-        case fallback === "title":
-          result = object.title?.[locale] ?? null;
-          break;
-        case fallback === "label":
-          result = object.label?.[locale] ?? null;
-          break;
-        case fallback === "group":
-          result =
-            object.group?.[locale] ??
-            object.group?.[Object.keys(object.group)[0] as keyof typeof object.group] ??
-            null;
-          break;
-        case fallback === "first_available_locale":
-          result =
-            object.title?.[Object.keys(object.title)[0] as keyof typeof object.title] ??
-            object.label?.[Object.keys(object.label)[0] as keyof typeof object.label] ??
-            null;
-          break;
-        case fallback === "reference":
-          result = object.reference || null;
-          break;
-        case fallback === "internal_name":
-          result = object.internal_name || null;
-          break;
-        case fallback === "attribute_name":
-          result = object.attribute_name || null;
-          break;
-        case fallback === "id" && Boolean(object.id):
-          result = `${humanName} #${object.id}`;
-          break;
-        default:
-          result = null;
-      }
-    }
-  });
+  const fallbackResolvers: Record<string, () => string | null> = {
+    title: () => object.title?.[locale] ?? null,
+    label: () => object.label?.[locale] ?? null,
+    group: () => object.group?.[locale] ?? getFirstLocalizedValue(object.group),
+    first_available_locale: () =>
+      getFirstLocalizedValue(object.title) ?? getFirstLocalizedValue(object.label),
+    reference: () => object.reference || null,
+    internal_name: () => object.internal_name || null,
+    attribute_name: () => object.attribute_name || null,
+    name: () => object.name || null,
+    id: () => (object.id ? `${humanName} #${object.id}` : null),
+  };
 
-  if (result === null) result = "";
+  for (const fallback of fallbacks) {
+    const result = fallbackResolvers[fallback]?.() ?? null;
+    if (result !== null) return result;
+  }
 
-  return result;
+  return "";
 };
 
 export { getMeaningfulLabel };
