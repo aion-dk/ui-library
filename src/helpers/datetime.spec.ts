@@ -15,9 +15,9 @@ describe("humanizeDate", () => {
   });
 
   describe("past dates (default short style)", () => {
-    it("formats seconds ago", () => {
+    it("returns 'less than a minute ago' for sub-minute past dates", () => {
       const date = new Date(NOW.getTime() - 30 * 1000);
-      expect(humanizeDate(date)).to.eq("30 sec. ago");
+      expect(humanizeDate(date)).to.eq("1 min. ago");
     });
 
     it("formats minutes ago", () => {
@@ -52,9 +52,9 @@ describe("humanizeDate", () => {
   });
 
   describe("future dates (default short style)", () => {
-    it("formats seconds in the future", () => {
+    it("returns 'in less than a minute' for sub-minute future dates", () => {
       const date = new Date(NOW.getTime() + 30 * 1000);
-      expect(humanizeDate(date)).to.eq("in 30 sec.");
+      expect(humanizeDate(date)).to.eq("in 1 min.");
     });
 
     it("formats minutes in the future", () => {
@@ -102,7 +102,7 @@ describe("humanizeDate", () => {
     });
   });
 
-  it("uses 'now' for the current moment with numeric: auto", () => {
-    expect(humanizeDate(NOW)).to.eq("now");
+  it("clamps the current moment to 1 minute ago", () => {
+    expect(humanizeDate(NOW)).to.eq("1 min. ago");
   });
 });

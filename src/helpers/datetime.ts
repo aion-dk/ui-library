@@ -6,7 +6,12 @@ const humanizeDate = (
   locale: SupportedLocale = "en",
   style: "narrow" | "short" | "long" = "short",
 ): string => {
-  const seconds = Math.round((date.getTime() - Date.now()) / TimeUnit.msPerSecond);
+  const rawSeconds = Math.round((date.getTime() - Date.now()) / TimeUnit.msPerSecond);
+  const seconds =
+    Math.abs(rawSeconds) < TimeUnit.minute
+      ? Math.sign(rawSeconds) * TimeUnit.minute || -TimeUnit.minute
+      : rawSeconds;
+
   const cutoffs: Array<[number, Intl.RelativeTimeFormatUnit]> = [
     [TimeUnit.minute, "second"],
     [TimeUnit.hour, "minute"],
