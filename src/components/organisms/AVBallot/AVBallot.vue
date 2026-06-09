@@ -3,7 +3,7 @@ import { ref, computed, inject, onMounted, watch, watchEffect } from "vue";
 import { switchLocale } from "@/i18n";
 import { flattenOptions } from "@/helpers/contestHelpers";
 import { getMeaningfulLabel } from "@/helpers/meaningfulLabel";
-import { useValidationPolicy } from "@/composables/useValidationPolicy";
+import { useValidationPolicy, handleOvervote } from "@/composables/useValidationPolicy";
 import type {
   PropType,
   SupportedLocale,
@@ -76,6 +76,7 @@ const emits = defineEmits([
   "update:selectionPile",
   "update:errors",
   "update:pendingAlerts",
+  "show-overvote-alert",
   "view-candidate",
 ]);
 
@@ -101,6 +102,8 @@ const {
   inlineResults: policyInlineResults,
   selectionMode,
   blockSelectionEnabled,
+  overvoteAlertBased,
+  policy,
 } = useValidationPolicy(
   computed(() => props.contest),
   computed(() => props.selectionPile),
@@ -281,6 +284,16 @@ const toggleOption = ({ reference, amount, text, onlyUpdate }: CheckedEventArgs)
   });
 };
 
+const handleBlockedClick = (): void => {
+  if (!overvoteAlertBased.value) return;
+
+  const alertResult = handleOvervote(policy.value);
+  if (!alertResult) return;
+
+  emits("update:pendingAlerts", [alertResult]);
+  emits("show-overvote-alert", alertResult);
+};
+
 const viewCandidate = (contestReference: string, optionReference: string): void =>
   emits("view-candidate", contestReference, optionReference);
 
@@ -384,6 +397,7 @@ watch(
           :parentTitle="option.parentTitle"
           :parentColor="option.parentColor"
           @checked="toggleOption"
+          @blocked-click="handleBlockedClick"
           @view-candidate="viewCandidate"
           :reverse-option="reverseOption"
           :selection-style="selectionStyle"
@@ -431,6 +445,7 @@ watch(
           :image-option="imageOption"
           :voice-credits="voiceCredits"
           @checked="toggleOption"
+          @blocked-click="handleBlockedClick"
           @view-candidate="viewCandidate"
           :reverse-option="reverseOption"
           :selection-style="selectionStyle"

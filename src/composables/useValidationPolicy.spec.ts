@@ -449,6 +449,80 @@ describe("useValidationPolicy", () => {
       expect(blockSelectionEnabled.value).toBe(false);
     });
   });
+
+  describe("overvoteAlertBased", () => {
+    it("is true when block_selection and alert feedbackType", () => {
+      const policy = makePolicy({
+        overvote: {
+          behavior: "block_selection",
+          feedbackScreen: "ballot_page",
+          feedbackType: "alert",
+        },
+      });
+      const contest = makeContest({ validationPolicy: policy });
+      const pile = getSelectionPile(["multi"]);
+      const { overvoteAlertBased } = useValidationPolicy(
+        ref(contest),
+        ref(pile),
+        ref("ballot_page"),
+      );
+      expect(overvoteAlertBased.value).toBe(true);
+    });
+
+    it("is true when block_selection and on_screen_message_and_alert feedbackType", () => {
+      const policy = makePolicy({
+        overvote: {
+          behavior: "block_selection",
+          feedbackScreen: "ballot_page",
+          feedbackType: "on_screen_message_and_alert",
+        },
+      });
+      const contest = makeContest({ validationPolicy: policy });
+      const pile = getSelectionPile(["multi"]);
+      const { overvoteAlertBased } = useValidationPolicy(
+        ref(contest),
+        ref(pile),
+        ref("ballot_page"),
+      );
+      expect(overvoteAlertBased.value).toBe(true);
+    });
+
+    it("is false when block_selection and on_screen_message feedbackType", () => {
+      const policy = makePolicy({
+        overvote: {
+          behavior: "block_selection",
+          feedbackScreen: "ballot_page",
+          feedbackType: "on_screen_message",
+        },
+      });
+      const contest = makeContest({ validationPolicy: policy });
+      const pile = getSelectionPile(["multi"]);
+      const { overvoteAlertBased } = useValidationPolicy(
+        ref(contest),
+        ref(pile),
+        ref("ballot_page"),
+      );
+      expect(overvoteAlertBased.value).toBe(false);
+    });
+
+    it("is false when allow behavior and alert feedbackType", () => {
+      const policy = makePolicy({
+        overvote: {
+          behavior: "allow",
+          feedbackScreen: "ballot_page",
+          feedbackType: "alert",
+        },
+      });
+      const contest = makeContest({ validationPolicy: policy });
+      const pile = getSelectionPile(["multi"]);
+      const { overvoteAlertBased } = useValidationPolicy(
+        ref(contest),
+        ref(pile),
+        ref("ballot_page"),
+      );
+      expect(overvoteAlertBased.value).toBe(false);
+    });
+  });
 });
 
 describe("getPendingAlerts", () => {

@@ -4,6 +4,7 @@ import localI18n from "@/i18n";
 import { getContest, getSelectionPile, getLiveResult } from "@/examples";
 
 import AVBallot from "./AVBallot.vue";
+import type { ValidationResult } from "@/types";
 import AVCollapser from "@/components/atoms/AVCollapser";
 import AVAnimatedTransition from "@/components/atoms/AVAnimatedTransition";
 import AVSearchBallot from "@/components/molecules/AVSearchBallot";
@@ -614,5 +615,59 @@ describe("AVBallot with validation policy", () => {
     await wrapper.vm.$nextTick();
     const option = wrapper.findComponent(AVOption);
     expect(option.props("maxSelectionsReached")).toBe(true);
+  });
+
+  it("emits update:pendingAlerts with synthetic overvote on blocked-click when alert-based", async () => {
+    const wrapper = createWrapper(
+      {
+        markingType: { ...getContest(["blank", "multi"]).markingType, maxMarks: 2 },
+        validationPolicy: {
+          overvote: {
+            behavior: "block_selection",
+            feedbackScreen: "ballot_page",
+            feedbackType: "alert",
+          },
+        },
+      },
+      getSelectionPile(["multi"]),
+    );
+    await wrapper.vm.$nextTick();
+    const option = wrapper.findComponent(AVOption);
+    option.vm.$emit("blocked-click");
+    await wrapper.vm.$nextTick();
+
+    const alertEvents = wrapper.emitted("update:pendingAlerts");
+    expect(alertEvents).toBeDefined();
+    const lastAlert = alertEvents![alertEvents!.length - 1][0] as ValidationResult[];
+    expect(lastAlert).toHaveLength(1);
+    expect(lastAlert[0].scenario).toBe("overvote");
+    expect(lastAlert[0].feedbackType).toBe("alert");
+    expect(lastAlert[0].feedbackScreen).toBe("ballot_page");
+    expect(lastAlert[0].warning).toBe(true);
+  });
+
+  it("does not emit alert on blocked-click when feedbackType is on_screen_message", async () => {
+    const wrapper = createWrapper(
+      {
+        markingType: { ...getContest(["blank", "multi"]).markingType, maxMarks: 2 },
+        validationPolicy: {
+          overvote: {
+            behavior: "block_selection",
+            feedbackScreen: "ballot_page",
+            feedbackType: "on_screen_message",
+          },
+        },
+      },
+      getSelectionPile(["multi"]),
+    );
+    await wrapper.vm.$nextTick();
+
+    const previousAlertCount = wrapper.emitted("update:pendingAlerts")?.length ?? 0;
+    const option = wrapper.findComponent(AVOption);
+    option.vm.$emit("blocked-click");
+    await wrapper.vm.$nextTick();
+
+    const alertEvents = wrapper.emitted("update:pendingAlerts");
+    expect(alertEvents?.length ?? 0).toBe(previousAlertCount);
   });
 });
