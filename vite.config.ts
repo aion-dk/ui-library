@@ -65,7 +65,7 @@ export default defineConfig((env: ConfigEnv) => {
         cssFileName: "styles",
       },
       rollupOptions: {
-        external: ["vue"],
+        external: ["vue", /^@assemblyvoting\/types(\/.*)?$/],
         output: {
           exports: "named",
           globals: {

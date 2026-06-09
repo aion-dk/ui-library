@@ -12,7 +12,7 @@ export default defineConfig(
       setupFiles: ["./.storybook/vitest.setup.ts"],
       coverage: {
         provider: "istanbul",
-        include: ["src/components/**"],
+        include: ["src/components/**", "src/helpers/**"],
         extension: [".ts", ".vue"],
         exclude: [
           "**/*.stories.ts",

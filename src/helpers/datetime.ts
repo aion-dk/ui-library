@@ -1,0 +1,41 @@
+import { TimeUnit } from "@/constants/datetime";
+import type { SupportedLocale } from "@assemblyvoting/types";
+
+const humanizeDate = (
+  date: Date,
+  locale: SupportedLocale = "en",
+  style: "narrow" | "short" | "long" = "short",
+): string => {
+  const rawSeconds = Math.round((date.getTime() - Date.now()) / TimeUnit.msPerSecond);
+  const formatter = new Intl.RelativeTimeFormat(locale, { numeric: "auto", style });
+
+  if (Math.abs(rawSeconds) < TimeUnit.minute) return formatter.format(0, "second");
+
+  const cutoffs: Array<[number, Intl.RelativeTimeFormatUnit]> = [
+    [TimeUnit.minute, "second"],
+    [TimeUnit.hour, "minute"],
+    [TimeUnit.day, "hour"],
+    [TimeUnit.day * TimeUnit.daysPerWeek, "day"],
+    [TimeUnit.day * TimeUnit.daysPerMonth, "week"],
+    [TimeUnit.day * TimeUnit.daysPerYear, "month"],
+    [Infinity, "year"],
+  ];
+
+  const divisors: Array<number> = [
+    TimeUnit.second,
+    TimeUnit.minute,
+    TimeUnit.hour,
+    TimeUnit.day,
+    TimeUnit.day * TimeUnit.daysPerWeek,
+    TimeUnit.day * TimeUnit.daysPerMonth,
+    TimeUnit.day * TimeUnit.daysPerYear,
+  ];
+
+  const defaultDivisor = 1;
+  const index = cutoffs.findIndex(([cutoff]) => Math.abs(rawSeconds) < cutoff);
+  const value = Math.trunc(rawSeconds / (divisors[index] ?? defaultDivisor));
+
+  return formatter.format(value, cutoffs[index]?.[1] ?? "year");
+};
+
+export { humanizeDate };
