@@ -100,7 +100,7 @@ watch(i18nLocale, (newLocale) => {
       <button
         v-if="displayScrollToBottom"
         type="button"
-        class="btn bg-gray-300 rounded-0 border-0 w-100"
+        class="btn --bs-gray-300 rounded-0 border-0 w-100"
         data-test="scroll-bottom"
         @click="scrollToBottom"
       >
