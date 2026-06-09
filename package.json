@@ -1,6 +1,6 @@
 {
   "name": "@assemblyvoting/electa-ui",
-  "version": "5.6.2-beta.12",
+  "version": "5.6.5-beta.1",
   "license": "MIT",
   "publishConfig": {
     "access": "public"
@@ -40,6 +40,7 @@
     "test-storybook-coverage": "test-storybook --maxWorkers 1 --coverage --testTimeout=60000"
   },
   "dependencies": {
+    "@assemblyvoting/types": "^1.0.6",
     "@fontsource/open-sans": "^5.2.7",
     "@fontsource/pt-mono": "^5.2.8",
     "@fontsource/rubik": "^5.2.8",
@@ -55,7 +56,6 @@
   },
   "devDependencies": {
     "@assemblyvoting/js-client": "^6.0.0",
-    "@assemblyvoting/types": "^1.0.0",
     "@chromatic-com/storybook": "^5.1.2",
     "@fortawesome/fontawesome-common-types": "^7.2.0",
     "@storybook/addon-a11y": "^10.3.6",
@@ -68,7 +68,7 @@
     "@types/jsdom": "^28.0.0",
     "@types/node": "^24.10.15",
     "@vitejs/plugin-vue": "^6.0.4",
-    "@vitest/coverage-istanbul": "^4.0.18",
+    "@vitest/coverage-istanbul": "^4.1.8",
     "@vitest/eslint-plugin": "^1.6.9",
     "@vue/eslint-config-prettier": "^10.2.0",
     "@vue/eslint-config-typescript": "^14.7.0",
@@ -93,8 +93,11 @@
     "vite-plugin-dts": "^4.5.4",
     "vite-plugin-static-copy": "^3.2.0",
     "vite-plugin-vue-devtools": "^8.0.7",
-    "vitest": "^4.0.18",
+    "vitest": "^4.1.8",
     "vue-tsc": "^3.2.5"
+  },
+  "resolutions": {
+    "vite": "^7.3.2"
   },
   "eslintConfig": {
     "extends": [
