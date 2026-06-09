@@ -7,10 +7,9 @@ const humanizeDate = (
   style: "narrow" | "short" | "long" = "short",
 ): string => {
   const rawSeconds = Math.round((date.getTime() - Date.now()) / TimeUnit.msPerSecond);
-  const seconds =
-    Math.abs(rawSeconds) < TimeUnit.minute
-      ? Math.sign(rawSeconds) * TimeUnit.minute || -TimeUnit.minute
-      : rawSeconds;
+  const formatter = new Intl.RelativeTimeFormat(locale, { numeric: "auto", style });
+
+  if (Math.abs(rawSeconds) < TimeUnit.minute) return formatter.format(0, "second");
 
   const cutoffs: Array<[number, Intl.RelativeTimeFormatUnit]> = [
     [TimeUnit.minute, "second"],
@@ -33,13 +32,10 @@ const humanizeDate = (
   ];
 
   const defaultDivisor = 1;
-  const index = cutoffs.findIndex(([cutoff]) => Math.abs(seconds) < cutoff);
-  const value = Math.round(seconds / (divisors[index] ?? defaultDivisor));
+  const index = cutoffs.findIndex(([cutoff]) => Math.abs(rawSeconds) < cutoff);
+  const value = Math.trunc(rawSeconds / (divisors[index] ?? defaultDivisor));
 
-  return new Intl.RelativeTimeFormat(locale, { numeric: "auto", style }).format(
-    value,
-    cutoffs[index]?.[1] ?? "year",
-  );
+  return formatter.format(value, cutoffs[index]?.[1] ?? "year");
 };
 
 export { humanizeDate };
