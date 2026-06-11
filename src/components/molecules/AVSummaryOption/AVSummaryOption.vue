@@ -99,7 +99,9 @@ const displayTitle = computed(() => {
 
 const optionGroups = computed(() => {
   const options = Array.from(Array(props.option?.crosses).keys());
-  options.forEach((index) => (options[index] = index + 1));
+  for (let i = 0; i < options.length; i + 1) {
+    options[i] = i + 1;
+  }
   const half = options.indexOf(Math.ceil(props.option?.crosses / 2)) + 1;
   const group1 = options.slice(0, half);
   const group2 = options.slice(half);
@@ -111,12 +113,13 @@ const bsBorderColor = computed(() =>
   getComputedStyle(document.documentElement).getPropertyValue("--bs-border-color"),
 );
 
-// oxlint-disable-next-line complexity
+const rtlAttr = computed(() => (isRtl.value ? "right" : "left"));
+
 const coloredEdgeStyle = computed(() => {
   if (props.blank && props.blankAccentColor) {
     return `
-      border-${isRtl.value ? "right" : "left"}-color: ${props.blankAccentColor};
-      border-${isRtl.value ? "right" : "left"}-width: 0.5rem;
+      border-${rtlAttr.value}-color: ${props.blankAccentColor};
+      border-${rtlAttr.value}-width: 0.5rem;
     `;
   }
 
@@ -126,8 +129,8 @@ const coloredEdgeStyle = computed(() => {
   ) {
     const color = props.option.accentColor || props.parents[0]?.accentColor || bsBorderColor.value;
     let baseStyleText = `
-      border-${isRtl.value ? "right" : "left"}-color: ${color};
-      border-${isRtl.value ? "right" : "left"}-width: 0.5rem;
+      border-${rtlAttr.value}-color: ${color};
+      border-${rtlAttr.value}-width: 0.5rem;
     `;
 
     if (props.option?.accentColor && !ancestryTitles.value?.length) return baseStyleText;
