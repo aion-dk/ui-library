@@ -12,16 +12,8 @@ const config: StorybookConfig = {
     "@storybook/addon-a11y",
     "storybook-addon-rtl",
     "@storybook/addon-links",
-    "@chromatic-com/storybook",
-    {
-      name: "@storybook/addon-coverage",
-      options: {
-        istanbul: {
-          include: ["**/*.stories.ts", "**/*.mdx"],
-        },
-      },
-    },
     "@storybook/addon-docs",
+    "@storybook/addon-vitest",
   ],
   framework: {
     name: "@storybook/vue3-vite",

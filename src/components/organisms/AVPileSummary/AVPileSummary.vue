@@ -11,6 +11,7 @@ import type {
   ImageOption,
   AVPileSummaryOptionSummary,
   AVPileSummaryState,
+  AVSummaryOptionObject,
   OptionSelection,
   IterableObject,
 } from "@/types";
@@ -96,35 +97,36 @@ const getAllParents = (option: OptionContent, parents: OptionContent[]): OptionC
 const optionSummaries = computed(() => {
   const summaryOptions: AVPileSummaryOptionSummary = [];
 
-  props.selectionPile.optionSelections.forEach((selection: OptionSelection) => {
+  for (let i = 0; i < props.selectionPile.optionSelections.length; i += 1) {
+    const selection: OptionSelection = props.selectionPile.optionSelections[i];
     const preexisting = summaryOptions.find((o) => o.handle === selection.reference);
 
     const optionContent = selectableOptions.value.find((o) => o.reference === selection.reference);
 
-    if (!optionContent) return;
+    if (!optionContent) continue;
 
     if (preexisting) {
       preexisting.crosses += 1;
     } else {
-      summaryOptions.push({
+      const summary: AVSummaryOptionObject = {
         reference: optionContent.reference,
         title: optionContent.title,
         handle: selection.reference,
         image: optionContent.image,
-        description: props.contest.displayDescriptionOnSummary
-          ? optionContent.description
-          : undefined,
         accentColor: optionContent.accentColor as `#${string}`,
         crosses: 1,
         parent: optionContent.parentContent,
-        rank:
-          props.contest.markingType.voteVariation === "ranked"
-            ? summaryOptions.length + 1
-            : undefined,
         writeIn: selection.text,
-      });
+      };
+
+      if (props.contest.displayDescriptionOnSummary)
+        summary.description = optionContent.description;
+      if (props.contest.markingType.voteVariation === "ranked")
+        summary.rank = summaryOptions.length + 1;
+
+      summaryOptions.push(summary);
     }
-  });
+  }
 
   return summaryOptions;
 });
