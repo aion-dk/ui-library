@@ -99,7 +99,7 @@ const displayTitle = computed(() => {
 
 const optionGroups = computed(() => {
   const options = Array.from(Array(props.option?.crosses).keys());
-  for (let i = 0; i < options.length; i + 1) {
+  for (let i = 0; i < options.length; i += 1) {
     options[i] = i + 1;
   }
   const half = options.indexOf(Math.ceil(props.option?.crosses / 2)) + 1;
