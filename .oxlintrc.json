@@ -25,6 +25,7 @@
     "vue/max-props": ["error", { "maxProps": 14 }], // As these are independent components that don't rely on stores, etc. we need to allow more props.
     "eslint/no-shadow": "error",
     "eslint/no-unneeded-ternary": "error",
+    "eslint/no-undefined": "error",
     // Start fixing later
     // "eslint/no-magic-numbers": ["error", {
     //   "ignoreArrayIndexes": true,
@@ -41,7 +42,6 @@
     "typescript/explicit-function-return-type": "error",
     "unicorn/no-array-for-each": "warn",
     "unicorn/no-array-reduce": "warn",
-    "eslint/no-undefined": "warn",
   }
 }
 

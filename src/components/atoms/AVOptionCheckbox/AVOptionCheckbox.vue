@@ -49,12 +49,15 @@ const onToggled = (): void => emits("toggled");
 const accessibilityAttributes = computed(() => {
   if (!props.optionReference) return {};
 
-  return {
+  const attrs: Record<string, string | number> = {
     id: `option_${props.optionReference}_checkbox_${props.checkBoxIndex}`,
     "aria-labelledby": `option_${props.optionReference}_title option_${props.optionReference}_tick option_${props.optionReference}_subtitle`,
     "aria-describedby": `option_${props.optionReference}_description option_${props.optionReference}_handle option_${props.optionReference}_partial_results`,
-    tabindex: props.disabled ? undefined : 0,
   };
+
+  if (props.disabled) attrs.tabindex = 0;
+
+  return attrs;
 });
 
 /**
