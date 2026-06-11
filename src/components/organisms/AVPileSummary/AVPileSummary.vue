@@ -2,6 +2,7 @@
 import { ref, computed, inject, onMounted, watch } from "vue";
 import { flattenOptions } from "@/helpers/contestHelpers";
 import { switchLocale } from "@/i18n";
+import { useValidationPolicy } from "@/composables/useValidationPolicy";
 import type {
   PropType,
   SupportedLocale,
@@ -9,15 +10,16 @@ import type {
   ContestContent,
   OptionContent,
   ImageOption,
+  SelectionStyle,
   AVPileSummaryOptionSummary,
   AVPileSummaryState,
-  OptionSelection,
   IterableObject,
+  ValidationResult,
 } from "@/types";
 import { getMeaningfulLabel } from "@/helpers/meaningfulLabel";
 import { AVIcon } from "@/components";
 
-const emits = defineEmits(["editCurrentSelection", "deleteSelection"]);
+const emits = defineEmits(["editCurrentSelection", "deleteSelection", "update:pendingAlerts"]);
 
 const props = defineProps({
   selectionPile: {
@@ -60,9 +62,72 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  reverseOption: {
+    type: Boolean,
+    default: false,
+  },
+  selectionStyle: {
+    type: String as PropType<SelectionStyle>,
+    default: "checkbox",
+  },
 });
 
 const showAllOptions = ref(false);
+
+/**
+ * This is necessary in order to support both provided i18n and local i18n.
+ * The used locale will be taken from the provided i18n as long as there is one
+ * (this happens when we plug-in the library into a product, as electa or evs),
+ * otherwise, it will take the locale from the local i18n instance.
+ * Removing it, will cause all tests, storybook and the playground to break.
+ */
+/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+const i18n: any = inject("i18n");
+const { t } = i18n.global;
+const i18nLocale = computed<SupportedLocale>(() => i18n.global.locale.value || i18n.global.locale);
+
+const { inlineResults: policyInlineResults, pendingAlerts } = useValidationPolicy(
+  computed(() => props.contest),
+  computed(() => props.selectionPile),
+  "review_page",
+  i18nLocale,
+);
+
+const REVIEW_KEY_PREFIX = "review_";
+const I18N_BASE = "js.components.AVSubmissionHelper.";
+
+const resolveReviewFeedbackMessage = (result: ValidationResult): string => {
+  if (result.isRawMessage) return result.feedbackMessage;
+  const reviewKey = `${I18N_BASE}${REVIEW_KEY_PREFIX}${result.feedbackMessage}`;
+  if (i18n.global.te(reviewKey)) {
+    return t(reviewKey, result.feedbackParams);
+  }
+  return t(`${I18N_BASE}${result.feedbackMessage}`, result.feedbackParams);
+};
+
+const mapAlertsWithReviewKeys = (alerts: ValidationResult[]): ValidationResult[] => {
+  return alerts.map((result) => {
+    if (result.isRawMessage) return result;
+    const reviewKey = `${REVIEW_KEY_PREFIX}${result.feedbackMessage}`;
+    const fullKey = `${I18N_BASE}${reviewKey}`;
+    if (i18n.global.te(fullKey)) {
+      return { ...result, feedbackMessage: reviewKey };
+    }
+    return result;
+  });
+};
+
+watch(
+  [pendingAlerts, (): AVPileSummaryState => props.activeState],
+  ([alerts, state]): void => {
+    if (state === "summary") {
+      emits("update:pendingAlerts", mapAlertsWithReviewKeys(alerts));
+    } else {
+      emits("update:pendingAlerts", []);
+    }
+  },
+  { deep: true },
+);
 
 const blankSelected = computed(() => {
   return props.selectionPile.optionSelections.length === 0;
@@ -96,12 +161,12 @@ const getAllParents = (option: OptionContent, parents: OptionContent[]): OptionC
 const optionSummaries = computed(() => {
   const summaryOptions: AVPileSummaryOptionSummary = [];
 
-  props.selectionPile.optionSelections.forEach((selection: OptionSelection) => {
+  for (const selection of props.selectionPile.optionSelections) {
     const preexisting = summaryOptions.find((o) => o.handle === selection.reference);
 
     const optionContent = selectableOptions.value.find((o) => o.reference === selection.reference);
 
-    if (!optionContent) return;
+    if (!optionContent) continue;
 
     if (preexisting) {
       preexisting.crosses += 1;
@@ -124,7 +189,7 @@ const optionSummaries = computed(() => {
         writeIn: selection.text,
       });
     }
-  });
+  }
 
   return summaryOptions;
 });
@@ -145,17 +210,6 @@ const orderedSummaryOptions = computed(() => {
   });
 });
 
-/**
- * This is necesary in order to support both provided i18n and local i18n.
- * The used locale will be taken from the provided i18n as long as there is one
- * (this happens when we plug-in the library into a product, as electa or evs),
- * otherwise, it will take the locale from the local i18n instance.
- * Removing it, will cause all tests, storybook and the playground to break.
- */
-/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
-const i18n: any = inject("i18n");
-const { t } = i18n.global;
-const i18nLocale = computed<SupportedLocale>(() => i18n.global.locale.value || i18n.global.locale);
 onMounted(() => {
   if (props.locale) switchLocale(props.locale);
 });
@@ -225,12 +279,32 @@ watch(
         :write-in="option.writeIn"
         :counter-interface="contest.multipleVotingInterface === 'counter'"
         :is-quadratic="contest.markingType.quadraticVoting"
+        :reverse-option="reverseOption"
+        :selection-style="selectionStyle"
       />
       <AVSummaryOption
         v-if="blankSelected"
         :blank="blankSelected"
         :blank-accent-color="contest.blankOptionColor"
       />
+      <div
+        v-if="policyInlineResults.length > 0"
+        class="mt-2 p-2"
+        :class="{
+          'bg-warning bg-opacity-10 text-warning-emphasis': policyInlineResults[0]?.warning,
+          'bg-theme-danger text-white': policyInlineResults[0]?.blocked,
+        }"
+        data-test="pile-summary-policy-feedback"
+      >
+        <div
+          v-for="result in policyInlineResults"
+          :key="result.scenario"
+          role="alert"
+          class="small"
+        >
+          {{ resolveReviewFeedbackMessage(result) }}
+        </div>
+      </div>
     </div>
   </div>
 

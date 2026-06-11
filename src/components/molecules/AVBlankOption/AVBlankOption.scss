@@ -22,3 +22,13 @@
   text-transform: none;
   font-weight: 500;
 }
+
+.AVBlankOption--selected-background {
+  background-color: var(--bs-ballot);
+  color: white !important;
+  --bs-heading-color: white;
+
+  .AVBlankOption--title {
+    color: white !important;
+  }
+}

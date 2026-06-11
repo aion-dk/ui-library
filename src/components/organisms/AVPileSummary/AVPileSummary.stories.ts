@@ -1,7 +1,7 @@
 import type { Meta } from "@/types";
 import { AVPileSummary } from "@/components";
 import { SUPPORTED_LOCALES } from "@/constants";
-import { getContest, getSelectionPile } from "@/examples";
+import { getContest, getSelectionPile, getValidationPolicy } from "@/examples";
 
 const meta: Meta<typeof AVPileSummary> & {
   argTypes: {
@@ -38,6 +38,13 @@ const meta: Meta<typeof AVPileSummary> & {
     locale: {
       control: { type: "select" },
       options: SUPPORTED_LOCALES,
+    },
+    reverseOption: {
+      control: { type: "boolean" },
+    },
+    selectionStyle: {
+      control: { type: "select" },
+      options: ["checkbox", "background"],
     },
     onEditCurrentSelection: {
       action: "editCurrentSelection: EDIT SELECTION",
@@ -258,6 +265,36 @@ export const SummaryRankedWithChildren = {
   },
 };
 
+export const SummaryReverseOption = {
+  render: Template,
+
+  args: {
+    contest: getContest([]),
+    activeState: "summary",
+    isEditing: false,
+    maximumOptionsShown: 3,
+    pileIndex: 0,
+    totalPiles: 3,
+    selectionPile: getSelectionPile(["single", "weighted"]),
+    reverseOption: true,
+  },
+};
+
+export const SummaryBackgroundSelectionStyle = {
+  render: Template,
+
+  args: {
+    contest: getContest([]),
+    activeState: "summary",
+    isEditing: false,
+    maximumOptionsShown: 3,
+    pileIndex: 0,
+    totalPiles: 3,
+    selectionPile: getSelectionPile(["single", "weighted"]),
+    selectionStyle: "background",
+  },
+};
+
 export const GalleryMode = {
   render: Template,
 
@@ -268,5 +305,33 @@ export const GalleryMode = {
     pileIndex: 0,
     totalPiles: 1,
     selectionPile: getSelectionPile(["children"]),
+  },
+};
+
+export const SummaryWithUndervoteWarning = {
+  render: Template,
+  args: {
+    contest: {
+      ...getContest(["blank", "multi"]),
+      validationPolicy: getValidationPolicy("undervote_warn"),
+    },
+    selectionPile: getSelectionPile([]),
+    activeState: "summary",
+    pileIndex: 0,
+    totalPiles: 1,
+  },
+};
+
+export const SummaryWithBlankVoteFeedback = {
+  render: Template,
+  args: {
+    contest: {
+      ...getContest(["blank"]),
+      validationPolicy: getValidationPolicy("blank_vote_feedback"),
+    },
+    selectionPile: getSelectionPile([]),
+    activeState: "summary",
+    pileIndex: 0,
+    totalPiles: 1,
   },
 };

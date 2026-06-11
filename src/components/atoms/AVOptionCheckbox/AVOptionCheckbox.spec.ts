@@ -97,4 +97,36 @@ describe("AVOptionCheckbox", () => {
 
     expect(wrapper.find("[data-test=exclusive-error]").text()).to.contain("Эксклюзивный");
   });
+
+  it("defaults selectionStyle to checkbox", async () => {
+    await wrapper.setProps({
+      locale: "en",
+      checked: true,
+      exclusiveError: false,
+      invalid: false,
+      disabled: false,
+      selectionStyle: "checkbox",
+    });
+
+    expect(wrapper.find("[data-test=option-checkbox]").classes()).to.contain(
+      "AVOptionCheckbox--checked",
+    );
+    expect(wrapper.find("[data-test=option-checkbox]").classes()).to.not.contain(
+      "AVOptionCheckbox--checked-white",
+    );
+  });
+
+  it("can apply background selection style", async () => {
+    await wrapper.setProps({
+      checked: true,
+      selectionStyle: "background",
+    });
+
+    expect(wrapper.find("[data-test=option-checkbox]").classes()).to.contain(
+      "AVOptionCheckbox--checked-white",
+    );
+    expect(wrapper.find("[data-test=option-checkbox]").classes()).to.not.contain(
+      "AVOptionCheckbox--checked",
+    );
+  });
 });

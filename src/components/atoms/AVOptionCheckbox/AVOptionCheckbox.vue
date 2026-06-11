@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, inject, onMounted, watch } from "vue";
 import { switchLocale } from "@/i18n";
-import type { PropType, SupportedLocale } from "@/types";
+import type { PropType, SupportedLocale, SelectionStyle } from "@/types";
 
 const props = defineProps({
   checked: {
@@ -40,6 +40,14 @@ const props = defineProps({
     type: String as PropType<SupportedLocale>,
     default: null,
   },
+  selectionStyle: {
+    type: String as PropType<SelectionStyle>,
+    default: "checkbox",
+  },
+  reverseOption: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const emits = defineEmits(["toggled"]);
@@ -53,7 +61,7 @@ const accessibilityAttributes = computed(() => {
     id: `option_${props.optionReference}_checkbox_${props.checkBoxIndex}`,
     "aria-labelledby": `option_${props.optionReference}_title option_${props.optionReference}_tick option_${props.optionReference}_subtitle`,
     "aria-describedby": `option_${props.optionReference}_description option_${props.optionReference}_handle option_${props.optionReference}_partial_results`,
-    tabindex: props.disabled ? undefined : 0,
+    tabindex: props.disabled ? -1 : 0,
   };
 });
 
@@ -85,6 +93,7 @@ watch(
     <div
       v-if="exclusiveError && checked"
       class="AVOptionCheckbox--exclusive-container"
+      :class="{ 'AVOptionCheckbox--exclusive-container--reversed': reverseOption }"
       data-test="exclusive-error"
     >
       <div class="AVOptionCheckbox--exclusive text-white px-2 d-block bg-theme-danger">
@@ -96,7 +105,8 @@ watch(
       type="button"
       class="AVOptionCheckbox float-end p-0 m-0"
       :class="{
-        'AVOptionCheckbox--checked': checked,
+        'AVOptionCheckbox--checked': checked && selectionStyle !== 'background',
+        'AVOptionCheckbox--checked-white': checked && selectionStyle === 'background',
         'AVOptionCheckbox--disabled': disabled,
         'AVOptionCheckbox--error': (exclusiveError || invalid) && checked,
       }"
@@ -120,6 +130,7 @@ watch(
         :id="`option_${optionReference}_tick`"
         :rank="excluded ? null : rank"
         :checked="checked"
+        :selection-style="selectionStyle"
         data-test="select"
       />
     </button>

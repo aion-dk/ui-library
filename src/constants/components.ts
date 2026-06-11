@@ -1,5 +1,7 @@
 const IMAGE_OPTIONS = ["square", "passport"] as const;
 
+const SELECTION_STYLES = ["checkbox", "background"] as const;
+
 const LOOKUP_DEFAULT_FALLBACKS: Array<string> = [
   "title",
   "label",
@@ -52,6 +54,7 @@ const CALCULATE_RESULT_STATUS = [
 
 export {
   IMAGE_OPTIONS,
+  SELECTION_STYLES,
   LOOKUP_DEFAULT_FALLBACKS,
   SPINNER_VARIANTS,
   LINK_VISUALIZER_KEYS,

@@ -10,7 +10,9 @@ import type {
   AVSplitHelperState,
   PartialResults,
   ImageOption,
+  SelectionStyle,
   IterableObject,
+  ValidationResult,
 } from "@/types";
 import SelectionPileValidator from "@assemblyvoting/js-client/dist/lib/validators/selectionPileValidator";
 import ContestSelectionValidator from "@assemblyvoting/js-client/dist/lib/validators/contestSelectionValidator";
@@ -49,6 +51,14 @@ const props = defineProps({
     type: String as PropType<ImageOption>,
     default: "square",
   },
+  reverseOption: {
+    type: Boolean,
+    default: false,
+  },
+  selectionStyle: {
+    type: String as PropType<SelectionStyle>,
+    default: "checkbox",
+  },
 });
 
 const emits = defineEmits([
@@ -56,6 +66,8 @@ const emits = defineEmits([
   "update:contestSelection",
   "update:activeState",
   "update:activePile",
+  "update:pendingAlerts",
+  "show-overvote-alert",
   "view-candidate",
 ]);
 
@@ -79,6 +91,18 @@ const contestErrors = ref<string[]>([]);
 
 const selectionPiles = computed(() => props.contestSelection.piles);
 
+/**
+ * This is necessary in order to support both provided i18n and local i18n.
+ * The used locale will be taken from the provided i18n as long as there is one
+ * (this happens when we plug-in the library into a product, as electa or evs),
+ * otherwise, it will take the locale from the local i18n instance.
+ * Removing it, will cause all tests, storybook and the playground to break.
+ */
+/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+const i18n: any = inject("i18n");
+const { t } = i18n.global;
+const i18nLocale = computed<SupportedLocale>(() => i18n.global.locale.value || i18n.global.locale);
+
 const unusedWeight = computed(() =>
   selectionPiles.value?.reduce(
     (sum: number, bs: SelectionPile) => sum - bs.multiplier,
@@ -97,13 +121,13 @@ const contestSelectionValidator = computed(
 );
 
 const readyForSubmission = computed(() => {
-  return (
+  const baseComplete =
     unusedWeight.value === 0 &&
     contestErrors.value.length == 0 &&
     selectionPiles.value.every((pile: SelectionPile) =>
       selectionPileValidator.value.isComplete(pile),
-    )
-  );
+    );
+  return baseComplete;
 });
 
 const assignedWeight = computed(() =>
@@ -210,17 +234,6 @@ onMounted(() => {
   if (!userCanSplit.value) persistActivePile();
 });
 
-/**
- * This is necesary in order to support both provided i18n and local i18n.
- * The used locale will be taken from the provided i18n as long as there is one
- * (this happens when we plug-in the library into a product, as electa or evs),
- * otherwise, it will take the locale from the local i18n instance.
- * Removing it, will cause all tests, storybook and the playground to break.
- */
-/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
-const i18n: any = inject("i18n");
-const { t } = i18n.global;
-const i18nLocale = computed<SupportedLocale>(() => i18n.global.locale.value || i18n.global.locale);
 watch(
   () => props.locale,
   () => {
@@ -275,7 +288,13 @@ watch(
           :image-option="imageOption"
           @update:selection-pile="updateActivePile"
           @update:errors="(errors: string[]) => updateErrors(errors)"
+          @update:pending-alerts="
+            (alerts: ValidationResult[]) => emits('update:pendingAlerts', alerts)
+          "
+          @show-overvote-alert="(alert: ValidationResult) => emits('show-overvote-alert', alert)"
           @view-candidate="viewCandidate"
+          :reverse-option="reverseOption"
+          :selection-style="selectionStyle"
         />
 
         <div id="ballot-action-buttons" class="mt-3 row">
@@ -432,7 +451,11 @@ watch(
       :show-submission-helper="showSubmissionHelper"
       @update:selection-pile="updateActivePile"
       @update:errors="(errors: string[]) => updateErrors(errors)"
+      @update:pending-alerts="(alerts: ValidationResult[]) => emits('update:pendingAlerts', alerts)"
+      @show-overvote-alert="(alert: ValidationResult) => emits('show-overvote-alert', alert)"
       @view-candidate="viewCandidate"
+      :reverse-option="reverseOption"
+      :selection-style="selectionStyle"
     />
   </template>
 </template>
