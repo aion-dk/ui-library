@@ -68,7 +68,6 @@ const mutationObserverTarget = document.getElementsByTagName("html")[0];
 const useFooter = computed(
   () =>
     props.option?.crosses &&
-    props.option?.crosses > 1 &&
     props.multipleVotesAllowed &&
     !props.counterInterface &&
     !props.isQuadratic &&
