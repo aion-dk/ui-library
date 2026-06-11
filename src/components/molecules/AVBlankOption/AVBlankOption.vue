@@ -58,6 +58,9 @@ onMounted(() => {
     isRtl.value = !!dirAttr && dirAttr === "rtl";
   });
   mutationObserver.value.observe(mutationObserverTarget, { attributes: true });
+
+  const initialDir = mutationObserverTarget.attributes.getNamedItem("dir")?.value;
+  isRtl.value = !!initialDir && initialDir === "rtl";
 });
 
 onUnmounted(() => mutationObserver.value && mutationObserver.value.disconnect());
