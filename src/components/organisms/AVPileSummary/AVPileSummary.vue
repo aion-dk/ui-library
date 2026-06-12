@@ -13,6 +13,7 @@ import type {
   SelectionStyle,
   AVPileSummaryOptionSummary,
   AVPileSummaryState,
+  AVSummaryOptionObject,
   IterableObject,
   ValidationResult,
 } from "@/types";
@@ -171,23 +172,23 @@ const optionSummaries = computed(() => {
     if (preexisting) {
       preexisting.crosses += 1;
     } else {
-      summaryOptions.push({
+      const summary: AVSummaryOptionObject = {
         reference: optionContent.reference,
         title: optionContent.title,
         handle: selection.reference,
         image: optionContent.image,
-        description: props.contest.displayDescriptionOnSummary
-          ? optionContent.description
-          : undefined,
         accentColor: optionContent.accentColor as `#${string}`,
         crosses: 1,
         parent: optionContent.parentContent,
-        rank:
-          props.contest.markingType.voteVariation === "ranked"
-            ? summaryOptions.length + 1
-            : undefined,
         writeIn: selection.text,
-      });
+      };
+
+      if (props.contest.displayDescriptionOnSummary)
+        summary.description = optionContent.description;
+      if (props.contest.markingType.voteVariation === "ranked")
+        summary.rank = summaryOptions.length + 1;
+
+      summaryOptions.push(summary);
     }
   }
 
