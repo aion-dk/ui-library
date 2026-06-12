@@ -172,7 +172,7 @@ const isWriteIn = computed(() => !!props.option.writeIn);
 const writeInSize = computed(() => new Blob([writeInText.value]).size);
 
 const writeInInvalid = computed(() => {
-  const regexp = /[^\p{L}\p{N}\p{Z},.'‘()?!@€£¥\n]/gu;
+  const regexp = /[^\p{L}\p{N}\p{Z},.''()?!@€£¥\n]/gu;
   return (
     checkedCount.value &&
     (writeInSize.value > Number(props.option.writeIn?.maxSize) ||
