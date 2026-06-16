@@ -277,7 +277,7 @@ describe("AVOption", () => {
     expect(wrapper.find("[data-test=option-image]").attributes().src).to.eq(
       "https://electa.staging-1.assemblyvoting.net/uploads_proxy/option/image/657750",
     );
-    expect(wrapper.find("[data-test=option-image]").attributes().alt).to.contain("Option image");
+    expect(wrapper.find("[data-test=option-image]").attributes().alt).to.eq("Option");
   });
 
   it("can change image format", async () => {
