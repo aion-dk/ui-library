@@ -106,7 +106,7 @@ const displayTitle = computed(() => {
 });
 
 const optionGroups = computed(() => {
-  const options = Array.from(Array(props.option?.crosses).keys());
+  const options = Array.from({ length: props.option?.crosses }, (_, i) => i);
   for (let i = 0; i < options.length; i += 1) {
     options[i] = i + 1;
   }
@@ -251,7 +251,7 @@ watch(
           'w-100': !galleryMode,
           'align-items-end': galleryMode && reverseOption,
         }"
-        style="max-width: calc(100%-70px)"
+        style="max-width: calc(100% - 70px)"
       >
         <div
           class="w-100"

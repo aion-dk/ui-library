@@ -435,7 +435,7 @@ describe("AVOption", () => {
     });
     const getLastCheckedEvent = () => {
       const emittedEvents = (writeInWrapper.emitted().checked as VitestEmitted) ?? [];
-      return emittedEvents[emittedEvents.length - 1]?.[0];
+      return emittedEvents.at(-1)?.[0];
     };
 
     await writeInWrapper.vm.$nextTick();

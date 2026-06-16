@@ -94,6 +94,7 @@ watch(
         <img
           v-if="option.image"
           :src="option.image"
+          alt=""
           class="AVResultOption--image ratio ratio-1x1"
           aria-hidden="true"
           data-test="result-image"
