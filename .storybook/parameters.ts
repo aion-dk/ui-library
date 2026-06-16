@@ -21,6 +21,13 @@ const parameters = {
   a11y: {
     context: "body",
     config: {
+      // Pin the WCAG conformance levels evaluated by axe so coverage is deterministic
+      // across axe-core upgrades. Must live in `config` (passed to axe.configure),
+      // NOT `options` (passed to axe.run), because `options.runOnly` overrides rule disables.
+      runOnly: {
+        type: "tag",
+        values: ["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "best-practice"],
+      },
       rules: [
         {
           // Don't show accesibility warnings regarding VUE devtools.
@@ -48,6 +55,21 @@ const parameters = {
           // Storybook doesn't know the actual background color when "dark mode" is enabled, as the table has a transparent background. This is why it incorrectly tags the contrast ratio as low.
           id: "color-contrast",
           selector: "[data-test=candidate-ranked-result]",
+          enabled: false,
+        },
+        {
+          // Page-level rule: isolated stories are not full pages, so a single <main> landmark is not expected.
+          id: "landmark-one-main",
+          enabled: false,
+        },
+        {
+          // Page-level rule: isolated stories are not full pages, so an h1 is not expected.
+          id: "page-has-heading-one",
+          enabled: false,
+        },
+        {
+          // Page-level rule: a "skip to content" link is a full-page concern, not relevant to isolated components.
+          id: "bypass",
           enabled: false,
         },
       ],
