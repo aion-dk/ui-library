@@ -46,6 +46,7 @@ const buildDefaultGlobal = (): DefaultGlobalConfig => ({
 export async function mountForA11y<T extends Component>(
   component: T,
   options?: ComponentMountingOptions<T>,
+  axeOptions?: { rules?: AxeCore.RunOptions["rules"] },
 ): Promise<AxeCore.AxeResults> {
   const userGlobal = options?.global;
   const defaults = buildDefaultGlobal();
@@ -65,7 +66,7 @@ export async function mountForA11y<T extends Component>(
     } as ComponentMountingOptions<T>["global"],
   });
 
-  const result = await runAxe(wrapper.element as HTMLElement);
+  const result = await runAxe(wrapper.element, axeOptions);
   wrapper.unmount();
   return result;
 }
