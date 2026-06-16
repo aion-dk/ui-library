@@ -106,11 +106,9 @@ const displayTitle = computed(() => {
 });
 
 const optionGroups = computed(() => {
-  const options = Array.from({ length: props.option?.crosses }, (_, i) => i);
-  for (let i = 0; i < options.length; i += 1) {
-    options[i] = i + 1;
-  }
-  const half = options.indexOf(Math.ceil(props.option?.crosses / 2)) + 1;
+  const crosses = props.option?.crosses ?? 0;
+  const options = Array.from({ length: crosses }, (_, i) => i + 1);
+  const half = options.indexOf(Math.ceil(crosses / 2)) + 1;
   const group1 = options.slice(0, half);
   const group2 = options.slice(half);
   if (group2.length) return [group1, group2];

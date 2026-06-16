@@ -30,13 +30,13 @@ const parameters = {
       },
       rules: [
         {
-          // Don't show accesibility warnings regarding VUE devtools.
+          // Don't show accessibility warnings regarding VUE devtools.
           id: "aria-prohibited-attr",
           selector: ".panel-entry-btn",
           enabled: false,
         },
         {
-          // Don't show accesibility warnings on Playwright messups.
+          // Don't show accessibility warnings on Playwright messups.
           id: "region",
           selector: "#storybook-root",
           enabled: false,
