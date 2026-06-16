@@ -34,7 +34,7 @@ describe("AVBlankOption accessibility", () => {
   });
 
   it("has no violations when invalid", async () => {
-    const result = await mountBlank({ checked: true, invalid: true });
+    const result = await mountBlank({ checked: true, error: true, invalid: true });
     expect(result).toHaveNoViolations();
   });
 });
