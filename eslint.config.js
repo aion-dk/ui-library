@@ -4,13 +4,17 @@ import pluginVitest from "@vitest/eslint-plugin";
 import vuejsA11y from "eslint-plugin-vuejs-accessibility";
 import skipFormatting from "@vue/eslint-config-prettier/skip-formatting";
 
-const a11yRecommendedRulesAsWarn = Object.fromEntries(
-  Object.entries(
-    vuejsA11y.configs["flat/recommended"].find(
-      (config) => config.rules && Object.keys(config.rules).length > 0,
-    ).rules,
-  ).map(([ruleId]) => [ruleId, "warn"]),
+const a11yRecommendedConfig = vuejsA11y.configs["flat/recommended"].find(
+  (config) => config.rules && Object.keys(config.rules).length > 0,
 );
+const a11yRecommendedRulesAsWarn = a11yRecommendedConfig
+  ? Object.fromEntries(
+      Object.entries(a11yRecommendedConfig.rules).map(([ruleId, value]) => [
+        ruleId,
+        Array.isArray(value) ? ["warn", ...value.slice(1)] : "warn",
+      ]),
+    )
+  : {};
 
 export default [
   {

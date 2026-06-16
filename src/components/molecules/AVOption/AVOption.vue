@@ -481,7 +481,7 @@ watch(
       }"
       :href="`option_${option.reference}_checkbox`"
       :aria-labelledby="`option_${option.reference}_title`"
-      :aria-label="option.reference"
+      :aria-label="title"
     ></a>
     <AVCollapser
       :pane-id="`pane_for_option_${option.reference}`"
