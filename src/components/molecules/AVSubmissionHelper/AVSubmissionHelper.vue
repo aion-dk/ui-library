@@ -164,7 +164,10 @@ watch(i18nLocale, (newLocale) => {
             }}
           </div>
         </div>
-        <hr v-if="errors.length > 0 || policyInlineResults.length > 0" class="my-3" />
+        <hr
+          v-if="errors.length > 0 || (policyInlineResults.length > 0 && chosenCount > 0)"
+          class="my-3"
+        />
 
         <div v-if="maxMarks > 1">
           <div class="d-block justify-content-between align-items-center">
