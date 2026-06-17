@@ -106,11 +106,9 @@ const displayTitle = computed(() => {
 });
 
 const optionGroups = computed(() => {
-  const options = Array.from(Array(props.option?.crosses).keys());
-  for (let i = 0; i < options.length; i += 1) {
-    options[i] = i + 1;
-  }
-  const half = options.indexOf(Math.ceil(props.option?.crosses / 2)) + 1;
+  const crosses = props.option?.crosses ?? 0;
+  const options = Array.from({ length: crosses }, (_, i) => i + 1);
+  const half = options.indexOf(Math.ceil(crosses / 2)) + 1;
   const group1 = options.slice(0, half);
   const group2 = options.slice(half);
   if (group2.length) return [group1, group2];
@@ -251,7 +249,7 @@ watch(
           'w-100': !galleryMode,
           'align-items-end': galleryMode && reverseOption,
         }"
-        style="max-width: calc(100%-70px)"
+        style="max-width: calc(100% - 70px)"
       >
         <div
           class="w-100"

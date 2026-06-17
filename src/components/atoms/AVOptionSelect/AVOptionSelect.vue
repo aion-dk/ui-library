@@ -68,7 +68,8 @@ watch(
     v-show="checked"
     class="AVOptionSelect"
     :class="selectionStyle === 'background' ? 'text-ballot' : 'text-white'"
-    :aria-label="optionAriaLabel"
+    :role="optionAriaLabel ? 'img' : undefined"
+    :aria-label="optionAriaLabel || undefined"
     data-test="option-select"
   >
     <strong v-if="rank" aria-hidden="true" data-test="rank">{{ rank }}</strong>

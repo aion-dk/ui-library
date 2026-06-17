@@ -172,7 +172,7 @@ const isWriteIn = computed(() => !!props.option.writeIn);
 const writeInSize = computed(() => new Blob([writeInText.value]).size);
 
 const writeInInvalid = computed(() => {
-  const regexp = /[^\p{L}\p{N}\p{Z},.''()?!@€£¥\n]/gu;
+  const regexp = /[^\p{L}\p{N}\p{Z},.'()?!@€£¥\n]/gu;
   return (
     checkedCount.value &&
     (writeInSize.value > Number(props.option.writeIn?.maxSize) ||
@@ -189,7 +189,7 @@ const writeInPlaceholder = computed(() =>
 );
 
 const optionGroups = computed(() => {
-  const options = Array.from(Array(votesAllowedPerOption.value).keys());
+  const options = Array.from({ length: votesAllowedPerOption.value }, (_, i) => i);
   for (let index = 0; index < options.length; index += 1) {
     options[index] = index + 1;
   }
@@ -481,6 +481,7 @@ watch(
       }"
       :href="`option_${option.reference}_checkbox`"
       :aria-labelledby="`option_${option.reference}_title`"
+      :aria-label="title"
     ></a>
     <AVCollapser
       :pane-id="`pane_for_option_${option.reference}`"

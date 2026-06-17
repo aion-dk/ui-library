@@ -248,6 +248,7 @@ watch(
             v-if="showPreview"
             class="AVFileInput--preview-img rounded-1"
             :src="generateURL(file)"
+            :alt="file.name"
           />
           <AVIcon v-else icon="file" data-test="file-preview-icon" />
           <p class="text-gray-800 m-0">

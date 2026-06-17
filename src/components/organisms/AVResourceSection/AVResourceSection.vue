@@ -412,6 +412,7 @@ watch(
                   v-else
                   style="width: 100%; height: 100%; min-height: 400px"
                   :src="item.form_content.toString()"
+                  :title="t('js.components.AVResourceSection.video')"
                   :aria-label="t('js.components.AVResourceSection.video')"
                 ></iframe>
               </div>

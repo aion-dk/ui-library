@@ -402,7 +402,7 @@ export const QuadraticVoting = {
   },
 };
 
-export const Error = {
+export const InvalidOption = {
   render: Template,
 
   args: {
