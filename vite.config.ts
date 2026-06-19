@@ -16,6 +16,11 @@ try {
 
 // https://vite.dev/config/
 export default defineConfig((env: ConfigEnv) => {
+  // `vite build --watch` (used by the devbox dev container to live-rebuild dist)
+  // empties outDir at the start of every rebuild. In watch mode we keep the
+  // previous output in place and overwrite files as they rebuild.
+  const isWatch = process.argv.includes("--watch") || process.argv.includes("-w");
+
   const plugins = [vue()];
 
   if (
@@ -56,6 +61,7 @@ export default defineConfig((env: ConfigEnv) => {
   return {
     plugins,
     build: {
+      emptyOutDir: !isWatch,
       cssCodeSplit: false,
       lib: {
         entry: "./src/index.ts",
