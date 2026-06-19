@@ -133,7 +133,7 @@
   }
 
   .AVVerticalStep--link-container:hover > .AVVerticalStep--step-default {
-    background-color: var(bg-gray-300);
+    background-color: var(--bs-gray-300);
   }
 
   .AVVerticalStep--link-container:hover
@@ -147,7 +147,7 @@
   }
 
   .AVVerticalStep--step-active {
-    background-color: white;
+    background-color: var(--bs-white);
   }
 
   .AVVerticalStep--step-done {
@@ -163,7 +163,7 @@
   }
 
   .AVVerticalStep--text-active {
-    color: white;
+    color: var(--bs-white);
   }
 
   .AVVerticalStep--text-done {
