@@ -70,7 +70,7 @@ export default defineConfig((env: ConfigEnv) => {
         fileName: (format) => (format === "es" ? "index.js" : "index.cjs"),
         cssFileName: "styles",
       },
-      rollupOptions: {
+      rolldownOptions: {
         external: ["vue", /^@assemblyvoting\/types(\/.*)?$/],
         output: {
           exports: "named",
