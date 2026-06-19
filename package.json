@@ -95,7 +95,6 @@
     "vue-tsc": "^3.2.5"
   },
   "resolutions": {
-    "vite": "^7.3.5",
     "playwright": "^1.60.0",
     "playwright-core": "^1.60.0"
   },
