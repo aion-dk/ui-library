@@ -78,9 +78,9 @@ export default defineConfig((env: ConfigEnv) => {
             vue: "Vue",
           },
         },
-        onwarn(warning, rollupWarn) {
+        onwarn(warning, rolldownWarn) {
           if (warning.code && !["UNUSED_EXTERNAL_IMPORT"].includes(warning.code)) {
-            rollupWarn(warning);
+            rolldownWarn(warning);
           }
         },
       },

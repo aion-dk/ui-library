@@ -61,6 +61,7 @@ export default defineConfig(
             ],
             test: {
               name: "storybook",
+              exclude: [...configDefaults.exclude],
               browser: {
                 enabled: true,
                 headless: true,
