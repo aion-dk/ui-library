@@ -95,7 +95,7 @@ export default defineConfig((env: ConfigEnv) => {
       },
     },
     optimizeDeps: {
-      include: ["motion", "bootstrap"],
+      include: ["motion", "bootstrap", "@assemblyvoting/js-client"],
     },
     css: {
       preprocessorOptions: {
