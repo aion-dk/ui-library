@@ -186,7 +186,7 @@ describe("useValidationPolicy", () => {
       expect(validationResults.value[0].scenario).toBe("blank_vote");
     });
 
-    it("uses custom message when provided", () => {
+    it("uses custom message when provided (on_screen_message falls back to message)", () => {
       const policy = makePolicy({
         blankVoteFeedback: {
           enabled: true,
@@ -204,6 +204,118 @@ describe("useValidationPolicy", () => {
       );
 
       expect(validationResults.value[0].feedbackMessage).toContain("Custom blank message");
+    });
+
+    it("uses inlineMessage for on_screen_message when provided", () => {
+      const policy = makePolicy({
+        blankVoteFeedback: {
+          enabled: true,
+          feedbackScreen: "ballot_page",
+          feedbackType: "on_screen_message",
+          message: { en: "Alert message" },
+          inlineMessage: { en: "Inline message" },
+        },
+      });
+      const contest = makeContest({ validationPolicy: policy });
+      const pile = getSelectionPile([]);
+      const { validationResults } = useValidationPolicy(
+        ref(contest),
+        ref(pile),
+        ref("ballot_page"),
+      );
+
+      expect(validationResults.value).toHaveLength(1);
+      expect(validationResults.value[0].feedbackType).toBe("on_screen_message");
+      expect(validationResults.value[0].feedbackMessage).toContain("Inline message");
+    });
+
+    it("splits into inline and alert results when feedbackType is on_screen_message_and_alert", () => {
+      const policy = makePolicy({
+        blankVoteFeedback: {
+          enabled: true,
+          feedbackScreen: "ballot_page",
+          feedbackType: "on_screen_message_and_alert",
+          message: { en: "Alert blank message" },
+          inlineMessage: { en: "Inline blank message" },
+        },
+      });
+      const contest = makeContest({ validationPolicy: policy });
+      const pile = getSelectionPile([]);
+      const { validationResults, pendingAlerts, inlineResults } = useValidationPolicy(
+        ref(contest),
+        ref(pile),
+        ref("ballot_page"),
+      );
+
+      expect(validationResults.value).toHaveLength(2);
+
+      const inline = validationResults.value.find((r) => r.feedbackType === "on_screen_message");
+      const alert = validationResults.value.find((r) => r.feedbackType === "alert");
+
+      expect(inline).toBeDefined();
+      expect(inline!.feedbackMessage).toContain("Inline blank message");
+      expect(inline!.isRawMessage).toBe(true);
+
+      expect(alert).toBeDefined();
+      expect(alert!.feedbackMessage).toContain("Alert blank message");
+      expect(alert!.isRawMessage).toBe(true);
+
+      expect(pendingAlerts.value).toHaveLength(1);
+      expect(pendingAlerts.value[0].feedbackMessage).toContain("Alert blank message");
+
+      expect(inlineResults.value).toHaveLength(1);
+      expect(inlineResults.value[0].feedbackMessage).toContain("Inline blank message");
+    });
+
+    it("splits with i18n key defaults when no custom messages provided", () => {
+      const policy = makePolicy({
+        blankVoteFeedback: {
+          enabled: true,
+          feedbackScreen: "ballot_page",
+          feedbackType: "on_screen_message_and_alert",
+        },
+      });
+      const contest = makeContest({ validationPolicy: policy });
+      const pile = getSelectionPile([]);
+      const { validationResults, pendingAlerts, inlineResults } = useValidationPolicy(
+        ref(contest),
+        ref(pile),
+        ref("ballot_page"),
+      );
+
+      expect(validationResults.value).toHaveLength(2);
+      expect(pendingAlerts.value).toHaveLength(1);
+      expect(inlineResults.value).toHaveLength(1);
+
+      expect(validationResults.value[0].feedbackMessage).toBe("warnings.blank_vote");
+      expect(validationResults.value[1].feedbackMessage).toBe("warnings.blank_vote");
+      expect(validationResults.value[0].isRawMessage).toBeUndefined();
+      expect(validationResults.value[1].isRawMessage).toBeUndefined();
+    });
+
+    it("uses message for alert only when feedbackType is alert", () => {
+      const policy = makePolicy({
+        blankVoteFeedback: {
+          enabled: true,
+          feedbackScreen: "ballot_page",
+          feedbackType: "alert",
+          message: { en: "Alert only message" },
+          inlineMessage: { en: "Should not appear" },
+        },
+      });
+      const contest = makeContest({ validationPolicy: policy });
+      const pile = getSelectionPile([]);
+      const { validationResults, pendingAlerts, inlineResults } = useValidationPolicy(
+        ref(contest),
+        ref(pile),
+        ref("ballot_page"),
+      );
+
+      expect(validationResults.value).toHaveLength(1);
+      expect(validationResults.value[0].feedbackType).toBe("alert");
+      expect(validationResults.value[0].feedbackMessage).toContain("Alert only message");
+      expect(pendingAlerts.value).toHaveLength(1);
+      expect(inlineResults.value).toHaveLength(0);
     });
 
     it("allows proceeding when minMarks=0 and blank vote enabled", () => {

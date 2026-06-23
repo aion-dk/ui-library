@@ -46,6 +46,7 @@ export interface BlankVoteFeedbackPolicy {
   feedbackScreen: FeedbackScreen;
   feedbackType: FeedbackType;
   message?: LocalString;
+  inlineMessage?: LocalString;
 }
 
 export interface OvervotePolicy extends BaseValidationPolicy {

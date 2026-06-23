@@ -39,6 +39,9 @@ const blankVoteFeedbackPolicy: ValidationPolicy = {
     message: {
       en: "You are about to cast a blank vote. Are you sure you want to continue?",
     },
+    inlineMessage: {
+      en: "You have not selected any option in this contest. If you continue, this contest will be submitted without a selection.",
+    },
   },
 };
 
@@ -59,6 +62,9 @@ const fullPolicy: ValidationPolicy = {
     feedbackType: "on_screen_message_and_alert",
     message: {
       en: "You are about to cast a blank vote. Are you sure you want to continue?",
+    },
+    inlineMessage: {
+      en: "You have not selected any option in this contest. If you continue, this contest will be submitted without a selection.",
     },
   },
 };
