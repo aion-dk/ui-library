@@ -415,6 +415,9 @@ onMounted(() => {
   });
   mutationObserver.value.observe(mutationObserverTarget, { attributes: true });
 
+  const initialDir = mutationObserverTarget.attributes.getNamedItem("dir")?.value;
+  isRtl.value = !!initialDir && initialDir === "rtl";
+
   if (el.value) {
     resizeObserver.value = new ResizeObserver(() => {
       elHeight.value = el.value?.clientHeight ?? 0;
@@ -527,7 +530,8 @@ watch(
             style="max-height: fit-content"
           >
             <div
-              class="ps-1 pe-2 pb-1 mt-n1 small rounded-0 text-wrap text-start w-100"
+              class="ps-1 pe-2 pb-1 mt-n1 small rounded-0 text-wrap w-100"
+              :class="isRtl ? 'text-end' : 'text-start'"
               :style="parentStyle"
               data-test="parent-bagde"
             >
@@ -535,7 +539,7 @@ watch(
             </div>
           </div>
           <div
-            class="d-flex justify-content-between"
+            class="d-flex justify-content-between position-relative"
             :class="{
               'flex-column': votesAllowedPerOption > 1 && !reverseOption,
               'flex-column-reverse': votesAllowedPerOption > 1 && reverseOption,
@@ -546,6 +550,36 @@ watch(
             }"
             data-test="option-container"
           >
+            <!-- CROSS (GALLERY MODE - ONLY SUPPORTS SINGLE CROSS) -->
+            <div
+              v-if="contest.mode === 'gallery'"
+              :ref="`crossesFor${option.reference}`"
+              class="AVOption--singlevote top-0 position-absolute"
+              :class="isRtl !== reverseOption ? 'start-0' : 'end-0'"
+              data-test="option-multivote"
+            >
+              <div class="hstack gap-2 flex-nowrap">
+                <AVOptionCheckbox
+                  :excluded="option.excluded"
+                  :checked="checkedCount >= optionGroups[0][0]"
+                  :rank="
+                    ranked
+                      ? selections
+                          .map((s: OptionSelection) => s.reference)
+                          .indexOf(option.reference) + 1
+                      : null
+                  "
+                  :exclusive-error="exclusiveError"
+                  :invalid="invalid"
+                  :option-reference="option.reference"
+                  :check-box-index="optionGroups[0][0]"
+                  :disabled="disabled || observerMode"
+                  :gallery-mode="contest.mode === 'gallery'"
+                  :selection-style="selectionStyle"
+                  @toggled="toggleOption(option.reference, optionGroups[0][0], writeInText)"
+                />
+              </div>
+            </div>
             <div
               class="vstack gap-2 p-3 justify-content-center"
               :class="{
@@ -564,9 +598,10 @@ watch(
                   'align-items-sm-end': contest.mode === 'gallery' && reverseOption,
                   'flex-sm-row-reverse': contest.mode === 'gallery' && reverseOption,
                 }"
-                :style="
-                  contest.mode === 'gallery' && !hasSecondaryElements ? 'min-height: 40px' : ''
-                "
+                :style="`
+                  ${contest.mode === 'gallery' && !hasSecondaryElements ? 'min-height: 40px;' : ''}
+                  ${contest.mode === 'gallery' ? `padding-inline-end: ${Math.abs(getCrossesWidth)}px;` : ''}
+                `"
                 data-test="option-header"
               >
                 <img
@@ -591,38 +626,6 @@ watch(
                 <span :id="`option_${option.reference}_handle`" class="visually-hidden">
                   {{ option.reference }}
                 </span>
-
-                <!-- CROSS (GALLERY MODE - ONLY SUPPORTS SINGLE CROSS) -->
-                <div
-                  v-if="contest.mode === 'gallery'"
-                  :ref="`crossesFor${option.reference}`"
-                  class="AVOption--singlevote position-absolute"
-                  :class="reverseOption ? 'start-0' : 'end-0'"
-                  :style="contest.mode === 'gallery' && parentTitle ? 'top: 1rem' : 'top: 0'"
-                  data-test="option-multivote"
-                >
-                  <div class="hstack gap-2 flex-nowrap">
-                    <AVOptionCheckbox
-                      :excluded="option.excluded"
-                      :checked="checkedCount >= optionGroups[0][0]"
-                      :rank="
-                        ranked
-                          ? selections
-                              .map((s: OptionSelection) => s.reference)
-                              .indexOf(option.reference) + 1
-                          : null
-                      "
-                      :exclusive-error="exclusiveError"
-                      :invalid="invalid"
-                      :option-reference="option.reference"
-                      :check-box-index="optionGroups[0][0]"
-                      :disabled="disabled || observerMode"
-                      :gallery-mode="contest.mode === 'gallery'"
-                      :selection-style="selectionStyle"
-                      @toggled="toggleOption(option.reference, optionGroups[0][0], writeInText)"
-                    />
-                  </div>
-                </div>
               </header>
 
               <!-- DESCRIPTION, LINKS, CANDIDACY -->

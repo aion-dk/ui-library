@@ -147,7 +147,7 @@
   }
 
   .AVVerticalStep--step-active {
-    background-color: white;
+    background-color: var(--bs-white);
   }
 
   .AVVerticalStep--step-done {
@@ -163,7 +163,7 @@
   }
 
   .AVVerticalStep--text-active {
-    color: white;
+    color: var(--bs-white);
   }
 
   .AVVerticalStep--text-done {
