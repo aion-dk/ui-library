@@ -1,6 +1,6 @@
 {
   "name": "@assemblyvoting/electa-ui",
-  "version": "5.6.6-beta.2",
+  "version": "5.7.0-ontario-beta.1",
   "license": "MIT",
   "publishConfig": {
     "access": "public"
@@ -89,7 +89,7 @@
     "storybook": "^10.4.3",
     "storybook-addon-rtl": "^3.0.1",
     "typescript": "^5.9.3",
-    "vite": "^7.3.2",
+    "vite": "^7.3.5",
     "vite-plugin-dts": "^4.5.4",
     "vite-plugin-static-copy": "^3.2.0",
     "vite-plugin-vue-devtools": "^8.0.7",
@@ -98,7 +98,7 @@
     "vue-tsc": "^3.2.5"
   },
   "resolutions": {
-    "vite": "^7.3.2",
+    "vite": "^7.3.5",
     "playwright": "^1.60.0",
     "playwright-core": "^1.60.0"
   },
