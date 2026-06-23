@@ -555,7 +555,7 @@ watch(
               v-if="contest.mode === 'gallery'"
               :ref="`crossesFor${option.reference}`"
               class="AVOption--singlevote top-0 position-absolute"
-              :class="isRtl ? 'start-0' : 'end-0'"
+              :class="isRtl !== reverseOption ? 'start-0' : 'end-0'"
               data-test="option-multivote"
             >
               <div class="hstack gap-2 flex-nowrap">
