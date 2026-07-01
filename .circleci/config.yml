@@ -68,12 +68,12 @@ jobs:
           name: Publish to NPM
           command: |
             package_version=$(jq -r '.version' package.json)
-            if echo "${package_version}" | grep -E "alpha|beta" > /dev/null; then
-              prerelease=$(echo "${package_version}" | grep -E -o "alpha|beta")
+            prerelease=$(echo "${package_version}" | grep -E -o "\-([^-]+)$" | sed 's/^-//')
+            if [ -n "${prerelease}" ]; then
               echo "Publishing prerelease with tag ${prerelease} to NPM"
               npm publish --tag ${prerelease}
             else
-              echo "Publishing release with to NPM"
+              echo "Publishing release to NPM"
               npm publish
             fi
 workflows:
