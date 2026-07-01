@@ -1,6 +1,6 @@
 {
   "name": "@assemblyvoting/electa-ui",
-  "version": "5.7.0-ontario-beta.3",
+  "version": "5.7.1-ontario",
   "license": "MIT",
   "publishConfig": {
     "access": "public"
