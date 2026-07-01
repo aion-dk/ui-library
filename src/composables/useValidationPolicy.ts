@@ -258,12 +258,50 @@ export function useValidationPolicy(
     if (s === null) return [];
     const result = evaluateScenario(s, policy.value, selectedCount.value, minMarks.value);
     if (!result) return [];
-    if (result.scenario === "blank_vote" && blankPolicy.value?.message) {
-      const resolved = resolveLocalizedMessage(blankPolicy.value.message, resolveLocale.value);
-      if (resolved) {
-        return [{ ...result, feedbackMessage: resolved, isRawMessage: true }];
+
+    if (result.scenario === "blank_vote" && blankPolicy.value) {
+      const bp = blankPolicy.value;
+
+      if (bp.feedbackType === "on_screen_message_and_alert") {
+        const inlineResult: ValidationResult = {
+          ...result,
+          feedbackType: "on_screen_message",
+        };
+        const alertResult: ValidationResult = {
+          ...result,
+          feedbackType: "alert",
+        };
+
+        const inlineMsg = bp.inlineMessage ?? bp.message;
+        if (inlineMsg) {
+          const resolved = resolveLocalizedMessage(inlineMsg, resolveLocale.value);
+          if (resolved) {
+            inlineResult.feedbackMessage = resolved;
+            inlineResult.isRawMessage = true;
+          }
+        }
+
+        if (bp.message) {
+          const resolved = resolveLocalizedMessage(bp.message, resolveLocale.value);
+          if (resolved) {
+            alertResult.feedbackMessage = resolved;
+            alertResult.isRawMessage = true;
+          }
+        }
+
+        return [inlineResult, alertResult];
+      }
+
+      const msg =
+        bp.feedbackType === "on_screen_message" ? (bp.inlineMessage ?? bp.message) : bp.message;
+      if (msg) {
+        const resolved = resolveLocalizedMessage(msg, resolveLocale.value);
+        if (resolved) {
+          return [{ ...result, feedbackMessage: resolved, isRawMessage: true }];
+        }
       }
     }
+
     return [result];
   });
 
