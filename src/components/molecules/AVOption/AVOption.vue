@@ -386,6 +386,14 @@ const isBlocked = computed(
     props.selectionMode !== "radio",
 );
 
+const handleCheckboxToggle = (reference: string, amount: number, text?: string): void => {
+  if (props.maxSelectionsReached && checkedCount.value === 0 && props.selectionMode !== "radio") {
+    emits("blocked-click");
+    return;
+  }
+  toggleOption(reference, amount, text);
+};
+
 const toggleFromWriteIn = (e: Event): void => {
   e.preventDefault();
   e.stopPropagation();
@@ -576,7 +584,7 @@ watch(
                   :disabled="disabled || observerMode"
                   :gallery-mode="contest.mode === 'gallery'"
                   :selection-style="selectionStyle"
-                  @toggled="toggleOption(option.reference, optionGroups[0][0], writeInText)"
+                  @toggled="handleCheckboxToggle(option.reference, optionGroups[0][0], writeInText)"
                 />
               </div>
             </div>
@@ -762,7 +770,7 @@ watch(
                   :disabled="disabled || observerMode"
                   :gallery-mode="false"
                   :selection-style="selectionStyle"
-                  @toggled="toggleOption(option.reference, optionIndex, writeInText)"
+                  @toggled="handleCheckboxToggle(option.reference, optionIndex, writeInText)"
                 />
               </div>
             </div>
