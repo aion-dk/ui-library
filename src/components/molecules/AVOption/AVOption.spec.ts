@@ -802,5 +802,26 @@ describe("AVOption", () => {
       await blockedWrapper.find("[data-test=option-checkbox]").trigger("click");
       expect(blockedWrapper.emitted("blocked-click")).toBeUndefined();
     });
+
+    it("emits blocked-click when increasing votes in multi-vote mode and maxSelectionsReached", async () => {
+      const blockedWrapper = mountAVOption({
+        contest: getContest(["multiple_votes_sm"]),
+        maxSelectionsReached: true,
+        selections: [{ reference: "exampleOption1" }],
+      });
+      await blockedWrapper.findAll("[data-test=option-checkbox]")[1].trigger("click");
+      expect(blockedWrapper.emitted("blocked-click")).toBeDefined();
+      expect(blockedWrapper.emitted("checked")).toBeUndefined();
+    });
+
+    it("does not emit blocked-click when decreasing votes in multi-vote mode and maxSelectionsReached", async () => {
+      const blockedWrapper = mountAVOption({
+        contest: getContest(["multiple_votes_sm"]),
+        maxSelectionsReached: true,
+        selections: [{ reference: "exampleOption1" }, { reference: "exampleOption1" }],
+      });
+      await blockedWrapper.findAll("[data-test=option-checkbox]")[1].trigger("click");
+      expect(blockedWrapper.emitted("blocked-click")).toBeUndefined();
+    });
   });
 });

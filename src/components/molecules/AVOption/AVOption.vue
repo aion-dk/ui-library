@@ -387,7 +387,11 @@ const isBlocked = computed(
 );
 
 const handleCheckboxToggle = (reference: string, amount: number, text?: string): void => {
-  if (props.maxSelectionsReached && checkedCount.value === 0 && props.selectionMode !== "radio") {
+  if (
+    props.maxSelectionsReached &&
+    amount > checkedCount.value &&
+    props.selectionMode !== "radio"
+  ) {
     emits("blocked-click");
     return;
   }
