@@ -782,5 +782,46 @@ describe("AVOption", () => {
       await parentWrapper.find("[data-test=option-section]").trigger("click");
       expect(parentWrapper.emitted("blocked-click")).toBeDefined();
     });
+
+    it("emits blocked-click when checkbox is clicked directly and maxSelectionsReached", async () => {
+      const blockedWrapper = mountAVOption({
+        maxSelectionsReached: true,
+        selections: [],
+      });
+      await blockedWrapper.find("[data-test=option-checkbox]").trigger("click");
+      expect(blockedWrapper.emitted("blocked-click")).toBeDefined();
+      expect(blockedWrapper.emitted("blocked-click")).toHaveLength(1);
+      expect(blockedWrapper.emitted("checked")).toBeUndefined();
+    });
+
+    it("does not emit blocked-click when checkbox is clicked and option is already selected", async () => {
+      const blockedWrapper = mountAVOption({
+        maxSelectionsReached: true,
+        selections: [{ reference: "exampleOption1" }],
+      });
+      await blockedWrapper.find("[data-test=option-checkbox]").trigger("click");
+      expect(blockedWrapper.emitted("blocked-click")).toBeUndefined();
+    });
+
+    it("emits blocked-click when increasing votes in multi-vote mode and maxSelectionsReached", async () => {
+      const blockedWrapper = mountAVOption({
+        contest: getContest(["multiple_votes_sm"]),
+        maxSelectionsReached: true,
+        selections: [{ reference: "exampleOption1" }],
+      });
+      await blockedWrapper.findAll("[data-test=option-checkbox]")[1].trigger("click");
+      expect(blockedWrapper.emitted("blocked-click")).toBeDefined();
+      expect(blockedWrapper.emitted("checked")).toBeUndefined();
+    });
+
+    it("does not emit blocked-click when decreasing votes in multi-vote mode and maxSelectionsReached", async () => {
+      const blockedWrapper = mountAVOption({
+        contest: getContest(["multiple_votes_sm"]),
+        maxSelectionsReached: true,
+        selections: [{ reference: "exampleOption1" }, { reference: "exampleOption1" }],
+      });
+      await blockedWrapper.findAll("[data-test=option-checkbox]")[1].trigger("click");
+      expect(blockedWrapper.emitted("blocked-click")).toBeUndefined();
+    });
   });
 });
