@@ -80,12 +80,22 @@ const disabledOptionReferences = computed(() =>
   props.selfVotePrevention && props.voterIdentifier ? [props.voterIdentifier] : [],
 );
 
-const validatorOptions = computed(() => ({
+type SelectionPileValidatorOptions = {
+  selfVotePrevention?: boolean;
+  voterIdentifier?: string;
+};
+
+const Validator = SelectionPileValidator as unknown as new (
+  contest: ContestContent,
+  options?: SelectionPileValidatorOptions,
+) => SelectionPileValidator;
+
+const validatorOptions = computed<SelectionPileValidatorOptions>(() => ({
   selfVotePrevention: props.selfVotePrevention,
   voterIdentifier: props.voterIdentifier || undefined,
 }));
 
-const validator = computed(() => new SelectionPileValidator(props.contest, validatorOptions.value));
+const validator = computed(() => new Validator(props.contest, validatorOptions.value));
 
 const customValidators = computed(() => {
   const validators = [];
@@ -318,8 +328,7 @@ watch(
             errors.some((err) => err.message.includes('exclusive'))
           "
           :contest="contest"
-          :disabled="disabled"
-          :disabled-option-references="disabledOptionReferences"
+          :disabled="disabled || disabledOptionReferences.includes(option.reference)"
           :observerMode="observerMode"
           :partial-results="partialResults"
           :image-option="imageOption"
@@ -361,8 +370,7 @@ watch(
             errors.some((err) => err.message.includes('exclusive'))
           "
           :contest="contest"
-          :disabled="disabled"
-          :disabled-option-references="disabledOptionReferences"
+          :disabled="disabled || disabledOptionReferences.includes(option.reference)"
           :observerMode="observerMode"
           :partial-results="partialResults"
           :image-option="imageOption"

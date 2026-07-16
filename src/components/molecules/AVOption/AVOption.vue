@@ -59,10 +59,6 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-  disabledOptionReferences: {
-    type: Array as PropType<string[]>,
-    default: () => [],
-  },
   observerMode: {
     type: Boolean,
     default: false,
@@ -154,9 +150,7 @@ const subOptionSelected = computed(() => {
 
 const exclusive = computed(() => props.option.exclusive);
 
-const optionDisabled = computed(() =>
-  props.disabled || props.disabledOptionReferences.includes(props.option.reference),
-);
+const optionDisabled = computed(() => props.disabled);
 
 const isWriteIn = computed(() => !!props.option.writeIn);
 
@@ -727,7 +721,6 @@ watch(
             :contest="contest"
             :invalid="invalid"
             :disabled="disabled"
-            :disabled-option-references="disabledOptionReferences"
             :observer-mode="observerMode"
             :partial-results="partialResults"
             :exclusive-error="childOption.exclusive && exclusiveError"

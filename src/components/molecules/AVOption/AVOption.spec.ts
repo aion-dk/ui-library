@@ -118,16 +118,6 @@ describe("AVOption", () => {
     expect(wrapper.find("[data-test=option-checkbox]").attributes().disabled).not.to.be.undefined;
   });
 
-  it("can disable a specific option reference", async () => {
-    const optionWrapper = mountAVOption({ disabledOptionReferences: ["exampleOption1"] });
-
-    expect(optionWrapper.find("[data-test=option]").classes()).to.contain("AVOption--disabled");
-    expect(optionWrapper.find("[data-test=option-checkbox]").attributes().disabled).not.to.be.undefined;
-
-    await optionWrapper.find("[data-test=option-section]").trigger("click");
-
-    expect(optionWrapper.emitted().checked).to.be.undefined;
-  });
 
   it("can be invalid", async () => {
     expect(wrapper.find("[data-test=option-checkbox]").classes()).to.not.contain(
