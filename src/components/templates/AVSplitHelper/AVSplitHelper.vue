@@ -94,13 +94,21 @@ const unusedWeight = computed(() =>
   ),
 );
 
-const selectionPileValidator = computed(() => new SelectionPileValidator(props.contest));
+const validatorOptions = computed(() => ({
+  selfVotePrevention: props.selfVotePrevention,
+  voterIdentifier: props.voterIdentifier || undefined,
+}));
+
+const selectionPileValidator = computed(() =>
+  new SelectionPileValidator(props.contest, validatorOptions.value),
+);
 
 const contestSelectionValidator = computed(
   () =>
     new ContestSelectionValidator({
       contest: props.contest,
       voterWeight: props.weight,
+      ...validatorOptions.value,
     }),
 );
 

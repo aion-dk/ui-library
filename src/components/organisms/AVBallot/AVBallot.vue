@@ -80,7 +80,12 @@ const disabledOptionReferences = computed(() =>
   props.selfVotePrevention && props.voterIdentifier ? [props.voterIdentifier] : [],
 );
 
-const validator = computed(() => new SelectionPileValidator(props.contest));
+const validatorOptions = computed(() => ({
+  selfVotePrevention: props.selfVotePrevention,
+  voterIdentifier: props.voterIdentifier || undefined,
+}));
+
+const validator = computed(() => new SelectionPileValidator(props.contest, validatorOptions.value));
 
 const customValidators = computed(() => {
   const validators = [];
