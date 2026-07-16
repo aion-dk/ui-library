@@ -76,9 +76,6 @@ const search = ref<HTMLInputElement | null>(null);
 
 const selections = computed(() => [...props.selectionPile.optionSelections]);
 
-const disabledOptionReferences = computed(() =>
-  props.selfVotePrevention && props.voterIdentifier ? [props.voterIdentifier] : [],
-);
 
 type SelectionPileValidatorOptions = {
   selfVotePrevention?: boolean;
@@ -328,7 +325,7 @@ watch(
             errors.some((err) => err.message.includes('exclusive'))
           "
           :contest="contest"
-          :disabled="disabled || disabledOptionReferences.includes(option.reference)"
+          :disabled="disabled"
           :observerMode="observerMode"
           :partial-results="partialResults"
           :image-option="imageOption"
@@ -370,7 +367,7 @@ watch(
             errors.some((err) => err.message.includes('exclusive'))
           "
           :contest="contest"
-          :disabled="disabled || disabledOptionReferences.includes(option.reference)"
+          :disabled="disabled"
           :observerMode="observerMode"
           :partial-results="partialResults"
           :image-option="imageOption"

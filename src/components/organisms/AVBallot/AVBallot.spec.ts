@@ -331,22 +331,6 @@ describe("AVBallot", () => {
     ).to.contain("true");
   });
 
-  it("disables the voter identifier option when self vote prevention is enabled", async () => {
-    await wrapper.setProps({
-      contest: getContest([]),
-      selectionPile: getSelectionPile([]),
-      disabled: false,
-      selfVotePrevention: true,
-      voterIdentifier: "exampleOption2",
-    });
-
-    expect(
-      wrapper.findAll("[data-test=option]")[0].get("[data-test=checkbox]").attributes().disabled,
-    ).to.eq("false");
-    expect(
-      wrapper.findAll("[data-test=option]")[1].get("[data-test=checkbox]").attributes().disabled,
-    ).to.eq("true");
-  });
 
   it("emits view-candidate from option children", async () => {
     await wrapper.setProps({
