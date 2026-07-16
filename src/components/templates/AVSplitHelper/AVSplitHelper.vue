@@ -33,6 +33,14 @@ const props = defineProps({
     type: Boolean,
     default: true,
   },
+  selfVotePrevention: {
+    type: Boolean,
+    default: false,
+  },
+  voterIdentifier: {
+    type: String,
+    default: null,
+  },
   partialResults: {
     type: Object as PropType<PartialResults>,
     default: null,
@@ -272,6 +280,8 @@ watch(
           :weight="weight"
           :includeLazyErrors="includeLazyErrors"
           :show-submission-helper="showSubmissionHelper"
+          :self-vote-prevention="selfVotePrevention"
+          :voter-identifier="voterIdentifier"
           :image-option="imageOption"
           @update:selection-pile="updateActivePile"
           @update:errors="(errors: string[]) => updateErrors(errors)"
@@ -430,6 +440,8 @@ watch(
       :weight="weight"
       :image-option="imageOption"
       :show-submission-helper="showSubmissionHelper"
+      :self-vote-prevention="selfVotePrevention"
+      :voter-identifier="voterIdentifier"
       @update:selection-pile="updateActivePile"
       @update:errors="(errors: string[]) => updateErrors(errors)"
       @view-candidate="viewCandidate"

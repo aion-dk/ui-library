@@ -59,6 +59,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  disabledOptionReferences: {
+    type: Array as PropType<string[]>,
+    default: () => [],
+  },
   observerMode: {
     type: Boolean,
     default: false,
@@ -149,6 +153,10 @@ const subOptionSelected = computed(() => {
 });
 
 const exclusive = computed(() => props.option.exclusive);
+
+const optionDisabled = computed(() =>
+  props.disabled || props.disabledOptionReferences.includes(props.option.reference),
+);
 
 const isWriteIn = computed(() => !!props.option.writeIn);
 
@@ -300,7 +308,7 @@ const parentStyle = computed(() => {
 });
 
 const toggleFromOption = (onlyUpdate: boolean): void => {
-  if (props.disabled || props.observerMode || !props.option.selectable || counterInterface.value)
+  if (optionDisabled.value || props.observerMode || !props.option.selectable || counterInterface.value)
     return;
 
   if (votesAllowedPerOption.value > 1) {
@@ -405,7 +413,7 @@ watch(
   <div
     class="position-relative"
     :class="{
-      'AVOption--disabled': disabled,
+      'AVOption--disabled': optionDisabled,
       'h-100': contest.mode === 'gallery',
     }"
     data-test="option"
@@ -446,7 +454,7 @@ watch(
           :class="{
             'AVOption--highlight': highlighted,
             'h-100': contest.mode === 'gallery',
-            'cursor-pointer': option.selectable && !(disabled || observerMode || counterInterface),
+            'cursor-pointer': option.selectable && !(optionDisabled || observerMode || counterInterface),
             'bg-transparent': contest.markingType.quadraticVoting,
           }"
           :style="coloredEdgeStyle"
@@ -500,7 +508,7 @@ watch(
                   :invalid="invalid"
                   :option-reference="option.reference"
                   :check-box-index="optionGroups[0][0]"
-                  :disabled="disabled || observerMode"
+                  :disabled="optionDisabled || observerMode"
                   :gallery-mode="contest.mode === 'gallery'"
                   @toggled="toggleOption(option.reference, optionGroups[0][0], writeInText)"
                 />
@@ -602,7 +610,7 @@ watch(
                     :data-test="`write-in-${option.reference}-input`"
                     :aria-labelledby="`option_${option.reference}_title`"
                     :placeholder="writeInPlaceholder"
-                    :disabled="disabled || observerMode || !option.selectable"
+                    :disabled="optionDisabled || observerMode || !option.selectable"
                     resize="vertical"
                     :rows="contest.mode === 'gallery' ? 3 : 1"
                     @click="toggleFromWriteIn"
@@ -623,7 +631,7 @@ watch(
               <AVOptionCounter
                 :amount="checkedCount"
                 :max-amount="votesAllowedPerOption"
-                :disabled="disabled || observerMode"
+                :disabled="optionDisabled || observerMode"
                 :invalid="invalid"
                 :is-quadratic="contest.markingType.quadraticVoting"
                 @update-crosses="
@@ -665,7 +673,7 @@ watch(
                   :invalid="invalid"
                   :option-reference="option.reference"
                   :check-box-index="optionIndex"
-                  :disabled="disabled || observerMode"
+                  :disabled="optionDisabled || observerMode"
                   :gallery-mode="false"
                   @toggled="toggleOption(option.reference, optionIndex, writeInText)"
                 />
@@ -674,7 +682,7 @@ watch(
 
             <!-- LIVE COUNT (INSIDE) -->
             <AVOptionLiveResults
-              v-if="optionPartialResults && (observerMode || disabled)"
+              v-if="optionPartialResults && (observerMode || optionDisabled)"
               :option-reference="option.reference"
               :partial-results="optionPartialResults"
               mode="internal"
@@ -693,7 +701,7 @@ watch(
       </template>
 
       <!-- LIVE COUNT (OUTSIDE) -->
-      <template #results v-if="!disabled && optionPartialResults && !observerMode">
+      <template #results v-if="!optionDisabled && optionPartialResults && !observerMode">
         <AVOptionLiveResults
           :option-reference="option.reference"
           :partial-results="optionPartialResults"
@@ -719,6 +727,7 @@ watch(
             :contest="contest"
             :invalid="invalid"
             :disabled="disabled"
+            :disabled-option-references="disabledOptionReferences"
             :observer-mode="observerMode"
             :partial-results="partialResults"
             :exclusive-error="childOption.exclusive && exclusiveError"

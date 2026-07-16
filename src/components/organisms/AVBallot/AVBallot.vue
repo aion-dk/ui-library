@@ -40,6 +40,14 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  selfVotePrevention: {
+    type: Boolean,
+    default: false,
+  },
+  voterIdentifier: {
+    type: String,
+    default: null,
+  },
   observerMode: {
     type: Boolean,
     default: false,
@@ -67,6 +75,10 @@ const emits = defineEmits(["update:selectionPile", "update:errors", "view-candid
 const search = ref<HTMLInputElement | null>(null);
 
 const selections = computed(() => [...props.selectionPile.optionSelections]);
+
+const disabledOptionReferences = computed(() =>
+  props.selfVotePrevention && props.voterIdentifier ? [props.voterIdentifier] : [],
+);
 
 const validator = computed(() => new SelectionPileValidator(props.contest));
 
@@ -302,6 +314,7 @@ watch(
           "
           :contest="contest"
           :disabled="disabled"
+          :disabled-option-references="disabledOptionReferences"
           :observerMode="observerMode"
           :partial-results="partialResults"
           :image-option="imageOption"
@@ -344,6 +357,7 @@ watch(
           "
           :contest="contest"
           :disabled="disabled"
+          :disabled-option-references="disabledOptionReferences"
           :observerMode="observerMode"
           :partial-results="partialResults"
           :image-option="imageOption"
