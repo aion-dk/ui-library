@@ -92,7 +92,7 @@ const Validator = SelectionPileValidator as unknown as new (
 
 const validatorOptions = computed<SelectionPileValidatorOptions>(() => ({
   selfVotePrevention: props.selfVotePrevention,
-  voterIdentifier: props.voterIdentifier || undefined,
+  voterIdentifier: props.voterIdentifier || "",
 }));
 
 const validator = computed(() => new Validator(props.contest, validatorOptions.value));
