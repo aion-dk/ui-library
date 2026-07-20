@@ -99,17 +99,12 @@ type SelectionPileValidatorOptions = {
   voterIdentifier?: string;
 };
 
-const Validator = SelectionPileValidator as unknown as new (
-  contest: ContestContent,
-  options?: SelectionPileValidatorOptions,
-) => SelectionPileValidator;
-
 const validatorOptions = computed<SelectionPileValidatorOptions>(() => ({
   selfVotePrevention: props.selfVotePrevention,
   voterIdentifier: props.voterIdentifier || "",
 }));
 
-const selectionPileValidator = computed(() => new Validator(props.contest, validatorOptions.value));
+const selectionPileValidator = computed(() => new SelectionPileValidator(props.contest, validatorOptions.value));
 
 const contestSelectionValidator = computed(
   () =>

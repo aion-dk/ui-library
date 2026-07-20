@@ -76,23 +76,17 @@ const search = ref<HTMLInputElement | null>(null);
 
 const selections = computed(() => [...props.selectionPile.optionSelections]);
 
-
 type SelectionPileValidatorOptions = {
   selfVotePrevention?: boolean;
   voterIdentifier?: string;
 };
-
-const Validator = SelectionPileValidator as unknown as new (
-  contest: ContestContent,
-  options?: SelectionPileValidatorOptions,
-) => SelectionPileValidator;
 
 const validatorOptions = computed<SelectionPileValidatorOptions>(() => ({
   selfVotePrevention: props.selfVotePrevention,
   voterIdentifier: props.voterIdentifier || "",
 }));
 
-const validator = computed(() => new Validator(props.contest, validatorOptions.value));
+const validator = computed(() => new SelectionPileValidator(props.contest, validatorOptions.value));
 
 const customValidators = computed(() => {
   const validators = [];
