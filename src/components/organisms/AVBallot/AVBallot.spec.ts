@@ -331,6 +331,7 @@ describe("AVBallot", () => {
     ).to.contain("true");
   });
 
+
   it("emits view-candidate from option children", async () => {
     await wrapper.setProps({
       contest: getContest([]),
