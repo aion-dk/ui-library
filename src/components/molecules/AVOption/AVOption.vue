@@ -465,15 +465,16 @@ watch(
             <div
               class="ps-1 pe-2 pb-1 mt-n1 small rounded-0 text-wrap w-100"
               :class="isRtl ? 'text-end' : 'text-start'"
-              :style="parentStyle"
+              :style="contest.mode === 'gallery' ? `${parentStyle} padding-inline-end: ${Math.abs(getCrossesWidth)}px;` : parentStyle"
               data-test="parent-bagde"
             >
               {{ parentTitle }}
             </div>
           </div>
           <div
-            class="d-flex justify-content-between position-relative"
+            class="d-flex justify-content-between"
             :class="{
+              'position-relative': contest.mode !== 'gallery',
               'flex-column': votesAllowedPerOption > 1,
               'flex-sm-row': votesAllowedPerOption <= 5 || counterInterface,
             }"
