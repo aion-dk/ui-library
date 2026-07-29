@@ -40,6 +40,14 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  selfVotePrevention: {
+    type: Boolean,
+    default: false,
+  },
+  voterIdentifier: {
+    type: String,
+    default: null,
+  },
   observerMode: {
     type: Boolean,
     default: false,
@@ -68,7 +76,17 @@ const search = ref<HTMLInputElement | null>(null);
 
 const selections = computed(() => [...props.selectionPile.optionSelections]);
 
-const validator = computed(() => new SelectionPileValidator(props.contest));
+type SelectionPileValidatorOptions = {
+  selfVotePrevention?: boolean;
+  voterIdentifier?: string;
+};
+
+const validatorOptions = computed<SelectionPileValidatorOptions>(() => ({
+  selfVotePrevention: props.selfVotePrevention,
+  voterIdentifier: props.voterIdentifier || "",
+}));
+
+const validator = computed(() => new SelectionPileValidator(props.contest, validatorOptions.value));
 
 const customValidators = computed(() => {
   const validators = [];
