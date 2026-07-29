@@ -1,5 +1,10 @@
 # Project Guidelines
 
+> Companion docs: [CLAUDE.md](../CLAUDE.md) (extended rules incl. styling sharp edges and
+> the release/branch model) and [doc/architecture.md](../doc/architecture.md) (the "why"
+> behind the build, styling, i18n, and release design). Step-by-step procedures live in
+> [.claude/skills/](../.claude/skills/). This file stays the quick style reference.
+
 ## Code Style
 - Use Vue 3 SFCs with `<script setup lang="ts">` and Composition API patterns used under `src/components/**`. NEVER use Options API or class-based components.
 - Keep component assets co-located in the component directory:
