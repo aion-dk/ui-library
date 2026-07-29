@@ -25,7 +25,7 @@ const props = defineProps({
     required: true,
   },
   seats: {
-    typ: Number,
+    type: Number,
     required: true,
   },
   hideElected: {
