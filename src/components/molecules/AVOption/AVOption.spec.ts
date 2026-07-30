@@ -118,7 +118,6 @@ describe("AVOption", () => {
     expect(wrapper.find("[data-test=option-checkbox]").attributes().disabled).not.to.be.undefined;
   });
 
-
   it("can be invalid", async () => {
     expect(wrapper.find("[data-test=option-checkbox]").classes()).to.not.contain(
       "AVOptionCheckbox--error",

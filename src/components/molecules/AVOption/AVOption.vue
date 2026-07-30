@@ -302,7 +302,12 @@ const parentStyle = computed(() => {
 });
 
 const toggleFromOption = (onlyUpdate: boolean): void => {
-  if (optionDisabled.value || props.observerMode || !props.option.selectable || counterInterface.value)
+  if (
+    optionDisabled.value ||
+    props.observerMode ||
+    !props.option.selectable ||
+    counterInterface.value
+  )
     return;
 
   if (votesAllowedPerOption.value > 1) {
@@ -448,7 +453,8 @@ watch(
           :class="{
             'AVOption--highlight': highlighted,
             'h-100': contest.mode === 'gallery',
-            'cursor-pointer': option.selectable && !(optionDisabled || observerMode || counterInterface),
+            'cursor-pointer':
+              option.selectable && !(optionDisabled || observerMode || counterInterface),
             'bg-transparent': contest.markingType.quadraticVoting,
           }"
           :style="coloredEdgeStyle"

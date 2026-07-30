@@ -104,7 +104,9 @@ const validatorOptions = computed<SelectionPileValidatorOptions>(() => ({
   voterIdentifier: props.voterIdentifier || "",
 }));
 
-const selectionPileValidator = computed(() => new SelectionPileValidator(props.contest, validatorOptions.value));
+const selectionPileValidator = computed(
+  () => new SelectionPileValidator(props.contest, validatorOptions.value),
+);
 
 const contestSelectionValidator = computed(
   () =>
