@@ -192,9 +192,9 @@ watch(
       data-test="dropzone"
     >
       <div class="hstack align-items-center justify-content-center">
-        <AVIcon icon="cloud-arrow-up" class="text-gray-500 fs-1" data-test="input-icon" />
+        <AVIcon icon="cloud-arrow-up" class="text-body-70 fs-1" data-test="input-icon" />
       </div>
-      <p class="AVFileInput--dragdroptext text-gray-700 text-center m-0" data-test="draggable-text">
+      <p class="AVFileInput--dragdroptext text-body-70 text-center m-0" data-test="draggable-text">
         <span v-if="isDragging">
           {{ t("js.components.AVFileInput.release") }}
         </span>
@@ -225,7 +225,7 @@ watch(
       :disabled="disabled"
     />
 
-    <p v-if="!disableAcceptedFormats" class="my-2 small text-gray-600" data-test="accepted-formats">
+    <p v-if="!disableAcceptedFormats" class="my-2 small text-body-70" data-test="accepted-formats">
       <strong>
         {{ t("js.components.AVFileInput.acceptedFormats") }}
       </strong>
@@ -250,8 +250,8 @@ watch(
             :src="generateURL(file)"
           />
           <AVIcon v-else icon="file" data-test="file-preview-icon" />
-          <p class="text-gray-800 m-0">
-            {{ file.name }}&nbsp;<em class="text-gray-700">({{ getFileSize(file.size) }})</em>
+          <p class="text-body-70 m-0">
+            {{ file.name }}&nbsp;<em class="text-body-70">({{ getFileSize(file.size) }})</em>
           </p>
         </div>
 
@@ -286,8 +286,8 @@ watch(
           class="AVFileInput--preview-card rounded border hstack justify-content-between align-content-center py-2 ps-3 pe-1"
         >
           <div class="AVFileInput--header hstack align-items-center gap-2">
-            <AVIcon icon="file" class="text-gray-700" data-test="file-preview-icon" />
-            <p class="text-gray-800 m-0">
+            <AVIcon icon="file" class="text-body-70" data-test="file-preview-icon" />
+            <p class="text-body-70 m-0">
               {{ currentValueFileName(file) }}
             </p>
           </div>
