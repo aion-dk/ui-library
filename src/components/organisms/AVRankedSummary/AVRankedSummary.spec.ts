@@ -354,73 +354,24 @@ describe("AVRankedSummary", () => {
     );
   });
 
-  it("can switch theme", async () => {
+  it("uses body text tokens and highlights elected rounds", async () => {
+    expect(wrapper.find("[data-test=exampleOption4_round_0]").classes()).to.contain("text-body");
     expect(wrapper.find("[data-test=exampleOption4_round_0]").classes()).to.not.contain(
-      "AVRankedSummary--text-dark",
+      "AVRankedSummary--highlighted",
     );
-    expect(wrapper.find("[data-test=exampleOption4_round_0]").classes()).to.contain(
-      "AVRankedSummary--text-light",
-    );
+    expect(wrapper.find("[data-test=exampleOption4_round_1]").classes()).to.contain("text-body");
     expect(wrapper.find("[data-test=exampleOption4_round_1]").classes()).to.not.contain(
-      "AVRankedSummary--text-dark",
+      "AVRankedSummary--highlighted",
     );
-    expect(wrapper.find("[data-test=exampleOption4_round_1]").classes()).to.contain(
-      "AVRankedSummary--text-light",
-    );
-    // elected in round 2, theme rules do not apply
+    // elected in round 2, so it carries the highlight override instead of the body token
     expect(wrapper.find("[data-test=exampleOption4_round_2]").classes()).to.not.contain(
-      "AVRankedSummary--text-dark",
+      "text-body",
     );
-    expect(wrapper.find("[data-test=exampleOption4_round_2]").classes()).to.not.contain(
-      "AVRankedSummary--text-light",
+    expect(wrapper.find("[data-test=exampleOption4_round_2]").classes()).to.contain(
+      "AVRankedSummary--highlighted",
     );
-
-    await wrapper.setProps({
-      theme: "dark",
-    });
-
-    expect(wrapper.find("[data-test=exampleOption4_round_0]").classes()).to.contain(
-      "AVRankedSummary--text-dark",
-    );
-    expect(wrapper.find("[data-test=exampleOption4_round_0]").classes()).to.not.contain(
-      "AVRankedSummary--text-light",
-    );
-    expect(wrapper.find("[data-test=exampleOption4_round_1]").classes()).to.contain(
-      "AVRankedSummary--text-dark",
-    );
-    expect(wrapper.find("[data-test=exampleOption4_round_1]").classes()).to.not.contain(
-      "AVRankedSummary--text-light",
-    );
-    // elected in round 2, theme rules do not apply
-    expect(wrapper.find("[data-test=exampleOption4_round_2]").classes()).to.not.contain(
-      "AVRankedSummary--text-dark",
-    );
-    expect(wrapper.find("[data-test=exampleOption4_round_2]").classes()).to.not.contain(
-      "AVRankedSummary--text-light",
-    );
-
-    await wrapper.setProps({
-      theme: "light",
-    });
-
-    expect(wrapper.find("[data-test=exampleOption4_round_0]").classes()).to.not.contain(
-      "AVRankedSummary--text-dark",
-    );
-    expect(wrapper.find("[data-test=exampleOption4_round_0]").classes()).to.contain(
-      "AVRankedSummary--text-light",
-    );
-    expect(wrapper.find("[data-test=exampleOption4_round_1]").classes()).to.not.contain(
-      "AVRankedSummary--text-dark",
-    );
-    expect(wrapper.find("[data-test=exampleOption4_round_1]").classes()).to.contain(
-      "AVRankedSummary--text-light",
-    );
-    // elected in round 2, theme rules do not apply
-    expect(wrapper.find("[data-test=exampleOption4_round_2]").classes()).to.not.contain(
-      "AVRankedSummary--text-dark",
-    );
-    expect(wrapper.find("[data-test=exampleOption4_round_2]").classes()).to.not.contain(
-      "AVRankedSummary--text-light",
+    expect(wrapper.find("[data-test=exampleOption4_round_2]").classes()).to.contain(
+      "AVRankedSummary--text-bold",
     );
   });
 

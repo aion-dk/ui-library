@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import type { PropType, Theme } from "@/types";
-
 defineProps({
   title: {
     type: String,
@@ -14,18 +12,12 @@ defineProps({
     type: String,
     required: true,
   },
-  theme: {
-    type: String as PropType<Theme>,
-    default: "light",
-  },
 });
 </script>
 
 <template>
-  <p class="m-0" :class="`AVResultSummaryItem--text-${theme}`" :data-test="reference">
+  <p class="m-0 text-body-80" :data-test="reference">
     <strong> {{ title }}: </strong>
     {{ value }}
   </p>
 </template>
-
-<style scoped lang="scss" src="./AVResultSummaryItem.scss" />

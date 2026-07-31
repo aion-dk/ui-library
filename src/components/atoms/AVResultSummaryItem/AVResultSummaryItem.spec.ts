@@ -9,13 +9,12 @@ describe("AVResultSummaryItem", () => {
       title: "Some number",
       value: 50,
       reference: "test-ref",
-      theme: "light",
     },
   });
 
   it("renders properly", async () => {
     expect(wrapper.text()).to.eq("Some number:  50");
-    expect(wrapper.html()).to.contain('class="m-0 AVResultSummaryItem--text-light"');
+    expect(wrapper.html()).to.contain('class="m-0 text-body-80"');
     expect(wrapper.html()).to.contain('data-test="test-ref"');
   });
 
@@ -24,11 +23,10 @@ describe("AVResultSummaryItem", () => {
       title: "Other stuff",
       value: "Text instead",
       reference: "test-ref2",
-      theme: "dark",
     });
 
     expect(wrapper.text()).to.eq("Other stuff:  Text instead");
-    expect(wrapper.html()).to.contain('class="m-0 AVResultSummaryItem--text-dark"');
+    expect(wrapper.html()).to.contain('class="m-0 text-body-80"');
     expect(wrapper.html()).to.contain('data-test="test-ref2"');
   });
 });

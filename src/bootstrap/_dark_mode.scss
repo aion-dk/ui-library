@@ -1,0 +1,65 @@
+[data-bs-theme="dark"] {
+  .text-bg-light {
+    background-color: var(--bs-tertiary-bg) !important;
+    border: solid 1px var(--bs-border-color) !important;
+    color: var(--bs-body-color-70) !important;
+  }
+
+  .text-bg-dark {
+    background-color: var(--bs-body-bg) !important;
+    border: solid 1px var(--bs-body-color-20) !important;
+    color: var(--bs-body-color-50) !important;
+  }
+
+  .text-bg-success {
+    background-color: var(--bs-success-bg-subtle) !important;
+    border: solid 1px var(--bs-success-border-subtle) !important;
+    color: var(--bs-success-text-emphasis) !important;
+  }
+
+  .text-bg-danger {
+    background-color: var(--bs-danger-bg-subtle) !important;
+    border: solid 1px var(--bs-danger-border-subtle) !important;
+    color: var(--bs-danger-text-emphasis) !important;
+  }
+
+  .text-bg-warning {
+    background-color: var(--bs-warning-bg-subtle) !important;
+    border: solid 1px var(--bs-warning-border-subtle) !important;
+    color: var(--bs-warning-text-emphasis) !important;
+  }
+
+  .text-bg-info {
+    background-color: var(--bs-info-bg-subtle) !important;
+    border: solid 1px var(--bs-info-border-subtle) !important;
+    color: var(--bs-info-text-emphasis) !important;
+  }
+
+  .text-bg-secondary {
+    background-color: var(--bs-secondary-bg) !important;
+    border: solid 1px var(--bs-secondary-border-subtle) !important;
+    color: var(--bs-secondary-text-emphasis) !important;
+  }
+
+  .text-bg-primary {
+    border: solid 1px var(--bs-primary-border-subtle) !important;
+  }
+
+  @each $color, $value in $theme-colors {
+    .bg-#{$color}-faded {
+      background-color: rgba(var(--bs-#{$color}-rgb), 0.1) !important;
+    }
+  }
+
+  .form-check-input:checked,
+  .form-check-input:indeterminate {
+    background-color: var(--bs-accent);
+    border-color: var(--bs-accent);
+  }
+
+  input[type="range"] {
+    &::-webkit-slider-thumb {
+      background-color: var(--bs-accent);
+    }
+  }
+}

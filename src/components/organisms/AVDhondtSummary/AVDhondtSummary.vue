@@ -1,18 +1,17 @@
 <script setup lang="ts">
-import { inject, onMounted, watch, computed } from "vue";
-import { switchLocale } from "@/i18n";
+import { onMounted, computed } from "vue";
 import type {
   AVDhondtSummaryOption,
   AVDhondtSummaryResult,
   AVDhondtSummarySortedResult,
   AVDhondtSummaryAdditionalData,
   SupportedLocale,
-  Theme,
   PropType,
   IterableObject,
   VoteCounts,
 } from "@/types";
 import { getMeaningfulLabel } from "@/helpers/meaningfulLabel";
+import { useLocalization } from "@/composables/useLocalization";
 
 const props = defineProps({
   result: {
@@ -42,10 +41,6 @@ const props = defineProps({
   voteCounts: {
     type: Object as PropType<VoteCounts>,
     required: true,
-  },
-  theme: {
-    type: String as PropType<Theme>,
-    default: "light",
   },
 });
 
@@ -108,43 +103,17 @@ const getOptionForSeat = (seat: number, optionReference: string): AVDhondtSummar
   ) as AVDhondtSummaryOption;
 
 onMounted(() => {
-  if (props.locale) switchLocale(props.locale); // Do not delete, read next comment.
   if (props.seats !== sortedData.value.seats.length)
     throw new Error("Amount of seats doesn't match with amount of rounds on the result");
 });
 
-/**
- * This is necesary in order to support both provided i18n and local i18n.
- * The used locale will be taken from the provided i18n as long as there is one
- * (this happens when we plug-in the library into a product, as electa or evs),
- * otherwise, it will take the locale from the local i18n instance.
- * Removing it, will cause all tests, storybook and the playground to break.
- */
-/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
-const i18n: any = inject("i18n");
-const { t } = i18n.global;
-const i18nLocale = computed<SupportedLocale>(() => i18n.global.locale.value || i18n.global.locale);
-watch(
-  () => props.locale,
-  () => {
-    if (props.locale) switchLocale(props.locale);
-  },
-  { deep: true },
-);
-/* END */
+const { locale: i18nLocale, t } = useLocalization(() => props.locale);
 </script>
 
 <template>
   <div class="table-responsive">
-    <table
-      class="table border"
-      :class="{
-        'border-light': theme === 'dark',
-      }"
-      id="dhondt_summary_table"
-      data-test="table"
-    >
-      <thead class="bg-secondary border-bottom">
+    <table class="table border" id="dhondt_summary_table" data-test="table">
+      <thead class="bg-body-80 border-bottom">
         <tr>
           <th>{{ t("js.components.AVDhondtSummary.header.party") }}</th>
 
@@ -168,7 +137,7 @@ watch(
           :key="`list_${optionReference}`"
           :data-test="`party-list-${index}`"
         >
-          <td :class="`AVDhondtSummary--text-${theme}`">
+          <td class="text-body">
             {{ additionalData[optionReference].title }}
           </td>
           <td
@@ -176,16 +145,13 @@ watch(
             :key="`seat_${seatNumber}`"
             class="text-center"
             :class="{
-              [`AVDhondtSummary--text-${theme}`]:
+              'text-body':
                 !getOptionForSeat(seatNumber, optionReference).elected &&
                 !getOptionForSeat(seatNumber, optionReference).tied,
-              'text-gray-800':
-                getOptionForSeat(seatNumber, optionReference).elected ||
-                getOptionForSeat(seatNumber, optionReference).tied,
               'bg-success-faded':
                 getOptionForSeat(seatNumber, optionReference).elected && !hideElected,
               'bg-danger-faded': getOptionForSeat(seatNumber, optionReference).ineligible,
-              'AVDhondtSummary--text-semibold':
+              'AVDhondtSummary--text-semibold AVDhondtSummary--highlighted':
                 (getOptionForSeat(seatNumber, optionReference).elected && !hideElected) ||
                 (getOptionForSeat(seatNumber, optionReference).tied && !hideTied),
               'bg-warning-faded':
@@ -206,7 +172,6 @@ watch(
       :title="t('js.components.AVDhondtSummary.summary.seats')"
       :value="seats"
       reference="seats"
-      :theme="theme"
     />
 
     <template v-if="!hideElected">
@@ -216,7 +181,6 @@ watch(
         :title="additionalData[partyReference].title"
         :value="getElectedSeats(additionalData[partyReference].elected)"
         :reference="partyReference"
-        :theme="theme"
       />
     </template>
 
@@ -225,7 +189,6 @@ watch(
       :title="t('js.components.AVDhondtSummary.summary.blank')"
       :value="sortedData.blank.count"
       reference="blank_votes"
-      :theme="theme"
     />
 
     <AVResultSummaryItem
@@ -233,7 +196,6 @@ watch(
       :title="t('js.components.AVDhondtSummary.summary.null_votes')"
       :value="voteCounts.excludedCount"
       reference="null_votes"
-      :theme="theme"
     />
 
     <AVResultSummaryItem
@@ -241,7 +203,6 @@ watch(
       :title="t('js.components.AVDhondtSummary.summary.distribution')"
       :value="distributionNumber"
       reference="distribution_n"
-      :theme="theme"
     />
   </div>
 </template>

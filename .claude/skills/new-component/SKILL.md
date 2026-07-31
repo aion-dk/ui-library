@@ -35,8 +35,7 @@ export default AVFoo;
 ```vue
 <script setup lang="ts">
 import type { PropType, SupportedLocale } from "@/types";
-import { computed, inject, onMounted, watch } from "vue";
-import { switchLocale } from "@/i18n";
+import { useLocalization } from "@/composables/useLocalization";
 
 const props = defineProps({
   someProp: {
@@ -51,27 +50,10 @@ const props = defineProps({
 
 const emits = defineEmits(["update:someProp"]); // array form; v-model events = update:propName
 
-/**
- * This is necesary in order to support both provided i18n and local i18n.
- * The used locale will be taken from the provided i18n as long as there is one
- * (this happens when we plug-in the library into a product, as electa or evs),
- * otherwise, it will take the locale from the local i18n instance.
- * Removing it, will cause all tests, storybook and the playground to break.
- */
-/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
-const i18n: any = inject("i18n");
-const { t } = i18n.global;
-onMounted(() => {
-  if (props.locale) switchLocale(props.locale);
-});
-watch(
-  () => props.locale,
-  () => {
-    if (props.locale) switchLocale(props.locale);
-  },
-  { deep: true },
-);
-/* END */
+// Resolves prop -> locale provided by the nearest AV ancestor -> injected i18n instance,
+// and gives you a `t`/`d` pinned to that locale. `i18nLocale` is the conventional local
+// name for reaching into LocalString fields, e.g. `option.title[i18nLocale]`.
+const { locale: i18nLocale, t } = useLocalization(() => props.locale);
 </script>
 
 <template>
@@ -83,8 +65,10 @@ watch(
 <style scoped lang="scss" src="./AVFoo.scss" />
 ```
 
-Copy the i18n block **verbatim** (comment included). Do not use `useI18n()`. Untranslated
-components omit the block, the `locale` prop, and the messages file.
+Always go through `useLocalization`; never `useI18n()`, never `inject("i18n")` directly, and
+never destructure `i18n.global.t` (that binds translations to the host app's global locale
+instead of the resolved one). Drop `i18nLocale` from the destructure if you don't need it.
+Untranslated components omit the composable, the `locale` prop, and the messages file.
 
 Template/style rules: Bootstrap utilities for layout; class names `AVFoo--modifier`;
 `data-test="kebab-case"` on anything a test will touch; `var(--bs-*)` tokens, never color

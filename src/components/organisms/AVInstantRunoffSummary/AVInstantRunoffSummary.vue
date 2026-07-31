@@ -3,14 +3,13 @@ import type {
   PropType,
   InstantRunoffRound,
   SupportedLocale,
-  Theme,
   IterableObject,
   VoteCounts,
   OptionResult,
 } from "@/types";
-import { inject, onMounted, watch, computed } from "vue";
-import { switchLocale } from "@/i18n";
+
 import { getMeaningfulLabel } from "@/helpers/meaningfulLabel";
+import { useLocalization } from "@/composables/useLocalization";
 
 const props = defineProps({
   rounds: {
@@ -49,10 +48,6 @@ const props = defineProps({
     type: String as PropType<SupportedLocale>,
     default: null,
   },
-  theme: {
-    type: String as PropType<Theme>,
-    default: "light",
-  },
 });
 
 const count = (reference: string, roundIndex: number): number =>
@@ -67,37 +62,12 @@ const isElected = (reference: string, roundIndex: number): boolean =>
 const isEliminatedOrElected = (reference: string, roundIndex: number): boolean =>
   isElected(reference, roundIndex) || isEliminated(reference, roundIndex);
 
-/**
- * This is necesary in order to support both provided i18n and local i18n.
- * The used locale will be taken from the provided i18n as long as there is one
- * (this happens when we plug-in the library into a product, as electa or evs),
- * otherwise, it will take the locale from the local i18n instance.
- * Removing it, will cause all tests, storybook and the playground to break.
- */
-/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
-const i18n: any = inject("i18n");
-const { t } = i18n.global;
-const i18nLocale = computed<SupportedLocale>(() => i18n.global.locale.value || i18n.global.locale);
-onMounted(() => {
-  if (props.locale) switchLocale(props.locale);
-});
-watch(
-  () => props.locale,
-  () => {
-    if (props.locale) switchLocale(props.locale);
-  },
-  { deep: true },
-);
-/* END */
+const { locale: i18nLocale, t } = useLocalization(() => props.locale);
 </script>
 
 <template>
   <div class="AVInstantRunoffSummary vstack">
-    <h5
-      class="AVInstantRunoffSummary--title"
-      :class="`AVInstantRunoffSummary--text-${theme}`"
-      data-test="seat-title"
-    >
+    <h5 class="AVInstantRunoffSummary--title text-body" data-test="seat-title">
       {{ t("js.components.AVInstantRunoffSummary.seat_n", { n: seatNumber }) }}
     </h5>
 
@@ -108,7 +78,7 @@ watch(
           id="ranked_summary_table"
           data-test="table"
         >
-          <thead class="AVInstantRunoffSummary--heading bg-secondary border-bottom">
+          <thead class="AVInstantRunoffSummary--heading bg-body-80 border-bottom">
             <tr>
               <th>
                 {{ t("js.components.AVInstantRunoffSummary.header.candidate") }}
@@ -124,14 +94,14 @@ watch(
                     n: index + 1,
                   })
                 }}
-                <AVIcon icon="info-circle" class="text-dark" />
+                <AVIcon icon="info-circle" class="text-body-60" />
               </th>
             </tr>
           </thead>
           <tbody>
             <tr v-for="(option, optionIndex) in sortedResult" :key="optionIndex">
               <template v-if="option.title">
-                <td :class="`AVInstantRunoffSummary--text-${theme}`">
+                <td class="text-body">
                   {{
                     getMeaningfulLabel(
                       option as unknown as IterableObject,
@@ -151,8 +121,11 @@ watch(
                       option.reference,
                       number - 1,
                     ),
-                    'text-dark': isEliminatedOrElected(option.reference, number - 1),
-                    [`AVInstantRunoffSummary--text-${theme}`]: true,
+                    'AVInstantRunoffSummary--highlighted': isEliminatedOrElected(
+                      option.reference,
+                      number - 1,
+                    ),
+                    'text-body': true,
                   }"
                 >
                   {{ count(option.reference, number - 1) }}
@@ -160,27 +133,25 @@ watch(
               </template>
             </tr>
             <tr>
-              <td :class="`AVInstantRunoffSummary--text-${theme}`">
+              <td class="text-body">
                 {{ t("js.components.AVInstantRunoffSummary.summary.transfered_votes") }}
               </td>
               <td
                 v-for="number in rounds.length"
                 :key="`instant_runoff_seat_${seatNumber}_transferred_${number}`"
-                class="text-center text-nowrap"
-                :class="`AVInstantRunoffSummary--text-${theme}`"
+                class="text-center text-nowrap text-body"
               >
                 {{ rounds[number - 1].transferred }}
               </td>
             </tr>
             <tr>
-              <td :class="`AVInstantRunoffSummary--text-${theme}`">
+              <td class="text-body">
                 {{ t("js.components.AVInstantRunoffSummary.summary.exhausted") }}
               </td>
               <td
                 v-for="number in rounds.length"
                 :key="`instant_runoff_seat_${seatNumber}_exhausted_${number}`"
-                class="text-center text-nowrap AVInstantRunoffSummary--cell-text"
-                :class="`AVInstantRunoffSummary--text-${theme}`"
+                class="text-body text-center text-nowrap AVInstantRunoffSummary--cell-text"
               >
                 {{ rounds[number - 1].exhausted }}
               </td>
@@ -195,14 +166,12 @@ watch(
           :title="t('js.components.AVInstantRunoffSummary.summary.not_included_count')"
           :value="votesNotIncluded"
           reference="not-included"
-          :theme="theme"
         />
 
         <AVResultSummaryItem
           :title="t('js.components.AVInstantRunoffSummary.summary.abstain')"
           :value="blankVotes"
           reference="abstain"
-          :theme="theme"
         />
 
         <AVResultSummaryItem
@@ -210,21 +179,18 @@ watch(
           :title="t('js.components.AVInstantRunoffSummary.summary.null_votes')"
           :value="voteCounts.excludedCount"
           reference="null_votes"
-          :theme="theme"
         />
 
         <AVResultSummaryItem
           :title="t('js.components.AVInstantRunoffSummary.summary.total_votes')"
           :value="totalVotes"
           reference="total"
-          :theme="theme"
         />
 
         <AVResultSummaryItem
           :title="t('js.components.AVInstantRunoffSummary.summary.quota')"
           :value="quota"
           reference="quota"
-          :theme="theme"
         />
       </div>
     </div>
