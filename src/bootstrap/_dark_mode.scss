@@ -45,9 +45,21 @@
     border: solid 1px var(--bs-primary-border-subtle) !important;
   }
 
+  @each $color, $value in $theme-colors {
+    .bg-#{$color}-faded {
+      background-color: rgba(var(--bs-#{$color}-rgb), 0.1) !important;
+    }
+  }
+
   .form-check-input:checked,
   .form-check-input:indeterminate {
     background-color: var(--bs-accent);
     border-color: var(--bs-accent);
+  }
+
+  input[type="range"] {
+    &::-webkit-slider-thumb {
+      background-color: var(--bs-accent);
+    }
   }
 }
