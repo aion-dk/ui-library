@@ -250,7 +250,7 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
     </div>
 
     <div v-if="currentValue.length" class="vstack gap-2">
-      <p class="form-label mt-2">
+      <p class="form-label mt-2 text-body">
         {{ t("js.components.AVFileInput.current") }}
       </p>
 

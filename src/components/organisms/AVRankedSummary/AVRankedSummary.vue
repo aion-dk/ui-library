@@ -3,7 +3,6 @@ import { computed } from "vue";
 import type {
   AVRankedSummaryResultOptionRow,
   SupportedLocale,
-  Theme,
   PropType,
   IterableObject,
   VoteCounts,
@@ -39,10 +38,6 @@ const props = defineProps({
   voteCounts: {
     type: Object as PropType<VoteCounts>,
     required: true,
-  },
-  theme: {
-    type: String as PropType<Theme>,
-    default: "light",
   },
 });
 
@@ -83,15 +78,8 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
 
 <template>
   <div class="table-responsive">
-    <table
-      class="table border"
-      :class="{
-        'border-light': theme === 'dark',
-      }"
-      id="ranked_summary_table"
-      data-test="table"
-    >
-      <thead class="bg-secondary border-bottom">
+    <table class="table border" id="ranked_summary_table" data-test="table">
+      <thead class="bg-body-80 border-bottom">
         <tr>
           <th>{{ t("js.components.AVRankedSummary.header.position") }}</th>
           <th>{{ t("js.components.AVRankedSummary.header.candidate") }}</th>
@@ -116,10 +104,10 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
           data-test="candidate-ranked-result"
           :class="{ 'border-0 border-bottom border-3': index + 1 === elected.length }"
         >
-          <td :class="`AVRankedSummary--text-${theme}`">
+          <td class="text-body">
             {{ (option.elected && index + 1) || "" }}
           </td>
-          <td :class="`AVRankedSummary--text-${theme}`">
+          <td class="text-body">
             {{
               getMeaningfulLabel(
                 option as unknown as IterableObject,
@@ -137,8 +125,9 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
             :class="{
               'bg-warning-faded': !hideTied && round.tied && (hideElected || !round.elected),
               'bg-success-faded': !hideElected && round.elected,
-              'AVRankedSummary--text-bold': round.elected,
-              [`AVRankedSummary--text-${theme}`]: !round.elected && !round.tied,
+              'AVRankedSummary--text-bold AVRankedSummary--highlighted': round.elected,
+              'AVRankedSummary--highlighted': round.tied,
+              'text-body': !round.elected && !round.tied,
             }"
           >
             {{ round.count }}
@@ -153,7 +142,6 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
       :title="t('js.components.AVRankedSummary.summary.seats')"
       :value="seats"
       reference="seats"
-      :theme="theme"
     />
 
     <AVResultSummaryItem
@@ -161,7 +149,6 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
       :title="t('js.components.AVRankedSummary.summary.distribution')"
       :value="distributionNumber"
       reference="distribution_n"
-      :theme="theme"
     />
 
     <AVResultSummaryItem
@@ -169,7 +156,6 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
       :title="t('js.components.AVRankedSummary.summary.elected')"
       :value="elected.join(', ')"
       reference="elected"
-      :theme="theme"
     />
 
     <AVResultSummaryItem
@@ -177,14 +163,12 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
       :title="t('js.components.AVRankedSummary.summary.tied')"
       :value="tied.join(', ')"
       reference="tied"
-      :theme="theme"
     />
 
     <AVResultSummaryItem
       :title="t('js.components.AVRankedSummary.summary.blank_votes')"
       :value="voteCounts.blankCount"
       reference="blank_votes"
-      :theme="theme"
     />
 
     <AVResultSummaryItem
@@ -192,7 +176,6 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
       :title="t('js.components.AVRankedSummary.summary.null_votes')"
       :value="voteCounts.excludedCount"
       reference="null_votes"
-      :theme="theme"
     />
   </div>
 </template>

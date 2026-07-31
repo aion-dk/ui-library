@@ -77,9 +77,7 @@ export const Multiple = {
 
 export const DefaultAndCurrentValue = {
   render: Template,
-  globals: {
-    backgrounds: { value: "dark" },
-  },
+
   args: {
     id: "ID",
     inputLabel: "Upload jsons or pdfs",

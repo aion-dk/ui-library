@@ -111,6 +111,17 @@ compiled `dist/styles.css` (component styles only, no Bootstrap core) and the **
 8. Order inside `bootstrap.customized.scss` is load-bearing: flags/maps → `functions` →
    palette/overrides → `variables` → `$utilities`/`$theme-colors` merges → `bootstrap`.
    Insert changes at the correct layer.
+9. Dark mode is Bootstrap-native (`$enable-dark-mode`, `$color-mode-type: data`): the host
+   app sets `data-bs-theme="dark"` on an ancestor and components inherit it. Components
+   **never** take a `theme` prop and never branch on one in the template — paint with
+   body tokens (`text-body`, `text-body-70`, `bg-body-80`, from `_body_opacity.scss`) and
+   put anything that needs a real dark-mode override behind a `[data-bs-theme="dark"]`
+   selector in the component's SCSS or in `_dark_mode.scss`. `AVVerticalStep` and
+   `AVAnimatedMenuButton` still carry the legacy `theme` prop (`Theme` from
+   `@assemblyvoting/types`); migrate them when touched, don't copy them.
+   Any new partial `bootstrap.customized.scss` `@import`s must also be added to the
+   `viteStaticCopy` targets in `vite.config.ts` — the raw SCSS ships and a missing
+   partial breaks the consumer's Sass build, not ours.
 
 ## Testing
 

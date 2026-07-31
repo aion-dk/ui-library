@@ -166,6 +166,7 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
 
 @import "../../node_modules/bootstrap/scss/bootstrap";
 @import "./body_opacity";
+@import "./dark_mode";
 
 #app {
   width: 100vw;

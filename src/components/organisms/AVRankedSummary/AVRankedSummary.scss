@@ -1,5 +1,4 @@
-tr.bg-warning-faded,
-tr.bg-success-faded {
+.AVRankedSummary--highlighted {
   border-bottom-color: var(--bs-border-color);
 }
 
@@ -16,10 +15,7 @@ th {
   font-weight: 600;
 }
 
-.AVRankedSummary--text-dark {
-  color: var(--bs-gray-200);
-}
-
-.AVRankedSummary--text-light {
-  color: var(--bs-gray-800);
+[data-bs-theme="dark"] .AVRankedSummary--highlighted {
+  color: var(--bs-body-color-alt) !important;
+  border-color: var(--bs-body-color-alt-30) !important;
 }

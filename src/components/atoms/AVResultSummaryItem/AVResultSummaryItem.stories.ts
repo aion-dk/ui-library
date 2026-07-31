@@ -15,10 +15,6 @@ const meta: Meta<typeof AVResultSummaryItem> = {
     reference: {
       control: { type: "text" },
     },
-    theme: {
-      control: { type: "select" },
-      options: ["light", "dark"],
-    },
   },
 };
 
@@ -32,27 +28,12 @@ const Template = (args: Meta) => ({
   template: '<AVResultSummaryItem v-bind="args" />',
 });
 
-export const Light = {
+export const Default = {
   render: Template,
 
   args: {
     title: "Some result summary information",
     value: "56",
     reference: "test",
-    theme: "light",
-  },
-};
-
-export const Dark = {
-  render: Template,
-
-  globals: {
-    backgrounds: { value: "dark" },
-  },
-  args: {
-    title: "Some result summary information",
-    value: "56",
-    reference: "test",
-    theme: "dark",
   },
 };

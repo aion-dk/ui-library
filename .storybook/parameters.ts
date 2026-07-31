@@ -8,7 +8,7 @@ const parameters = {
   backgrounds: {
     options: {
       light: { name: "Light", value: "#FFFFFF" },
-      dark: { name: "Dark", value: "#1e293b" },
+      dark: { name: "Dark", value: "#2A3034" },
     },
   },
   controls: {

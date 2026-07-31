@@ -296,58 +296,18 @@ describe("AVDhondtAPSummary", () => {
     );
   });
 
-  it("can switch theme", async () => {
+  it("uses body text tokens and highlights elected or tied rows", async () => {
     wrapper.findAll("[data-test=candidate-dhondt-result]").forEach((el, i) => {
-      if (i === 0) {
-        // elected, theme rules do not apply
-        expect(el.html()).to.not.contain("AVDhondtAPSummary--text-dark");
-        expect(el.html()).to.not.contain("AVDhondtAPSummary--text-light");
-      } else {
-        el.findAll("td").forEach((child, i) => {
-          if (i !== 0) {
-            expect(child.classes()).to.contain("AVDhondtAPSummary--text-light");
-            expect(child.classes()).to.not.contain("AVDhondAPSummary--text-dark");
-          }
-        });
-      }
-    });
-
-    await wrapper.setProps({
-      theme: "dark",
-    });
-
-    wrapper.findAll("[data-test=candidate-dhondt-result]").forEach((el, i) => {
-      if (i === 0) {
-        // elected, theme rules do not apply
-        expect(el.html()).to.not.contain("AVDhondtAPSummary--text-dark");
-        expect(el.html()).to.not.contain("AVDhondtAPSummary--text-light");
-      } else {
-        el.findAll("td").forEach((child, i) => {
-          if (i !== 0) {
-            expect(child.classes()).to.not.contain("AVDhondtAPSummary--text-light");
-            expect(child.classes()).to.contain("AVDhondtAPSummary--text-dark");
-          }
-        });
-      }
-    });
-
-    await wrapper.setProps({
-      theme: "light",
-    });
-
-    wrapper.findAll("[data-test=candidate-dhondt-result]").forEach((el, i) => {
-      if (i === 0) {
-        // elected, theme rules do not apply
-        expect(el.html()).to.not.contain("AVDhondtAPSummary--text-dark");
-        expect(el.html()).to.not.contain("AVDhondtAPSummary--text-light");
-      } else {
-        el.findAll("td").forEach((child, i) => {
-          if (i !== 0) {
-            expect(child.classes()).to.contain("AVDhondtAPSummary--text-light");
-            expect(child.classes()).to.not.contain("AVDhondtAPSummary--text-dark");
-          }
-        });
-      }
+      el.findAll("td").forEach((child) => {
+        if (i === 0) {
+          // elected, so it carries the highlight override instead of the body token
+          expect(child.classes()).to.contain("AVDhondtAPSummary--highlighted");
+          expect(child.classes()).to.not.contain("text-body");
+        } else {
+          expect(child.classes()).to.contain("text-body");
+          expect(child.classes()).to.not.contain("AVDhondtAPSummary--highlighted");
+        }
+      });
     });
   });
 

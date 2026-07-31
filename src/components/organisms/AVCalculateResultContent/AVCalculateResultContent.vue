@@ -74,7 +74,7 @@ const { t } = useLocalization(() => props.locale);
 </script>
 
 <template>
-  <div class="AVCalculateResultContent--container vstack gap-3 mt-3 text-gray-700">
+  <div class="AVCalculateResultContent--container vstack gap-3 mt-3 text-body-70">
     <AVProgressBar :id="`result_${id}`" :value="progress" data-test="progress" />
     <div class="AVCalculateResultContent--information align-items-start">
       <div

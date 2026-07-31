@@ -23,7 +23,7 @@ const Template = (args: Meta) => ({
     return { args };
   },
   template:
-    '<AVElectaContestCard v-bind="args"><template #card-content>Content goes here.</template></AVElectaContestCard>',
+    '<AVElectaContestCard v-bind="args"><template #card-content><span class="text-body">Content goes here.</span></template></AVElectaContestCard>',
 });
 
 export const Default = {

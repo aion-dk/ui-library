@@ -52,7 +52,9 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
   <div
     class="d-flex p-3"
     :class="{
-      'bg-secondary': !tied && !elected && !ineligible,
+      'text-body': true,
+      'bg-body-80': !tied && !elected && !ineligible,
+      'AVResultOption--highlighted': elected || tied,
       'bg-success-faded': elected,
       'bg-warning-faded': tied && !elected,
       'bg-danger-faded': ineligible,
@@ -89,7 +91,7 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
       </div>
       <div class="vstack align-items-end justify-content-center gap-1" data-test="result-results">
         <p class="mb-0">{{ truncatedVotes }}</p>
-        <p v-if="!hidePercentage" class="text-dark mb-0">{{ optionPercent }}%</p>
+        <p v-if="!hidePercentage" class="mb-0">{{ optionPercent }}%</p>
       </div>
     </div>
   </div>

@@ -58,6 +58,10 @@ export default defineConfig((env: ConfigEnv) => {
           src: resolve(__dirname, "src/bootstrap/_body_opacity.scss"),
           dest: "src/bootstrap",
         },
+        {
+          src: resolve(__dirname, "src/bootstrap/_dark_mode.scss"),
+          dest: "src/bootstrap",
+        },
       ],
     }),
   );

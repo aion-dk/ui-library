@@ -6,7 +6,6 @@ import type {
   AVDhondtSummarySortedResult,
   AVDhondtSummaryAdditionalData,
   SupportedLocale,
-  Theme,
   PropType,
   IterableObject,
   VoteCounts,
@@ -42,10 +41,6 @@ const props = defineProps({
   voteCounts: {
     type: Object as PropType<VoteCounts>,
     required: true,
-  },
-  theme: {
-    type: String as PropType<Theme>,
-    default: "light",
   },
 });
 
@@ -117,15 +112,8 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
 
 <template>
   <div class="table-responsive">
-    <table
-      class="table border"
-      :class="{
-        'border-light': theme === 'dark',
-      }"
-      id="dhondt_summary_table"
-      data-test="table"
-    >
-      <thead class="bg-secondary border-bottom">
+    <table class="table border" id="dhondt_summary_table" data-test="table">
+      <thead class="bg-body-80 border-bottom">
         <tr>
           <th>{{ t("js.components.AVDhondtSummary.header.party") }}</th>
 
@@ -149,7 +137,7 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
           :key="`list_${optionReference}`"
           :data-test="`party-list-${index}`"
         >
-          <td :class="`AVDhondtSummary--text-${theme}`">
+          <td class="text-body">
             {{ additionalData[optionReference].title }}
           </td>
           <td
@@ -157,16 +145,13 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
             :key="`seat_${seatNumber}`"
             class="text-center"
             :class="{
-              [`AVDhondtSummary--text-${theme}`]:
+              'text-body':
                 !getOptionForSeat(seatNumber, optionReference).elected &&
                 !getOptionForSeat(seatNumber, optionReference).tied,
-              'text-gray-800':
-                getOptionForSeat(seatNumber, optionReference).elected ||
-                getOptionForSeat(seatNumber, optionReference).tied,
               'bg-success-faded':
                 getOptionForSeat(seatNumber, optionReference).elected && !hideElected,
               'bg-danger-faded': getOptionForSeat(seatNumber, optionReference).ineligible,
-              'AVDhondtSummary--text-semibold':
+              'AVDhondtSummary--text-semibold AVDhondtSummary--highlighted':
                 (getOptionForSeat(seatNumber, optionReference).elected && !hideElected) ||
                 (getOptionForSeat(seatNumber, optionReference).tied && !hideTied),
               'bg-warning-faded':
@@ -187,7 +172,6 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
       :title="t('js.components.AVDhondtSummary.summary.seats')"
       :value="seats"
       reference="seats"
-      :theme="theme"
     />
 
     <template v-if="!hideElected">
@@ -197,7 +181,6 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
         :title="additionalData[partyReference].title"
         :value="getElectedSeats(additionalData[partyReference].elected)"
         :reference="partyReference"
-        :theme="theme"
       />
     </template>
 
@@ -206,7 +189,6 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
       :title="t('js.components.AVDhondtSummary.summary.blank')"
       :value="sortedData.blank.count"
       reference="blank_votes"
-      :theme="theme"
     />
 
     <AVResultSummaryItem
@@ -214,7 +196,6 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
       :title="t('js.components.AVDhondtSummary.summary.null_votes')"
       :value="voteCounts.excludedCount"
       reference="null_votes"
-      :theme="theme"
     />
 
     <AVResultSummaryItem
@@ -222,7 +203,6 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
       :title="t('js.components.AVDhondtSummary.summary.distribution')"
       :value="distributionNumber"
       reference="distribution_n"
-      :theme="theme"
     />
   </div>
 </template>

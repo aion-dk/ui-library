@@ -3,7 +3,6 @@ import type {
   PropType,
   InstantRunoffRound,
   SupportedLocale,
-  Theme,
   IterableObject,
   VoteCounts,
   OptionResult,
@@ -49,10 +48,6 @@ const props = defineProps({
     type: String as PropType<SupportedLocale>,
     default: null,
   },
-  theme: {
-    type: String as PropType<Theme>,
-    default: "light",
-  },
 });
 
 const count = (reference: string, roundIndex: number): number =>
@@ -72,11 +67,7 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
 
 <template>
   <div class="AVInstantRunoffSummary vstack">
-    <h5
-      class="AVInstantRunoffSummary--title"
-      :class="`AVInstantRunoffSummary--text-${theme}`"
-      data-test="seat-title"
-    >
+    <h5 class="AVInstantRunoffSummary--title text-body" data-test="seat-title">
       {{ t("js.components.AVInstantRunoffSummary.seat_n", { n: seatNumber }) }}
     </h5>
 
@@ -87,7 +78,7 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
           id="ranked_summary_table"
           data-test="table"
         >
-          <thead class="AVInstantRunoffSummary--heading bg-secondary border-bottom">
+          <thead class="AVInstantRunoffSummary--heading bg-body-80 border-bottom">
             <tr>
               <th>
                 {{ t("js.components.AVInstantRunoffSummary.header.candidate") }}
@@ -103,14 +94,14 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
                     n: index + 1,
                   })
                 }}
-                <AVIcon icon="info-circle" class="text-dark" />
+                <AVIcon icon="info-circle" class="text-body-60" />
               </th>
             </tr>
           </thead>
           <tbody>
             <tr v-for="(option, optionIndex) in sortedResult" :key="optionIndex">
               <template v-if="option.title">
-                <td :class="`AVInstantRunoffSummary--text-${theme}`">
+                <td class="text-body">
                   {{
                     getMeaningfulLabel(
                       option as unknown as IterableObject,
@@ -130,8 +121,11 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
                       option.reference,
                       number - 1,
                     ),
-                    'text-dark': isEliminatedOrElected(option.reference, number - 1),
-                    [`AVInstantRunoffSummary--text-${theme}`]: true,
+                    'AVInstantRunoffSummary--highlighted': isEliminatedOrElected(
+                      option.reference,
+                      number - 1,
+                    ),
+                    'text-body': true,
                   }"
                 >
                   {{ count(option.reference, number - 1) }}
@@ -139,27 +133,25 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
               </template>
             </tr>
             <tr>
-              <td :class="`AVInstantRunoffSummary--text-${theme}`">
+              <td class="text-body">
                 {{ t("js.components.AVInstantRunoffSummary.summary.transfered_votes") }}
               </td>
               <td
                 v-for="number in rounds.length"
                 :key="`instant_runoff_seat_${seatNumber}_transferred_${number}`"
-                class="text-center text-nowrap"
-                :class="`AVInstantRunoffSummary--text-${theme}`"
+                class="text-center text-nowrap text-body"
               >
                 {{ rounds[number - 1].transferred }}
               </td>
             </tr>
             <tr>
-              <td :class="`AVInstantRunoffSummary--text-${theme}`">
+              <td class="text-body">
                 {{ t("js.components.AVInstantRunoffSummary.summary.exhausted") }}
               </td>
               <td
                 v-for="number in rounds.length"
                 :key="`instant_runoff_seat_${seatNumber}_exhausted_${number}`"
-                class="text-center text-nowrap AVInstantRunoffSummary--cell-text"
-                :class="`AVInstantRunoffSummary--text-${theme}`"
+                class="text-body text-center text-nowrap AVInstantRunoffSummary--cell-text"
               >
                 {{ rounds[number - 1].exhausted }}
               </td>
@@ -174,14 +166,12 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
           :title="t('js.components.AVInstantRunoffSummary.summary.not_included_count')"
           :value="votesNotIncluded"
           reference="not-included"
-          :theme="theme"
         />
 
         <AVResultSummaryItem
           :title="t('js.components.AVInstantRunoffSummary.summary.abstain')"
           :value="blankVotes"
           reference="abstain"
-          :theme="theme"
         />
 
         <AVResultSummaryItem
@@ -189,21 +179,18 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
           :title="t('js.components.AVInstantRunoffSummary.summary.null_votes')"
           :value="voteCounts.excludedCount"
           reference="null_votes"
-          :theme="theme"
         />
 
         <AVResultSummaryItem
           :title="t('js.components.AVInstantRunoffSummary.summary.total_votes')"
           :value="totalVotes"
           reference="total"
-          :theme="theme"
         />
 
         <AVResultSummaryItem
           :title="t('js.components.AVInstantRunoffSummary.summary.quota')"
           :value="quota"
           reference="quota"
-          :theme="theme"
         />
       </div>
     </div>

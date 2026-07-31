@@ -210,23 +210,9 @@ describe("AVInstantRunoffSummary", () => {
     expect(wrapper.find("[data-test=table]").text()).to.contain("Exhausted ballots1234");
   });
 
-  it("can switch theme", async () => {
-    expect(wrapper.findAll(".AVInstantRunoffSummary--text-light").length).to.eq(31);
-    expect(wrapper.findAll(".AVInstantRunoffSummary--text-dark").length).to.eq(0);
-
-    await wrapper.setProps({
-      theme: "dark",
-    });
-
-    expect(wrapper.findAll(".AVInstantRunoffSummary--text-light").length).to.eq(0);
-    expect(wrapper.findAll(".AVInstantRunoffSummary--text-dark").length).to.eq(31);
-
-    await wrapper.setProps({
-      theme: "light",
-    });
-
-    expect(wrapper.findAll(".AVInstantRunoffSummary--text-light").length).to.eq(31);
-    expect(wrapper.findAll(".AVInstantRunoffSummary--text-dark").length).to.eq(0);
+  it("uses body text tokens and highlights eliminated or elected cells", async () => {
+    expect(wrapper.findAll(".text-body").length).to.eq(31);
+    expect(wrapper.findAll(".AVInstantRunoffSummary--highlighted").length).to.eq(4);
   });
 
   it("can switch language", async () => {

@@ -7,10 +7,6 @@ th {
   font-weight: 700;
 }
 
-.AVInstantRunoffSummary--text-dark {
-  color: var(--bs-gray-200);
-}
-
-.AVInstantRunoffSummary--text-light {
-  color: var(--bs-gray-800);
+[data-bs-theme="dark"] .AVInstantRunoffSummary--highlighted {
+  color: var(--bs-body-color-alt) !important;
 }

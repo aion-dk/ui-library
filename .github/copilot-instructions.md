@@ -13,6 +13,12 @@
 - Use `@` imports for project source paths (alias to `src/`).
 - Use always yarn for package management and scripts; avoid npm, pnpm or similar if possible.
 
+## Dark Mode And Styling
+- Dark mode is Bootstrap-native: the host app sets `data-bs-theme="dark"` on an ancestor and components inherit it. Never add a `theme` prop to a component and never branch on one in a template.
+- Paint with mode-aware tokens (`text-body`, `text-body-70`, `bg-body-80`, … from `src/bootstrap/_body_opacity.scss`) instead of fixed colours like `text-gray-800` or `bg-secondary`. Anything a token can't express goes behind a `[data-bs-theme="dark"]` selector in the component's `.scss`.
+- `AVVerticalStep` and `AVAnimatedMenuButton` still use the legacy `theme` prop; migrate them when you touch them rather than following their pattern.
+- In Storybook the backgrounds toolbar is the dark/light switch — it sets `data-bs-theme` on the story wrapper (`.storybook/decorators.ts`), and stories opt in with `globals: { backgrounds: { value: "dark" } }`.
+
 ## Architecture
 - This is a component library organized by design-system levels in `src/components/`:
   - `atoms/`, `molecules/`, `organisms/`, `templates/`.

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { PropType, NormalResult, VoteCounts, Theme, SupportedLocale } from "@/types";
+import type { PropType, NormalResult, VoteCounts, SupportedLocale } from "@/types";
 import { useLocalization } from "@/composables/useLocalization";
 
 const props = defineProps({
@@ -30,10 +30,6 @@ const props = defineProps({
   voteCounts: {
     type: Object as PropType<VoteCounts>,
     required: true,
-  },
-  theme: {
-    type: String as PropType<Theme>,
-    default: "light",
   },
   locale: {
     type: String as PropType<SupportedLocale>,
@@ -73,7 +69,6 @@ const { t } = useLocalization(() => props.locale);
         :title="t('js.components.AVNormalSummary.summary.null_votes')"
         :value="voteCounts.excludedCount"
         reference="null_votes"
-        :theme="theme"
       />
     </div>
   </div>

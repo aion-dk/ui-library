@@ -3,7 +3,6 @@ import { computed } from "vue";
 import type {
   AVDhondtResultOptionRow,
   SupportedLocale,
-  Theme,
   PropType,
   IterableObject,
   VoteCounts,
@@ -44,10 +43,6 @@ const props = defineProps({
     type: String as PropType<SupportedLocale>,
     default: "en",
   },
-  theme: {
-    type: String as PropType<Theme>,
-    default: "light",
-  },
 });
 
 const elected = computed(() => {
@@ -83,15 +78,8 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
 
 <template>
   <div class="table-responsive">
-    <table
-      class="table border"
-      :class="{
-        'border-light': theme === 'dark',
-      }"
-      id="dhondt_summary_table"
-      data-test="table"
-    >
-      <thead class="bg-secondary border-bottom">
+    <table class="table border" id="dhondt_summary_table" data-test="table">
+      <thead class="bg-body-80 border-bottom">
         <tr>
           <th>
             {{ t("js.components.AVDhondtAPSummary.header.title") }}
@@ -120,7 +108,8 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
         >
           <td
             :class="{
-              [`AVDhondtAPSummary--text-${theme}`]: !option.elected && !option.tied,
+              'text-body': !option.elected && !option.tied,
+              'AVDhondtAPSummary--highlighted': option.elected || option.tied,
             }"
           >
             <template v-if="option.group">
@@ -136,7 +125,8 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
           </td>
           <td
             :class="{
-              [`AVDhondtAPSummary--text-${theme}`]: !option.elected && !option.tied,
+              'text-body': !option.elected && !option.tied,
+              'AVDhondtAPSummary--highlighted': option.elected || option.tied,
             }"
           >
             {{
@@ -157,14 +147,16 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
           </td>
           <td
             :class="{
-              [`AVDhondtAPSummary--text-${theme}`]: !option.elected && !option.tied,
+              'text-body': !option.elected && !option.tied,
+              'AVDhondtAPSummary--highlighted': option.elected || option.tied,
             }"
           >
             {{ option.count }}
           </td>
           <td
             :class="{
-              [`AVDhondtAPSummary--text-${theme}`]: !option.elected && !option.tied,
+              'text-body': !option.elected && !option.tied,
+              'AVDhondtAPSummary--highlighted': option.elected || option.tied,
             }"
           >
             {{ option.comparativeFigure ? Number(option.comparativeFigure).toFixed(2) : "" }}
@@ -172,19 +164,11 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
         </tr>
 
         <tr>
-          <td
-            :class="{
-              [`AVDhondtAPSummary--text-${theme}`]: true,
-            }"
-          >
+          <td class="text-body">
             <strong>{{ t("js.components.AVDhondtAPSummary.total_count") }}</strong>
           </td>
           <td></td>
-          <td
-            :class="{
-              [`AVDhondtAPSummary--text-${theme}`]: true,
-            }"
-          >
+          <td class="text-body">
             <strong>{{ totalCount }}</strong>
           </td>
           <td></td>
@@ -198,7 +182,6 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
       :title="t('js.components.AVDhondtAPSummary.summary.seats')"
       :value="seats"
       reference="seats"
-      :theme="theme"
     />
 
     <AVResultSummaryItem
@@ -206,7 +189,6 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
       :title="t('js.components.AVDhondtAPSummary.summary.distribution')"
       :value="distributionNumber"
       reference="distribution_n"
-      :theme="theme"
     />
 
     <AVResultSummaryItem
@@ -214,7 +196,6 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
       :title="t('js.components.AVDhondtAPSummary.summary.elected')"
       :value="elected.join(', ')"
       reference="elected"
-      :theme="theme"
     />
 
     <AVResultSummaryItem
@@ -222,7 +203,6 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
       :title="t('js.components.AVDhondtAPSummary.summary.tied')"
       :value="tied.join(', ')"
       reference="tied"
-      :theme="theme"
     />
 
     <AVResultSummaryItem
@@ -230,7 +210,6 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
       :title="t('js.components.AVDhondtAPSummary.summary.null_votes')"
       :value="voteCounts.excludedCount"
       reference="null_votes"
-      :theme="theme"
     />
   </div>
 </template>
