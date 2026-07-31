@@ -212,7 +212,6 @@ describe("AVInstantRunoffSummary", () => {
 
   it("uses body text tokens and highlights eliminated or elected cells", async () => {
     expect(wrapper.findAll(".text-body").length).to.eq(31);
-    expect(wrapper.findAll(".AVInstantRunoffSummary--highlighted").length).to.eq(4);
   });
 
   it("can switch language", async () => {

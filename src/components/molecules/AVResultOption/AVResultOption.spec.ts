@@ -28,7 +28,7 @@ describe("AVResultOption", () => {
   it("renders properly", async () => {
     expect(wrapper.findAll("[data-test=result-image]").length).to.eq(0);
 
-    expect(wrapper.find("[data-test=result-option]").classes()).to.contain("bg-body-80");
+    expect(wrapper.find("[data-test=result-option]").classes()).to.contain("bg-body-alt-10");
     expect(wrapper.find("[data-test=result-option]").classes()).to.not.contain("bg-success-faded");
     expect(wrapper.find("[data-test=result-option]").classes()).to.not.contain("bg-warning-faded");
 
