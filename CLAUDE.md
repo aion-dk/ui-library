@@ -63,10 +63,15 @@ statements 80 / branches 70 over `src/components/**` + `src/helpers/**` (exclusi
 - Props: runtime object form, `type: String as PropType<X>`. **Zero** components use
   `withDefaults` or `defineProps<T>()` — don't introduce them.
 - Emits: array-form `defineEmits([...])`; `v-model` events are `update:propName`.
-- i18n: components **never** call `useI18n()`. They contain the verbatim
-  `inject("i18n")` + `switchLocale` block (see skill template) and take a
-  `locale: PropType<SupportedLocale>` prop. The block's "DO NOT REMOVE" comments are
-  earned — removing it breaks host-app integration, tests, Storybook, and the playground.
+- i18n: components **never** call `useI18n()` or `inject("i18n")` directly. They take a
+  `locale: PropType<SupportedLocale>` prop and one line —
+  `const { locale: i18nLocale, t } = useLocalization(() => props.locale)`
+  (`src/composables/useLocalization.ts`). Precedence is prop → locale provided by the
+  nearest AV ancestor → injected i18n instance; `localI18n` is the inject default, which
+  is what keeps tests, Storybook and the playground working. Never destructure
+  `i18n.global.t` — it binds to the host app's global locale, so the library's chrome
+  would stay in the admin language while content translated. Only entry-point components
+  need `:locale`; it reaches children via `provide`, so don't hand-forward it.
 - Translation keys: `t("js.components.AVFoo.snake_case_key")`; HTML-bearing strings get
   an `_html` suffix. Messages files must cover **all 20 locales** in `SUPPORTED_LOCALES`
   (ar ca cy da de en es fi fr is it ja ko nl pl pt ro ru sv zh).

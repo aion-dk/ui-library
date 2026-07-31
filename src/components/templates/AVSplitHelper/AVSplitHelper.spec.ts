@@ -443,6 +443,14 @@ describe("AVSplitHelper", () => {
       locale: "da",
     });
 
+    // The `locale` prop is only passed to AVSplitHelper. Everything asserted below
+    // lives in a nested child (AVSplitWizardHeader, AVBallot, AVOption,
+    // AVSubmissionHelper, AVPileSummary, AVSplitWeightHelper) that is never handed a
+    // `:locale` — they inherit the resolved locale through provide/inject. And the
+    // injected i18n instance is never mutated to get there, so a host app's own
+    // locale is left alone.
+    expect(localI18n.global.locale.value).to.eq("en");
+
     // Overview
     expect(wrapper.find("[data-test=split-helper-contest-title]").text()).to.contain(
       "Eksempel valgseddel",

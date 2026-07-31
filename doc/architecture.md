@@ -71,13 +71,31 @@ map-merges → custom utility loops → the full `bootstrap` import → global h
 Products (electa, EVS) have their own vue-i18n instance and translation pipeline; the
 library must render with *their* instance when embedded but stay self-sufficient in
 Storybook, tests, and the playground. The plugin therefore `provide`s either the host's
-instance or the local fallback (`src/index.ts`), and every translated component
-`inject("i18n")`s it — plus a `locale` prop that calls `switchLocale()` for consumers who
-don't provide an instance at all. `useI18n()` would bind components to whichever i18n is
-*installed*, breaking the provided-instance path; that's why the copy-pasted inject block
-carries "DO NOT REMOVE" comments and why it stays duplicated rather than extracted (it
-must run in each component's own `setup()` scope; historic attempts to clean it up broke
-host integration).
+instance or the local fallback (`src/index.ts`). `useI18n()` would bind components to
+whichever i18n is *installed*, breaking the provided-instance path — so components never
+call it.
+
+Every translated component goes through `useLocalization` (`src/composables/`), which runs
+in the component's own `setup()` and resolves the locale in this order:
+
+1. the component's own `locale` prop,
+2. the locale resolved by the nearest AV ancestor (handed down via `provide`),
+3. the locale of the injected i18n instance.
+
+Two things that ordering buys, both of which used to be bugs. **The prop wins.** Previously
+the prop called `switchLocale()`, which mutated the library's *local* instance — a no-op
+whenever a host app had provided its own, so `:locale` silently did nothing in production.
+Now nothing global is mutated: the returned `t`/`d` pass the resolved locale explicitly, so
+the library's own chrome ("Select one (1) option", the vote-weight line, aria labels) follows
+`locale` instead of staying in the host app's language. **The prop reaches children.** Only
+the component a consumer actually mounts needs `:locale`; entry points don't have to forward
+it down through AVBallot → AVOption → AVCollapser, and a child nobody remembered to forward
+to can't fall back to the host locale and produce a half-translated ballot.
+
+`localI18n` is the `inject("i18n")` default, which is what keeps tests, Storybook and the
+playground working with no host app present — the concern the old per-component
+"DO NOT REMOVE" blocks were guarding. `switchLocale()` survives for exactly one caller,
+the Storybook toolbar decorator, which drives the global locale for stories that pass no prop.
 
 Messages are per-component `*.messages.ts` files assembled into
 `js.components.<AVName>.*` by `src/i18n/LocalMessages.ts` — the same key layout products

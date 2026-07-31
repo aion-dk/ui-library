@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { computed, onMounted, onUnmounted, ref, inject, watch, nextTick } from "vue";
-import type { PropType, SupportedLocale, Theme } from "@/types";
+import { computed, onMounted, onUnmounted, ref, watch, nextTick } from "vue";
+import type { PropType, Theme } from "@/types";
+import { useLocalization } from "@/composables/useLocalization";
 
 const props = defineProps({
   stepNumber: {
@@ -100,25 +101,14 @@ onMounted(() => {
 
 onUnmounted(() => window.removeEventListener("resize", updateValues));
 
-/**
- * This is necesary in order to support both provided i18n and local i18n.
- * The used locale will be taken from the provided i18n as long as there is one
- * (this happens when we plug-in the library into a product, as electa or evs),
- * otherwise, it will take the locale from the local i18n instance.
- * Removing it, will cause all tests, storybook and the playground to break.
- */
-/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
-const i18n: any = inject("i18n");
-const i18nLocale = computed<SupportedLocale>(() => i18n.global.locale.value || i18n.global.locale);
-watch(
-  i18nLocale,
-  () => {
-    nextTick();
-    updateValues();
-  },
-  { deep: true },
-);
-/* END */
+// This component has no `locale` prop of its own; it inherits the locale resolved
+// by the nearest AV ancestor, and re-measures because a locale change resizes text.
+const { locale: i18nLocale } = useLocalization();
+
+watch(i18nLocale, () => {
+  nextTick();
+  updateValues();
+});
 </script>
 
 <template>

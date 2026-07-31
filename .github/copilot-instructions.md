@@ -23,7 +23,8 @@
 
 ## i18n And Dependency Injection
 - Components are expected to support provided i18n from host apps and local fallback i18n.
-- Preserve the `inject("i18n")` + locale switching pattern used in existing components (for example `src/components/atoms/AVSpinner/AVSpinner.vue`).
+- Translated components get their locale and `t`/`d` from `useLocalization` (`src/composables/useLocalization.ts`), e.g. `const { locale: i18nLocale, t } = useLocalization(() => props.locale);` (for example `src/components/atoms/AVSpinner/AVSpinner.vue`). Never call `useI18n()`, never `inject("i18n")` directly, and never destructure `i18n.global.t` — that binds translations to the host app's global locale rather than the resolved one.
+- Precedence is `locale` prop → locale provided by the nearest AV ancestor → injected i18n instance. Only entry-point components need to be passed `:locale`; it propagates to children automatically, so don't add manual `:locale` forwarding.
 - Do not remove i18n fallback behavior; it is required for tests, Storybook, and playground usage.
 - Make sure to add any new i18n keys to all languages (`SUPPORTED_LOCALES` on `src/constants`) in the appropriate `*.messages.ts` file.
 
