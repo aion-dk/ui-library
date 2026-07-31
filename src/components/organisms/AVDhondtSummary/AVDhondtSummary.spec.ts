@@ -489,114 +489,27 @@ describe("AVDhondtSummary", () => {
     );
   });
 
-  it("supports dark theme", async () => {
+  it("uses body text tokens and highlights elected or tied seats", async () => {
     await wrapper.setProps({
       hideTied: false,
     });
 
-    expect(wrapper.find("[data-test=party-list-0]").findAll("td")[1].classes()).to.contain(
-      "text-gray-800",
-    );
-    expect(wrapper.find("[data-test=party-list-0]").findAll("td")[2].classes()).to.contain(
-      "text-gray-800",
-    );
-    expect(wrapper.find("[data-test=party-list-0]").findAll("td")[3].classes()).to.contain(
-      "text-gray-800",
-    );
-    expect(wrapper.find("[data-test=party-list-0]").findAll("td")[4].classes()).to.not.contain(
-      "text-gray-800",
-    );
-    expect(wrapper.find("[data-test=party-list-0]").findAll("td")[1].classes()).to.not.contain(
-      "AVDhondtSummary--text-light",
-    );
-    expect(wrapper.find("[data-test=party-list-0]").findAll("td")[2].classes()).to.not.contain(
-      "AVDhondtSummary--text-light",
-    );
-    expect(wrapper.find("[data-test=party-list-0]").findAll("td")[3].classes()).to.not.contain(
-      "AVDhondtSummary--text-light",
-    );
-    expect(wrapper.find("[data-test=party-list-0]").findAll("td")[4].classes()).to.contain(
-      "AVDhondtSummary--text-light",
-    );
+    const cellsFor = (party: string) => wrapper.find(`[data-test=${party}]`).findAll("td");
 
-    expect(wrapper.find("[data-test=party-list-1]").findAll("td")[1].classes()).to.contain(
-      "text-gray-800",
-    );
-    expect(wrapper.find("[data-test=party-list-1]").findAll("td")[2].classes()).to.contain(
-      "text-gray-800",
-    );
-    expect(wrapper.find("[data-test=party-list-1]").findAll("td")[3].classes()).to.not.contain(
-      "text-gray-800",
-    );
-    expect(wrapper.find("[data-test=party-list-1]").findAll("td")[4].classes()).to.not.contain(
-      "text-gray-800",
-    );
-    expect(wrapper.find("[data-test=party-list-1]").findAll("td")[1].classes()).to.not.contain(
-      "AVDhondtSummary--text-light",
-    );
-    expect(wrapper.find("[data-test=party-list-1]").findAll("td")[2].classes()).to.not.contain(
-      "AVDhondtSummary--text-light",
-    );
-    expect(wrapper.find("[data-test=party-list-1]").findAll("td")[3].classes()).to.contain(
-      "AVDhondtSummary--text-light",
-    );
-    expect(wrapper.find("[data-test=party-list-1]").findAll("td")[4].classes()).to.contain(
-      "AVDhondtSummary--text-light",
-    );
+    [
+      { party: "party-list-0", highlighted: [1, 2, 3], plain: [4] },
+      { party: "party-list-1", highlighted: [1, 2], plain: [3, 4] },
+    ].forEach(({ party, highlighted, plain }) => {
+      highlighted.forEach((i) => {
+        expect(cellsFor(party)[i].classes()).to.contain("AVDhondtSummary--highlighted");
+        expect(cellsFor(party)[i].classes()).to.not.contain("text-body");
+      });
 
-    await wrapper.setProps({
-      theme: "dark",
+      plain.forEach((i) => {
+        expect(cellsFor(party)[i].classes()).to.contain("text-body");
+        expect(cellsFor(party)[i].classes()).to.not.contain("AVDhondtSummary--highlighted");
+      });
     });
-
-    expect(wrapper.find("[data-test=party-list-0]").findAll("td")[1].classes()).to.contain(
-      "text-gray-800",
-    );
-    expect(wrapper.find("[data-test=party-list-0]").findAll("td")[2].classes()).to.contain(
-      "text-gray-800",
-    );
-    expect(wrapper.find("[data-test=party-list-0]").findAll("td")[3].classes()).to.contain(
-      "text-gray-800",
-    );
-    expect(wrapper.find("[data-test=party-list-0]").findAll("td")[4].classes()).to.not.contain(
-      "text-gray-800",
-    );
-    expect(wrapper.find("[data-test=party-list-0]").findAll("td")[1].classes()).to.not.contain(
-      "AVDhondtSummary--text-dark",
-    );
-    expect(wrapper.find("[data-test=party-list-0]").findAll("td")[2].classes()).to.not.contain(
-      "AVDhondtSummary--text-dark",
-    );
-    expect(wrapper.find("[data-test=party-list-0]").findAll("td")[3].classes()).to.not.contain(
-      "AVDhondtSummary--text-dark",
-    );
-    expect(wrapper.find("[data-test=party-list-0]").findAll("td")[4].classes()).to.contain(
-      "AVDhondtSummary--text-dark",
-    );
-
-    expect(wrapper.find("[data-test=party-list-1]").findAll("td")[1].classes()).to.contain(
-      "text-gray-800",
-    );
-    expect(wrapper.find("[data-test=party-list-1]").findAll("td")[2].classes()).to.contain(
-      "text-gray-800",
-    );
-    expect(wrapper.find("[data-test=party-list-1]").findAll("td")[3].classes()).to.not.contain(
-      "text-gray-800",
-    );
-    expect(wrapper.find("[data-test=party-list-1]").findAll("td")[4].classes()).to.not.contain(
-      "text-gray-800",
-    );
-    expect(wrapper.find("[data-test=party-list-1]").findAll("td")[1].classes()).to.not.contain(
-      "AVDhondtSummary--text-dark",
-    );
-    expect(wrapper.find("[data-test=party-list-1]").findAll("td")[2].classes()).to.not.contain(
-      "AVDhondtSummary--text-dark",
-    );
-    expect(wrapper.find("[data-test=party-list-1]").findAll("td")[3].classes()).to.contain(
-      "AVDhondtSummary--text-dark",
-    );
-    expect(wrapper.find("[data-test=party-list-1]").findAll("td")[4].classes()).to.contain(
-      "AVDhondtSummary--text-dark",
-    );
   });
 
   it("switches language", async () => {

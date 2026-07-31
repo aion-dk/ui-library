@@ -63,10 +63,15 @@ statements 80 / branches 70 over `src/components/**` + `src/helpers/**` (exclusi
 - Props: runtime object form, `type: String as PropType<X>`. **Zero** components use
   `withDefaults` or `defineProps<T>()` — don't introduce them.
 - Emits: array-form `defineEmits([...])`; `v-model` events are `update:propName`.
-- i18n: components **never** call `useI18n()`. They contain the verbatim
-  `inject("i18n")` + `switchLocale` block (see skill template) and take a
-  `locale: PropType<SupportedLocale>` prop. The block's "DO NOT REMOVE" comments are
-  earned — removing it breaks host-app integration, tests, Storybook, and the playground.
+- i18n: components **never** call `useI18n()` or `inject("i18n")` directly. They take a
+  `locale: PropType<SupportedLocale>` prop and one line —
+  `const { locale: i18nLocale, t } = useLocalization(() => props.locale)`
+  (`src/composables/useLocalization.ts`). Precedence is prop → locale provided by the
+  nearest AV ancestor → injected i18n instance; `localI18n` is the inject default, which
+  is what keeps tests, Storybook and the playground working. Never destructure
+  `i18n.global.t` — it binds to the host app's global locale, so the library's chrome
+  would stay in the admin language while content translated. Only entry-point components
+  need `:locale`; it reaches children via `provide`, so don't hand-forward it.
 - Translation keys: `t("js.components.AVFoo.snake_case_key")`; HTML-bearing strings get
   an `_html` suffix. Messages files must cover **all 20 locales** in `SUPPORTED_LOCALES`
   (ar ca cy da de en es fi fr is it ja ko nl pl pt ro ru sv zh).
@@ -106,6 +111,34 @@ compiled `dist/styles.css` (component styles only, no Bootstrap core) and the **
 8. Order inside `bootstrap.customized.scss` is load-bearing: flags/maps → `functions` →
    palette/overrides → `variables` → `$utilities`/`$theme-colors` merges → `bootstrap`.
    Insert changes at the correct layer.
+9. Dark mode is Bootstrap-native (`$enable-dark-mode`, `$color-mode-type: data`): the host
+   app sets `data-bs-theme="dark"` on an ancestor and components inherit it. Components
+   **never** take a `theme` prop and never branch on one in the template — paint with
+   body tokens (`text-body`, `text-body-70`, `bg-body-80`, from `_body_opacity.scss`) and
+   put anything that needs a real dark-mode override behind a `[data-bs-theme="dark"]`
+   selector in the component's SCSS or in `_dark_mode.scss`. `AVVerticalStep` and
+   `AVAnimatedMenuButton` still carry the legacy `theme` prop (`Theme` from
+   `@assemblyvoting/types`); migrate them when touched, don't copy them.
+   Any new partial `bootstrap.customized.scss` `@import`s must also be added to the
+   `viteStaticCopy` targets in `vite.config.ts` — the raw SCSS ships and a missing
+   partial breaks the consumer's Sass build, not ours.
+10. **Always prefer the body-opacity utilities for neutrals**, in this order:
+    1. `text-body-{10..90}` / `bg-body-{10..90}` (and the `-alt-*` counterparts for
+       inverted surfaces) from `_body_opacity.scss` — derived from `--bs-body-color-rgb`,
+       so they follow `data-bs-theme` *and* give 10% emphasis steps.
+    2. Plain Bootstrap body tokens (`text-body`, `bg-body`, `bg-body-tertiary`) when a
+       coarse step is genuinely all you need.
+    3. Never `text-muted` (deprecated in Bootstrap 5.3 — it's now just an alias for
+       `var(--bs-secondary-color)` — and a single fixed muting level): use `text-body-70`
+       or whichever step reads right.
+    4. Never `--bs-gray-*` / `text-gray-*` / `bg-gray-*`, and not the `secondary`
+       utilities either. `bg-secondary`/`text-secondary` resolve to the brand `$secondary`
+       (`#eeeeee`), a fixed light grey that stays light in dark mode; `--bs-gray-*` is a
+       frozen palette. `text-body-secondary` does adapt, but it's one coarse step with no
+       emphasis control, so reach for `text-body-70` instead. Replacing exactly these
+       (`text-gray-800` → `text-body`, `bg-secondary` → `bg-body-80`) is what the dark-mode
+       migration consisted of — don't reintroduce them. `text-muted` still survives in
+       `AVOption`, `AVSummaryOption` and `AVPileSummary`; migrate when touched.
 
 ## Testing
 

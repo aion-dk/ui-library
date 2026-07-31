@@ -211,6 +211,26 @@ Example of a component view in Desktop, Tablet and Mobile.
 
 <img src={CanvasSize} />
 
+### Dark mode
+
+Use the <strong>Change background</strong> button in the toolbar to switch between <strong>Light</strong> and <strong>Dark</strong>. Picking <strong>Dark</strong> also sets `data-bs-theme="dark"` on the story wrapper, so the component renders in Bootstrap's dark colour mode instead of just sitting on a dark canvas.
+
+That mirrors how the library behaves in a host app: dark mode is inherited from a `data-bs-theme="dark"` attribute on any ancestor element, so components never take a `theme` prop. Stories that should open in dark mode declare it themselves:
+
+<Source
+  language="typescript"
+  dark
+  format={false}
+  code={`export const Dark = {
+  render: Template,
+  globals: {
+    backgrounds: { value: "dark" },
+  },
+};`}
+/>
+
+A couple of components (`AVVerticalStep`, `AVAnimatedMenuButton`) still expose a legacy `theme` prop and are being migrated to the attribute.
+
 <div className="subheading">USING THE LIBRARY</div>
 
 <strong>Import the whole library as a plugin (recommended)</strong>

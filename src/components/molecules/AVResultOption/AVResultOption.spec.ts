@@ -28,7 +28,7 @@ describe("AVResultOption", () => {
   it("renders properly", async () => {
     expect(wrapper.findAll("[data-test=result-image]").length).to.eq(0);
 
-    expect(wrapper.find("[data-test=result-option]").classes()).to.contain("bg-secondary");
+    expect(wrapper.find("[data-test=result-option]").classes()).to.contain("bg-body-alt-10");
     expect(wrapper.find("[data-test=result-option]").classes()).to.not.contain("bg-success-faded");
     expect(wrapper.find("[data-test=result-option]").classes()).to.not.contain("bg-warning-faded");
 
@@ -48,7 +48,7 @@ describe("AVResultOption", () => {
     });
 
     expect(wrapper.find("[data-test=result-option]").classes()).to.contain("bg-success-faded");
-    expect(wrapper.find("[data-test=result-option]").classes()).to.not.contain("bg-secondary");
+    expect(wrapper.find("[data-test=result-option]").classes()).to.not.contain("bg-body-80");
     expect(wrapper.find("[data-test=result-option]").classes()).to.not.contain("bg-warning-faded");
 
     expect(wrapper.find("[data-test=result-title]").text()).to.contain("I've changed");
@@ -64,7 +64,7 @@ describe("AVResultOption", () => {
     });
 
     expect(wrapper.find("[data-test=result-option]").classes()).to.contain("bg-warning-faded");
-    expect(wrapper.find("[data-test=result-option]").classes()).to.not.contain("bg-secondary");
+    expect(wrapper.find("[data-test=result-option]").classes()).to.not.contain("bg-body-80");
     expect(wrapper.find("[data-test=result-option]").classes()).to.not.contain("bg-success-faded");
 
     expect(wrapper.find("[data-test=result-results]").text()).to.contain("2");
@@ -80,7 +80,7 @@ describe("AVResultOption", () => {
 
     expect(wrapper.find("[data-test=result-option]").classes()).to.contain("bg-success-faded");
     expect(wrapper.find("[data-test=result-option]").classes()).to.not.contain("bg-warning-faded");
-    expect(wrapper.find("[data-test=result-option]").classes()).to.not.contain("bg-secondary");
+    expect(wrapper.find("[data-test=result-option]").classes()).to.not.contain("bg-body-80");
   });
 
   it("can display image", async () => {

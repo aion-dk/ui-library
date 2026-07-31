@@ -6,8 +6,8 @@
 
 .AVWaitingDots {
   border-radius: 9999px;
-  color: var(--bs-gray-700);
-  background-color: var(--bs-gray-700);
+  color: var(--bs-body-color-60);
+  background-color: var(--bs-body-color-60);
   position: relative;
   width: 3px;
   height: 3px;
@@ -24,8 +24,8 @@
 }
 
 .AVWaitingDots::before {
-  color: var(--bs-gray-700);
-  background-color: var(--bs-gray-700);
+  color: var(--bs-body-color-60);
+  background-color: var(--bs-body-color-60);
   border-radius: 9999px;
   left: -5px;
   width: 3px;
@@ -35,8 +35,8 @@
 }
 
 .AVWaitingDots::after {
-  color: var(--bs-gray-700);
-  background-color: var(--bs-gray-700);
+  color: var(--bs-body-color-60);
+  background-color: var(--bs-body-color-60);
   border-radius: 9999px;
   left: 5px;
   width: 3px;
@@ -57,10 +57,10 @@
 
 @keyframes dot-waiting {
   0% {
-    background-color: rgba(55, 65, 81, 1);
+    background-color: var(--bs-body-color-20);
   }
   50%,
   100% {
-    background-color: rgba(55, 65, 81, 0.2);
+    background-color: var(--bs-body-color-30);
   }
 }

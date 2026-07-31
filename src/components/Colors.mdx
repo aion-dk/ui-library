@@ -1,4 +1,4 @@
-import { Meta, ColorPalette, ColorItem } from "@storybook/addon-docs/blocks";
+import { Meta, ColorPalette, ColorItem, Source } from "@storybook/addon-docs/blocks";
 
 <Meta title="Design System/Colors" />
 
@@ -6,97 +6,141 @@ import { Meta, ColorPalette, ColorItem } from "@storybook/addon-docs/blocks";
 
 <br />
 
+### Neutrals: prefer the body-opacity utilities
+
+For greys and muted text, reach for the body-opacity family — `text-body-10` … `text-body-90`, `bg-body-10` … `bg-body-90`, plus the `-alt-*` counterparts for inverted surfaces (defined in `src/bootstrap/_body_opacity.scss`). They are derived from `--bs-body-color-rgb`, so one class stays correct in both light and dark mode while still giving 10% emphasis steps.
+
+Prefer them over the alternatives:
+
+- Never `text-muted`. Bootstrap deprecated it in 5.3 (it is now just an alias for `var(--bs-secondary-color)`), and it gives you a single fixed level of muting. Use `text-body-70` — or whichever step reads right — instead.
+- The `--bs-gray-{shade}` palette is a **fixed** set of values. It does not follow `data-bs-theme`, so `text-gray-800` becomes dark text on a dark background in dark mode. Use it only for something that must never change with colour mode.
+- `bg-secondary` / `text-secondary` are the brand `$secondary` (`#eeeeee`), a brand colour rather than a surface token — also fixed.
+- `text-body-secondary` / `bg-body-tertiary` do follow colour mode, but they are three coarse steps; `text-body-70` says "muted" directly and stays adjustable.
+
+<br />
+
+### How the body-opacity utilities work
+
+Every step is generated from `--bs-body-color-rgb`, which Bootstrap redefines under `data-bs-theme`, so the same class resolves differently per mode. In light mode `--bs-body-color-rgb` is `33, 37, 41` (near-black) while `--bs-body-color-alt-rgb` is `222, 226, 230` (near-white); in dark mode the two swap. The `-alt-*` family is therefore built from the **opposite** mode's colour, which is what makes it useful for inverted surfaces.
+
+- `.text-body-10` … `.text-body-90` — the current mode's body colour at 10–90%. Use for text emphasis: `text-body-70` for muted copy, `text-body-90` for near-full strength.
+- `.bg-body-10` … `.bg-body-90` — the _opposite_ mode's body colour at 10–90%. Use for subtle surfaces that follow the mode: table headers, cards, wells.
+- `.text-body-alt-10` … `.text-body-alt-90` — the _opposite_ mode's body colour. Use for text sitting on an inverted surface.
+- `.bg-body-alt-10` … `.bg-body-alt-90` — the current mode's body colour. Use for deliberately inverted surfaces.
+- `.text-body-alt` / `.bg-body-alt` — full-strength inverted text colour and background.
+- `.text-body-secondary-alt` / `.bg-body-secondary-alt` / `.text-body-tertiary-alt` / `.bg-body-tertiary-alt` — inverted equivalents of Bootstrap's secondary and tertiary tokens.
+
+Steps go in tens from 10 to 90 — for full strength use plain `text-body` / `bg-body`.
+
+The swatches below are the **light mode** resolutions; in dark mode the two ramps swap places.
+
 <ColorPalette>
-  ### Neutral palette for Electa
+  <ColorItem
+    title="Body colour steps"
+    subtitle="--bs-body-color-{10…90} — .text-body-10 … .text-body-90, .bg-body-alt-10 … .bg-body-alt-90"
+    colors={{
+      10: "rgba(33, 37, 41, 0.1)",
+      20: "rgba(33, 37, 41, 0.2)",
+      30: "rgba(33, 37, 41, 0.3)",
+      40: "rgba(33, 37, 41, 0.4)",
+      50: "rgba(33, 37, 41, 0.5)",
+      60: "rgba(33, 37, 41, 0.6)",
+      70: "rgba(33, 37, 41, 0.7)",
+      80: "rgba(33, 37, 41, 0.8)",
+      90: "rgba(33, 37, 41, 0.9)",
+    }}
+  />
 
-{" "}
+  <ColorItem
+    title="Body colour steps (alt)"
+    subtitle="--bs-body-color-alt-{10…90} — .bg-body-10 … .bg-body-90, .text-body-alt-10 … .text-body-alt-90"
+    colors={{
+      10: "rgba(222, 226, 230, 0.1)",
+      20: "rgba(222, 226, 230, 0.2)",
+      30: "rgba(222, 226, 230, 0.3)",
+      40: "rgba(222, 226, 230, 0.4)",
+      50: "rgba(222, 226, 230, 0.5)",
+      60: "rgba(222, 226, 230, 0.6)",
+      70: "rgba(222, 226, 230, 0.7)",
+      80: "rgba(222, 226, 230, 0.8)",
+      90: "rgba(222, 226, 230, 0.9)",
+    }}
+  />
+</ColorPalette>
 
-<br />
+The rule of thumb is to keep a surface and its text in the same family. On a normal surface pair `bg-body-*` with `text-body-*`; on an inverted one pair `bg-body-alt-*` with `text-body-alt-*`:
 
-{" "}
+<Source
+  language="html"
+  dark
+  format={false}
+  code={`<!-- follows the colour mode: light grey header in light mode, dark grey in dark mode -->
+<thead class="bg-body-80 border-bottom">
+  <tr><th class="text-body">Candidate</th></tr>
+</thead>
 
-<ColorItem
-  title="--bs-gray-{shade}"
-  subtitle="neutrals"
-  colors={{
-    50: "#F8FAFC",
-    100: "#F7F7F7",
-    200: "#E9ECEF",
-    300: "#DEE2E6",
-    400: "#CED4DA",
-    500: "#ADB5BD",
-    600: "#6C757D",
-    700: "#495057",
-    800: "#343A40",
-    900: "#212529",
-  }}
+<!-- muted copy, readable in both modes -->
+
+<p class="text-body-70">Accepted formats: PDF, JSON</p>
+
+<!-- deliberately inverted panel: dark in light mode, light in dark mode -->
+
+<div class="bg-body-alt-90">
+  <p class="text-body-alt">Inverted banner copy</p>
+</div>`}
 />
 
 <br />
 
-### Assembly Voting primary color palette
+### Brand palette
 
-<br />
+These come from `src/bootstrap/bootstrap.customized.scss` and are merged into `$theme-colors`, so each one generates the usual Bootstrap utilities — `.text-{name}`, `.bg-{name}`, `.border-{name}`, `.btn-{name}` — plus a `.bg-{name}-faded` variant (the colour mixed 20% into white) and a `.pulse-shadow-{name}` animation.
+
+Note that these are **fixed brand values**: they do not react to `data-bs-theme`. Use them for brand identity, not for surfaces or body copy — those belong to the body-opacity utilities above.
+
+<ColorPalette>
+  <ColorItem
+    title="Brand colors"
+    subtitle="Midnight blue, Mist grey, Oxford blue, Golden bell orange, dark, dark grey"
+    colors={{
+      primary: "#00203e",
+      secondary: "#eeeeee",
+      "brand-dark": "#061128",
+      accent: "#f39200",
+      dark: "#26425c",
+      ballot: "#23292a",
+    }}
+  />
 
 <ColorItem
-  title="theme.colors.avblue"
-  subtitle="brand accent color"
+  title="Primary tints"
+  subtitle="$primary-10 … $primary-90 — .text-primary-50, .bg-primary-70, …"
   colors={{
-    100: "#EFF2FC",
-    200: "#D9DFEF",
-    300: "#9EAEDA",
-    400: "#7C8FC1",
-    500: "#5A6FA7",
-    600: "#163075",
-    700: "#0D1D46",
-    800: "#09132F",
-    900: "#040A17",
+    10: "#bfc7cf",
+    30: "#99a6b2",
+    50: "#738594",
+    70: "#4d6378",
+    90: "#26425c",
   }}
 />
+
+  <ColorItem
+    title="Accent tints"
+    subtitle="$accent-10 … $accent-90 — deliberately still AV blue, not orange"
+    colors={{
+      10: "#acb6f6",
+      30: "#8291f2",
+      50: "#596ded",
+      70: "#2f48e9",
+      90: "#1226aa",
+    }}
+  />
+</ColorPalette>
+
+The accent tints keep Assembly Voting's blue rather than tinting `$accent`: orange tints looked wrong in context and there is no guidance yet on how LUMI want them applied. Expect this to be revisited from their side.
 
 <br />
 
 ### Semantic colors
 
-<br />
-
-<ColorItem
-  title="theme.colors.semantic"
-  subtitle="semantic colors for success"
-  colors={{
-    "success.1": "#3FC063",
-    "success.2": "#C5E1CC",
-    "success.3": "#EAF7EE",
-  }}
-/>
-
-<br />
-
-<ColorItem
-  title="theme.colors.semantic"
-  subtitle="semantic colors for information"
-  colors={{ "info.1": "#006CE5", "info.2": "#B4CCEB", "info.3": "#E6EFFA" }}
-/>
-
-<br />
-
-<ColorItem
-  title="theme.colors.semantic"
-  subtitle="semantic colors for danger"
-  colors={{
-    "danger.1": "#EA4E2C",
-    "danger.2": "#ECC9C1",
-    "danger.3": "#FCEDE9",
-  }}
-/>
-
-  <ColorItem
-    title="theme.colors.semantic"
-    subtitle="semantic colors for warning"
-    colors={{
-      "warning.1": "#EE9500",
-      "warning.2": "#F5DEB6",
-      "warning.3": "#FEF7EA",
-    }}
-  />
-</ColorPalette>
+Use Bootstrap's utility classes (`success`, `info`, `warning`, `danger`) and their `-faded` / `bg-*-subtle` variants rather than hard-coded values, so they keep following the colour mode.
