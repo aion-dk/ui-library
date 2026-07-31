@@ -53,7 +53,7 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
     class="d-flex p-3"
     :class="{
       'text-body': true,
-      'bg-body-80': !tied && !elected && !ineligible,
+      'bg-body-alt-10': !tied && !elected && !ineligible,
       'AVResultOption--highlighted': elected || tied,
       'bg-success-faded': elected,
       'bg-warning-faded': tied && !elected,
