@@ -84,6 +84,32 @@ contract* — which cells get body tokens versus a `--highlighted` override — 
 result is covered in Storybook, where the backgrounds toolbar drives `data-bs-theme` on
 the story wrapper (`.storybook/decorators.ts`).
 
+### Why neutrals go through the body-opacity family
+
+`_body_opacity.scss` exists because Bootstrap's own neutral options are either mode-blind
+or too coarse. It re-derives `--bs-body-color-{10..90}` from `--bs-body-color-rgb` (plus an
+`-alt` family carrying the *opposite* mode's values, for surfaces that must stay inverted),
+and emits `text-body-*` / `bg-body-*` utilities from them. Because everything descends from
+`--bs-body-color`, which Bootstrap redefines under `[data-bs-theme]`, a single class is
+correct in both modes at any emphasis level.
+
+So neutrals should always come from that family, ahead of the alternatives:
+
+- `--bs-gray-*` (and the local `text-gray-*` / `bg-gray-*` utilities) is a frozen palette —
+  `text-gray-800` is dark text on a dark background once the mode flips. This is what most
+  of the migration replaced.
+- `bg-secondary` / `text-secondary` resolve to the brand `$secondary` (`#eeeeee`, LUMI Mist
+  grey). It's a brand colour, not a surface token, so it stays light in dark mode.
+- `text-body-secondary` / `bg-body-tertiary` *do* follow the mode, but they are three fixed
+  steps. `text-body-70` expresses "muted" directly and stays adjustable.
+- `text-muted` is the worst of both: Bootstrap deprecated it in 5.3, where it became a plain
+  alias for `var(--bs-secondary-color)`, so it is the coarse secondary step under a name
+  that implies a design intent it no longer carries. `text-body-{step}` states the intent.
+
+The practical rule: reach for `text-body-{step}` / `bg-body-{step}` first, fall back to the
+plain Bootstrap body tokens for coarse cases, and treat a literal grey, a `secondary`
+utility, or `text-muted` as a bug in anything that can render in dark mode.
+
 Layer order inside `bootstrap.customized.scss` is load-bearing (Sass evaluates
 top-to-bottom): `$enable-*` flags and breakpoint maps → Bootstrap `functions` → brand
 palette and variable overrides → Bootstrap `variables` → `$utilities` and `$theme-colors`

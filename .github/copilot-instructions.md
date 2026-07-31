@@ -15,7 +15,10 @@
 
 ## Dark Mode And Styling
 - Dark mode is Bootstrap-native: the host app sets `data-bs-theme="dark"` on an ancestor and components inherit it. Never add a `theme` prop to a component and never branch on one in a template.
-- Paint with mode-aware tokens (`text-body`, `text-body-70`, `bg-body-80`, … from `src/bootstrap/_body_opacity.scss`) instead of fixed colours like `text-gray-800` or `bg-secondary`. Anything a token can't express goes behind a `[data-bs-theme="dark"]` selector in the component's `.scss`.
+- For neutrals, always prefer the body-opacity utilities — `text-body-{10..90}` / `bg-body-{10..90}` and their `-alt-*` counterparts from `src/bootstrap/_body_opacity.scss` — over anything else. They derive from `--bs-body-color-rgb`, so they follow `data-bs-theme` and still give 10% emphasis steps.
+- Never use `text-muted` — Bootstrap deprecated it in 5.3 (now just an alias for `var(--bs-secondary-color)`) and it offers one fixed muting level. Use `text-body-70`, or whichever step reads right.
+- Never use `--bs-gray-*` / `text-gray-*` / `bg-gray-*` (frozen palette) and avoid the `secondary` utilities too: `bg-secondary`/`text-secondary` are the brand `$secondary` (`#eeeeee`) and stay light in dark mode, while `text-body-secondary` adapts but is a single coarse step — use `text-body-70`. Plain `text-body`/`bg-body`/`bg-body-tertiary` are fine when a coarse step really is all you need.
+- Anything a token can't express goes behind a `[data-bs-theme="dark"]` selector in the component's `.scss`.
 - `AVVerticalStep` and `AVAnimatedMenuButton` still use the legacy `theme` prop; migrate them when you touch them rather than following their pattern.
 - In Storybook the backgrounds toolbar is the dark/light switch — it sets `data-bs-theme` on the story wrapper (`.storybook/decorators.ts`), and stories opt in with `globals: { backgrounds: { value: "dark" } }`.
 

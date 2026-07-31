@@ -122,6 +122,23 @@ compiled `dist/styles.css` (component styles only, no Bootstrap core) and the **
    Any new partial `bootstrap.customized.scss` `@import`s must also be added to the
    `viteStaticCopy` targets in `vite.config.ts` — the raw SCSS ships and a missing
    partial breaks the consumer's Sass build, not ours.
+10. **Always prefer the body-opacity utilities for neutrals**, in this order:
+    1. `text-body-{10..90}` / `bg-body-{10..90}` (and the `-alt-*` counterparts for
+       inverted surfaces) from `_body_opacity.scss` — derived from `--bs-body-color-rgb`,
+       so they follow `data-bs-theme` *and* give 10% emphasis steps.
+    2. Plain Bootstrap body tokens (`text-body`, `bg-body`, `bg-body-tertiary`) when a
+       coarse step is genuinely all you need.
+    3. Never `text-muted` (deprecated in Bootstrap 5.3 — it's now just an alias for
+       `var(--bs-secondary-color)` — and a single fixed muting level): use `text-body-70`
+       or whichever step reads right.
+    4. Never `--bs-gray-*` / `text-gray-*` / `bg-gray-*`, and not the `secondary`
+       utilities either. `bg-secondary`/`text-secondary` resolve to the brand `$secondary`
+       (`#eeeeee`), a fixed light grey that stays light in dark mode; `--bs-gray-*` is a
+       frozen palette. `text-body-secondary` does adapt, but it's one coarse step with no
+       emphasis control, so reach for `text-body-70` instead. Replacing exactly these
+       (`text-gray-800` → `text-body`, `bg-secondary` → `bg-body-80`) is what the dark-mode
+       migration consisted of — don't reintroduce them. `text-muted` still survives in
+       `AVOption`, `AVSummaryOption` and `AVPileSummary`; migrate when touched.
 
 ## Testing
 
