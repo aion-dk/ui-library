@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, inject, onMounted, watch } from "vue";
-import { switchLocale } from "@/i18n";
+import { ref, computed, onMounted, watch } from "vue";
 import type {
   PropType,
   SupportedLocale,
@@ -17,6 +16,7 @@ import type {
 import SelectionPileValidator from "@assemblyvoting/js-client/dist/lib/validators/selectionPileValidator";
 import ContestSelectionValidator from "@assemblyvoting/js-client/dist/lib/validators/contestSelectionValidator";
 import { getMeaningfulLabel } from "@/helpers/meaningfulLabel";
+import { useLocalization } from "@/composables/useLocalization";
 
 const props = defineProps({
   contest: {
@@ -34,6 +34,14 @@ const props = defineProps({
   showSubmissionHelper: {
     type: Boolean,
     default: true,
+  },
+  selfVotePrevention: {
+    type: Boolean,
+    default: false,
+  },
+  voterIdentifier: {
+    type: String,
+    default: null,
   },
   partialResults: {
     type: Object as PropType<PartialResults>,
@@ -91,17 +99,7 @@ const contestErrors = ref<string[]>([]);
 
 const selectionPiles = computed(() => props.contestSelection.piles);
 
-/**
- * This is necessary in order to support both provided i18n and local i18n.
- * The used locale will be taken from the provided i18n as long as there is one
- * (this happens when we plug-in the library into a product, as electa or evs),
- * otherwise, it will take the locale from the local i18n instance.
- * Removing it, will cause all tests, storybook and the playground to break.
- */
-/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
-const i18n: any = inject("i18n");
-const { t } = i18n.global;
-const i18nLocale = computed<SupportedLocale>(() => i18n.global.locale.value || i18n.global.locale);
+const { locale: i18nLocale, t } = useLocalization(() => props.locale);
 
 const unusedWeight = computed(() =>
   selectionPiles.value?.reduce(
@@ -110,13 +108,26 @@ const unusedWeight = computed(() =>
   ),
 );
 
-const selectionPileValidator = computed(() => new SelectionPileValidator(props.contest));
+type SelectionPileValidatorOptions = {
+  selfVotePrevention?: boolean;
+  voterIdentifier?: string;
+};
+
+const validatorOptions = computed<SelectionPileValidatorOptions>(() => ({
+  selfVotePrevention: props.selfVotePrevention,
+  voterIdentifier: props.voterIdentifier || "",
+}));
+
+const selectionPileValidator = computed(
+  () => new SelectionPileValidator(props.contest, validatorOptions.value),
+);
 
 const contestSelectionValidator = computed(
   () =>
     new ContestSelectionValidator({
       contest: props.contest,
       voterWeight: props.weight,
+      ...validatorOptions.value,
     }),
 );
 
@@ -227,21 +238,11 @@ watch(activePile, (newPile) => {
 watch(activeState, (newState) => emits("update:activeState", newState));
 
 onMounted(() => {
-  if (props.locale) switchLocale(props.locale); // DO NOT REMOVE (If in doubt, read the next block comment)
   emits("update:activePile", activePile.value);
   emits("update:activeState", activeState.value);
   emits("update:complete", readyForSubmission.value);
   if (!userCanSplit.value) persistActivePile();
 });
-
-watch(
-  () => props.locale,
-  () => {
-    if (props.locale) switchLocale(props.locale);
-  },
-  { deep: true },
-);
-/* END */
 </script>
 
 <template>
@@ -285,6 +286,8 @@ watch(
           :weight="weight"
           :includeLazyErrors="includeLazyErrors"
           :show-submission-helper="showSubmissionHelper"
+          :self-vote-prevention="selfVotePrevention"
+          :voter-identifier="voterIdentifier"
           :image-option="imageOption"
           @update:selection-pile="updateActivePile"
           @update:errors="(errors: string[]) => updateErrors(errors)"
@@ -449,6 +452,8 @@ watch(
       :weight="weight"
       :image-option="imageOption"
       :show-submission-helper="showSubmissionHelper"
+      :self-vote-prevention="selfVotePrevention"
+      :voter-identifier="voterIdentifier"
       @update:selection-pile="updateActivePile"
       @update:errors="(errors: string[]) => updateErrors(errors)"
       @update:pending-alerts="(alerts: ValidationResult[]) => emits('update:pendingAlerts', alerts)"

@@ -1,5 +1,10 @@
 # Project Guidelines
 
+> Companion docs: [CLAUDE.md](../CLAUDE.md) (extended rules incl. styling sharp edges and
+> the release/branch model) and [doc/architecture.md](../doc/architecture.md) (the "why"
+> behind the build, styling, i18n, and release design). Step-by-step procedures live in
+> [.claude/skills/](../.claude/skills/). This file stays the quick style reference.
+
 ## Code Style
 - Use Vue 3 SFCs with `<script setup lang="ts">` and Composition API patterns used under `src/components/**`. NEVER use Options API or class-based components.
 - Keep component assets co-located in the component directory:
@@ -7,6 +12,15 @@
 - Prefer shared types and constants from `src/types/**` and `src/constants/**` instead of redefining local enums/unions.
 - Use `@` imports for project source paths (alias to `src/`).
 - Use always yarn for package management and scripts; avoid npm, pnpm or similar if possible.
+
+## Dark Mode And Styling
+- Dark mode is Bootstrap-native: the host app sets `data-bs-theme="dark"` on an ancestor and components inherit it. Never add a `theme` prop to a component and never branch on one in a template.
+- For neutrals, always prefer the body-opacity utilities — `text-body-{10..90}` / `bg-body-{10..90}` and their `-alt-*` counterparts from `src/bootstrap/_body_opacity.scss` — over anything else. They derive from `--bs-body-color-rgb`, so they follow `data-bs-theme` and still give 10% emphasis steps.
+- Never use `text-muted` — Bootstrap deprecated it in 5.3 (now just an alias for `var(--bs-secondary-color)`) and it offers one fixed muting level. Use `text-body-70`, or whichever step reads right.
+- Never use `--bs-gray-*` / `text-gray-*` / `bg-gray-*` (frozen palette) and avoid the `secondary` utilities too: `bg-secondary`/`text-secondary` are the brand `$secondary` (`#eeeeee`) and stay light in dark mode, while `text-body-secondary` adapts but is a single coarse step — use `text-body-70`. Plain `text-body`/`bg-body`/`bg-body-tertiary` are fine when a coarse step really is all you need.
+- Anything a token can't express goes behind a `[data-bs-theme="dark"]` selector in the component's `.scss`.
+- `AVVerticalStep` and `AVAnimatedMenuButton` still use the legacy `theme` prop; migrate them when you touch them rather than following their pattern.
+- In Storybook the backgrounds toolbar is the dark/light switch — it sets `data-bs-theme` on the story wrapper (`.storybook/decorators.ts`), and stories opt in with `globals: { backgrounds: { value: "dark" } }`.
 
 ## Architecture
 - This is a component library organized by design-system levels in `src/components/`:
@@ -18,7 +32,8 @@
 
 ## i18n And Dependency Injection
 - Components are expected to support provided i18n from host apps and local fallback i18n.
-- Preserve the `inject("i18n")` + locale switching pattern used in existing components (for example `src/components/atoms/AVSpinner/AVSpinner.vue`).
+- Translated components get their locale and `t`/`d` from `useLocalization` (`src/composables/useLocalization.ts`), e.g. `const { locale: i18nLocale, t } = useLocalization(() => props.locale);` (for example `src/components/atoms/AVSpinner/AVSpinner.vue`). Never call `useI18n()`, never `inject("i18n")` directly, and never destructure `i18n.global.t` — that binds translations to the host app's global locale rather than the resolved one.
+- Precedence is `locale` prop → locale provided by the nearest AV ancestor → injected i18n instance. Only entry-point components need to be passed `:locale`; it propagates to children automatically, so don't add manual `:locale` forwarding.
 - Do not remove i18n fallback behavior; it is required for tests, Storybook, and playground usage.
 - Make sure to add any new i18n keys to all languages (`SUPPORTED_LOCALES` on `src/constants`) in the appropriate `*.messages.ts` file.
 

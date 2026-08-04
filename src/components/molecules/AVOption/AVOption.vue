@@ -2,16 +2,7 @@
 import useEventsBus from "@/helpers/eventBus";
 import { getMeaningfulLabel } from "@/helpers/meaningfulLabel";
 import { getTextContrastColor } from "@/helpers/contrastCalculator";
-import {
-  watch,
-  ref,
-  nextTick,
-  computed,
-  inject,
-  onMounted,
-  onUnmounted,
-  useTemplateRef,
-} from "vue";
+import { watch, ref, nextTick, computed, onMounted, onUnmounted, useTemplateRef } from "vue";
 import type {
   PropType,
   SupportedLocale,
@@ -25,7 +16,7 @@ import type {
   IterableObject,
   VoiceCredits,
 } from "@/types";
-import { switchLocale } from "@/i18n";
+import { useLocalization } from "@/composables/useLocalization";
 
 const { eventBus } = useEventsBus();
 
@@ -166,6 +157,8 @@ const subOptionSelected = computed(() => {
 });
 
 const exclusive = computed(() => props.option.exclusive);
+
+const optionDisabled = computed(() => props.disabled);
 
 const isWriteIn = computed(() => !!props.option.writeIn);
 
@@ -338,7 +331,12 @@ const parentStyle = computed(() => {
 });
 
 const toggleFromOption = (onlyUpdate: boolean): void => {
-  if (props.disabled || props.observerMode || !props.option.selectable || counterInterface.value)
+  if (
+    optionDisabled.value ||
+    props.observerMode ||
+    !props.option.selectable ||
+    counterInterface.value
+  )
     return;
 
   if (votesAllowedPerOption.value > 1) {
@@ -419,8 +417,6 @@ watch(
 );
 
 onMounted(() => {
-  if (props.locale) switchLocale(props.locale); // DO NOT REMOVE (If in doubt, read the next block comment)
-
   mutationObserver.value = new MutationObserver(() => {
     const dirAttr = mutationObserverTarget.attributes.getNamedItem("dir")?.value;
     isRtl.value = !!dirAttr && dirAttr === "rtl";
@@ -458,32 +454,14 @@ onUnmounted(() => {
   resizeObserver.value?.disconnect();
 });
 
-/**
- * This is necesary in order to support both provided i18n and local i18n.
- * The used locale will be taken from the provided i18n as long as there is one
- * (this happens when we plug-in the library into a product, as electa or evs),
- * otherwise, it will take the locale from the local i18n instance.
- * Removing it, will cause all tests, storybook and the playground to break.
- */
-/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
-const i18n: any = inject("i18n");
-const { t } = i18n.global;
-const i18nLocale = computed<SupportedLocale>(() => i18n.global.locale.value || i18n.global.locale);
-watch(
-  () => props.locale,
-  () => {
-    if (props.locale) switchLocale(props.locale);
-  },
-  { deep: true },
-);
-/* END */
+const { locale: i18nLocale, t } = useLocalization(() => props.locale);
 </script>
 
 <template>
   <div
     class="position-relative"
     :class="{
-      'AVOption--disabled': disabled,
+      'AVOption--disabled': optionDisabled,
       'h-100': contest.mode === 'gallery',
     }"
     data-test="option"
@@ -522,7 +500,8 @@ watch(
           :class="{
             'AVOption--highlight': highlighted,
             'h-100': contest.mode === 'gallery',
-            'cursor-pointer': option.selectable && !(disabled || observerMode || counterInterface),
+            'cursor-pointer':
+              option.selectable && !(optionDisabled || observerMode || counterInterface),
             'bg-transparent':
               contest.markingType.quadraticVoting &&
               !(selectionStyle === 'background' && checkedCount > 0),
@@ -699,7 +678,7 @@ watch(
                     :data-test="`write-in-${option.reference}-input`"
                     :aria-labelledby="`option_${option.reference}_title`"
                     :placeholder="writeInPlaceholder"
-                    :disabled="disabled || observerMode || !option.selectable"
+                    :disabled="optionDisabled || observerMode || !option.selectable"
                     resize="vertical"
                     :rows="contest.mode === 'gallery' ? 3 : 1"
                     @click="toggleFromWriteIn"
@@ -724,7 +703,7 @@ watch(
               <AVOptionCounter
                 :amount="checkedCount"
                 :max-amount="votesAllowedPerOption"
-                :disabled="disabled || observerMode"
+                :disabled="optionDisabled || observerMode"
                 :invalid="invalid"
                 :is-quadratic="contest.markingType.quadraticVoting"
                 @update-crosses="
@@ -771,7 +750,7 @@ watch(
                   :invalid="invalid"
                   :option-reference="option.reference"
                   :check-box-index="optionIndex"
-                  :disabled="disabled || observerMode"
+                  :disabled="optionDisabled || observerMode"
                   :gallery-mode="false"
                   :selection-style="selectionStyle"
                   @toggled="handleCheckboxToggle(option.reference, optionIndex, writeInText)"
@@ -781,7 +760,7 @@ watch(
 
             <!-- LIVE COUNT (INSIDE) -->
             <AVOptionLiveResults
-              v-if="optionPartialResults && (observerMode || disabled)"
+              v-if="optionPartialResults && (observerMode || optionDisabled)"
               :option-reference="option.reference"
               :partial-results="optionPartialResults"
               mode="internal"
@@ -800,7 +779,7 @@ watch(
       </template>
 
       <!-- LIVE COUNT (OUTSIDE) -->
-      <template #results v-if="!disabled && optionPartialResults && !observerMode">
+      <template #results v-if="!optionDisabled && optionPartialResults && !observerMode">
         <AVOptionLiveResults
           :option-reference="option.reference"
           :partial-results="optionPartialResults"

@@ -542,11 +542,14 @@ describe("AVOption", () => {
     await wrapper.setProps({
       option: getOption(["selectable", "image", "color", "children"], 1),
       contest: getContest(["gallery", "children_options"]),
-      parentTitle: "Fruit",
+      parentTitle: "Washington Spirit/Olympique Lyonnais",
     });
 
     expect(wrapper.findAll("[data-test=option-children]").length).to.eq(0);
-    expect(wrapper.find("[data-test=parent-bagde]").text()).to.contain("Fruit");
+    expect(wrapper.find("[data-test=parent-bagde]").text()).to.contain(
+      "Washington Spirit/Olympique Lyonnais",
+    );
+    expect(wrapper.find("[data-test=option-container]").classes()).to.include("position-relative");
     expect(wrapper.find("[data-test=option-section]").attributes().style).to.include(
       "border-left-width: 0.5rem;",
     );
@@ -623,7 +626,9 @@ describe("AVOption", () => {
       locale: "da",
     });
 
-    expect(wrapper.find("[data-test=parent-bagde]").text()).to.contain("Fruit"); // Doesn't change because is sent from parent
+    expect(wrapper.find("[data-test=parent-bagde]").text()).to.contain(
+      "Washington Spirit/Olympique Lyonnais",
+    ); // Doesn't change because is sent from parent
 
     expect(wrapper.find("[data-test=option-title]").text()).to.contain("Eksempel mulighed 1");
     expect(wrapper.find("[data-test=option-description]").text()).to.contain(
