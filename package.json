@@ -39,7 +39,7 @@
     "test-storybook": "vitest run --project=storybook"
   },
   "dependencies": {
-    "@assemblyvoting/types": "^1.0.6",
+    "@assemblyvoting/types": "^1.2.0",
     "@fontsource/open-sans": "^5.2.7",
     "@fontsource/pt-mono": "^5.2.8",
     "@fontsource/rubik": "^5.2.8",
