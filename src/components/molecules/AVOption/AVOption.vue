@@ -367,9 +367,13 @@ Result:
 ✅ Radio mode → Always allowed (radio handles its own logic)
 */
 
-const handleOptionClick = (): void => {
+const handleOptionClick = (event: MouseEvent): void => {
   if (props.disabled || props.observerMode || !props.option.selectable || counterInterface.value)
     return;
+
+  if (event.target && (event.target as Element).closest("a, video")) {
+    return;
+  }
 
   if (props.maxSelectionsReached && checkedCount.value === 0 && props.selectionMode !== "radio") {
     emits("blocked-click");
