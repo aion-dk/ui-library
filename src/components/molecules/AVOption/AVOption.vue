@@ -371,7 +371,7 @@ const handleOptionClick = (event: MouseEvent): void => {
   if (props.disabled || props.observerMode || !props.option.selectable || counterInterface.value)
     return;
 
-  if (event.target && (event.target as Element).closest("a, video")) {
+  if (event.target instanceof Element && event.target.closest("a, video")) {
     return;
   }
 
