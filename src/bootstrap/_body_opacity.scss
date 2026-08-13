@@ -1,0 +1,89 @@
+@use "sass:math";
+
+@mixin body-opacity-vars {
+  @for $i from 1 through 9 {
+    $step: $i * 10;
+    $opacity: math.div($i, 10);
+    --bs-body-color-#{$step}: rgba(var(--bs-body-color-rgb), #{$opacity});
+    --bs-body-color-alt-#{$step}: rgba(var(--bs-body-color-alt-rgb), #{$opacity});
+  }
+}
+
+@mixin body-alt-vars($color, $bg, $secondary-color, $secondary-bg, $tertiary-color, $tertiary-bg) {
+  --bs-body-color-alt: #{$color};
+  --bs-body-color-alt-rgb: #{to-rgb($color)};
+  --bs-body-bg-alt: #{$bg};
+  --bs-secondary-color-alt: #{$secondary-color};
+  --bs-secondary-bg-alt: #{$secondary-bg};
+  --bs-tertiary-color-alt: #{$tertiary-color};
+  --bs-tertiary-bg-alt: #{$tertiary-bg};
+}
+
+:root,
+[data-bs-theme="light"] {
+  @include body-alt-vars(
+    $body-color-dark,
+    $body-bg-dark,
+    $body-secondary-color-dark,
+    $body-secondary-bg-dark,
+    $body-tertiary-color-dark,
+    $body-tertiary-bg-dark
+  );
+  @include body-opacity-vars;
+}
+
+@include color-mode(dark) {
+  @include body-alt-vars(
+    $body-color,
+    $body-bg,
+    $body-secondary-color,
+    $body-secondary-bg,
+    $body-tertiary-color,
+    $body-tertiary-bg
+  );
+  @include body-opacity-vars;
+}
+
+.text-body-alt {
+  color: var(--bs-body-color-alt) !important;
+}
+
+.bg-body-alt {
+  background-color: var(--bs-body-bg-alt) !important;
+}
+
+.text-body-secondary-alt {
+  color: var(--bs-secondary-color-alt) !important;
+}
+
+.bg-body-secondary-alt {
+  background-color: var(--bs-secondary-bg-alt) !important;
+}
+
+.text-body-tertiary-alt {
+  color: var(--bs-tertiary-color-alt) !important;
+}
+
+.bg-body-tertiary-alt {
+  background-color: var(--bs-tertiary-bg-alt) !important;
+}
+
+@for $i from 1 through 9 {
+  $step: $i * 10;
+
+  .text-body-#{$step} {
+    color: var(--bs-body-color-#{$step}) !important;
+  }
+
+  .bg-body-#{$step} {
+    background-color: var(--bs-body-color-alt-#{$step}) !important;
+  }
+
+  .text-body-alt-#{$step} {
+    color: var(--bs-body-color-alt-#{$step}) !important;
+  }
+
+  .bg-body-alt-#{$step} {
+    background-color: var(--bs-body-color-#{$step}) !important;
+  }
+}

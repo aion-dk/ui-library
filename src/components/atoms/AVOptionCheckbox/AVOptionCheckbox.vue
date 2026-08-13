@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { ref, computed, inject, onMounted, onUnmounted, watch } from "vue";
-import { switchLocale } from "@/i18n";
+import { ref, computed, onMounted, onUnmounted } from "vue";
 import type { PropType, SupportedLocale, SelectionStyle } from "@/types";
+import { useLocalization } from "@/composables/useLocalization";
 
 const props = defineProps({
   checked: {
@@ -75,8 +75,6 @@ const accessibilityAttributes = computed(() => {
 });
 
 onMounted(() => {
-  if (props.locale) switchLocale(props.locale); // DO NOT REMOVE (If in doubt, read the next block comment)
-
   mutationObserver.value = new MutationObserver(() => {
     const dirAttr = mutationObserverTarget.attributes.getNamedItem("dir")?.value;
     isRtl.value = !!dirAttr && dirAttr === "rtl";
@@ -89,24 +87,7 @@ onMounted(() => {
 
 onUnmounted(() => mutationObserver.value && mutationObserver.value.disconnect());
 
-/**
- * This is necesary in order to support both provided i18n and local i18n.
- * The used locale will be taken from the provided i18n as long as there is one
- * (this happens when we plug-in the library into a product, as electa or evs),
- * otherwise, it will take the locale from the local i18n instance.
- * Removing it, will cause all tests, storybook and the playground to break.
- */
-/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
-const i18n: any = inject("i18n");
-const { t } = i18n.global;
-watch(
-  () => props.locale,
-  () => {
-    if (props.locale) switchLocale(props.locale);
-  },
-  { deep: true },
-);
-/* END */
+const { t } = useLocalization(() => props.locale);
 </script>
 
 <template>

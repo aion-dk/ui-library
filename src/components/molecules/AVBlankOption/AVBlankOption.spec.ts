@@ -264,4 +264,10 @@ describe("AVBlankOption", () => {
       "AVBlankOption--selected-background",
     );
   });
+
+  it("emits toggleBlank when clicked", async () => {
+    await wrapper.find("[data-test=blank-option]").trigger("click");
+
+    expect(wrapper.emitted().toggleBlank).to.have.lengthOf(1);
+  });
 });

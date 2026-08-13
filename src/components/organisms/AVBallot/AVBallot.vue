@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, inject, onMounted, watch, watchEffect } from "vue";
-import { switchLocale } from "@/i18n";
+import { ref, computed, watch, watchEffect } from "vue";
 import { flattenOptions } from "@/helpers/contestHelpers";
 import { getMeaningfulLabel } from "@/helpers/meaningfulLabel";
 import { useValidationPolicy, handleOvervote } from "@/composables/useValidationPolicy";
@@ -20,6 +19,7 @@ import type {
 } from "@/types";
 import SelectionPileValidator from "@assemblyvoting/js-client/dist/lib/validators/selectionPileValidator";
 import BelgiumBallotValidator from "@assemblyvoting/js-client/dist/lib/validators/belgiumBallotValidator";
+import { useLocalization } from "@/composables/useLocalization";
 
 const props = defineProps({
   contest: {
@@ -41,6 +41,14 @@ const props = defineProps({
   disabled: {
     type: Boolean,
     default: false,
+  },
+  selfVotePrevention: {
+    type: Boolean,
+    default: false,
+  },
+  voterIdentifier: {
+    type: String,
+    default: null,
   },
   observerMode: {
     type: Boolean,
@@ -80,17 +88,7 @@ const emits = defineEmits([
   "view-candidate",
 ]);
 
-/**
- * This is necessary in order to support both provided i18n and local i18n.
- * The used locale will be taken from the provided i18n as long as there is one
- * (this happens when we plug-in the library into a product, as electa or evs),
- * otherwise, it will take the locale from the local i18n instance.
- * Removing it, will cause all tests, storybook and the playground to break.
- */
-/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
-const i18n: any = inject("i18n");
-const { t } = i18n.global;
-const i18nLocale = computed<SupportedLocale>(() => i18n.global.locale.value || i18n.global.locale);
+const { locale: i18nLocale, t } = useLocalization(() => props.locale);
 
 const search = ref<HTMLInputElement | null>(null);
 
@@ -115,7 +113,17 @@ watchEffect(() => {
   emits("update:pendingAlerts", pendingAlerts.value);
 });
 
-const validator = computed(() => new SelectionPileValidator(props.contest));
+type SelectionPileValidatorOptions = {
+  selfVotePrevention?: boolean;
+  voterIdentifier?: string;
+};
+
+const validatorOptions = computed<SelectionPileValidatorOptions>(() => ({
+  selfVotePrevention: props.selfVotePrevention,
+  voterIdentifier: props.voterIdentifier || "",
+}));
+
+const validator = computed(() => new SelectionPileValidator(props.contest, validatorOptions.value));
 
 const customValidators = computed(() => {
   const validators = [];
@@ -323,18 +331,6 @@ const galleryOptions = computed(() => {
 
   return options;
 });
-
-onMounted(() => {
-  if (props.locale) switchLocale(props.locale);
-});
-watch(
-  () => props.locale,
-  () => {
-    if (props.locale) switchLocale(props.locale);
-  },
-  { deep: true },
-);
-/* END */
 </script>
 
 <template>
