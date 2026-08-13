@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, computed, inject, watch } from "vue";
 import { flattenOptions } from "@/helpers/contestHelpers";
+import localI18n from "@/i18n";
 import { useValidationPolicy } from "@/composables/useValidationPolicy";
 import type {
   PropType,
@@ -77,7 +78,7 @@ const showAllOptions = ref(false);
 
 // Needed for i18n.global.te() translation-existence checks below; useLocalization doesn't expose that.
 /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
-const i18n: any = inject("i18n");
+const i18n: any = inject("i18n", localI18n);
 const { locale: i18nLocale, t } = useLocalization(() => props.locale);
 
 const { inlineResults: policyInlineResults, pendingAlerts } = useValidationPolicy(
