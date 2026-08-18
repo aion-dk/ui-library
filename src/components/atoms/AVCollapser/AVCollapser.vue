@@ -81,11 +81,20 @@ const { t } = useLocalization(() => props.locale);
 
 <template>
   <template v-if="collapsable">
+    <!--
+      When `useDeferredButton` is true the real toggle button is Teleported
+      outside the toggle slot (to `#${paneId}_btn`), and the wrapper below only
+      hosts the option's visual content. Keeping `role="button"`/`tabindex` here
+      would mark a non-button container as interactive while it holds other
+      focusable controls (checkboxes, links, textarea) — axe `nested-interactive`.
+      So we strip the interactive semantics in that branch; the handlers are
+      no-ops there anyway (triggerAccordion/onKeydown early-return).
+    -->
     <div
-      role="button"
-      tabindex="0"
-      :aria-controls="paneId"
-      :aria-expanded="isOpen"
+      :role="useDeferredButton ? undefined : 'button'"
+      :tabindex="useDeferredButton ? undefined : 0"
+      :aria-controls="useDeferredButton ? undefined : paneId"
+      :aria-expanded="useDeferredButton ? undefined : isOpen"
       class="w-100 border-0"
       style="background: transparent; box-shadow: none; padding: 0"
       :class="{
