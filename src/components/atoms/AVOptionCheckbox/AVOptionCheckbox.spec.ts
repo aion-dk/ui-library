@@ -129,4 +129,27 @@ describe("AVOptionCheckbox", () => {
       "AVOptionCheckbox--checked",
     );
   });
+
+  it("does not emit a tick id when optionReference is empty (avoids duplicate-id collisions)", async () => {
+    await wrapper.setProps({
+      checked: true,
+      optionReference: "",
+      rank: 1,
+    });
+
+    const select = wrapper.find("[data-test=select]");
+    expect(select.exists()).to.be.true;
+    expect(select.attributes().id).to.be.undefined;
+  });
+
+  it("emits a unique tick id when optionReference is provided", async () => {
+    await wrapper.setProps({
+      checked: true,
+      optionReference: "optA",
+      rank: 1,
+    });
+
+    const select = wrapper.find("[data-test=select]");
+    expect(select.attributes().id).to.eq("option_optA_tick");
+  });
 });
