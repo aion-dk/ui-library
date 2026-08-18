@@ -68,25 +68,35 @@ const triggerAccordion = (): void => {
   toggleAccordion();
 };
 
+const onKeydown = (event: KeyboardEvent): void => {
+  if (props.useDeferredButton) return;
+  if (event.key === "Enter" || event.key === " " || event.key === "Spacebar") {
+    event.preventDefault();
+    toggleAccordion();
+  }
+};
+
 const { t } = useLocalization(() => props.locale);
 </script>
 
 <template>
   <template v-if="collapsable">
-    <button
-      type="button"
+    <div
+      role="button"
+      tabindex="0"
       :aria-controls="paneId"
       :aria-expanded="isOpen"
       class="w-100 border-0"
-      style="background: transparent; box-shadow: none; outline: none; padding: 0"
+      style="background: transparent; box-shadow: none; padding: 0"
       :class="{
         AVCollapser: !useDeferredButton,
       }"
       data-test="collapser-button"
       @click="triggerAccordion()"
+      @keydown="onKeydown"
     >
       <slot name="toggle" :is-open="isOpen" :collapsable="collapsable" />
-    </button>
+    </div>
     <slot name="results" />
     <AVAnimatedTransition :skip-transition="!animateAccordion">
       <div v-show="isOpen" :id="paneId" :aria-hidden="!isOpen">
