@@ -157,4 +157,85 @@ describe("AVCollapser", () => {
     await localeWrapper.setProps({ locale: "en" });
     expect(localeWrapper.props().locale).to.eq("en");
   });
+
+  it("toggles via keyboard (Enter/Space) when not using deferred button", async () => {
+    const keyWrapper = mount(AVCollapser, {
+      props: {
+        paneId: "keyTest",
+        collapsable: true,
+        startCollapsed: true,
+      },
+      slots: { toggle: "Key Button", pane: "Key Content" },
+      global: {
+        provide: { i18n: localI18n },
+        components: { AVAnimatedTransition },
+        stubs: { AVIcon: { template: "<span />" } },
+      },
+    });
+    const btn = keyWrapper.find("[data-test=collapser-button]");
+    expect(keyWrapper.find("#keyTest").attributes().style).to.contain("display: none");
+
+    await btn.trigger("keydown", { key: "Enter" });
+    expect(keyWrapper.find("#keyTest").attributes().style).to.not.contain("display: none");
+
+    await btn.trigger("keydown", { key: " " });
+    expect(keyWrapper.find("#keyTest").attributes().style).to.contain("display: none");
+
+    await btn.trigger("keydown", { key: "Spacebar" });
+    expect(keyWrapper.find("#keyTest").attributes().style).to.not.contain("display: none");
+  });
+
+  it("ignores keyboard when using deferred button", async () => {
+    const el = document.createElement("div");
+    el.id = "deferredKey_btn";
+    document.body.appendChild(el);
+    const keyDeferredWrapper = mount(AVCollapser, {
+      props: {
+        paneId: "deferredKey",
+        collapsable: true,
+        useDeferredButton: true,
+        optionReference: "refKey",
+        startCollapsed: true,
+      },
+      slots: { toggle: "Deferred Key", pane: "Deferred Key Content" },
+      global: {
+        provide: { i18n: localI18n },
+        components: { AVAnimatedTransition },
+        stubs: { AVIcon: { template: "<span />" } },
+      },
+    });
+    const btn = keyDeferredWrapper.find("[data-test=collapser-button]");
+    await btn.trigger("keydown", { key: "Enter" });
+    expect(keyDeferredWrapper.find("#deferredKey").attributes().style).to.contain("display: none");
+    document.body.removeChild(el);
+  });
+
+  it("forces toggle open via the pane slot's toggleCollapse prop", async () => {
+    let toggleCollapse: ((force?: boolean | null, animate?: boolean) => void) | null = null;
+    const forceWrapper = mount(AVCollapser, {
+      props: {
+        paneId: "forceTest",
+        collapsable: true,
+        startCollapsed: true,
+      },
+      slots: {
+        toggle: "Force Button",
+        pane: (props: { toggleCollapse: typeof toggleCollapse }) => {
+          toggleCollapse = props.toggleCollapse;
+          return '<div data-test="pane-content">pane</div>';
+        },
+      },
+      global: {
+        provide: { i18n: localI18n },
+        components: { AVAnimatedTransition },
+        stubs: { AVIcon: { template: "<span />" } },
+      },
+    });
+    expect(forceWrapper.find("#forceTest").attributes().style).to.contain("display: none");
+    expect(toggleCollapse).to.exist;
+    toggleCollapse!(true, false);
+    await forceWrapper.vm.$nextTick();
+    expect(forceWrapper.find("#forceTest").attributes().style).to.not.contain("display: none");
+    expect(forceWrapper.emitted("accordionOpen")).to.exist;
+  });
 });
