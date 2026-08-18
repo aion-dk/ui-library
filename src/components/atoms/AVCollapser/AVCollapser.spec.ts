@@ -183,6 +183,11 @@ describe("AVCollapser", () => {
 
     await btn.trigger("keydown", { key: "Spacebar" });
     expect(keyWrapper.find("#keyTest").attributes().style).to.not.contain("display: none");
+
+    // Held-key repeat must not re-toggle (matches native button behavior)
+    const isOpenBefore = keyWrapper.find("#keyTest").attributes().style;
+    await btn.trigger("keydown", { key: "Enter", repeat: true });
+    expect(keyWrapper.find("#keyTest").attributes().style).to.eq(isOpenBefore);
   });
 
   it("ignores keyboard when using deferred button", async () => {

@@ -17,13 +17,6 @@
   }
 }
 
-[data-test="collapser-button"] {
-  &:focus-visible {
-    outline: 0.125rem solid var(--bs-primary, #0d6efd);
-    outline-offset: 0.125rem;
-  }
-}
-
 .AVCollapser-collapse-btn {
   background-color: var(--bs-light);
 }

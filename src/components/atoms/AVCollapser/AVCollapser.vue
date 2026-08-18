@@ -70,6 +70,7 @@ const triggerAccordion = (): void => {
 
 const onKeydown = (event: KeyboardEvent): void => {
   if (props.useDeferredButton) return;
+  if (event.repeat) return;
   if (event.key === "Enter" || event.key === " " || event.key === "Spacebar") {
     event.preventDefault();
     toggleAccordion();
