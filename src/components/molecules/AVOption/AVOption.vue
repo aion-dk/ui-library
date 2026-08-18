@@ -470,16 +470,14 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
     }"
     data-test="option"
   >
-    <a
+    <div
       :id="option.reference"
       class="AVOption--scroll-anchor visually-hidden"
       :class="{
         'h-100': contest.mode === 'gallery',
       }"
-      :href="`option_${option.reference}_checkbox`"
-      :aria-labelledby="`option_${option.reference}_title`"
-      :aria-label="title"
-    ></a>
+      tabindex="-1"
+    ></div>
     <AVCollapser
       :pane-id="`pane_for_option_${option.reference}`"
       :collapsable="contest.collapsable && hasChildren"

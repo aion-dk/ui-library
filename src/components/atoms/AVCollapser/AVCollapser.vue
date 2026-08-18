@@ -73,9 +73,12 @@ const { t } = useLocalization(() => props.locale);
 
 <template>
   <template v-if="collapsable">
-    <div
+    <button
+      type="button"
       :aria-controls="paneId"
-      tabindex="0"
+      :aria-expanded="isOpen"
+      class="w-100 border-0"
+      style="background: transparent; box-shadow: none; outline: none; padding: 0"
       :class="{
         AVCollapser: !useDeferredButton,
       }"
@@ -83,7 +86,7 @@ const { t } = useLocalization(() => props.locale);
       @click="triggerAccordion()"
     >
       <slot name="toggle" :is-open="isOpen" :collapsable="collapsable" />
-    </div>
+    </button>
     <slot name="results" />
     <AVAnimatedTransition :skip-transition="!animateAccordion">
       <div v-show="isOpen" :id="paneId" :aria-hidden="!isOpen">
