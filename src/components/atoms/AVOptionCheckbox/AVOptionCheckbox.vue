@@ -131,7 +131,7 @@ const { t } = useLocalization(() => props.locale);
     >
       <AVOptionSelect
         v-if="checked"
-        :id="`option_${optionReference}_tick`"
+        :id="optionReference ? `option_${optionReference}_tick` : undefined"
         :rank="excluded ? null : rank"
         :checked="checked"
         :selection-style="selectionStyle"

@@ -184,12 +184,13 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
     class="AVSummaryOption card rounded-0 position-relative"
     :class="{ 'AVSummaryOption--selected-background': selectionStyle === 'background' && !blank }"
     :style="coloredEdgeStyle"
+    role="group"
     :aria-label="t('js.components.AVSummaryOption.aria_label.option')"
     data-test="summary-option"
   >
     <!-- ANCESTRY (NORMAL) -->
     <div v-if="ancestryTitles && !galleryMode" class="AVSummaryOption--ancestry card-header small">
-      <div aria-label="breadcrumb">
+      <nav aria-label="breadcrumb">
         <ol class="breadcrumb mb-0" data-test="summary-option-ancestry">
           <li
             v-for="(title, index) in ancestryTitles"
@@ -200,7 +201,7 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
             {{ title }}
           </li>
         </ol>
-      </div>
+      </nav>
     </div>
 
     <!-- ANCESTRY (GALLERY) -->

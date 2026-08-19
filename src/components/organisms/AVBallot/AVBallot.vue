@@ -339,6 +339,7 @@ const galleryOptions = computed(() => {
     :class="{
       'AVBallot--error': !isValid,
     }"
+    role="group"
     :aria-label="t('js.components.AVBallot.aria_labels.ballot')"
     data-test="ballot"
   >
@@ -422,6 +423,7 @@ const galleryOptions = computed(() => {
       v-else
       id="ballot_options"
       class="vstack gap-2"
+      role="group"
       :aria-label="t('js.components.AVBallot.aria_labels.ballot_options')"
     >
       <template v-for="option in contest.options" :key="option.reference">

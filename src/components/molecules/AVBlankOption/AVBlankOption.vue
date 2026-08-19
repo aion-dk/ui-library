@@ -92,6 +92,7 @@ const { t } = useLocalization(() => props.locale);
         'AVBlankOption--selected-background': selectionStyle === 'background' && checked,
       }"
       :style="accentColor ? `border-${isRtl ? 'right' : 'left'}-color: ${accentColor};` : ''"
+      role="group"
       :aria-label="t('js.components.AVBlankOption.aria_labels.option')"
       data-test="option-container"
     >
