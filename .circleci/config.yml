@@ -103,6 +103,7 @@ workflows:
             tags:
               only: /^v.*/
       - publish:
+          context: ["npm-publishing"]
           requires:
             - lint_test_build
             - docker/license-checker
