@@ -75,5 +75,6 @@ export interface ValidationResult {
 declare module "@assemblyvoting/types" {
   interface ContestContent {
     validationPolicy?: ValidationPolicy;
+    showVoterWeightMessage?: boolean;
   }
 }

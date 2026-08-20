@@ -368,7 +368,7 @@ const galleryOptions = computed(() => {
 
     <!-- WEIGHT -->
     <div
-      v-if="!contest.disregardVoterWeight && weight"
+      v-if="contest.showVoterWeightMessage && !contest.disregardVoterWeight && weight"
       class="hstack justify-content-end py-1 text-gray-700 small"
       data-test="ballot-voter-weight"
     >
