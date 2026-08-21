@@ -361,15 +361,16 @@ const galleryOptions = computed(() => {
 
     <hr
       :class="{
-        'mt-3 mb-0': !contest.disregardVoterWeight && weight,
-        'my-3': contest.disregardVoterWeight,
+        'mt-3 mb-0':
+          contest.showVoterWeightMessage !== false && !contest.disregardVoterWeight && weight,
+        'my-3': contest.showVoterWeightMessage === false || contest.disregardVoterWeight,
       }"
     />
 
     <!-- WEIGHT -->
     <div
-      v-if="!contest.disregardVoterWeight && weight"
-      class="hstack justify-content-end py-1 text-gray-700 small"
+      v-if="contest.showVoterWeightMessage !== false && !contest.disregardVoterWeight && weight"
+      class="hstack justify-content-end py-1 text-body-70 small"
       data-test="ballot-voter-weight"
     >
       <span>{{ t("js.components.AVBallot.your_vote_weight", { weight }) }}</span>
