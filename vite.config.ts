@@ -59,6 +59,10 @@ export default defineConfig((env: ConfigEnv) => {
           dest: "src/bootstrap",
         },
         {
+          src: resolve(__dirname, "src/bootstrap/_badges.scss"),
+          dest: "src/bootstrap",
+        },
+        {
           src: resolve(__dirname, "src/bootstrap/_dark_mode.scss"),
           dest: "src/bootstrap",
         },
