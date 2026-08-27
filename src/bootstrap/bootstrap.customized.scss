@@ -105,6 +105,7 @@ $custom-file-text: (
 
 // Boostrap variable overrides
 $card-border-radius: 0 !default;
+$badge-font-weight: 600 !default;
 
 @import "../../node_modules/bootstrap/scss/variables";
 
@@ -127,6 +128,60 @@ $utilities: map-merge(
 
 // Include any default map overrides here
 $theme-colors: map-merge($theme-colors, $custom-colors);
+
+// maps must load after the $theme-colors merge above (its !default freezes
+// $theme-colors-rgb, which must include the custom colors) and before the
+// token merges below (they extend maps it defines)
+@import "../../node_modules/bootstrap/scss/variables-dark";
+@import "../../node_modules/bootstrap/scss/maps";
+
+// Subtle/emphasis tokens for the custom colors — Bootstrap only builds these
+// for its stock palette. Emitted as --bs-*-{bg,border}-subtle/-text-emphasis
+// in both themes; consumed by the tinted badges in _badges.scss.
+// brand-dark is near-black, so its dark values ghost with grays instead of
+// deriving from the color itself (shades of near-black are invisible).
+$theme-colors-text: map-merge(
+  $theme-colors-text,
+  (
+    "accent": shade-color($accent, 60%),
+    "brand-dark": shade-color($brand-dark, 60%),
+  )
+);
+$theme-colors-bg-subtle: map-merge(
+  $theme-colors-bg-subtle,
+  (
+    "accent": tint-color($accent, 80%),
+    "brand-dark": tint-color($brand-dark, 80%),
+  )
+);
+$theme-colors-border-subtle: map-merge(
+  $theme-colors-border-subtle,
+  (
+    "accent": tint-color($accent, 60%),
+    "brand-dark": tint-color($brand-dark, 60%),
+  )
+);
+$theme-colors-text-dark: map-merge(
+  $theme-colors-text-dark,
+  (
+    "accent": tint-color($accent, 40%),
+    "brand-dark": $gray-400,
+  )
+);
+$theme-colors-bg-subtle-dark: map-merge(
+  $theme-colors-bg-subtle-dark,
+  (
+    "accent": shade-color($accent, 80%),
+    "brand-dark": $gray-800,
+  )
+);
+$theme-colors-border-subtle-dark: map-merge(
+  $theme-colors-border-subtle-dark,
+  (
+    "accent": shade-color($accent, 40%),
+    "brand-dark": $gray-700,
+  )
+);
 
 @import "../../node_modules/bootstrap/scss/mixins/breakpoints";
 
@@ -166,6 +221,7 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
 
 @import "../../node_modules/bootstrap/scss/bootstrap";
 @import "./body_opacity";
+@import "./badges";
 @import "./dark_mode";
 
 #app {

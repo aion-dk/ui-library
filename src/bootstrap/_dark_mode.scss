@@ -41,8 +41,11 @@
     color: var(--bs-secondary-text-emphasis) !important;
   }
 
+  // tints of $primary wash out on dark surfaces — solid navy pill instead
   .text-bg-primary {
-    border: solid 1px var(--bs-primary-border-subtle) !important;
+    background-color: var(--bs-primary) !important;
+    border-color: rgba(var(--bs-light-rgb), 0.2) !important;
+    color: rgba(var(--bs-light-rgb), 0.8) !important;
   }
 
   @each $color, $value in $theme-colors {

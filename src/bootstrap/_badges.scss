@@ -1,0 +1,39 @@
+// Tinted badges built on Bootstrap's subtle/emphasis tokens, which flip with
+// data-bs-theme — the same rules serve light and dark mode. Tokens for the
+// custom colors (accent, brand-dark) are added in bootstrap.customized.scss.
+.badge {
+  color: var(--bs-body-color) !important;
+  border: 1px solid transparent;
+}
+
+// $primary navy carries almost no chroma at badge tints and washes to gray —
+// tint from a brighter blue of the same hue, navy ink keeps it on-brand.
+// Dark mode counterpart lives in _dark_mode.scss (solid navy pill).
+.text-bg-primary {
+  background-color: rgba(31, 100, 173, 0.12) !important;
+  border-color: rgba(31, 100, 173, 0.35) !important;
+  color: var(--bs-primary) !important;
+}
+
+@each $c in (success, danger, warning, info, dark, accent, brand-dark) {
+  .text-bg-#{$c} {
+    background-color: var(--bs-#{$c}-bg-subtle) !important;
+    border-color: var(--bs-#{$c}-border-subtle) !important;
+    color: var(--bs-#{$c}-text-emphasis) !important;
+  }
+}
+
+// $secondary (#eeeeee) and $light derive near-invisible subtle tokens —
+// paint with Bootstrap's adaptive neutral surfaces instead. These vars flip
+// with data-bs-theme, matching the dark-mode rules in _dark_mode.scss.
+.text-bg-secondary {
+  background-color: var(--bs-secondary-bg) !important;
+  border-color: var(--bs-border-color) !important;
+  color: var(--bs-secondary-text-emphasis) !important;
+}
+
+.text-bg-light {
+  background-color: var(--bs-tertiary-bg) !important;
+  border-color: var(--bs-border-color) !important;
+  color: var(--bs-body-color-70) !important;
+}
