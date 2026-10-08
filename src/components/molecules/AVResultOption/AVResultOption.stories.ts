@@ -23,6 +23,9 @@ const meta: Meta<typeof AVResultOption> = {
     tied: {
       control: { type: "boolean" },
     },
+    list: {
+      control: { type: "boolean" },
+    },
     hidePercentage: {
       control: { type: "boolean" },
     },
@@ -94,5 +97,16 @@ export const WithImage = {
     option: getOption(["selectable", "image"], 1),
     votes: 20,
     total: 100,
+  },
+};
+
+export const List = {
+  render: Template,
+
+  args: {
+    option: getOption(["selectable"], 1),
+    votes: 20,
+    total: 100,
+    list: true,
   },
 };

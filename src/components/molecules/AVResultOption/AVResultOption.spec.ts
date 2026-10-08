@@ -4,13 +4,23 @@ import localI18n from "@/i18n";
 import { getOption } from "@/examples";
 
 import AVResultOption from "./AVResultOption.vue";
+import type { NormalResultListGroup, NormalResultListOption, OptionContent } from "@/types";
 
-const INITIAL_OPTION = getOption(["selectable"], 1);
+const toListOption = (option: OptionContent): NormalResultListOption => ({
+  count: 0,
+  elected: false,
+  imageUrl: option.image ?? null,
+  reference: option.reference,
+  tied: false,
+  title: option.title,
+});
+
+const INITIAL_LIST_OPTION = toListOption(getOption(["selectable"], 1));
 
 describe("AVResultOption", () => {
   const wrapper = mount(AVResultOption, {
     props: {
-      option: INITIAL_OPTION,
+      option: INITIAL_LIST_OPTION,
       votes: 1,
       total: 2,
       locale: "en",
@@ -38,10 +48,10 @@ describe("AVResultOption", () => {
   });
 
   it("can update values", async () => {
-    INITIAL_OPTION.title.en = "I've changed";
+    INITIAL_LIST_OPTION.title.en = "I've changed";
 
     await wrapper.setProps({
-      option: INITIAL_OPTION,
+      option: INITIAL_LIST_OPTION,
       votes: 2,
       total: 10,
       elected: true,
@@ -84,14 +94,14 @@ describe("AVResultOption", () => {
   });
 
   it("can display image", async () => {
+    const imageOption = getOption(["selectable", "image"], 1);
+
     await wrapper.setProps({
-      option: getOption(["selectable", "image"], 1),
+      option: toListOption(imageOption),
     });
 
     expect(wrapper.findAll("[data-test=result-image]").length).to.eq(1);
-    expect(wrapper.find("[data-test=result-image]").attributes().src).to.eq(
-      "https://electa.staging-1.assemblyvoting.net/uploads_proxy/option/image/657750",
-    );
+    expect(wrapper.find("[data-test=result-image]").attributes().src).to.eq(imageOption.image);
   });
 
   it("can switch language", async () => {
@@ -100,5 +110,31 @@ describe("AVResultOption", () => {
     });
 
     expect(wrapper.find("[data-test=result-title]").text()).to.contain("Dæmi um valmöguleika 1");
+  });
+
+  it("can render as a list", async () => {
+    const option = () => wrapper.find("[data-test=result-option]").classes();
+
+    await wrapper.setProps({ list: true, elected: false, tied: false, ineligible: false });
+    expect(option()).to.contain("bg-body");
+    expect(option()).to.not.contain("bg-body-alt-10");
+
+    await wrapper.setProps({ elected: true });
+    expect(option()).to.contain("bg-success-faded");
+  });
+
+  it("can render a group", async () => {
+    const group: NormalResultListGroup = {
+      children: [],
+      imageUrl: null,
+      reference: "group-1",
+      title: { en: "Example group" },
+      seatsWon: 0,
+    };
+
+    await wrapper.setProps({ option: group, locale: "en" });
+
+    expect(wrapper.findAll("[data-test=result-image]").length).to.eq(0);
+    expect(wrapper.find("[data-test=result-title]").text()).to.contain("Example group");
   });
 });
