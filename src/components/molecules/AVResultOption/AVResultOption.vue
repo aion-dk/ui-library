@@ -65,7 +65,7 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
       'text-body': true,
       'bg-body-alt-10': !tied && !elected && !ineligible && !list,
       'bg-body': list && !tied && !elected && !ineligible,
-      border: list,
+      'border border-2': list,
       'AVResultOption--highlighted': elected || tied,
       'bg-success-faded': elected,
       'bg-warning-faded': tied && !elected,
