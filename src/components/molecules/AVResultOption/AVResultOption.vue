@@ -1,12 +1,18 @@
 <script setup lang="ts">
 import { computed } from "vue";
-import type { PropType, SupportedLocale, OptionContent, IterableObject } from "@/types";
+import type {
+  PropType,
+  SupportedLocale,
+  IterableObject,
+  NormalResultListOption,
+  NormalResultListGroup,
+} from "@/types";
 import { getMeaningfulLabel } from "@/helpers/meaningfulLabel";
 import { useLocalization } from "@/composables/useLocalization";
 
 const props = defineProps({
   option: {
-    type: Object as PropType<OptionContent>,
+    type: Object as PropType<NormalResultListOption | NormalResultListGroup>,
     required: true,
   },
   votes: {
@@ -26,6 +32,10 @@ const props = defineProps({
     default: false,
   },
   tied: {
+    type: Boolean,
+    default: false,
+  },
+  list: {
     type: Boolean,
     default: false,
   },
@@ -53,7 +63,9 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
     class="d-flex p-3"
     :class="{
       'text-body': true,
-      'bg-body-alt-10': !tied && !elected && !ineligible,
+      'bg-body-alt-10': !tied && !elected && !ineligible && !list,
+      'bg-body': list && !tied && !elected && !ineligible,
+      border: list,
       'AVResultOption--highlighted': elected || tied,
       'bg-success-faded': elected,
       'bg-warning-faded': tied && !elected,
@@ -73,8 +85,8 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
     >
       <div class="hstack gap-3 overflow-hidden text-nowrap">
         <img
-          v-if="option.image"
-          :src="option.image"
+          v-if="option.imageUrl"
+          :src="option.imageUrl"
           class="AVResultOption--image ratio ratio-1x1"
           aria-hidden="true"
           data-test="result-image"

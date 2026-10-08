@@ -92,7 +92,6 @@ import {
   AVBallot,
   AVResourceSection,
   AVNormalSummary,
-  AVNormalListSummary,
   AVRankedSummary,
   AVInstantRunoffSummary,
   AVDhondtAPSummary,
@@ -147,7 +146,6 @@ export default {
     app.component("AVBallot", AVBallot);
     app.component("AVResourceSection", AVResourceSection);
     app.component("AVNormalSummary", AVNormalSummary);
-    app.component("AVNormalListSummary", AVNormalListSummary);
     app.component("AVRankedSummary", AVRankedSummary);
     app.component("AVInstantRunoffSummary", AVInstantRunoffSummary);
     app.component("AVDhondtAPSummary", AVDhondtAPSummary);
@@ -202,7 +200,6 @@ export {
   AVBallot,
   AVResourceSection,
   AVNormalSummary,
-  AVNormalListSummary,
   AVRankedSummary,
   AVInstantRunoffSummary,
   AVDhondtAPSummary,

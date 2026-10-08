@@ -36,7 +36,6 @@ export { default as AVPileSummary } from "@/components/organisms/AVPileSummary";
 export { default as AVBallot } from "@/components/organisms/AVBallot";
 export { default as AVResourceSection } from "@/components/organisms/AVResourceSection";
 export { default as AVNormalSummary } from "@/components/organisms/AVNormalSummary";
-export { default as AVNormalListSummary } from "@/components/organisms/AVNormalListSummary";
 export { default as AVRankedSummary } from "@/components/organisms/AVRankedSummary";
 export { default as AVInstantRunoffSummary } from "@/components/organisms/AVInstantRunoffSummary";
 export { default as AVDhondtAPSummary } from "@/components/organisms/AVDhondtAPSummary";

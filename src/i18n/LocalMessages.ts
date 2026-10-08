@@ -24,7 +24,6 @@ import AVPileSummary from "@/components/organisms/AVPileSummary/AVPileSummary.me
 import AVBallot from "@/components/organisms/AVBallot/AVBallot.messages";
 import AVResourceSection from "@/components/organisms/AVResourceSection/AVResourceSection.messages";
 import AVNormalSummary from "@/components/organisms/AVNormalSummary/AVNormalSummary.messages";
-import AVNormalListSummary from "@/components/organisms/AVNormalListSummary/AVNormalListSummary.messages";
 import AVRankedSummary from "@/components/organisms/AVRankedSummary/AVRankedSummary.messages";
 import AVInstantRunoffSummary from "@/components/organisms/AVInstantRunoffSummary/AVInstantRunoffSummary.messages";
 import AVDhondtAPSummary from "@/components/organisms/AVDhondtAPSummary/AVDhondtAPSummary.messages";
@@ -68,7 +67,6 @@ const components: DefineLocaleMessage = {
   AVBallot,
   AVResourceSection,
   AVNormalSummary,
-  AVNormalListSummary,
   AVRankedSummary,
   AVInstantRunoffSummary,
   AVDhondtAPSummary,

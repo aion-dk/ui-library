@@ -1,4 +1,4 @@
-import type { Meta } from "@/types";
+import type { Meta, NormalResultListGroup, OptionContent } from "@/types";
 import { AVNormalSummary } from "@/components";
 import { getOption, getVoteCounts } from "@/examples";
 
@@ -323,7 +323,7 @@ export const OptionsWithImage = {
       {
         reference: getOption(["selectable", "image"], 1).reference,
         title: getOption(["selectable", "image"], 1).title,
-        image: getOption(["selectable", "image"], 1).image,
+        imageUrl: getOption(["selectable", "image"], 1).image,
         count: 30,
         elected: true,
         tied: false,
@@ -331,7 +331,7 @@ export const OptionsWithImage = {
       {
         reference: getOption(["selectable", "image"], 2).reference,
         title: getOption(["selectable", "image"], 2).title,
-        image: getOption(["selectable", "image"], 2).image,
+        imageUrl: getOption(["selectable", "image"], 2).image,
         count: 20,
         elected: false,
         tied: false,
@@ -339,7 +339,7 @@ export const OptionsWithImage = {
       {
         reference: getOption(["selectable", "image"], 3).reference,
         title: getOption(["selectable", "image"], 3).title,
-        image: getOption(["selectable", "image"], 3).image,
+        imageUrl: getOption(["selectable", "image"], 3).image,
         count: 10,
         elected: false,
         tied: false,
@@ -347,7 +347,7 @@ export const OptionsWithImage = {
       {
         reference: getOption(["selectable", "image"], 4).reference,
         title: getOption(["selectable", "image"], 4).title,
-        image: getOption(["selectable", "image"], 4).image,
+        imageUrl: getOption(["selectable", "image"], 4).image,
         count: 10,
         elected: false,
         tied: false,
@@ -355,7 +355,7 @@ export const OptionsWithImage = {
       {
         reference: getOption(["selectable", "image"], 5).reference,
         title: getOption(["selectable", "image"], 5).title,
-        image: getOption(["selectable", "image"], 5).image,
+        imageUrl: getOption(["selectable", "image"], 5).image,
         count: 10,
         elected: false,
         tied: false,
@@ -363,7 +363,7 @@ export const OptionsWithImage = {
       {
         reference: getOption(["selectable", "image"], 6).reference,
         title: getOption(["selectable", "image"], 6).title,
-        image: getOption(["selectable", "image"], 6).image,
+        imageUrl: getOption(["selectable", "image"], 6).image,
         count: 10,
         elected: false,
         tied: false,
@@ -373,3 +373,53 @@ export const OptionsWithImage = {
     voteCounts: getVoteCounts(),
   },
 };
+
+export const ListResults = {
+  render: Template,
+
+  args: {
+    sortedResult: [
+      toGroup(getOption(["selectable", "children", "image"], 1), [40, 101, 91], [1, 2], 2),
+      toGroup(getOption(["selectable", "children", "image"], 2), [6, 4, 2], [], null),
+      {
+        reference: getOption(["selectable"], 3).reference,
+        title: getOption(["selectable"], 3).title,
+        imageUrl: getOption(["selectable"], 3).image,
+        count: 1,
+        elected: false,
+        tied: false,
+      },
+      {
+        reference: "blank",
+        title: { en: "Blank" },
+        count: 0,
+        elected: false,
+        tied: false,
+      },
+    ],
+    totalCount: 245,
+    voteCounts: getVoteCounts(),
+  },
+};
+
+function toGroup(
+  parent: OptionContent,
+  counts: number[],
+  elected: number[],
+  seats: number | null,
+): NormalResultListGroup {
+  return {
+    reference: parent.reference,
+    title: parent.title,
+    imageUrl: parent.image ?? null,
+    seats,
+    children: [parent, ...(parent.children ?? [])].map((option, index) => ({
+      reference: option.reference,
+      title: option.title,
+      imageUrl: option.image ?? null,
+      count: counts[index] ?? 0,
+      elected: elected.includes(index),
+      tied: false,
+    })),
+  };
+}

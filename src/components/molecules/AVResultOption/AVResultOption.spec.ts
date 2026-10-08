@@ -101,4 +101,17 @@ describe("AVResultOption", () => {
 
     expect(wrapper.find("[data-test=result-title]").text()).to.contain("Dæmi um valmöguleika 1");
   });
+
+  it("can render as a list", async () => {
+    const option = () => wrapper.find("[data-test=result-option]").classes();
+
+    await wrapper.setProps({ list: true, elected: false, tied: false, ineligible: false });
+    expect(option()).to.contain("bg-body");
+    expect(option()).to.contain("border");
+    expect(option()).to.not.contain("bg-body-alt-10");
+
+    await wrapper.setProps({ elected: true });
+    expect(option()).to.contain("bg-success-faded");
+    expect(option()).to.not.contain("border");
+  });
 });
