@@ -3,7 +3,7 @@ import type { DefineLocaleMessage } from "@/types";
 const translations: DefineLocaleMessage = {
   ar: {
     group: {
-      seats: "لا مقاعد | {n} مقعد | {n} مقاعد",
+      seats_won: "لا مقاعد | {n} مقعد | {n} مقاعد",
     },
     summary: {
       null_votes: "الأصوات الفارغة",
@@ -11,7 +11,7 @@ const translations: DefineLocaleMessage = {
   },
   ca: {
     group: {
-      seats: "cap escó | {n} escó | {n} escons",
+      seats_won: "cap escó | {n} escó | {n} escons",
     },
     summary: {
       null_votes: "Vots nuls",
@@ -19,7 +19,7 @@ const translations: DefineLocaleMessage = {
   },
   cy: {
     group: {
-      seats: "dim seddi | {n} sedd | {n} sedd",
+      seats_won: "dim seddi | {n} sedd | {n} sedd",
     },
     summary: {
       null_votes: "Pleidleisiau gwag",
@@ -27,7 +27,7 @@ const translations: DefineLocaleMessage = {
   },
   da: {
     group: {
-      seats: "ingen mandater | {n} mandat | {n} mandater",
+      seats_won: "ingen mandater | {n} mandat | {n} mandater",
     },
     summary: {
       null_votes: "Nul stemmer",
@@ -35,7 +35,7 @@ const translations: DefineLocaleMessage = {
   },
   de: {
     group: {
-      seats: "keine Sitze | {n} Sitz | {n} Sitze",
+      seats_won: "keine Sitze | {n} Sitz | {n} Sitze",
     },
     summary: {
       null_votes: "Nullstimmen",
@@ -43,7 +43,7 @@ const translations: DefineLocaleMessage = {
   },
   en: {
     group: {
-      seats: "no seats | {n} seat | {n} seats",
+      seats_won: "no seats | {n} seat | {n} seats",
     },
     summary: {
       null_votes: "Null votes",
@@ -51,7 +51,7 @@ const translations: DefineLocaleMessage = {
   },
   es: {
     group: {
-      seats: "ningún escaño | {n} escaño | {n} escaños",
+      seats_won: "ningún escaño | {n} escaño | {n} escaños",
     },
     summary: {
       null_votes: "Votos nulos",
@@ -59,7 +59,7 @@ const translations: DefineLocaleMessage = {
   },
   fi: {
     group: {
-      seats: "ei paikkoja | {n} paikka | {n} paikkaa",
+      seats_won: "ei paikkoja | {n} paikka | {n} paikkaa",
     },
     summary: {
       null_votes: "Nollaäänet",
@@ -67,7 +67,7 @@ const translations: DefineLocaleMessage = {
   },
   fr: {
     group: {
-      seats: "aucun siège | {n} siège | {n} sièges",
+      seats_won: "aucun siège | {n} siège | {n} sièges",
     },
     summary: {
       null_votes: "Votes nuls",
@@ -75,7 +75,7 @@ const translations: DefineLocaleMessage = {
   },
   is: {
     group: {
-      seats: "engin sæti | {n} sæti | {n} sæti",
+      seats_won: "engin sæti | {n} sæti | {n} sæti",
     },
     summary: {
       null_votes: "Núll atkvæði",
@@ -83,7 +83,7 @@ const translations: DefineLocaleMessage = {
   },
   it: {
     group: {
-      seats: "nessun seggio | {n} seggio | {n} seggi",
+      seats_won: "nessun seggio | {n} seggio | {n} seggi",
     },
     summary: {
       null_votes: "Voti nulli",
@@ -91,7 +91,7 @@ const translations: DefineLocaleMessage = {
   },
   nl: {
     group: {
-      seats: "geen zetels | {n} zetel | {n} zetels",
+      seats_won: "geen zetels | {n} zetel | {n} zetels",
     },
     summary: {
       null_votes: "Nul stemmen",
@@ -99,7 +99,7 @@ const translations: DefineLocaleMessage = {
   },
   pl: {
     group: {
-      seats: "brak mandatów | {n} mandat | {n} mandaty",
+      seats_won: "brak mandatów | {n} mandat | {n} mandaty",
     },
     summary: {
       null_votes: "Głosy zerowe",
@@ -107,7 +107,7 @@ const translations: DefineLocaleMessage = {
   },
   pt: {
     group: {
-      seats: "nenhum assento | {n} assento | {n} assentos",
+      seats_won: "nenhum assento | {n} assento | {n} assentos",
     },
     summary: {
       null_votes: "Votos nulos",
@@ -115,7 +115,7 @@ const translations: DefineLocaleMessage = {
   },
   ro: {
     group: {
-      seats: "niciun mandat | {n} mandat | {n} mandate",
+      seats_won: "niciun mandat | {n} mandat | {n} mandate",
     },
     summary: {
       null_votes: "Voturi nule",
@@ -123,7 +123,7 @@ const translations: DefineLocaleMessage = {
   },
   ru: {
     group: {
-      seats: "нет мест | {n} место | {n} мест",
+      seats_won: "нет мест | {n} место | {n} мест",
     },
     summary: {
       null_votes: "Нулевые голоса",
@@ -131,7 +131,7 @@ const translations: DefineLocaleMessage = {
   },
   sv: {
     group: {
-      seats: "inga mandat | {n} mandat | {n} mandat",
+      seats_won: "inga mandat | {n} mandat | {n} mandat",
     },
     summary: {
       null_votes: "Nollröster",
@@ -139,7 +139,7 @@ const translations: DefineLocaleMessage = {
   },
   ja: {
     group: {
-      seats: "議席なし | {n} 議席 | {n} 議席",
+      seats_won: "議席なし | {n} 議席 | {n} 議席",
     },
     summary: {
       null_votes: "空白票",
@@ -147,7 +147,7 @@ const translations: DefineLocaleMessage = {
   },
   ko: {
     group: {
-      seats: "의석 없음 | {n}석 | {n}석",
+      seats_won: "의석 없음 | {n}석 | {n}석",
     },
     summary: {
       null_votes: "무효 중",
@@ -155,7 +155,7 @@ const translations: DefineLocaleMessage = {
   },
   zh: {
     group: {
-      seats: "无席位 | {n} 个席位 | {n} 个席位",
+      seats_won: "无席位 | {n} 个席位 | {n} 个席位",
     },
     summary: {
       null_votes: "无效票",

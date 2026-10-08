@@ -36,7 +36,7 @@ interface NormalResultListGroup {
   title: LocalString;
   imageUrl: string | null;
   children: NormalResultListOption[];
-  seats?: number | null;
+  seatsWon?: number | null;
 }
 interface NormalResultListOption {
   reference: string;

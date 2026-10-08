@@ -406,13 +406,13 @@ function toGroup(
   parent: OptionContent,
   counts: number[],
   elected: number[],
-  seats: number | null,
+  seatsWon: number | null,
 ): NormalResultListGroup {
   return {
     reference: parent.reference,
     title: parent.title,
     imageUrl: parent.image ?? null,
-    seats,
+    seatsWon,
     children: [parent, ...(parent.children ?? [])].map((option, index) => ({
       reference: option.reference,
       title: option.title,

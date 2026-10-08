@@ -93,11 +93,11 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
               </h3>
             </div>
             <small
-              v-if="typeof item.seats === 'number' && !hideElected"
+              v-if="typeof item.seatsWon === 'number' && !hideElected"
               class="text-body-70 text-nowrap"
-              data-test="group-seats"
+              data-test="group-seats-won"
             >
-              {{ t("js.components.AVNormalSummary.group.seats", {}, item.seats) }}
+              {{ t("js.components.AVNormalSummary.group.seats_won", {}, item.seatsWon) }}
             </small>
           </div>
 

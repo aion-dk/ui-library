@@ -289,7 +289,7 @@ describe("AVNormalSummary", () => {
         reference: parent.reference,
         title: parent.title,
         imageUrl: null,
-        seats: 2,
+        seatsWon: 2,
         children: [
           {
             reference: parent.reference,
@@ -371,22 +371,22 @@ describe("AVNormalSummary", () => {
       ).to.deep.eq(["6", "4", "2", "1", "3"]);
     });
 
-    it("shows seats when given", async () => {
+    it("shows seats won when given", async () => {
       const wrapper = listWrapper();
-      expect(wrapper.find("[data-test=group-seats]").text()).to.eq("2 seats");
+      expect(wrapper.find("[data-test=group-seats-won]").text()).to.eq("2 seats");
 
       await wrapper.setProps({ locale: "da" });
-      expect(wrapper.find("[data-test=group-seats]").text()).to.eq("2 mandater");
+      expect(wrapper.find("[data-test=group-seats-won]").text()).to.eq("2 mandater");
 
       await wrapper.setProps({ hideElected: true });
-      expect(wrapper.find("[data-test=group-seats]").exists()).to.be.false;
+      expect(wrapper.find("[data-test=group-seats-won]").exists()).to.be.false;
     });
 
-    it("hides seats when null", () => {
+    it("hides seats won when null", () => {
       const wrapper = mount(AVNormalSummary, {
         props: {
           voteCounts: getVoteCounts(),
-          sortedResult: [{ ...listResult[0], seats: null }],
+          sortedResult: [{ ...listResult[0], seatsWon: null }],
           totalCount: 16,
         },
         global: {
@@ -397,7 +397,7 @@ describe("AVNormalSummary", () => {
       });
 
       expect(wrapper.find("[data-test=result-group]").exists()).to.be.true;
-      expect(wrapper.find("[data-test=group-seats]").exists()).to.be.false;
+      expect(wrapper.find("[data-test=group-seats-won]").exists()).to.be.false;
     });
 
     it("applies hide flags to children", async () => {
