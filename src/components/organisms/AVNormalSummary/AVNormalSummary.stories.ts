@@ -379,8 +379,36 @@ export const ListResults = {
 
   args: {
     sortedResult: [
-      toGroup(getOption(["selectable", "children", "image"], 1), [40, 101, 91], [1, 2], 2),
-      toGroup(getOption(["selectable", "children", "image"], 2), [6, 4, 2], [], null),
+      toGroup(getOption(["selectable", "children", "image"], 1), [101, 91], [0, 1], 2),
+      toGroup(getOption(["selectable", "children", "image"], 2), [4, 2], [], null),
+      {
+        reference: getOption(["selectable"], 3).reference,
+        title: getOption(["selectable"], 3).title,
+        imageUrl: getOption(["selectable"], 3).image,
+        count: 1,
+        elected: false,
+        tied: false,
+      },
+      {
+        reference: "blank",
+        title: { en: "Blank" },
+        count: 0,
+        elected: false,
+        tied: false,
+      },
+    ],
+    totalCount: 245,
+    voteCounts: getVoteCounts(),
+  },
+};
+
+export const ListWithParentResults = {
+  render: Template,
+
+  args: {
+    sortedResult: [
+      toGroup(getOption(["selectable", "children", "image"], 1), [40, 101, 91], [1, 2], 2, true),
+      toGroup(getOption(["selectable", "children", "image"], 2), [6, 4, 2], [], null, true),
       {
         reference: getOption(["selectable"], 3).reference,
         title: getOption(["selectable"], 3).title,
@@ -407,19 +435,22 @@ function toGroup(
   counts: number[],
   elected: number[],
   seatsWon: number | null,
+  includeParent = false,
 ): NormalResultListGroup {
   return {
     reference: parent.reference,
     title: parent.title,
     imageUrl: parent.image ?? null,
     seatsWon,
-    children: [parent, ...(parent.children ?? [])].map((option, index) => ({
-      reference: option.reference,
-      title: option.title,
-      imageUrl: option.image ?? null,
-      count: counts[index] ?? 0,
-      elected: elected.includes(index),
-      tied: false,
-    })),
+    children: [...(includeParent ? [parent] : []), ...(parent.children ?? [])].map(
+      (option, index) => ({
+        reference: option.reference,
+        title: option.title,
+        imageUrl: option.image ?? null,
+        count: counts[index] ?? 0,
+        elected: elected.includes(index),
+        tied: false,
+      }),
+    ),
   };
 }
