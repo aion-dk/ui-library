@@ -10,7 +10,7 @@ import type {
 } from "@/types";
 import { getMeaningfulLabel } from "@/helpers/meaningfulLabel";
 import { useLocalization } from "@/composables/useLocalization";
-import { AVResultOption } from "@/components";
+import { AVResultOption, AVResultSummaryItem } from "@/components";
 
 const props = defineProps({
   sortedResult: {
@@ -106,10 +106,9 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
               v-for="child in item.children"
               :key="`result_for_${item.reference}_${child.reference}`"
               :option="child"
-              :votes="child.count"
               :total="totalCount"
-              :elected="!hideElected && child.elected"
-              :tied="!hideTied && child.tied"
+              :hide-elected="hideElected"
+              :hide-tied="hideTied"
               :list="child.reference === item.reference"
               :hide-percentage="isPercentageHidden(child.reference)"
               data-test="result-option"
@@ -120,11 +119,9 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
         <AVResultOption
           v-else
           :option="item"
-          :votes="item.count"
           :total="totalCount"
-          :elected="!hideElected && item.elected"
-          :tied="!hideTied && item.tied"
-          :ineligible="item.ineligible"
+          :hide-elected="hideElected"
+          :hide-tied="hideTied"
           :hide-percentage="isPercentageHidden(item.reference)"
           data-test="result-option"
         />

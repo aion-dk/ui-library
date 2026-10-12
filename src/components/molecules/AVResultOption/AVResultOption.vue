@@ -1,37 +1,23 @@
 <script setup lang="ts">
 import { computed } from "vue";
-import type {
-  PropType,
-  SupportedLocale,
-  IterableObject,
-  NormalResultListOption,
-  NormalResultListGroup,
-} from "@/types";
+import type { PropType, SupportedLocale, IterableObject, NormalResultListOption } from "@/types";
 import { getMeaningfulLabel } from "@/helpers/meaningfulLabel";
 import { useLocalization } from "@/composables/useLocalization";
 
 const props = defineProps({
   option: {
-    type: Object as PropType<NormalResultListOption | NormalResultListGroup>,
-    required: true,
-  },
-  votes: {
-    type: Number,
+    type: Object as PropType<NormalResultListOption>,
     required: true,
   },
   total: {
     type: Number,
     required: true,
   },
-  elected: {
+  hideElected: {
     type: Boolean,
     default: false,
   },
-  ineligible: {
-    type: Boolean,
-    default: false,
-  },
-  tied: {
+  hideTied: {
     type: Boolean,
     default: false,
   },
@@ -49,11 +35,15 @@ const props = defineProps({
   },
 });
 
+const votes = computed(() => props.option.count);
 const optionPercent = computed(() =>
-  props.total > 0 ? Math.round((props.votes / props.total) * 10000) / 100 : 0,
+  props.total > 0 ? Math.round((votes.value / props.total) * 10000) / 100 : 0,
 );
 
-const truncatedVotes = computed(() => Math.round(props.votes * 100) / 100);
+const truncatedVotes = computed(() => Math.round(votes.value * 100) / 100);
+const elected = computed(() => !props.hideElected && props.option.elected);
+const tied = computed(() => !props.hideTied && props.option.tied);
+const ineligible = computed(() => props.option.ineligible);
 
 const { locale: i18nLocale, t } = useLocalization(() => props.locale);
 </script>
