@@ -7,6 +7,13 @@ import AVResultSummaryItem from "@/components/atoms/AVResultSummaryItem";
 
 import AVNormalSummary from "./AVNormalSummary.vue";
 
+// Exposes the passed-down option's result fields as attributes so tests can read them.
+const AVResultOptionStub = {
+  props: ["option"],
+  template:
+    '<span :data-count="option.count" :data-elected="option.elected" :data-tied="option.tied" />',
+};
+
 describe("AVNormalSummary", () => {
   const wrapper = mount(AVNormalSummary, {
     props: {
@@ -28,9 +35,7 @@ describe("AVNormalSummary", () => {
         i18n: localI18n,
       },
       stubs: {
-        AVResultOption: {
-          template: "<span />",
-        },
+        AVResultOption: AVResultOptionStub,
       },
       components: {
         AVResultSummaryItem,
@@ -101,7 +106,7 @@ describe("AVNormalSummary", () => {
           value = "10";
           break;
       }
-      expect(e.attributes().votes).to.eq(value);
+      expect(e.attributes()["data-count"]).to.eq(value);
     });
 
     await wrapper.setProps({
@@ -157,7 +162,7 @@ describe("AVNormalSummary", () => {
           value = "5";
           break;
       }
-      expect(e.attributes().votes).to.eq(value);
+      expect(e.attributes()["data-count"]).to.eq(value);
     });
   });
 
@@ -188,7 +193,7 @@ describe("AVNormalSummary", () => {
     const electedBefore: Array<string> = [];
     wrapper
       .findAll("[data-test=result-option]")
-      .forEach((e) => electedBefore.push(e.attributes()["elected"]));
+      .forEach((e) => electedBefore.push(e.attributes()["data-elected"]));
     expect(electedBefore.some((e) => e === "true")).to.be.true;
 
     await wrapper.setProps({
@@ -199,8 +204,8 @@ describe("AVNormalSummary", () => {
     const electedAfter: Array<string> = [];
     wrapper
       .findAll("[data-test=result-option]")
-      .forEach((e) => electedAfter.push(e.attributes()["elected"]));
-    expect(electedAfter.every((e) => e === "false")).to.be.true;
+      .forEach((e) => electedAfter.push(e.attributes()["hide-elected"]));
+    expect(electedAfter.every((e) => e === "true")).to.be.true;
   });
 
   it("hides tied", async () => {
@@ -244,7 +249,7 @@ describe("AVNormalSummary", () => {
     const tiedBefore: Array<string> = [];
     wrapper
       .findAll("[data-test=result-option]")
-      .forEach((e) => tiedBefore.push(e.attributes()["tied"]));
+      .forEach((e) => tiedBefore.push(e.attributes()["data-tied"]));
     expect(tiedBefore.some((e) => e === "true")).to.be.true;
 
     await wrapper.setProps({
@@ -255,8 +260,8 @@ describe("AVNormalSummary", () => {
     const tiedAfter: Array<string> = [];
     wrapper
       .findAll("[data-test=result-option]")
-      .forEach((e) => tiedAfter.push(e.attributes()["tied"]));
-    expect(tiedAfter.every((e) => e === "false")).to.be.true;
+      .forEach((e) => tiedAfter.push(e.attributes()["hide-tied"]));
+    expect(tiedAfter.every((e) => e === "true")).to.be.true;
   });
 
   it("can switch language", async () => {
@@ -340,7 +345,7 @@ describe("AVNormalSummary", () => {
         props: { voteCounts: getVoteCounts(), sortedResult: listResult, totalCount: 16 },
         global: {
           provide: { i18n: localI18n },
-          stubs: { AVResultOption: { template: "<span />" } },
+          stubs: { AVResultOption: AVResultOptionStub },
           components: { AVResultSummaryItem },
         },
       });
@@ -351,7 +356,7 @@ describe("AVNormalSummary", () => {
       expect(groups.length).to.eq(1);
       expect(groups[0].find("[data-test=group-title]").text()).to.eq("Example option 1");
       expect(
-        groups[0].findAll("[data-test=result-option]").map((e) => e.attributes().votes),
+        groups[0].findAll("[data-test=result-option]").map((e) => e.attributes()["data-count"]),
       ).to.deep.eq(["6", "4", "2"]);
     });
 
@@ -367,7 +372,7 @@ describe("AVNormalSummary", () => {
       expect(
         listWrapper()
           .findAll("[data-test=result-option]")
-          .map((e) => e.attributes().votes),
+          .map((e) => e.attributes()["data-count"]),
       ).to.deep.eq(["6", "4", "2", "1", "3"]);
     });
 
@@ -391,7 +396,7 @@ describe("AVNormalSummary", () => {
         },
         global: {
           provide: { i18n: localI18n },
-          stubs: { AVResultOption: { template: "<span />" } },
+          stubs: { AVResultOption: AVResultOptionStub },
           components: { AVResultSummaryItem },
         },
       });
@@ -405,13 +410,15 @@ describe("AVNormalSummary", () => {
       const attr = (name: string) =>
         wrapper.findAll("[data-test=result-option]").map((e) => e.attributes()[name]);
 
-      expect(attr("elected")).to.include("true");
-      expect(attr("tied")).to.include("true");
+      expect(attr("data-elected")).to.include("true");
+      expect(attr("data-tied")).to.include("true");
+      expect(attr("hide-elected").every((e) => e === "false")).to.be.true;
+      expect(attr("hide-tied").every((e) => e === "false")).to.be.true;
 
       await wrapper.setProps({ hideElected: true, hideTied: true, disregardBlank: true });
 
-      expect(attr("elected").every((e) => e === "false")).to.be.true;
-      expect(attr("tied").every((e) => e === "false")).to.be.true;
+      expect(attr("hide-elected").every((e) => e === "true")).to.be.true;
+      expect(attr("hide-tied").every((e) => e === "true")).to.be.true;
       expect(attr("hide-percentage")).to.deep.eq(["false", "false", "false", "false", "true"]);
     });
 

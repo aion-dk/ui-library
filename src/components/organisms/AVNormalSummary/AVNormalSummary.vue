@@ -132,7 +132,7 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
       <AVResultSummaryItem
         v-if="Number.isFinite(voteCounts.excludedCount)"
         :title="t('js.components.AVNormalSummary.summary.null_votes')"
-        :value="voteCounts.excludedCount"
+        :value="voteCounts.excludedCount ?? ''"
         reference="null_votes"
       />
     </div>

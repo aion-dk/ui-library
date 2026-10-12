@@ -4,7 +4,7 @@ import localI18n from "@/i18n";
 import { getOption } from "@/examples";
 
 import AVResultOption from "./AVResultOption.vue";
-import type { NormalResultListGroup, NormalResultListOption, OptionContent } from "@/types";
+import type { NormalResultListOption, OptionContent } from "@/types";
 
 const toListOption = (option: OptionContent): NormalResultListOption => ({
   count: 0,
@@ -15,13 +15,15 @@ const toListOption = (option: OptionContent): NormalResultListOption => ({
   title: option.title,
 });
 
-const INITIAL_LIST_OPTION = toListOption(getOption(["selectable"], 1));
-
 describe("AVResultOption", () => {
+  let option: NormalResultListOption = {
+    ...toListOption(getOption(["selectable"], 1)),
+    count: 1,
+  };
+
   const wrapper = mount(AVResultOption, {
     props: {
-      option: INITIAL_LIST_OPTION,
-      votes: 1,
+      option,
       total: 2,
       locale: "en",
     },
@@ -34,6 +36,9 @@ describe("AVResultOption", () => {
       },
     },
   });
+
+  const setOption = (changes: Partial<NormalResultListOption>) =>
+    wrapper.setProps({ option: (option = { ...option, ...changes }) });
 
   it("renders properly", async () => {
     expect(wrapper.findAll("[data-test=result-image]").length).to.eq(0);
@@ -48,12 +53,10 @@ describe("AVResultOption", () => {
   });
 
   it("can update values", async () => {
-    INITIAL_LIST_OPTION.title.en = "I've changed";
-
-    await wrapper.setProps({
-      option: INITIAL_LIST_OPTION,
-      votes: 2,
-      total: 10,
+    await wrapper.setProps({ total: 10 });
+    await setOption({
+      title: { ...option.title, en: "I've changed" },
+      count: 2,
       elected: true,
     });
 
@@ -67,11 +70,8 @@ describe("AVResultOption", () => {
   });
 
   it("can hide percentage", async () => {
-    await wrapper.setProps({
-      hidePercentage: true,
-      elected: false,
-      tied: true,
-    });
+    await wrapper.setProps({ hidePercentage: true });
+    await setOption({ elected: false, tied: true });
 
     expect(wrapper.find("[data-test=result-option]").classes()).to.contain("bg-warning-faded");
     expect(wrapper.find("[data-test=result-option]").classes()).to.not.contain("bg-body-80");
@@ -82,22 +82,33 @@ describe("AVResultOption", () => {
   });
 
   it("can handle ties", async () => {
-    await wrapper.setProps({
-      hidePercentage: false,
-      elected: true,
-      tied: true,
-    });
+    await wrapper.setProps({ hidePercentage: false });
+    await setOption({ elected: true, tied: true });
 
     expect(wrapper.find("[data-test=result-option]").classes()).to.contain("bg-success-faded");
     expect(wrapper.find("[data-test=result-option]").classes()).to.not.contain("bg-warning-faded");
     expect(wrapper.find("[data-test=result-option]").classes()).to.not.contain("bg-body-80");
   });
 
+  it("can hide elected and tied", async () => {
+    const classes = () => wrapper.find("[data-test=result-option]").classes();
+
+    await wrapper.setProps({ hideElected: true });
+    expect(classes()).to.not.contain("bg-success-faded");
+    expect(classes()).to.contain("bg-warning-faded");
+
+    await wrapper.setProps({ hideTied: true });
+    expect(classes()).to.not.contain("bg-warning-faded");
+    expect(classes()).to.contain("bg-body-alt-10");
+
+    await wrapper.setProps({ hideElected: false, hideTied: false });
+  });
+
   it("can display image", async () => {
     const imageOption = getOption(["selectable", "image"], 1);
 
     await wrapper.setProps({
-      option: toListOption(imageOption),
+      option: (option = toListOption(imageOption)),
     });
 
     expect(wrapper.findAll("[data-test=result-image]").length).to.eq(1);
@@ -113,28 +124,20 @@ describe("AVResultOption", () => {
   });
 
   it("can render as a list", async () => {
-    const option = () => wrapper.find("[data-test=result-option]").classes();
+    const classes = () => wrapper.find("[data-test=result-option]").classes();
 
-    await wrapper.setProps({ list: true, elected: false, tied: false, ineligible: false });
-    expect(option()).to.contain("bg-body");
-    expect(option()).to.not.contain("bg-body-alt-10");
+    await wrapper.setProps({ list: true });
+    await setOption({ elected: false, tied: false, ineligible: false });
+    expect(classes()).to.contain("bg-body");
+    expect(classes()).to.not.contain("bg-body-alt-10");
 
-    await wrapper.setProps({ elected: true });
-    expect(option()).to.contain("bg-success-faded");
+    await setOption({ elected: true });
+    expect(classes()).to.contain("bg-success-faded");
   });
 
-  it("can render a group", async () => {
-    const group: NormalResultListGroup = {
-      children: [],
-      imageUrl: null,
-      reference: "group-1",
-      title: { en: "Example group" },
-      seatsWon: 0,
-    };
+  it("marks ineligible options", async () => {
+    await setOption({ elected: false, ineligible: true });
 
-    await wrapper.setProps({ option: group, locale: "en" });
-
-    expect(wrapper.findAll("[data-test=result-image]").length).to.eq(0);
-    expect(wrapper.find("[data-test=result-title]").text()).to.contain("Example group");
+    expect(wrapper.find("[data-test=result-option]").classes()).to.contain("bg-danger-faded");
   });
 });
