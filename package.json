@@ -89,7 +89,7 @@
     "vite-plugin-dts": "^4.5.4",
     "vite-plugin-static-copy": "^3.2.0",
     "vite-plugin-vue-devtools": "^8.0.7",
-    "vitest": "^4.1.8",
+    "vitest": "^4.1.11",
     "vue-tsc": "^3.2.5",
     "playwright": "^1.60.0",
     "@vitest/browser-playwright": "4.1.8"
