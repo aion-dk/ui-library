@@ -268,15 +268,15 @@ describe("AVOption", () => {
   it("can display image", async () => {
     expect(wrapper.findAll("[data-test=option-image]").length).to.eq(0);
 
+    const imageOption = getOption(["selectable", "image"], 1);
+
     await wrapper.setProps({
-      option: getOption(["selectable", "image"], 1),
+      option: imageOption,
       partialResults: undefined,
     });
 
     expect(wrapper.findAll("[data-test=option-image]").length).to.eq(1);
-    expect(wrapper.find("[data-test=option-image]").attributes().src).to.eq(
-      "https://electa.staging-1.assemblyvoting.net/uploads_proxy/option/image/657750",
-    );
+    expect(wrapper.find("[data-test=option-image]").attributes().src).to.eq(imageOption.image);
     expect(wrapper.find("[data-test=option-image]").attributes().alt).to.contain("Option image");
   });
 
