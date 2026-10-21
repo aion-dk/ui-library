@@ -119,8 +119,8 @@ describe("AVPileSummary", () => {
     expect(wrapper.find("[data-test=summary-option]").text()).to.contain("Example option 1");
   });
 
-  it("allows summary editing independently of prefilled ballots", async () => {
-    await wrapper.setProps({ activeState: "summary", editable: true });
+  it("allows summary editing when editable or prefilled", async () => {
+    await wrapper.setProps({ activeState: "summary", editable: true, isPrefilled: false });
     const edit = wrapper.get("[data-test=pile-summary-edit]");
     expect(edit.attributes("aria-label")).toBeTruthy();
     const count = wrapper.emitted("editCurrentSelection")?.length ?? 0;
@@ -128,11 +128,10 @@ describe("AVPileSummary", () => {
     expect(wrapper.emitted("editCurrentSelection")).toHaveLength(count + 1);
 
     await wrapper.setProps({ editable: false, isPrefilled: true });
-    expect(wrapper.find("[data-test=pile-summary-edit]").exists()).toBe(false);
-
-    await wrapper.setProps({ editable: undefined });
     expect(wrapper.find("[data-test=pile-summary-edit]").exists()).toBe(true);
+
     await wrapper.setProps({ isPrefilled: false });
+    expect(wrapper.find("[data-test=pile-summary-edit]").exists()).toBe(false);
   });
 
   it("can support multiple options", async () => {

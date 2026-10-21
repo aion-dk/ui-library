@@ -59,7 +59,7 @@ const props = defineProps({
   },
   editable: {
     type: Boolean,
-    default: null,
+    default: false,
   },
   isPrefilled: {
     type: Boolean,
@@ -161,7 +161,7 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
       data-test="pile-summary-header"
     >
       <button
-        v-if="editable ?? isPrefilled"
+        v-if="editable || isPrefilled"
         type="button"
         class="btn btn-link btn-sm stretched-link"
         :aria-label="
