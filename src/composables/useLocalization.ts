@@ -19,7 +19,7 @@ const AV_LOCALE = "avLocale";
 
 interface Localization {
   locale: ComputedRef<SupportedLocale>;
-  t: (key: string, named?: Record<string, unknown>) => string;
+  t: (key: string, named?: Record<string, unknown>, plural?: number) => string;
   d: (value: Date | number | string, format?: string | null) => string;
 }
 
@@ -63,8 +63,11 @@ export const useLocalization = (
 
   provide(AV_LOCALE, locale);
 
-  const t = (key: string, named: Record<string, unknown> = {}): string =>
-    i18n.global.t(key, named, { locale: locale.value });
+  // Pass `plural` to pick a form from a "none | one | many" message; `{n}` is filled from it.
+  const t = (key: string, named: Record<string, unknown> = {}, plural?: number): string =>
+    typeof plural === "number"
+      ? i18n.global.t(key, { n: plural, ...named }, { locale: locale.value, plural })
+      : i18n.global.t(key, named, { locale: locale.value });
 
   const d = (value: Date | number | string, format: string | null = null): string =>
     i18n.global.d(value, format, locale.value);
