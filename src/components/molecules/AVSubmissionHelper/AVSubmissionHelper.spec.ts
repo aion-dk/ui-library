@@ -38,6 +38,13 @@ describe("AVSubmissionHelper", () => {
     );
   });
 
+  // Regression: a wrapper around the sticky element confined it to its own height, so it never
+  // stuck. `sticky-bottom` must be on the root, whose parent is the (taller) ballot.
+  it("is sticky on its root element", () => {
+    expect(wrapper.classes()).to.include("sticky-bottom");
+    expect(wrapper.element.firstElementChild?.classList.contains("sticky-bottom")).to.not.be.true;
+  });
+
   it("can track marks", async () => {
     await wrapper.setProps({
       chosenCount: 3,
@@ -252,6 +259,9 @@ describe("AVSubmissionHelper with policy inline results", () => {
     expect(wrapper.findAll("[data-test=submission-helper-policy-feedback]").length).to.eq(0);
   });
 
+  // Intentional: on the ballot page inline policy feedback waits for a selection, so the
+  // blank-vote message (only produced at zero selections) is not shown inline here. Blank votes
+  // are flagged by the alert on submit and inline on the review page (AVPileSummary).
   it("renders raw policy messages verbatim, only once something is chosen", async () => {
     await wrapper.setProps({
       chosenCount: 0,

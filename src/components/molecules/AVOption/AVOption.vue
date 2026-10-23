@@ -288,11 +288,12 @@ const creditBarOpacity = computed(() => {
   return "opacity: 0.1;";
 });
 
+// Logical insets, so the bar follows the document direction (RTL) without the isRtl observer.
 const creditBarPosition = computed(() => {
   if (props.reverseOption) {
-    return "right: 0;";
+    return "inset-inline-end: 0;";
   }
-  return "left: 0;";
+  return "inset-inline-start: 0;";
 });
 
 const backgroundHeight = computed(() => `height: ${elHeight.value}px;`);
@@ -386,6 +387,14 @@ const isBlocked = computed(
     checkedCount.value === 0 &&
     !props.disabled &&
     props.selectionMode !== "radio",
+);
+
+// The counter keeps its own displayed value, so a "+" the ballot rejects would leave it showing
+// more marks than stored. Once a blocking policy hits the limit, stop it from adding.
+const counterMaxAmount = computed(() =>
+  props.maxSelectionsReached && props.selectionMode !== "radio"
+    ? checkedCount.value
+    : votesAllowedPerOption.value,
 );
 
 const handleCheckboxToggle = (reference: string, amount: number, text?: string): void => {
@@ -704,7 +713,7 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
             >
               <AVOptionCounter
                 :amount="checkedCount"
-                :max-amount="votesAllowedPerOption"
+                :max-amount="counterMaxAmount"
                 :disabled="optionDisabled || observerMode"
                 :invalid="invalid"
                 :is-quadratic="contest.markingType.quadraticVoting"

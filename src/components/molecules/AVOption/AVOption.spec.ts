@@ -71,6 +71,47 @@ describe("AVOption", () => {
     ).to.contain("width: 36%");
   });
 
+  // Regression: at a blocking policy's limit, "+" still bumped the counter's own value while the
+  // ballot rejected the mark, so the counter showed more marks than were stored.
+  it("stops the counter from adding once a blocking policy reaches the limit", () => {
+    const counter = (props = {}) =>
+      mountAVOption({
+        contest: getContest(["counter", "multiple_votes_sm"]),
+        selections: [{ reference: "exampleOption1" }],
+        ...props,
+      }).findComponent(AVOptionCounter);
+
+    expect(counter().props("maxAmount")).to.eq(5);
+
+    const blocked = counter({ maxSelectionsReached: true });
+    expect(blocked.props("maxAmount")).to.eq(1);
+    expect(blocked.get("[data-test=option-counter-add]").attributes().disabled).to.exist;
+    expect(blocked.get("[data-test=option-counter-subtract]").attributes().disabled).to.not.exist;
+
+    expect(
+      counter({ maxSelectionsReached: true, selectionMode: "radio" }).props("maxAmount"),
+    ).to.eq(5);
+  });
+
+  // Regression: physical `left`/`right` offsets pinned the bar to the wrong side in RTL.
+  it("anchors the voice credits bar with logical insets", async () => {
+    const voiceCredits: VoiceCredits = {
+      total: 100,
+      remaining: 64,
+      credits: new Map([["exampleOption1", 36]]),
+    };
+    const barStyle = (reverseOption: boolean) =>
+      mountAVOption({ contest: getContest(["quadratic_voting"]), voiceCredits, reverseOption })
+        .find(".position-absolute.pointer-events-none")
+        .attributes().style;
+
+    expect(barStyle(false)).to.contain("inset-inline-start: 0");
+    expect(barStyle(true)).to.contain("inset-inline-end: 0");
+    for (const style of [barStyle(false), barStyle(true)]) {
+      expect(style).to.not.match(/(^|[;\s])(left|right):/);
+    }
+  });
+
   it("renders properly", async () => {
     expect(wrapper.find("[data-test=option-container]").text()).to.contain("Example option 1");
     expect(wrapper.findAll("[data-test=option-summary]").length).to.eq(0);

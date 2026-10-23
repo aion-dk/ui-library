@@ -816,4 +816,67 @@ describe("AVBallot with validation policy", () => {
 
     expect(wrapper.find("[data-test=search-ballot-input]").exists()).to.be.false;
   });
+
+  it("renders the submission helper as a direct sticky child of the ballot", () => {
+    const helper = createWrapper().get("[data-test=ballot-submission-helper]");
+
+    expect(helper.classes()).to.include.members(["sticky-bottom", "mt-4"]);
+  });
+
+  // Regression: `too_many` used to be dropped for any overvote result, so a blocking
+  // `allow_with_error` overvote emitted no errors and the ballot looked valid.
+  it("keeps a blocking overvote invalid, without repeating the message in the helper", () => {
+    const contest = getContest(["many_options"]);
+    const wrapper = createWrapper(
+      {
+        markingType: { ...contest.markingType, maxMarks: 3 },
+        options: contest.options,
+        validationPolicy: {
+          overvote: {
+            behavior: "allow_with_error",
+            feedbackScreen: "ballot_page",
+            feedbackType: "on_screen_message",
+          },
+        },
+      },
+      getSelectionPile(["many"]),
+    );
+
+    expect(lastErrors(wrapper).map((e) => e.message)).to.include("too_many");
+    expect(wrapper.findComponent(AVOption).props("invalid")).to.be.true;
+    expect(
+      wrapper.findAll("[data-test=submission-helper-error]").map((e) => e.text()),
+    ).to.not.include("Too many options selected.");
+    expect(wrapper.get("[data-test=submission-helper-policy-feedback]").text()).to.eq(
+      "You have selected too many options.",
+    );
+  });
+
+  // Regression: blocking only kicked in once the limit was already reached, so a multi-vote
+  // click adding several marks at once could jump past maxMarks.
+  it("blocks a multi-vote change that would cross maxMarks from below", () => {
+    const contest = getContest(["multiple_votes_sm"]);
+    const wrapper = createWrapper(
+      {
+        markingType: contest.markingType,
+        options: contest.options,
+        validationPolicy: {
+          overvote: {
+            behavior: "block_selection",
+            feedbackScreen: "ballot_page",
+            feedbackType: "alert",
+          },
+        },
+      },
+      { optionSelections: [{ reference: "exampleOption1" }] },
+    );
+    const option = wrapper.findComponent(AVOption);
+
+    option.vm.$emit("checked", { reference: "exampleOption2", amount: 5 });
+    expect(wrapper.emitted("update:selectionPile")).to.not.exist;
+    expect(wrapper.emitted("show-overvote-alert")).to.have.length(1);
+
+    option.vm.$emit("checked", { reference: "exampleOption2", amount: 4 });
+    expect(lastSelectionPile(wrapper)!.optionSelections).to.have.length(5);
+  });
 });

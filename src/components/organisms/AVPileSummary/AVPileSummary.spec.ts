@@ -325,6 +325,20 @@ describe("AVPileSummary in summary state", () => {
     expect(lastPendingAlerts(wrapper)).to.deep.eq([]);
   });
 
+  // Regression: the watcher is lazy, so a summary mounted with an unchanged pile never
+  // reported its review alerts to the host.
+  it("reports pending alerts when mounted directly in summary state", () => {
+    const wrapper = mountSummary(
+      { ...getContest([]), validationPolicy: getValidationPolicy("blank_vote_feedback") },
+      getSelectionPile([]),
+    );
+
+    expect(wrapper.emitted("update:pendingAlerts")).to.have.length(1);
+    expect(lastPendingAlerts(wrapper)!.map((a) => a.feedbackMessage)).to.deep.eq([
+      "You are about to cast a blank vote. Are you sure you want to continue?",
+    ]);
+  });
+
   it("maps pending alerts to their review translation keys", async () => {
     const wrapper = mountSummary(
       {

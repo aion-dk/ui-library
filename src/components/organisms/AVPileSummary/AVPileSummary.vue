@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, inject, watch } from "vue";
+import { ref, computed, inject, watch, onMounted } from "vue";
 import { flattenOptions } from "@/helpers/contestHelpers";
 import localI18n from "@/i18n";
 import { useValidationPolicy } from "@/composables/useValidationPolicy";
@@ -127,6 +127,14 @@ watch(
   },
   { deep: true },
 );
+
+// The watcher above is lazy: a summary mounted with an unchanged pile would never report its
+// review alerts. Other initial states emit nothing, so they don't clear a sibling's alerts.
+onMounted(() => {
+  if (props.activeState === "summary") {
+    emits("update:pendingAlerts", mapAlertsWithReviewKeys(pendingAlerts.value));
+  }
+});
 
 const blankSelected = computed(() => {
   return props.selectionPile.optionSelections.length === 0;
