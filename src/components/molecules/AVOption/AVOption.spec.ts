@@ -71,6 +71,47 @@ describe("AVOption", () => {
     ).to.contain("width: 36%");
   });
 
+  // Regression: at a blocking policy's limit, "+" still bumped the counter's own value while the
+  // ballot rejected the mark, so the counter showed more marks than were stored.
+  it("stops the counter from adding once a blocking policy reaches the limit", () => {
+    const counter = (props = {}) =>
+      mountAVOption({
+        contest: getContest(["counter", "multiple_votes_sm"]),
+        selections: [{ reference: "exampleOption1" }],
+        ...props,
+      }).findComponent(AVOptionCounter);
+
+    expect(counter().props("maxAmount")).to.eq(5);
+
+    const blocked = counter({ maxSelectionsReached: true });
+    expect(blocked.props("maxAmount")).to.eq(1);
+    expect(blocked.get("[data-test=option-counter-add]").attributes().disabled).to.exist;
+    expect(blocked.get("[data-test=option-counter-subtract]").attributes().disabled).to.not.exist;
+
+    expect(
+      counter({ maxSelectionsReached: true, selectionMode: "radio" }).props("maxAmount"),
+    ).to.eq(5);
+  });
+
+  // Regression: physical `left`/`right` offsets pinned the bar to the wrong side in RTL.
+  it("anchors the voice credits bar with logical insets", async () => {
+    const voiceCredits: VoiceCredits = {
+      total: 100,
+      remaining: 64,
+      credits: new Map([["exampleOption1", 36]]),
+    };
+    const barStyle = (reverseOption: boolean) =>
+      mountAVOption({ contest: getContest(["quadratic_voting"]), voiceCredits, reverseOption })
+        .find(".position-absolute.pointer-events-none")
+        .attributes().style;
+
+    expect(barStyle(false)).to.contain("inset-inline-start: 0");
+    expect(barStyle(true)).to.contain("inset-inline-end: 0");
+    for (const style of [barStyle(false), barStyle(true)]) {
+      expect(style).to.not.match(/(^|[;\s])(left|right):/);
+    }
+  });
+
   it("renders properly", async () => {
     expect(wrapper.find("[data-test=option-container]").text()).to.contain("Example option 1");
     expect(wrapper.findAll("[data-test=option-summary]").length).to.eq(0);
@@ -277,7 +318,7 @@ describe("AVOption", () => {
 
     expect(wrapper.findAll("[data-test=option-image]").length).to.eq(1);
     expect(wrapper.find("[data-test=option-image]").attributes().src).to.eq(imageOption.image);
-    expect(wrapper.find("[data-test=option-image]").attributes().alt).to.contain("Option image");
+    expect(wrapper.find("[data-test=option-image]").attributes().alt).to.eq("Option");
   });
 
   it("can change image format", async () => {
@@ -435,7 +476,7 @@ describe("AVOption", () => {
     });
     const getLastCheckedEvent = () => {
       const emittedEvents = (writeInWrapper.emitted().checked as VitestEmitted) ?? [];
-      return emittedEvents[emittedEvents.length - 1]?.[0];
+      return emittedEvents.at(-1)?.[0];
     };
 
     await writeInWrapper.vm.$nextTick();
@@ -637,5 +678,196 @@ describe("AVOption", () => {
     expect(wrapper.find("[data-test=option-link]").attributes().href).to.eq(
       "https://www.google.dk",
     );
+  });
+
+  it("defaults reverseOption to false", async () => {
+    await wrapper.setProps({
+      option: getOption(["selectable"], 1),
+      contest: getContest(["multiple_votes_sm"]),
+      selections: [],
+      locale: "en",
+    });
+
+    expect(wrapper.find("[data-test=option-container]").classes()).to.contain("flex-column");
+    expect(wrapper.find("[data-test=option-container]").classes()).to.not.contain(
+      "flex-column-reverse",
+    );
+    expect(wrapper.find("[data-test=option-container]").classes()).to.contain("flex-sm-row");
+    expect(wrapper.find("[data-test=option-container]").classes()).to.not.contain(
+      "flex-sm-row-reverse",
+    );
+  });
+
+  it("can reverse option layout", async () => {
+    await wrapper.setProps({
+      reverseOption: true,
+    });
+
+    expect(wrapper.find("[data-test=option-container]").classes()).to.not.contain("flex-column");
+    expect(wrapper.find("[data-test=option-container]").classes()).to.contain(
+      "flex-column-reverse",
+    );
+    expect(wrapper.find("[data-test=option-container]").classes()).to.not.contain("flex-sm-row");
+    expect(wrapper.find("[data-test=option-container]").classes()).to.contain(
+      "flex-sm-row-reverse",
+    );
+  });
+
+  it("defaults selectionStyle to checkbox", async () => {
+    await wrapper.setProps({
+      option: getOption(["selectable"], 1),
+      contest: getContest([]),
+      selections: [{ reference: "exampleOption1" }],
+      reverseOption: false,
+    });
+
+    expect(wrapper.find("[data-test=option-section]").classes()).to.not.contain(
+      "AVOption--selected-background",
+    );
+  });
+
+  it("can apply background selection style when selected", async () => {
+    await wrapper.setProps({
+      selectionStyle: "background",
+    });
+
+    expect(wrapper.find("[data-test=option-section]").classes()).to.contain(
+      "AVOption--selected-background",
+    );
+  });
+
+  it("does not apply background selection style when not selected", async () => {
+    await wrapper.setProps({
+      selections: [],
+    });
+
+    expect(wrapper.find("[data-test=option-section]").classes()).to.not.contain(
+      "AVOption--selected-background",
+    );
+  });
+
+  it("passes selectionStyle to AVOptionCheckbox", async () => {
+    await wrapper.setProps({
+      selections: [{ reference: "exampleOption1" }],
+    });
+
+    const checkbox = wrapper.findComponent(AVOptionCheckbox);
+    expect(checkbox.props("selectionStyle")).to.eq("background");
+  });
+
+  it("passes reverseOption and selectionStyle to child options", async () => {
+    await wrapper.setProps({
+      option: getOption(["selectable", "children"], 1),
+      contest: getContest(["children_options"]),
+      reverseOption: true,
+      selectionStyle: "background",
+    });
+
+    const childOptions = wrapper.findAllComponents(AVOption).slice(1);
+    childOptions.forEach((child) => {
+      expect(child.props("reverseOption")).to.eq(true);
+      expect(child.props("selectionStyle")).to.eq("background");
+    });
+  });
+
+  describe("blocked-click event", () => {
+    it("emits blocked-click when maxSelectionsReached and option is unselected", async () => {
+      const blockedWrapper = mountAVOption({
+        maxSelectionsReached: true,
+        selections: [],
+      });
+      await blockedWrapper.find("[data-test=option-section]").trigger("click");
+      expect(blockedWrapper.emitted("blocked-click")).toBeDefined();
+      expect(blockedWrapper.emitted("blocked-click")).toHaveLength(1);
+    });
+
+    it("does not change selection when blocked-click is emitted", async () => {
+      const blockedWrapper = mountAVOption({
+        maxSelectionsReached: true,
+        selections: [],
+      });
+      await blockedWrapper.find("[data-test=option-section]").trigger("click");
+      expect(blockedWrapper.emitted("checked")).toBeUndefined();
+    });
+
+    it("does not emit blocked-click when option is already selected", async () => {
+      const blockedWrapper = mountAVOption({
+        maxSelectionsReached: true,
+        selections: [{ reference: "exampleOption1" }],
+      });
+      await blockedWrapper.find("[data-test=option-section]").trigger("click");
+      expect(blockedWrapper.emitted("blocked-click")).toBeUndefined();
+    });
+
+    it("does not emit blocked-click when maxSelectionsReached is false", async () => {
+      const normalWrapper = mountAVOption({
+        maxSelectionsReached: false,
+        selections: [],
+      });
+      await normalWrapper.find("[data-test=option-section]").trigger("click");
+      expect(normalWrapper.emitted("blocked-click")).toBeUndefined();
+    });
+
+    it("does not emit blocked-click in radio mode", async () => {
+      const radioWrapper = mountAVOption({
+        maxSelectionsReached: true,
+        selectionMode: "radio",
+        selections: [],
+      });
+      await radioWrapper.find("[data-test=option-section]").trigger("click");
+      expect(radioWrapper.emitted("blocked-click")).toBeUndefined();
+    });
+
+    it("emits blocked-click for parent when only child is selected", async () => {
+      const parentWithChildren = getOption(["selectable", "children"], 1);
+      const parentWrapper = mountAVOption({
+        option: parentWithChildren,
+        maxSelectionsReached: true,
+        selections: [{ reference: `exampleChildren1-1` }],
+      });
+      await parentWrapper.find("[data-test=option-section]").trigger("click");
+      expect(parentWrapper.emitted("blocked-click")).toBeDefined();
+    });
+
+    it("emits blocked-click when checkbox is clicked directly and maxSelectionsReached", async () => {
+      const blockedWrapper = mountAVOption({
+        maxSelectionsReached: true,
+        selections: [],
+      });
+      await blockedWrapper.find("[data-test=option-checkbox]").trigger("click");
+      expect(blockedWrapper.emitted("blocked-click")).toBeDefined();
+      expect(blockedWrapper.emitted("blocked-click")).toHaveLength(1);
+      expect(blockedWrapper.emitted("checked")).toBeUndefined();
+    });
+
+    it("does not emit blocked-click when checkbox is clicked and option is already selected", async () => {
+      const blockedWrapper = mountAVOption({
+        maxSelectionsReached: true,
+        selections: [{ reference: "exampleOption1" }],
+      });
+      await blockedWrapper.find("[data-test=option-checkbox]").trigger("click");
+      expect(blockedWrapper.emitted("blocked-click")).toBeUndefined();
+    });
+
+    it("emits blocked-click when increasing votes in multi-vote mode and maxSelectionsReached", async () => {
+      const blockedWrapper = mountAVOption({
+        contest: getContest(["multiple_votes_sm"]),
+        maxSelectionsReached: true,
+        selections: [{ reference: "exampleOption1" }],
+      });
+      await blockedWrapper.findAll("[data-test=option-checkbox]")[1].trigger("click");
+      expect(blockedWrapper.emitted("blocked-click")).toBeDefined();
+      expect(blockedWrapper.emitted("checked")).toBeUndefined();
+    });
+
+    it("does not emit blocked-click when decreasing votes in multi-vote mode and maxSelectionsReached", async () => {
+      const blockedWrapper = mountAVOption({
+        contest: getContest(["multiple_votes_sm"]),
+        maxSelectionsReached: true,
+        selections: [{ reference: "exampleOption1" }, { reference: "exampleOption1" }],
+      });
+      await blockedWrapper.findAll("[data-test=option-checkbox]")[1].trigger("click");
+      expect(blockedWrapper.emitted("blocked-click")).toBeUndefined();
+    });
   });
 });

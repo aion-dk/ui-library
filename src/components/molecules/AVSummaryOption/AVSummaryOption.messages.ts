@@ -124,7 +124,7 @@ const translations: DefineLocaleMessage = {
   pl: {
     aria_label: {
       option: "Opcja",
-      option_image: "Imagine opțiune",
+      option_image: "Obraz opcji",
     },
     blank: "Puste",
     write_in: "Wpisz",

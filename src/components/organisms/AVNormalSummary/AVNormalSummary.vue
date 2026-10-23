@@ -77,6 +77,7 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
               <img
                 v-if="item.imageUrl"
                 :src="item.imageUrl"
+                alt=""
                 style="object-fit: cover; max-height: 35px; max-width: 35px"
                 class="AVResultOption--image ratio ratio-1x1"
                 aria-hidden="true"

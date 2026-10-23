@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from "vue";
-import type { PropType, SupportedLocale, Error, VoiceCredits } from "@/types";
+import type { PropType, SupportedLocale, Error, VoiceCredits, ValidationResult } from "@/types";
 import { useLocalization } from "@/composables/useLocalization";
 
 const props = defineProps({
@@ -36,29 +36,28 @@ const props = defineProps({
     type: String as PropType<SupportedLocale>,
     default: null,
   },
+  policyInlineResults: {
+    type: Array as PropType<ValidationResult[]>,
+    default: () => [],
+  },
+  displayErrorModal: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const errorMessages = computed(() => {
-  // Hint to i18n-tasks that these translations should be present:
-  // t("submission_helper.errors.too_many")
-  // t("submission_helper.errors.blank")
-  // t("submission_helper.errors.write_in_required")
-  // t("submission_helper.errors.write_in_too_long")
-  // t("submission_helper.errors.write_in_not_supported")
-  // t("submission_helper.errors.write_in_empty")
-  // t("submission_helper.errors.exceeded_list_limit")
-  // t("submission_helper.errors.exclusive")
-  // t("submission_helper.errors.cross_party_voting")
-  // t("submission_helper.errors.too_many_credits")
   return props.errors.map((e) => {
     if (e.keys) {
-      Object.keys(e.keys).forEach((key) => {
-        if (typeof e.keys[key] === "object") {
-          e.keys[key] = e.keys[key][i18nLocale.value];
+      // Copy instead of mutating the prop, so LocalString params re-localize on locale change.
+      const keys = { ...e.keys };
+      for (const key of Object.keys(keys)) {
+        if (typeof keys[key] === "object") {
+          keys[key] = keys[key][i18nLocale.value];
         }
-      });
+      }
 
-      return t(`js.components.AVSubmissionHelper.errors.${e.message}`, e.keys);
+      return t(`js.components.AVSubmissionHelper.errors.${e.message}`, keys);
     } else {
       return t(`js.components.AVSubmissionHelper.errors.${e.message}`);
     }
@@ -74,7 +73,7 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
 </script>
 
 <template>
-  <div class="sticky-bottom">
+  <div class="mt-2 sticky-bottom">
     <button
       v-if="displayScrollToBottom"
       type="button"
@@ -88,9 +87,12 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
     <div
       class="p-3"
       :class="{
-        'bg-gray-700': !errors.length,
-        'text-white': !errors.length,
-        'bg-theme-danger': errors.length > 0,
+        'bg-gray-700':
+          (!errors.length && !policyInlineResults.some((r) => r.blocked)) || chosenCount === 0,
+        'text-white':
+          (!errors.length && !policyInlineResults.some((r) => r.blocked)) || chosenCount === 0,
+        'bg-theme-danger':
+          (errors.length > 0 || policyInlineResults.some((r) => r.blocked)) && chosenCount > 0,
       }"
       data-test="submission-helper"
     >
@@ -110,7 +112,7 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
       </div>
 
       <!-- ERRORS -->
-      <div v-if="errors.length > 0">
+      <div>
         <div
           v-for="errorMessage in errorMessages"
           :key="errorMessage"
@@ -118,8 +120,31 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
           v-text="errorMessage"
           data-test="submission-helper-error"
         ></div>
-        <hr class="my-3" />
       </div>
+      <div v-if="policyInlineResults.length > 0 && chosenCount > 0">
+        <div
+          v-for="result in policyInlineResults"
+          :key="result.scenario"
+          role="alert"
+          :class="{
+            'text-white': result.warning || result.blocked,
+          }"
+          data-test="submission-helper-policy-feedback"
+        >
+          {{
+            result.isRawMessage
+              ? result.feedbackMessage
+              : t(
+                  `js.components.AVSubmissionHelper.${result.feedbackMessage}`,
+                  result.feedbackParams,
+                )
+          }}
+        </div>
+      </div>
+      <hr
+        v-if="errors.length > 0 || (policyInlineResults.length > 0 && chosenCount > 0)"
+        class="my-3"
+      />
 
       <div v-if="maxMarks > 1">
         <div class="d-block justify-content-between align-items-center">

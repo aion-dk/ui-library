@@ -229,6 +229,7 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
             v-if="showPreview"
             class="AVFileInput--preview-img rounded-1"
             :src="generateURL(file)"
+            :alt="file.name"
           />
           <AVIcon v-else icon="file" data-test="file-preview-icon" />
           <p class="text-body-70 m-0">
