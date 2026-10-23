@@ -49,13 +49,15 @@ const props = defineProps({
 const errorMessages = computed(() => {
   return props.errors.map((e) => {
     if (e.keys) {
-      for (const key of Object.keys(e.keys)) {
-        if (typeof e.keys[key] === "object") {
-          e.keys[key] = e.keys[key][i18nLocale.value];
+      // Copy instead of mutating the prop, so LocalString params re-localize on locale change.
+      const keys = { ...e.keys };
+      for (const key of Object.keys(keys)) {
+        if (typeof keys[key] === "object") {
+          keys[key] = keys[key][i18nLocale.value];
         }
       }
 
-      return t(`js.components.AVSubmissionHelper.errors.${e.message}`, e.keys);
+      return t(`js.components.AVSubmissionHelper.errors.${e.message}`, keys);
     } else {
       return t(`js.components.AVSubmissionHelper.errors.${e.message}`);
     }

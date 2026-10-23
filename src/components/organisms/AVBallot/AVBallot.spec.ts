@@ -4,7 +4,7 @@ import localI18n from "@/i18n";
 import { getContest, getSelectionPile, getLiveResult } from "@/examples";
 
 import AVBallot from "./AVBallot.vue";
-import type { ValidationResult } from "@/types";
+import type { SelectionPile, ValidationResult } from "@/types";
 import AVCollapser from "@/components/atoms/AVCollapser";
 import AVAnimatedTransition from "@/components/atoms/AVAnimatedTransition";
 import AVSearchBallot from "@/components/molecules/AVSearchBallot";
@@ -669,5 +669,151 @@ describe("AVBallot with validation policy", () => {
 
     const alertEvents = wrapper.emitted("update:pendingAlerts");
     expect(alertEvents?.length ?? 0).toBe(previousAlertCount);
+  });
+
+  const lastSelectionPile = (wrapper: ReturnType<typeof createWrapper>) =>
+    wrapper.emitted("update:selectionPile")?.at(-1)?.[0] as SelectionPile | undefined;
+
+  const lastErrors = (wrapper: ReturnType<typeof createWrapper>) =>
+    (wrapper.emitted("update:errors")?.at(-1)?.[0] ?? []) as { message: string }[];
+
+  const radioPolicy = {
+    markingType: { ...getContest(["blank"]).markingType, maxMarks: 1 },
+    validationPolicy: {
+      overvote: {
+        behavior: "behave_as_radio_button",
+        feedbackScreen: "ballot_page",
+        feedbackType: "on_screen_message",
+      },
+    },
+  } as const;
+
+  it("ignores selections beyond maxMarks under block_selection, but still allows removing", async () => {
+    const wrapper = createWrapper(
+      {
+        markingType: { ...getContest(["blank", "multi"]).markingType, maxMarks: 2 },
+        validationPolicy: {
+          overvote: {
+            behavior: "block_selection",
+            feedbackScreen: "ballot_page",
+            feedbackType: "on_screen_message",
+          },
+        },
+      },
+      getSelectionPile(["multi"]),
+    );
+    const option = wrapper.findComponent(AVOption);
+
+    option.vm.$emit("checked", { reference: "exampleOption3", amount: 1 });
+    expect(wrapper.emitted("update:selectionPile")).to.not.exist;
+
+    option.vm.$emit("checked", { reference: "exampleOption1", amount: 1 });
+    expect(lastSelectionPile(wrapper)!.optionSelections.map((s) => s.reference)).to.deep.eq([
+      "exampleOption2",
+    ]);
+  });
+
+  it("replaces the selection and clears an explicit blank in radio mode", async () => {
+    const wrapper = createWrapper(radioPolicy, {
+      ...getSelectionPile(["single"]),
+      explicitBlank: true,
+    });
+
+    wrapper.findComponent(AVOption).vm.$emit("checked", {
+      reference: "exampleOption2",
+      amount: 1,
+    });
+
+    const pile = lastSelectionPile(wrapper)!;
+    expect(pile.optionSelections.map((s) => s.reference)).to.deep.eq(["exampleOption2"]);
+    expect(pile.explicitBlank).to.be.false;
+  });
+
+  it("clears option selections when choosing blank in radio mode", async () => {
+    const wrapper = createWrapper(radioPolicy, getSelectionPile(["single"]));
+
+    wrapper.findComponent(AVBlankOption).vm.$emit("toggleBlank");
+
+    const pile = lastSelectionPile(wrapper)!;
+    expect(pile.explicitBlank).to.be.true;
+    expect(pile.optionSelections).to.deep.eq([]);
+  });
+
+  it("keeps option selections when choosing blank in checkbox mode", async () => {
+    const wrapper = createWrapper({}, getSelectionPile(["single"]));
+
+    wrapper.findComponent(AVBlankOption).vm.$emit("toggleBlank");
+
+    const pile = lastSelectionPile(wrapper)!;
+    expect(pile.explicitBlank).to.be.true;
+    expect(pile.optionSelections.map((s) => s.reference)).to.deep.eq(["exampleOption1"]);
+  });
+
+  it("updates a write-in text in place without reordering selections", async () => {
+    const wrapper = createWrapper({}, getSelectionPile(["multi"]));
+
+    wrapper.findComponent(AVOption).vm.$emit("checked", {
+      reference: "exampleOption1",
+      amount: 1,
+      text: "Jane Doe",
+      onlyUpdate: true,
+    });
+
+    expect(lastSelectionPile(wrapper)!.optionSelections).to.deep.eq([
+      { reference: "exampleOption1", text: "Jane Doe" },
+      { reference: "exampleOption2" },
+    ]);
+  });
+
+  it("drops the too_many error only when the overvote policy reports it", async () => {
+    const contest = getContest(["many_options"]);
+    const overLimit = {
+      markingType: { ...contest.markingType, maxMarks: 3 },
+      options: contest.options,
+    };
+
+    const withoutPolicy = createWrapper(overLimit, getSelectionPile(["many"]));
+    expect(lastErrors(withoutPolicy).map((e) => e.message)).to.include("too_many");
+
+    const withPolicy = createWrapper(
+      {
+        ...overLimit,
+        validationPolicy: {
+          overvote: {
+            behavior: "allow_and_warn",
+            feedbackScreen: "ballot_page",
+            feedbackType: "on_screen_message",
+          },
+        },
+      },
+      getSelectionPile(["many"]),
+    );
+    expect(lastErrors(withPolicy).map((e) => e.message)).to.not.include("too_many");
+  });
+
+  // Regression: the search box used to keep its term across contests (fixed during the
+  // main → ontario sync review).
+  it("clears the search box when moving to another contest, and only then", async () => {
+    const wrapper = createWrapper(getContest(["search_form"]));
+    const searchValue = () =>
+      (wrapper.get("[data-test=search-ballot-input]").element as HTMLInputElement).value;
+    await wrapper.get("[data-test=search-ballot-input]").setValue("example");
+
+    await wrapper.setProps({
+      contest: { ...getContest(["search_form"]), title: { en: "Edited" } },
+    });
+    expect(searchValue()).to.eq("example");
+
+    await wrapper.setProps({ contest: { ...getContest(["search_form"]), reference: "other" } });
+    expect(searchValue()).to.eq("");
+  });
+
+  it("moves to a contest without a search form", async () => {
+    const wrapper = createWrapper(getContest(["search_form"]));
+    await wrapper.get("[data-test=search-ballot-input]").setValue("example");
+
+    await wrapper.setProps({ contest: { ...getContest([]), reference: "other" } });
+
+    expect(wrapper.find("[data-test=search-ballot-input]").exists()).to.be.false;
   });
 });

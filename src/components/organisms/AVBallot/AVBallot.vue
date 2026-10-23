@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, watch, watchEffect } from "vue";
+import { computed, watch, watchEffect } from "vue";
 import { flattenOptions } from "@/helpers/contestHelpers";
 import { getMeaningfulLabel } from "@/helpers/meaningfulLabel";
 import { useValidationPolicy, handleOvervote } from "@/composables/useValidationPolicy";
@@ -89,8 +89,6 @@ const emits = defineEmits([
 ]);
 
 const { locale: i18nLocale, t } = useLocalization(() => props.locale);
-
-const search = ref<HTMLInputElement | null>(null);
 
 const selections = computed(() => [...props.selectionPile.optionSelections]);
 
@@ -210,7 +208,6 @@ const voiceCredits = computed<VoiceCredits>(() => {
 watch(reactiveContest, (present, previous) => {
   if (previous && present && present.reference !== previous.reference) {
     document.getElementById("content")?.focus();
-    if (previous.searchForm) (search.value as HTMLInputElement).value = "";
   }
 });
 
@@ -354,7 +351,7 @@ const galleryOptions = computed(() => {
     </h5>
     <AVSearchBallot
       v-if="contest.searchForm && !disabled && !observerMode"
-      ref="search"
+      :key="contest.reference"
       :options="flattenOptions(contest.options)"
       :options-container-id="'ballot_options'"
     />

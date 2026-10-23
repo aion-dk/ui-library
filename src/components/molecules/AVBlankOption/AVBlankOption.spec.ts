@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from "vitest";
-import { mount } from "@vue/test-utils";
+import { mount, flushPromises, type VueWrapper } from "@vue/test-utils";
 import localI18n from "@/i18n";
 import { getLiveResult } from "@/examples";
 
@@ -269,5 +269,34 @@ describe("AVBlankOption", () => {
     await wrapper.find("[data-test=blank-option]").trigger("click");
 
     expect(wrapper.emitted().toggleBlank).to.have.lengthOf(1);
+  });
+
+  it("emits toggleBlank from the leading checkbox in reversed layout", async () => {
+    await wrapper.setProps({ reverseOption: true });
+
+    (wrapper.findComponent("[data-test=blank-checkbox]") as VueWrapper).vm.$emit("toggled");
+
+    expect(wrapper.emitted().toggleBlank).to.have.lengthOf(2);
+    await wrapper.setProps({ reverseOption: false });
+  });
+
+  it("moves the accent border to the right in right-to-left documents", async () => {
+    const html = document.documentElement;
+    await wrapper.setProps({ accentColor: "#FF0000" });
+    try {
+      html.setAttribute("dir", "rtl");
+      await flushPromises();
+      expect(wrapper.find("[data-test=option-container]").attributes().style).to.include(
+        "border-right-color: rgb(255, 0, 0);",
+      );
+
+      html.setAttribute("dir", "ltr");
+      await flushPromises();
+      expect(wrapper.find("[data-test=option-container]").attributes().style).to.include(
+        "border-left-color: rgb(255, 0, 0);",
+      );
+    } finally {
+      html.removeAttribute("dir");
+    }
   });
 });

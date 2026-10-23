@@ -251,4 +251,73 @@ describe("AVSubmissionHelper with policy inline results", () => {
 
     expect(wrapper.findAll("[data-test=submission-helper-policy-feedback]").length).to.eq(0);
   });
+
+  it("renders raw policy messages verbatim, only once something is chosen", async () => {
+    await wrapper.setProps({
+      chosenCount: 0,
+      policyInlineResults: [
+        {
+          scenario: "blank_vote",
+          allowed: false,
+          warning: false,
+          blocked: true,
+          feedbackMessage: "A custom message written by the election administrator.",
+          feedbackScreen: "ballot_page",
+          feedbackType: "on_screen_message",
+          isRawMessage: true,
+        },
+      ],
+    });
+
+    expect(wrapper.find("[data-test=submission-helper-policy-feedback]").exists()).to.be.false;
+
+    await wrapper.setProps({ chosenCount: 1 });
+
+    expect(wrapper.find("[data-test=submission-helper-policy-feedback]").text()).to.eq(
+      "A custom message written by the election administrator.",
+    );
+
+    await wrapper.setProps({ policyInlineResults: [] });
+  });
+
+  it("interpolates error params, localizing translatable ones", async () => {
+    await wrapper.setProps({
+      errors: [
+        {
+          message: "exceeded_list_limit",
+          keys: { list_name: { en: "Party A", da: "Parti A" }, max_list_marks: 2 },
+        },
+      ],
+    });
+
+    expect(wrapper.find("[data-test=submission-helper-error]").text()).to.contain(
+      "Your selection exceeded the maximum amount of options that can be on Party A list. Please select max 2 options per this list",
+    );
+
+    await wrapper.setProps({ errors: [] });
+  });
+
+  // Regression: LocalString params used to be overwritten in the prop with the first locale's
+  // string, so they never re-localized (fixed during the main → ontario sync review).
+  it("re-localizes translatable error params when the locale changes", async () => {
+    const keys = { list_name: { en: "Party A", da: "Parti A" }, max_list_marks: 2 };
+    await wrapper.setProps({ errors: [{ message: "exceeded_list_limit", keys }] });
+    try {
+      expect(wrapper.find("[data-test=submission-helper-error]").text()).to.contain("Party A");
+
+      await wrapper.setProps({ locale: "da" });
+      expect(wrapper.find("[data-test=submission-helper-error]").text()).to.contain("Parti A");
+      expect(keys.list_name).to.deep.eq({ en: "Party A", da: "Parti A" });
+    } finally {
+      await wrapper.setProps({ locale: "en", errors: [] });
+    }
+  });
+
+  it("asks for an exact number of options when min and max marks match", async () => {
+    await wrapper.setProps({ minMarks: 3, maxMarks: 3 });
+
+    expect(wrapper.find("[data-test=submission-helper]").text()).to.contain("Select 3 options.");
+
+    await wrapper.setProps({ minMarks: 1, maxMarks: 3 });
+  });
 });
