@@ -117,6 +117,7 @@ const getContest = (args: ContestArg[]): ContestContent => {
     customRulesets: args.includes("belgian_rules") ? ["belgian_ballot_rules"] : undefined,
     multipleVotingInterface:
       args.includes("quadratic_voting") || args.includes("counter") ? "counter" : "crosses",
+    showVoterWeightMessage: true,
   };
 };
 

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from "vue";
-import type { PropType, SupportedLocale } from "@/types";
+import type { PropType, SupportedLocale, SelectionStyle } from "@/types";
 import { useLocalization } from "@/composables/useLocalization";
 
 const props = defineProps({
@@ -15,6 +15,10 @@ const props = defineProps({
   locale: {
     type: String as PropType<SupportedLocale>,
     default: null,
+  },
+  selectionStyle: {
+    type: String as PropType<SelectionStyle>,
+    default: "checkbox",
   },
 });
 
@@ -35,8 +39,10 @@ const { t } = useLocalization(() => props.locale);
 <template>
   <div
     v-show="checked"
-    class="text-white AVOptionSelect"
-    :aria-label="optionAriaLabel"
+    class="AVOptionSelect"
+    :class="selectionStyle === 'background' ? 'text-ballot' : 'text-white'"
+    :role="optionAriaLabel ? 'img' : undefined"
+    :aria-label="optionAriaLabel || undefined"
     data-test="option-select"
   >
     <strong v-if="rank" aria-hidden="true" data-test="rank">{{ rank }}</strong>
@@ -44,7 +50,7 @@ const { t } = useLocalization(() => props.locale);
       v-else
       width="26"
       height="26"
-      stroke="white"
+      :stroke="selectionStyle === 'background' ? 'var(--bs-ballot)' : 'white'"
       stroke-width="0.25rem"
       aria-hidden="true"
       data-test="check"

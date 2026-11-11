@@ -387,6 +387,27 @@ describe("AVNormalSummary", () => {
       expect(wrapper.find("[data-test=group-seats-won]").exists()).to.be.false;
     });
 
+    it("renders the group image as decorative", () => {
+      const imageUrl = getOption(["selectable", "image"], 1).image ?? null;
+      const wrapper = mount(AVNormalSummary, {
+        props: {
+          voteCounts: getVoteCounts(),
+          sortedResult: [{ ...listResult[0], imageUrl }],
+          totalCount: 16,
+        },
+        global: {
+          provide: { i18n: localI18n },
+          stubs: { AVResultOption: AVResultOptionStub },
+          components: { AVResultSummaryItem },
+        },
+      });
+
+      const image = wrapper.find("[data-test=result-group] [data-test=result-image]");
+      expect(image.attributes().src).to.eq(imageUrl);
+      expect(image.attributes().alt).to.eq("");
+      expect(image.attributes()["aria-hidden"]).to.eq("true");
+    });
+
     it("hides seats won when null", () => {
       const wrapper = mount(AVNormalSummary, {
         props: {

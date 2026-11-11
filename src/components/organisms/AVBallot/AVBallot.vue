@@ -1,7 +1,12 @@
 <script setup lang="ts">
-import { ref, computed, watch } from "vue";
+import { computed, watch, watchEffect } from "vue";
 import { flattenOptions } from "@/helpers/contestHelpers";
 import { getMeaningfulLabel } from "@/helpers/meaningfulLabel";
+import {
+  useValidationPolicy,
+  handleOvervote,
+  applyOvervotePolicy,
+} from "@/composables/useValidationPolicy";
 import type {
   PropType,
   SupportedLocale,
@@ -11,6 +16,7 @@ import type {
   PartialResults,
   Error,
   ImageOption,
+  SelectionStyle,
   IterableObject,
   AVBallotGalleryOption,
   VoiceCredits,
@@ -64,17 +70,50 @@ const props = defineProps({
     type: String as PropType<ImageOption>,
     default: "square",
   },
+  reverseOption: {
+    type: Boolean,
+    default: false,
+  },
+  selectionStyle: {
+    type: String as PropType<SelectionStyle>,
+    default: "checkbox",
+  },
   weight: {
     type: Number,
     default: null,
   },
 });
 
-const emits = defineEmits(["update:selectionPile", "update:errors", "view-candidate"]);
+const emits = defineEmits([
+  "update:selectionPile",
+  "update:errors",
+  "update:pendingAlerts",
+  "show-overvote-alert",
+  "view-candidate",
+]);
 
-const search = ref<HTMLInputElement | null>(null);
+const { locale: i18nLocale, t } = useLocalization(() => props.locale);
 
 const selections = computed(() => [...props.selectionPile.optionSelections]);
+
+const {
+  pendingAlerts,
+  inlineResults: policyInlineResults,
+  selectionMode,
+  blockingOvervote,
+  blockSelectionEnabled,
+  overvoteAlertBased,
+  policy,
+} = useValidationPolicy(
+  computed(() => props.contest),
+  computed(() => props.selectionPile),
+  "ballot_page",
+  i18nLocale,
+);
+
+watchEffect(() => {
+  emits("update:pendingAlerts", pendingAlerts.value);
+});
 
 type SelectionPileValidatorOptions = {
   selfVotePrevention?: boolean;
@@ -120,9 +159,19 @@ const errors = computed(() => {
     }
   }
 
-  emits("update:errors", combinedErrors);
-  return combinedErrors;
+  const policyErrors = applyOvervotePolicy(combinedErrors, props.contest, props.selectionPile);
+
+  emits("update:errors", policyErrors);
+  return policyErrors;
 });
+
+// A blocking overvote keeps `too_many` in `errors` (so the ballot stays invalid), but when the
+// policy already explains it inline, the helper shouldn't print the same thing twice.
+const helperErrors = computed(() =>
+  policyInlineResults.value.some((r) => r.scenario === "overvote")
+    ? errors.value.filter((err) => err.message !== "too_many")
+    : errors.value,
+);
 
 const isValid = computed(() => errors.value.length === 0);
 
@@ -168,48 +217,98 @@ const voiceCredits = computed<VoiceCredits>(() => {
 watch(reactiveContest, (present, previous) => {
   if (previous && present && present.reference !== previous.reference) {
     document.getElementById("content")?.focus();
-    if (previous.searchForm) (search.value as HTMLInputElement).value = "";
   }
 });
 
 const toggleBlank = (): void => {
+  const newBlank = !props.selectionPile.explicitBlank;
   emits("update:selectionPile", {
     ...props.selectionPile,
-    explicitBlank: !props.selectionPile.explicitBlank,
+    explicitBlank: newBlank,
+    optionSelections:
+      selectionMode.value === "radio" && newBlank ? [] : props.selectionPile.optionSelections,
   });
 };
 
+/**
+ * Handles selecting/deselecting an option or updating its text.
+ * Manages the selection state based on the contest's marking type constraints.
+ */
 const toggleOption = ({ reference, amount, text, onlyUpdate }: CheckedEventArgs): void => {
+  // Count how many times this option is currently selected (for multi-select contests)
   const currentAmount = selections.value.filter(
     (selection) => selection.reference === reference,
   ).length;
 
+  // Find the position of this option in the current selections array
   const selectionIndex = selections.value.findIndex(
     (selection) => selection.reference === reference,
   );
   const newSelection = { reference, text };
 
+  // Calculate the target selection count for this option
+  const totalSelections = selections.value.length;
   let finalAmount = amount;
+  // Toggle off if clicking the same amount again (unless it's a text-only update)
   if (amount === currentAmount && !onlyUpdate) finalAmount = amount - 1;
 
-  let newSelections = selections.value.filter((selection) => {
-    if (selection.reference !== reference) return { ...selection };
-  });
+  // Check if this action would increase the total number of selections
+  const wouldIncreaseTotal = finalAmount > currentAmount;
 
+  // Block the selection if:
+  // - A blocking overvote policy is set, it's not a text update, not in radio mode,
+  //   and the proposed total would exceed max marks (also when crossing it from below,
+  //   e.g. a multi-vote click that adds several marks at once)
+  if (
+    blockingOvervote.value &&
+    !onlyUpdate &&
+    selectionMode.value !== "radio" &&
+    wouldIncreaseTotal &&
+    totalSelections - currentAmount + finalAmount > (props.contest.markingType.maxMarks ?? Infinity)
+  ) {
+    handleBlockedClick();
+    return;
+  }
+
+  // Remove all existing selections for this option to rebuild the selection list
+  let newSelections = selections.value.filter((selection) => selection.reference !== reference);
+
+  // In radio mode, selecting a new option clears all other selections
+  if (selectionMode.value === "radio" && finalAmount > 0 && currentAmount === 0) {
+    newSelections = [];
+  }
+
+  // Add the option the required number of times (for multi-select with min/max > 1)
   for (let i = 0; i < finalAmount; i += 1) {
     newSelections.push(newSelection);
   }
 
+  // For text-only updates, preserve the existing selection structure but update the text
   if (onlyUpdate && selectionIndex >= 0) {
     const selectionWithUpdatedText = [...selections.value];
     selectionWithUpdatedText[selectionIndex] = newSelection;
     newSelections = selectionWithUpdatedText;
   }
 
+  // Emit the updated selection state, clearing explicit blank if a radio option was selected
   emits("update:selectionPile", {
     ...props.selectionPile,
     optionSelections: newSelections,
+    explicitBlank:
+      selectionMode.value === "radio" && finalAmount > 0
+        ? false
+        : props.selectionPile.explicitBlank,
   });
+};
+
+const handleBlockedClick = (): void => {
+  if (!overvoteAlertBased.value) return;
+
+  const alertResult = handleOvervote(policy.value);
+  if (!alertResult) return;
+
+  emits("update:pendingAlerts", [alertResult]);
+  emits("show-overvote-alert", alertResult);
 };
 
 const viewCandidate = (contestReference: string, optionReference: string): void =>
@@ -241,8 +340,6 @@ const galleryOptions = computed(() => {
 
   return options;
 });
-
-const { locale: i18nLocale, t } = useLocalization(() => props.locale);
 </script>
 
 <template>
@@ -251,6 +348,7 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
     :class="{
       'AVBallot--error': !isValid,
     }"
+    role="group"
     :aria-label="t('js.components.AVBallot.aria_labels.ballot')"
     data-test="ballot"
   >
@@ -265,22 +363,23 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
     </h5>
     <AVSearchBallot
       v-if="contest.searchForm && !disabled && !observerMode"
-      ref="search"
+      :key="contest.reference"
       :options="flattenOptions(contest.options)"
       :options-container-id="'ballot_options'"
     />
 
     <hr
       :class="{
-        'mt-3 mb-0': !contest.disregardVoterWeight && weight,
-        'my-3': contest.disregardVoterWeight,
+        'mt-3 mb-0':
+          contest.showVoterWeightMessage !== false && !contest.disregardVoterWeight && weight,
+        'my-3': contest.showVoterWeightMessage === false || contest.disregardVoterWeight,
       }"
     />
 
     <!-- WEIGHT -->
     <div
-      v-if="!contest.disregardVoterWeight && weight"
-      class="hstack justify-content-end py-1 text-gray-700 small"
+      v-if="contest.showVoterWeightMessage !== false && !contest.disregardVoterWeight && weight"
+      class="hstack justify-content-end py-1 text-body-70 small"
       data-test="ballot-voter-weight"
     >
       <span>{{ t("js.components.AVBallot.your_vote_weight", { weight }) }}</span>
@@ -305,7 +404,12 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
           :parentTitle="option.parentTitle"
           :parentColor="option.parentColor"
           @checked="toggleOption"
+          @blocked-click="handleBlockedClick"
           @view-candidate="viewCandidate"
+          :reverse-option="reverseOption"
+          :selection-style="selectionStyle"
+          :selection-mode="selectionMode"
+          :max-selections-reached="blockSelectionEnabled"
         />
       </div>
 
@@ -320,6 +424,8 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
         :partial-results="partialResults ? partialResults['blank'] : null"
         gallery-mode
         @toggle-blank="toggleBlank"
+        :reverse-option="reverseOption"
+        :selection-style="selectionStyle"
       />
     </div>
 
@@ -327,6 +433,7 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
       v-else
       id="ballot_options"
       class="vstack gap-2"
+      role="group"
       :aria-label="t('js.components.AVBallot.aria_labels.ballot_options')"
     >
       <template v-for="option in contest.options" :key="option.reference">
@@ -346,7 +453,12 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
           :image-option="imageOption"
           :voice-credits="voiceCredits"
           @checked="toggleOption"
+          @blocked-click="handleBlockedClick"
           @view-candidate="viewCandidate"
+          :reverse-option="reverseOption"
+          :selection-style="selectionStyle"
+          :selection-mode="selectionMode"
+          :max-selections-reached="blockSelectionEnabled"
         />
       </template>
       <AVBlankOption
@@ -358,6 +470,8 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
         :observer-mode="observerMode"
         :accent-color="contest.blankOptionColor"
         :partial-results="partialResults ? partialResults['blank'] : null"
+        :reverse-option="reverseOption"
+        :selection-style="selectionStyle"
         @toggle-blank="toggleBlank"
       />
     </div>
@@ -365,13 +479,14 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
     <AVSubmissionHelper
       v-if="showSubmissionHelper && !disabled && !observerMode"
       :chosen-count="selections.length"
-      :errors="errors"
+      :errors="helperErrors"
       :min-marks="contest.markingType.minMarks"
       :max-marks="contest.markingType.maxMarks"
       :has-exclusive-options="contestHasExclusiveOptions"
       :display-scroll-to-bottom="contest.displayScrollToBottomBtn"
       :voice-credits="contest.markingType.quadraticVoting ? voiceCredits : null"
-      class="mt-3"
+      :policy-inline-results="policyInlineResults"
+      class="mt-4"
       data-test="ballot-submission-helper"
     />
   </div>

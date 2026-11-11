@@ -2,12 +2,17 @@ import type { Meta } from "@/types";
 import { AVOptionCheckbox } from "@/components";
 import { SUPPORTED_LOCALES } from "@/constants";
 
-const meta: Meta<typeof AVOptionCheckbox> = {
+const meta: Meta<typeof AVOptionCheckbox> & {
+  argTypes: { onToggled: { action: string } };
+} = {
   title: "Design System/Atoms/AVOptionCheckbox",
   component: AVOptionCheckbox,
   tags: ["autodocs"],
   argTypes: {
     checked: {
+      control: { type: "boolean" },
+    },
+    excluded: {
       control: { type: "boolean" },
     },
     optionReference: {
@@ -22,12 +27,25 @@ const meta: Meta<typeof AVOptionCheckbox> = {
     disabled: {
       control: { type: "boolean" },
     },
+    invalid: {
+      control: { type: "boolean" },
+    },
     exclusiveError: {
       control: { type: "boolean" },
     },
     locale: {
       control: { type: "select" },
       options: SUPPORTED_LOCALES,
+    },
+    reverseOption: {
+      control: { type: "boolean" },
+    },
+    selectionStyle: {
+      control: { type: "select" },
+      options: ["checkbox", "background"],
+    },
+    onToggled: {
+      action: "toggled: OPTION TOGGLED",
     },
   },
 };

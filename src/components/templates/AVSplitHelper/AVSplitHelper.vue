@@ -9,12 +9,14 @@ import type {
   AVSplitHelperState,
   PartialResults,
   ImageOption,
+  SelectionStyle,
   IterableObject,
+  ValidationResult,
 } from "@/types";
 import SelectionPileValidator from "@assemblyvoting/js-client/dist/lib/validators/selectionPileValidator";
-import ContestSelectionValidator from "@assemblyvoting/js-client/dist/lib/validators/contestSelectionValidator";
 import { getMeaningfulLabel } from "@/helpers/meaningfulLabel";
 import { useLocalization } from "@/composables/useLocalization";
+import { applyOvervotePolicy, isOvervoteAllowedByPolicy } from "@/composables/useValidationPolicy";
 
 const props = defineProps({
   contest: {
@@ -57,6 +59,14 @@ const props = defineProps({
     type: String as PropType<ImageOption>,
     default: "square",
   },
+  reverseOption: {
+    type: Boolean,
+    default: false,
+  },
+  selectionStyle: {
+    type: String as PropType<SelectionStyle>,
+    default: "checkbox",
+  },
 });
 
 const emits = defineEmits([
@@ -64,6 +74,8 @@ const emits = defineEmits([
   "update:contestSelection",
   "update:activeState",
   "update:activePile",
+  "update:pendingAlerts",
+  "show-overvote-alert",
   "view-candidate",
 ]);
 
@@ -87,6 +99,8 @@ const contestErrors = ref<string[]>([]);
 
 const selectionPiles = computed(() => props.contestSelection.piles);
 
+const { locale: i18nLocale, t } = useLocalization(() => props.locale);
+
 const unusedWeight = computed(() =>
   selectionPiles.value?.reduce(
     (sum: number, bs: SelectionPile) => sum - bs.multiplier,
@@ -108,23 +122,28 @@ const selectionPileValidator = computed(
   () => new SelectionPileValidator(props.contest, validatorOptions.value),
 );
 
-const contestSelectionValidator = computed(
-  () =>
-    new ContestSelectionValidator({
-      contest: props.contest,
-      voterWeight: props.weight,
-      ...validatorOptions.value,
-    }),
-);
+// Policy-aware versions of the SDK checks, matching what AVBallot reports: an overvote the
+// contest's policy allows (e.g. allow_and_warn) is not an error here either.
+const isComplete = (pile: SelectionPile): boolean => {
+  if (!isOvervoteAllowedByPolicy(props.contest, pile)) {
+    return selectionPileValidator.value.isComplete(pile);
+  }
+  // An overvote always has enough marks, so completeness reduces to "no remaining errors".
+  const errors = selectionPileValidator.value.validate(pile);
+  return applyOvervotePolicy(errors, props.contest, pile).length === 0;
+};
+
+const hasError = (pile: SelectionPile): boolean => {
+  const errors = selectionPileValidator.value.validate(pile, props.includeLazyErrors);
+  return applyOvervotePolicy(errors, props.contest, pile).length > 0;
+};
+
+const allPilesComplete = computed(() => selectionPiles.value.every(isComplete));
 
 const readyForSubmission = computed(() => {
-  return (
-    unusedWeight.value === 0 &&
-    contestErrors.value.length == 0 &&
-    selectionPiles.value.every((pile: SelectionPile) =>
-      selectionPileValidator.value.isComplete(pile),
-    )
-  );
+  const baseComplete =
+    unusedWeight.value === 0 && contestErrors.value.length == 0 && allPilesComplete.value;
+  return baseComplete;
 });
 
 const assignedWeight = computed(() =>
@@ -142,14 +161,6 @@ const maxAssignable = computed(() =>
 const userCanSplit = computed(() => props.contest.markingType.maxPiles !== 1 && props.weight > 1);
 
 const isEditing = computed(() => activeSelectionPileIndex.value !== null);
-
-const isComplete = (pile: SelectionPile): boolean => {
-  return selectionPileValidator.value.isComplete(pile);
-};
-
-const hasError = (pile: SelectionPile): boolean => {
-  return selectionPileValidator.value.validate(pile, props.includeLazyErrors).length > 0;
-};
 
 const persistActivePile = (): void => {
   if (userCanSplit.value) {
@@ -229,8 +240,6 @@ onMounted(() => {
   emits("update:complete", readyForSubmission.value);
   if (!userCanSplit.value) persistActivePile();
 });
-
-const { locale: i18nLocale, t } = useLocalization(() => props.locale);
 </script>
 
 <template>
@@ -279,7 +288,13 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
           :image-option="imageOption"
           @update:selection-pile="updateActivePile"
           @update:errors="(errors: string[]) => updateErrors(errors)"
+          @update:pending-alerts="
+            (alerts: ValidationResult[]) => emits('update:pendingAlerts', alerts)
+          "
+          @show-overvote-alert="(alert: ValidationResult) => emits('show-overvote-alert', alert)"
           @view-candidate="viewCandidate"
+          :reverse-option="reverseOption"
+          :selection-style="selectionStyle"
         />
 
         <div id="ballot-action-buttons" class="mt-3 row">
@@ -323,6 +338,8 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
             :is-editing="isEditing"
             :total-piles="contestSelection.piles.length"
             :image-option="imageOption"
+            :reverse-option="reverseOption"
+            :selection-style="selectionStyle"
             @edit-current-selection="activeState = 'ballot'"
           />
           <label
@@ -382,7 +399,7 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
 
       <div v-else-if="activeState === 'overview'" data-test="split-helper-overview">
         <div
-          v-if="unusedWeight === 0 && contestSelectionValidator.isComplete(contestSelection)"
+          v-if="unusedWeight === 0 && allPilesComplete"
           class="alert alert-success rounded-0 text-center"
         >
           <AVIcon icon="circle-check" />
@@ -419,6 +436,8 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
             :pile-index="index"
             :total-piles="contestSelection.piles.length"
             :image-option="imageOption"
+            :reverse-option="reverseOption"
+            :selection-style="selectionStyle"
             @delete-selection="removeSplit(index)"
           />
         </article>
@@ -438,7 +457,11 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
       :voter-identifier="voterIdentifier"
       @update:selection-pile="updateActivePile"
       @update:errors="(errors: string[]) => updateErrors(errors)"
+      @update:pending-alerts="(alerts: ValidationResult[]) => emits('update:pendingAlerts', alerts)"
+      @show-overvote-alert="(alert: ValidationResult) => emits('show-overvote-alert', alert)"
       @view-candidate="viewCandidate"
+      :reverse-option="reverseOption"
+      :selection-style="selectionStyle"
     />
   </template>
 </template>

@@ -39,6 +39,13 @@ const meta: Meta<typeof AVBlankOption> & {
     onToggleBlank: {
       action: "toggleBlank: BLANK TOGGLED",
     },
+    reverseOption: {
+      control: { type: "boolean" },
+    },
+    selectionStyle: {
+      control: { type: "select" },
+      options: ["checkbox", "background"],
+    },
   },
 };
 

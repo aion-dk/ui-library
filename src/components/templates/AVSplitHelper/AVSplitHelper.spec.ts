@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { mount } from "@vue/test-utils";
-import { getContestSelection, getContest } from "@/examples";
-import type { VitestEmitted } from "@/types";
+import { getContestSelection, getContest, getLiveResult } from "@/examples";
+import type { ContestContent, ContestSelection, VitestEmitted } from "@/types";
 import localI18n from "@/i18n";
 
 import AVSplitHelper from "./AVSplitHelper.vue";
@@ -521,5 +521,248 @@ describe("AVSplitHelper", () => {
     expect(wrapper.find("[data-test=split-helper-assign-confirm]").text()).to.contain(
       "Bekræft og tildel",
     );
+  });
+});
+
+describe("AVSplitHelper new props", () => {
+  const createWrapper = (extraProps = {}) =>
+    mount(AVSplitHelper, {
+      props: {
+        contest: getContest([]),
+        contestSelection: getContestSelection([]),
+        weight: 1,
+        locale: "en",
+        ...extraProps,
+      },
+      global: {
+        components: {
+          AVBallot,
+          AVPileSummary,
+          AVSummaryOption,
+          AVSplitWizardHeader,
+          AVSplitWeightHelper,
+          AVSubmissionHelper,
+          AVBlankOption,
+          AVOption,
+          AVOptionCheckbox,
+          AVOptionSelect,
+          AVCollapser,
+          AVAnimatedTransition,
+          AVSearchBallot,
+          AVTooltip,
+          AVOptionLiveResults,
+          AVOptionCounter,
+        },
+        provide: {
+          i18n: localI18n,
+        },
+        directives: {
+          tooltip: () => {},
+        },
+        stubs: {
+          AVIcon: {
+            template: "<span />",
+          },
+        },
+      },
+    });
+
+  it("passes partialResults to AVBallot", async () => {
+    const partialResults = getLiveResult(["exampleOption1"]);
+    const wrapper = createWrapper({ partialResults });
+
+    const ballot = wrapper.findComponent(AVBallot);
+    expect(ballot.props("partialResults")).to.deep.eq(partialResults);
+  });
+
+  it("passes includeLazyErrors to AVBallot", async () => {
+    const wrapper = createWrapper({ includeLazyErrors: true });
+
+    const ballot = wrapper.findComponent(AVBallot);
+    expect(ballot.props("includeLazyErrors")).to.eq(true);
+  });
+
+  it("defaults includeLazyErrors to false", async () => {
+    const wrapper = createWrapper();
+
+    const ballot = wrapper.findComponent(AVBallot);
+    expect(ballot.props("includeLazyErrors")).to.eq(false);
+  });
+
+  it("passes imageOption to AVBallot", async () => {
+    const wrapper = createWrapper({ imageOption: "passport" });
+
+    const ballot = wrapper.findComponent(AVBallot);
+    expect(ballot.props("imageOption")).to.eq("passport");
+  });
+
+  it("defaults imageOption to square", async () => {
+    const wrapper = createWrapper();
+
+    const ballot = wrapper.findComponent(AVBallot);
+    expect(ballot.props("imageOption")).to.eq("square");
+  });
+
+  it("passes reverseOption to AVBallot", async () => {
+    const wrapper = createWrapper({ reverseOption: true });
+
+    const ballot = wrapper.findComponent(AVBallot);
+    expect(ballot.props("reverseOption")).to.eq(true);
+  });
+
+  it("defaults reverseOption to false", async () => {
+    const wrapper = createWrapper();
+
+    const ballot = wrapper.findComponent(AVBallot);
+    expect(ballot.props("reverseOption")).to.eq(false);
+  });
+
+  it("passes selectionStyle to AVBallot", async () => {
+    const wrapper = createWrapper({ selectionStyle: "background" });
+
+    const ballot = wrapper.findComponent(AVBallot);
+    expect(ballot.props("selectionStyle")).to.eq("background");
+  });
+
+  it("defaults selectionStyle to checkbox", async () => {
+    const wrapper = createWrapper();
+
+    const ballot = wrapper.findComponent(AVBallot);
+    expect(ballot.props("selectionStyle")).to.eq("checkbox");
+  });
+
+  it("passes imageOption to AVPileSummary in split mode", async () => {
+    const wrapper = createWrapper({
+      weight: 10,
+      contestSelection: getContestSelection(["half"]),
+      imageOption: "passport",
+    });
+
+    const pileSummaries = wrapper.findAllComponents(AVPileSummary);
+    expect(pileSummaries.length).to.be.greaterThan(0);
+    pileSummaries.forEach((summary) => {
+      expect(summary.props("imageOption")).to.eq("passport");
+    });
+  });
+
+  // Regression: both pile summaries fell back to the default layout in split mode.
+  it("passes reverseOption and selectionStyle to AVPileSummary in assign and overview", async () => {
+    const layout = { reverseOption: true, selectionStyle: "background" };
+    const expectLayout = (wrapper: ReturnType<typeof createWrapper>) => {
+      const summaries = wrapper.findAllComponents(AVPileSummary);
+      expect(summaries.length).to.be.greaterThan(0);
+      for (const summary of summaries) {
+        expect(summary.props("reverseOption")).to.be.true;
+        expect(summary.props("selectionStyle")).to.eq("background");
+      }
+    };
+
+    expectLayout(
+      createWrapper({ weight: 10, contestSelection: getContestSelection(["half"]), ...layout }),
+    );
+
+    const assigning = createWrapper({ weight: 10, ...layout });
+    assigning.findComponent(AVBallot).vm.$emit("update:selectionPile", {
+      multiplier: 1,
+      optionSelections: [{ reference: "exampleOption1" }],
+      explicitBlank: false,
+    });
+    await assigning.vm.$nextTick();
+    await assigning.get("[data-test=split-helper-confirm]").trigger("click");
+    expectLayout(assigning);
+  });
+});
+
+// Regression: the split wizard used the raw SDK validation, so an overvote the policy allows
+// (allow_and_warn) could not be confirmed or submitted, unlike in AVBallot.
+describe("AVSplitHelper with an overvote policy", () => {
+  const overLimitContest = (behavior: "allow_and_warn" | "allow_with_error") => {
+    const contest = getContest(["many_options"]);
+    return {
+      ...contest,
+      markingType: { ...contest.markingType, maxMarks: 3 },
+      validationPolicy: {
+        overvote: {
+          behavior,
+          feedbackScreen: "ballot_page" as const,
+          feedbackType: "on_screen_message" as const,
+        },
+      },
+    };
+  };
+  const overLimitPile = (multiplier: number) => ({
+    multiplier,
+    optionSelections: ["1", "2", "3", "4"].map((n) => ({ reference: `exampleOption${n}` })),
+    explicitBlank: false,
+  });
+
+  const mountSplit = (props: {
+    contest: ContestContent;
+    contestSelection: ContestSelection;
+    weight: number;
+  }) =>
+    mount(AVSplitHelper, {
+      props: { locale: "en", ...props },
+      global: {
+        components: {
+          AVBallot,
+          AVPileSummary,
+          AVSummaryOption,
+          AVSplitWizardHeader,
+          AVSplitWeightHelper,
+          AVSubmissionHelper,
+          AVBlankOption,
+          AVOption,
+          AVOptionCheckbox,
+          AVOptionSelect,
+          AVCollapser,
+          AVAnimatedTransition,
+          AVSearchBallot,
+          AVTooltip,
+          AVOptionLiveResults,
+          AVOptionCounter,
+        },
+        provide: { i18n: localI18n },
+        directives: { tooltip: () => {} },
+        stubs: { AVIcon: { template: "<span />" } },
+      },
+    });
+
+  it("lets an allowed overvote be confirmed, but not a blocking one", async () => {
+    for (const [behavior, disabled] of [
+      ["allow_and_warn", false],
+      ["allow_with_error", true],
+    ] as const) {
+      const wrapper = mountSplit({
+        contest: overLimitContest(behavior),
+        contestSelection: { reference: "exampleContest", piles: [] },
+        weight: 10,
+      });
+      wrapper.findComponent(AVBallot).vm.$emit("update:selectionPile", overLimitPile(1));
+      await wrapper.vm.$nextTick();
+
+      expect(
+        wrapper.get("[data-test=split-helper-confirm]").attributes("disabled") !== undefined,
+      ).to.eq(disabled, behavior);
+    }
+  });
+
+  it("counts an allowed overvote pile as complete, but not a blocking one", () => {
+    for (const [behavior, complete] of [
+      ["allow_and_warn", true],
+      ["allow_with_error", false],
+    ] as const) {
+      const wrapper = mountSplit({
+        contest: overLimitContest(behavior),
+        contestSelection: { reference: "exampleContest", piles: [overLimitPile(10)] },
+        weight: 10,
+      });
+
+      expect(wrapper.emitted("update:complete")?.at(-1)?.[0]).to.eq(complete, behavior);
+      expect(wrapper.find("[data-test=split-helper-overview] .alert-success").exists()).to.eq(
+        complete,
+        behavior,
+      );
+    }
   });
 });

@@ -15,6 +15,7 @@ coverage
 *.local
 tmp
 .eslintcache
+*.tsbuildinfo
 
 /cypress/videos/
 /cypress/screenshots/

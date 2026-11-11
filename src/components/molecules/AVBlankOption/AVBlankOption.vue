@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onMounted, ref, onUnmounted } from "vue";
-import type { PropType, SupportedLocale, PartialResult } from "@/types";
+import type { PropType, SupportedLocale, PartialResult, SelectionStyle } from "@/types";
 import { useLocalization } from "@/composables/useLocalization";
 
 const props = defineProps({
@@ -39,6 +39,14 @@ const props = defineProps({
   invalid: {
     type: Boolean,
     default: false,
+  },
+  reverseOption: {
+    type: Boolean,
+    default: false,
+  },
+  selectionStyle: {
+    type: String as PropType<SelectionStyle>,
+    default: "checkbox",
   },
 });
 
@@ -81,17 +89,19 @@ const { t } = useLocalization(() => props.locale);
       :class="{
         'AVBlankOption--accent': accentColor,
         'h-100': galleryMode,
+        'AVBlankOption--selected-background': selectionStyle === 'background' && checked,
       }"
       :style="accentColor ? `border-${isRtl ? 'right' : 'left'}-color: ${accentColor};` : ''"
+      role="group"
       :aria-label="t('js.components.AVBlankOption.aria_labels.option')"
       data-test="option-container"
     >
-      <div class="hstack justify-content-between p-3" data-test="option-content">
-        <h5 id="option_blank_title" class="AVBlankOption--title m-0">
-          {{ t("js.components.AVBlankOption.title") }}
-        </h5>
-        <span id="option_blank_handle" class="visually-hidden">blank</span>
-        <div class="p-1">
+      <div
+        class="hstack p-3"
+        :class="reverseOption ? 'justify-content-start gap-3' : 'justify-content-between'"
+        data-test="option-content"
+      >
+        <div v-if="reverseOption" class="p-1">
           <AVOptionCheckbox
             option-reference="blank"
             :rank="null"
@@ -100,6 +110,27 @@ const { t } = useLocalization(() => props.locale);
             :invalid="invalid"
             :disabled="disabled || observerMode"
             :gallery-mode="galleryMode"
+            :selection-style="selectionStyle"
+            :reverse-option="reverseOption"
+            @toggled="emits('toggleBlank')"
+            data-test="blank-checkbox"
+          />
+        </div>
+        <h5 id="option_blank_title" class="AVBlankOption--title m-0">
+          {{ t("js.components.AVBlankOption.title") }}
+        </h5>
+        <span id="option_blank_handle" class="visually-hidden">blank</span>
+        <div v-if="!reverseOption" class="p-1">
+          <AVOptionCheckbox
+            option-reference="blank"
+            :rank="null"
+            :checked="checked"
+            :exclusive-error="error"
+            :invalid="invalid"
+            :disabled="disabled || observerMode"
+            :gallery-mode="galleryMode"
+            :selection-style="selectionStyle"
+            :reverse-option="reverseOption"
             @toggled="emits('toggleBlank')"
             data-test="blank-checkbox"
           />

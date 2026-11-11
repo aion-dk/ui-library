@@ -1,6 +1,8 @@
 <script setup lang="ts">
-import { ref, computed } from "vue";
+import { ref, computed, inject, watch, onMounted } from "vue";
 import { flattenOptions } from "@/helpers/contestHelpers";
+import localI18n from "@/i18n";
+import { useValidationPolicy } from "@/composables/useValidationPolicy";
 import type {
   PropType,
   SupportedLocale,
@@ -8,17 +10,18 @@ import type {
   ContestContent,
   OptionContent,
   ImageOption,
+  SelectionStyle,
   AVPileSummaryOptionSummary,
   AVPileSummaryState,
   AVSummaryOptionObject,
-  OptionSelection,
   IterableObject,
+  ValidationResult,
 } from "@/types";
 import { getMeaningfulLabel } from "@/helpers/meaningfulLabel";
 import { AVIcon } from "@/components";
 import { useLocalization } from "@/composables/useLocalization";
 
-const emits = defineEmits(["editCurrentSelection", "deleteSelection"]);
+const emits = defineEmits(["editCurrentSelection", "deleteSelection", "update:pendingAlerts"]);
 
 const props = defineProps({
   selectionPile: {
@@ -65,9 +68,73 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  reverseOption: {
+    type: Boolean,
+    default: false,
+  },
+  selectionStyle: {
+    type: String as PropType<SelectionStyle>,
+    default: "checkbox",
+  },
 });
 
 const showAllOptions = ref(false);
+
+// Needed for i18n.global.te() translation-existence checks below; useLocalization doesn't expose that.
+/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+const i18n: any = inject("i18n", localI18n);
+const { locale: i18nLocale, t } = useLocalization(() => props.locale);
+
+const { inlineResults: policyInlineResults, pendingAlerts } = useValidationPolicy(
+  computed(() => props.contest),
+  computed(() => props.selectionPile),
+  "review_page",
+  i18nLocale,
+);
+
+const REVIEW_KEY_PREFIX = "review_";
+const I18N_BASE = "js.components.AVSubmissionHelper.";
+
+const resolveReviewFeedbackMessage = (result: ValidationResult): string => {
+  if (result.isRawMessage) return result.feedbackMessage;
+  const reviewKey = `${I18N_BASE}${REVIEW_KEY_PREFIX}${result.feedbackMessage}`;
+  if (i18n.global.te(reviewKey)) {
+    return t(reviewKey, result.feedbackParams);
+  }
+  return t(`${I18N_BASE}${result.feedbackMessage}`, result.feedbackParams);
+};
+
+const mapAlertsWithReviewKeys = (alerts: ValidationResult[]): ValidationResult[] => {
+  return alerts.map((result) => {
+    if (result.isRawMessage) return result;
+    const reviewKey = `${REVIEW_KEY_PREFIX}${result.feedbackMessage}`;
+    const fullKey = `${I18N_BASE}${reviewKey}`;
+    if (i18n.global.te(fullKey)) {
+      return { ...result, feedbackMessage: reviewKey };
+    }
+    return result;
+  });
+};
+
+watch(
+  [pendingAlerts, (): AVPileSummaryState => props.activeState],
+  ([alerts, state]): void => {
+    if (state === "summary") {
+      emits("update:pendingAlerts", mapAlertsWithReviewKeys(alerts));
+    } else {
+      emits("update:pendingAlerts", []);
+    }
+  },
+  { deep: true },
+);
+
+// The watcher above is lazy: a summary mounted with an unchanged pile would never report its
+// review alerts. Other initial states emit nothing, so they don't clear a sibling's alerts.
+onMounted(() => {
+  if (props.activeState === "summary") {
+    emits("update:pendingAlerts", mapAlertsWithReviewKeys(pendingAlerts.value));
+  }
+});
 
 const blankSelected = computed(() => {
   return props.selectionPile.optionSelections.length === 0;
@@ -101,8 +168,7 @@ const getAllParents = (option: OptionContent, parents: OptionContent[]): OptionC
 const optionSummaries = computed(() => {
   const summaryOptions: AVPileSummaryOptionSummary = [];
 
-  for (let i = 0; i < props.selectionPile.optionSelections.length; i += 1) {
-    const selection: OptionSelection = props.selectionPile.optionSelections[i];
+  for (const selection of props.selectionPile.optionSelections) {
     const preexisting = summaryOptions.find((o) => o.handle === selection.reference);
 
     const optionContent = selectableOptions.value.find((o) => o.reference === selection.reference);
@@ -150,8 +216,6 @@ const orderedSummaryOptions = computed(() => {
     return indexA - indexB;
   });
 });
-
-const { locale: i18nLocale, t } = useLocalization(() => props.locale);
 </script>
 
 <template>
@@ -210,12 +274,32 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
         :write-in="option.writeIn"
         :counter-interface="contest.multipleVotingInterface === 'counter'"
         :is-quadratic="contest.markingType.quadraticVoting"
+        :reverse-option="reverseOption"
+        :selection-style="selectionStyle"
       />
       <AVSummaryOption
         v-if="blankSelected"
         :blank="blankSelected"
         :blank-accent-color="contest.blankOptionColor"
       />
+      <div
+        v-if="policyInlineResults.length > 0"
+        class="mt-2 p-2"
+        :class="{
+          'bg-warning bg-opacity-10 text-warning-emphasis': policyInlineResults[0]?.warning,
+          'bg-theme-danger text-white': policyInlineResults[0]?.blocked,
+        }"
+        data-test="pile-summary-policy-feedback"
+      >
+        <div
+          v-for="result in policyInlineResults"
+          :key="result.scenario"
+          role="alert"
+          class="small"
+        >
+          {{ resolveReviewFeedbackMessage(result) }}
+        </div>
+      </div>
     </div>
   </div>
 
