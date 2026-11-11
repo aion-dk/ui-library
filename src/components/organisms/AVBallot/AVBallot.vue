@@ -1,8 +1,12 @@
 <script setup lang="ts">
-import { ref, computed, watch, watchEffect } from "vue";
+import { computed, watch, watchEffect } from "vue";
 import { flattenOptions } from "@/helpers/contestHelpers";
 import { getMeaningfulLabel } from "@/helpers/meaningfulLabel";
-import { useValidationPolicy, handleOvervote } from "@/composables/useValidationPolicy";
+import {
+  useValidationPolicy,
+  handleOvervote,
+  applyOvervotePolicy,
+} from "@/composables/useValidationPolicy";
 import type {
   PropType,
   SupportedLocale,
@@ -90,15 +94,13 @@ const emits = defineEmits([
 
 const { locale: i18nLocale, t } = useLocalization(() => props.locale);
 
-const search = ref<HTMLInputElement | null>(null);
-
 const selections = computed(() => [...props.selectionPile.optionSelections]);
 
 const {
-  validationResults: policyResults,
   pendingAlerts,
   inlineResults: policyInlineResults,
   selectionMode,
+  blockingOvervote,
   blockSelectionEnabled,
   overvoteAlertBased,
   policy,
@@ -157,14 +159,19 @@ const errors = computed(() => {
     }
   }
 
-  if (policyResults.value.some((r) => r.scenario === "overvote")) {
-    const idx = combinedErrors.findIndex((err) => err.message === "too_many");
-    if (idx >= 0) combinedErrors.splice(idx, 1);
-  }
+  const policyErrors = applyOvervotePolicy(combinedErrors, props.contest, props.selectionPile);
 
-  emits("update:errors", combinedErrors);
-  return combinedErrors;
+  emits("update:errors", policyErrors);
+  return policyErrors;
 });
+
+// A blocking overvote keeps `too_many` in `errors` (so the ballot stays invalid), but when the
+// policy already explains it inline, the helper shouldn't print the same thing twice.
+const helperErrors = computed(() =>
+  policyInlineResults.value.some((r) => r.scenario === "overvote")
+    ? errors.value.filter((err) => err.message !== "too_many")
+    : errors.value,
+);
 
 const isValid = computed(() => errors.value.length === 0);
 
@@ -210,7 +217,6 @@ const voiceCredits = computed<VoiceCredits>(() => {
 watch(reactiveContest, (present, previous) => {
   if (previous && present && present.reference !== previous.reference) {
     document.getElementById("content")?.focus();
-    if (previous.searchForm) (search.value as HTMLInputElement).value = "";
   }
 });
 
@@ -250,16 +256,19 @@ const toggleOption = ({ reference, amount, text, onlyUpdate }: CheckedEventArgs)
   const wouldIncreaseTotal = finalAmount > currentAmount;
 
   // Block the selection if:
-  // - Blocking is enabled, it's not a text update, not in radio mode,
-  //   would increase total selections, and we've hit the max marks limit
+  // - A blocking overvote policy is set, it's not a text update, not in radio mode,
+  //   and the proposed total would exceed max marks (also when crossing it from below,
+  //   e.g. a multi-vote click that adds several marks at once)
   if (
-    blockSelectionEnabled.value &&
+    blockingOvervote.value &&
     !onlyUpdate &&
     selectionMode.value !== "radio" &&
     wouldIncreaseTotal &&
     totalSelections - currentAmount + finalAmount > (props.contest.markingType.maxMarks ?? Infinity)
-  )
+  ) {
+    handleBlockedClick();
     return;
+  }
 
   // Remove all existing selections for this option to rebuild the selection list
   let newSelections = selections.value.filter((selection) => selection.reference !== reference);
@@ -354,7 +363,7 @@ const galleryOptions = computed(() => {
     </h5>
     <AVSearchBallot
       v-if="contest.searchForm && !disabled && !observerMode"
-      ref="search"
+      :key="contest.reference"
       :options="flattenOptions(contest.options)"
       :options-container-id="'ballot_options'"
     />
@@ -470,14 +479,14 @@ const galleryOptions = computed(() => {
     <AVSubmissionHelper
       v-if="showSubmissionHelper && !disabled && !observerMode"
       :chosen-count="selections.length"
-      :errors="errors"
+      :errors="helperErrors"
       :min-marks="contest.markingType.minMarks"
       :max-marks="contest.markingType.maxMarks"
       :has-exclusive-options="contestHasExclusiveOptions"
       :display-scroll-to-bottom="contest.displayScrollToBottomBtn"
       :voice-credits="contest.markingType.quadraticVoting ? voiceCredits : null"
       :policy-inline-results="policyInlineResults"
-      class="mt-3"
+      class="mt-4"
       data-test="ballot-submission-helper"
     />
   </div>

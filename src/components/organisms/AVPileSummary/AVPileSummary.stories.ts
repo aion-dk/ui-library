@@ -335,3 +335,11 @@ export const SummaryWithBlankVoteFeedback = {
     totalPiles: 1,
   },
 };
+
+export const EditableSummary = {
+  render: Template,
+  args: {
+    ...Summary.args,
+    editable: true,
+  },
+};

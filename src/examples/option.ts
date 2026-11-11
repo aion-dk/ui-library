@@ -72,8 +72,7 @@ const video: LocalString = {
   sv: "https://www.youtube.com/watch?v=Lzmt-g4Xf6k",
 };
 
-const image: string =
-  "https://electa.staging-1.assemblyvoting.net/uploads_proxy/option/image/657750";
+const getImage = (reference: string) => `https://robohash.org/${reference}?set=set5&bgset=bg1`;
 
 const colors: ExampleColor = {
   1: "#FF0000",
@@ -93,8 +92,9 @@ const getOption = (
   children: boolean = false,
   parent: number | null = null,
 ): OptionContent => {
+  const reference = children ? `exampleChildren${parent}-${index}` : `exampleOption${index}`;
   const option: OptionContent = {
-    reference: children ? `exampleChildren${parent}-${index}` : `exampleOption${index}`,
+    reference: reference,
     code: index,
     position: index,
     title: {
@@ -122,7 +122,7 @@ const getOption = (
     image:
       args.includes("image") ||
       ((args.includes("gallery") || args.includes("gallery_parents")) && children)
-        ? image
+        ? getImage(reference)
         : "",
     selectable: args.includes("gallery_parents")
       ? true
@@ -172,4 +172,4 @@ const getOptions = (
   return options;
 };
 
-export { getOptions, getOption };
+export { getOptions, getOption, getImage };

@@ -189,6 +189,40 @@ export function getInlineResults(
   });
 }
 
+/** The contest's validation policy, with defaults filled in for every unset rule. */
+export function resolvePolicy(contest: ContestContent): ValidationPolicy {
+  const defaults = getDefaultPolicy();
+  const custom = contest.validationPolicy;
+  if (!custom) return defaults;
+  return {
+    undervoteBetween: custom.undervoteBetween ?? defaults.undervoteBetween,
+    undervoteBelowMin: custom.undervoteBelowMin ?? defaults.undervoteBelowMin,
+    blankVoteFeedback: custom.blankVoteFeedback ?? defaults.blankVoteFeedback,
+    overvote: custom.overvote ?? defaults.overvote,
+  };
+}
+
+/** True when the pile is an overvote that the contest's policy lets through (not blocking). */
+export function isOvervoteAllowedByPolicy(contest: ContestContent, pile: SelectionPile): boolean {
+  if (pile.explicitBlank === true) return false;
+  if (pile.optionSelections.length <= contest.markingType.maxMarks) return false;
+  const result = handleOvervote(resolvePolicy(contest));
+  return !!result && !result.blocked;
+}
+
+/**
+ * Drops the SDK's `too_many` error when the overvote policy allows the overvote. A blocking
+ * overvote (e.g. `allow_with_error`) keeps it, so the selection stays invalid.
+ */
+export function applyOvervotePolicy<T extends { message: string }>(
+  errors: T[],
+  contest: ContestContent,
+  pile: SelectionPile,
+): T[] {
+  if (!isOvervoteAllowedByPolicy(contest, pile)) return errors;
+  return errors.filter((error) => error.message !== "too_many");
+}
+
 function resolveLocalizedMessage(
   message: Record<string, string> | undefined,
   locale: string,
@@ -204,6 +238,7 @@ export interface UseValidationPolicyReturn {
   pendingAlerts: ComputedRef<ValidationResult[]>;
   inlineResults: ComputedRef<ValidationResult[]>;
   selectionMode: ComputedRef<"checkbox" | "radio">;
+  blockingOvervote: ComputedRef<boolean>;
   blockSelectionEnabled: ComputedRef<boolean>;
   overvoteAlertBased: ComputedRef<boolean>;
   selectedCount: ComputedRef<number>;
@@ -225,17 +260,7 @@ export function useValidationPolicy(
   const resolvePile = computed(() => (isRef(selectionPile) ? selectionPile.value : selectionPile));
   const resolveScreen = computed(() => (isRef(activeScreen) ? activeScreen.value : activeScreen));
 
-  const policy = computed<ValidationPolicy>(() => {
-    const defaults = getDefaultPolicy();
-    const custom = resolveContest.value.validationPolicy;
-    if (!custom) return defaults;
-    return {
-      undervoteBetween: custom.undervoteBetween ?? defaults.undervoteBetween,
-      undervoteBelowMin: custom.undervoteBelowMin ?? defaults.undervoteBelowMin,
-      blankVoteFeedback: custom.blankVoteFeedback ?? defaults.blankVoteFeedback,
-      overvote: custom.overvote ?? defaults.overvote,
-    };
-  });
+  const policy = computed<ValidationPolicy>(() => resolvePolicy(resolveContest.value));
 
   const selectedCount = computed(() => resolvePile.value.optionSelections.length);
 
@@ -321,24 +346,22 @@ export function useValidationPolicy(
     return "checkbox";
   });
 
-  const blockSelectionEnabled = computed(() => {
-    const overvotePolicy = policy.value.overvote;
-    return (
-      (overvotePolicy?.behavior === "block_selection" ||
-        overvotePolicy?.behavior === "behave_as_radio_button") &&
-      selectedCount.value >= maxMarks.value
-    );
+  // The policy blocks selections past maxMarks, whether or not the limit is reached yet.
+  const blockingOvervote = computed(() => {
+    const behavior = policy.value.overvote?.behavior;
+    return behavior === "block_selection" || behavior === "behave_as_radio_button";
   });
+
+  const blockSelectionEnabled = computed(
+    () => blockingOvervote.value && selectedCount.value >= maxMarks.value,
+  );
 
   const overvoteAlertBased = computed(() => {
     const overvotePolicy = policy.value.overvote;
-    const blockingBehavior =
-      overvotePolicy?.behavior === "block_selection" ||
-      overvotePolicy?.behavior === "behave_as_radio_button";
     const alertFeedback =
       overvotePolicy?.feedbackType === "alert" ||
       overvotePolicy?.feedbackType === "on_screen_message_and_alert";
-    return blockingBehavior && alertFeedback;
+    return blockingOvervote.value && alertFeedback;
   });
 
   return {
@@ -348,6 +371,7 @@ export function useValidationPolicy(
     pendingAlerts,
     inlineResults,
     selectionMode,
+    blockingOvervote,
     blockSelectionEnabled,
     overvoteAlertBased,
     selectedCount,

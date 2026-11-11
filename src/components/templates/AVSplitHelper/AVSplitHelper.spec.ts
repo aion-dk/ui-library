@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { mount } from "@vue/test-utils";
 import { getContestSelection, getContest, getLiveResult } from "@/examples";
-import type { VitestEmitted } from "@/types";
+import type { ContestContent, ContestSelection, VitestEmitted } from "@/types";
 import localI18n from "@/i18n";
 
 import AVSplitHelper from "./AVSplitHelper.vue";
@@ -643,5 +643,126 @@ describe("AVSplitHelper new props", () => {
     pileSummaries.forEach((summary) => {
       expect(summary.props("imageOption")).to.eq("passport");
     });
+  });
+
+  // Regression: both pile summaries fell back to the default layout in split mode.
+  it("passes reverseOption and selectionStyle to AVPileSummary in assign and overview", async () => {
+    const layout = { reverseOption: true, selectionStyle: "background" };
+    const expectLayout = (wrapper: ReturnType<typeof createWrapper>) => {
+      const summaries = wrapper.findAllComponents(AVPileSummary);
+      expect(summaries.length).to.be.greaterThan(0);
+      for (const summary of summaries) {
+        expect(summary.props("reverseOption")).to.be.true;
+        expect(summary.props("selectionStyle")).to.eq("background");
+      }
+    };
+
+    expectLayout(
+      createWrapper({ weight: 10, contestSelection: getContestSelection(["half"]), ...layout }),
+    );
+
+    const assigning = createWrapper({ weight: 10, ...layout });
+    assigning.findComponent(AVBallot).vm.$emit("update:selectionPile", {
+      multiplier: 1,
+      optionSelections: [{ reference: "exampleOption1" }],
+      explicitBlank: false,
+    });
+    await assigning.vm.$nextTick();
+    await assigning.get("[data-test=split-helper-confirm]").trigger("click");
+    expectLayout(assigning);
+  });
+});
+
+// Regression: the split wizard used the raw SDK validation, so an overvote the policy allows
+// (allow_and_warn) could not be confirmed or submitted, unlike in AVBallot.
+describe("AVSplitHelper with an overvote policy", () => {
+  const overLimitContest = (behavior: "allow_and_warn" | "allow_with_error") => {
+    const contest = getContest(["many_options"]);
+    return {
+      ...contest,
+      markingType: { ...contest.markingType, maxMarks: 3 },
+      validationPolicy: {
+        overvote: {
+          behavior,
+          feedbackScreen: "ballot_page" as const,
+          feedbackType: "on_screen_message" as const,
+        },
+      },
+    };
+  };
+  const overLimitPile = (multiplier: number) => ({
+    multiplier,
+    optionSelections: ["1", "2", "3", "4"].map((n) => ({ reference: `exampleOption${n}` })),
+    explicitBlank: false,
+  });
+
+  const mountSplit = (props: {
+    contest: ContestContent;
+    contestSelection: ContestSelection;
+    weight: number;
+  }) =>
+    mount(AVSplitHelper, {
+      props: { locale: "en", ...props },
+      global: {
+        components: {
+          AVBallot,
+          AVPileSummary,
+          AVSummaryOption,
+          AVSplitWizardHeader,
+          AVSplitWeightHelper,
+          AVSubmissionHelper,
+          AVBlankOption,
+          AVOption,
+          AVOptionCheckbox,
+          AVOptionSelect,
+          AVCollapser,
+          AVAnimatedTransition,
+          AVSearchBallot,
+          AVTooltip,
+          AVOptionLiveResults,
+          AVOptionCounter,
+        },
+        provide: { i18n: localI18n },
+        directives: { tooltip: () => {} },
+        stubs: { AVIcon: { template: "<span />" } },
+      },
+    });
+
+  it("lets an allowed overvote be confirmed, but not a blocking one", async () => {
+    for (const [behavior, disabled] of [
+      ["allow_and_warn", false],
+      ["allow_with_error", true],
+    ] as const) {
+      const wrapper = mountSplit({
+        contest: overLimitContest(behavior),
+        contestSelection: { reference: "exampleContest", piles: [] },
+        weight: 10,
+      });
+      wrapper.findComponent(AVBallot).vm.$emit("update:selectionPile", overLimitPile(1));
+      await wrapper.vm.$nextTick();
+
+      expect(
+        wrapper.get("[data-test=split-helper-confirm]").attributes("disabled") !== undefined,
+      ).to.eq(disabled, behavior);
+    }
+  });
+
+  it("counts an allowed overvote pile as complete, but not a blocking one", () => {
+    for (const [behavior, complete] of [
+      ["allow_and_warn", true],
+      ["allow_with_error", false],
+    ] as const) {
+      const wrapper = mountSplit({
+        contest: overLimitContest(behavior),
+        contestSelection: { reference: "exampleContest", piles: [overLimitPile(10)] },
+        weight: 10,
+      });
+
+      expect(wrapper.emitted("update:complete")?.at(-1)?.[0]).to.eq(complete, behavior);
+      expect(wrapper.find("[data-test=split-helper-overview] .alert-success").exists()).to.eq(
+        complete,
+        behavior,
+      );
+    }
   });
 });
