@@ -1,4 +1,4 @@
-import { computed, inject, provide, type ComputedRef } from "vue";
+import { computed, inject, provide, unref, type ComputedRef } from "vue";
 import localI18n from "@/i18n";
 import type { SupportedLocale } from "@/types";
 
@@ -17,6 +17,11 @@ import type { SupportedLocale } from "@/types";
  */
 const AV_LOCALE = "avLocale";
 
+const FALLBACK_LOCALE: SupportedLocale = "en";
+
+const asLocale = (value: unknown): SupportedLocale | null =>
+  typeof value === "string" && value !== "" ? (value as SupportedLocale) : null;
+
 interface Localization {
   locale: ComputedRef<SupportedLocale>;
   t: (key: string, named?: Record<string, unknown>, plural?: number) => string;
@@ -32,6 +37,12 @@ interface Localization {
  *   2. the locale resolved by the nearest ancestor AV component
  *   3. the locale of the injected i18n instance (the host app's, or the
  *      library's own when running standalone)
+ *   4. "en", if none of the above is a usable string
+ *
+ * Because the prop wins, a component's `locale` prop must default to `null`,
+ * never to a concrete locale: `default: "en"` silently pins the component to
+ * English and ignores both its AV ancestor and the host app (enforced by
+ * `localePropDefaults.spec.ts`).
  *
  * This is necessary in order to support both a provided i18n and the local one.
  * `localI18n` is the `inject` default, so tests, Storybook and the playground —
@@ -55,10 +66,18 @@ export const useLocalization = (
   const inheritedLocale = inject<ComputedRef<SupportedLocale> | null>(AV_LOCALE, null);
 
   // `i18n.global.locale` is a ref on a Composer (legacy: false) and a plain
-  // string on a legacy VueI18n instance — support both.
+  // string on a legacy VueI18n instance — `unref` supports both.
+  //
+  // Every candidate must be a non-empty string: vue-i18n throws "cannot support
+  // locale type" on anything else. The old `locale.value || locale` fallback
+  // handed vue-i18n the Ref object itself whenever the instance's locale was
+  // unset (e.g. Storybook's toolbar global arriving as `undefined`).
   const locale = computed<SupportedLocale>(
     () =>
-      localeProp() ?? inheritedLocale?.value ?? (i18n.global.locale.value || i18n.global.locale),
+      asLocale(localeProp()) ??
+      asLocale(inheritedLocale?.value) ??
+      asLocale(unref(i18n.global.locale)) ??
+      FALLBACK_LOCALE,
   );
 
   provide(AV_LOCALE, locale);
