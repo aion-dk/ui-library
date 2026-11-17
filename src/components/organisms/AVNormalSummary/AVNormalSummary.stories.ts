@@ -1,5 +1,6 @@
 import type { Meta, NormalResultListGroup, OptionContent } from "@/types";
 import { AVNormalSummary } from "@/components";
+import { SUPPORTED_LOCALES } from "@/constants";
 import { getOption, getVoteCounts } from "@/examples";
 
 const meta: Meta<typeof AVNormalSummary> = {
@@ -27,6 +28,10 @@ const meta: Meta<typeof AVNormalSummary> = {
     },
     totalCount: {
       control: { type: "number", min: 0, max: 9999, step: 1 },
+    },
+    locale: {
+      control: { type: "select" },
+      options: SUPPORTED_LOCALES,
     },
   },
 };
