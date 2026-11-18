@@ -70,6 +70,8 @@ setup((app) => {
 const preview: Preview = {
   parameters: parameters,
   globalTypes: globals,
+  // Storybook 10 ignores `globalTypes.*.defaultValue`; without this the locale global starts as `undefined` and the decorator pushes it into vue-i18n.
+  initialGlobals: { locale: "en" },
   decorators: decorators,
   tags: ["autodocs"],
 };
