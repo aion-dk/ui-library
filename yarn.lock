@@ -47,10 +47,10 @@
     "@noble/hashes" "^1.8.0"
     sjcl-with-all "^1.0.8"
 
-"@assemblyvoting/js-client@^6.6.0":
-  version "6.6.0"
-  resolved "https://registry.yarnpkg.com/@assemblyvoting/js-client/-/js-client-6.6.0.tgz#b8a8e33c8ae56642b75f734c55cbed2544038992"
-  integrity sha512-k1PVtehiAU1E09bkIhTOAYilHd+Ps28al5JUz3/ISWwR2ZRA2Wpg9Gi5egHBhXYH+fjCcX9pPH3U7/UJeRAddg==
+"@assemblyvoting/js-client@^7.1.1":
+  version "7.1.1"
+  resolved "https://registry.yarnpkg.com/@assemblyvoting/js-client/-/js-client-7.1.1.tgz#98a1745d36719c93281083dce84628b0bca292fd"
+  integrity sha512-4Q644OAoXxboj2YPrwb5kmMDu8OgdI90Vpch/EMQs21j1e0qx48uakJDLCwI6DL5hcr/cxDdeu2GOcJm7m4uKg==
   dependencies:
     "@assemblyvoting/av-crypto" "^1.3.0"
     "@noble/curves" "^2.2.0"
@@ -63,10 +63,10 @@
     util "^0.12.5"
     xml-js "^1.6.11"
 
-"@assemblyvoting/types@^1.0.6":
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/@assemblyvoting/types/-/types-1.0.6.tgz#d9969ffcf22d01788f8b9ceff8f214a4929d6971"
-  integrity sha512-igYESo5H7Q2zIzN89RT7G/zb+sQ9DH2QhdGb0xmANRJSLNUv1+JQVSNcgsC6mEW0d1ztEcg6eq6+b0+jpfyVsg==
+"@assemblyvoting/types@^1.3.1":
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/@assemblyvoting/types/-/types-1.3.1.tgz#fe86c69dad3b8e8440cafca76cbeb32c0af16944"
+  integrity sha512-3WKJc0GmTbyxZRj2ZDof+p4PYVTjdw4ifwoHYbffkDhbTTC3mKYso8gf0A0P1o1cHGsl60+TUpRWVcKHFGRavg==
 
 "@babel/code-frame@^7.10.4", "@babel/code-frame@^7.29.7":
   version "7.29.7"
