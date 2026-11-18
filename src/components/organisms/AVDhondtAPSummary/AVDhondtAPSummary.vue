@@ -41,7 +41,7 @@ const props = defineProps({
   },
   locale: {
     type: String as PropType<SupportedLocale>,
-    default: "en",
+    default: null,
   },
 });
 
