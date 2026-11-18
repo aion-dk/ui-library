@@ -31,21 +31,23 @@ interface VoteCounts {
   excludedCount?: number;
   blankCount: number;
 }
-
-interface NormalResult extends OptionResult {
-  image?: string;
+interface NormalResultListGroup {
+  reference: string;
+  title: LocalString;
+  imageUrl: string | null;
+  children: NormalResultListOption[];
+  seatsWon?: number | null;
+}
+interface NormalResultListOption {
+  reference: string;
+  title: LocalString;
+  imageUrl: string | null;
   count: number;
+  elected: boolean;
+  tied: boolean;
+  ineligible?: boolean;
 }
-
-interface RankedResult extends OptionResult {
-  optionPosition: number;
-}
-
-interface Round {
-  accumulatedCounts: Record<string, number>;
-  elected: string[];
-  tied: string[];
-}
+type NormalResultDataForDisplay = (NormalResultListGroup | NormalResultListOption)[];
 
 interface InstantRunoffRound {
   counts: Record<string, number>;
@@ -66,10 +68,10 @@ export type {
   PartialResults,
   Party,
   OptionResult,
-  Round,
   InstantRunoffRound,
-  NormalResult,
-  RankedResult,
+  NormalResultListGroup,
+  NormalResultListOption,
+  NormalResultDataForDisplay,
   VoteCounts,
   VoiceCredits,
 };

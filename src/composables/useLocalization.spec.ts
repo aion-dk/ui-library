@@ -178,4 +178,28 @@ describe("useLocalization", () => {
 
     expect(da.text()).to.not.eq(en.text());
   });
+
+  it("falls back to English instead of throwing when the instance's locale is unset", () => {
+    // Regression: `locale.value || locale` handed vue-i18n the Ref object itself,
+    // which throws "cannot support locale type" (Storybook's toolbar global used
+    // to arrive as `undefined` and get pushed into the instance).
+    const i18n = createI18n({
+      legacy: false,
+      locale: "en",
+      messages: localI18n.global.messages.value,
+    });
+    (i18n.global.locale as unknown as { value: unknown }).value = undefined;
+
+    const wrapper = mountWith({}, i18n);
+
+    expect(wrapper.find("[data-test=parent]").attributes()["data-locale"]).to.eq("en");
+    expect(wrapper.find("[data-test=parent-text]").text()).to.eq("Loading...");
+  });
+
+  it("ignores a non-string locale prop and keeps resolving down the chain", () => {
+    switchLocale("da");
+    const wrapper = mountWith({ locale: "" as SupportedLocale });
+
+    expect(wrapper.find("[data-test=parent]").attributes()["data-locale"]).to.eq("da");
+  });
 });
