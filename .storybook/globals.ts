@@ -9,7 +9,6 @@ const globals: GlobalTypes = {
   locale: {
     name: "locale",
     description: "Internationalization locale",
-    defaultValue: "en",
     toolbar: {
       icon: "globe",
       items: [
