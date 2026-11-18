@@ -10,7 +10,7 @@ const decorators: Decorator[] = [
     const [{ locale }] = useGlobals();
 
     useEffect(() => {
-      sbLocale.value = locale;
+      sbLocale.value = locale ?? "en";
     }, [locale]);
 
     return {
