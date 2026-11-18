@@ -57,6 +57,10 @@ const props = defineProps({
     type: String as PropType<ImageOption>,
     default: "square",
   },
+  editable: {
+    type: Boolean,
+    default: false,
+  },
   isPrefilled: {
     type: Boolean,
     default: false,
@@ -157,7 +161,7 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
       data-test="pile-summary-header"
     >
       <button
-        v-if="isPrefilled"
+        v-if="editable || isPrefilled"
         type="button"
         class="btn btn-link btn-sm stretched-link"
         :aria-label="

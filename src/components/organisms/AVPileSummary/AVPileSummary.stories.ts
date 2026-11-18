@@ -270,3 +270,11 @@ export const GalleryMode = {
     selectionPile: getSelectionPile(["children"]),
   },
 };
+
+export const EditableSummary = {
+  render: Template,
+  args: {
+    ...Summary.args,
+    editable: true,
+  },
+};
