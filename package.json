@@ -85,7 +85,7 @@
     "storybook": "^10.6.7",
     "storybook-addon-rtl": "^3.0.2",
     "typescript": "^5.9.3",
-    "vite": "^7.3.5",
+    "vite": "^7.3.7",
     "vite-plugin-dts": "^4.5.4",
     "vite-plugin-static-copy": "^3.2.0",
     "vite-plugin-vue-devtools": "^8.0.7",
@@ -95,7 +95,7 @@
     "@vitest/browser-playwright": "4.1.11"
   },
   "resolutions": {
-    "vite": "^7.3.5",
+    "vite": "^7.3.7",
     "playwright": "^1.60.0",
     "playwright-core": "^1.60.0"
   },
