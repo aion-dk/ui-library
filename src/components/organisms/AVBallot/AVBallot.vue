@@ -15,8 +15,7 @@ import type {
   AVBallotGalleryOption,
   VoiceCredits,
 } from "@/types";
-import SelectionPileValidator from "@assemblyvoting/js-client/dist/lib/validators/selectionPileValidator";
-import BelgiumBallotValidator from "@assemblyvoting/js-client/dist/lib/validators/belgiumBallotValidator";
+import { SelectionPileValidator, BelgiumBallotValidator } from "@/helpers/validators";
 import { useLocalization } from "@/composables/useLocalization";
 
 const props = defineProps({

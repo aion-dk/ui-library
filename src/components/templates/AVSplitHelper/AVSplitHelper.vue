@@ -11,8 +11,7 @@ import type {
   ImageOption,
   IterableObject,
 } from "@/types";
-import SelectionPileValidator from "@assemblyvoting/js-client/dist/lib/validators/selectionPileValidator";
-import ContestSelectionValidator from "@assemblyvoting/js-client/dist/lib/validators/contestSelectionValidator";
+import { SelectionPileValidator, ContestSelectionValidator } from "@/helpers/validators";
 import { getMeaningfulLabel } from "@/helpers/meaningfulLabel";
 import { useLocalization } from "@/composables/useLocalization";
 
