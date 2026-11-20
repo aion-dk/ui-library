@@ -52,6 +52,11 @@ export default defineConfig(
           },
           {
             extends: true,
+            // Pre-bundle deps Vite otherwise discovers mid-run; the resulting
+            // re-optimize + reload makes suites fail to import on a cold cache (CI).
+            optimizeDeps: {
+              include: ["floating-vue", "@storybook/vue3-vite"],
+            },
             plugins: [
               // The plugin will run tests for the stories defined in your Storybook config
               // See options at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon#storybooktest

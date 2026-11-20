@@ -1,7 +1,7 @@
 import { fileURLToPath, URL } from "node:url";
 import { resolve } from "node:path";
 import dts from "vite-plugin-dts";
-import { defineConfig, type ConfigEnv } from "vite";
+import { defineConfig, type ConfigEnv, type PluginOption } from "vite";
 import vue from "@vitejs/plugin-vue";
 import { viteStaticCopy } from "vite-plugin-static-copy";
 
@@ -21,7 +21,7 @@ export default defineConfig((env: ConfigEnv) => {
   // previous output in place and overwrite files as they rebuild.
   const isWatch = process.argv.includes("--watch") || process.argv.includes("-w");
 
-  const plugins = [vue()];
+  const plugins: PluginOption[] = [vue()];
 
   if (
     env.command === "serve" &&
@@ -38,7 +38,7 @@ export default defineConfig((env: ConfigEnv) => {
   plugins.push(
     dts({
       entryRoot: "src",
-      outDir: "dist",
+      outDirs: "dist",
       tsconfigPath: "tsconfig.build.json",
     }),
   );
@@ -47,20 +47,26 @@ export default defineConfig((env: ConfigEnv) => {
     ...viteStaticCopy({
       targets: [
         {
-          src: resolve(__dirname, "node_modules/bootstrap"),
+          src: resolve(import.meta.dirname, "node_modules/bootstrap"),
           dest: "node_modules",
+          // v4 preserves the source path; drop the leading `node_modules/` so
+          // Bootstrap lands at dist/node_modules/bootstrap (see warning above).
+          rename: { stripBase: 1 },
         },
         {
-          src: resolve(__dirname, "src/bootstrap/bootstrap.customized.scss"),
+          src: resolve(import.meta.dirname, "src/bootstrap/bootstrap.customized.scss"),
           dest: "src/bootstrap",
+          rename: { stripBase: true },
         },
         {
-          src: resolve(__dirname, "src/bootstrap/_body_opacity.scss"),
+          src: resolve(import.meta.dirname, "src/bootstrap/_body_opacity.scss"),
           dest: "src/bootstrap",
+          rename: { stripBase: true },
         },
         {
-          src: resolve(__dirname, "src/bootstrap/_dark_mode.scss"),
+          src: resolve(import.meta.dirname, "src/bootstrap/_dark_mode.scss"),
           dest: "src/bootstrap",
+          rename: { stripBase: true },
         },
       ],
     }),

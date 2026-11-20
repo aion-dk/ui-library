@@ -14,7 +14,7 @@ Repeatable procedures: `.claude/skills/new-component/`.
 yarn --frozen-lockfile      # install
 yarn dev                    # playground (src/App.vue) — hack freely, NEVER commit App.vue changes
 yarn storybook              # Storybook dev on :6006
-yarn test                   # unit tests, watch mode (jsdom, root src/)
+yarn test                   # unit tests, watch mode (jsdom)
 yarn test-coverage          # unit tests + coverage — CI gate
 yarn test-storybook         # every story rendered in headless Chromium + axe a11y — CI gate
 yarn lint                   # oxlint then eslint, both --fix
