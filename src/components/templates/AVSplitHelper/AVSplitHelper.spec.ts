@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { mount } from "@vue/test-utils";
 import { getContestSelection, getContest } from "@/examples";
-import type { VitestEmitted } from "@/types";
+import type { ContestSelection, VitestEmitted } from "@/types";
 import localI18n from "@/i18n";
 
 import AVSplitHelper from "./AVSplitHelper.vue";
@@ -62,6 +62,14 @@ describe("AVSplitHelper", () => {
       },
     },
   });
+
+  // Simulates the parent's `v-model:contestSelection` applying the latest emitted value.
+  const applyLastContestSelection = async () => {
+    const emitted = wrapper.emitted()["update:contestSelection"] as VitestEmitted;
+    const latest = emitted[emitted.length - 1][0] as ContestSelection;
+    await wrapper.setProps({ contestSelection: latest });
+    return latest;
+  };
 
   it("renders properly", async () => {
     expect(wrapper.find("[data-test=split-helper-contest-title]").text()).to.contain(
@@ -380,6 +388,9 @@ describe("AVSplitHelper", () => {
     expect(wrapper.findAll("[data-test=pile-summary-edit]").length).to.eq(1);
     await wrapper.find("[data-test=pile-summary-delete]").trigger("click");
 
+    const updatedSelection = await applyLastContestSelection();
+    expect(updatedSelection.piles.length).to.eq(0);
+
     expect(wrapper.findAll("[data-test=pile-summary-edit]").length).to.eq(0);
 
     expect(wrapper.emitted()["update:activeState"][8]).to.not.exist;
@@ -470,6 +481,7 @@ describe("AVSplitHelper", () => {
       "Slet dette valg",
     );
     await wrapper.find("[data-test=pile-summary-delete]").trigger("click");
+    await applyLastContestSelection();
     expect(wrapper.find("[data-test=split-helper-overview]").text()).to.contain(
       "6  utildeltestemmesedler",
     );

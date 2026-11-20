@@ -194,7 +194,10 @@ const newSplit = (): void => {
 };
 
 const removeSplit = (splitIndex: number): void => {
-  selectionPiles.value.splice(splitIndex, 1);
+  emits("update:contestSelection", {
+    ...props.contestSelection,
+    piles: selectionPiles.value.filter((_, index) => index !== splitIndex),
+  });
 };
 
 const selectPile = (index: number): void => {
