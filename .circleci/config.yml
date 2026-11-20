@@ -6,9 +6,9 @@ executors:
   playwright:
     docker:
       - image: mcr.microsoft.com/playwright:v1.60.0-noble
-  node24:
+  node26:
     docker:
-      - image: cimg/node:24.14.0
+      - image: cimg/node:26.13
   ruby-node:
     docker:
       - image: cimg/ruby:4.0-node
@@ -32,7 +32,7 @@ jobs:
       - run: yarn test-storybook
   lint_test_build:
     executor:
-      name: node24
+      name: node26
     steps:
       - checkout
       - restore_cache:
@@ -51,7 +51,7 @@ jobs:
       - run: yarn run build-storybook
   publish:
     executor:
-      name: node24
+      name: node26
     steps:
       - checkout
       - restore_cache:
