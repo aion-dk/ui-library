@@ -43,13 +43,7 @@ type ContestArg =
   | "counter";
 
 type SelectionPileArg =
-  | "single"
-  | "multi"
-  | "weighted"
-  | "blank"
-  | "many"
-  | "children"
-  | "multivote";
+  "single" | "multi" | "weighted" | "blank" | "many" | "children" | "multivote";
 
 type ContestSelectionArg = "half" | "complete";
 

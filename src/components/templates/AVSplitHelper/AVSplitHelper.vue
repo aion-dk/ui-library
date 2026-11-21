@@ -13,7 +13,7 @@ import type {
   IterableObject,
   ValidationResult,
 } from "@/types";
-import SelectionPileValidator from "@assemblyvoting/js-client/dist/lib/validators/selectionPileValidator";
+import { SelectionPileValidator } from "@/helpers/validators";
 import { getMeaningfulLabel } from "@/helpers/meaningfulLabel";
 import { useLocalization } from "@/composables/useLocalization";
 import { applyOvervotePolicy, isOvervoteAllowedByPolicy } from "@/composables/useValidationPolicy";
@@ -205,7 +205,10 @@ const newSplit = (): void => {
 };
 
 const removeSplit = (splitIndex: number): void => {
-  selectionPiles.value.splice(splitIndex, 1);
+  emits("update:contestSelection", {
+    ...props.contestSelection,
+    piles: selectionPiles.value.filter((_, index) => index !== splitIndex),
+  });
 };
 
 const selectPile = (index: number): void => {

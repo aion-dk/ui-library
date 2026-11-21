@@ -63,6 +63,14 @@ describe("AVSplitHelper", () => {
     },
   });
 
+  // Simulates the parent's `v-model:contestSelection` applying the latest emitted value.
+  const applyLastContestSelection = async () => {
+    const emitted = wrapper.emitted()["update:contestSelection"] as VitestEmitted;
+    const latest = emitted[emitted.length - 1][0] as ContestSelection;
+    await wrapper.setProps({ contestSelection: latest });
+    return latest;
+  };
+
   it("renders properly", async () => {
     expect(wrapper.find("[data-test=split-helper-contest-title]").text()).to.contain(
       "Example ballot",
@@ -380,6 +388,9 @@ describe("AVSplitHelper", () => {
     expect(wrapper.findAll("[data-test=pile-summary-edit]").length).to.eq(1);
     await wrapper.find("[data-test=pile-summary-delete]").trigger("click");
 
+    const updatedSelection = await applyLastContestSelection();
+    expect(updatedSelection.piles.length).to.eq(0);
+
     expect(wrapper.findAll("[data-test=pile-summary-edit]").length).to.eq(0);
 
     expect(wrapper.emitted()["update:activeState"][8]).to.not.exist;
@@ -470,6 +481,7 @@ describe("AVSplitHelper", () => {
       "Slet dette valg",
     );
     await wrapper.find("[data-test=pile-summary-delete]").trigger("click");
+    await applyLastContestSelection();
     expect(wrapper.find("[data-test=split-helper-overview]").text()).to.contain(
       "6  utildeltestemmesedler",
     );
@@ -670,6 +682,22 @@ describe("AVSplitHelper new props", () => {
     await assigning.vm.$nextTick();
     await assigning.get("[data-test=split-helper-confirm]").trigger("click");
     expectLayout(assigning);
+  });
+
+  it("edits a pile other than the first one with that pile's selection and weight", async () => {
+    const contestSelection = getContestSelection(["complete"]);
+    const wrapper = createWrapper({ weight: 10, contestSelection });
+    const [, secondPile] = contestSelection.piles;
+
+    await wrapper.findAll("[data-test=pile-summary-edit]")[1].trigger("click");
+    expect(wrapper.emitted("update:activeState")?.at(-1)?.[0]).to.eq("ballot");
+    expect(wrapper.findComponent(AVBallot).props("selectionPile")).to.deep.eq(secondPile);
+
+    await wrapper.get("[data-test=split-helper-confirm]").trigger("click");
+    expect(wrapper.emitted("update:activeState")?.at(-1)?.[0]).to.eq("assign");
+    expect(wrapper.findComponent(AVSplitWeightHelper).props("activeAssigned")).to.eq(
+      secondPile.multiplier,
+    );
   });
 });
 

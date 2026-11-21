@@ -7,13 +7,13 @@ import localI18n from "@/i18n";
 
 expect.extend({ toHaveNoViolations });
 
+// Vitest 5 types matchers as `Matchers<R, T>`, which both `Assertion` and
+// `AsymmetricMatchersContaining` extend; the type parameters must match
+// Vitest's declaration exactly or TS reports TS2428.
 declare module "vitest" {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  interface Assertion<T> {
-    toHaveNoViolations(): void;
-  }
-  interface AsymmetricMatchersContaining {
-    toHaveNoViolations(): void;
+  interface Matchers<R extends void | Promise<void> = void | Promise<void>, T = unknown> {
+    toHaveNoViolations(): R;
   }
 }
 

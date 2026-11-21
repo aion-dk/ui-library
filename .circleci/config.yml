@@ -5,10 +5,10 @@ orbs:
 executors:
   playwright:
     docker:
-      - image: mcr.microsoft.com/playwright:v1.60.0-noble
-  node24:
+      - image: mcr.microsoft.com/playwright:v1.65.1-noble
+  node26:
     docker:
-      - image: cimg/node:24.14.0
+      - image: cimg/node:26.13
   ruby-node:
     docker:
       - image: cimg/ruby:4.0-node
@@ -32,7 +32,7 @@ jobs:
       - run: yarn test-storybook
   lint_test_build:
     executor:
-      name: node24
+      name: node26
     steps:
       - checkout
       - restore_cache:
@@ -55,7 +55,7 @@ jobs:
       - run: yarn run build-storybook
   publish:
     executor:
-      name: node24
+      name: node26
     steps:
       - checkout
       - restore_cache:
@@ -65,12 +65,14 @@ jobs:
       - node/install-yarn
       - run: yarn install --immutable
       - run:
-          name: Set npm access token
+          # Trusted publishing (OIDC): npm exchanges this short-lived CircleCI
+          # token for publish rights; no NPM_TOKEN involved. The job must keep
+          # the npm-publishing context — the npm trusted-publisher config is
+          # pinned to its context ID. Needs npm >= 11.5.1 (Node 24.14 ships 11.9).
+          name: Publish to NPM (trusted publishing)
           command: |
-            npm set //registry.npmjs.org/:_authToken=$NPM_TOKEN
-      - run:
-          name: Publish to NPM
-          command: |
+            echo "npm $(npm --version)"
+            export NPM_ID_TOKEN=$(circleci run oidc get --claims '{"aud": "npm:registry.npmjs.org"}')
             package_version=$(jq -r '.version' package.json)
             prerelease=$(echo "${package_version}" | grep -E -o "\-([^-]+)$" | sed 's/^-//')
             if [ -n "${prerelease}" ]; then
