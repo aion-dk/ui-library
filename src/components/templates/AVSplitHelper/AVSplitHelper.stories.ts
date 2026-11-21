@@ -1,7 +1,7 @@
 import type { Meta } from "@/types";
 import { AVSplitHelper } from "@/components";
 import { SUPPORTED_LOCALES } from "@/constants";
-import { getContestSelection, getContest } from "@/examples";
+import { getContestSelection, getContest, getValidationPolicy } from "@/examples";
 
 const meta: Meta<typeof AVSplitHelper> & {
   argTypes: {
@@ -34,17 +34,27 @@ const meta: Meta<typeof AVSplitHelper> & {
     showSubmissionHelper: {
       control: { type: "boolean" },
     },
+    reverseOption: {
+      control: { type: "boolean" },
+    },
+    selectionStyle: {
+      control: { type: "select" },
+      options: ["checkbox", "background"],
+    },
     "onUpdate:activePile": {
       action: "onUpdate:activePile: UPDATED",
     },
     "onUpdate:activeState": {
-      action: "onUpdate:activePile: UPDATED",
+      action: "onUpdate:activeState: UPDATED",
     },
     "onUpdate:complete": {
-      action: "onUpdate:activePile: UPDATED",
+      action: "onUpdate:complete: UPDATED",
     },
     "onUpdate:contestSelection": {
-      action: "onUpdate:activePile: UPDATED",
+      action: "onUpdate:contestSelection: UPDATED",
+    },
+    "onUpdate:pendingAlerts": {
+      action: "onUpdate:pendingAlerts: UPDATED",
     },
   },
 };
@@ -144,6 +154,71 @@ export const QuadraticVoting = {
 
   args: {
     contest: getContest(["multiple_votes_lg", "huge", "quadratic_voting"]),
+    contestSelection: getContestSelection([]),
+    weight: 1,
+  },
+};
+
+export const WithValidationPolicyUndervoteWarn = {
+  render: Template,
+
+  args: {
+    contest: {
+      ...getContest(["blank", "multi"]),
+      validationPolicy: getValidationPolicy("undervote_warn"),
+    },
+    contestSelection: getContestSelection([]),
+    weight: 1,
+  },
+};
+
+export const WithValidationPolicyOvervoteBlock = {
+  render: Template,
+
+  args: {
+    contest: {
+      ...getContest(["blank", "multi"]),
+      validationPolicy: getValidationPolicy("overvote_block"),
+    },
+    contestSelection: getContestSelection([]),
+    weight: 1,
+  },
+};
+
+export const WithValidationPolicyRadioButton = {
+  render: Template,
+
+  args: {
+    contest: {
+      ...getContest(["blank"]),
+      validationPolicy: getValidationPolicy("radio_button"),
+    },
+    contestSelection: getContestSelection([]),
+    weight: 1,
+  },
+};
+
+export const WithValidationPolicyBlankVoteFeedback = {
+  render: Template,
+
+  args: {
+    contest: {
+      ...getContest(["blank", "multi"]),
+      validationPolicy: getValidationPolicy("blank_vote_feedback"),
+    },
+    contestSelection: getContestSelection([]),
+    weight: 1,
+  },
+};
+
+export const WithValidationPolicyMixed = {
+  render: Template,
+
+  args: {
+    contest: {
+      ...getContest(["blank", "multi"]),
+      validationPolicy: getValidationPolicy("full"),
+    },
     contestSelection: getContestSelection([]),
     weight: 1,
   },

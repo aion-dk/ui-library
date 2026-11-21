@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from "vitest";
-import { mount } from "@vue/test-utils";
+import { mount, flushPromises, type VueWrapper } from "@vue/test-utils";
 import localI18n from "@/i18n";
 import { getLiveResult } from "@/examples";
 
@@ -202,5 +202,101 @@ describe("AVBlankOption", () => {
 
     expect(wrapper.find("[data-test=option-content]").text()).to.contain("Vot en blanc");
     expect(wrapper.find("[data-test=partial-results-external]").text()).to.contain("5  vots");
+  });
+
+  it("defaults reverseOption to false", async () => {
+    await wrapper.setProps({
+      locale: "en",
+      partialResults: undefined,
+      accentColor: undefined,
+      observerMode: false,
+    });
+
+    expect(wrapper.find("[data-test=option-content]").classes()).to.contain(
+      "justify-content-between",
+    );
+    expect(wrapper.find("[data-test=option-content]").classes()).to.not.contain(
+      "justify-content-start",
+    );
+  });
+
+  it("can reverse option layout", async () => {
+    await wrapper.setProps({
+      reverseOption: true,
+    });
+
+    expect(wrapper.find("[data-test=option-content]").classes()).to.contain(
+      "justify-content-start",
+    );
+    expect(wrapper.find("[data-test=option-content]").classes()).to.contain("gap-3");
+    expect(wrapper.find("[data-test=option-content]").classes()).to.not.contain(
+      "justify-content-between",
+    );
+  });
+
+  it("defaults selectionStyle to checkbox", async () => {
+    await wrapper.setProps({
+      checked: true,
+      reverseOption: false,
+    });
+
+    expect(wrapper.find("[data-test=option-container]").classes()).to.not.contain(
+      "AVBlankOption--selected-background",
+    );
+  });
+
+  it("can apply background selection style when checked", async () => {
+    await wrapper.setProps({
+      selectionStyle: "background",
+    });
+
+    expect(wrapper.find("[data-test=option-container]").classes()).to.contain(
+      "AVBlankOption--selected-background",
+    );
+  });
+
+  it("does not apply background selection style when not checked", async () => {
+    await wrapper.setProps({
+      checked: false,
+    });
+
+    expect(wrapper.find("[data-test=option-container]").classes()).to.not.contain(
+      "AVBlankOption--selected-background",
+    );
+  });
+
+  it("emits toggleBlank when clicked", async () => {
+    await wrapper.find("[data-test=blank-option]").trigger("click");
+
+    expect(wrapper.emitted().toggleBlank).to.have.lengthOf(1);
+  });
+
+  it("emits toggleBlank from the leading checkbox in reversed layout", async () => {
+    await wrapper.setProps({ reverseOption: true });
+
+    (wrapper.findComponent("[data-test=blank-checkbox]") as VueWrapper).vm.$emit("toggled");
+
+    expect(wrapper.emitted().toggleBlank).to.have.lengthOf(2);
+    await wrapper.setProps({ reverseOption: false });
+  });
+
+  it("moves the accent border to the right in right-to-left documents", async () => {
+    const html = document.documentElement;
+    await wrapper.setProps({ accentColor: "#FF0000" });
+    try {
+      html.setAttribute("dir", "rtl");
+      await flushPromises();
+      expect(wrapper.find("[data-test=option-container]").attributes().style).to.include(
+        "border-right-color: rgb(255, 0, 0);",
+      );
+
+      html.setAttribute("dir", "ltr");
+      await flushPromises();
+      expect(wrapper.find("[data-test=option-container]").attributes().style).to.include(
+        "border-left-color: rgb(255, 0, 0);",
+      );
+    } finally {
+      html.removeAttribute("dir");
+    }
   });
 });

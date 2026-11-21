@@ -29,6 +29,13 @@ const meta: Meta<typeof AVSummaryOption> = {
     isQuadratic: {
       control: { type: "boolean" },
     },
+    reverseOption: {
+      control: { type: "boolean" },
+    },
+    selectionStyle: {
+      control: { type: "select" },
+      options: ["checkbox", "background"],
+    },
     locale: {
       control: { type: "select" },
       options: SUPPORTED_LOCALES,
@@ -276,6 +283,38 @@ export const GalleryModeWithImageAndDescription = {
     multipleVotesAllowed: false,
     galleryMode: true,
     parents: [{ title: { en: "Parent 1" }, accentColor: "#FF00FF" }],
+  },
+};
+
+export const ReverseOption = {
+  render: Template,
+
+  args: {
+    option: {
+      title: getOption([], 1).title,
+      handle: getOption([], 1).reference,
+      crosses: 1,
+      rank: null,
+    },
+    blank: false,
+    multipleVotesAllowed: false,
+    reverseOption: true,
+  },
+};
+
+export const BackgroundSelectionStyle = {
+  render: Template,
+
+  args: {
+    option: {
+      title: getOption([], 1).title,
+      handle: getOption([], 1).reference,
+      crosses: 1,
+      rank: null,
+    },
+    blank: false,
+    multipleVotesAllowed: false,
+    selectionStyle: "background",
   },
 };
 

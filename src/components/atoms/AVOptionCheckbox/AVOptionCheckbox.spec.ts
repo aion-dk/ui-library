@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { mount } from "@vue/test-utils";
+import { mount, flushPromises } from "@vue/test-utils";
 import localI18n from "@/i18n";
 
 import AVOptionCheckbox from "./AVOptionCheckbox.vue";
@@ -96,5 +96,96 @@ describe("AVOptionCheckbox", () => {
     });
 
     expect(wrapper.find("[data-test=exclusive-error]").text()).to.contain("Эксклюзивный");
+  });
+
+  it("defaults selectionStyle to checkbox", async () => {
+    await wrapper.setProps({
+      locale: "en",
+      checked: true,
+      exclusiveError: false,
+      invalid: false,
+      disabled: false,
+      selectionStyle: "checkbox",
+    });
+
+    expect(wrapper.find("[data-test=option-checkbox]").classes()).to.contain(
+      "AVOptionCheckbox--checked",
+    );
+    expect(wrapper.find("[data-test=option-checkbox]").classes()).to.not.contain(
+      "AVOptionCheckbox--checked-white",
+    );
+  });
+
+  it("can apply background selection style", async () => {
+    await wrapper.setProps({
+      checked: true,
+      selectionStyle: "background",
+    });
+
+    expect(wrapper.find("[data-test=option-checkbox]").classes()).to.contain(
+      "AVOptionCheckbox--checked-white",
+    );
+    expect(wrapper.find("[data-test=option-checkbox]").classes()).to.not.contain(
+      "AVOptionCheckbox--checked",
+    );
+  });
+
+  it("does not emit a tick id when optionReference is empty (avoids duplicate-id collisions)", async () => {
+    await wrapper.setProps({
+      checked: true,
+      optionReference: "",
+      rank: 1,
+    });
+
+    const select = wrapper.find("[data-test=select]");
+    expect(select.exists()).to.be.true;
+    expect(select.attributes().id).to.be.undefined;
+  });
+
+  it("emits a unique tick id when optionReference is provided", async () => {
+    await wrapper.setProps({
+      checked: true,
+      optionReference: "optA",
+      rank: 1,
+    });
+
+    const select = wrapper.find("[data-test=select]");
+    expect(select.attributes().id).to.eq("option_optA_tick");
+  });
+
+  it("drops the rank when the option is excluded", async () => {
+    await wrapper.setProps({ checked: true, rank: 2, excluded: true });
+
+    expect(wrapper.find("[data-test=select]").attributes().rank).to.be.undefined;
+    expect(wrapper.find("[data-test=option-checkbox]").attributes()["aria-label"]).to.eq(
+      localI18n.global.t("js.components.AVOptionCheckbox.aria_label.checked_normal"),
+    );
+
+    await wrapper.setProps({ excluded: false });
+  });
+
+  it("floats to the start in right-to-left documents", async () => {
+    const html = document.documentElement;
+    try {
+      expect(wrapper.find("[data-test=option-checkbox]").classes()).to.contain("float-end");
+
+      html.setAttribute("dir", "rtl");
+      await flushPromises();
+      expect(wrapper.find("[data-test=option-checkbox]").classes()).to.contain("float-start");
+
+      const mountedInRtl = mount(AVOptionCheckbox, {
+        props: { checked: false, locale: "en" },
+        global: { provide: { i18n: localI18n } },
+      });
+      await flushPromises();
+      expect(mountedInRtl.find("[data-test=option-checkbox]").classes()).to.contain("float-start");
+      mountedInRtl.unmount();
+
+      html.setAttribute("dir", "ltr");
+      await flushPromises();
+      expect(wrapper.find("[data-test=option-checkbox]").classes()).to.contain("float-end");
+    } finally {
+      html.removeAttribute("dir");
+    }
   });
 });

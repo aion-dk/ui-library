@@ -12,6 +12,7 @@ import type {
   CheckedEventArgs,
   PartialResults,
   ImageOption,
+  SelectionStyle,
   IterableObject,
   VoiceCredits,
 } from "@/types";
@@ -78,9 +79,25 @@ const props = defineProps({
     type: Object as PropType<VoiceCredits>,
     default: null,
   },
+  reverseOption: {
+    type: Boolean,
+    default: false,
+  },
+  selectionStyle: {
+    type: String as PropType<SelectionStyle>,
+    default: "checkbox",
+  },
+  selectionMode: {
+    type: String as PropType<"checkbox" | "radio">,
+    default: "checkbox",
+  },
+  maxSelectionsReached: {
+    type: Boolean,
+    default: false,
+  },
 });
 
-const emits = defineEmits(["accordion-open", "checked", "view-candidate"]);
+const emits = defineEmits(["accordion-open", "checked", "blocked-click", "view-candidate"]);
 
 const crosses = useTemplateRef<HTMLDivElement | null>(`crossesFor${props.option.reference}`);
 
@@ -148,7 +165,7 @@ const isWriteIn = computed(() => !!props.option.writeIn);
 const writeInSize = computed(() => new Blob([writeInText.value]).size);
 
 const writeInInvalid = computed(() => {
-  const regexp = /[^\p{L}\p{N}\p{Z},.'‘()?!@€£¥\n]/gu;
+  const regexp = /[^\p{L}\p{N}\p{Z},.'()?!@€£¥\n]/gu;
   return (
     checkedCount.value &&
     (writeInSize.value > Number(props.option.writeIn?.maxSize) ||
@@ -165,7 +182,7 @@ const writeInPlaceholder = computed(() =>
 );
 
 const optionGroups = computed(() => {
-  const options = Array.from(Array(votesAllowedPerOption.value).keys());
+  const options = Array.from({ length: votesAllowedPerOption.value }, (_, i) => i);
   for (let index = 0; index < options.length; index += 1) {
     options[index] = index + 1;
   }
@@ -257,6 +274,28 @@ const usageOnBackground = computed(() => {
   return `width: ${percentage > 100 ? "100" : percentage}%`;
 });
 
+const creditBarBgClass = computed(() => {
+  if (props.selectionStyle === "background" && checkedCount.value > 0) {
+    return "bg-white";
+  }
+  return props.invalid ? "bg-theme-danger" : "bg-ballot";
+});
+
+const creditBarOpacity = computed(() => {
+  if (props.selectionStyle === "background" && checkedCount.value > 0) {
+    return "opacity: 0.3;";
+  }
+  return "opacity: 0.1;";
+});
+
+// Logical insets, so the bar follows the document direction (RTL) without the isRtl observer.
+const creditBarPosition = computed(() => {
+  if (props.reverseOption) {
+    return "inset-inline-end: 0;";
+  }
+  return "inset-inline-start: 0;";
+});
+
 const backgroundHeight = computed(() => `height: ${elHeight.value}px;`);
 
 const bsBorderColor = computed(() =>
@@ -316,6 +355,58 @@ const toggleFromOption = (onlyUpdate: boolean): void => {
   }
 
   toggleOption(props.option.reference, 1, writeInText.value, onlyUpdate);
+};
+
+/*
+This code blocks clicks on unselected options when the selection limit is reached (in multi-select mode).
+Result:
+
+❌ Clicking an unselected option when max is reached → Does nothing (blocked)
+✅ Clicking an already-selected option → Deselects it (allowed)
+✅ Radio mode → Always allowed (radio handles its own logic)
+*/
+
+const handleOptionClick = (event: MouseEvent): void => {
+  if (props.disabled || props.observerMode || !props.option.selectable || counterInterface.value)
+    return;
+
+  if (event.target instanceof Element && event.target.closest("a, video")) {
+    return;
+  }
+
+  if (props.maxSelectionsReached && checkedCount.value === 0 && props.selectionMode !== "radio") {
+    emits("blocked-click");
+    return;
+  }
+  toggleFromOption(false);
+};
+
+const isBlocked = computed(
+  () =>
+    props.maxSelectionsReached &&
+    checkedCount.value === 0 &&
+    !props.disabled &&
+    props.selectionMode !== "radio",
+);
+
+// The counter keeps its own displayed value, so a "+" the ballot rejects would leave it showing
+// more marks than stored. Once a blocking policy hits the limit, stop it from adding.
+const counterMaxAmount = computed(() =>
+  props.maxSelectionsReached && props.selectionMode !== "radio"
+    ? checkedCount.value
+    : votesAllowedPerOption.value,
+);
+
+const handleCheckboxToggle = (reference: string, amount: number, text?: string): void => {
+  if (
+    props.maxSelectionsReached &&
+    amount > checkedCount.value &&
+    props.selectionMode !== "radio"
+  ) {
+    emits("blocked-click");
+    return;
+  }
+  toggleOption(reference, amount, text);
 };
 
 const toggleFromWriteIn = (e: Event): void => {
@@ -388,15 +479,14 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
     }"
     data-test="option"
   >
-    <a
+    <div
       :id="option.reference"
       class="AVOption--scroll-anchor visually-hidden"
       :class="{
         'h-100': contest.mode === 'gallery',
       }"
-      :href="`option_${option.reference}_checkbox`"
-      :aria-labelledby="`option_${option.reference}_title`"
-    ></a>
+      tabindex="-1"
+    ></div>
     <AVCollapser
       :pane-id="`pane_for_option_${option.reference}`"
       :collapsable="contest.collapsable && hasChildren"
@@ -411,12 +501,9 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
       <template #toggle="{ collapsable }">
         <!-- CREDIT USAGE ON BACKGROUND -->
         <div
-          class="position-absolute pointer-events-none"
-          :class="{
-            'bg-ballot': !invalid,
-            'bg-theme-danger': invalid,
-          }"
-          :style="`${usageOnBackground}; ${backgroundHeight}; opacity: 0.1;`"
+          class="position-absolute pointer-events-none z-1"
+          :class="creditBarBgClass"
+          :style="`${usageOnBackground}; ${backgroundHeight}; ${creditBarPosition} ${creditBarOpacity}`"
         ></div>
         <section
           ref="el"
@@ -426,12 +513,17 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
             'h-100': contest.mode === 'gallery',
             'cursor-pointer':
               option.selectable && !(optionDisabled || observerMode || counterInterface),
-            'bg-transparent': contest.markingType.quadraticVoting,
+            'bg-transparent':
+              contest.markingType.quadraticVoting &&
+              !(selectionStyle === 'background' && checkedCount > 0),
+            'AVOption--selected-background': selectionStyle === 'background' && checkedCount > 0,
+            'AVOption--blocked': isBlocked,
           }"
           :style="coloredEdgeStyle"
+          :aria-disabled="isBlocked || undefined"
           :aria-label="`${t('js.components.AVOption.aria_labels.option')} ${getMeaningfulLabel(option as unknown as IterableObject, i18nLocale, t('js.components.AVOption.aria_labels.option'))}`"
           data-test="option-section"
-          @click="toggleFromOption(false)"
+          @click="handleOptionClick"
         >
           <!-- PARENT BADGE -->
           <div
@@ -451,8 +543,12 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
           <div
             class="d-flex justify-content-between position-relative"
             :class="{
-              'flex-column': votesAllowedPerOption > 1,
-              'flex-sm-row': votesAllowedPerOption <= 5 || counterInterface,
+              'flex-column': votesAllowedPerOption > 1 && !reverseOption,
+              'flex-column-reverse': votesAllowedPerOption > 1 && reverseOption,
+              'flex-sm-row': (votesAllowedPerOption <= 5 || counterInterface) && !reverseOption,
+              'flex-sm-row-reverse':
+                (votesAllowedPerOption <= 5 || counterInterface) && reverseOption,
+              'flex-row-reverse': votesAllowedPerOption === 1 && reverseOption,
             }"
             data-test="option-container"
           >
@@ -461,7 +557,7 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
               v-if="contest.mode === 'gallery'"
               :ref="`crossesFor${option.reference}`"
               class="AVOption--singlevote top-0 position-absolute"
-              :class="isRtl ? 'start-0' : 'end-0'"
+              :class="isRtl !== reverseOption ? 'start-0' : 'end-0'"
               data-test="option-multivote"
             >
               <div class="hstack gap-2 flex-nowrap">
@@ -479,21 +575,31 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
                   :invalid="invalid"
                   :option-reference="option.reference"
                   :check-box-index="optionGroups[0][0]"
-                  :disabled="optionDisabled || observerMode"
+                  :disabled="disabled || observerMode"
                   :gallery-mode="contest.mode === 'gallery'"
-                  @toggled="toggleOption(option.reference, optionGroups[0][0], writeInText)"
+                  :selection-style="selectionStyle"
+                  @toggled="handleCheckboxToggle(option.reference, optionGroups[0][0], writeInText)"
                 />
               </div>
             </div>
             <div
-              class="vstack gap-2 p-3 align-items-start justify-content-center"
+              class="vstack gap-2 p-3 justify-content-center"
+              :class="{
+                'align-items-start': !(contest.mode === 'gallery' && reverseOption),
+                'align-items-end': contest.mode === 'gallery' && reverseOption,
+              }"
               :style="`max-width: calc(100% - ${getCrossesWidth}px);`"
               data-test="option-content"
             >
               <!-- OPTION HEADER -->
               <header
-                class="AVOption--header d-flex flex-column flex-sm-row align-items-sm-center gap-3"
-                :class="{ 'w-100': isWriteIn }"
+                class="AVOption--header d-flex flex-column flex-sm-row gap-3"
+                :class="{
+                  'w-100': isWriteIn,
+                  'align-items-sm-center': !(contest.mode === 'gallery' && reverseOption),
+                  'align-items-sm-end': contest.mode === 'gallery' && reverseOption,
+                  'flex-sm-row-reverse': contest.mode === 'gallery' && reverseOption,
+                }"
                 :style="`
                   ${contest.mode === 'gallery' && !hasSecondaryElements ? 'min-height: 40px;' : ''}
                   ${contest.mode === 'gallery' ? `padding-inline-end: ${Math.abs(getCrossesWidth)}px;` : ''}
@@ -505,9 +611,11 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
                   :src="option.image"
                   :alt="t('js.components.AVOption.aria_labels.option_image')"
                   class="AVOption--image"
-                  :class="
-                    imageOption === 'square' ? 'AVOption--image-square' : 'AVOption--image-passport'
-                  "
+                  :class="{
+                    'AVOption--image-square': imageOption === 'square',
+                    'AVOption--image-passport': imageOption === 'passport',
+                    'order-last': contest.mode === 'gallery' && reverseOption,
+                  }"
                   data-test="option-image"
                 />
                 <h5
@@ -598,10 +706,14 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
             </div>
 
             <!-- COUNTER (STACKED MODE) -->
-            <div v-if="counterInterface" class="AVOption--singlevote hstack justify-content-end">
+            <div
+              v-if="counterInterface"
+              class="AVOption--singlevote hstack justify-content-end"
+              :class="{ 'bg-white': selectionStyle === 'background' && checkedCount > 0 }"
+            >
               <AVOptionCounter
                 :amount="checkedCount"
-                :max-amount="votesAllowedPerOption"
+                :max-amount="counterMaxAmount"
                 :disabled="optionDisabled || observerMode"
                 :invalid="invalid"
                 :is-quadratic="contest.markingType.quadraticVoting"
@@ -610,15 +722,20 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
                 "
               />
             </div>
+
             <!-- CROSSES (STACKED MODE) -->
             <div
               v-else-if="votesAllowedPerOption >= 1 && contest.mode !== 'gallery'"
               :ref="`crossesFor${option.reference}`"
               :class="{
                 'AVOption--multivote-aside hstack gap-2 justify-content-end bg-secondary':
-                  votesAllowedPerOption <= 5 && votesAllowedPerOption !== 1,
+                  votesAllowedPerOption <= 5 && votesAllowedPerOption !== 1 && !reverseOption,
+                'AVOption--multivote-aside-reversed hstack gap-2 justify-content-start bg-secondary':
+                  votesAllowedPerOption <= 5 && votesAllowedPerOption !== 1 && reverseOption,
                 'AVOption--multivote-footer hstack gap-2 flex-wrap justify-content-end border-top bg-secondary':
-                  votesAllowedPerOption > 5,
+                  votesAllowedPerOption > 5 && !reverseOption,
+                'AVOption--multivote-footer-reversed hstack gap-2 flex-wrap justify-content-start border-top bg-secondary':
+                  votesAllowedPerOption > 5 && reverseOption,
                 'AVOption--singlevote': votesAllowedPerOption === 1,
               }"
               data-test="option-multivote"
@@ -646,7 +763,8 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
                   :check-box-index="optionIndex"
                   :disabled="optionDisabled || observerMode"
                   :gallery-mode="false"
-                  @toggled="toggleOption(option.reference, optionIndex, writeInText)"
+                  :selection-style="selectionStyle"
+                  @toggled="handleCheckboxToggle(option.reference, optionIndex, writeInText)"
                 />
               </div>
             </div>
@@ -705,7 +823,12 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
             :voice-credits="voiceCredits"
             @checked="(args: boolean) => emits('checked', args)"
             @accordion-open="() => toggleCollapse(true, false)"
+            @blocked-click="() => emits('blocked-click')"
             @view-candidate="openChildrenCandidate"
+            :reverse-option="reverseOption"
+            :selection-style="selectionStyle"
+            :selection-mode="selectionMode"
+            :max-selections-reached="maxSelectionsReached"
           />
         </div>
       </template>

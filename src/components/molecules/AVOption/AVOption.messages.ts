@@ -9,7 +9,7 @@ const translations: DefineLocaleMessage = {
     view_candidate: "عرض المرشح",
     aria_labels: {
       option: "خيار",
-      option_image: "صورة الخيار",
+      option_image: "خيار",
     },
     write_in: {
       placeholder: "اكتب ردك هنا",
@@ -23,7 +23,7 @@ const translations: DefineLocaleMessage = {
     view_candidate: "Veure candidat/a",
     aria_labels: {
       option: "Opció",
-      option_image: "Imatge de l'opció",
+      option_image: "Opció",
     },
     write_in: {
       placeholder: "Escriu la teva resposta aquí",
@@ -37,7 +37,7 @@ const translations: DefineLocaleMessage = {
     view_candidate: "Veure candidat/a",
     aria_labels: {
       option: "Opsiwn",
-      option_image: "Delwedd opsiwn",
+      option_image: "Opsiwn",
     },
     write_in: {
       placeholder: "Teipiwch eich ymateb yma",
@@ -49,7 +49,7 @@ const translations: DefineLocaleMessage = {
     view_candidate: "Se kandidat",
     aria_labels: {
       option: "Valgmulighed",
-      option_image: "Valgmulighedsbillede",
+      option_image: "Valgmulighed",
     },
     write_in: {
       placeholder: "Skriv dit svar her",
@@ -61,7 +61,7 @@ const translations: DefineLocaleMessage = {
     view_candidate: "Kandidaten ansehen",
     aria_labels: {
       option: "Option",
-      option_image: "Optionsbild",
+      option_image: "Option",
     },
     write_in: {
       placeholder: "Geben Sie hier Ihre Antwort ein",
@@ -73,7 +73,7 @@ const translations: DefineLocaleMessage = {
     view_candidate: "View candidate",
     aria_labels: {
       option: "Option",
-      option_image: "Option image",
+      option_image: "Option",
     },
     write_in: {
       placeholder: "Type your input/response here",
@@ -85,7 +85,7 @@ const translations: DefineLocaleMessage = {
     view_candidate: "Ver candidato",
     aria_labels: {
       option: "Opción",
-      option_image: "Imagen de la opción",
+      option_image: "Opción",
     },
     write_in: {
       placeholder: "Escribe tu voto aquí",
@@ -97,7 +97,7 @@ const translations: DefineLocaleMessage = {
     view_candidate: "候補者を表示",
     aria_labels: {
       option: "オプション",
-      option_image: "オプション画像",
+      option_image: "オプション",
     },
     write_in: {
       placeholder: "ここに入力してください",
@@ -109,7 +109,7 @@ const translations: DefineLocaleMessage = {
     view_candidate: "후보자 보기",
     aria_labels: {
       option: "옵션",
-      option_image: "옵션 이미지",
+      option_image: "옵션",
     },
     write_in: {
       placeholder: "여기에 입력하세요",
@@ -121,7 +121,7 @@ const translations: DefineLocaleMessage = {
     view_candidate: "查看候选人",
     aria_labels: {
       option: "选项",
-      option_image: "选项图像",
+      option_image: "选项",
     },
     write_in: {
       placeholder: "在此输入您的回复",
@@ -133,7 +133,7 @@ const translations: DefineLocaleMessage = {
     view_candidate: "Katso ehdokas",
     aria_labels: {
       option: "Vaihtoehto",
-      option_image: "Vaihtoehdon kuva",
+      option_image: "Vaihtoehto",
     },
     write_in: {
       placeholder: "Kirjoita vastauksesi tähän",
@@ -145,7 +145,7 @@ const translations: DefineLocaleMessage = {
     view_candidate: "Voir le candidat",
     aria_labels: {
       option: "Option",
-      option_image: "Image d'option",
+      option_image: "Option",
     },
     write_in: {
       placeholder: "Saisissez votre réponse ici",
@@ -157,7 +157,7 @@ const translations: DefineLocaleMessage = {
     view_candidate: "Skoða frambjóðanda",
     aria_labels: {
       option: "Valkostur",
-      option_image: "Valmöguleikamynd",
+      option_image: "Valkostur",
     },
     write_in: {
       placeholder: "Skrifaðu svarið þitt hér",
@@ -169,7 +169,7 @@ const translations: DefineLocaleMessage = {
     view_candidate: "Visualizza candidato",
     aria_labels: {
       option: "Opzione",
-      option_image: "Immagine dell'opzione",
+      option_image: "Opzione",
     },
     write_in: {
       placeholder: "Inserisci qui la tua risposta",
@@ -181,7 +181,7 @@ const translations: DefineLocaleMessage = {
     view_candidate: "Bekijk kandidaat",
     aria_labels: {
       option: "Optie",
-      option_image: "Optie afbeelding",
+      option_image: "Optie",
     },
     write_in: {
       placeholder: "Typ hier uw antwoord",
@@ -193,7 +193,7 @@ const translations: DefineLocaleMessage = {
     view_candidate: "Zobacz kandydata",
     aria_labels: {
       option: "Opcja",
-      option_image: "Obraz opcji",
+      option_image: "Opcja",
     },
     write_in: {
       placeholder: "Wpisz swoją odpowiedź tutaj",
@@ -204,7 +204,7 @@ const translations: DefineLocaleMessage = {
     video_link_text_html: "Vídeo",
     aria_labels: {
       option: "Opção",
-      option_image: "Opção imagem",
+      option_image: "Opção",
     },
     write_in: {
       placeholder: "Introduza aqui a sua resposta",
@@ -218,7 +218,7 @@ const translations: DefineLocaleMessage = {
     view_candidate: "Vedeți candidatul",
     aria_labels: {
       option: "Opțiune",
-      option_image: "Imagine opțiune",
+      option_image: "Opțiune",
     },
     write_in: {
       placeholder: "Scrieți răspunsul aici",
@@ -230,7 +230,7 @@ const translations: DefineLocaleMessage = {
     view_candidate: "Посмотреть кандидата",
     aria_labels: {
       option: "Вариант",
-      option_image: "Изображение для варианта",
+      option_image: "Вариант",
     },
     write_in: {
       placeholder: "Введите свой ответ здесь",
@@ -242,7 +242,7 @@ const translations: DefineLocaleMessage = {
     view_candidate: "Se kandidat",
     aria_labels: {
       option: "Alternativ",
-      option_image: "Alternativ bild",
+      option_image: "Alternativ",
     },
     write_in: {
       placeholder: "Skriv ditt svar här",

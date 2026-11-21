@@ -32,6 +32,12 @@ describe("Respects fallback order", () => {
   it("Gets title", async () => {
     expect(getMeaningfulLabel({}, "da", "Item", ["title"])).to.eq("");
   });
+
+  it("Gets name", async () => {
+    expect(
+      getMeaningfulLabel({ ...INITIAL_OPTION, name: "Custom name" }, "da", "Item", ["name"]),
+    ).to.eq("Custom name");
+  });
 });
 
 describe("Option labels", () => {

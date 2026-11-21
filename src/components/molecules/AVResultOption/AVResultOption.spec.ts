@@ -61,7 +61,7 @@ describe("AVResultOption", () => {
     });
 
     expect(wrapper.find("[data-test=result-option]").classes()).to.contain("bg-success-faded");
-    expect(wrapper.find("[data-test=result-option]").classes()).to.not.contain("bg-body-80");
+    expect(wrapper.find("[data-test=result-option]").classes()).to.not.contain("bg-body-alt-10");
     expect(wrapper.find("[data-test=result-option]").classes()).to.not.contain("bg-warning-faded");
 
     expect(wrapper.find("[data-test=result-title]").text()).to.contain("I've changed");
@@ -74,7 +74,7 @@ describe("AVResultOption", () => {
     await setOption({ elected: false, tied: true });
 
     expect(wrapper.find("[data-test=result-option]").classes()).to.contain("bg-warning-faded");
-    expect(wrapper.find("[data-test=result-option]").classes()).to.not.contain("bg-body-80");
+    expect(wrapper.find("[data-test=result-option]").classes()).to.not.contain("bg-body-alt-10");
     expect(wrapper.find("[data-test=result-option]").classes()).to.not.contain("bg-success-faded");
 
     expect(wrapper.find("[data-test=result-results]").text()).to.contain("2");
@@ -87,7 +87,7 @@ describe("AVResultOption", () => {
 
     expect(wrapper.find("[data-test=result-option]").classes()).to.contain("bg-success-faded");
     expect(wrapper.find("[data-test=result-option]").classes()).to.not.contain("bg-warning-faded");
-    expect(wrapper.find("[data-test=result-option]").classes()).to.not.contain("bg-body-80");
+    expect(wrapper.find("[data-test=result-option]").classes()).to.not.contain("bg-body-alt-10");
   });
 
   it("can hide elected and tied", async () => {
@@ -113,6 +113,7 @@ describe("AVResultOption", () => {
 
     expect(wrapper.findAll("[data-test=result-image]").length).to.eq(1);
     expect(wrapper.find("[data-test=result-image]").attributes().src).to.eq(imageOption.image);
+    expect(wrapper.find("[data-test=result-image]").attributes().alt).to.eq("");
   });
 
   it("can switch language", async () => {

@@ -6,6 +6,7 @@ import type {
   AVSummaryOptionObject,
   AVSummaryOptionParent,
   ImageOption,
+  SelectionStyle,
   IterableObject,
 } from "@/types";
 import { getMeaningfulLabel } from "@/helpers/meaningfulLabel";
@@ -57,6 +58,14 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  reverseOption: {
+    type: Boolean,
+    default: false,
+  },
+  selectionStyle: {
+    type: String as PropType<SelectionStyle>,
+    default: "checkbox",
+  },
 });
 
 const isRtl = ref<boolean>(false);
@@ -97,11 +106,9 @@ const displayTitle = computed(() => {
 });
 
 const optionGroups = computed(() => {
-  const options = Array.from(Array(props.option?.crosses).keys());
-  for (let i = 0; i < options.length; i += 1) {
-    options[i] = i + 1;
-  }
-  const half = options.indexOf(Math.ceil(props.option?.crosses / 2)) + 1;
+  const crosses = props.option?.crosses ?? 0;
+  const options = Array.from({ length: crosses }, (_, i) => i + 1);
+  const half = options.indexOf(Math.ceil(crosses / 2)) + 1;
   const group1 = options.slice(0, half);
   const group2 = options.slice(half);
   if (group2.length) return [group1, group2];
@@ -175,13 +182,15 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
 <template>
   <div
     class="AVSummaryOption card rounded-0 position-relative"
+    :class="{ 'AVSummaryOption--selected-background': selectionStyle === 'background' && !blank }"
     :style="coloredEdgeStyle"
+    role="group"
     :aria-label="t('js.components.AVSummaryOption.aria_label.option')"
     data-test="summary-option"
   >
     <!-- ANCESTRY (NORMAL) -->
     <div v-if="ancestryTitles && !galleryMode" class="AVSummaryOption--ancestry card-header small">
-      <div aria-label="breadcrumb">
+      <nav aria-label="breadcrumb">
         <ol class="breadcrumb mb-0" data-test="summary-option-ancestry">
           <li
             v-for="(title, index) in ancestryTitles"
@@ -192,7 +201,7 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
             {{ title }}
           </li>
         </ol>
-      </div>
+      </nav>
     </div>
 
     <!-- ANCESTRY (GALLERY) -->
@@ -209,21 +218,37 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
     <!-- OPTION -->
     <div
       class="card-body hstack gap-2"
-      :class="{ 'p-4': useFooter, 'justify-content-between': !galleryMode }"
+      :class="{
+        'p-4': useFooter,
+        'justify-content-between': !galleryMode,
+        'flex-row-reverse': reverseOption,
+      }"
     >
       <div
-        :class="{ vstack: galleryMode, 'w-100': !galleryMode }"
-        style="max-width: calc(100%-70px)"
+        :class="{
+          vstack: galleryMode,
+          'w-100': !galleryMode,
+          'align-items-end': galleryMode && reverseOption,
+        }"
+        style="max-width: calc(100% - 70px)"
       >
-        <div class="w-100" :class="{ hstack: !galleryMode }">
+        <div
+          class="w-100"
+          :class="{
+            hstack: !galleryMode,
+            'justify-content-end': galleryMode && reverseOption,
+          }"
+        >
           <img
             v-if="option?.image"
             :src="option?.image"
-            class="AVSummaryOption--img me-2 me-sm-3"
             :class="{
               'mb-3': galleryMode,
+              'AVSummaryOption--img': true,
               'AVSummaryOption--img-square': imageOption === 'square',
               'AVSummaryOption--img-passport': imageOption === 'passport',
+              'me-2 me-sm-3': !reverseOption,
+              'ms-2 ms-sm-3 order-last': reverseOption,
             }"
             :alt="t('js.components.AVSummaryOption.aria_label.option_image')"
             data-test="summary-option-image"
@@ -251,7 +276,11 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
           </div>
         </div>
       </div>
-      <div v-if="!useFooter" class="align-self-start">
+      <div
+        v-if="!useFooter"
+        class="AVSummaryOption--checkbox"
+        :class="reverseOption ? 'align-self-start order-last' : 'align-self-start'"
+      >
         <AVOptionCounter
           v-if="counterInterface || isQuadratic"
           :amount="props.option?.crosses"
@@ -263,6 +292,7 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
           :checked="true"
           :rank="option?.rank"
           :disabled="true"
+          :selection-style="selectionStyle"
           data-test="summary-cross"
         />
       </div>
@@ -271,7 +301,8 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
     <!-- IF MULTIVOTE -->
     <div
       v-if="useFooter"
-      class="card-footer bg-light d-flex gap-2 justify-content-end py-3 flex-wrap"
+      class="card-footer bg-light d-flex gap-2 py-3 flex-wrap"
+      :class="reverseOption ? 'justify-content-start' : 'justify-content-end'"
     >
       <div
         v-for="groupIndex in optionGroups"
@@ -284,6 +315,7 @@ const { locale: i18nLocale, t } = useLocalization(() => props.locale);
           :checked="true"
           :rank="option?.rank"
           :disabled="true"
+          :selection-style="selectionStyle"
           data-test="summary-cross"
         />
       </div>

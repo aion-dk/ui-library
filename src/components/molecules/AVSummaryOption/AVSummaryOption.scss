@@ -38,3 +38,20 @@
 .AVSummaryOption--ancestry {
   color: var(--bs-gray-700);
 }
+
+.AVSummaryOption--selected-background {
+  background-color: var(--bs-ballot);
+  color: white !important;
+  --bs-heading-color: white;
+
+  .AVSummaryOption--title {
+    color: white !important;
+  }
+}
+
+.AVSummaryOption--checkbox {
+  &.order-last {
+    margin-left: 0;
+    margin-right: auto;
+  }
+}
