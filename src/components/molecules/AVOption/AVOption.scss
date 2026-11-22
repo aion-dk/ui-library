@@ -143,7 +143,8 @@
   }
 
   .AVOption--singlevote.bg-white {
-    background-color: var(--bs-gray-100) !important;
+    // Same as gray-100 in light mode, but follows data-bs-theme="dark".
+    background-color: var(--bs-tertiary-bg) !important;
     border-radius: 0;
     align-self: stretch;
     align-items: center;

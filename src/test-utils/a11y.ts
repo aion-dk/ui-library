@@ -54,9 +54,14 @@ export async function mountForA11y<T extends Component>(
   const stubs = { ...defaults.stubs, ...((userGlobal?.stubs ?? {}) as object) };
   const directives = { ...defaults.directives, ...((userGlobal?.directives ?? {}) as object) };
 
+  // Mount into a dedicated container and scan that: for multi-root components
+  // `wrapper.element` is only the first root node, so axe would miss the rest.
+  const container = document.createElement("div");
+  document.body.appendChild(container);
+
   const wrapper = mount(component, {
     ...(options as ComponentMountingOptions<T>),
-    attachTo: document.body,
+    attachTo: container,
     global: {
       ...(userGlobal as object),
       provide,
@@ -66,9 +71,12 @@ export async function mountForA11y<T extends Component>(
     } as ComponentMountingOptions<T>["global"],
   });
 
-  const result = await runAxe(wrapper.element, axeOptions);
-  wrapper.unmount();
-  return result;
+  try {
+    return await runAxe(container, axeOptions);
+  } finally {
+    wrapper.unmount();
+    container.remove();
+  }
 }
 
 export { runAxe };

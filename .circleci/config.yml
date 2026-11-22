@@ -47,9 +47,9 @@ jobs:
           key: v1-dependencies-{{ checksum "yarn.lock" }}
       - run: yarn run lint
       - run: yarn run test-coverage
-      # `--root src/` makes vitest write the report to src/coverage, not ./coverage.
+      # The unit project's root is the repo root, so vitest writes the report to ./coverage.
       - store_artifacts:
-          path: src/coverage
+          path: coverage
           destination: coverage
       - run: yarn run build
       - run: yarn run build-storybook

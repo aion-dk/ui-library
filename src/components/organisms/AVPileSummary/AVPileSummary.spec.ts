@@ -387,6 +387,57 @@ describe("AVPileSummary in summary state", () => {
     expect(lastPendingAlerts(wrapper)![0].feedbackMessage).to.eq("warnings.overvote");
   });
 
+  // Regression: the review-key existence checks used the host's global locale ("en") instead
+  // of the locale this summary renders in, so the wording could come from the wrong key.
+  it("checks review translations in the summary's own locale, not the host's", async () => {
+    const i18nWithDanishReviewKeysOnly = {
+      global: new Proxy(localI18n.global as unknown as Record<string, unknown>, {
+        get: (target, key) =>
+          key === "te"
+            ? (_key: string, locale?: string) => locale === "da"
+            : Reflect.get(target, key),
+      }),
+    };
+    const overvoteAlertContest = {
+      ...getContest(["multi"]),
+      validationPolicy: {
+        overvote: {
+          behavior: "block_selection" as const,
+          feedbackScreen: "ballot_and_review_page" as const,
+          feedbackType: "alert" as const,
+        },
+      },
+    };
+
+    const inline = mountSummary(
+      { ...getContest(["multi"]), validationPolicy: getValidationPolicy("undervote_warn") },
+      getSelectionPile(["single"]),
+      { locale: "da" },
+      i18nWithDanishReviewKeysOnly,
+    );
+    expect(feedback(inline).get("[role=alert]").text()).to.eq(
+      localI18n.global.t(
+        "js.components.AVSubmissionHelper.review_warnings.undervote_between",
+        {},
+        {
+          locale: "da",
+        },
+      ),
+    );
+
+    const alerts = mountSummary(
+      overvoteAlertContest,
+      getSelectionPile(["many"]),
+      {
+        activeState: "assign",
+        locale: "da",
+      },
+      i18nWithDanishReviewKeysOnly,
+    );
+    await alerts.setProps({ activeState: "summary" });
+    expect(lastPendingAlerts(alerts)![0].feedbackMessage).to.eq("review_warnings.overvote");
+  });
+
   it("lists options in contest order regardless of selection order", () => {
     const wrapper = mountSummary(getContest(["many_options"]), {
       multiplier: 1,

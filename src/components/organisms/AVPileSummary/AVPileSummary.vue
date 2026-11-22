@@ -98,7 +98,7 @@ const I18N_BASE = "js.components.AVSubmissionHelper.";
 const resolveReviewFeedbackMessage = (result: ValidationResult): string => {
   if (result.isRawMessage) return result.feedbackMessage;
   const reviewKey = `${I18N_BASE}${REVIEW_KEY_PREFIX}${result.feedbackMessage}`;
-  if (i18n.global.te(reviewKey)) {
+  if (i18n.global.te(reviewKey, i18nLocale.value)) {
     return t(reviewKey, result.feedbackParams);
   }
   return t(`${I18N_BASE}${result.feedbackMessage}`, result.feedbackParams);
@@ -109,7 +109,7 @@ const mapAlertsWithReviewKeys = (alerts: ValidationResult[]): ValidationResult[]
     if (result.isRawMessage) return result;
     const reviewKey = `${REVIEW_KEY_PREFIX}${result.feedbackMessage}`;
     const fullKey = `${I18N_BASE}${reviewKey}`;
-    if (i18n.global.te(fullKey)) {
+    if (i18n.global.te(fullKey, i18nLocale.value)) {
       return { ...result, feedbackMessage: reviewKey };
     }
     return result;
