@@ -76,6 +76,9 @@ export default defineConfig((env: ConfigEnv) => {
     plugins,
     build: {
       emptyOutDir: !isWatch,
+      // Rolldown's watcher (Vite 8) picks up the build's own output — dist/ (incl. the copied bootstrap tree and .d.ts files) and .git/ — and rebuilds forever.
+      // Only set in watch mode: a non-null `build.watch` turns watch mode on for every build.
+      watch: isWatch ? { exclude: ["dist/**", ".git/**", "coverage/**"] } : null,
       cssCodeSplit: false,
       lib: {
         entry: "./src/index.ts",
