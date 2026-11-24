@@ -13,3 +13,4 @@ export * from "@/types/components";
 export * from "@/types/translations";
 export * from "@/types/icon";
 export * from "@/types/helpers";
+export * from "@/types/validationPolicy";

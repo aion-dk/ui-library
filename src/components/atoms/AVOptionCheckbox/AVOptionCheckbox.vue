@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from "vue";
-import type { PropType, SupportedLocale } from "@/types";
+import type { PropType, SupportedLocale, SelectionStyle } from "@/types";
 import { useLocalization } from "@/composables/useLocalization";
 
 const props = defineProps({
@@ -39,6 +39,14 @@ const props = defineProps({
   locale: {
     type: String as PropType<SupportedLocale>,
     default: null,
+  },
+  selectionStyle: {
+    type: String as PropType<SelectionStyle>,
+    default: "checkbox",
+  },
+  reverseOption: {
+    type: Boolean,
+    default: false,
   },
 });
 
@@ -87,6 +95,7 @@ const { t } = useLocalization(() => props.locale);
     <div
       v-if="exclusiveError && checked"
       class="AVOptionCheckbox--exclusive-container"
+      :class="{ 'AVOptionCheckbox--exclusive-container--reversed': reverseOption }"
       data-test="exclusive-error"
     >
       <div class="AVOptionCheckbox--exclusive text-white px-2 d-block bg-theme-danger">
@@ -100,7 +109,8 @@ const { t } = useLocalization(() => props.locale);
       :class="{
         'float-end': !isRtl,
         'float-start': isRtl,
-        'AVOptionCheckbox--checked': checked,
+        'AVOptionCheckbox--checked': checked && selectionStyle !== 'background',
+        'AVOptionCheckbox--checked-white': checked && selectionStyle === 'background',
         'AVOptionCheckbox--disabled': disabled,
         'AVOptionCheckbox--error': (exclusiveError || invalid) && checked,
       }"
@@ -121,9 +131,10 @@ const { t } = useLocalization(() => props.locale);
     >
       <AVOptionSelect
         v-if="checked"
-        :id="`option_${optionReference}_tick`"
+        :id="optionReference ? `option_${optionReference}_tick` : undefined"
         :rank="excluded ? null : rank"
         :checked="checked"
+        :selection-style="selectionStyle"
         data-test="select"
       />
     </button>

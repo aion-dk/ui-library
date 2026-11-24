@@ -1,4 +1,4 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, beforeAll } from "vitest";
 import { mount } from "@vue/test-utils";
 import localI18n from "@/i18n";
 
@@ -36,6 +36,13 @@ describe("AVSubmissionHelper", () => {
     expect(wrapper.find("[data-test=submission-helper]").classes()).to.not.contain(
       "AVSubmissionHelper--danger",
     );
+  });
+
+  // Regression: a wrapper around the sticky element confined it to its own height, so it never
+  // stuck. `sticky-bottom` must be on the root, whose parent is the (taller) ballot.
+  it("is sticky on its root element", () => {
+    expect(wrapper.classes()).to.include("sticky-bottom");
+    expect(wrapper.element.firstElementChild?.classList.contains("sticky-bottom")).to.not.be.true;
   });
 
   it("can track marks", async () => {
@@ -171,5 +178,156 @@ describe("AVSubmissionHelper", () => {
     expect(wrapper.findAll("[data-test=submission-helper-error]")[4].text()).to.contain(
       "Selecția dvs. a depășit numărul maxim de opțiuni",
     );
+  });
+});
+
+describe("AVSubmissionHelper with policy inline results", () => {
+  beforeAll(() => {
+    localI18n.global.locale.value = "en";
+  });
+
+  const wrapper = mount(AVSubmissionHelper, {
+    props: {
+      minMarks: 1,
+      maxMarks: 3,
+      chosenCount: 0,
+      errors: [],
+      locale: "en",
+    },
+    global: {
+      provide: {
+        i18n: localI18n,
+      },
+      directives: {
+        tooltip: () => {},
+      },
+      stubs: {
+        AVIcon: {
+          template: "<span />",
+        },
+      },
+    },
+  });
+
+  it("renders policy warning feedback inline", async () => {
+    await wrapper.setProps({
+      locale: "en",
+      chosenCount: 1,
+      policyInlineResults: [
+        {
+          scenario: "undervote_between",
+          allowed: true,
+          warning: true,
+          blocked: false,
+          feedbackMessage: "warnings.undervote_between",
+          feedbackScreen: "ballot_page",
+          feedbackType: "on_screen_message",
+        },
+      ],
+    });
+
+    expect(wrapper.findAll("[data-test=submission-helper-policy-feedback]").length).to.eq(1);
+    expect(wrapper.find("[data-test=submission-helper-policy-feedback]").text()).to.contain(
+      "You have selected fewer than the maximum allowed options",
+    );
+  });
+
+  it("renders policy error feedback inline", async () => {
+    await wrapper.setProps({
+      chosenCount: 1,
+      policyInlineResults: [
+        {
+          scenario: "undervote_below_min",
+          allowed: false,
+          warning: false,
+          blocked: true,
+          feedbackMessage: "errors.undervote_below_min",
+          feedbackScreen: "ballot_page",
+          feedbackType: "on_screen_message",
+        },
+      ],
+    });
+
+    expect(wrapper.findAll("[data-test=submission-helper-policy-feedback]").length).to.eq(1);
+  });
+
+  it("does not render policy feedback when no results", async () => {
+    await wrapper.setProps({
+      policyInlineResults: [],
+    });
+
+    expect(wrapper.findAll("[data-test=submission-helper-policy-feedback]").length).to.eq(0);
+  });
+
+  // Intentional: on the ballot page inline policy feedback waits for a selection, so the
+  // blank-vote message (only produced at zero selections) is not shown inline here. Blank votes
+  // are flagged by the alert on submit and inline on the review page (AVPileSummary).
+  it("renders raw policy messages verbatim, only once something is chosen", async () => {
+    await wrapper.setProps({
+      chosenCount: 0,
+      policyInlineResults: [
+        {
+          scenario: "blank_vote",
+          allowed: false,
+          warning: false,
+          blocked: true,
+          feedbackMessage: "A custom message written by the election administrator.",
+          feedbackScreen: "ballot_page",
+          feedbackType: "on_screen_message",
+          isRawMessage: true,
+        },
+      ],
+    });
+
+    expect(wrapper.find("[data-test=submission-helper-policy-feedback]").exists()).to.be.false;
+
+    await wrapper.setProps({ chosenCount: 1 });
+
+    expect(wrapper.find("[data-test=submission-helper-policy-feedback]").text()).to.eq(
+      "A custom message written by the election administrator.",
+    );
+
+    await wrapper.setProps({ policyInlineResults: [] });
+  });
+
+  it("interpolates error params, localizing translatable ones", async () => {
+    await wrapper.setProps({
+      errors: [
+        {
+          message: "exceeded_list_limit",
+          keys: { list_name: { en: "Party A", da: "Parti A" }, max_list_marks: 2 },
+        },
+      ],
+    });
+
+    expect(wrapper.find("[data-test=submission-helper-error]").text()).to.contain(
+      "Your selection exceeded the maximum amount of options that can be on Party A list. Please select max 2 options per this list",
+    );
+
+    await wrapper.setProps({ errors: [] });
+  });
+
+  // Regression: LocalString params used to be overwritten in the prop with the first locale's
+  // string, so they never re-localized (fixed during the main → ontario sync review).
+  it("re-localizes translatable error params when the locale changes", async () => {
+    const keys = { list_name: { en: "Party A", da: "Parti A" }, max_list_marks: 2 };
+    await wrapper.setProps({ errors: [{ message: "exceeded_list_limit", keys }] });
+    try {
+      expect(wrapper.find("[data-test=submission-helper-error]").text()).to.contain("Party A");
+
+      await wrapper.setProps({ locale: "da" });
+      expect(wrapper.find("[data-test=submission-helper-error]").text()).to.contain("Parti A");
+      expect(keys.list_name).to.deep.eq({ en: "Party A", da: "Parti A" });
+    } finally {
+      await wrapper.setProps({ locale: "en", errors: [] });
+    }
+  });
+
+  it("asks for an exact number of options when min and max marks match", async () => {
+    await wrapper.setProps({ minMarks: 3, maxMarks: 3 });
+
+    expect(wrapper.find("[data-test=submission-helper]").text()).to.contain("Select 3 options.");
+
+    await wrapper.setProps({ minMarks: 1, maxMarks: 3 });
   });
 });

@@ -1,10 +1,19 @@
 .AVCollapser {
+  all: unset;
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
   cursor: pointer;
   transition: all 300ms ease-in-out;
   box-shadow: 0 0 0 0.125rem rgb(82 88 93 / 0%);
 
   &:hover {
     box-shadow: 0 0 0 0.125rem rgb(82 88 93 / 50%);
+  }
+
+  &:focus-visible {
+    outline: 0.125rem solid var(--bs-primary, #0d6efd);
+    outline-offset: 0.125rem;
   }
 }
 
