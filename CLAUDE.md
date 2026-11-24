@@ -12,7 +12,7 @@ Repeatable procedures: `.claude/skills/new-component/`.
 
 ```sh
 yarn --frozen-lockfile      # install
-yarn dev                    # playground (src/App.vue) — hack freely, NEVER commit App.vue changes
+yarn dev                    # playground (src/App.vue) — hack freely, NEVER commit App.vue changes (except new locales, see Pitfalls)
 yarn storybook              # Storybook dev on :6006
 yarn test                   # unit tests, watch mode (jsdom)
 yarn test-coverage          # unit tests + coverage — CI gate
@@ -73,8 +73,8 @@ statements 80 / branches 70 over `src/components/**` + `src/helpers/**` (exclusi
   would stay in the admin language while content translated. Only entry-point components
   need `:locale`; it reaches children via `provide`, so don't hand-forward it.
 - Translation keys: `t("js.components.AVFoo.snake_case_key")`; HTML-bearing strings get
-  an `_html` suffix. Messages files must cover **all 20 locales** in `SUPPORTED_LOCALES`
-  (ar ca cy da de en es fi fr is it ja ko nl pl pt ro ru sv zh).
+  an `_html` suffix. Messages files must cover **all 21 locales** in `SUPPORTED_LOCALES`
+  (ar ca cy da de en es fi fil fr is it ja ko nl pl pt ro ru sv zh).
 - Styles: external file linked as `<style scoped lang="scss" src="./AVFoo.scss" />`;
   class names `AVFoo--modifier`; layout via Bootstrap utilities in the template, SCSS only
   for what utilities can't express.
@@ -171,7 +171,9 @@ compiled `dist/styles.css` (component styles only, no Bootstrap core) and the **
 
 ## Pitfalls
 
-- `src/App.vue` is a playground. Use it, never commit changes to it.
+- `src/App.vue` is a playground. Use it, never commit changes to it — **except** the
+  locale `<select>`: when adding a supported language, add its `<option>` there (alongside
+  `LocalMessages.ts`, `.storybook/globals.ts` and every `*.messages.ts`) and commit it.
 - In devbox, consuming apps bind-mount this repo's `dist/` directly into their
   `node_modules`. `vite build --watch` deliberately does NOT empty `dist/`
   (`emptyOutDir: !isWatch` in `vite.config.ts`) — keep it that way.

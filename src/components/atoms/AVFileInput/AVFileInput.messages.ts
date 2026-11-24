@@ -106,6 +106,21 @@ const translations: DefineLocaleMessage = {
     remove_file: "Poistaa",
     download_file: "Lataa",
   },
+  fil: {
+    acceptedFormats: "Mga Tinatanggap na Uri ng File:",
+    primary: "I-drag at i-drop ang anumang file dito",
+    secondary: {
+      start: "o",
+      strong: "maghanap ng file",
+      end: "mula sa device",
+    },
+    release: "Bitawan upang i-drop ang mga file dito.",
+    current: "Kasalukuyang bersyon:",
+    uploading: "Ina-upload:",
+    alt_preview: "Preview ng kasalukuyang larawan",
+    remove_file: "Alisin",
+    download_file: "I-download",
+  },
   fr: {
     acceptedFormats: "Types de fichiers acceptés:",
     primary: "Faites glisser et déposez n'importe quel fichier ici",

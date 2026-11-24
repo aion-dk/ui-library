@@ -128,6 +128,11 @@ const messages = {
       components: getTranslations("fi"),
     },
   },
+  fil: {
+    js: {
+      components: getTranslations("fil"),
+    },
+  },
   fr: {
     js: {
       components: getTranslations("fr"),

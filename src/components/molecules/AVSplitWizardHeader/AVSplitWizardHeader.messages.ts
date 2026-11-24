@@ -133,6 +133,23 @@ const translations: DefineLocaleMessage = {
       header: "Vaihe 3: Yleiskatsaus äänestyslippujen valintaan",
     },
   },
+  fil: {
+    ballot: {
+      adding: "Hakbang 1: Gawin ang iyong pagpili para sa seleksyon ng balota {n}",
+      editing: "Hakbang 1: I-edit ang iyong pagpili para sa seleksyon ng balota {n}",
+      can_assign_ballots: "Maaari mong italaga ang iyong mga pagpili sa hanggang {n} balota.",
+      can_assign_description:
+        "Maaari mong piliing isumite ang lahat ng {n} balota na may parehong mga pagpili o maaari mong ipamahagi ang mga ito. Hakbang 1: Piliin ang mga opsyong gusto mo. Hakbang 2: Pagpasyahan kung sa ilang balota itatala ang opsyong ito at ulitin hanggang magamit mo ang lahat ng balota. Hakbang 3: Suriin ang iyong mga pagpili at iboto.",
+    },
+    assign: {
+      header: "Hakbang 2: Magtalaga ng bilang ng mga balota sa seleksyon ng balota {n}",
+      header_edit_mode:
+        "Hakbang 2: I-edit ang itinalagang bilang ng mga balota sa seleksyon ng balota {n}",
+    },
+    overview: {
+      header: "Hakbang 3: Pangkalahatang-tanaw ng mga seleksyon ng balota",
+    },
+  },
   fr: {
     ballot: {
       adding: "Étape 1: Ajout de la sélection des bulletins de vote {n}",

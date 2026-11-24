@@ -33,6 +33,10 @@ const translations: DefineLocaleMessage = {
     vote_count_singular: "{n} ääni",
     vote_count_plural: "{n} ääntä",
   },
+  fil: {
+    vote_count_singular: "{n} boto",
+    vote_count_plural: "{n} boto",
+  },
   fr: {
     vote_count_singular: "{n} voix",
     vote_count_plural: "{n} voix",

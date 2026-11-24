@@ -41,6 +41,11 @@ const translations: DefineLocaleMessage = {
     expand_text: "Laajenna napsauttamalla",
     sub_options_select: "{n} valittu",
   },
+  fil: {
+    collapse_text: "Itiklop",
+    expand_text: "I-click upang palawakin",
+    sub_options_select: "{n} ang napili",
+  },
   fr: {
     collapse_text: "Effondrer",
     expand_text: "Cliquez pour agrandir",

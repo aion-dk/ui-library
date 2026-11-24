@@ -146,6 +146,25 @@ const translations: DefineLocaleMessage = {
       new_ballot_selection: "Lisää uusi äänestyslippu",
     },
   },
+  fil: {
+    ballot: {
+      back_button: "Bumalik",
+      confirm_button: "Kumpirmahin ang Seleksyon",
+    },
+    assign: {
+      split_question: "Ilang balota ang dapat magkaroon ng kombinasyong ito ng mga pagpili?",
+      ballots_to_assign: "Bilang ng mga balotang itatalaga:",
+      ballots_to_assign_edit_mode: "I-edit ang itinalagang bilang ng mga balota:",
+      back_button: "Bumalik sa seleksyon",
+      confirm_button: "Kumpirmahin at italaga",
+    },
+    overview: {
+      all_ballots_assigned:
+        "Naitalaga mo na ang lahat ng iyong balota at maaari ka nang magpatuloy",
+      ballots_left: " balota na natitirang itatalaga",
+      new_ballot_selection: "Magdagdag ng bagong seleksyon ng balota",
+    },
+  },
   fr: {
     ballot: {
       back_button: "Retour",

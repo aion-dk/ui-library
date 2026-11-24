@@ -78,7 +78,7 @@ bootstrap scss inside this scoped file.
 
 ### `AVFoo.messages.ts` (translated components)
 
-All 20 locales, alphabetical: ar ca cy da de en es fi fr is it ja ko nl pl pt ro ru sv zh.
+All 21 locales, alphabetical: ar ca cy da de en es fi fil fr is it ja ko nl pl pt ro ru sv zh.
 snake_case keys; `_html` suffix if the string carries markup.
 
 ```ts

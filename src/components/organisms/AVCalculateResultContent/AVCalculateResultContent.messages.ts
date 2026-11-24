@@ -183,6 +183,32 @@ const translations: DefineLocaleMessage = {
       label: "Kulunut:",
     },
   },
+  fil: {
+    roles: {
+      label: "Ang iyong tungkulin:",
+      mixer: "Mixer",
+      decrypter: "Decrypter",
+      observer: "Tagamasid",
+      all: "Mixer at Decrypter",
+    },
+    status: {
+      label: "Katayuan:",
+      initial: "Sinisimulan",
+      mixing: "Hinahalo",
+      decrypting: "Dine-decrypt",
+      aggregating: "Pinagsasama-sama",
+      finished: "Tapos na",
+    },
+    mixes: {
+      label: "Mga mix:",
+    },
+    decryptions: {
+      label: "Mga decryption:",
+    },
+    elapsed: {
+      label: "Lumipas:",
+    },
+  },
   fr: {
     roles: {
       label: "Votre rôle:",

@@ -73,6 +73,15 @@ const translations: DefineLocaleMessage = {
       go_to_option: "Siirry vaihtoehtoon",
     },
   },
+  fil: {
+    search_the_ballot: "Maghanap sa balota",
+    no_results: "Walang resulta",
+    enter_option_name: "Pangalan ng kandidato",
+    aria_labels: {
+      ballot_options: "Mga opsyon sa balota",
+      go_to_option: "Pumunta sa opsyon",
+    },
+  },
   fr: {
     search_the_ballot: "Recherche dans le scrutin",
     no_results: "Aucun résultat",
