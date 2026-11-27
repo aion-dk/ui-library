@@ -135,6 +135,23 @@ const translations: DefineLocaleMessage = {
       null_votes: "Nollaäänet",
     },
   },
+  fil: {
+    seat_n: "Upuan {n}",
+    header: {
+      candidate: "Kandidato",
+      round_n: "Round {n}",
+    },
+    summary: {
+      transfered_votes: "Mga boto na inilipat mula sa mga natanggal na kandidato",
+      exhausted: "Mga naubos na balota",
+      not_included_count:
+        "Mga boto para sa mga nahalal na kandidato na hindi kasama sa bilang para sa upuang ito",
+      abstain: "Hindi bumoto",
+      total_votes: "Kabuuang boto",
+      quota: "Kinakailangang quota para mahalal",
+      null_votes: "Mga di-wastong boto",
+    },
+  },
   fr: {
     seat_n: "Siège {n}",
     header: {

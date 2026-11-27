@@ -57,6 +57,13 @@ const translations: DefineLocaleMessage = {
       ballot: "Äänestyslippu",
     },
   },
+  fil: {
+    your_vote_weight: "May bigat na {weight} ang iyong boto",
+    aria_labels: {
+      ballot_options: "Mga opsyon sa balota",
+      ballot: "Balota",
+    },
+  },
   fr: {
     your_vote_weight: "Votre vote a un poids de {weight}",
     aria_labels: {

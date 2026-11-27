@@ -433,6 +433,62 @@ const translations: DefineLocaleMessage = {
       confirmation_title: "Vahvista",
     },
   },
+  fil: {
+    select_exactly: "Pumili ng {min_marks} opsyon.",
+    select_multiple: "Pumili ng pagitan ng {min_marks} at {max_marks} opsyon.",
+    select_multiple_with_exclusives:
+      "Pumili ng pagitan ng {min_marks} at {max_marks} opsyon. O pumili ng isang (1) eksklusibong opsyon.",
+    select_single: "Pumili ng isang (1) opsyon.",
+    selected: "Napili: {selected}",
+    go_to_bottom: "Pumunta sa ibaba",
+    remaining_credits: "Natitirang voice credit:",
+    error_modal_title: "Error",
+    error_modal_dismiss: "Isara",
+    errors: {
+      too_many: "Masyadong maraming opsyon ang napili.",
+      blank: "Eksklusibo ang Blangko at hindi maaaring isama sa iba pang opsyon.",
+      write_in_required:
+        "Kailangan mong tukuyin ang kahit isang partido kapag napili ang 'Write in'.",
+      write_in_too_long: "Masyadong mahaba ang isinulat na halaga. Subukang paikliin ito.",
+      write_in_not_supported:
+        "Mga titik, numero, at ang mga sumusunod na espesyal na karakter lamang ang pinapayagan: '{',.()?!@€£¥'}",
+      write_in_empty: "Hindi maaaring walang laman ang isinulat na halaga.",
+      exceeded_list_limit:
+        "Lumampas ang iyong seleksyon sa pinakamaraming bilang ng opsyon na maaaring nasa listahang {list_name}. Mangyaring pumili ng hanggang {max_list_marks} opsyon sa listahang ito",
+      exclusive: "Hindi maaaring isama ang mga eksklusibong opsyon sa iba pang opsyon.",
+      cross_party_voting:
+        "Higit sa isang listahan ang kasama sa iyong seleksyon. Mangyaring pumili lamang sa loob ng iisang listahan.",
+      too_many_credits:
+        "Lumampas ang iyong mga boto sa dami ng voice credit na maaaring ipamahagi. Mangyaring ayusin ang iyong seleksyon.",
+      undervote_below_min:
+        "Kailangan mong pumili ng hindi bababa sa {min_marks} opsyon upang magpatuloy.",
+      overvote: "Masyadong maraming opsyon ang iyong napili.",
+    },
+    warnings: {
+      undervote_between:
+        "Balota: Mas kaunti sa pinakamaraming pinapayagang opsyon ang iyong napili. Maaari kang magpatuloy o pumili pa.",
+      blank_vote:
+        "Wala kang napiling opsyon sa contest na ito. Kung magpapatuloy ka, isusumite ang contest na ito nang walang seleksyon.",
+      overvote: "Higit sa pinakamaraming pinapayagang opsyon ang iyong napili.",
+    },
+    review_errors: {
+      overvote: "Masyadong maraming opsyon ang iyong napili.",
+      undervote_below_min:
+        "Kailangan mong pumili ng hindi bababa sa {min_marks} opsyon upang magpatuloy.",
+    },
+    review_warnings: {
+      undervote_between:
+        "Buod: Mas kaunti sa pinakamaraming pinapayagang opsyon ang iyong napili. Maaari kang magpatuloy o pumili pa.",
+      blank_vote:
+        "Wala kang napiling opsyon sa contest na ito. Kung magpapatuloy ka, isusumite ang contest na ito nang walang seleksyon.",
+      overvote: "Higit sa pinakamaraming pinapayagang opsyon ang iyong napili.",
+    },
+    alert: {
+      proceed_anyway: "Magpatuloy pa rin",
+      go_back: "Bumalik",
+      confirmation_title: "Kumpirmahin",
+    },
+  },
   fr: {
     select_exactly: "Sélectionnez les options de {min_marks}.",
     select_multiple: "Sélectionnez entre les options {min_marks} et {max_marks}.",

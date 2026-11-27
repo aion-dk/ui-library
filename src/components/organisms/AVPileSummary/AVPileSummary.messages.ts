@@ -113,6 +113,20 @@ const translations: DefineLocaleMessage = {
     },
     change_selection_btn: "Muuta valintaa",
   },
+  fil: {
+    selection: "Seleksyon",
+    assigned: "Naitalaga:",
+    ballots: "mga balota",
+    ballot_selection: "Seleksyon ng balota",
+    blank: "Blangko",
+    and_n_more: "At {n} pa...",
+    show_less: "Ipakita ang mas kaunting opsyon",
+    aria_labels: {
+      delete_selection: "Burahin ang seleksyong ito",
+      edit_selection: "I-edit ang seleksyong ito",
+    },
+    change_selection_btn: "Baguhin ang seleksyon",
+  },
   fr: {
     selection: "Sélection",
     assigned: "Affecté:",

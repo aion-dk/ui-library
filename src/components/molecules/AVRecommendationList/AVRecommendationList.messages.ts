@@ -177,6 +177,22 @@ const translations: DefineLocaleMessage = {
       no_recommendations: "Tällä puolueella ei ole vielä suosituksia",
     },
   },
+  fil: {
+    header_title: "Mga nagrerekomenda ({n})",
+    collapse: "Itiklop ang listahan",
+    uncollapse: "Palawakin ang listahan",
+    and_more: "at {n} pa...",
+    invite_recommenders_button_label: "Mag-imbita ng mga nagrerekomenda",
+    view_recommendations_button_label: "Tingnan ang mga rekomendasyon",
+    candidate: {
+      public_count_text: "May {n} rekomendasyon ang kandidatong ito",
+      no_recommendations: "Wala pang rekomendasyon ang kandidatong ito",
+    },
+    party: {
+      public_count_text: "May {n} rekomendasyon ang partidong ito",
+      no_recommendations: "Wala pang rekomendasyon ang partidong ito",
+    },
+  },
   fr: {
     header_title: "Recommandateurs ({n})",
     collapse: "Réduire la liste",

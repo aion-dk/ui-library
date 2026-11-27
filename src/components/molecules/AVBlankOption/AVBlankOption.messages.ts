@@ -49,6 +49,12 @@ const translations: DefineLocaleMessage = {
       option: "Vaihtoehto",
     },
   },
+  fil: {
+    title: "Blangko",
+    aria_labels: {
+      option: "Opsyon",
+    },
+  },
   fr: {
     title: "Blanc",
     aria_labels: {

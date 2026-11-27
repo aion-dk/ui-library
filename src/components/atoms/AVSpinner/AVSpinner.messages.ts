@@ -25,6 +25,9 @@ const translations: DefineLocaleMessage = {
   fi: {
     loading: "Ladataan...",
   },
+  fil: {
+    loading: "Naglo-load...",
+  },
   fr: {
     loading: "Chargement...",
   },

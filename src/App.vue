@@ -35,6 +35,7 @@ import * as examples from "@/examples";
       <option value="en">🇬🇧 EN - English (LTR)</option>
       <option value="es">🇪🇸 ES - Spanish (LTR)</option>
       <option value="fi">🇫🇮 FI - Finnish (LTR)</option>
+      <option value="fil">🇵🇭 FIL - Filipino (LTR)</option>
       <option value="fr">🇫🇷 FR - French (LTR)</option>
       <option value="is">🇮🇸 IS - Icelandic (LTR)</option>
       <option value="it">🇮🇹 IT - Italian (LTR)</option>

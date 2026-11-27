@@ -33,6 +33,10 @@ const translations: DefineLocaleMessage = {
     aria_expand: "Laajentaa",
     aria_collapse: "Romahdus",
   },
+  fil: {
+    aria_expand: "Palawakin",
+    aria_collapse: "Itiklop",
+  },
   fr: {
     aria_expand: "Développer",
     aria_collapse: "Réduire",
