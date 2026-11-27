@@ -9,6 +9,7 @@ const translations: DefineLocaleMessage = {
   en: { aria_label: "Ranked" },
   es: { aria_label: "Clasificación" },
   fi: { aria_label: "Sijoitus" },
+  fil: { aria_label: "May ranggo" },
   fr: { aria_label: "Classé" },
   is: { aria_label: "Raðað" },
   it: { aria_label: "Classificato" },

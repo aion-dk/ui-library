@@ -65,6 +65,14 @@ const translations: DefineLocaleMessage = {
       unchecked: "Ei tarkistettu",
     },
   },
+  fil: {
+    exclusive_option: "Eksklusibo",
+    aria_label: {
+      checked_normal: "May tsek",
+      checked_ranked: "May tsek na may ranggong {rank}",
+      unchecked: "Walang tsek",
+    },
+  },
   fr: {
     exclusive_option: "Exclusif",
     aria_label: {

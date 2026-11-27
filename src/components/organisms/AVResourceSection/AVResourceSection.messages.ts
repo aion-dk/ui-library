@@ -97,6 +97,18 @@ const translations: DefineLocaleMessage = {
     show_all: "näytä kaikki",
     show_less: "näytä vähemmän",
   },
+  fil: {
+    alt_candidate: "Larawan ng kandidato",
+    alt_party: "Logo ng partido",
+    and_more: "at {amount} pa",
+    true: "May tsek",
+    false: "Walang tsek",
+    video: "Video player mula sa panlabas na pinagmulan",
+    human: "Item ng form",
+    party_leader: "Pinuno ng partido",
+    show_all: "ipakita lahat",
+    show_less: "ipakita ang mas kaunti",
+  },
   fr: {
     alt_candidate: "Portrait du candidat",
     alt_party: "Logo du parti",

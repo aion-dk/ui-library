@@ -33,6 +33,10 @@ const translations: DefineLocaleMessage = {
     show_more: "Näytä lisää",
     show_less: "Näytä vähemmän",
   },
+  fil: {
+    show_more: "Ipakita ang higit pa",
+    show_less: "Ipakita ang mas kaunti",
+  },
   fr: {
     show_more: "Afficher plus",
     show_less: "Afficher moins",

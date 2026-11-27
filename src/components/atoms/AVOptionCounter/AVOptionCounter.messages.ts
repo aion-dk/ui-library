@@ -71,6 +71,15 @@ const translations: DefineLocaleMessage = {
       subtract: "Vähennä yksi ääni",
     },
   },
+  fil: {
+    amount: "walang boto | {n} boto | {n} boto",
+    used_credits:
+      "Walang nagamit na voice credit | {n} voice credit ang nagamit | {n} voice credit ang nagamit",
+    aria_label: {
+      add: "Magdagdag ng isang boto",
+      subtract: "Magbawas ng isang boto",
+    },
+  },
   fr: {
     amount: "aucun vote | {n} vote | {n} votes",
     used_credits:

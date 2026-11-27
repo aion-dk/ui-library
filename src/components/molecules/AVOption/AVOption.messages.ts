@@ -139,6 +139,18 @@ const translations: DefineLocaleMessage = {
       placeholder: "Kirjoita vastauksesi tähän",
     },
   },
+  fil: {
+    info_link_text_html: "Impormasyon",
+    video_link_text_html: "Video",
+    view_candidate: "Tingnan ang kandidato",
+    aria_labels: {
+      option: "Opsyon",
+      option_image: "Opsyon",
+    },
+    write_in: {
+      placeholder: "I-type ang iyong input/sagot dito",
+    },
+  },
   fr: {
     info_link_text_html: "Infos",
     video_link_text_html: "Vidéo",

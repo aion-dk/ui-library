@@ -65,6 +65,14 @@ const translations: DefineLocaleMessage = {
     blank: "Tyhjä",
     write_in: "Kirjoita vastauksesi tähän",
   },
+  fil: {
+    aria_label: {
+      option: "Opsyon",
+      option_image: "Larawan ng opsyon",
+    },
+    blank: "Blangko",
+    write_in: "Isulat",
+  },
   fr: {
     aria_label: {
       option: "Option",

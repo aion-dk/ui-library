@@ -20,6 +20,7 @@ const globals: GlobalTypes = {
         { value: "en", title: "English", right: "🇬🇧 EN - LTR" },
         { value: "es", title: "Spanish", right: "🇪🇸 ES - LTR" },
         { value: "fi", title: "Finnish", right: "🇫🇮 FI - LTR" },
+        { value: "fil", title: "Filipino", right: "🇵🇭 FIL - LTR" },
         { value: "fr", title: "French", right: "🇫🇷 FR - LTR" },
         { value: "is", title: "Icelandic", right: "🇮🇸 IS - LTR" },
         { value: "it", title: "Italian", right: "🇮🇹 IT - LTR" },

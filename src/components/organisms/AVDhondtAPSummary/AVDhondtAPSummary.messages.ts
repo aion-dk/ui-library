@@ -129,6 +129,22 @@ const translations: DefineLocaleMessage = {
       null_votes: "Nollaäänet",
     },
   },
+  fil: {
+    header: {
+      title: "Opsyon",
+      group: "Listahan",
+      count: "Bilang ng boto",
+      comparative_figure: "Paghahambing na bilang",
+    },
+    total_count: "Kabuuang bilang",
+    summary: {
+      seats: "Mga upuan",
+      distribution: "Numero ng distribusyon",
+      elected: "Nahalal",
+      tied: "Tabla",
+      null_votes: "Mga di-wastong boto",
+    },
+  },
   fr: {
     header: {
       title: "Option",

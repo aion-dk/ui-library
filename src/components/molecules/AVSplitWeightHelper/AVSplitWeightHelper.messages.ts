@@ -41,6 +41,11 @@ const translations: DefineLocaleMessage = {
     assigned: "Jo annettu:",
     unused: "Vasemmalta:",
   },
+  fil: {
+    total: "Kabuuang bilang ng mga balota:",
+    assigned: "Naitalaga na:",
+    unused: "Natitirang itatalaga:",
+  },
   fr: {
     total: "Votre poids total:",
     assigned: "Déjà attribué:",

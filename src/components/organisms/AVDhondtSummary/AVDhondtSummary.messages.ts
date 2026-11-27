@@ -137,6 +137,23 @@ const translations: DefineLocaleMessage = {
       },
     },
   },
+  fil: {
+    header: {
+      party: "Partido",
+      seat_n: "Upuan {n}",
+    },
+    summary: {
+      distribution: "Numero ng distribusyon",
+      seats: "Kabuuang upuan",
+      blank: "Mga blangkong boto",
+      null_votes: "Mga di-wastong boto",
+      seat_count: {
+        no_seats: "Walang upuan",
+        one_seat: "1 upuan",
+        n_seats: "{n} upuan",
+      },
+    },
+  },
   fr: {
     header: {
       party: "Parti",

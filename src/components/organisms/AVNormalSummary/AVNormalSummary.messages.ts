@@ -65,6 +65,14 @@ const translations: DefineLocaleMessage = {
       null_votes: "Nollaäänet",
     },
   },
+  fil: {
+    group: {
+      seats_won: "walang upuan | {n} upuan | {n} upuan",
+    },
+    summary: {
+      null_votes: "Mga di-wastong boto",
+    },
+  },
   fr: {
     group: {
       seats_won: "aucun siège | {n} siège | {n} sièges",
